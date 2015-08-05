@@ -1,0 +1,35 @@
+@import 'bourbon';
+@import 'neat';
+
+.pic-editor {
+  @include outer-container;
+
+  .image-container {
+    @include span-columns(8);
+  }
+  .controls-container {
+    @include span-columns(4);
+  }
+
+  @media (max-width: 1000px) {
+    .image-container, .controls-container {
+      @include span-columns(12);
+    }
+  }
+}
+
+.content-type-selector {
+  @include outer-container;
+
+  .content-type {
+    text-align: center;
+    cursor: pointer;
+    @include span-columns(4);
+  }
+}
+
+.image {
+  height: 650px;
+  width: 650px;
+  margin: 0 auto;
+}

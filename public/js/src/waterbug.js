@@ -1,4 +1,5 @@
 // DOM elements
+import $ from 'jquery';
 var $source;
 var $photographer;
 var $save;
@@ -19,13 +20,12 @@ var $fileinput;
 var $customFilename;
 
 // Constants
-var IS_MOBILE = Modernizr.touch && Modernizr.mq('screen and max-width(700px)');
 var MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
 
 // state
 var scaledImageHeight;
 var scaledImageWidth;
-var previewScale = IS_MOBILE ? 0.32 : 0.64;
+var previewScale = 0.64;
 var dy = 0;
 var dx = 0;
 var image;
@@ -41,7 +41,7 @@ var img = new Image();
 var logo = new Image();
 
 
-var onDocumentLoad = function(e) {
+var init = function(e) {
     $source = $('#source');
     $photographer = $('#photographer');
     $canvas = $('#imageCanvas');

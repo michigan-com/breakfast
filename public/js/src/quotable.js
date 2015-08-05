@@ -1,3 +1,4 @@
+import $ from 'jquery';
 var $text = null;
 var $save = null;
 var $poster = null;
@@ -119,7 +120,7 @@ function adjustFontSize(size) {
     };
 }
 
-$(function() {
+var init = function() {
     $text = $('.poster blockquote p, .source');
     $save = $('#save');
     $poster = $('.poster');
@@ -197,4 +198,8 @@ $(function() {
         disableToolbar: true,
         placeholder: 'Type your quote source here'
     });
-});
+};
+
+module.exports = {
+  init
+}

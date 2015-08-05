@@ -1,3 +1,7 @@
+import $ from 'jquery';
+import moment from 'moment';
+import MediumEditor from 'medium-editor';
+
 var $text = null;
 var $factList = null;
 var $save = null;
@@ -17,7 +21,7 @@ var timestampInterval = null;
 /*
  * Run on page load.
  */
-var onDocumentLoad = function() {
+var init = function() {
     $text = $('.poster blockquote p, .source');
     $factList = $('.poster blockquote');
     $save = $('#save');
@@ -45,7 +49,7 @@ var onDocumentLoad = function() {
     timestampInterval = setInterval(updateTimestamp, 1000);
     setupMediumEditor();
 
-    $('[data-toggle="tooltip"]').tooltip();
+    //$('[data-toggle="tooltip"]').tooltip();
 }
 
 /*
@@ -219,3 +223,6 @@ var setupMediumEditor = function(){
     $factList.focus();
 }
 
+module.exports = {
+  init
+}
