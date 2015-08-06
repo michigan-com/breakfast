@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import { wrapText, clone } from './lib/parse';
@@ -118,6 +117,12 @@ class PicEditor extends React.Component {
     });
   }
 
+  addListItem() {
+    let list = clone(this.state.list);
+    list.items.push('');
+    this.setState({ list });
+  }
+
   listItemChanged(ref, index) {
     if (index >= this.state.list.items.length) {
       console.log('Index out of range');
@@ -136,18 +141,29 @@ class PicEditor extends React.Component {
   }
 
   renderImageText() {
-    function renderListItem(item, index) {
-      let canvasStyle = this.getCanvasStyle();
-      let listStyle = this.getListStyle();
-      let listItemStyle = listStyle.listItem;
-      let listMetrics = measureText(item, canvasStyle.width - 50, listItemStyle.fontFace,
-            listItemStyle.fontSize, listItemStyle.fontSize);
 
-      listItemStyle.height = listMetrics.height;
-      listItemStyle.top += listItemStyle.height * index;
-      return (
-        <Text className='item' style={ listItemStyle }>{ item }</Text>
-      )
+
+    function renderListItems() {
+      let canvasStyle = this.getCanvasStyle();
+      let listItemStyle = this.getListStyle().listItem;
+      let prevHeight = 0;
+      let returnElements = [];
+      for (let i = 0; i < this.state.list.items.length; i++) {
+        let item = this.state.list.items[i];
+
+        let listMetrics = measureText(item, canvasStyle.width - 50, listItemStyle.fontFace,
+            listItemStyle.fontSize, listItemStyle.lineHeight);
+
+        listItemStyle.height = listMetrics.height;
+        listItemStyle.top += prevHeight;
+        returnElements.push(
+           <Text className='item' style={ clone(listItemStyle) }> • {item}</Text>
+        )
+
+        prevHeight = listMetrics.height;
+      }
+
+      return returnElements;
     }
 
     function renderQuoteLine(item, index) {
@@ -185,7 +201,7 @@ class PicEditor extends React.Component {
         <Group>
           <Text className='headline'>
           </Text>
-          { this.state.list.items.map(renderListItem.bind(this)) }
+          { renderListItems.call(this) }
         </Group>
       )
     }
@@ -215,7 +231,7 @@ class PicEditor extends React.Component {
       return (
         <div className='inputs'>
           { this.state.list.items.map(renderListItemInput.bind(this)) }
-          <div className='add-item'>Add item</div>
+          <div className='add-item' onClick={ this.addListItem.bind(this) }>Add item</div>
         </div>
       )
     }
@@ -225,9 +241,12 @@ class PicEditor extends React.Component {
     let canvas = React.findDOMNode(this.refs.canvas);
     let dataUri = canvas.toDataURL();
 
-    let $a = $('<a>').attr('href', dataUri).attr('download', 'pic.png').appendTo('body');
-    $a[0].click();
-    $a.remove();
+    var a = document.createElement('a');
+    a.setAttribute('href',  dataUri);
+    a.setAttribute('download', 'pic.png');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   render() {
