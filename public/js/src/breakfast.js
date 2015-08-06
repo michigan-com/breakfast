@@ -60,7 +60,8 @@ class PicEditor extends React.Component {
         height: textHeight,
         lineHeight: 20,
         fontSize: 15,
-        width: textWidth
+        width: textWidth,
+        color: 'grey'
       }
     }
   }
@@ -98,7 +99,7 @@ class PicEditor extends React.Component {
 
   contentTypeChange(contentType) {
     if (this.contentTypes.indexOf(contentType) === -1) {
-      console.log('Invalid conent type ' + type);
+      console.log('Invalid conent type ' + contentType);
       return;
     }
 
@@ -117,10 +118,35 @@ class PicEditor extends React.Component {
     });
   }
 
+  quoteSourceChanged() {
+    let quote = this.state.quote.quote;
+    this.setState({
+      quote: {
+        quote,
+        source: React.findDOMNode(this.refs.source).value
+      }
+    })
+  }
+
   addListItem() {
     let list = clone(this.state.list);
     list.items.push('');
     this.setState({ list });
+  }
+
+  removeListItem(index) {
+    let newItems = [];
+    let list = this.state.list;
+    for (let i = 0; i < list.items.length; i++) {
+      if (i != index) newItems.push(list.items[i]);
+    }
+
+    this.setState({
+      list: {
+        headline: list.headline,
+        items: newItems
+      }
+    });
   }
 
   listItemChanged(ref, index) {
@@ -156,8 +182,9 @@ class PicEditor extends React.Component {
 
         listItemStyle.height = listMetrics.height;
         listItemStyle.top += prevHeight;
+        console.log(listItemStyle.left);
         returnElements.push(
-           <Text className='item' style={ clone(listItemStyle) }> • {item}</Text>
+           <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
         )
 
         prevHeight = listMetrics.height;
@@ -204,10 +231,9 @@ class PicEditor extends React.Component {
           { renderListItems.call(this) }
         </Group>
       )
-    }
-    else {
+    } else {
       return (
-        <div>Haven't implemented this yet</div>
+        <Text>Haven't implemented this yet</Text>
       )
     }
   }
@@ -217,22 +243,33 @@ class PicEditor extends React.Component {
     function renderListItemInput(item, index) {
       let ref = 'list-item-' + index;
       return (
-        <input type='text' ref={ ref } value={ item } onChange={ this.listItemChanged.bind(this, ref, index) }/>
+
+        <div className='list-input'>
+          <input type='text' ref={ ref } value={ item } onChange={ this.listItemChanged.bind(this, ref, index) }/>
+          <div className='remove-list-item' onClick={ this.removeListItem.bind(this,index) }>X</div>
+        </div>
       )
     }
 
     if (this.state.contentType === 'quote') {
       return (
-        <div className='inputs'>
+        <div className='inputs quote-inputs'>
+          <div className='input-title'>Quote</div>
           <input type='text' ref='quote' placeholder={ this.state.quote.quote } onChange={ this.quoteChanged.bind(this) }/>
+          <div className='input-title'>Source</div>
+          <input type='text' ref='source' placeholder={ this.state.quote.source } onChange={ this.quoteSourceChanged.bind(this) }/>
         </div>
       )
     } else if (this.state.contentType === 'list') {
       return (
-        <div className='inputs'>
+        <div className='inputs list-inputs'>
           { this.state.list.items.map(renderListItemInput.bind(this)) }
           <div className='add-item' onClick={ this.addListItem.bind(this) }>Add item</div>
         </div>
+      )
+    } else if (this.state.contentType === 'picture') {
+      return (
+        <div> This hasn't been implemented yet</div>
       )
     }
   }
@@ -255,7 +292,7 @@ class PicEditor extends React.Component {
       <div className='pic-editor'>
         <div className='image-container'>
           <div className='image' ref='image'>
-            <Surface className='quote' width={650} height={650} left={0} top={0} ref='canvas'>
+            <Surface className='quote' width={650} height={650} left={0} top={0} fillStyle={'white'} ref='canvas'>
               { this.renderImageText() }
             </Surface>
           </div>
@@ -264,7 +301,7 @@ class PicEditor extends React.Component {
           <div className='content-type-selector'>
             <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'quote') }>Quote</div>
             <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'list') }>Fact List</div>
-            <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'image') }>Water Mark</div>
+            <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'picture') }>Water Mark</div>
           </div>
           <div className='text-rendering'>
             { this.renderTextInput() }

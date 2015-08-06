@@ -6,6 +6,9 @@ html {
 *::before {
   box-sizing: inherit; }
 
+body {
+  font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif; }
+
 .pic-editor {
   max-width: 68em;
   margin-left: auto;
@@ -46,16 +49,46 @@ html {
     content: "";
     display: table; }
   .content-type-selector .content-type {
-    text-align: center;
-    cursor: pointer;
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 31.76157%; }
+    width: 31.76157%;
+    text-align: center;
+    cursor: pointer;
+    background: #40912F;
+    color: white; }
     .content-type-selector .content-type:last-child {
       margin-right: 0; }
 
 .image {
   height: 650px;
   width: 650px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  background: white;
+  border: 1px solid black; }
+
+.controls-container .content-type-selector {
+  margin-bottom: 40px; }
+
+.controls-container .list-inputs .list-input {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .controls-container .list-inputs .list-input::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .controls-container .list-inputs .list-input input {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 82.94039%; }
+    .controls-container .list-inputs .list-input input:last-child {
+      margin-right: 0; }
+  .controls-container .list-inputs .list-input .remove-list-item {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 14.70196%; }
+    .controls-container .list-inputs .list-input .remove-list-item:last-child {
+      margin-right: 0; }
