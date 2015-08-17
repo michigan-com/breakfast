@@ -24,12 +24,16 @@ class PicEditor extends React.Component {
       list: {
         headline: 'This is a headline',
         items: ['this is an item in the ist']
-      }
+      },
+
+      fontSize: 20
     }
 
     this.canvasPadding = 20;
     this.canvasWidth = 650;
     this.canvasHeight = 650;
+
+    this.fontMultiplier = 1;
   }
 
   getCanvasStyle() {
@@ -41,7 +45,7 @@ class PicEditor extends React.Component {
   }
 
   getQuoteStyle() {
-    let textHeight = 50;
+    let textHeight = this.state.fontSize * 1.25;
     let textWidth = this.canvasWidth - 20;
     let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
     return {
@@ -50,7 +54,7 @@ class PicEditor extends React.Component {
         left: 10,
         height: textHeight,
         lineHeight: textHeight,
-        fontSize: 20,
+        fontSize: this.state.fontSize,
         width: textWidth,
         fontFace: font
       },
@@ -72,8 +76,7 @@ class PicEditor extends React.Component {
     let textWidth = this.canvasWidth - 20;
     let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
 
-    let listItemFontSize = 20;
-    let listItemSize = 30;
+    let listItemSize = this.state.fontSize * 1.25;;
     return {
       headline: {
         top: this.canvasPadding,
@@ -89,7 +92,7 @@ class PicEditor extends React.Component {
         left: 10 + 10,
         height: listItemSize,
         lineHeight: listItemSize,
-        fontSize: listItemFontSize,
+        fontSize: this.state.fontSize,
         width: textWidth,
         fontFace: font
       }
@@ -166,8 +169,11 @@ class PicEditor extends React.Component {
     });
   }
 
-  renderImageText() {
+  setFontSize(e) {
+    this.setState({ fontSize: parseInt(e.target.value) });
+  }
 
+  renderImageText() {
 
     function renderListItems() {
       let canvasStyle = this.getCanvasStyle();
@@ -182,7 +188,7 @@ class PicEditor extends React.Component {
 
         listItemStyle.height = listMetrics.height;
         listItemStyle.top += prevHeight;
-        console.log(listItemStyle.left);
+        console.log(listItemStyle.fontSize);
         returnElements.push(
            <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
         )
@@ -204,7 +210,7 @@ class PicEditor extends React.Component {
     }
 
     if (this.state.contentType === 'quote') {
-
+      console.log(this.state.fontSize);
       let canvasStyle = this.getCanvasStyle();
       let quoteStyle = this.getQuoteStyle();
       let quoteMetrics = measureText(this.state.quote.quote, canvasStyle.width - 50,
@@ -214,10 +220,10 @@ class PicEditor extends React.Component {
       quoteStyle.source.top = quoteStyle.text.height + quoteStyle.text.top;
       return (
         <Group>
-          <Text className='quote-text' style={ quoteStyle.text }>
+          <Text className='quote-text' style={ clone(quoteStyle.text) }>
             { this.state.quote.quote }
           </Text>
-          <Text className='source' style={ quoteStyle.source }>
+          <Text className='source' style={ clone(quoteStyle.source) }>
             { this.state.quote.source }
           </Text>
         </Group>
@@ -305,6 +311,9 @@ class PicEditor extends React.Component {
           </div>
           <div className='text-rendering'>
             { this.renderTextInput() }
+          </div>
+          <div className='options'>
+            <input type='range' min='10' max='60' value={ this.state.fontSize } onChange={ this.setFontSize.bind(this) }/>
           </div>
           <div className='save'>
             <button className='save' onClick={ this.saveImage.bind(this) }>Save</button>
