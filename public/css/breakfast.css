@@ -64,8 +64,9 @@ body {
   height: 650px;
   width: 650px;
   margin: 0 auto;
-  background: white;
-  border: 1px solid black; }
+  background: white; }
+  .image canvas {
+    border: 1px solid black; }
 
 .controls-container .content-type-selector {
   margin-bottom: 40px; }

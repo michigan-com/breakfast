@@ -39,7 +39,10 @@ body {
   width: 650px;
   margin: 0 auto;
   background: white;
-  border: 1px solid black;
+
+  canvas {
+    border: 1px solid black;
+  }
 }
 
 .controls-container {

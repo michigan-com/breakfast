@@ -41,12 +41,14 @@ export default class Canvas extends React.Component {
   }
 
   getBackgroundStyle() {
+    let canvasStyle = this.getCanvasStyle();
+
     let style = {
       zIndex: 1,
       top: 0,
       left: 0,
-      width: 650,
-      height: 650
+      width: canvasStyle.width,
+      height: canvasStyle.height
     }
 
     if (this.props.background.type === 'color') {
