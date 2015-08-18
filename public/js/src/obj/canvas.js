@@ -7,6 +7,7 @@ var Image = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
+var Layer = ReactCanvas.Layer;
 
 export default class Canvas extends React.Component {
 
@@ -14,21 +15,50 @@ export default class Canvas extends React.Component {
     super(args);
 
     this.canvasPadding = 20;
-    this.canvasWidth = 650;
-    this.canvasHeight = 650;
   }
 
   getCanvasStyle() {
+    let canvasWidth = 650;
+    let canvasHeight = 650;
+    if (this.props.aspectRatio === '16:9') {
+      canvasHeight = canvasWidth * 9/16;
+    }
     return {
-      width: this.canvasWidth,
-      height: this.canvasHeight,
-      textWidth: this.canvasWidth - 20,
+      width: canvasWidth,
+      height: canvasHeight,
+      textWidth: canvasWidth - 20,
     }
   }
 
+  getCanvasNode() {
+    return React.findDOMNode(this.refs.canvas);
+  }
+
+  getGroupStyle() {
+    return {
+      zIndex: 100
+    }
+  }
+
+  getBackgroundStyle() {
+    let style = {
+      zIndex: 1,
+      top: 0,
+      left: 0,
+      width: 650,
+      height: 650
+    }
+
+    if (this.props.background.type === 'color') {
+      style.backgroundColor = this.props.background.color;
+    }
+    return style;
+  }
+
   getQuoteStyle() {
+    let canvasStyle = this.getCanvasStyle();
+
     let textHeight = this.props.fontSize * 1.25;
-    let textWidth = this.canvasWidth - 20;
     let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
     return {
       text: {
@@ -37,8 +67,9 @@ export default class Canvas extends React.Component {
         height: textHeight,
         lineHeight: textHeight,
         fontSize: this.props.fontSize,
-        width: textWidth,
-        fontFace: font
+        width: canvasStyle.textWidth,
+        fontFace: font,
+        color: this.props.fontColor
       },
       source: {
         top: 50 + 10,
@@ -46,16 +77,17 @@ export default class Canvas extends React.Component {
         height: textHeight,
         lineHeight: 20,
         fontSize: 15,
-        width: textWidth,
+        width: canvasStyle.textWidth,
         color: 'grey'
       }
     }
   }
 
   getListStyle() {
+    let canvasStyle = this.getCanvasStyle();
+
     let headlineFontSize = 30;
     let headlineSize = 50;
-    let textWidth = this.canvasWidth - 20;
     let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
 
     let listItemSize = this.props.fontSize * 1.25;;
@@ -66,7 +98,7 @@ export default class Canvas extends React.Component {
         height: headlineSize,
         lineHeight: headlineSize,
         fontSize: headlineFontSize,
-        width: textWidth,
+        width: canvasStyle.textWidth,
         fontFace: font
       },
       listItem: {
@@ -75,8 +107,9 @@ export default class Canvas extends React.Component {
         height: listItemSize,
         lineHeight: listItemSize,
         fontSize: this.props.fontSize,
-        width: textWidth,
-        fontFace: font
+        width: canvasStyle.textWidth,
+        fontFace: font,
+        color: this.props.fontColor
       }
     }
 
@@ -95,7 +128,6 @@ export default class Canvas extends React.Component {
 
       listItemStyle.height = listMetrics.height;
       listItemStyle.top += prevHeight;
-      console.log(listItemStyle.fontSize);
       returnElements.push(
          <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
       )
@@ -110,7 +142,6 @@ export default class Canvas extends React.Component {
 
     let style = this.getQuoteStyle().source
     style.top += style.height * index;
-    console.log(style.top, style.height, index);
     return (
       <Text className='quote-text' style={ style }>{ item }</Text>
     )
@@ -125,7 +156,7 @@ export default class Canvas extends React.Component {
     quoteStyle.text.height = quoteMetrics.height;
     quoteStyle.source.top = quoteStyle.text.height + quoteStyle.text.top;
     return (
-      <Group>
+      <Group style={ this.getGroupStyle() }>
         <Text className='quote-text' style={ clone(quoteStyle.text) }>
           { this.props.canvasData.quote }
         </Text>
@@ -138,7 +169,7 @@ export default class Canvas extends React.Component {
 
   renderList() {
     return (
-      <Group>
+      <Group style={ this.getGroupStyle() }>
         <Text className='headline'>
         </Text>
         { this.renderListItems.call(this) }
@@ -146,16 +177,36 @@ export default class Canvas extends React.Component {
     )
   }
 
-
-  render() {
-    if (this.props.type === 'quote') {
-      return this.renderQuote();
-    } else if (this.props.type === 'list') {
-      return this.renderList();
-    } else {
-      return (
-        <Text className='idk'> Haven't implemented this yet</Text>
+  renderBackground() {
+    let type = this.props.background.type;
+    let backgroundObj;
+    if (type === 'color') {
+      backgroundObj = (
+        <Layer style={ this.getBackgroundStyle() }></Layer>
+      )
+    } else if (type === 'image') {
+      backgroundObj = (
+        <Image style={ this.getBackgroundStyle() } src={ this.props.background.src }/>
       )
     }
+
+    return backgroundObj;
+  }
+
+  render() {
+    let canvasElements = (<Text className='idk'> Haven't implemented this yet</Text>)
+    let canvasStyle = this.getCanvasStyle();
+
+    if (this.props.type === 'quote') {
+      canvasElements = this.renderQuote();
+    } else if (this.props.type === 'list') {
+      canvasElements = this.renderList();
+    }
+    return (
+      <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>
+        { this.renderBackground() }
+        { canvasElements }
+      </Surface>
+    )
   }
 }
