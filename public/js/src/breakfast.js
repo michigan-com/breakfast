@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import { wrapText, clone } from './lib/parse';
+import Canvas from './obj/canvas.js';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -28,76 +29,6 @@ class PicEditor extends React.Component {
 
       fontSize: 20
     }
-
-    this.canvasPadding = 20;
-    this.canvasWidth = 650;
-    this.canvasHeight = 650;
-
-    this.fontMultiplier = 1;
-  }
-
-  getCanvasStyle() {
-    return {
-      width: this.canvasWidth,
-      height: this.canvasHeight,
-      textWidth: this.canvasWidth - 20,
-    }
-  }
-
-  getQuoteStyle() {
-    let textHeight = this.state.fontSize * 1.25;
-    let textWidth = this.canvasWidth - 20;
-    let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
-    return {
-      text: {
-        top: this.canvasPadding,
-        left: 10,
-        height: textHeight,
-        lineHeight: textHeight,
-        fontSize: this.state.fontSize,
-        width: textWidth,
-        fontFace: font
-      },
-      source: {
-        top: 50 + 10,
-        left: 10,
-        height: textHeight,
-        lineHeight: 20,
-        fontSize: 15,
-        width: textWidth,
-        color: 'grey'
-      }
-    }
-  }
-
-  getListStyle() {
-    let headlineFontSize = 30;
-    let headlineSize = 50;
-    let textWidth = this.canvasWidth - 20;
-    let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
-
-    let listItemSize = this.state.fontSize * 1.25;;
-    return {
-      headline: {
-        top: this.canvasPadding,
-        left: 10,
-        height: headlineSize,
-        lineHeight: headlineSize,
-        fontSize: headlineFontSize,
-        width: textWidth,
-        fontFace: font
-      },
-      listItem: {
-        top: headlineSize + 10,
-        left: 10 + 10,
-        height: listItemSize,
-        lineHeight: listItemSize,
-        fontSize: this.state.fontSize,
-        width: textWidth,
-        fontFace: font
-      }
-    }
-
   }
 
   contentTypeChange(contentType) {
@@ -173,77 +104,6 @@ class PicEditor extends React.Component {
     this.setState({ fontSize: parseInt(e.target.value) });
   }
 
-  renderImageText() {
-
-    function renderListItems() {
-      let canvasStyle = this.getCanvasStyle();
-      let listItemStyle = this.getListStyle().listItem;
-      let prevHeight = 0;
-      let returnElements = [];
-      for (let i = 0; i < this.state.list.items.length; i++) {
-        let item = this.state.list.items[i];
-
-        let listMetrics = measureText(item, canvasStyle.width - 50, listItemStyle.fontFace,
-            listItemStyle.fontSize, listItemStyle.lineHeight);
-
-        listItemStyle.height = listMetrics.height;
-        listItemStyle.top += prevHeight;
-        console.log(listItemStyle.fontSize);
-        returnElements.push(
-           <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
-        )
-
-        prevHeight = listMetrics.height;
-      }
-
-      return returnElements;
-    }
-
-    function renderQuoteLine(item, index) {
-
-      let style = this.getQuoteStyle().source
-      style.top += style.height * index;
-      console.log(style.top, style.height, index);
-      return (
-        <Text className='quote-text' style={ style }>{ item }</Text>
-      )
-    }
-
-    if (this.state.contentType === 'quote') {
-      console.log(this.state.fontSize);
-      let canvasStyle = this.getCanvasStyle();
-      let quoteStyle = this.getQuoteStyle();
-      let quoteMetrics = measureText(this.state.quote.quote, canvasStyle.width - 50,
-            quoteStyle.text.fontFace, quoteStyle.text.fontSize, quoteStyle.text.lineHeight);
-
-      quoteStyle.text.height = quoteMetrics.height;
-      quoteStyle.source.top = quoteStyle.text.height + quoteStyle.text.top;
-      return (
-        <Group>
-          <Text className='quote-text' style={ clone(quoteStyle.text) }>
-            { this.state.quote.quote }
-          </Text>
-          <Text className='source' style={ clone(quoteStyle.source) }>
-            { this.state.quote.source }
-          </Text>
-        </Group>
-      )
-    } else if (this.state.contentType === 'list') {
-
-      return (
-        <Group>
-          <Text className='headline'>
-          </Text>
-          { renderListItems.call(this) }
-        </Group>
-      )
-    } else {
-      return (
-        <Text>Haven't implemented this yet</Text>
-      )
-    }
-  }
-
   renderTextInput() {
 
     function renderListItemInput(item, index) {
@@ -294,12 +154,14 @@ class PicEditor extends React.Component {
 
   render() {
 
+    let canvasData = this.state[this.state.contentType];
+    console.log(canvasData, this.state.contentType);
     return(
       <div className='pic-editor'>
         <div className='image-container'>
           <div className='image' ref='image'>
             <Surface className='quote' width={650} height={650} left={0} top={0} fillStyle={'white'} ref='canvas'>
-              { this.renderImageText() }
+              <Canvas type={ this.state.contentType } canvasData={ canvasData } fontSize={ this.state.fontSize }/>
             </Surface>
           </div>
         </div>
