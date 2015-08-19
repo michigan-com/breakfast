@@ -7,7 +7,8 @@ html {
   box-sizing: inherit; }
 
 body {
-  font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif; }
+  font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
+  background: #eee; }
 
 .pic-editor {
   max-width: 68em;
@@ -28,7 +29,8 @@ body {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 31.76157%; }
+    width: 31.76157%;
+    position: relative; }
     .pic-editor .controls-container:last-child {
       margin-right: 0; }
   @media (max-width: 1000px) {
@@ -54,17 +56,18 @@ body {
     margin-right: 2.35765%;
     width: 31.76157%;
     text-align: center;
-    cursor: pointer;
     background: #40912F;
-    color: white; }
+    color: white;
+    cursor: pointer; }
     .content-type-selector .content-type:last-child {
       margin-right: 0; }
+    .content-type-selector .content-type.active, .content-type-selector .content-type:hover {
+      background: #27571c; }
 
 .image {
   height: 650px;
   width: 650px;
-  margin: 0 auto;
-  background: white; }
+  margin: 0 auto; }
   .image canvas {
     border: 1px solid black; }
 
@@ -93,3 +96,54 @@ body {
     width: 14.70196%; }
     .controls-container .list-inputs .list-input .remove-list-item:last-child {
       margin-right: 0; }
+
+/** Control Stuff **/
+.control {
+  display: block;
+  width: 100%; }
+  .control.background .label, .control.aspect-ratio .label {
+    float: none;
+    display: block; }
+  .control.background input {
+    display: none; }
+  .control .options {
+    display: block;
+    width: 100%; }
+    .control .options .option {
+      display: inline-block;
+      width: 50%;
+      float: left;
+      text-align: center;
+      text-align: center;
+      background: #40867C;
+      color: white;
+      cursor: pointer; }
+      .control .options .option.active, .control .options .option:hover {
+        background: #27524c; }
+
+.label {
+  display: inline-block;
+  width: 30%;
+  float: left; }
+  .label + input {
+    width: 50%;
+    display: inline-block; }
+
+.picker {
+  display: inline-block;
+  width: 50%;
+  position: relative; }
+  .picker .picker-open {
+    width: 100%;
+    text-align: center; }
+  .picker .picker-container {
+    position: absolute;
+    background: #40867C;
+    padding: 20px;
+    z-index: 1000; }
+    .picker .picker-container.hide {
+      display: none; }
+    .picker .picker-container .picker-close {
+      position: absolute;
+      right: 2px;
+      top: 2px; }

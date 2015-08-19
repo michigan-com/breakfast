@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
-import { wrapText, clone } from './lib/parse';
+import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
-import ColorPicker from 'react-color';
+import Controls from './obj/controls';
+import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -10,15 +11,20 @@ var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
 
-var SIXTEEN_NINE = '16:9';
-var SQUARE = 'square';
-
 class PicEditor extends React.Component {
   constructor(args) {
     super(args);
 
     this.contentTypes = ['quote', 'list', 'picture'];
     this.aspectRatios = [SQUARE, SIXTEEN_NINE];
+    this.logos = [{
+      name: 'Detroit Free Press',
+      filename: 'dfp_white.svg'
+    }, {
+      name: 'Detroit News',
+      filename: 'dn_white.svg'
+    }];
+
     this.state = {
       contentType: this.contentTypes[0],
 
@@ -42,7 +48,12 @@ class PicEditor extends React.Component {
 
       // Aspect ratio for the canvas
       aspectRatio: this.aspectRatios[0],
+
+      logoImg: this.logos[0].filename
     }
+
+    this.logoChanged(0);
+
   }
 
   contentTypeChange(contentType) {
@@ -103,6 +114,36 @@ class PicEditor extends React.Component {
     })
   }
 
+  logoChanged(index) {
+    if (index < 0 || index >= this.logos.length) {
+      console.log(`Index ${index} invalid`);
+      return;
+    }
+
+    //if (typeof this.logos[index].element === 'undefined') {
+      //// Load the image into the DOM for usage
+      //let i = document.createElement('img');
+      //i.src = `/img/${this.logos[index].filename}`;
+      //i = document.getElementById('img-cache').appendChild(i);
+
+      //i.onload = function() {
+        //console.log(i.scrollHeight, i.scrollWidth);
+        //this.logos[index].element = i;
+      //}.bind(this)
+
+      //var b = new Blob([`${window.location.origin}/img/${this.logos[index].filename}`]);
+      //var f = new FileReader();
+      //f.onload = function(e) {
+        //console.log(f.result);
+      //};
+      //f.readAsBinaryString(b);
+    //}
+
+    this.setState({
+      logoImg: this.logos[index].filename
+    });
+  }
+
   addListItem() {
     let list = clone(this.state.list);
     list.items.push('');
@@ -141,7 +182,7 @@ class PicEditor extends React.Component {
     });
   }
 
-  getFileContents(e) {
+  getFileContents(e, input) {
     // react-canvas does some weird caching stuff with images. This makes
     // it so that we clear out the old image while we're loading the new one
     this.setState({
@@ -150,10 +191,9 @@ class PicEditor extends React.Component {
       }
     });
 
-    let input = React.findDOMNode(this.refs['image-upload'])
     let file = input.files[0];
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function(e) {
       this.setState({
         background: {
@@ -212,7 +252,7 @@ class PicEditor extends React.Component {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
 
-    var a = document.createElement('a');
+    let a = document.createElement('a');
     a.setAttribute('href',  dataUri);
     a.setAttribute('download', 'pic.png');
     document.body.appendChild(a);
@@ -220,6 +260,11 @@ class PicEditor extends React.Component {
     document.body.removeChild(a);
   }
 
+  renderContentOptions(option, index) {
+    return(
+      <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` } onClick={ this.contentTypeChange.bind(this, option) }>{ toTitleCase(option) }</div>
+    )
+  }
   render() {
     let canvasData = this.state[this.state.contentType];
     return(
@@ -232,34 +277,18 @@ class PicEditor extends React.Component {
                 fontColor={ this.state.fontColor }
                 background={ this.state.background }
                 aspectRatio={ this.state.aspectRatio }
+                logo={ this.state.logoImg }
                 ref='canvas'/>
           </div>
         </div>
         <div className='controls-container'>
           <div className='content-type-selector'>
-            <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'quote') }>Quote</div>
-            <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'list') }>Fact List</div>
-            <div className='content-type' onClick={ this.contentTypeChange.bind(this, 'picture') }>Water Mark</div>
+            { ['quote', 'list', 'picture'].map(this.renderContentOptions.bind(this)) }
           </div>
           <div className='text-rendering'>
             { this.renderTextInput() }
           </div>
-          <div className='options'>
-            <input type='range' min='10' max='60' value={ this.state.fontSize } onChange={ this.setFontSize.bind(this) }/>
-          </div>
-          <div className='font-color-picker'>
-            <ColorPicker color={ this.state.fontColor } onChangeComplete={ this.fontColorChange.bind(this) }/>
-          </div>
-          <div className='background-color-picker'>
-            <ColorPicker color={ this.state.backgroundColor } onChangeComplete={ this.backgroundColorChange.bind(this) }/>
-          </div>
-          <div className='background-image-upload'>
-            <input type='file' name='image' id='image-upload' onChange={ this.getFileContents.bind(this) } ref='image-upload'/>
-          </div>
-          <div className='aspect-ratio-picker'>
-            <div className='aspect-ratio' onClick={ this.aspectRatioChange.bind(this, SIXTEEN_NINE)}>{ SIXTEEN_NINE }</div>
-            <div className='aspect-ratio' onClick={ this.aspectRatioChange.bind(this, SQUARE) }>{ SQUARE }</div>
-          </div>
+          <Controls breakfast={ this } logos={ this.logos }/>
           <div className='save'>
             <button className='save' onClick={ this.saveImage.bind(this) }>Save Image</button>
           </div>

@@ -114,7 +114,18 @@ export default class Canvas extends React.Component {
         color: this.props.fontColor
       }
     }
+  }
 
+  getLogoStyle() {
+    let canvasStyle = this.getCanvasStyle();
+    let height = canvasStyle.height / 5;
+    return {
+      height,
+      top: canvasStyle.height - height,
+      left: 0,
+      width: 150,
+      zIndex: 100
+    }
   }
 
   renderListItems() {
@@ -193,6 +204,16 @@ export default class Canvas extends React.Component {
     }
 
     return backgroundObj;
+  }
+
+  renderLogo() {
+    let style = this.getLogoStyle();
+    let logoUrl = `${window.location.origin}/img/${this.props.logo}`;
+    console.log(style);
+    console.log(logoUrl);
+    return (
+      <Image src={ logoUrl } style={ style }/>
+    )
   }
 
   render() {

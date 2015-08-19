@@ -1,8 +1,24 @@
 @import 'bourbon';
 @import 'neat';
 
+$primary-color: #40912F;
+$secondary-color: #40867C;
+
+@mixin button($background-color: $primary-color) {
+  text-align: center;
+  background: $background-color;
+  color: white;
+  cursor: pointer;
+
+  &.active, &:hover {
+    background: darken($background-color, 15%);
+  }
+
+}
+
 body {
   font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
+  background: #eee;
 }
 
 .pic-editor {
@@ -13,6 +29,7 @@ body {
   }
   .controls-container {
     @include span-columns(4);
+    position: relative;
   }
 
   @media (max-width: 1000px) {
@@ -27,10 +44,7 @@ body {
 
   .content-type {
     @include span-columns(4);
-    text-align: center;
-    cursor: pointer;
-    background: #40912F;
-    color: white;
+    @include button($primary-color);
   }
 }
 
@@ -38,7 +52,6 @@ body {
   height: 650px;
   width: 650px;
   margin: 0 auto;
-  background: white;
 
   canvas {
     border: 1px solid black;
@@ -64,3 +77,78 @@ body {
     }
   }
 }
+
+
+/** Control Stuff **/
+.control {
+  display: block;
+  width: 100%;
+
+  &.background, &.aspect-ratio {
+    .label {
+      float: none;
+      display: block;
+    }
+  }
+
+  &.background {
+    input {
+      display: none;
+    }
+  }
+
+  .options {
+    display: block;
+    width: 100%;
+
+
+    .option {
+      display: inline-block;
+      width: 50%;
+      float: left;
+      text-align: center;
+
+      @include button($secondary-color);
+    }
+  }
+}
+
+.label {
+  display: inline-block;
+  width: 30%;
+  float: left;
+
+  &+input {
+    width: 50%;
+    display: inline-block;
+  }
+}
+
+.picker {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+
+  .picker-open {
+    width: 100%;
+    text-align: center;
+  }
+
+  .picker-container {
+    position: absolute;
+    background: $secondary-color;
+    padding: 20px;
+    z-index: 1000;
+
+    &.hide {
+      display: none;
+    }
+
+    .picker-close {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+    }
+  }
+}
+
