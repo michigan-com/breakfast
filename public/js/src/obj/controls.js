@@ -40,7 +40,7 @@ export default class Controls extends React.Component {
           <span className='label'>File</span>
           <span className='input'>
             <span className='file-upload' onClick={ this.triggerFileUpload.bind(this) }>Choose image</span>
-            <input type='file' name='image' id='image-upload' onSelect={ this.fileUpload.bind(this) } ref='image-upload'/>
+            <input type='file' name='image' id='image-upload' onChange={ this.fileUpload.bind(this) } ref='image-upload'/>
           </span>
         </div>
       </div>

@@ -31,7 +31,7 @@ body {
     position: relative; }
     .pic-editor .controls-container:last-child {
       margin-right: 0; }
-  @media (max-width: 1000px) {
+  @media (max-width: 800px) {
     .pic-editor .image-container, .pic-editor .controls-container {
       float: left;
       display: block;

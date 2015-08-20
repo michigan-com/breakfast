@@ -75,7 +75,7 @@ body {
     position: relative;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 800px) {
     .image-container, .controls-container {
       @include span-columns(12);
     }
