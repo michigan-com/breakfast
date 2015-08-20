@@ -92,7 +92,7 @@ export default class Canvas extends React.Component {
     let headlineSize = 50;
     let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
 
-    let listItemSize = this.props.fontSize * 1.25;;
+    let listItemSize = this.props.fontSize * 1.25;
     return {
       headline: {
         top: this.canvasPadding,
@@ -113,6 +113,17 @@ export default class Canvas extends React.Component {
         fontFace: font,
         color: this.props.fontColor
       }
+    }
+  }
+
+  getAttributionStyle() {
+    let fontSize = 10;
+    let font = ReactCanvas.FontFace('Arial Black, Arial Thin, Gadget, sans-serif', '', {});
+    return {
+      fontSize,
+      color: this.props.fontColor,
+      fontFace: font,
+      lineHeight: fontSize * 1.25
     }
   }
 
@@ -192,6 +203,25 @@ export default class Canvas extends React.Component {
     )
   }
 
+  renderPicture() {
+    let canvasStyle = this.getCanvasStyle();
+    let attributionStyle = this.getAttributionStyle();
+    let attributionText = `${this.props.canvasData.photographer ? this.props.canvasData.photographer + ' / ' : ''}${this.props.canvasData.copyright}`;
+    let metrics = measureText(attributionText, canvasStyle.width - 50,
+          attributionStyle.fontFace, attributionStyle.fontSize, attributionStyle.lineHeight);
+
+    // Draw in the bottom right hand corner of the canvas
+    attributionStyle.height = metrics.height;
+    attributionStyle.width = metrics.width;
+    attributionStyle.top = canvasStyle.height - metrics.height - 5;
+    attributionStyle.left = canvasStyle.width - metrics.width - 5;
+    return(
+      <Group style={ this.getGroupStyle() }>
+        <Text className='attribution' style={ attributionStyle }>{ attributionText}</Text>
+      </Group>
+    )
+}
+
   renderBackground() {
     let type = this.props.background.type;
     let backgroundObj;
@@ -234,6 +264,8 @@ export default class Canvas extends React.Component {
       canvasElements = this.renderQuote();
     } else if (this.props.type === 'list') {
       canvasElements = this.renderList();
+    } else if (this.props.type === 'picture') {
+      canvasElements = this.renderPicture();
     }
     return (
       <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>

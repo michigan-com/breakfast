@@ -38,6 +38,10 @@ class PicEditor extends React.Component {
         headline: 'This is a headline',
         items: ['this is an item in the ist']
       },
+      picture: {
+        photographer: 'Peter Parker',
+        copyright: 'Daily Bugle'
+      },
 
       fontSize: 20,
       fontColor: '#ffffff',
@@ -115,6 +119,26 @@ class PicEditor extends React.Component {
     })
   }
 
+  photographerChange() {
+    let copyright = this.state.picture.copyright;
+    this.setState({
+      picture: {
+        photographer: React.findDOMNode(this.refs.photographer).value,
+        copyright
+      }
+    });
+  }
+
+  copyrightChange() {
+    let photographer = this.state.picture.photographer;
+    this.setState({
+      picture: {
+        photographer,
+        copyright: React.findDOMNode(this.refs.copyright).value
+      }
+    })
+  }
+
   logoChanged(index) {
     if (index < 0 || index >= this.logos.length) {
       console.log(`Index ${index} invalid`);
@@ -135,21 +159,16 @@ class PicEditor extends React.Component {
     // Clear out the old image
     setNewImage('', 0.0);
 
-    //if (!(filename in this.logoAspectRatios)) {
-      // Load the image into the DOM for usage
-      let i = document.createElement('img');
-      i.src = `/img/${this.logos[index].filename}`;
-      i = document.getElementById('img-cache').appendChild(i);
+    // Load the image into the DOM for usage
+    let i = document.createElement('img');
+    i.src = `/img/${this.logos[index].filename}`;
+    i = document.getElementById('img-cache').appendChild(i);
 
-      i.onload = function() {
-        console.log(i.scrollHeight, i.scrollWidth);
-        this.logoAspectRatios[filename] = (i.scrollWidth / i.scrollHeight);
-        setNewImage(filename, this.logoAspectRatios[filename]);
-      }.bind(this)
-
-    //} else {
-      //setNewImage(filename, this.logoAspectRatios[filename]);
-    //}
+    i.onload = function() {
+      console.log(i.scrollHeight, i.scrollWidth);
+      this.logoAspectRatios[filename] = (i.scrollWidth / i.scrollHeight);
+      setNewImage(filename, this.logoAspectRatios[filename]);
+    }.bind(this)
 
   }
 
@@ -252,7 +271,12 @@ class PicEditor extends React.Component {
       )
     } else if (this.state.contentType === 'picture') {
       return (
-        <div> This hasn't been implemented yet</div>
+        <div className='inputs picture-inputs'>
+          <div className='input-title'>Photographer</div>
+          <input type='text' ref='photographer' placeholder={ this.state.picture.photographer } onChange={ this.photographerChange.bind(this) }/>
+          <div className='input-title'>Copyright holder</div>
+          <input type='text' ref='copyright' placeholder={ this.state.picture.copyright } onChange={ this.copyrightChange.bind(this) }/>
+        </div>
       )
     }
   }
