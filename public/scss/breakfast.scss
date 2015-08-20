@@ -284,3 +284,76 @@ body {
 
   }
 }
+
+.select {
+  width: 100%;
+
+  &.show {
+    .current-selection {
+      &:after {
+        @include transform(rotate(0deg));
+      }
+    }
+  }
+
+  .current-selection {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    line-height: 40px;
+    border-bottom: 1px solid $secondary-color;
+    color: $secondary-color;
+    cursor: pointer;
+
+    &:after {
+      content: '^';
+      position: absolute;
+      right: 0;
+      @include transform(rotate(180deg));
+      @include transition(all 250ms linear);
+    }
+  }
+
+  .options {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    max-height: 30px * 5; // 5 max height;
+    overflow-y: auto;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid $secondary-color;
+
+    .option {
+      font-size: 20px;
+      line-height: 30px;
+      color: $secondary-color;
+      @include transition(all 250ms ease-in);
+      cursor: pointer;
+
+      &:hover, &.selected {
+        background: $secondary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+.save {
+  margin-top: 30px;
+}
+.save-image {
+  background: $primary-color;
+  color: white;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
+  margin: 10px 0px;
+  @include transition(all 250ms ease-in);
+  cursor: pointer;
+
+  &:hover {
+    background: darken($primary-color, 10%);
+  }
+}

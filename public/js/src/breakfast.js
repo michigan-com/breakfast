@@ -365,7 +365,7 @@ class PicEditor extends React.Component {
           </div>
           <Controls breakfast={ this } logos={ this.logos }/>
           <div className='save'>
-            <button className='save' onClick={ this.saveImage.bind(this) }>Save Image</button>
+            <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
           </div>
         </div>
       </div>

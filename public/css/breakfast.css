@@ -294,3 +294,73 @@ body {
     .ratio-options .aspect-ratio.active, .ratio-options .aspect-ratio:hover {
       background: #40867C;
       color: white; }
+
+.select {
+  width: 100%; }
+  .select.show .current-selection:after {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  .select .current-selection {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    line-height: 40px;
+    border-bottom: 1px solid #40867C;
+    color: #40867C;
+    cursor: pointer; }
+    .select .current-selection:after {
+      content: '^';
+      position: absolute;
+      right: 0;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+      transition: all 250ms linear;
+      -o-transition: all 250ms linear;
+      -moz-transition: all 250ms linear;
+      -webkit-transition: all 250ms linear; }
+  .select .options {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #40867C; }
+    .select .options .option {
+      font-size: 20px;
+      line-height: 30px;
+      color: #40867C;
+      transition: all 250ms ease-in;
+      -o-transition: all 250ms ease-in;
+      -moz-transition: all 250ms ease-in;
+      -webkit-transition: all 250ms ease-in;
+      cursor: pointer; }
+      .select .options .option:hover, .select .options .option.selected {
+        background: #40867C;
+        color: white; }
+
+.save {
+  margin-top: 30px; }
+
+.save-image {
+  background: #40912F;
+  color: white;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
+  margin: 10px 0px;
+  transition: all 250ms ease-in;
+  -o-transition: all 250ms ease-in;
+  -moz-transition: all 250ms ease-in;
+  -webkit-transition: all 250ms ease-in;
+  cursor: pointer; }
+  .save-image:hover {
+    background: #2f6a23; }
