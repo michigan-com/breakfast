@@ -7,22 +7,20 @@ html {
   box-sizing: inherit; }
 
 body {
-  font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
-  background: #eee; }
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  background: white; }
 
 .pic-editor {
-  max-width: 68em;
-  margin-left: auto;
-  margin-right: auto; }
-  .pic-editor::after {
-    clear: both;
-    content: "";
-    display: table; }
+  width: 95%;
+  margin: 0 auto;
+  display: block;
+  position: relative; }
   .pic-editor .image-container {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 65.88078%; }
+    width: 65.88078%;
+    margin-right: 0; }
     .pic-editor .image-container:last-child {
       margin-right: 0; }
   .pic-editor .controls-container {
@@ -43,26 +41,44 @@ body {
         margin-right: 0; } }
 
 .content-type-selector {
-  max-width: 68em;
-  margin-left: auto;
-  margin-right: auto; }
-  .content-type-selector::after {
-    clear: both;
-    content: "";
-    display: table; }
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 30px;
+  height: 60px; }
   .content-type-selector .content-type {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 31.76157%;
     text-align: center;
-    background: #40912F;
-    color: white;
-    cursor: pointer; }
+    color: #40912F;
+    border: 1px solid #40912F;
+    cursor: pointer;
+    transition: all 250ms ease-in;
+    -o-transition: all 250ms ease-in;
+    -moz-transition: all 250ms ease-in;
+    -webkit-transition: all 250ms ease-in;
+    font-size: 30px;
+    line-height: 60px;
+    text-transform: uppercase; }
     .content-type-selector .content-type:last-child {
       margin-right: 0; }
     .content-type-selector .content-type.active, .content-type-selector .content-type:hover {
-      background: #27571c; }
+      background: #40912F;
+      color: white; }
+    .content-type-selector .content-type.active {
+      text-align: center;
+      color: #40912F;
+      border: 1px solid #40912F;
+      cursor: pointer;
+      transition: all 250ms ease-in;
+      -o-transition: all 250ms ease-in;
+      -moz-transition: all 250ms ease-in;
+      -webkit-transition: all 250ms ease-in; }
+      .content-type-selector .content-type.active.active, .content-type-selector .content-type.active:hover {
+        background: #40912F;
+        color: white; }
 
 .image {
   height: 650px;
@@ -86,66 +102,195 @@ body {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 82.94039%; }
+    width: 91.4702%; }
     .controls-container .list-inputs .list-input input:last-child {
       margin-right: 0; }
   .controls-container .list-inputs .list-input .remove-list-item {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 14.70196%; }
+    width: 6.17215%;
+    color: #A83641;
+    transition: all 250ms ease-in;
+    -o-transition: all 250ms ease-in;
+    -moz-transition: all 250ms ease-in;
+    -webkit-transition: all 250ms ease-in;
+    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    height: 40px;
+    margin: 10px 0; }
     .controls-container .list-inputs .list-input .remove-list-item:last-child {
       margin-right: 0; }
+    .controls-container .list-inputs .list-input .remove-list-item:hover {
+      color: white;
+      background: #A83641; }
+
+.controls-container .list-inputs .add-item {
+  font-size: 20px;
+  line-height: 40px;
+  width: 50%;
+  background: #40912F;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 10px auto;
+  transition: all 250ms ease-in;
+  -o-transition: all 250ms ease-in;
+  -moz-transition: all 250ms ease-in;
+  -webkit-transition: all 250ms ease-in; }
+  .controls-container .list-inputs .add-item:hover {
+    background: #1e4416; }
+
+.section-title {
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+  margin: 10px 0px;
+  color: #40867C;
+  text-transform: uppercase; }
+
+.input-title {
+  text-transform: uppercase;
+  color: #40912F;
+  font-size: 15px;
+  line-height: 30px; }
+
+/** Text input stuff **/
+.text-rendering {
+  width: 100%; }
+  .text-rendering input {
+    background: white;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: 0;
+    font-size: 20px;
+    line-height: 40px;
+    width: 100%;
+    margin: 10px auto; }
 
 /** Control Stuff **/
 .control {
   display: block;
   width: 100%; }
-  .control.background .label, .control.aspect-ratio .label {
-    float: none;
-    display: block; }
   .control.background input {
     display: none; }
-  .control .options {
-    display: block;
-    width: 100%; }
-    .control .options .option {
-      display: inline-block;
-      width: 50%;
-      float: left;
-      text-align: center;
-      text-align: center;
-      background: #40867C;
-      color: white;
-      cursor: pointer; }
-      .control .options .option.active, .control .options .option:hover {
-        background: #27524c; }
-      .control .options .option.hidden {
-        display: none; }
 
-.label {
-  display: inline-block;
-  width: 30%;
-  float: left; }
-  .label + input {
-    width: 50%;
-    display: inline-block; }
+.input-container {
+  width: 100%;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 5px 0px;
+  height: 50px; }
+  .input-container.hidden {
+    display: none; }
+  .input-container .label {
+    display: inline-block;
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    text-align: center; }
+    .input-container .label:last-child {
+      margin-right: 0; }
+  .input-container .input {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 74.41059%;
+    display: inline-block;
+    text-align: center; }
+    .input-container .input:last-child {
+      margin-right: 0; }
+    .input-container .input > input {
+      width: 100%; }
 
 .picker {
   display: inline-block;
-  width: 50%;
-  position: relative; }
+  width: 100%;
+  position: relative;
+  text-align: center; }
   .picker .picker-open {
-    width: 100%;
-    text-align: center; }
+    width: 50%;
+    text-align: center;
+    color: #40867C;
+    border: 1px solid #40867C;
+    cursor: pointer;
+    transition: all 250ms ease-in;
+    -o-transition: all 250ms ease-in;
+    -moz-transition: all 250ms ease-in;
+    -webkit-transition: all 250ms ease-in;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 30px;
+    height: 100%;
+    padding: 10px; }
+    .picker .picker-open.active, .picker .picker-open:hover {
+      background: #40867C;
+      color: white; }
   .picker .picker-container {
     position: absolute;
     background: #40867C;
-    padding: 20px;
+    padding: 30px;
     z-index: 1000; }
     .picker .picker-container.hide {
       display: none; }
     .picker .picker-container .picker-close {
+      color: #A83641;
+      transition: all 250ms ease-in;
+      -o-transition: all 250ms ease-in;
+      -moz-transition: all 250ms ease-in;
+      -webkit-transition: all 250ms ease-in;
+      cursor: pointer;
       position: absolute;
-      right: 2px;
-      top: 2px; }
+      top: 0;
+      right: 0;
+      line-height: 30px;
+      font-size: 15px;
+      color: white;
+      padding: 5px; }
+      .picker .picker-container .picker-close:hover {
+        color: white;
+        background: #A83641; }
+
+.file-upload {
+  width: 50%;
+  text-align: center;
+  color: #40867C;
+  border: 1px solid #40867C;
+  cursor: pointer;
+  transition: all 250ms ease-in;
+  -o-transition: all 250ms ease-in;
+  -moz-transition: all 250ms ease-in;
+  -webkit-transition: all 250ms ease-in;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 30px;
+  height: 100%;
+  padding: 10px; }
+  .file-upload.active, .file-upload:hover {
+    background: #40867C;
+    color: white; }
+
+.ratio-options {
+  width: 100%; }
+  .ratio-options .aspect-ratio {
+    text-align: center;
+    color: #40867C;
+    border: 1px solid #40867C;
+    cursor: pointer;
+    transition: all 250ms ease-in;
+    -o-transition: all 250ms ease-in;
+    -moz-transition: all 250ms ease-in;
+    -webkit-transition: all 250ms ease-in;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 0;
+    width: 50%;
+    display: inline-block;
+    float: left; }
+    .ratio-options .aspect-ratio.active, .ratio-options .aspect-ratio:hover {
+      background: #40867C;
+      color: white; }

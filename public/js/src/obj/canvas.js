@@ -96,20 +96,21 @@ export default class Canvas extends React.Component {
     return {
       headline: {
         top: this.canvasPadding,
-        left: 10,
+        left: this.canvasPadding,
         height: headlineSize,
         lineHeight: headlineSize,
         fontSize: headlineFontSize,
         width: canvasStyle.textWidth,
-        fontFace: font
+        fontFace: font,
+        color: this.props.fontColor
       },
       listItem: {
         top: headlineSize + 10,
-        left: 10 + 10,
+        left: this.canvasPadding * 2,
         height: listItemSize,
-        lineHeight: listItemSize,
+        lineHeight: listItemSize * 1.25,
         fontSize: this.props.fontSize,
-        width: canvasStyle.textWidth,
+        width: canvasStyle.textWidth - (this.canvasPadding * 2),
         fontFace: font,
         color: this.props.fontColor
       }
@@ -144,13 +145,25 @@ export default class Canvas extends React.Component {
   renderListItems() {
     let canvasStyle = this.getCanvasStyle();
     let listItemStyle = this.getListStyle().listItem;
+    let headlineStyle = this.getListStyle().headline;
     let prevHeight = 0;
     let returnElements = [];
-    for (let i = 0; i < this.props.canvasData.items.length; i++) {
-      let item = this.props.canvasData.items[i];
 
-      let listMetrics = measureText(item, canvasStyle.width - 50, listItemStyle.fontFace,
-          listItemStyle.fontSize, listItemStyle.lineHeight);
+    // Render the headline
+    let headline = this.props.canvasData.headline.toUpperCase();
+    let headlineMetrics = measureText(headline, canvasStyle.width - this.canvasPadding,
+          headlineStyle.fontFace, headlineStyle.fontSize, headlineStyle.lineHeight);
+    prevHeight = headlineMetrics.height;
+    returnElements.push(
+      <Text className='headline' style={ headlineStyle }>{ headline }</Text>
+    )
+
+    // render the text input. Have to manually calculate starting point
+    for (let i = 0; i < this.props.canvasData.items.length; i++) {
+      let item = `• ${this.props.canvasData.items[i]}`;
+
+      let listMetrics = measureText(item, canvasStyle.width - (this.canvasPadding * 4),
+          listItemStyle.fontFace, listItemStyle.fontSize, listItemStyle.lineHeight);
 
       listItemStyle.height = listMetrics.height;
       listItemStyle.top += prevHeight;
@@ -158,7 +171,7 @@ export default class Canvas extends React.Component {
          <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
       )
 
-      prevHeight = listMetrics.height;
+      prevHeight = listMetrics.height + (listItemStyle.lineHeight * .2);
     }
 
     return returnElements;

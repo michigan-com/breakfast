@@ -32,17 +32,43 @@ export default class Controls extends React.Component {
 
     let breakfast = this.props.breakfast;
     let contentType = breakfast.state.contentType;
-    let backgroundClass = `option ${contentType === 'watermark' ? 'hidden' : ''}`;
+    let backgroundClass = `input-container ${contentType === 'watermark' ? 'hidden' : ''}`;
 
     return (
-      <div className='options'>
+      <div>
         <div className={ backgroundClass }>
-        <PickerToggle color={ breakfast.state.backgroundColor } callback={ breakfast.backgroundColorChange.bind(breakfast) }/>
+          <span className='label'>Color</span>
+          <span className='input'>
+            <PickerToggle color={ breakfast.state.backgroundColor } callback={ breakfast.backgroundColorChange.bind(breakfast) }/>
+          </span>
         </div>
-        <div className='option'>
-        <span className='file-upload' onClick={ this.triggerFileUpload.bind(this) }>Choose an image</span>
-        <input type='file' name='image' id='image-upload' onChange={ this.fileUpload.bind(this) } ref='image-upload'/>
+        <div className='input-container'>
+          <span className='label'>File</span>
+          <span className='input'>
+            <span className='file-upload' onClick={ this.triggerFileUpload.bind(this) }>Choose image</span>
+            <input type='file' name='image' id='image-upload' onChange={ this.fileUpload.bind(this) } ref='image-upload'/>
+          </span>
         </div>
+      </div>
+    )
+  }
+
+  renderRatioOptions() {
+    let breakfast = this.props.breakfast;
+    let currentRatio = breakfast.state.aspectRatio;
+
+    function renderRatioOption(ratio, key) {
+      return (
+        <div className={ `aspect-ratio ${currentRatio === ratio ? 'active' : ''}`}
+          onClick={ breakfast.aspectRatioChange.bind(breakfast, ratio)}>
+            { ratio }
+        </div>
+      )
+
+    }
+    return (
+      <div className='ratio-options'>
+        { breakfast.aspectRatios.map(renderRatioOption) }
       </div>
     )
   }
@@ -51,28 +77,29 @@ export default class Controls extends React.Component {
     let breakfast = this.props.breakfast;
     return(
       <div className='controls'>
-        <div className='control options'>
-          <span className='label'>Font Size</span>
-          <input type='range' min='10' max='60' value={ breakfast.state.fontSize } onChange={ breakfast.setFontSize.bind(breakfast) }/>
-        </div>
-        <div className='control font-color-picker'>
-          <span className='label'>Font Color</span>
-          <PickerToggle color={ breakfast.state.fontColor } callback={ breakfast.fontColorChange.bind(breakfast) }/>
+        <div className='section-title'>Options</div>
+        <div className='control font'>
+          <div className='input-title'>Font</div>
+          <div className='input-container'>
+            <span className='label'>Size</span>
+            <span className='input'>
+              <input type='range' min='10' max='60' value={ breakfast.state.fontSize } onChange={ breakfast.setFontSize.bind(breakfast) }/>
+            </span>
+          </div>
+          <div className='input-container'>
+            <span className='label'>Color</span>
+            <span className='input'>
+              <PickerToggle color={ breakfast.state.fontColor } callback={ breakfast.fontColorChange.bind(breakfast) }/>
+            </span>
+          </div>
         </div>
         <div className='control background'>
-          <span className='label'>Background</span>
+          <div className='input-title'>Background</div>
           { this.renderBackgroundOptions() }
         </div>
         <div className='control aspect-ratio'>
-          <span className='label'>Aspect Ratio</span>
-          <div className='options'>
-            <div className='option'>
-              <div className='aspect-ratio' onClick={ breakfast.aspectRatioChange.bind(breakfast, SIXTEEN_NINE)}>{ SIXTEEN_NINE }</div>
-            </div>
-            <div className='option'>
-              <div className='aspect-ratio' onClick={ breakfast.aspectRatioChange.bind(breakfast, SQUARE) }>{ SQUARE }</div>
-            </div>
-          </div>
+          <div className='input-title'>Aspect Ratio</div>
+          { this.renderRatioOptions() }
         </div>
         <div className='control logo'>
           <select className='logo-picker' onChange={ this.changeLogo.bind(this) }>
@@ -108,7 +135,7 @@ class PickerToggle extends React.Component {
       <div className='picker'>
           <span className='picker-open' onClick={ this.showPicker.bind(this) }>Pick Color</span>
           <div className={ `picker-container ${ this.state.pickerHidden ? 'hide' : ''}` }>
-            <span className='picker-close' onClick= { this.hidePicker.bind(this) }>Close</span>
+            <span className='picker-close' onClick= { this.hidePicker.bind(this) }>X</span>
             <ColorPicker className='color-picker' type='compact' color={ this.props.color } onChangeComplete={  this.props.callback }/>
           </div>
       </div>

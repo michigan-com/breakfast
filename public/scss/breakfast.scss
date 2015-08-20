@@ -1,31 +1,74 @@
 @import 'bourbon';
 @import 'neat';
 
+$body-background: white;
+
 $primary-color: #40912F;
 $secondary-color: #40867C;
+$danger-color: #A83641;
 
-@mixin button($background-color: $primary-color) {
+$button-font-size: 30px;
+$button-line-height: $button-font-size * 2;
+$input-font-size: 20px;
+$input-line-height: $input-font-size * 2;
+
+$picker-padding: 30px;
+
+@mixin transition($string) {
+  transition: $string;
+  -o-transition: $string;
+  -moz-transition: $string;
+  -webkit-transition: $string;
+}
+
+@mixin button($color: $primary-color) {
   text-align: center;
-  background: $background-color;
-  color: white;
+  color: $color;
+  border: 1px solid $color;
   cursor: pointer;
+  @include transition(all 250ms ease-in);
 
   &.active, &:hover {
-    background: darken($background-color, 15%);
+    background: $color;
+    color: white;
   }
+}
 
+@mixin close-button() {
+  color: $danger-color;
+  @include transition(all 250ms ease-in);
+  cursor: pointer;
+
+  &:hover {
+    color: $body-background;
+    background: $danger-color;
+  }
+}
+
+@mixin picker-open() {
+  width: 50%;
+  @include button($secondary-color);
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 30px;
+  height: 100%;
+  padding: 10px;
 }
 
 body {
-  font-family: Optima, Segoe, 'Segoe UI', Candara, Calibri, Arial, sans-serif;
-  background: #eee;
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  background: $body-background;
 }
 
 .pic-editor {
-  @include outer-container;
+  width: 95%;
+  margin: 0 auto;
+  display: block;
+  position: relative;
 
   .image-container {
     @include span-columns(8);
+    margin-right: 0;
   }
   .controls-container {
     @include span-columns(4);
@@ -40,11 +83,22 @@ body {
 }
 
 .content-type-selector {
-  @include outer-container;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 30px;
+  height: $button-line-height;
 
   .content-type {
     @include span-columns(4);
     @include button($primary-color);
+    font-size: $button-font-size;
+    line-height: $button-line-height;
+    text-transform: uppercase;
+
+    &.active {
+      @include button($primary-color)
+    }
   }
 }
 
@@ -69,13 +123,69 @@ body {
       @include outer-container;
 
       input {
-        @include span-columns(10);
+        @include span-columns(11);
       }
+
       .remove-list-item {
-        @include span-columns(2);
+        @include span-columns(1);
+        @include close-button();
+        line-height: $input-line-height;
+        text-align: center;
+        height: $input-line-height;
+        margin: 10px 0;
+      }
+    }
+
+    .add-item {
+      font-size: 20px;
+      line-height: 40px;
+      width: 50%;
+      background: $primary-color;
+      text-align: center;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin: 10px auto;
+      @include transition(all 250ms ease-in);
+
+      &:hover {
+        background: darken($primary-color, 20%);
       }
     }
   }
+}
+
+.section-title {
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+  margin: 10px 0px;
+  color: $secondary-color;
+  text-transform: uppercase;
+}
+
+.input-title {
+  text-transform: uppercase;
+  color: $primary-color;
+  font-size: 15px;
+  line-height: 30px;
+}
+
+/** Text input stuff **/
+.text-rendering {
+  width: 100%;
+
+  input {
+    background: $body-background;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: 0;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    width: 100%;
+    margin: 10px auto;
+  }
+
 }
 
 
@@ -84,64 +194,57 @@ body {
   display: block;
   width: 100%;
 
-  &.background, &.aspect-ratio {
-    .label {
-      float: none;
-      display: block;
-    }
-  }
-
   &.background {
     input {
       display: none;
     }
   }
 
-  .options {
-    display: block;
-    width: 100%;
-
-
-    .option {
-      display: inline-block;
-      width: 50%;
-      float: left;
-      text-align: center;
-
-      @include button($secondary-color);
-
-      &.hidden {
-        display: none;
-      }
-    }
-  }
 }
 
-.label {
-  display: inline-block;
-  width: 30%;
-  float: left;
+.input-container {
+  width: 100%;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 5px 0px;
+  height: 50px;
 
-  &+input {
-    width: 50%;
+  &.hidden {
+    display: none;
+  }
+
+  .label {
     display: inline-block;
+    @include span-columns(3);
+    text-align: center;
+
+  }
+
+  .input {
+    @include span-columns(9);
+    display: inline-block;
+    text-align: center;
+
+    & > input {
+      width: 100%;
+    }
   }
 }
 
 .picker {
   display: inline-block;
-  width: 50%;
+  width: 100%;
   position: relative;
+  text-align: center;
 
   .picker-open {
-    width: 100%;
-    text-align: center;
+    @include picker-open();
   }
 
   .picker-container {
     position: absolute;
     background: $secondary-color;
-    padding: 20px;
+    padding: $picker-padding;
     z-index: 1000;
 
     &.hide {
@@ -149,10 +252,35 @@ body {
     }
 
     .picker-close {
+      @include close-button();
       position: absolute;
-      right: 2px;
-      top: 2px;
+      top: 0;
+      right: 0;
+      line-height: $picker-padding;
+      font-size: $picker-padding * .5;
+      color: white;
+      padding: 5px;
     }
   }
 }
 
+.file-upload {
+  @include picker-open();
+}
+
+.ratio-options {
+  width: 100%;
+
+  .aspect-ratio {
+    @include button($secondary-color);
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 0;
+    width: 50%;
+    display: inline-block;
+    float: left;
+
+
+  }
+}

@@ -28,6 +28,14 @@ class PicEditor extends React.Component {
     this.logoAspectRatios = {};
     this.previousBackground; // used for when we switch back and forth from watermark
 
+
+    this.defaults = {
+      quote: {
+        quote: 'Test quote',
+        source: 'Test source'
+      }
+    }
+
     this.state = {
       contentType: this.contentTypes[0],
 
@@ -141,7 +149,7 @@ class PicEditor extends React.Component {
   photographerChange() {
     let copyright = this.state.watermark.copyright;
     this.setState({
-      picture: {
+      watermark: {
         photographer: React.findDOMNode(this.refs.photographer).value,
         copyright
       }
@@ -151,7 +159,7 @@ class PicEditor extends React.Component {
   copyrightChange() {
     let photographer = this.state.watermark.photographer;
     this.setState({
-      picture: {
+      watermark: {
         photographer,
         copyright: React.findDOMNode(this.refs.copyright).value
       }
@@ -189,6 +197,16 @@ class PicEditor extends React.Component {
       setNewImage(filename, this.logoAspectRatios[filename]);
     }.bind(this)
 
+  }
+
+  headlineChanged() {
+    let items = this.state.list.items;
+    this.setState({
+      list: {
+        headline: React.findDOMNode(this.refs.headline).value,
+        items
+      }
+    });
   }
 
   addListItem() {
@@ -284,6 +302,9 @@ class PicEditor extends React.Component {
     } else if (this.state.contentType === 'list') {
       return (
         <div className='inputs list-inputs'>
+          <div className='input-title'>Headline</div>
+          <input type='text' ref='headline' placeholder={ this.state.list.headline } onChange={ this.headlineChanged.bind(this) }/>
+          <div className='input-title'>List Items</div>
           { this.state.list.items.map(renderListItemInput.bind(this)) }
           <div className='add-item' onClick={ this.addListItem.bind(this) }>Add item</div>
         </div>
@@ -317,10 +338,14 @@ class PicEditor extends React.Component {
       <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` } onClick={ this.contentTypeChange.bind(this, option) }>{ toTitleCase(option) }</div>
     )
   }
+
   render() {
     let canvasData = this.state[this.state.contentType];
     return(
       <div className='pic-editor'>
+        <div className='content-type-selector'>
+          { ['quote', 'list', 'watermark'].map(this.renderContentOptions.bind(this)) }
+        </div>
         <div className='image-container'>
           <div className='image' ref='image'>
             <Canvas type={ this.state.contentType }
@@ -334,9 +359,7 @@ class PicEditor extends React.Component {
           </div>
         </div>
         <div className='controls-container'>
-          <div className='content-type-selector'>
-            { ['quote', 'list', 'watermark'].map(this.renderContentOptions.bind(this)) }
-          </div>
+          <div className='section-title'>Content</div>
           <div className='text-rendering'>
             { this.renderTextInput() }
           </div>
