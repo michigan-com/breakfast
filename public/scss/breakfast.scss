@@ -109,6 +109,10 @@ body {
       text-align: center;
 
       @include button($secondary-color);
+
+      &.hidden {
+        display: none;
+      }
     }
   }
 }

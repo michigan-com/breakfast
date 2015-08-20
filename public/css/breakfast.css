@@ -120,6 +120,8 @@ body {
       cursor: pointer; }
       .control .options .option.active, .control .options .option:hover {
         background: #27524c; }
+      .control .options .option.hidden {
+        display: none; }
 
 .label {
   display: inline-block;

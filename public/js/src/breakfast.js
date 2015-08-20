@@ -15,7 +15,8 @@ class PicEditor extends React.Component {
   constructor(args) {
     super(args);
 
-    this.contentTypes = ['quote', 'list', 'picture'];
+    this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
+    this.contentTypes = ['quote', 'list', 'watermark'];
     this.aspectRatios = [SQUARE, SIXTEEN_NINE];
     this.logos = [{
       name: 'Detroit Free Press',
@@ -25,6 +26,7 @@ class PicEditor extends React.Component {
       filename: 'dn_white.svg'
     }];
     this.logoAspectRatios = {};
+    this.previousBackground; // used for when we switch back and forth from watermark
 
     this.state = {
       contentType: this.contentTypes[0],
@@ -38,7 +40,7 @@ class PicEditor extends React.Component {
         headline: 'This is a headline',
         items: ['this is an item in the ist']
       },
-      picture: {
+      watermark: {
         photographer: 'Peter Parker',
         copyright: 'Daily Bugle'
       },
@@ -67,9 +69,26 @@ class PicEditor extends React.Component {
       return;
     }
 
-    this.setState({
+    let newState = {
       contentType
-    });
+    };
+
+    // If we're switching to the watermark and we don't have a background
+    // image, load the default one
+    if (contentType === 'watermark' && this.state.background.type !== 'image') {
+      this.previousBackground = this.state.background;
+      newState.background = {
+        type: 'image',
+        src: this.defaultImageSrc
+      }
+    } else if (contentType !== 'watermark' && this.state.background.src === this.defaultImageSrc) {
+      // If we're switching away from watermark, and we have the default image
+      // loaded, change back to the previous background
+      newState.background = this.previousBackground;
+
+    }
+
+    this.setState(newState);
   }
 
   aspectRatioChange(newRatio) {
@@ -120,7 +139,7 @@ class PicEditor extends React.Component {
   }
 
   photographerChange() {
-    let copyright = this.state.picture.copyright;
+    let copyright = this.state.watermark.copyright;
     this.setState({
       picture: {
         photographer: React.findDOMNode(this.refs.photographer).value,
@@ -130,7 +149,7 @@ class PicEditor extends React.Component {
   }
 
   copyrightChange() {
-    let photographer = this.state.picture.photographer;
+    let photographer = this.state.watermark.photographer;
     this.setState({
       picture: {
         photographer,
@@ -269,13 +288,13 @@ class PicEditor extends React.Component {
           <div className='add-item' onClick={ this.addListItem.bind(this) }>Add item</div>
         </div>
       )
-    } else if (this.state.contentType === 'picture') {
+    } else if (this.state.contentType === 'watermark') {
       return (
         <div className='inputs picture-inputs'>
           <div className='input-title'>Photographer</div>
-          <input type='text' ref='photographer' placeholder={ this.state.picture.photographer } onChange={ this.photographerChange.bind(this) }/>
+          <input type='text' ref='photographer' placeholder={ this.state.watermark.photographer } onChange={ this.photographerChange.bind(this) }/>
           <div className='input-title'>Copyright holder</div>
-          <input type='text' ref='copyright' placeholder={ this.state.picture.copyright } onChange={ this.copyrightChange.bind(this) }/>
+          <input type='text' ref='copyright' placeholder={ this.state.watermark.copyright } onChange={ this.copyrightChange.bind(this) }/>
         </div>
       )
     }
@@ -316,7 +335,7 @@ class PicEditor extends React.Component {
         </div>
         <div className='controls-container'>
           <div className='content-type-selector'>
-            { ['quote', 'list', 'picture'].map(this.renderContentOptions.bind(this)) }
+            { ['quote', 'list', 'watermark'].map(this.renderContentOptions.bind(this)) }
           </div>
           <div className='text-rendering'>
             { this.renderTextInput() }

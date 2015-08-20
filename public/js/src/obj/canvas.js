@@ -264,7 +264,7 @@ export default class Canvas extends React.Component {
       canvasElements = this.renderQuote();
     } else if (this.props.type === 'list') {
       canvasElements = this.renderList();
-    } else if (this.props.type === 'picture') {
+    } else if (this.props.type === 'watermark') {
       canvasElements = this.renderPicture();
     }
     return (

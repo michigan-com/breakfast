@@ -27,6 +27,26 @@ export default class Controls extends React.Component {
       <option value={ index }>{ logoObj.name }</option>
     )
   }
+
+  renderBackgroundOptions() {
+
+    let breakfast = this.props.breakfast;
+    let contentType = breakfast.state.contentType;
+    let backgroundClass = `option ${contentType === 'watermark' ? 'hidden' : ''}`;
+
+    return (
+      <div className='options'>
+        <div className={ backgroundClass }>
+        <PickerToggle color={ breakfast.state.backgroundColor } callback={ breakfast.backgroundColorChange.bind(breakfast) }/>
+        </div>
+        <div className='option'>
+        <span className='file-upload' onClick={ this.triggerFileUpload.bind(this) }>Choose an image</span>
+        <input type='file' name='image' id='image-upload' onChange={ this.fileUpload.bind(this) } ref='image-upload'/>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     let breakfast = this.props.breakfast;
     return(
@@ -41,15 +61,7 @@ export default class Controls extends React.Component {
         </div>
         <div className='control background'>
           <span className='label'>Background</span>
-          <div className='options'>
-            <div className='option'>
-              <PickerToggle color={ breakfast.state.backgroundColor } callback={ breakfast.backgroundColorChange.bind(breakfast) }/>
-            </div>
-            <div className='option'>
-              <span className='file-upload' onClick={ this.triggerFileUpload.bind(this) }>Choose an image</span>
-              <input type='file' name='image' id='image-upload' onChange={ this.fileUpload.bind(this) } ref='image-upload'/>
-            </div>
-          </div>
+          { this.renderBackgroundOptions() }
         </div>
         <div className='control aspect-ratio'>
           <span className='label'>Aspect Ratio</span>
