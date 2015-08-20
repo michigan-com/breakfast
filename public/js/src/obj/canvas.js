@@ -117,13 +117,15 @@ export default class Canvas extends React.Component {
   }
 
   getLogoStyle() {
+    let aspectRatio = this.props.logo.aspectRatio ? this.props.logo.aspectRatio : 1;
     let canvasStyle = this.getCanvasStyle();
-    let height = canvasStyle.height / 5;
+    let width = 150;
+    let height = width / aspectRatio;
     return {
       height,
+      width,
       top: canvasStyle.height - height,
       left: 0,
-      width: 150,
       zIndex: 100
     }
   }
@@ -193,13 +195,18 @@ export default class Canvas extends React.Component {
   renderBackground() {
     let type = this.props.background.type;
     let backgroundObj;
+    let backgroundStyle = this.getBackgroundStyle();
+    let layerStyle = {
+      zIndex: backgroundStyle.zIndex
+    }
+
     if (type === 'color') {
       backgroundObj = (
         <Layer style={ this.getBackgroundStyle() }></Layer>
       )
     } else if (type === 'image') {
       backgroundObj = (
-        <Image style={ this.getBackgroundStyle() } src={ this.props.background.src }/>
+        <Image style={ backgroundStyle } src={ this.props.background.src }/>
       )
     }
 
@@ -207,12 +214,15 @@ export default class Canvas extends React.Component {
   }
 
   renderLogo() {
+    if (!this.props.logo.filename) {
+      return;
+    }
+
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/img/${this.props.logo}`;
-    console.log(style);
+    let logoUrl = `${window.location.origin}/img/${this.props.logo.filename}`;
     console.log(logoUrl);
     return (
-      <Image src={ logoUrl } style={ style }/>
+       <Image src={ logoUrl } style={ style }/>
     )
   }
 
@@ -229,6 +239,7 @@ export default class Canvas extends React.Component {
       <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>
         { this.renderBackground() }
         { canvasElements }
+        { this.renderLogo() }
       </Surface>
     )
   }

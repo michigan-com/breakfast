@@ -24,6 +24,7 @@ class PicEditor extends React.Component {
       name: 'Detroit News',
       filename: 'dn_white.svg'
     }];
+    this.logoAspectRatios = {};
 
     this.state = {
       contentType: this.contentTypes[0],
@@ -39,17 +40,17 @@ class PicEditor extends React.Component {
       },
 
       fontSize: 20,
-      fontColor: '#000000',
+      fontColor: '#ffffff',
       background: {
         type: 'color',
-        color: '#ffffff'
+        color: '#000000'
       },
       backgroundColor: '#ffffff',
 
       // Aspect ratio for the canvas
       aspectRatio: this.aspectRatios[0],
 
-      logoImg: this.logos[0].filename
+      logo: {}
     }
 
     this.logoChanged(0);
@@ -120,28 +121,36 @@ class PicEditor extends React.Component {
       return;
     }
 
-    //if (typeof this.logos[index].element === 'undefined') {
-      //// Load the image into the DOM for usage
-      //let i = document.createElement('img');
-      //i.src = `/img/${this.logos[index].filename}`;
-      //i = document.getElementById('img-cache').appendChild(i);
+    let logo = this.logos[index];
+    let filename = logo.filename;
+    let setNewImage = function(imgFilename, aspectRatio) {
+      this.setState({
+        logo: {
+          filename: imgFilename,
+          aspectRatio
+        }
+      });
+    }.bind(this)
 
-      //i.onload = function() {
-        //console.log(i.scrollHeight, i.scrollWidth);
-        //this.logos[index].element = i;
-      //}.bind(this)
+    // Clear out the old image
+    setNewImage('', 0.0);
 
-      //var b = new Blob([`${window.location.origin}/img/${this.logos[index].filename}`]);
-      //var f = new FileReader();
-      //f.onload = function(e) {
-        //console.log(f.result);
-      //};
-      //f.readAsBinaryString(b);
+    //if (!(filename in this.logoAspectRatios)) {
+      // Load the image into the DOM for usage
+      let i = document.createElement('img');
+      i.src = `/img/${this.logos[index].filename}`;
+      i = document.getElementById('img-cache').appendChild(i);
+
+      i.onload = function() {
+        console.log(i.scrollHeight, i.scrollWidth);
+        this.logoAspectRatios[filename] = (i.scrollWidth / i.scrollHeight);
+        setNewImage(filename, this.logoAspectRatios[filename]);
+      }.bind(this)
+
+    //} else {
+      //setNewImage(filename, this.logoAspectRatios[filename]);
     //}
 
-    this.setState({
-      logoImg: this.logos[index].filename
-    });
   }
 
   addListItem() {
@@ -277,7 +286,7 @@ class PicEditor extends React.Component {
                 fontColor={ this.state.fontColor }
                 background={ this.state.background }
                 aspectRatio={ this.state.aspectRatio }
-                logo={ this.state.logoImg }
+                logo={ this.state.logo }
                 ref='canvas'/>
           </div>
         </div>
