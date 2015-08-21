@@ -1,0 +1,10 @@
+#!/bin/bash
+
+APP_DIR=/srv/sites/breakfast
+
+export NODE_PORT="5000"
+export NODE_ENV="production"
+
+cd $APP_DIR
+
+exec node --harmony ./dist/server.js

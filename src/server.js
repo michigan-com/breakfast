@@ -2,7 +2,7 @@
 import app from './app';
 import winston from 'winston';
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.NODE_PORT || '3000');
 app.set('port', port);
 
 winston.info(`[SERVER] Environment: ${app.get('env')}`);
