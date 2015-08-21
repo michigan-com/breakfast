@@ -3,7 +3,9 @@ import ReactCanvas from 'react-canvas';
 import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
 import Controls from './obj/controls';
+import Content from './obj/content';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
+import ContentStore from './store/content';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -33,6 +35,14 @@ class PicEditor extends React.Component {
       quote: {
         quote: 'Test quote',
         source: 'Test source'
+      },
+      list: {
+        headline: 'This is a headline',
+        items: ['This is an item in the list']
+      },
+      watermark: {
+        photographer: 'Peter Parker',
+        copyright: 'Daily Bugle'
       }
     }
 
@@ -41,16 +51,16 @@ class PicEditor extends React.Component {
 
       // Quote stuff
       quote: {
-        quote: 'Test quote',
-        source: 'Test source'
+        quote: '',
+        source: ''
       },
       list: {
-        headline: 'This is a headline',
-        items: ['this is an item in the ist']
+        headline: '',
+        items: ['This is an item in the list']
       },
       watermark: {
-        photographer: 'Peter Parker',
-        copyright: 'Daily Bugle'
+        photographer: '',
+        copyright: ''
       },
 
       fontSize: 20,
@@ -68,7 +78,14 @@ class PicEditor extends React.Component {
     }
 
     this.logoChanged(0);
+  }
 
+  componentDidMount() {
+    ContentStore.addChangeListener(this._contentChange.bind(this));
+  }
+
+  _contentChange() {
+    this.setState(ContentStore.getContent());
   }
 
   contentTypeChange(contentType) {
@@ -126,11 +143,11 @@ class PicEditor extends React.Component {
     });
   }
 
-  quoteChanged() {
+  quoteChanged(quote) {
     let source = this.state.quote.source;
     this.setState({
       quote: {
-        quote: React.findDOMNode(this.refs.quote).value,
+        quote,
         source
       }
     });
@@ -192,7 +209,6 @@ class PicEditor extends React.Component {
     i = document.getElementById('img-cache').appendChild(i);
 
     i.onload = function() {
-      console.log(i.scrollHeight, i.scrollWidth);
       this.logoAspectRatios[filename] = (i.scrollWidth / i.scrollHeight);
       setNewImage(filename, this.logoAspectRatios[filename]);
     }.bind(this)
@@ -277,50 +293,6 @@ class PicEditor extends React.Component {
     this.setState({ fontSize: parseInt(e.target.value) });
   }
 
-  renderTextInput() {
-
-    function renderListItemInput(item, index) {
-      let ref = 'list-item-' + index;
-      return (
-
-        <div className='list-input'>
-          <input type='text' ref={ ref } value={ item } onChange={ this.listItemChanged.bind(this, ref, index) }/>
-          <div className='remove-list-item' onClick={ this.removeListItem.bind(this,index) }>X</div>
-        </div>
-      )
-    }
-
-    if (this.state.contentType === 'quote') {
-      return (
-        <div className='inputs quote-inputs'>
-          <div className='input-title'>Quote</div>
-          <input type='text' ref='quote' placeholder={ this.state.quote.quote } onChange={ this.quoteChanged.bind(this) }/>
-          <div className='input-title'>Source</div>
-          <input type='text' ref='source' placeholder={ this.state.quote.source } onChange={ this.quoteSourceChanged.bind(this) }/>
-        </div>
-      )
-    } else if (this.state.contentType === 'list') {
-      return (
-        <div className='inputs list-inputs'>
-          <div className='input-title'>Headline</div>
-          <input type='text' ref='headline' placeholder={ this.state.list.headline } onChange={ this.headlineChanged.bind(this) }/>
-          <div className='input-title'>List Items</div>
-          { this.state.list.items.map(renderListItemInput.bind(this)) }
-          <div className='add-item' onClick={ this.addListItem.bind(this) }>Add item</div>
-        </div>
-      )
-    } else if (this.state.contentType === 'watermark') {
-      return (
-        <div className='inputs picture-inputs'>
-          <div className='input-title'>Photographer</div>
-          <input type='text' ref='photographer' placeholder={ this.state.watermark.photographer } onChange={ this.photographerChange.bind(this) }/>
-          <div className='input-title'>Copyright holder</div>
-          <input type='text' ref='copyright' placeholder={ this.state.watermark.copyright } onChange={ this.copyrightChange.bind(this) }/>
-        </div>
-      )
-    }
-  }
-
   saveImage() {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
@@ -335,7 +307,10 @@ class PicEditor extends React.Component {
 
   renderContentOptions(option, index) {
     return(
-      <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` } onClick={ this.contentTypeChange.bind(this, option) }>{ toTitleCase(option) }</div>
+      <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` }
+          onClick={ this.contentTypeChange.bind(this, option) }>
+        { toTitleCase(option) }
+      </div>
     )
   }
 
@@ -361,7 +336,7 @@ class PicEditor extends React.Component {
         <div className='controls-container'>
           <div className='section-title'>Content</div>
           <div className='text-rendering'>
-            { this.renderTextInput() }
+            <Content breakfast={ this }/>
           </div>
           <Controls breakfast={ this } logos={ this.logos }/>
           <div className='save'>
