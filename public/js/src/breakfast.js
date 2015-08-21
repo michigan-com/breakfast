@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
+import objectAssign from 'object-assign';
 import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
-import Controls from './obj/controls';
+import Options from './obj/options';
 import Content from './obj/content';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
-import ContentStore from './store/content';
+import { ContentStore, OptionStore } from './store';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -48,44 +49,25 @@ class PicEditor extends React.Component {
 
     this.state = {
       contentType: this.contentTypes[0],
-
-      // Quote stuff
-      quote: {
-        quote: '',
-        source: ''
-      },
-      list: {
-        headline: '',
-        items: ['This is an item in the list']
-      },
-      watermark: {
-        photographer: '',
-        copyright: ''
-      },
-
-      fontSize: 20,
-      fontColor: '#ffffff',
-      background: {
-        type: 'color',
-        color: '#000000'
-      },
-      backgroundColor: '#ffffff',
-
-      // Aspect ratio for the canvas
-      aspectRatio: this.aspectRatios[0],
-
-      logo: {}
     }
 
     this.logoChanged(0);
+
+    objectAssign(this.state, ContentStore.getContent());
+    objectAssign(this.state, OptionStore.getOptions());
   }
 
   componentDidMount() {
     ContentStore.addChangeListener(this._contentChange.bind(this));
+    OptionStore.addChangeListener(this._optionChange.bind(this));
   }
 
   _contentChange() {
     this.setState(ContentStore.getContent());
+  }
+
+  _optionChange() {
+    this.setState(OptionStore.getContent());
   }
 
   contentTypeChange(contentType) {
@@ -333,12 +315,12 @@ class PicEditor extends React.Component {
                 ref='canvas'/>
           </div>
         </div>
-        <div className='controls-container'>
+        <div className='options-container'>
           <div className='section-title'>Content</div>
           <div className='text-rendering'>
             <Content breakfast={ this }/>
           </div>
-          <Controls breakfast={ this } logos={ this.logos }/>
+          <Options breakfast={ this } logos={ this.logos }/>
           <div className='save'>
             <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
           </div>

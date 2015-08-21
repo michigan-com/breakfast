@@ -5,8 +5,6 @@ import { SIXTEEN_NINE, SQUARE } from '../lib/constants';
 export default class Controls extends React.Component {
   constructor(args) {
     super(args);
-
-
   }
 
   fileUpload(e) {

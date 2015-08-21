@@ -23,7 +23,11 @@ export default class Content extends React.Component {
       args = getter();
     }
 
-    action(args);
+    if (Array.isArray(args)) {
+      action.apply(action, args);
+    } else {
+      action(args);
+    }
   }
 
   /**

@@ -1,10 +1,9 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
-import { actions } from '../lib/constants';
+import { actions, CHANGE_EVENT } from '../lib/constants';
 
 let Actions = actions.content;
-let CHANGE_EVENT = 'change';
 
 let content = {
   quote: {

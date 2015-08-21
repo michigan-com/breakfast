@@ -23,13 +23,13 @@ body {
     margin-right: 0; }
     .pic-editor .image-container:last-child {
       margin-right: 0; }
-  .pic-editor .controls-container {
+  .pic-editor .options-container {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 31.76157%;
     position: relative; }
-    .pic-editor .controls-container:last-child {
+    .pic-editor .options-container:last-child {
       margin-right: 0; }
   @media (max-width: 800px) {
     .pic-editor .image-container, .pic-editor .controls-container {

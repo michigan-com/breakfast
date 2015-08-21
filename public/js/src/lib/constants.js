@@ -1,4 +1,6 @@
 /* Action constants */
+
+// Content Actions
 let quoteChange = 'quoteChange';
 let sourceChange = 'sourceChange';
 
@@ -10,9 +12,21 @@ let listItemRemove = 'listItemRemove';
 let photographerChange = 'photographerChange';
 let copyrightChange = 'copyrightChange';
 
+// Option Actions
+let fontSizeChange = 'fontSizeChange';
+let fontColorChange = 'fontColorChange';
+
+let backgroundColorChange = 'backgroundColorChange';
+let backgroundImageChange = 'backgroundImageChange';
+
+let aspectRatioChange = 'aspectRatioChange';
+
+let logoChange = 'logoChange';
+
 module.exports = {
   SIXTEEN_NINE: '16:9',
   SQUARE: 'square',
+  CHANGE_EVENT: 'change',
   actions: {
     content: {
       // Quote
@@ -28,6 +42,18 @@ module.exports = {
       // Watermark
       photographerChange,
       copyrightChange
+    },
+
+    options: {
+      fontSizeChange,
+      fontColorChange,
+
+      backgroundColorChange,
+      backgroundImageChange,
+
+      aspectRatioChange,
+
+      logoChange
     }
   }
 }
