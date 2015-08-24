@@ -2,6 +2,7 @@ import React from 'react';
 import ColorPicker from 'react-color';
 import { SIXTEEN_NINE, SQUARE } from '../lib/constants';
 import OptionActions from '../actions/options';
+import { Select } from './components';
 
 let actions = new OptionActions();
 
@@ -37,10 +38,6 @@ export default class Controls extends React.Component {
     } else {
       action(args);
     }
-  }
-
-  fileUpload(e) {
-    this.props.breakfast.getFileContents(e, React.findDOMNode(this.refs['image-upload']));
   }
 
   triggerFileUpload() {
@@ -189,7 +186,7 @@ export default class Controls extends React.Component {
         </div>
         <div className='control logo'>
           <div className='input-title'>Logo</div>
-          <Select options={ this.props.logos } valueKey='name'
+          <LogoSelect options={ this.props.logos } valueKey='name'
               onSelect={ this.logoChanged.bind(this) }/>
         </div>
       </div>
@@ -237,75 +234,6 @@ class PickerToggle extends React.Component {
   }
 }
 
-class Select extends React.Component {
-  constructor(args) {
-    super(args);
+class LogoSelect extends Select {
 
-    this.state = {
-      optionsHidden: true,
-      currentIndex: 0
-    }
-  }
-
-  toggleOptions() {
-    this.setState({
-      optionsHidden: !this.state.optionsHidden
-    });
-  }
-
-  optionSelected(index) {
-    if (index < 0 || index >= this.props.options.length) {
-      return;
-    }
-
-    this.setState({
-      currentIndex: index,
-      optionsHidden: true
-    });
-
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.options[index], index);
-    }
-  }
-
-  getValue(option) {
-    let valueKey = this.props.valueKey;
-    if (!valueKey) valueKey = 'value';
-    if (!valueKey in option) console.log(`Key ${valueKey} not found`);
-
-    return option[valueKey];
-  }
-
-  renderOptions() {
-    if (this.state.optionsHidden) return;
-
-    function renderOption(option, index) {
-      return (
-        <div className={ `option ${index === this.state.currentIndex ? 'selected' : ''}` }
-            onClick={ this.optionSelected.bind(this, index) }>
-          { this.getValue(option) }
-        </div>
-      )
-    }
-
-    return (
-      <div className='options'>
-        { this.props.options.map(renderOption.bind(this)) }
-      </div>
-    )
-  }
-
-  render() {
-    if (!this.props.options.length) {
-      return;
-    }
-
-    let selected = this.props.options[this.state.currentIndex];
-    return (
-      <div className={ `select ${ this.state.optionsHidden ? '' : 'show' }`}>
-        <div className='current-selection' onClick={ this.toggleOptions.bind(this) }>{ this.getValue(selected) }</div>
-        { this.renderOptions() }
-      </div>
-    )
-  }
 }

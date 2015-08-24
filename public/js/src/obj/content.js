@@ -155,7 +155,7 @@ export default class Content extends React.Component {
               onChange={ this.changeEvent.bind(
                 this,
                 actions.copyrightChange,
-                this.getInputVal(this, 'copyright')) }
+                this.getInputVal.bind(this, 'copyright')) }
               value={ breakfast.state.watermark.copyright }/>
         </div>
       )

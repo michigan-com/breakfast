@@ -112,45 +112,42 @@ body {
   }
 }
 
-.controls-container {
-  .content-type-selector {
-    margin-bottom: 40px;
-  }
+.content-type-selector {
+  margin-bottom: 40px;
+}
 
+.list-inputs {
+  .list-input {
+    @include outer-container;
 
-  .list-inputs {
-    .list-input {
-      @include outer-container;
-
-      input {
-        @include span-columns(11);
-      }
-
-      .remove-list-item {
-        @include span-columns(1);
-        @include close-button();
-        line-height: $input-line-height;
-        text-align: center;
-        height: $input-line-height;
-        margin: 10px 0;
-      }
+    input {
+      @include span-columns(11);
     }
 
-    .add-item {
-      font-size: 20px;
-      line-height: 40px;
-      width: 50%;
-      background: $primary-color;
+    .remove-list-item {
+      @include span-columns(1);
+      @include close-button();
+      line-height: $input-line-height;
       text-align: center;
-      color: white;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin: 10px auto;
-      @include transition(all 250ms ease-in);
+      height: $input-line-height;
+      margin: 10px 0;
+    }
+  }
 
-      &:hover {
-        background: darken($primary-color, 20%);
-      }
+  .add-item {
+    font-size: 20px;
+    line-height: 40px;
+    width: 50%;
+    background: $primary-color;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 10px auto;
+    @include transition(all 250ms ease-in);
+
+    &:hover {
+      background: darken($primary-color, 20%);
     }
   }
 }

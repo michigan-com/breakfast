@@ -87,25 +87,25 @@ body {
   .image canvas {
     border: 1px solid black; }
 
-.controls-container .content-type-selector {
+.content-type-selector {
   margin-bottom: 40px; }
 
-.controls-container .list-inputs .list-input {
+.list-inputs .list-input {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto; }
-  .controls-container .list-inputs .list-input::after {
+  .list-inputs .list-input::after {
     clear: both;
     content: "";
     display: table; }
-  .controls-container .list-inputs .list-input input {
+  .list-inputs .list-input input {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 91.4702%; }
-    .controls-container .list-inputs .list-input input:last-child {
+    .list-inputs .list-input input:last-child {
       margin-right: 0; }
-  .controls-container .list-inputs .list-input .remove-list-item {
+  .list-inputs .list-input .remove-list-item {
     float: left;
     display: block;
     margin-right: 2.35765%;
@@ -120,13 +120,13 @@ body {
     text-align: center;
     height: 40px;
     margin: 10px 0; }
-    .controls-container .list-inputs .list-input .remove-list-item:last-child {
+    .list-inputs .list-input .remove-list-item:last-child {
       margin-right: 0; }
-    .controls-container .list-inputs .list-input .remove-list-item:hover {
+    .list-inputs .list-input .remove-list-item:hover {
       color: white;
       background: #A83641; }
 
-.controls-container .list-inputs .add-item {
+.list-inputs .add-item {
   font-size: 20px;
   line-height: 40px;
   width: 50%;
@@ -140,7 +140,7 @@ body {
   -o-transition: all 250ms ease-in;
   -moz-transition: all 250ms ease-in;
   -webkit-transition: all 250ms ease-in; }
-  .controls-container .list-inputs .add-item:hover {
+  .list-inputs .add-item:hover {
     background: #1e4416; }
 
 .section-title {
