@@ -18,6 +18,7 @@ let fontColorChange = 'fontColorChange';
 
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
+let backgroundImageLoading = 'backgroundImageLoading';
 
 let aspectRatioChange = 'aspectRatioChange';
 
@@ -45,14 +46,19 @@ module.exports = {
     },
 
     options: {
+      // Font
       fontSizeChange,
       fontColorChange,
 
+      // Background
       backgroundColorChange,
       backgroundImageChange,
+      backgroundImageLoading,
 
+      // Canvas aspect ratio
       aspectRatioChange,
 
+      // Logo
       logoChange
     }
   }

@@ -21,13 +21,7 @@ class PicEditor extends React.Component {
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.contentTypes = ['quote', 'list', 'watermark'];
     this.aspectRatios = [SQUARE, SIXTEEN_NINE];
-    this.logos = [{
-      name: 'Detroit Free Press',
-      filename: 'dfp_white.svg'
-    }, {
-      name: 'Detroit News',
-      filename: 'dn_white.svg'
-    }];
+    this.logos = OptionStore.getLogoOptions();
     this.logoAspectRatios = {};
     this.previousBackground; // used for when we switch back and forth from watermark
 
@@ -51,8 +45,6 @@ class PicEditor extends React.Component {
       contentType: this.contentTypes[0],
     }
 
-    this.logoChanged(0);
-
     objectAssign(this.state, ContentStore.getContent());
     objectAssign(this.state, OptionStore.getOptions());
   }
@@ -67,7 +59,8 @@ class PicEditor extends React.Component {
   }
 
   _optionChange() {
-    this.setState(OptionStore.getContent());
+    console.log(this.state);
+    this.setState(OptionStore.getOptions());
   }
 
   contentTypeChange(contentType) {

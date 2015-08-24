@@ -5,6 +5,8 @@ import { actions, CHANGE_EVENT } from '../lib/constants';
 
 let Actions = actions.content;
 
+let contentTypes = ['quote', 'list', 'watermark'];
+let contentType = contentTypes[0];
 let content = {
   quote: {
     quote: '',
@@ -22,19 +24,19 @@ let content = {
 
 let ContentStore = assign({}, EventEmitter.prototype, {
 
-  addChangeListener: function(callback) {
+  addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  emitChange: function() {
+  emitChange() {
     this.emit(CHANGE_EVENT);
   },
 
-  getContent: function() {
+  getContent() {
     return content;
   },
 
@@ -45,7 +47,7 @@ let ContentStore = assign({}, EventEmitter.prototype, {
    *  what in the store to change
    * @param {String} text - The new value to be stored
    */
-  textChange: function(actionType, text) {
+  textChange(actionType, text) {
     switch(actionType) {
       case Actions.quoteChange:
         content.quote.quote = text;
@@ -102,6 +104,18 @@ let ContentStore = assign({}, EventEmitter.prototype, {
 
     content.list.items[index] = text;
 
+    this.emitChange();
+  },
+
+  /**
+   * Update the content type
+   *
+   * @param {String} type - Content type to be updated to
+   */
+  contentTypeUpdate(type) {
+    if (contentTypes.indexOf(type) < 0) return;
+
+    contentType = type;
     this.emitChange();
   }
 
