@@ -26,29 +26,33 @@ app.get('/', function(req, res) {
   res.render('index')
 });
 
-app.get('/logos/:color/:filename', getLogo);
-app.get('/logos/:filename', getLogo);
+app.get('/logos/:color/:filename', handleGetLogo);
+app.get('/logos/:filename', handleGetLogo);
 
-async function getLogo(req, res) {
+function handleGetLogo(req, res, next) {
+  return getLogo(req, res, next).catch(function(err) {
+    next(err);
+  });
+}
+
+async function getLogo(req, res, next) {
   let color = 'color' in req.params ? req.params.color : undefined;
   let filename = req.params.filename;
 
   let data = await logoFetch.getLogo(filename, color);
-  try {
 
-    let buffer = new Buffer(data, 'utf8');
+  let buffer = new Buffer(data, 'utf8');
 
-    res.set({
-      'Accept-Ranges': 'bytes',
-      'Cache-Control': 'public, max-age=0',
-      'Content-Type': 'image/svg+xml',
-      'Content-Length': buffer.length
-    }).send(buffer);
-  } catch(e) {
-
-    console.error(e);
-    res.send('Error');
-  }
+  res.set({
+    'Accept-Ranges': 'bytes',
+    'Cache-Control': 'public, max-age=0',
+    'Content-Type': 'image/svg+xml',
+    'Content-Length': buffer.length
+  }).send(buffer);
 }
+
+app.get('/test/route.svg', function(req, res, next) {
+  res.send('testing');
+});
 
 module.exports = app;
