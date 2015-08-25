@@ -51,8 +51,4 @@ async function getLogo(req, res, next) {
   }).send(buffer);
 }
 
-app.get('/test/route.svg', function(req, res, next) {
-  res.send('testing');
-});
-
 module.exports = app;
