@@ -20,7 +20,7 @@ export default class Canvas extends React.Component {
   getCanvasStyle() {
     let canvasWidth = 650;
     let canvasHeight = 650;
-    if (this.props.aspectRatio === '16:9') {
+    if (this.props.options.aspectRatio  === '16:9') {
       canvasHeight = canvasWidth * 9/16;
     }
     return {
@@ -51,8 +51,8 @@ export default class Canvas extends React.Component {
       height: canvasStyle.height
     }
 
-    if (this.props.background.type === 'color') {
-      style.backgroundColor = this.props.background.color;
+    if (this.props.options.background.type === 'color') {
+      style.backgroundColor = this.props.options.background.color;
     }
     return style;
   }
@@ -61,7 +61,8 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
 
     let textHeight = this.props.fontSize * 1.25;
-    let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
+    console.log(this.props.options.fontFace);
+    let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
     return {
       text: {
         top: this.canvasPadding,
@@ -71,7 +72,7 @@ export default class Canvas extends React.Component {
         fontSize: this.props.fontSize,
         width: canvasStyle.textWidth,
         fontFace: font,
-        color: this.props.fontColor
+        color: this.props.options.fontColor
       },
       source: {
         top: 50 + 10,
@@ -102,7 +103,7 @@ export default class Canvas extends React.Component {
         fontSize: headlineFontSize,
         width: canvasStyle.textWidth,
         fontFace: font,
-        color: this.props.fontColor
+        color: this.props.options.fontColor
       },
       listItem: {
         top: headlineSize + 10,
@@ -112,7 +113,7 @@ export default class Canvas extends React.Component {
         fontSize: this.props.fontSize,
         width: canvasStyle.textWidth - (this.canvasPadding * 2),
         fontFace: font,
-        color: this.props.fontColor
+        color: this.props.options.fontColor
       }
     }
   }
@@ -122,14 +123,14 @@ export default class Canvas extends React.Component {
     let font = ReactCanvas.FontFace('Arial Black, Arial Thin, Gadget, sans-serif', '', {});
     return {
       fontSize,
-      color: this.props.fontColor,
+      color: this.props.options.fontColor,
       fontFace: font,
       lineHeight: fontSize * 1.25
     }
   }
 
   getLogoStyle() {
-    let aspectRatio = this.props.logo.aspectRatio ? this.props.logo.aspectRatio : 1;
+    let aspectRatio = this.props.options.logo.aspectRatio ? this.props.options.logo.aspectRatio : 1;
     let canvasStyle = this.getCanvasStyle();
     let width = 150;
     let height = width / aspectRatio;
@@ -236,7 +237,8 @@ export default class Canvas extends React.Component {
 }
 
   renderBackground() {
-    let type = this.props.background.type;
+    let background = this.props.options.background;
+    let type = background.type;
     let backgroundObj;
     let backgroundStyle = this.getBackgroundStyle();
     let layerStyle = {
@@ -249,7 +251,7 @@ export default class Canvas extends React.Component {
       )
     } else if (type === 'image') {
       backgroundObj = (
-        <Image style={ backgroundStyle } src={ this.props.background.src }/>
+        <Image style={ backgroundStyle } src={ background.src }/>
       )
     }
 
@@ -257,12 +259,13 @@ export default class Canvas extends React.Component {
   }
 
   renderLogo() {
-    if (!this.props.logo.filename) {
+    let logo = this.props.options.logo;
+    if (!logo.filename) {
       return;
     }
 
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/img/${this.props.logo.filename}`;
+    let logoUrl = `${window.location.origin}/img/${logo.filename}`;
     return (
        <Image src={ logoUrl } style={ style }/>
     )

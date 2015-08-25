@@ -22,6 +22,24 @@ let content = {
   }
 }
 
+// TODO make this more random
+function getRandomDefaults() {
+  return {
+    quote: {
+      quote: 'Test Quote',
+      source: 'Test Source'
+    },
+    list: {
+      headline: 'This is a headline',
+      items: ['This is an item in the list']
+    },
+    watermark: {
+      photographer: 'Peter Parker',
+      copyright: 'Daily Bugle'
+    }
+  }
+}
+
 let ContentStore = assign({}, EventEmitter.prototype, {
 
   addChangeListener(callback) {
@@ -38,6 +56,10 @@ let ContentStore = assign({}, EventEmitter.prototype, {
 
   getContent() {
     return content;
+  },
+
+  getDefaults() {
+    return getRandomDefaults();
   },
 
   /**

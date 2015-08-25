@@ -15,6 +15,7 @@ let copyrightChange = 'copyrightChange';
 // Option Actions
 let fontSizeChange = 'fontSizeChange';
 let fontColorChange = 'fontColorChange';
+let fontFaceChange = 'fontFaceChange';
 
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
@@ -49,6 +50,7 @@ module.exports = {
       // Font
       fontSizeChange,
       fontColorChange,
+      fontFaceChange,
 
       // Background
       backgroundColorChange,

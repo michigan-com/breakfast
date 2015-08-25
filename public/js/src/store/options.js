@@ -13,10 +13,16 @@ let logos = [{
   name: 'Detroit News',
   filename: 'dn_white.svg'
 }];
+let fonts = [
+  'Helvetica',
+  'Impact',
+  'Georgia'
+];
 
 let options = {
   fontSize: 20,
   fontColor: '#ffffff',
+  fontFace: fonts[0],
   background: {
     type: 'color',
     color: '#000000'
@@ -50,6 +56,10 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     return logos;
   },
 
+  getFontOptions() {
+    return fonts;
+  },
+
   /**
    * Update the font size
    *
@@ -63,11 +73,16 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
   /**
    * Update font color
-   *
-   * @param {String} color - Hex version of the new font color
+   * * @param {String} color - Hex version of the new font color
    */
   fontColorChange(color) {
     options.fontColor = color;
+
+    this.emitChange();
+  },
+
+  fontFaceChange(fontFace) {
+    options.fontFace = fontFace;
 
     this.emitChange();
   },
@@ -140,6 +155,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.fontColorChange:
       OptionStore.fontColorChange(action.value);
+      break;
+    case Actions.fontFaceChange:
+      OptionStore.fontFaceChange(action.value);
       break;
     case Actions.backgroundColorChange:
       OptionStore.backgroundColorChange(action.value);

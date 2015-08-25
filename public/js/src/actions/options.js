@@ -4,6 +4,7 @@ import OptionStore from '../store/options';
 
 let Actions = actions.options;
 let logos = OptionStore.getLogoOptions();
+let fonts = OptionStore.getFontOptions();
 
 export default class OptionActions {
 
@@ -22,6 +23,15 @@ export default class OptionActions {
       type: Actions.fontColorChange,
       value: color
     });
+  }
+
+  fontFaceChange(index) {
+    if (index < 0 || index >= fonts.length) return;
+
+    Dispatcher.dispatch({
+      type: Actions.fontFaceChange,
+      value: fonts[index]
+    })
   }
 
   backgroundColorChange(color) {

@@ -296,7 +296,8 @@ body {
       color: white; }
 
 .select {
-  width: 100%; }
+  width: 100%;
+  position: relative; }
   .select.show .current-selection:after {
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
@@ -308,13 +309,13 @@ body {
     text-align: center;
     font-size: 25px;
     line-height: 40px;
-    border-bottom: 1px solid #40867C;
+    border: 1px solid #40867C;
     color: #40867C;
     cursor: pointer; }
     .select .current-selection:after {
       content: '^';
       position: absolute;
-      right: 0;
+      right: 3%;
       -webkit-transform: rotate(180deg);
       -moz-transform: rotate(180deg);
       -ms-transform: rotate(180deg);
@@ -332,7 +333,8 @@ body {
     overflow-y: auto;
     margin-top: 10px;
     background: white;
-    border: 1px solid #40867C; }
+    border: 1px solid #40867C;
+    z-index: 1000; }
     .select .options .option {
       font-size: 20px;
       line-height: 30px;
@@ -341,7 +343,8 @@ body {
       -o-transition: all 250ms ease-in;
       -moz-transition: all 250ms ease-in;
       -webkit-transition: all 250ms ease-in;
-      cursor: pointer; }
+      cursor: pointer;
+      background: inherit; }
       .select .options .option:hover, .select .options .option.selected {
         background: #40867C;
         color: white; }

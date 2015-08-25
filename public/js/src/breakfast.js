@@ -22,24 +22,9 @@ class PicEditor extends React.Component {
     this.contentTypes = ['quote', 'list', 'watermark'];
     this.aspectRatios = [SQUARE, SIXTEEN_NINE];
     this.logos = OptionStore.getLogoOptions();
+    this.fonts = OptionStore.getFontOptions();
     this.logoAspectRatios = {};
     this.previousBackground; // used for when we switch back and forth from watermark
-
-
-    this.defaults = {
-      quote: {
-        quote: 'Test quote',
-        source: 'Test source'
-      },
-      list: {
-        headline: 'This is a headline',
-        items: ['This is an item in the list']
-      },
-      watermark: {
-        photographer: 'Peter Parker',
-        copyright: 'Daily Bugle'
-      }
-    }
 
     this.state = {
       contentType: this.contentTypes[0],
@@ -96,6 +81,7 @@ class PicEditor extends React.Component {
 
   render() {
     let canvasData = this.state[this.state.contentType];
+    let contentDefaults = ContentStore.getDefaults();
     return(
       <div className='pic-editor'>
         <div className='content-type-selector'>
@@ -106,19 +92,22 @@ class PicEditor extends React.Component {
             <Canvas type={ this.state.contentType }
                 canvasData={ canvasData }
                 fontSize={ this.state.fontSize }
-                fontColor={ this.state.fontColor }
-                background={ this.state.background }
-                aspectRatio={ this.state.aspectRatio }
-                logo={ this.state.logo }
+                options={ OptionStore.getOptions() }
                 ref='canvas'/>
           </div>
         </div>
         <div className='options-container'>
           <div className='section-title'>Content</div>
           <div className='text-rendering'>
-            <Content breakfast={ this }/>
+            <Content contentType={ this.state.contentType }
+                defaults={ contentDefaults }
+                content={ ContentStore.getContent() }/>
           </div>
-          <Options breakfast={ this } logos={ this.logos }/>
+          <Options fonts={ this.fonts }
+              logos={ this.logos }
+              aspectRatios={ this.aspectRatios }
+              contentType={ this.state.contentType }
+              options={ OptionStore.getOptions() }/>
           <div className='save'>
             <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
           </div>

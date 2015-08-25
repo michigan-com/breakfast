@@ -9,6 +9,7 @@ let actions = new OptionActions();
 export default class Controls extends React.Component {
   constructor(args) {
     super(args);
+    this.logos = Option
   }
 
   componentDidMount() {
@@ -47,6 +48,10 @@ export default class Controls extends React.Component {
 
   logoChanged(logoInfo, index) {
     this.changeEvent(actions.logoChange, () => { return index; });
+  }
+
+  fontFaceChanged(fontFace, index) {
+    this.changeEvent(actions.fontFaceChange, () => { return index; });
   }
 
   /**
@@ -101,8 +106,7 @@ export default class Controls extends React.Component {
 
   renderBackgroundOptions() {
 
-    let breakfast = this.props.breakfast;
-    let contentType = breakfast.state.contentType;
+    let contentType = this.props.contentType;
     let backgroundClass = `input-container ${contentType === 'watermark' ? 'hidden' : ''}`;
 
     return (
@@ -110,7 +114,7 @@ export default class Controls extends React.Component {
         <div className={ backgroundClass }>
           <span className='label'>Color</span>
           <span className='input'>
-            <PickerToggle color={ breakfast.state.backgroundColor }
+            <PickerToggle color={ this.props.options.backgroundColor }
                 callback={ this.colorChangeCallback(actions.backgroundColorChange) }/>
           </span>
         </div>
@@ -132,8 +136,7 @@ export default class Controls extends React.Component {
   }
 
   renderRatioOptions() {
-    let breakfast = this.props.breakfast;
-    let currentRatio = breakfast.state.aspectRatio;
+    let currentRatio = this.props.options.aspectRatio;
 
     function renderRatioOption(ratio, key) {
       return (
@@ -146,13 +149,13 @@ export default class Controls extends React.Component {
     }
     return (
       <div className='ratio-options'>
-        { breakfast.aspectRatios.map(renderRatioOption.bind(this)) }
+        { this.props.aspectRatios.map(renderRatioOption.bind(this)) }
       </div>
     )
   }
 
   render() {
-    let breakfast = this.props.breakfast;
+    let options = this.props.options;
     return(
       <div className='controls'>
         <div className='section-title'>Options</div>
@@ -162,7 +165,7 @@ export default class Controls extends React.Component {
             <span className='label'>Size</span>
             <span className='input'>
               <input type='range' min='10' max='60' ref='font-size'
-                  value={ breakfast.state.fontSize }
+                  value={ options.fontSize }
                   onChange={ this.changeEvent.bind(this,
                     actions.fontSizeChange,
                     this.getInputVal.bind(this, 'font-size')) }/>
@@ -171,8 +174,15 @@ export default class Controls extends React.Component {
           <div className='input-container'>
             <span className='label'>Color</span>
             <span className='input'>
-              <PickerToggle color={ breakfast.state.fontColor }
+              <PickerToggle color={ options.fontColor }
                   callback={ this.colorChangeCallback(actions.fontColorChange) }/>
+            </span>
+          </div>
+          <div className='input-container'>
+            <span className='label'>Face</span>
+            <span className='input'>
+              <FontSelect options={ this.props.fonts }
+                  onSelect={ this.fontFaceChanged.bind(this) }/>
             </span>
           </div>
         </div>
@@ -236,4 +246,20 @@ class PickerToggle extends React.Component {
 
 class LogoSelect extends Select {
 
+}
+
+class FontSelect extends Select {
+  /**
+   * this.props.options are just going to be an array of strings, so just
+   * return the string
+   *
+   * @param {String} option - Font face to render
+   */
+  getDisplayValue(option) { return option; }
+
+  getStyle(option) {
+    return {
+      'font-family': option
+    }
+  }
 }

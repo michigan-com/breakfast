@@ -70,7 +70,9 @@ export default class Content extends React.Component {
   }
 
   render() {
-    let breakfast = this.props.breakfast;
+    let content = this.props.content;
+    let contentType = this.props.contentType;
+    let defaults = this.props.defaults;
 
     function renderListItemInput(item, index) {
       let ref = this.formatListItemRef(index);
@@ -94,69 +96,69 @@ export default class Content extends React.Component {
       )
     }
 
-    if (breakfast.state.contentType === 'quote') {
+    if (contentType === 'quote') {
       return (
         <div className='inputs quote-inputs'>
 
           <div className='input-title'>Quote</div>
           <input type='text' ref='quote'
-              placeholder={ breakfast.defaults.quote.quote }
+              placeholder={ defaults.quote.quote }
               onChange={ this.changeEvent.bind(
                   this,
                   actions.quoteChange,
                   this.getInputVal.bind(this, 'quote')) }
-              value={ breakfast.state.quote.quote }/>
+              value={ content.quote.quote }/>
 
           <div className='input-title'>Source</div>
           <input type='text' ref='source'
-              placeholder={ breakfast.defaults.quote.source }
+              placeholder={ defaults.quote.source }
               onChange={ this.changeEvent.bind(
                   this,
                   actions.sourceChange,
                   this.getInputVal.bind(this, 'source')) }
-              value={ breakfast.state.quote.source }/>
+              value={ content.quote.source }/>
         </div>
       )
-    } else if (breakfast.state.contentType === 'list') {
+    } else if (contentType === 'list') {
       return (
         <div className='inputs list-inputs'>
 
           <div className='input-title'>Headline</div>
           <input type='text' ref='headline'
-              placeholder={ breakfast.defaults.list.headline }
+              placeholder={ defaults.list.headline }
               onChange={ this.changeEvent.bind(
                   this,
                   actions.headlineChange,
                   this.getInputVal.bind(this, 'headline')) }
-              value={ breakfast.state.list.headline }/>
+              value={ content.list.headline }/>
 
           <div className='input-title'>List Items</div>
-          { breakfast.state.list.items.map(renderListItemInput.bind(this)) }
+          { content.list.items.map(renderListItemInput.bind(this)) }
           <div className='add-item'
              onClick={ this.changeEvent.bind(this, actions.listItemAdd) }>
               Add item
             </div>
         </div>
       )
-    } else if (breakfast.state.contentType === 'watermark') {
+    } else if (contentType === 'watermark') {
       return (
         <div className='inputs picture-inputs'>
           <div className='input-title'>Photographer</div>
           <input type='text' ref='photographer'
-              placeholder={ breakfast.defaults.watermark.photographer }
+              placeholder={ defaults.watermark.photographer }
               onChange={ this.changeEvent.bind(
                 this,
                 actions.photographerChange,
                 this.getInputVal.bind(this, 'photographer'))}
-              value={ breakfast.state.watermark.photographer }/>
+              value={ content.watermark.photographer }/>
           <div className='input-title'>Copyright holder</div>
           <input type='text' ref='copyright'
-              placeholder={ breakfast.defaults.watermark.copyright }
+              placeholder={ defaults.watermark.copyright }
               onChange={ this.changeEvent.bind(
                 this,
                 actions.copyrightChange,
                 this.getInputVal.bind(this, 'copyright')) }
-              value={ breakfast.state.watermark.copyright }/>
+              value={ content.watermark.copyright }/>
         </div>
       )
     }

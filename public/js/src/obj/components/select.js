@@ -31,12 +31,25 @@ export default class Select extends React.Component {
     }
   }
 
-  getValue(option) {
+  /**
+   * Get the display value for a given option, override if you want a different
+   * value
+   *
+   * @param {Object} option - Option to be displayed
+   */
+  getDisplayValue(option) {
     let valueKey = this.props.valueKey;
     if (!valueKey) valueKey = 'value';
     if (!valueKey in option) console.log(`Key ${valueKey} not found`);
 
     return option[valueKey];
+  }
+
+  /**
+   * Override function to make custom style for each option
+   */
+  getStyle(option) {
+    return {};
   }
 
   /**
@@ -51,8 +64,9 @@ export default class Select extends React.Component {
   renderOption(option, index) {
     return (
       <div className={ `option ${index === this.state.currentIndex ? 'selected' : ''}` }
-          onClick={ this.optionSelected.bind(this, index) }>
-        { this.getValue(option) }
+          onClick={ this.optionSelected.bind(this, index) }
+          style={ this.getStyle(option) }>
+        { this.getDisplayValue(option) }
       </div>
     )
   }
@@ -75,7 +89,11 @@ export default class Select extends React.Component {
     let selected = this.props.options[this.state.currentIndex];
     return (
       <div className={ `select ${ this.state.optionsHidden ? '' : 'show' }`}>
-        <div className='current-selection' onClick={ this.toggleOptions.bind(this) }>{ this.getValue(selected) }</div>
+        <div className='current-selection'
+            onClick={ this.toggleOptions.bind(this) }
+            style={ this.getStyle(selected) }>
+          { this.getDisplayValue(selected) }
+        </div>
         { this.renderOptions() }
       </div>
     )
