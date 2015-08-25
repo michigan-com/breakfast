@@ -39,6 +39,8 @@ async function getLogo(req, res) {
     let buffer = new Buffer(data, 'utf8');
 
     res.set({
+      'Accept-Ranges': 'bytes',
+      'Cache-Control': 'public, max-age=0',
       'Content-Type': 'image/svg+xml',
       'Content-Length': buffer.length
     }).send(buffer);
