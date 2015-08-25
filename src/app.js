@@ -6,6 +6,7 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import Buffer from 'buffer';
 
 import LogoFetch from './logoFetch.js';
 let logoFetch = new LogoFetch();
@@ -34,12 +35,20 @@ async function getLogo(req, res) {
   let filename = req.params.filename;
 
   let data = await logoFetch.getLogo(filename, color);
+  try {
 
-  res.set({
-    'Content-Type': 'image/svg+xml',
-    'Content-Length': data.length
-  }).send(data);
+    //let buffer = new Buffer(data, 'utf-8');
+    //console.log(buffer.toString('hex'));
 
+    res.set({
+      'Content-Type': 'image/svg+xml; charset=utf-8',
+      'Content-Length': data.length,
+    }).send(data);
+  } catch(e) {
+
+    console.error(e);
+    res.send('Error');
+  }
 }
 
 module.exports = app;
