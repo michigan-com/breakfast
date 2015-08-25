@@ -19,5 +19,8 @@ npm install
 printer "Running gulp tasks ..."
 gulp
 
+printer "Generating logo information ..."
+gulp generateLogoJson
+
 printer "Restarting server ..."
 supervisorctl restart breakfast

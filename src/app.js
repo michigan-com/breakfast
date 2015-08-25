@@ -7,6 +7,9 @@ import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
+import LogoFetch from './logoFetch.js';
+let logoFetch = new LogoFetch();
+
 var app = express();
 var BASE_DIR = path.dirname(__dirname);
 
@@ -22,5 +25,21 @@ app.use(express.static(path.join(BASE_DIR, 'public')));
 app.get('/', function(req, res) {
   res.render('index')
 });
+
+app.get('/logos/:color/:filename', getLogo);
+app.get('/logos/:filename', getLogo);
+
+async function getLogo(req, res) {
+  let color = 'color' in req.params ? req.params.color : undefined;
+  let filename = req.params.filename;
+
+  let data = await logoFetch.getLogo(filename, color);
+
+  res.set({
+    'Content-Type': 'image/svg+xml',
+    'Content-Length': data.length
+  }).send(data);
+
+}
 
 module.exports = app;

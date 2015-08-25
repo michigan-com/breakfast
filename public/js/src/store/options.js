@@ -2,17 +2,11 @@ import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
 import { actions, SQUARE, SIXTEEN_NINE, CHANGE_EVENT } from '../lib/constants';
+import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 
 let aspectRatios = [SQUARE, SIXTEEN_NINE];
-let logos = [{
-  name: 'Detroit Free Press',
-  filename: 'dfp_white.svg'
-}, {
-  name: 'Detroit News',
-  filename: 'dn_white.svg'
-}];
 let fonts = [
   'Helvetica',
   'Impact',
@@ -53,6 +47,14 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   },
 
   getLogoOptions() {
+    let logos = [];
+    for (let filename in logoInfo) {
+      logos.push({
+        name: logoInfo[filename].name,
+        filename
+      });
+
+    }
     return logos;
   },
 

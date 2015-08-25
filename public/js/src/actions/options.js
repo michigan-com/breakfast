@@ -1,6 +1,7 @@
 import Dispatcher from '../dispatcher';
 import { actions } from '../lib/constants';
 import OptionStore from '../store/options';
+import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 let logos = OptionStore.getLogoOptions();
@@ -79,23 +80,19 @@ export default class OptionActions {
 
     let logo = logos[index];
     let filename = logo.filename;
-    let setNewImage = function(filename, aspectRatio) {
+
+    if (!(filename in logoInfo)) {
+      return;
+    }
+
+    let aspectRatio = logoInfo[filename].aspectRatio;
+
+    setTimeout(function() {
       Dispatcher.dispatch({
         type: Actions.logoChange,
         filename,
         aspectRatio
-      });
-    };
-
-    // Load the image into the DOM for usage
-    let i = document.createElement('img');
-    i.src = `/img/${filename}`;
-    i = document.getElementById('img-cache').appendChild(i);
-
-    i.onload = function() {
-      let aspectRatio = (i.scrollWidth / i.scrollHeight);
-      setNewImage(filename, aspectRatio);
-    }
-
+      })
+    }, 25);
   }
 }
