@@ -88,13 +88,11 @@ class PicEditor extends React.Component {
           { ['quote', 'list', 'watermark'].map(this.renderContentOptions.bind(this)) }
         </div>
         <div className='image-container'>
-          <div className='image' ref='image'>
-            <Canvas type={ this.state.contentType }
-                canvasData={ canvasData }
-                fontSize={ this.state.fontSize }
-                options={ OptionStore.getOptions() }
-                ref='canvas'/>
-          </div>
+          <Canvas type={ this.state.contentType }
+              canvasData={ canvasData }
+              fontSize={ this.state.fontSize }
+              options={ OptionStore.getOptions() }
+              ref='canvas'/>
         </div>
         <div className='options-container'>
           <div className='section-title'>Content</div>

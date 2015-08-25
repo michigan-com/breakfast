@@ -32,19 +32,19 @@ body {
     .pic-editor .options-container:last-child {
       margin-right: 0; }
   @media (max-width: 800px) {
-    .pic-editor .image-container, .pic-editor .controls-container {
+    .pic-editor .image-container, .pic-editor .options-container {
       float: left;
       display: block;
       margin-right: 2.35765%;
       width: 100%; }
-      .pic-editor .image-container:last-child, .pic-editor .controls-container:last-child {
+      .pic-editor .image-container:last-child, .pic-editor .options-container:last-child {
         margin-right: 0; } }
 
 .content-type-selector {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 2%;
   height: 60px; }
   .content-type-selector .content-type {
     float: left;
@@ -67,6 +67,10 @@ body {
     .content-type-selector .content-type.active, .content-type-selector .content-type:hover {
       background: #40912F;
       color: white; }
+    @media (max-width: 800px) {
+      .content-type-selector .content-type {
+        font-size: 15px;
+        line-height: 30px; } }
     .content-type-selector .content-type.active {
       text-align: center;
       color: #40912F;
@@ -86,9 +90,6 @@ body {
   margin: 0 auto; }
   .image canvas {
     border: 1px solid black; }
-
-.content-type-selector {
-  margin-bottom: 40px; }
 
 .list-inputs .list-input {
   max-width: 68em;

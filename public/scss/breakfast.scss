@@ -73,10 +73,11 @@ body {
   .options-container {
     @include span-columns(4);
     position: relative;
+
   }
 
   @media (max-width: 800px) {
-    .image-container, .controls-container {
+    .image-container, .options-container {
       @include span-columns(12);
     }
   }
@@ -86,7 +87,7 @@ body {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 2%;
   height: $button-line-height;
 
   .content-type {
@@ -95,6 +96,12 @@ body {
     font-size: $button-font-size;
     line-height: $button-line-height;
     text-transform: uppercase;
+
+    @media (max-width: 800px) {
+      font-size: $button-font-size * .5;
+      line-height: $button-line-height * .5;
+
+    }
 
     &.active {
       @include button($primary-color)
@@ -110,10 +117,6 @@ body {
   canvas {
     border: 1px solid black;
   }
-}
-
-.content-type-selector {
-  margin-bottom: 40px;
 }
 
 .list-inputs {

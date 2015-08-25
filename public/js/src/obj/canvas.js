@@ -15,11 +15,29 @@ export default class Canvas extends React.Component {
     super(args);
 
     this.canvasPadding = 20;
+    window.onresize = function() {
+      this.setState({ windowChange: true});
+    }.bind(this);
   }
 
   getCanvasStyle() {
+    let windowWidth = window.innerWidth;
+    let cutoff = 1200; // The cutoff at which we begin calculating the width
     let canvasWidth = 650;
-    let canvasHeight = 650;
+
+    if (windowWidth <= cutoff) {
+      // 800px is the window size the media query cutoff
+      if (windowWidth > 800) {
+        // our SASS says that the width of the column is 2/3 of the screen
+        // calculate 2/3 of the width, minus some for padding
+        canvasWidth = (windowWidth * 2/3) * .8;
+      } else {
+        canvasWidth = windowWidth * .9;
+      }
+    }
+
+    let canvasHeight = canvasWidth;
+
     if (this.props.options.aspectRatio  === '16:9') {
       canvasHeight = canvasWidth * 9/16;
     }
@@ -283,11 +301,13 @@ export default class Canvas extends React.Component {
       canvasElements = this.renderPicture();
     }
     return (
-      <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>
-        { this.renderBackground() }
-        { canvasElements }
-        { this.renderLogo() }
-      </Surface>
+      <div className='image' style={ canvasStyle } ref='image'>
+        <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>
+          { this.renderBackground() }
+          { canvasElements }
+          { this.renderLogo() }
+        </Surface>
+      </div>
     )
   }
 }
