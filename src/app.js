@@ -41,14 +41,12 @@ async function getLogo(req, res, next) {
 
   let data = await logoFetch.getLogo(filename, color);
 
-  let buffer = new Buffer(data, 'utf8');
-
   res.set({
     'Accept-Ranges': 'bytes',
     'Cache-Control': 'public, max-age=0',
     'Content-Type': 'image/svg+xml',
-    'Content-Length': buffer.length
-  }).send(buffer);
+    'Content-Length': data.length
+  }).send(data);
 }
 
 module.exports = app;
