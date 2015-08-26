@@ -109,7 +109,7 @@ let ContentStore = assign({}, EventEmitter.prototype, {
   listItemRemove(index) {
     let newItems = [];
     for (let i = 0; i < content.list.items.length; i++) {
-      if (i != index) newItems.push(content.list.items[index]);
+      if (i != index) newItems.push(content.list.items[i]);
     }
     content.list.items = newItems;
 

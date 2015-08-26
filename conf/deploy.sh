@@ -16,11 +16,11 @@ git pull origin master
 printer "Installing node modules ..."
 npm install
 
-printer "Running gulp tasks ..."
-gulp
-
 printer "Generating logo information ..."
 gulp generateLogoJson
+
+printer "Running gulp tasks ..."
+gulp
 
 printer "Restarting server ..."
 supervisorctl restart breakfast

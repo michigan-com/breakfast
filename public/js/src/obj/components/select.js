@@ -6,7 +6,7 @@ export default class Select extends React.Component {
 
     this.state = {
       optionsHidden: true,
-      currentIndex: 0
+      currentIndex: this.props.currentIndex ? this.props.currentIndex : 0
     }
 
     this.htmlClass = '';

@@ -153,8 +153,18 @@ export default class Canvas extends React.Component {
   getLogoStyle() {
     let aspectRatio = this.props.options.logo.aspectRatio ? this.props.options.logo.aspectRatio : 1;
     let canvasStyle = this.getCanvasStyle();
-    let width = 150;
-    let height = width / aspectRatio;
+    let width;
+    let height;
+
+    if (aspectRatio > 1) {
+      // The logo is wider than it is tall
+      width = canvasStyle.width / 4;
+      height = width / aspectRatio;
+    } else if (aspectRatio <= 1) {
+      height = canvasStyle.height / 8;
+      width = height * aspectRatio;
+    }
+
     return {
       height,
       width,

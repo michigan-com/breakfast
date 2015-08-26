@@ -131,6 +131,14 @@ export default class Controls extends React.Component {
 
   renderFontOptions() {
     let options = this.props.options;
+    let currentIndex = 0;
+    for (var i = 0; i < this.props.fonts.length; i++) {
+      let font = this.props.fonts[i];
+      if (this.props.options.fontFace === font) {
+        currentIndex = i;
+        break;
+      }
+    }
 
     return (
       <div className='option font'>
@@ -156,7 +164,8 @@ export default class Controls extends React.Component {
           <span className='label'>Face</span>
           <span className='input'>
             <FontSelect options={ this.props.fonts }
-                onSelect={ this.fontFaceChanged.bind(this) }/>
+                onSelect={ this.fontFaceChanged.bind(this) }
+                currentIndex={ currentIndex }/>
           </span>
         </div>
       </div>
@@ -218,11 +227,21 @@ export default class Controls extends React.Component {
   }
 
   renderLogoOptions() {
+    let currentIndex = 0;
+    for (let i = 0; i < this.props.logos.length; i++) {
+      let logo = this.props.logos[i];
+
+      if (logo.filename === this.props.options.logo.filename) {
+        currentIndex = i;
+        break;
+      }
+    }
+
     return (
       <div className='option logo'>
         <div className='input-title'>Logo</div>
         <LogoSelect options={ this.props.logos } valueKey='name'
-            onSelect={ this.logoChanged.bind(this) }/>
+            onSelect={ this.logoChanged.bind(this) } currentIndex={ currentIndex }/>
       </div>
     )
   }
