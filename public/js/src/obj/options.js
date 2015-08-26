@@ -196,7 +196,7 @@ export default class Controls extends React.Component {
                 id='image-upload'
                 ref='image-upload'
                 onChange={ this.changeEvent.bind(this,
-                  actions.backgroundImageChange,
+                  actions.backgroundImageFileChange,
                   this.getFileFromInput.bind(this, 'image-upload') )} />
           </span>
         </div>

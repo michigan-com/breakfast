@@ -22,7 +22,7 @@ function generateDefaultOptions() {
 
     backgroundType: 'color',
     backgroundColor: '#000000',
-    backgroundSrc: 'http://localhost:3000/img/default_image.jpg',
+    backgroundSrc: '',
 
     // Aspect ratio for the canvas
     aspectRatio: aspectRatios[0],

@@ -183,8 +183,7 @@ body {
 .options {
   width: 100%; }
   .options .option-select-container {
-    width: 100%;
-    margin: 0px 10px; }
+    width: 100%; }
     .options .option-select-container .option-select {
       text-align: center;
       color: #40867C;

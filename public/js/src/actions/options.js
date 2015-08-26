@@ -1,3 +1,4 @@
+import xr from 'xr';
 import Dispatcher from '../dispatcher';
 import { actions } from '../lib/constants';
 import OptionStore from '../store/options';
@@ -48,7 +49,7 @@ export default class OptionActions {
    *
    * @param {Object} file - File object from an <input type='file'
    */
-  backgroundImageChange(file) {
+  backgroundImageFileChange(file) {
     Dispatcher.dispatch({ type: Actions.backgroundImageLoading });
 
     let reader = new FileReader();
@@ -58,8 +59,31 @@ export default class OptionActions {
         value: reader.result
       });
     }
-
     reader.readAsDataURL(file);
+  }
+
+  /**
+   * Given a url for an image, fetch the image and read the file contents
+   *
+   * @param {String} url - Url for an image
+   */
+  backgroundImageUrlChange(url) {
+    var image = new Image();
+
+    image.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+        canvas.getContext('2d').drawImage(this, 0, 0);
+
+        Dispatcher.dispatch({
+          type: Actions.backgroundImageChange,
+          value: canvas.toDataURL('image/png')
+        });
+    };
+
+    image.src = url;
   }
 
   backgroundTypeChange(type) {
