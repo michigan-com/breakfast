@@ -7,12 +7,15 @@ import Options from './obj/options';
 import Content from './obj/content';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { ContentStore, OptionStore } from './store';
+import OptionActions from './actions/options';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
+
+var actionOptions = new OptionActions();
 
 class PicEditor extends React.Component {
   constructor(args) {
@@ -24,7 +27,7 @@ class PicEditor extends React.Component {
     this.logos = OptionStore.getLogoOptions();
     this.fonts = OptionStore.getFontOptions();
     this.logoAspectRatios = {};
-    this.previousBackground; // used for when we switch back and forth from watermark
+    this.defaultOptions = OptionStore.getDefaults();
 
     this.state = {
       contentType: this.contentTypes[0],
@@ -32,6 +35,8 @@ class PicEditor extends React.Component {
 
     objectAssign(this.state, ContentStore.getContent());
     objectAssign(this.state, OptionStore.getOptions());
+
+    this.previousBackground = this.state.backgroundType;
   }
 
   componentDidMount() {
@@ -51,6 +56,15 @@ class PicEditor extends React.Component {
     if (this.contentTypes.indexOf(contentType) === -1) {
       console.log('Invalid conent type ' + contentType);
       return;
+    }
+
+    if (contentType === 'watermark') {
+      this.previousBackroundType = this.state.backgroundType;
+      actionOptions.backgroundTypeChange('image');
+    } else {
+      if (this.state.backgroundType !== this.previousBackgroundType) {
+        actionOptions.backgroundTypeChange(this.previousBackroundType);
+      }
     }
 
     this.setState({

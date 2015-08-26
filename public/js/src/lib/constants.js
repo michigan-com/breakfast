@@ -20,6 +20,7 @@ let fontFaceChange = 'fontFaceChange';
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
 let backgroundImageLoading = 'backgroundImageLoading';
+let backgroundTypeChange = 'backgroundTypeChange';
 
 let aspectRatioChange = 'aspectRatioChange';
 
@@ -56,6 +57,7 @@ module.exports = {
       backgroundColorChange,
       backgroundImageChange,
       backgroundImageLoading,
+      backgroundTypeChange,
 
       // Canvas aspect ratio
       aspectRatioChange,

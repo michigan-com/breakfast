@@ -7,26 +7,31 @@ import logoInfo from '../lib/logoInfo.json';
 let Actions = actions.options;
 
 let aspectRatios = [SQUARE, SIXTEEN_NINE];
+let backgroundTypes = ['color', 'image'];
 let fonts = [
   'Helvetica',
   'Impact',
   'Georgia'
 ];
 
-let options = {
-  fontSize: 20,
-  fontColor: '#ffffff',
-  fontFace: fonts[0],
-  background: {
-    type: 'color',
-    color: '#000000'
-  },
+function generateDefaultOptions() {
+  return  {
+    fontSize: 20,
+    fontColor: '#ffffff',
+    fontFace: fonts[0],
 
-  // Aspect ratio for the canvas
-  aspectRatio: aspectRatios[0],
+    backgroundType: 'color',
+    backgroundColor: '#000000',
+    backgroundSrc: 'http://localhost:3000/img/default_image.jpg',
 
-  logo: {}
+    // Aspect ratio for the canvas
+    aspectRatio: aspectRatios[0],
+
+    logo: {}
+  }
 }
+
+let options = generateDefaultOptions();
 
 let OptionStore = assign({}, EventEmitter.prototype, {
 
@@ -46,6 +51,10 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     return options;
   },
 
+  getDefaults() {
+    return generateDefaultOptions();
+  },
+
   getLogoOptions() {
     let logos = [];
     for (let filename in logoInfo) {
@@ -53,13 +62,16 @@ let OptionStore = assign({}, EventEmitter.prototype, {
         name: logoInfo[filename].name,
         filename
       });
-
     }
     return logos;
   },
 
   getFontOptions() {
     return fonts;
+  },
+
+  getBackgroundTypeOptions() {
+    return backgroundTypes;
   },
 
   /**
@@ -90,10 +102,8 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   },
 
   backgroundColorChange(color) {
-    options.background = {
-      type: 'color',
-      color
-    };
+    options.backgroundType = 'color';
+    options.backgroundColor = color;
 
     this.emitChange();
   },
@@ -104,10 +114,14 @@ let OptionStore = assign({}, EventEmitter.prototype, {
    * @param {String} src - Data from FileReader for an uploaded file image
    */
   backgroundImageChange(src) {
-    options.background = {
-      type: 'image',
-      src
-    };
+    options.backgroundType = 'image';
+    options.backgroundSrc = src;
+
+    this.emitChange();
+  },
+
+  backgroundTypeChange(type) {
+    options.backgroundType = type;
 
     this.emitChange();
   },
@@ -117,9 +131,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
    * image
    */
   backgroundImageLoading() {
-    options.background = {
-      type: 'loading image'
-    };
+    options.backgroundType = 'loading image';
 
     this.emitChange();
   },
@@ -169,6 +181,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.backgroundImageLoading:
       OptionStore.backgroundImageLoading();
+      break;
+    case Actions.backgroundTypeChange:
+      OptionStore.backgroundTypeChange(action.value);
       break;
     case Actions.aspectRatioChange:
       OptionStore.aspectRatioChange(action.value);

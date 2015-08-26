@@ -206,7 +206,8 @@ gulp.task('generateLogoJson', function() {
   var ratioRegex = /width="(\d+(?:\.\d+)?)px"\s+height="(\d+(?:\.\d+)?)px"/;
   var logoNames = {
     'dfp.svg': 'Detroit Free Press',
-    'dn.svg': 'Detroit News'
+    'dn.svg': 'Detroit News',
+    'michigan.svg': 'Michigan.com'
   };
 
   var files = fs.readdirSync(logo_root);

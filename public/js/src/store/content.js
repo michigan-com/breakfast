@@ -7,20 +7,6 @@ let Actions = actions.content;
 
 let contentTypes = ['quote', 'list', 'watermark'];
 let contentType = contentTypes[0];
-let content = {
-  quote: {
-    quote: '',
-    source: ''
-  },
-  list: {
-    headline: '',
-    items: []
-  },
-  watermark: {
-    photographer: '',
-    copyright: ''
-  }
-}
 
 // TODO make this more random
 function getRandomDefaults() {
@@ -39,6 +25,21 @@ function getRandomDefaults() {
     }
   }
 }
+
+let content = {
+  quote: {
+    quote: '',
+    source: '',
+  },
+  list: {
+    headline: '',
+    items: [''],
+  },
+  watermark: {
+    photographer: '',
+    copyright: ''
+  }
+};
 
 let ContentStore = assign({}, EventEmitter.prototype, {
 

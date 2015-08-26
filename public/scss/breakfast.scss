@@ -26,7 +26,8 @@ $picker-padding: 30px;
   color: $color;
   border: 1px solid $color;
   cursor: pointer;
-  @include transition(all 250ms ease-in);
+  @include transition(background 250ms ease-in);
+  @include transition(color 250ms ease-in);
 
   &.active, &:hover {
     background: $color;
@@ -190,16 +191,40 @@ body {
 
 
 /** Control Stuff **/
-.control {
-  display: block;
+.options {
   width: 100%;
 
-  &.background {
-    input {
-      display: none;
+  .option-select-container {
+    width: 100%;
+    margin: 0px 10px;
+
+    .option-select {
+      @include button($secondary-color);
+      font-size: 20px;
+      line-height: 30px;
+      display: inline-block;
+      width: 40%;
+      margin: 10px 5%;
+      text-transform: capitalize;
+
+      @media (min-width: 800px) and (max-width: 1050px) {
+        width: 80%;
+        margin: 10px 10%;
+      }
     }
   }
 
+  .option {
+    display: block;
+    width: 100%;
+
+    &.background {
+      #image-upload {
+        display: none;
+      }
+    }
+
+  }
 }
 
 .input-container {
@@ -246,6 +271,8 @@ body {
     background: $secondary-color;
     padding: $picker-padding;
     z-index: 1000;
+    top: -50px;
+    box-shadow: 0 0 .35em black;
 
     &.hide {
       display: none;
@@ -279,9 +306,6 @@ body {
     margin-right: 0;
     width: 50%;
     display: inline-block;
-    float: left;
-
-
   }
 }
 
@@ -297,6 +321,13 @@ body {
     }
   }
 
+  .current-selection, .select-option {
+    img {
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+
   .current-selection {
     width: 100%;
     text-align: center;
@@ -305,6 +336,7 @@ body {
     border: 1px solid $secondary-color;
     color: $secondary-color;
     cursor: pointer;
+    height: 40px;
 
     &:after {
       content: '^';
@@ -315,7 +347,7 @@ body {
     }
   }
 
-  .options {
+  .select-options {
     width: 100%;
     position: absolute;
     text-align: center;
@@ -326,14 +358,14 @@ body {
     border: 1px solid $secondary-color;
     z-index: 1000;
 
-    .option {
+    .select-option {
       font-size: 20px;
       line-height: 30px;
       color: $secondary-color;
       @include transition(all 250ms ease-in);
       cursor: pointer;
       background: inherit;
-
+      height: 30px;
 
       &:hover, &.selected {
         background: $secondary-color;

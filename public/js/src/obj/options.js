@@ -10,10 +10,36 @@ export default class Controls extends React.Component {
   constructor(args) {
     super(args);
     this.logos = Option
+
+    this.possibleOptions = ['font', 'background', 'aspect ratio', 'logo'];
+
+    this.state = {
+      optionSelected: false,
+      selectedOption: ''
+    }
   }
 
   componentDidMount() {
     this.logoChanged({}, 0);
+  }
+
+  /**
+   * When a top-level option is selected
+   */
+  selectOption(selectedOption) {
+    if (this.possibleOptions.indexOf(selectedOption) < 0) return;
+
+    this.setState({
+      optionSelected: true,
+      selectedOption
+    });
+  }
+
+  closeOption() {
+    this.setState({
+      optionSelected: false,
+      selectedOption: ''
+    })
   }
 
   /**
@@ -104,13 +130,48 @@ export default class Controls extends React.Component {
     return value;
   }
 
+  renderFontOptions() {
+    let options = this.props.options;
+
+    return (
+      <div className='option font'>
+        <div className='input-title'>Font</div>
+        <div className='input-container'>
+          <span className='label'>Size</span>
+          <span className='input'>
+            <input type='range' min='10' max='60' ref='font-size'
+                value={ options.fontSize }
+                onChange={ this.changeEvent.bind(this,
+                  actions.fontSizeChange,
+                  this.getInputVal.bind(this, 'font-size')) }/>
+          </span>
+        </div>
+        <div className='input-container'>
+          <span className='label'>Color</span>
+          <span className='input'>
+            <PickerToggle color={ options.fontColor }
+                callback={ this.colorChangeCallback(actions.fontColorChange) }/>
+          </span>
+        </div>
+        <div className='input-container'>
+          <span className='label'>Face</span>
+          <span className='input'>
+            <FontSelect options={ this.props.fonts }
+                onSelect={ this.fontFaceChanged.bind(this) }/>
+          </span>
+        </div>
+      </div>
+    )
+  }
+
   renderBackgroundOptions() {
 
     let contentType = this.props.contentType;
     let backgroundClass = `input-container ${contentType === 'watermark' ? 'hidden' : ''}`;
 
     return (
-      <div>
+      <div className='option background'>
+        <div className='input-title'>Background</div>
         <div className={ backgroundClass }>
           <span className='label'>Color</span>
           <span className='input'>
@@ -145,62 +206,88 @@ export default class Controls extends React.Component {
             { ratio }
         </div>
       )
+    }
+
+    return (
+      <div className='option aspect-ratio'>
+        <div className='input-title'>Aspect Ratio</div>
+        <div className='ratio-options'>
+          { this.props.aspectRatios.map(renderRatioOption.bind(this)) }
+        </div>
+      </div>
+    )
+  }
+
+  renderLogoOptions() {
+    return (
+      <div className='option logo'>
+        <div className='input-title'>Logo</div>
+        <LogoSelect options={ this.props.logos } valueKey='name'
+            onSelect={ this.logoChanged.bind(this) }/>
+      </div>
+    )
+  }
+  /**
+   * Render the buttons to select which option to use
+   */
+  renderOptionSelect() {
+    function renderOption(option, index) {
+      let className = 'option-select';
+      let callback = this.selectOption.bind(this, option);
+      if (this.state.optionSelected && this.state.selectedOption === option) {
+        className += ' active';
+        callback = this.closeOption.bind(this);
+      }
+
+      return (
+        <div className={ className } onClick={ callback }>{ option }</div>
+      )
 
     }
+
+    return(
+      <div className='option-select-container'>
+        { this.possibleOptions.map(renderOption.bind(this)) }
+      </div>
+    )
+  }
+
+  /**
+   * When an option is selected, render the option
+   */
+  renderSelectedOption() {
+    let selectedOption = this.state.selectedOption;
+    let optionContent;
+
+    if (selectedOption === 'font') {
+      optionContent = this.renderFontOptions();
+    } else if (selectedOption === 'background') {
+      optionContent = this.renderBackgroundOptions();
+    } else if (selectedOption === 'aspect ratio') {
+      optionContent = this.renderRatioOptions();
+    } else if (selectedOption === 'logo') {
+      optionContent = this.renderLogoOptions();
+    }
+
     return (
-      <div className='ratio-options'>
-        { this.props.aspectRatios.map(renderRatioOption.bind(this)) }
+      <div className='option-container'>
+        { optionContent }
       </div>
     )
   }
 
   render() {
-    let options = this.props.options;
-    return(
-      <div className='controls'>
-        <div className='section-title'>Options</div>
-        <div className='control font'>
-          <div className='input-title'>Font</div>
-          <div className='input-container'>
-            <span className='label'>Size</span>
-            <span className='input'>
-              <input type='range' min='10' max='60' ref='font-size'
-                  value={ options.fontSize }
-                  onChange={ this.changeEvent.bind(this,
-                    actions.fontSizeChange,
-                    this.getInputVal.bind(this, 'font-size')) }/>
-            </span>
-          </div>
-          <div className='input-container'>
-            <span className='label'>Color</span>
-            <span className='input'>
-              <PickerToggle color={ options.fontColor }
-                  callback={ this.colorChangeCallback(actions.fontColorChange) }/>
-            </span>
-          </div>
-          <div className='input-container'>
-            <span className='label'>Face</span>
-            <span className='input'>
-              <FontSelect options={ this.props.fonts }
-                  onSelect={ this.fontFaceChanged.bind(this) }/>
-            </span>
-          </div>
-        </div>
-        <div className='control background'>
-          <div className='input-title'>Background</div>
-          { this.renderBackgroundOptions() }
-        </div>
-        <div className='control aspect-ratio'>
-          <div className='input-title'>Aspect Ratio</div>
-          { this.renderRatioOptions() }
-        </div>
-        <div className='control logo'>
-          <div className='input-title'>Logo</div>
-          <LogoSelect options={ this.props.logos } valueKey='name'
-              onSelect={ this.logoChanged.bind(this) }/>
-        </div>
-      </div>
+    let content;
+    if (this.state.optionSelected) {
+      content = this.renderSelectedOption();
+    }
 
+    return (
+      <div className='options'>
+        <div className='section-title'>Options</div>
+        { this.renderOptionSelect() }
+        { content }
+      </div>
     )
   }
 }
@@ -229,7 +316,7 @@ class PickerToggle extends React.Component {
           <span className='picker-open' onClick={ this.showPicker.bind(this) }>Pick Color</span>
           <div className={ `picker-container ${ this.state.pickerHidden ? 'hide' : ''}` }>
             <span className='picker-close' onClick= { this.hidePicker.bind(this) }>X</span>
-            <ColorPicker className='color-picker' type='compact' color={ this.props.color } onChangeComplete={  this.props.callback }/>
+            <ColorPicker className='color-picker' type='chrome' color={ this.props.color } onChangeComplete={  this.props.callback }/>
           </div>
       </div>
     )
@@ -245,7 +332,17 @@ class PickerToggle extends React.Component {
 }
 
 class LogoSelect extends Select {
+  constructor(args) {
+    super(args);
 
+    this.htmlClass = 'logo-select';
+  }
+
+  getDisplayValue(option, index) {
+    return (
+      <img src={ `/logos/000000/${option.filename}`} title={ option.name } alt={ option.name }/>
+    )
+  }
 }
 
 class FontSelect extends Select {
@@ -254,8 +351,9 @@ class FontSelect extends Select {
    * return the string
    *
    * @param {String} option - Font face to render
+   * @param {Number} index - Index of the option
    */
-  getDisplayValue(option) { return option; }
+  getDisplayValue(option, index) { return option; }
 
   getStyle(option) {
     return {

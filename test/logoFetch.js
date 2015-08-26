@@ -24,7 +24,6 @@ describe('Testing logo fetching', function() {
   it('Tests the coloring of the logo', async function() {
     let color = '#eeeeee';
     let data = await logoFetch.getLogo(logoFiles[0], color);
-    console.log(data.length);
 
     let matches = logoFetch.colorRegex.exec(data);
 

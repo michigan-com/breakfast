@@ -55,10 +55,14 @@ body {
     color: #40912F;
     border: 1px solid #40912F;
     cursor: pointer;
-    transition: all 250ms ease-in;
-    -o-transition: all 250ms ease-in;
-    -moz-transition: all 250ms ease-in;
-    -webkit-transition: all 250ms ease-in;
+    transition: background 250ms ease-in;
+    -o-transition: background 250ms ease-in;
+    -moz-transition: background 250ms ease-in;
+    -webkit-transition: background 250ms ease-in;
+    transition: color 250ms ease-in;
+    -o-transition: color 250ms ease-in;
+    -moz-transition: color 250ms ease-in;
+    -webkit-transition: color 250ms ease-in;
     font-size: 30px;
     line-height: 60px;
     text-transform: uppercase; }
@@ -76,10 +80,14 @@ body {
       color: #40912F;
       border: 1px solid #40912F;
       cursor: pointer;
-      transition: all 250ms ease-in;
-      -o-transition: all 250ms ease-in;
-      -moz-transition: all 250ms ease-in;
-      -webkit-transition: all 250ms ease-in; }
+      transition: background 250ms ease-in;
+      -o-transition: background 250ms ease-in;
+      -moz-transition: background 250ms ease-in;
+      -webkit-transition: background 250ms ease-in;
+      transition: color 250ms ease-in;
+      -o-transition: color 250ms ease-in;
+      -moz-transition: color 250ms ease-in;
+      -webkit-transition: color 250ms ease-in; }
       .content-type-selector .content-type.active.active, .content-type-selector .content-type.active:hover {
         background: #40912F;
         color: white; }
@@ -172,11 +180,42 @@ body {
     margin: 10px auto; }
 
 /** Control Stuff **/
-.control {
-  display: block;
+.options {
   width: 100%; }
-  .control.background input {
-    display: none; }
+  .options .option-select-container {
+    width: 100%;
+    margin: 0px 10px; }
+    .options .option-select-container .option-select {
+      text-align: center;
+      color: #40867C;
+      border: 1px solid #40867C;
+      cursor: pointer;
+      transition: background 250ms ease-in;
+      -o-transition: background 250ms ease-in;
+      -moz-transition: background 250ms ease-in;
+      -webkit-transition: background 250ms ease-in;
+      transition: color 250ms ease-in;
+      -o-transition: color 250ms ease-in;
+      -moz-transition: color 250ms ease-in;
+      -webkit-transition: color 250ms ease-in;
+      font-size: 20px;
+      line-height: 30px;
+      display: inline-block;
+      width: 40%;
+      margin: 10px 5%;
+      text-transform: capitalize; }
+      .options .option-select-container .option-select.active, .options .option-select-container .option-select:hover {
+        background: #40867C;
+        color: white; }
+      @media (min-width: 800px) and (max-width: 1050px) {
+        .options .option-select-container .option-select {
+          width: 80%;
+          margin: 10px 10%; } }
+  .options .option {
+    display: block;
+    width: 100%; }
+    .options .option.background #image-upload {
+      display: none; }
 
 .input-container {
   width: 100%;
@@ -218,10 +257,14 @@ body {
     color: #40867C;
     border: 1px solid #40867C;
     cursor: pointer;
-    transition: all 250ms ease-in;
-    -o-transition: all 250ms ease-in;
-    -moz-transition: all 250ms ease-in;
-    -webkit-transition: all 250ms ease-in;
+    transition: background 250ms ease-in;
+    -o-transition: background 250ms ease-in;
+    -moz-transition: background 250ms ease-in;
+    -webkit-transition: background 250ms ease-in;
+    transition: color 250ms ease-in;
+    -o-transition: color 250ms ease-in;
+    -moz-transition: color 250ms ease-in;
+    -webkit-transition: color 250ms ease-in;
     margin: 0 auto;
     font-size: 15px;
     line-height: 30px;
@@ -234,7 +277,9 @@ body {
     position: absolute;
     background: #40867C;
     padding: 30px;
-    z-index: 1000; }
+    z-index: 1000;
+    top: -50px;
+    box-shadow: 0 0 0.35em black; }
     .picker .picker-container.hide {
       display: none; }
     .picker .picker-container .picker-close {
@@ -261,10 +306,14 @@ body {
   color: #40867C;
   border: 1px solid #40867C;
   cursor: pointer;
-  transition: all 250ms ease-in;
-  -o-transition: all 250ms ease-in;
-  -moz-transition: all 250ms ease-in;
-  -webkit-transition: all 250ms ease-in;
+  transition: background 250ms ease-in;
+  -o-transition: background 250ms ease-in;
+  -moz-transition: background 250ms ease-in;
+  -webkit-transition: background 250ms ease-in;
+  transition: color 250ms ease-in;
+  -o-transition: color 250ms ease-in;
+  -moz-transition: color 250ms ease-in;
+  -webkit-transition: color 250ms ease-in;
   margin: 0 auto;
   font-size: 15px;
   line-height: 30px;
@@ -281,17 +330,20 @@ body {
     color: #40867C;
     border: 1px solid #40867C;
     cursor: pointer;
-    transition: all 250ms ease-in;
-    -o-transition: all 250ms ease-in;
-    -moz-transition: all 250ms ease-in;
-    -webkit-transition: all 250ms ease-in;
+    transition: background 250ms ease-in;
+    -o-transition: background 250ms ease-in;
+    -moz-transition: background 250ms ease-in;
+    -webkit-transition: background 250ms ease-in;
+    transition: color 250ms ease-in;
+    -o-transition: color 250ms ease-in;
+    -moz-transition: color 250ms ease-in;
+    -webkit-transition: color 250ms ease-in;
     font-size: 30px;
     line-height: 40px;
     text-align: center;
     margin-right: 0;
     width: 50%;
-    display: inline-block;
-    float: left; }
+    display: inline-block; }
     .ratio-options .aspect-ratio.active, .ratio-options .aspect-ratio:hover {
       background: #40867C;
       color: white; }
@@ -305,6 +357,9 @@ body {
     -ms-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg); }
+  .select .current-selection img, .select .select-option img {
+    max-width: 100%;
+    height: 100%; }
   .select .current-selection {
     width: 100%;
     text-align: center;
@@ -312,7 +367,8 @@ body {
     line-height: 40px;
     border: 1px solid #40867C;
     color: #40867C;
-    cursor: pointer; }
+    cursor: pointer;
+    height: 40px; }
     .select .current-selection:after {
       content: '^';
       position: absolute;
@@ -326,7 +382,7 @@ body {
       -o-transition: all 250ms linear;
       -moz-transition: all 250ms linear;
       -webkit-transition: all 250ms linear; }
-  .select .options {
+  .select .select-options {
     width: 100%;
     position: absolute;
     text-align: center;
@@ -336,7 +392,7 @@ body {
     background: white;
     border: 1px solid #40867C;
     z-index: 1000; }
-    .select .options .option {
+    .select .select-options .select-option {
       font-size: 20px;
       line-height: 30px;
       color: #40867C;
@@ -345,8 +401,9 @@ body {
       -moz-transition: all 250ms ease-in;
       -webkit-transition: all 250ms ease-in;
       cursor: pointer;
-      background: inherit; }
-      .select .options .option:hover, .select .options .option.selected {
+      background: inherit;
+      height: 30px; }
+      .select .select-options .select-option:hover, .select .select-options .select-option.selected {
         background: #40867C;
         color: white; }
 

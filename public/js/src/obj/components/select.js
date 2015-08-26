@@ -8,6 +8,8 @@ export default class Select extends React.Component {
       optionsHidden: true,
       currentIndex: 0
     }
+
+    this.htmlClass = '';
   }
 
   toggleOptions() {
@@ -36,8 +38,9 @@ export default class Select extends React.Component {
    * value
    *
    * @param {Object} option - Option to be displayed
+   * @param {Number} index - Index of the option being rendered
    */
-  getDisplayValue(option) {
+  getDisplayValue(option, index) {
     let valueKey = this.props.valueKey;
     if (!valueKey) valueKey = 'value';
     if (!valueKey in option) console.log(`Key ${valueKey} not found`);
@@ -63,10 +66,10 @@ export default class Select extends React.Component {
    */
   renderOption(option, index) {
     return (
-      <div className={ `option ${index === this.state.currentIndex ? 'selected' : ''}` }
+      <div className={ `select-option ${index === this.state.currentIndex ? 'selected' : ''}` }
           onClick={ this.optionSelected.bind(this, index) }
           style={ this.getStyle(option) }>
-        { this.getDisplayValue(option) }
+        { this.getDisplayValue(option, index) }
       </div>
     )
   }
@@ -75,7 +78,7 @@ export default class Select extends React.Component {
     if (this.state.optionsHidden) return;
 
     return (
-      <div className='options'>
+      <div className='select-options'>
         { this.props.options.map(this.renderOption.bind(this)) }
       </div>
     )
@@ -88,11 +91,11 @@ export default class Select extends React.Component {
 
     let selected = this.props.options[this.state.currentIndex];
     return (
-      <div className={ `select ${ this.state.optionsHidden ? '' : 'show' }`}>
+      <div className={ `select ${this.htmlClass} ${ this.state.optionsHidden ? '' : 'show' }`}>
         <div className='current-selection'
             onClick={ this.toggleOptions.bind(this) }
             style={ this.getStyle(selected) }>
-          { this.getDisplayValue(selected) }
+          { this.getDisplayValue(selected, this.state.currentIndex) }
         </div>
         { this.renderOptions() }
       </div>

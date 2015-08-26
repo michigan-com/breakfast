@@ -6,6 +6,7 @@ import logoInfo from '../lib/logoInfo.json';
 let Actions = actions.options;
 let logos = OptionStore.getLogoOptions();
 let fonts = OptionStore.getFontOptions();
+let backgroundTypes = OptionStore.getBackgroundTypeOptions();
 
 export default class OptionActions {
 
@@ -59,6 +60,15 @@ export default class OptionActions {
     }
 
     reader.readAsDataURL(file);
+  }
+
+  backgroundTypeChange(type) {
+    if (backgroundTypes.indexOf(type) < 0) return;
+
+    Dispatcher.dispatch({
+      type: Actions.backgroundTypeChange,
+      value: type
+    });
   }
 
   aspectRatioChange(ratio) {

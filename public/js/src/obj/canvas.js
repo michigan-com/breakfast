@@ -69,8 +69,8 @@ export default class Canvas extends React.Component {
       height: canvasStyle.height
     }
 
-    if (this.props.options.background.type === 'color') {
-      style.backgroundColor = this.props.options.background.color;
+    if (this.props.options.backgroundType === 'color') {
+      style.backgroundColor = this.props.options.backgroundColor;
     }
     return style;
   }
@@ -79,7 +79,6 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
 
     let textHeight = this.props.fontSize * 1.25;
-    console.log(this.props.options.fontFace);
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
     return {
       text: {
@@ -99,7 +98,7 @@ export default class Canvas extends React.Component {
         lineHeight: 20,
         fontSize: 15,
         width: canvasStyle.textWidth,
-        color: 'grey'
+        color: this.props.options.fontColor
       }
     }
   }
@@ -255,8 +254,7 @@ export default class Canvas extends React.Component {
 }
 
   renderBackground() {
-    let background = this.props.options.background;
-    let type = background.type;
+    let type = this.props.options.backgroundType;
     let backgroundObj;
     let backgroundStyle = this.getBackgroundStyle();
     let layerStyle = {
@@ -269,7 +267,7 @@ export default class Canvas extends React.Component {
       )
     } else if (type === 'image') {
       backgroundObj = (
-        <Image style={ backgroundStyle } src={ background.src }/>
+        <Image style={ backgroundStyle } src={ this.props.options.backgroundSrc }/>
       )
     }
 
