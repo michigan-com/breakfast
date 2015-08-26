@@ -23,7 +23,7 @@ class PicEditor extends React.Component {
 
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.contentTypes = ['quote', 'list', 'watermark'];
-    this.aspectRatios = [SQUARE, SIXTEEN_NINE];
+    this.aspectRatios = OptionStore.getAspectRatioOptions();
     this.logos = OptionStore.getLogoOptions();
     this.fonts = OptionStore.getFontOptions();
     this.logoAspectRatios = {};

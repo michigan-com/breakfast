@@ -9,7 +9,6 @@ let actions = new OptionActions();
 export default class Controls extends React.Component {
   constructor(args) {
     super(args);
-    this.logos = Option
 
     this.possibleOptions = ['font', 'background', 'aspect ratio', 'logo'];
 

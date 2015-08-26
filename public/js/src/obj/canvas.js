@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import { clone } from '../lib/parse';
+import { SIXTEEN_NINE, TWO_ONE } from '../lib/constants';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -38,9 +39,12 @@ export default class Canvas extends React.Component {
 
     let canvasHeight = canvasWidth;
 
-    if (this.props.options.aspectRatio  === '16:9') {
+    if (this.props.options.aspectRatio  === SIXTEEN_NINE) {
       canvasHeight = canvasWidth * 9/16;
+    } else if (this.props.options.aspectRatio === TWO_ONE) {
+      canvasHeight = canvasWidth * 1/2;
     }
+
     return {
       width: canvasWidth,
       height: canvasHeight,

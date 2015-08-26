@@ -29,6 +29,7 @@ let logoChange = 'logoChange';
 module.exports = {
   SIXTEEN_NINE: '16:9',
   SQUARE: 'square',
+  TWO_ONE: '2:1 (Twitter)',
   CHANGE_EVENT: 'change',
   actions: {
     content: {

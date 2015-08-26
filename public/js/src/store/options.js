@@ -1,12 +1,12 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
-import { actions, SQUARE, SIXTEEN_NINE, CHANGE_EVENT } from '../lib/constants';
+import { actions, SQUARE, SIXTEEN_NINE, TWO_ONE, CHANGE_EVENT } from '../lib/constants';
 import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 
-let aspectRatios = [SQUARE, SIXTEEN_NINE];
+let aspectRatios = [SQUARE, SIXTEEN_NINE, TWO_ONE];
 let backgroundTypes = ['color', 'image'];
 let fonts = [
   'Helvetica',
@@ -72,6 +72,10 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
   getBackgroundTypeOptions() {
     return backgroundTypes;
+  },
+
+  getAspectRatioOptions() {
+    return aspectRatios;
   },
 
   /**
