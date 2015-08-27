@@ -88,6 +88,7 @@ class PicEditor extends React.Component {
   renderContentOptions(option, index) {
     return(
       <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` }
+          key={ option }
           onClick={ this.contentTypeChange.bind(this, option) }>
         { toTitleCase(option) }
       </div>

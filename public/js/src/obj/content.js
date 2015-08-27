@@ -78,7 +78,7 @@ export default class Content extends React.Component {
       let ref = this.formatListItemRef(index);
       return (
 
-        <div className='list-input'>
+        <div className='list-input' key={ `list-item-${index}` }>
           <input type='text' ref={ ref }
               value={ item }
               onChange={ this.changeEvent.bind(

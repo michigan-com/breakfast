@@ -210,6 +210,7 @@ export default class Controls extends React.Component {
     function renderRatioOption(ratio, key) {
       return (
         <div className={ `aspect-ratio ${currentRatio === ratio ? 'active' : ''}`}
+          key={ ratio }
           onClick={ this.changeEvent.bind(this, actions.aspectRatioChange, function() { return ratio; }) }>
             { ratio }
         </div>
@@ -258,7 +259,7 @@ export default class Controls extends React.Component {
       }
 
       return (
-        <div className={ className } onClick={ callback }>{ option }</div>
+        <div className={ className } onClick={ callback } key={ option }>{ option }</div>
       )
 
     }

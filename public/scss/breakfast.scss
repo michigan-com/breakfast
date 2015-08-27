@@ -2,6 +2,7 @@
 @import 'neat';
 
 $body-background: white;
+$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 
 $primary-color: #40912F;
 $secondary-color: #40867C;
@@ -57,7 +58,7 @@ $picker-padding: 30px;
 }
 
 body {
-  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  font-family: $body-font;
   background: $body-background;
 }
 
@@ -344,6 +345,7 @@ body {
       right: 3%;
       @include transform(rotate(180deg));
       @include transition(all 250ms linear);
+      font-family: $body-font;
     }
   }
 

@@ -7,7 +7,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   background: white; }
 
 .pic-editor {
@@ -381,7 +381,8 @@ body {
       transition: all 250ms linear;
       -o-transition: all 250ms linear;
       -moz-transition: all 250ms linear;
-      -webkit-transition: all 250ms linear; }
+      -webkit-transition: all 250ms linear;
+      font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; }
   .select .select-options {
     width: 100%;
     position: absolute;

@@ -67,6 +67,7 @@ export default class Select extends React.Component {
   renderOption(option, index) {
     return (
       <div className={ `select-option ${index === this.state.currentIndex ? 'selected' : ''}` }
+          key={ `option-${index}` }
           onClick={ this.optionSelected.bind(this, index) }
           style={ this.getStyle(option) }>
         { this.getDisplayValue(option, index) }
