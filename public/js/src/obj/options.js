@@ -1,6 +1,6 @@
 import React from 'react';
 import ColorPicker from 'react-color';
-import { SIXTEEN_NINE, SQUARE } from '../lib/constants';
+import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE } from '../lib/constants';
 import OptionActions from '../actions/options';
 import { Select } from './components';
 
@@ -208,6 +208,16 @@ export default class Controls extends React.Component {
     let currentRatio = this.props.options.aspectRatio;
 
     function renderRatioOption(ratio, key) {
+      switch(ratio) {
+        case FIT_IMAGE:
+          if (this.props.options.backgroundType === BACKGROUND_IMAGE) break;
+        case SQUARE:
+          if (this.props.contentType !== 'watermark') break;
+          return null;
+        default:
+          break;
+      }
+
       return (
         <div className={ `aspect-ratio ${currentRatio === ratio ? 'active' : ''}`}
           key={ ratio }

@@ -27,10 +27,19 @@ let aspectRatioChange = 'aspectRatioChange';
 let logoChange = 'logoChange';
 
 module.exports = {
+  // Aspect ratios
   SIXTEEN_NINE: '16:9',
   SQUARE: 'square',
   TWO_ONE: '2:1 (Twitter)',
+  FIT_IMAGE: 'Fit Image',
+
   CHANGE_EVENT: 'change',
+
+  // Background type states
+  BACKGROUND_LOADING: 'background loading',
+  BACKGROUND_IMAGE : 'image',
+  BACKGROUND_COLOR: 'color',
+
   actions: {
     content: {
       // Quote

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import { clone } from '../lib/parse';
-import { SIXTEEN_NINE, TWO_ONE } from '../lib/constants';
+import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, BACKGROUND_LOADING, BACKGROUND_IMAGE,
+    BACKGROUND_COLOR } from '../lib/constants';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -16,15 +17,59 @@ export default class Canvas extends React.Component {
     super(args);
 
     this.canvasPadding = 20;
+    this.canvasWidth = 650;
     window.onresize = function() {
       this.setState({ windowChange: true});
     }.bind(this);
+
+    this.state = {
+      backgroundPos: {
+        top: 0,
+        left: 0
+      },
+
+      mouseDown: false,
+      lastMouseX: 0,
+      lastMouseY: 0,
+
+      backgroundType: this.props.options.backgroundType
+
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let newState = {
+      backgroundType: nextProps.options.backgroundType
+    };
+
+    if (nextProps.options.backgroundType === BACKGROUND_COLOR) {
+      newState.backgroundPos = {
+        top: 0,
+        left: 0
+      }
+    }
+
+    // Adjust the newly loaded background image to center on the canvas
+    //if (nextProps.options.backgroundType === BACKGROUND_IMAGE &&
+          //this.state.backgroundType === BACKGROUND_LOADING) {
+      //let canvasStyle = this.getCanvasStyle();
+      //let backgroundImg = nextProps.options.backgroundImg;
+      //newState.backgroundPos = {
+        //top: (canvasStyle.height - backgroundImg.height) / 2,
+        //left: (canvasStyle.width - backgroundImg.width) / 2
+      //}
+    //}
+
+    this.setState(newState);
+  }
+
+  componentWillUpdate(nextProps, nextState) {
   }
 
   getCanvasStyle() {
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = 650;
+    let canvasWidth = this.canvasWidth;
 
     if (windowWidth <= cutoff) {
       // 800px is the window size the media query cutoff
@@ -39,10 +84,20 @@ export default class Canvas extends React.Component {
 
     let canvasHeight = canvasWidth;
 
-    if (this.props.options.aspectRatio  === SIXTEEN_NINE) {
-      canvasHeight = canvasWidth * 9/16;
-    } else if (this.props.options.aspectRatio === TWO_ONE) {
-      canvasHeight = canvasWidth * 1/2;
+    switch (this.props.options.aspectRatio) {
+      case SIXTEEN_NINE:
+        canvasHeight = canvasWidth * 9/16;
+        break;
+      case TWO_ONE:
+        canvasHeight = canvasWidth * 1/2;
+        break;
+      case FIT_IMAGE:
+        // Only deal with this aspect ratio if we've loaded an image up
+        if (this.props.options.backgroundType !== BACKGROUND_IMAGE) {
+          break;
+        }
+        let backgroundImg = this.props.options.backgroundImg;
+        canvasHeight = canvasWidth  / (backgroundImg.width / backgroundImg.height);
     }
 
     return {
@@ -67,14 +122,16 @@ export default class Canvas extends React.Component {
 
     let style = {
       zIndex: 1,
-      top: 0,
-      left: 0,
+      top: this.state.backgroundPos.top,
+      left: this.state.backgroundPos.left,
       width: canvasStyle.width,
       height: canvasStyle.height
     }
 
-    if (this.props.options.backgroundType === 'color') {
+    if (this.props.options.backgroundType === BACKGROUND_COLOR) {
       style.backgroundColor = this.props.options.backgroundColor;
+    } else if (this.props.options.backgroundType === BACKGROUND_IMAGE) {
+      style.backgroundColor = '#000000';
     }
     return style;
   }
@@ -275,13 +332,14 @@ export default class Canvas extends React.Component {
       zIndex: backgroundStyle.zIndex
     }
 
-    if (type === 'color') {
+    if (type === BACKGROUND_COLOR) {
       backgroundObj = (
         <Layer style={ this.getBackgroundStyle() }></Layer>
+
       )
-    } else if (type === 'image') {
+    } else if (type === BACKGROUND_IMAGE) {
       backgroundObj = (
-        <Image style={ backgroundStyle } src={ this.props.options.backgroundSrc }/>
+        <Image style={ backgroundStyle } src={ this.props.options.backgroundImg.src }/>
       )
     }
 
@@ -301,6 +359,38 @@ export default class Canvas extends React.Component {
     )
   }
 
+  mouseDown(e) {
+    //if (this.props.type !== 'watermark' || !this.props.options.backgroundImg.src) return;
+
+    this.setState({
+      mouseDown: true,
+      lastMouseX: e.clientX,
+      lastMouseY: e.clientY
+    });
+  }
+
+  mouseUp(e) {
+    this.setState({ mouseDown: false });
+  }
+
+  mouseMove(e) {
+    if (!this.state.mouseDown) return;
+
+    let movementX = this.state.lastMouseX - e.clientX;
+    let movementY = this.state.lastMouseY - e.clientY;
+    let newTop = this.state.backgroundPos.top - movementY;
+    let newLeft = this.state.backgroundPos.left - movementX;
+
+    this.setState({
+      backgroundPos: {
+        top: newTop,
+        left: newLeft
+      },
+      lastMouseX: e.clientX,
+      lastMouseY: e.clientY
+    });
+  }
+
   render() {
     let canvasElements = (<Text className='idk'> Haven't implemented this yet</Text>)
     let canvasStyle = this.getCanvasStyle();
@@ -312,9 +402,20 @@ export default class Canvas extends React.Component {
     } else if (this.props.type === 'watermark') {
       canvasElements = this.renderPicture();
     }
+
     return (
-      <div className='image' style={ canvasStyle } ref='image'>
-        <Surface className='quote' width={ canvasStyle.width } height={ canvasStyle.height } left={0} top={0} ref='canvas'>
+      <div className='image'
+          onMouseDown={ this.mouseDown.bind(this) }
+          onMouseUp={ this.mouseUp.bind(this) }
+          onMouseMove={ this.mouseMove.bind(this) }
+          style={ canvasStyle }
+          ref='image'>
+        <Surface className='quote'
+            width={ canvasStyle.width }
+            height={ canvasStyle.height }
+            left={0}
+            top={0}
+            ref='canvas'>
           { this.renderBackground() }
           { canvasElements }
           { this.renderLogo() }

@@ -54,10 +54,21 @@ export default class OptionActions {
 
     let reader = new FileReader();
     reader.onload = function(e) {
-      Dispatcher.dispatch({
-        type: Actions.backgroundImageChange,
-        value: reader.result
-      });
+      var img = new Image();
+
+      img.onload = function() {
+        Dispatcher.dispatch({
+          type: Actions.backgroundImageChange,
+          value: {
+            src: reader.result,
+            width: img.width,
+            height: img.height
+          }
+        });
+      }
+
+      img.src = reader.result;
+
     }
     reader.readAsDataURL(file);
   }
