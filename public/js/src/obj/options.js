@@ -22,6 +22,12 @@ export default class Controls extends React.Component {
     this.logoChanged({}, 0);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.contentType === 'watermark' && !nextProps.options.backgroundImg.src) {
+      actions.backgroundImageUrlChange('http://localhost:3000/img/default_image.jpg');
+    }
+  }
+
   /**
    * When a top-level option is selected
    */
@@ -211,8 +217,10 @@ export default class Controls extends React.Component {
       switch(ratio) {
         case FIT_IMAGE:
           if (this.props.options.backgroundType !== BACKGROUND_IMAGE) return null;
+          break;
         case SQUARE:
           if (this.props.contentType === 'watermark') return null;
+          break;
       }
 
       return (

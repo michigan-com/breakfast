@@ -79,22 +79,26 @@ export default class OptionActions {
    * @param {String} url - Url for an image
    */
   backgroundImageUrlChange(url) {
-    var image = new Image();
+    var img = new Image();
 
-    image.onload = function () {
-        var canvas = document.createElement('canvas');
-        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
-        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+    img.onload = function () {
+      var canvas = document.createElement('canvas');
+      canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+      canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
 
-        canvas.getContext('2d').drawImage(this, 0, 0);
+      canvas.getContext('2d').drawImage(this, 0, 0);
 
-        Dispatcher.dispatch({
-          type: Actions.backgroundImageChange,
-          value: canvas.toDataURL('image/png')
-        });
+      Dispatcher.dispatch({
+        type: Actions.backgroundImageChange,
+        value: {
+          src: canvas.toDataURL('image/png'),
+          width: img.width,
+          height: img.height
+        }
+      });
     };
 
-    image.src = url;
+    img.src = url;
   }
 
   backgroundTypeChange(type) {
