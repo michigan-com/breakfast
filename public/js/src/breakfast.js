@@ -22,7 +22,7 @@ class PicEditor extends React.Component {
     super(args);
 
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
-    this.contentTypes = ['quote', 'list', 'watermark'];
+    this.contentTypes = ContentStore.getContentTypes();
     this.aspectRatios = OptionStore.getAspectRatioOptions();
     this.logos = OptionStore.getLogoOptions();
     this.fonts = OptionStore.getFontOptions();
@@ -96,31 +96,26 @@ class PicEditor extends React.Component {
   }
 
   render() {
-    let canvasData = this.state[this.state.contentType];
     let contentDefaults = ContentStore.getDefaults();
+    let content = ContentStore.getContent();
+    let canvasData = this.state[content.type];
     return(
       <div className='pic-editor'>
-        <div className='content-type-selector'>
-          { ['quote', 'list', 'watermark'].map(this.renderContentOptions.bind(this)) }
-        </div>
         <div className='image-container'>
-          <Canvas type={ this.state.contentType }
-              canvasData={ canvasData }
+          <Canvas canvasData={ canvasData }
               fontSize={ this.state.fontSize }
               options={ OptionStore.getOptions() }
+              content={ content }
               ref='canvas'/>
         </div>
         <div className='options-container'>
-          <div className='section-title'>Content</div>
-          <div className='text-rendering'>
-            <Content contentType={ this.state.contentType }
-                defaults={ contentDefaults }
-                content={ ContentStore.getContent() }/>
-          </div>
+          <Content contentTypes={ this.contentTypes }
+              defaults={ contentDefaults }
+              content={ ContentStore.getContent() }/>
           <Options fonts={ this.fonts }
               logos={ this.logos }
               aspectRatios={ this.aspectRatios }
-              contentType={ this.state.contentType }
+              contentType={ content.type }
               options={ OptionStore.getOptions() }/>
           <div className='save'>
             <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>

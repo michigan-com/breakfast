@@ -6,7 +6,6 @@ import { actions, CHANGE_EVENT } from '../lib/constants';
 let Actions = actions.content;
 
 let contentTypes = ['quote', 'list', 'watermark'];
-let contentType = contentTypes[0];
 
 // TODO make this more random
 function getRandomDefaults() {
@@ -27,6 +26,7 @@ function getRandomDefaults() {
 }
 
 let content = {
+  type: contentTypes[0],
   quote: {
     quote: '',
     source: '',
@@ -38,7 +38,7 @@ let content = {
   watermark: {
     photographer: '',
     copyright: ''
-  }
+  },
 };
 
 let ContentStore = assign({}, EventEmitter.prototype, {
@@ -61,6 +61,10 @@ let ContentStore = assign({}, EventEmitter.prototype, {
 
   getDefaults() {
     return getRandomDefaults();
+  },
+
+  getContentTypes() {
+    return contentTypes;
   },
 
   /**
@@ -135,10 +139,10 @@ let ContentStore = assign({}, EventEmitter.prototype, {
    *
    * @param {String} type - Content type to be updated to
    */
-  contentTypeUpdate(type) {
+  contentTypeChange(type) {
     if (contentTypes.indexOf(type) < 0) return;
 
-    contentType = type;
+    content.type = type;
     this.emitChange();
   }
 
@@ -165,6 +169,10 @@ Dispatcher.register(function(action) {
       break;
     case Actions.listItemChange:
       ContentStore.listItemChange(action.index, action.text);
+      break;
+
+    case Actions.contentTypeChange:
+      ContentStore.contentTypeChange(action.value);
       break;
   }
 });

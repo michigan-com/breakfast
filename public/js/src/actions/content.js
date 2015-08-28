@@ -66,4 +66,11 @@ export default class ContentActions {
       text
     })
   }
+
+  contentTypeChange(type) {
+    Dispatcher.dispatch({
+      type: Actions.contentTypeChange,
+      value: type
+    })
+  }
 }

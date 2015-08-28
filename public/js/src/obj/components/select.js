@@ -9,7 +9,7 @@ export default class Select extends React.Component {
       currentIndex: this.props.currentIndex ? this.props.currentIndex : 0
     }
 
-    this.htmlClass = '';
+    this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
   }
 
   toggleOptions() {

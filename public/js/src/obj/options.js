@@ -385,7 +385,7 @@ class FontSelect extends Select {
 
   getStyle(option) {
     return {
-      'font-family': option
+      fontFamily: option
     }
   }
 }

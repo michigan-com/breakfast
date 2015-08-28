@@ -12,6 +12,8 @@ let listItemRemove = 'listItemRemove';
 let photographerChange = 'photographerChange';
 let copyrightChange = 'copyrightChange';
 
+let contentTypeChange = 'contentTypeChange';
+
 // Option Actions
 let fontSizeChange = 'fontSizeChange';
 let fontColorChange = 'fontColorChange';
@@ -54,7 +56,9 @@ module.exports = {
 
       // Watermark
       photographerChange,
-      copyrightChange
+      copyrightChange,
+
+      contentTypeChange
     },
 
     options: {

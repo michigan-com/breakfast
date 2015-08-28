@@ -167,9 +167,9 @@ body {
   line-height: 30px; }
 
 /** Text input stuff **/
-.text-rendering {
+.inputs {
   width: 100%; }
-  .text-rendering input {
+  .inputs input {
     background: white;
     border: none;
     border-bottom: 1px solid grey;
@@ -357,6 +357,8 @@ body {
     -ms-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg); }
+  .select.content-type-select {
+    text-transform: capitalize; }
   .select .current-selection img, .select .select-option img {
     max-width: 100%;
     height: 100%; }

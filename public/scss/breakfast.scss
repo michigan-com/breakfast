@@ -174,7 +174,7 @@ body {
 }
 
 /** Text input stuff **/
-.text-rendering {
+.inputs {
   width: 100%;
 
   input {
@@ -320,6 +320,10 @@ body {
         @include transform(rotate(0deg));
       }
     }
+  }
+
+  &.content-type-select {
+    text-transform: capitalize;
   }
 
   .current-selection, .select-option {

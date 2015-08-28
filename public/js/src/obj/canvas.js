@@ -349,7 +349,7 @@ export default class Canvas extends React.Component {
   }
 
   mouseDown(e) {
-    //if (this.props.type !== 'watermark' || !this.props.options.backgroundImg.src) return;
+    //if (this.props.content.type !== 'watermark' || !this.props.options.backgroundImg.src) return;
 
     this.setState({
       mouseDown: true,
@@ -383,12 +383,13 @@ export default class Canvas extends React.Component {
   render() {
     let canvasElements = (<Text className='idk'> Haven't implemented this yet</Text>)
     let canvasStyle = this.getCanvasStyle();
+    let contentType = this.props.content.type;
 
-    if (this.props.type === 'quote') {
+    if (contentType === 'quote') {
       canvasElements = this.renderQuote();
-    } else if (this.props.type === 'list') {
+    } else if (contentType === 'list') {
       canvasElements = this.renderList();
-    } else if (this.props.type === 'watermark') {
+    } else if (contentType === 'watermark') {
       canvasElements = this.renderPicture();
     }
 
