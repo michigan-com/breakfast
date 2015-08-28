@@ -130,6 +130,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   backgroundImageChange(backgroundImg) {
     options.backgroundType = BACKGROUND_IMAGE;
     options.backgroundImg = backgroundImg;
+    options.aspectRatio = FIT_IMAGE;
 
     this.emitChange();
   },

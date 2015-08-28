@@ -210,11 +210,9 @@ export default class Controls extends React.Component {
     function renderRatioOption(ratio, key) {
       switch(ratio) {
         case FIT_IMAGE:
-          if (this.props.options.backgroundType === BACKGROUND_IMAGE) break;
-            return null
+          if (this.props.options.backgroundType !== BACKGROUND_IMAGE) return null;
         case SQUARE:
-          if (this.props.contentType !== 'watermark') break;
-          return null;
+          if (this.props.contentType === 'watermark') return null;
       }
 
       return (
