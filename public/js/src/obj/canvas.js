@@ -158,7 +158,7 @@ export default class Canvas extends React.Component {
 
     let headlineFontSize = 30;
     let headlineSize = 50;
-    let font = ReactCanvas.FontFace('Arial Black, Arial Bold, Gadget, sans-serif', '', {});
+    let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
     let listItemSize = this.props.fontSize * 1.25;
     return {
@@ -187,7 +187,7 @@ export default class Canvas extends React.Component {
 
   getAttributionStyle() {
     let fontSize = 10;
-    let font = ReactCanvas.FontFace('Arial Black, Arial Thin, Gadget, sans-serif', '', {});
+    let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
     return {
       fontSize,
       color: this.props.options.fontColor,
