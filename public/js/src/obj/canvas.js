@@ -156,8 +156,8 @@ export default class Canvas extends React.Component {
   getListStyle() {
     let canvasStyle = this.getCanvasStyle();
 
-    let headlineFontSize = 30;
-    let headlineSize = 50;
+    let headlineFontSize = this.props.fontSize * 1.5;
+    let headlineSize = headlineFontSize * 1.25;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
     let listItemSize = this.props.fontSize * 1.25;
@@ -186,7 +186,7 @@ export default class Canvas extends React.Component {
   }
 
   getAttributionStyle() {
-    let fontSize = 10;
+    let fontSize = this.props.fontSize * .5;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
     return {
       fontSize,
