@@ -49,17 +49,6 @@ export default class Canvas extends React.Component {
       }
     }
 
-    // Adjust the newly loaded background image to center on the canvas
-    //if (nextProps.options.backgroundType === BACKGROUND_IMAGE &&
-          //this.state.backgroundType === BACKGROUND_LOADING) {
-      //let canvasStyle = this.getCanvasStyle();
-      //let backgroundImg = nextProps.options.backgroundImg;
-      //newState.backgroundPos = {
-        //top: (canvasStyle.height - backgroundImg.height) / 2,
-        //left: (canvasStyle.width - backgroundImg.width) / 2
-      //}
-    //}
-
     this.setState(newState);
   }
 
@@ -405,9 +394,9 @@ export default class Canvas extends React.Component {
 
     return (
       <div className='image'
-          onMouseDown={ this.mouseDown.bind(this) }
-          onMouseUp={ this.mouseUp.bind(this) }
-          onMouseMove={ this.mouseMove.bind(this) }
+          //onMouseDown={ this.mouseDown.bind(this) }
+          //onMouseUp={ this.mouseUp.bind(this) }
+          //onMouseMove={ this.mouseMove.bind(this) }
           style={ canvasStyle }
           ref='image'>
         <Surface className='quote'

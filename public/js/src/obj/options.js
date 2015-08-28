@@ -211,11 +211,10 @@ export default class Controls extends React.Component {
       switch(ratio) {
         case FIT_IMAGE:
           if (this.props.options.backgroundType === BACKGROUND_IMAGE) break;
+            return null
         case SQUARE:
           if (this.props.contentType !== 'watermark') break;
           return null;
-        default:
-          break;
       }
 
       return (
