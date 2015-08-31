@@ -28,8 +28,8 @@ var browserifyShim = require('browserify-shim');
 
 var config = require('./config');
 
-var jsSrc = './public/js/src/';
-var jsDist = './public/js/dist/';
+var jsSrc = './src/js/';
+var jsDist = './public/js/';
 var jsBundle = ['breakfast.js'];
 
 gulp.task('sass', function() {
@@ -79,7 +79,7 @@ gulp.task('watch', function() {
   gulp.watch('./src/**/*.js', ['babel']);
 
   gutil.log('Watching scss files ...');
-  gulp.watch('./public/scss/**/*.scss', function() {
+  gulp.watch('./src/scss/**/*.scss', function() {
     return bundleSass();
   });
 });
@@ -159,7 +159,7 @@ function bundleJs(file, bcb) {
 }
 
 function babelBundle() {
-  var src = './src/**/*.js';
+  var src = './src/server/**/*.js';
   var dist = './dist';
 
   gutil.log('Babel is generating ' + src + ' files to ' + dist + ' ...');
@@ -174,7 +174,7 @@ function babelBundle() {
 }
 
 function bundleSass() {
-  var cssSrc = './public/scss/';
+  var cssSrc = './src/scss/';
   var cssDist = './public/css/';
   var cssFiles = cssSrc + '**/*.scss';
 
@@ -202,7 +202,7 @@ function bundleSass() {
  */
 gulp.task('generateLogoJson', function() {
   var logo_root = path.join(__dirname, 'public', 'img', 'logos');
-  var outfile = path.join(__dirname, 'public', 'js', 'src', 'lib', 'logoInfo.json');
+  var outfile = path.join(__dirname, 'src', 'js', 'lib', 'logoInfo.json');
   var ratioRegex = /width="(\d+(?:\.\d+)?)px"\s+height="(\d+(?:\.\d+)?)px"/;
   var logoNames = {
     'dfp.svg': 'Detroit Free Press',

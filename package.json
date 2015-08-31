@@ -38,6 +38,7 @@
     "moment": "^2.10.6",
     "node-neat": "^1.7.2",
     "object-assign": "^4.0.1",
+    "passport": "^0.3.0",
     "pkgify": "^1.0.3",
     "plumber": "^0.4.8",
     "react": "^0.13.3",
