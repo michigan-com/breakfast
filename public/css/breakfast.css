@@ -245,6 +245,44 @@ body {
     .input-container .input > input {
       width: 100%; }
 
+.input-container.image-url-background input {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 57.35098%;
+  margin-right: 0;
+  border: 0;
+  border-bottom: 1px solid grey;
+  font-size: inherit;
+  line-height: inherit;
+  outline: none; }
+  .input-container.image-url-background input:last-child {
+    margin-right: 0; }
+
+.input-container.image-url-background .get-image-url {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 40.29137%;
+  text-align: center;
+  color: #40912F;
+  border: 1px solid #40912F;
+  cursor: pointer;
+  transition: background 250ms ease-in;
+  -o-transition: background 250ms ease-in;
+  -moz-transition: background 250ms ease-in;
+  -webkit-transition: background 250ms ease-in;
+  transition: color 250ms ease-in;
+  -o-transition: color 250ms ease-in;
+  -moz-transition: color 250ms ease-in;
+  -webkit-transition: color 250ms ease-in;
+  margin-left: 0; }
+  .input-container.image-url-background .get-image-url:last-child {
+    margin-right: 0; }
+  .input-container.image-url-background .get-image-url.active, .input-container.image-url-background .get-image-url:hover {
+    background: #40912F;
+    color: white; }
+
 .picker {
   display: inline-block;
   width: 100%;

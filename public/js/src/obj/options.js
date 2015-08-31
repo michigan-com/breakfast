@@ -206,6 +206,13 @@ export default class Controls extends React.Component {
                   this.getFileFromInput.bind(this, 'image-upload') )} />
           </span>
         </div>
+        <div className='input-container image-url-background'>
+          <span className='label'>Link</span>
+          <span className='input'>
+            <input type='text' id='image-url' ref='image-url'/>
+            <span className='get-image-url'>Load</span>
+          </span>
+        </div>
       </div>
     )
   }

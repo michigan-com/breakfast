@@ -254,6 +254,26 @@ body {
       width: 100%;
     }
   }
+
+}
+
+.input-container.image-url-background {
+
+  input {
+    @include span-columns(7);
+    margin-right: 0;
+    border: 0;
+    border-bottom: 1px solid grey;
+    font-size: inherit;
+    line-height: inherit;
+    outline: none;
+  }
+
+  .get-image-url {
+    @include span-columns(5);
+    @include button($primary-color);
+    margin-left: 0;
+  }
 }
 
 .picker {
