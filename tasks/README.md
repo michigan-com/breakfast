@@ -2,6 +2,8 @@
 
 Moudlarized gulp tasks which makes for a cleaner root gulpfile
 
+Inspired by [this Medium post](https://medium.com/@_rywar/spreading-gulp-tasks-into-multiple-files-2f63d8c959d5)
+
 ## Tasks described
 
 ### `./build``
