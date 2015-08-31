@@ -7,7 +7,7 @@ var neat = require('node-neat');
 
 var cssSrc = './src/scss/';
 var cssDist = './public/css/';
-var cssFiles = cssSrc + '**/*.scss';
+var sassFiles = cssSrc + '**/*.scss';
 
 /**
  * Gulp task
@@ -28,7 +28,7 @@ function bundleSass() {
   var paths = ['./node_modules/'];
   paths = paths.concat(neat.includePaths);
 
-  return gulp.src(cssFiles)
+  return gulp.src(sassFiles)
     .pipe(plumber(gutil.log))
     .pipe(sass({ includePaths: paths }))
     .pipe(gulp.dest(cssDist))
@@ -39,7 +39,7 @@ function bundleSass() {
 
 function watchFunction() {
   gutil.log('Watching scss files ...');
-  gulp.watch('./src/scss/**/*.scss', function() {
+  gulp.watch(sassFiles, function() {
     return bundleSass();
   });
 }
@@ -47,7 +47,7 @@ function watchFunction() {
 module.exports = {
   cssSrc: cssSrc,
   cssDist: cssDist,
-  cssFiles: cssFiles,
+  sassFiles: sassFiles,
 
   bundleSass: bundleSass,
   watchFunction: watchFunction

@@ -18,6 +18,7 @@ var browserifyShim = require('browserify-shim');
 var jsSrc = './src/js/';
 var jsDist = './public/js/';
 var jsBundle = ['breakfast.js'];
+var jsFiles = jsSrc + '**/*.js';
 
 /**
  * Gulp task
@@ -85,18 +86,17 @@ function bundleJs(file) {
  * them on save
  */
 function watchFunction() {
-  each(jsBundle, function(fname) {
-    gutil.log('Watching ' + fname + ' ...');
-    var filePath = jsSrc + fname;
-    gulp.watch(filePath, function() {
-      return gulp.src(filePath)
-        .pipe(plumber(gutil.log))
-        .pipe(tap(bundleJs))
-        .pipe(gulp.dest(jsDist))
-        .on('end', function() {
-          gutil.log('Browserify finished creating: ' + filePath);
-        });
-    });
+
+  gutil.log('Watching ' + jsFiles);
+  gulp.watch(jsFiles, function() {
+    var filePath = jsSrc + jsBundle[0];
+    return gulp.src(filePath)
+      .pipe(plumber(gutil.log))
+      .pipe(tap(bundleJs))
+      .pipe(gulp.dest(jsDist))
+      .on('end', function() {
+        gutil.log('Browserify finished creating: ' + filePath);
+      });
   });
 }
 

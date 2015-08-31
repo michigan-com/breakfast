@@ -40,7 +40,7 @@ function babelBundle() {
  */
 function watchFunction() {
   gutil.log('Watching node modules ...');
-  gulp.watch('./src/server/**/*.js', ['babel']);
+  gulp.watch(src, ['babel']);
 }
 
 module.exports = {
