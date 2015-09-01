@@ -8,10 +8,17 @@ if (!DB_URI) {
 
 var sequelize = new Sequelize(DB_URI, {});
 
-module.exports = {
-  models: {
-    User: sequelize.define('user', User)
-  },
+// Make the models
+var UserModel = sequelize.define('user', User);
 
+module.exports = {
+  // Models
+  User: UserModel,
+
+  models: [
+    UserModel
+  ],
+
+  // DB instance
   db: sequelize
 }

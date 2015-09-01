@@ -28,11 +28,24 @@ gulp.task('db-create', function() {
 });
 
 function createTables() {
-  exec('psql -f ' + createTablesPath + ' -d breakfast', function(err, stdout, stderr) {
-    if (err) throw new Error(err);
+  var db = require('../../dist/db/db');
 
-    console.log(stdout);
-    console.log(stderr);
+  var models = db.models;
 
-  });
+  for (var i = 0; i < models.length; i++) {
+    var model= models[i];
+
+    model.sync({ force: true} );
+  }
 }
+
+gulp.task('db-add-defaults', function() {
+  var db = require('../../dist/db/db');
+
+  var User = db.User;
+
+  User.create({
+    email: 'test@test.com',
+    password: 'test'
+  });
+});
