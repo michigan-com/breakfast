@@ -13,7 +13,13 @@ passport.use(new LocalStrategy({
 },
   function(email, password, done) {
     console.log(`Looking up ${email}`);
-    User.find({ email }).then(function(user) {
+    User.find({
+      where: {
+        email: {
+          $eq: email
+        }
+      }
+    }).then(function(user) {
       if (!user || !user.passwordMatch(password)) {
         console.log(`Login failed`);
         return done(null, false);
