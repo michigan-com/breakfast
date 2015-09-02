@@ -10,25 +10,23 @@ import { loginRequired } from '../middleware/login';
 let router = new Router();
 passport.use(new LocalStrategy({
     usernameField: 'email'
-},
-  function(email, password, done) {
-    console.log(`Looking up ${email}`);
-    User.find({
+  },
+  // this is the function that gets called when a user logs in via posting
+  //  to the /login/ url
+  async function(email, password, done) {
+    let user = await User.find({
       where: {
         email: {
           $eq: email
         }
       }
-    }).then(function(user) {
-      if (!user || !user.passwordMatch(password)) {
-        console.log(`Login failed`);
-        return done(null, false);
-      }
-
-      console.log(`Login success`);
-
-      return done(null, user);
     });
+
+    if (!user || !user.passwordMatch(password)) {
+      return done(null, false);
+    }
+
+    return done(null, user);
   }
 ));
 
