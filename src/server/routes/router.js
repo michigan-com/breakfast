@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+
 import logoFetch from './logoFetch';
 import login from './login';
-
 import { User } from '../db/db';
+import { loginRequired } from '../middleware/login';
 
 let router = new Router();
 passport.use(new LocalStrategy({
@@ -47,14 +48,8 @@ router.get('/', function(req, res) {
 });
 
 router.get('/breakfast/',
+  loginRequired,
   function(req, res) {
-    if (!req.user) {
-      req.flash('error', 'You need to login');
-      res.redirect('/login/');
-      return;
-    }
-    console.log('BREAKFAST TIME');
-    console.log(req.user);
     res.render('breakfast');
   }
 );
