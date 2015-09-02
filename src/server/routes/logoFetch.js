@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+
+import { loginRequired } from '../middleware/login';
 import { PACKAGE_DIR } from '../constants';
 
 var LOGO_ROOT = path.join(PACKAGE_DIR, 'public', 'img', 'logos');
@@ -85,8 +87,8 @@ class LogoFetch {
 function registerRoutes(router, passport) {
   let logoFetch = new LogoFetch();
 
-  router.get('/logos/:color/:filename', handleGetLogo);
-  router.get('/logos/:filename', handleGetLogo);
+  router.get('/logos/:color/:filename', loginRequired, handleGetLogo);
+  router.get('/logos/:filename', loginRequired, handleGetLogo);
 
   function handleGetLogo(req, res, next) {
     return getLogo(req, res, next).catch(function(err) {
