@@ -1,12 +1,46 @@
-import Crypto from 'crypto';
+import crypto from 'crypto';
 
 import Sequelize from 'sequelize';
 
-let UserObj = {
+/**
+ * Given a password string, sha256 hash it
+ *
+ * @param {String} password - Password to hash
+ */
+function hash(pwd) {
+  let sha = crypto.createHash('sha256');
+  sha.update(pwd);
+
+  let hashed = sha.digest('hex');
+  console.log(hashed);
+
+  return hashed;
+}
+
+// Columns, etc
+let attributes = {
   email: { type: Sequelize.STRING },
-  password: { type: Sequelize.STRING },
+  password: {
+    type: Sequelize.STRING,
+    set: function(password) {
+      this.setDataValue('password', hash(password));
+    }
+  },
   admin: { type: Sequelize.BOOLEAN, defaultValue: false },
   createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
 };
 
-module.exports = UserObj;
+// Class Methods
+let instanceMethods = {
+  passwordMatch: function(password) {
+    return this.password === hash(password);
+  }
+
+}
+
+module.exports = {
+  attributes,
+  methods: {
+    instanceMethods
+  }
+};

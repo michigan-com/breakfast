@@ -10,13 +10,9 @@ passport.use(new LocalStrategy({
 },
   function(email, password, done) {
     User.find({ email }).then(function(user) {
-      if (!user) {
-        console.log(`User ${email} not found`);
+      if (!user || !user.passwordMatch(password)) {
         return done(null, false);
       }
-
-      // TODO validate password
-      console.log(`User ${email} found}`);
 
       return done(null, user);
     });

@@ -9,7 +9,7 @@ if (!DB_URI) {
 var sequelize = new Sequelize(DB_URI, {});
 
 // Make the models
-var UserModel = sequelize.define('user', User);
+var UserModel = sequelize.define('user', User.attributes, User.methods);
 
 module.exports = {
   // Models
