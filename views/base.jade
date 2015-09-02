@@ -6,6 +6,10 @@ head
 
   block css
 body
+  block messages
+    if messages
+      for message in messages
+        li #{message}
   block content
 
   block js

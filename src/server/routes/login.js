@@ -1,54 +1,34 @@
 import passport from 'passport';
-import LocalStrategy from 'passport-local';
 import csrf from 'csurf';
 
-import { User } from '../db/db';
-
 let csrfProtection = csrf({ cookie: true});
-passport.use(new LocalStrategy({
-    usernameField: 'email'
-},
-  function(email, password, done) {
-    User.find({ email }).then(function(user) {
-      if (!user || !user.passwordMatch(password)) {
-        return done(null, false);
-      }
 
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  // TODO make this better somehow
-  return done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id).then(function(user) {
-    // user will be null if the id isn't found, might want to
-    // revisit this
-    done(null, user);
-  });
-});
-
-function registerRoutes(router) {
+function registerRoutes(router, passport) {
 
   /** Login Routes */
 
   // Render the login page
   router.get('/login/', csrfProtection, (req, res) => {
+
+    // If the user is already logged in, redirect to breakfast
+    if (req.user) {
+      res.redirect('/breakfast/');
+      return;
+    }
+
     res.render('login', {
-      csrfToken: req.csrfToken()
+      csrfToken: req.csrfToken(),
+      messages: req.flash('error')
     });
   });
 
   // Handle the login response
   router.post('/login/', passport.authenticate('local', {
-    successRedirect: '/breakfast/',
     failureRedirect: '/login/',
-    failureFlash: true
-  }));
+    failureFlash: 'Login failure'
+  }), function(req, res) {
+    return res.redirect('/breakfast/');
+  });
 }
 
 module.exports = {

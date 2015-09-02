@@ -82,7 +82,7 @@ class LogoFetch {
  *
  * @param {Object} router - express.Router() instance
  */
-function registerRoutes(router) {
+function registerRoutes(router, passport) {
   let logoFetch = new LogoFetch();
 
   router.get('/logos/:color/:filename', handleGetLogo);
