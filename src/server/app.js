@@ -6,9 +6,10 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import csrf from 'csurf';
+import passport from 'passport';
 
-import LogoFetch from './logoFetch.js';
-let logoFetch = new LogoFetch();
+import router from './routes/router';
 
 var app = express();
 var BASE_DIR = path.dirname(__dirname);
@@ -21,32 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(BASE_DIR, 'public')));
+app.use(csrf({ cookie: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/', function(req, res) {
-  res.render('index')
-});
-
-app.get('/logos/:color/:filename', handleGetLogo);
-app.get('/logos/:filename', handleGetLogo);
-
-function handleGetLogo(req, res, next) {
-  return getLogo(req, res, next).catch(function(err) {
-    next(err);
-  });
-}
-
-async function getLogo(req, res, next) {
-  let color = 'color' in req.params ? req.params.color : undefined;
-  let filename = req.params.filename;
-
-  let data = await logoFetch.getLogo(filename, color);
-
-  res.set({
-    'Accept-Ranges': 'bytes',
-    'Cache-Control': 'public, max-age=0',
-    'Content-Type': 'image/svg+xml',
-    'Content-Length': data.length
-  }).send(data);
-}
+// Register the routes
+app.use('/', router);
 
 module.exports = app;

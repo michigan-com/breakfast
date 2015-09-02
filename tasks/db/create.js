@@ -2,17 +2,22 @@ var exec = require('child_process').exec;
 var path = require('path');
 
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 var DB_PATH = path.resolve('src', 'server', 'db');
 var createDbPath = path.resolve(DB_PATH, 'create_db.sh');
 var createTablesPath = path.resolve(DB_PATH, 'create_tables.sql');
+
+gulp.task('db-init', function() {
+  runSequence('db-create', 'db-table-create', 'db-add-defaults');
+});
 
 /**
  * Create the database (that was easier than expected)
  *
  * @memberof db/create.js
  */
-gulp.task('db-create', function() {
+gulp.task('db-create', function(done) {
 
   exec(createDbPath, function(err, stdout, stderr) {
     if (err) {
@@ -23,11 +28,14 @@ gulp.task('db-create', function() {
       }
     }
 
-    createTables();
+    done();
   });
 });
 
-function createTables() {
+/**
+ * Create database tables from the models defined in DB
+ */
+gulp.task('db-table-create', function(done) {
   var db = require('../../dist/db/db');
 
   var models = db.models;
@@ -37,8 +45,11 @@ function createTables() {
 
     model.sync({ force: true} );
   }
-}
+});
 
+/**
+ * Add default users
+ */
 gulp.task('db-add-defaults', function() {
   var db = require('../../dist/db/db');
 

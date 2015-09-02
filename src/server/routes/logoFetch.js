@@ -1,13 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { PACKAGE_DIR } from './constants';
+import { PACKAGE_DIR } from '../constants';
 
 var LOGO_ROOT = path.join(PACKAGE_DIR, 'public', 'img', 'logos');
 
-export default class LogoFetch {
+class LogoFetch {
   constructor() {
     this.colorRegex = /<path fill="#[a-fA-F0-9]+"/g;
   }
+
 
   /**
    * Get the logo based on the filename. Can specify an optional color that
@@ -72,4 +73,42 @@ export default class LogoFetch {
       });
     });
   }
+}
+
+
+/**
+ * Register the routes for LogoFetch. Registers URLs for getting
+ * default logos, and for URLs to color the logos
+ *
+ * @param {Object} router - express.Router() instance
+ */
+function registerRoutes(router) {
+  let logoFetch = new LogoFetch();
+
+  router.get('/logos/:color/:filename', handleGetLogo);
+  router.get('/logos/:filename', handleGetLogo);
+
+  function handleGetLogo(req, res, next) {
+    return getLogo(req, res, next).catch(function(err) {
+      next(err);
+    });
+  }
+
+  async function getLogo(req, res, next) {
+    let color = 'color' in req.params ? req.params.color : undefined;
+    let filename = req.params.filename;
+
+    let data = await logoFetch.getLogo(filename, color);
+
+    res.set({
+      'Accept-Ranges': 'bytes',
+      'Cache-Control': 'public, max-age=0',
+      'Content-Type': 'image/svg+xml',
+      'Content-Length': data.length
+    }).send(data);
+  }
+}
+
+module.exports = {
+  registerRoutes
 }
