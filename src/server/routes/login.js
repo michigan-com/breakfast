@@ -2,7 +2,14 @@ import csrf from 'csurf';
 
 let csrfProtection = csrf({ cookie: true});
 
-function registerRoutes(router, passport) {
+/**
+ * Register the login urls
+ *
+ * @param {Object} app - Express object. Use to get DB connection as needed
+ * @param {Object} router - express.Router() instance
+ * @param {Object} passport - Passport instance
+ */
+function registerRoutes(app, router, passport) {
 
   /** Login Routes */
 

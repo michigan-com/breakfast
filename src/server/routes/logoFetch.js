@@ -84,9 +84,11 @@ class LogoFetch {
  * Register the routes for LogoFetch. Registers URLs for getting
  * default logos, and for URLs to color the logos
  *
+ * @param {Object} app - Express object. Use to get DB connection as needed
  * @param {Object} router - express.Router() instance
+ * @param {Object} passport - Passport instance
  */
-function registerRoutes(router, passport) {
+function registerRoutes(app, router, passport) {
   let logoFetch = new LogoFetch();
 
   router.get('/logos/:color/:filename', loginRequired, handleGetLogo);

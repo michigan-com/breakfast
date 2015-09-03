@@ -10,15 +10,16 @@ let app = createApp(process.env.TEST_DB_URI, false);
 let db = app.get('db');
 let agent = request.agent(app);
 
-let userEmail = 'testemail@testemail.com';
-let userPassword = 'test';
+let defaultEmail = 'testemail@testemail.com';
+let defaultPassword = 'test';
 
 describe('Route testing', function() {
+  // TODO abstract this
   before(async function(done) {
     createTables(db, function() {
       db.User.create({
-        email: userEmail,
-        password: userPassword
+        email: defaultEmail,
+        password: defaultPassword
       }).then(function() {
         done();
       });
@@ -57,8 +58,8 @@ describe('Route testing', function() {
     agent
       .post('/login/')
       .send({
-        email: userEmail,
-        password: userPassword
+        email: defaultEmail,
+        password: defaultPassword
       })
       .expect('Location', '/breakfast/')
       .end(done);
