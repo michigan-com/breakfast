@@ -19,14 +19,16 @@ function hash(pwd) {
 
 // Columns, etc
 let attributes = {
-  email: { type: Sequelize.STRING },
+  email: { type: Sequelize.STRING, allowNull: false, unique: true },
   password: {
     type: Sequelize.STRING,
     set: function(password) {
       this.setDataValue('password', hash(password));
-    }
+    },
+    allowNull: false
   },
   admin: { type: Sequelize.BOOLEAN, defaultValue: false },
+  registered: { type: Sequelize.BOOLEAN, defaultValue: false },
   createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
 };
 
@@ -35,7 +37,6 @@ let instanceMethods = {
   passwordMatch: function(password) {
     return this.password === hash(password);
   }
-
 }
 
 module.exports = {

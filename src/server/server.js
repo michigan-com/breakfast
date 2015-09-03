@@ -1,7 +1,8 @@
 'use strict';
-import app from './app';
+import { createApp } from './app';
 import winston from 'winston';
 
+var app = createApp();
 var port = normalizePort(process.env.NODE_PORT || '3000');
 app.set('port', port);
 

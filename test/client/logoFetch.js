@@ -1,7 +1,11 @@
-import LogoFetch from '../src/logoFetch';
+import path from 'path';
+
+import '../../dist/env';
+import dir from '../../dist/util/dir';
+import { LogoFetch } from '../../src/server/routes/logoFetch';
 import { ok, equal, notEqual } from 'assert';
 
-let logoFetch = new LogoFetch();
+let logoFetch = new LogoFetch(dir('logos'));
 let logoFiles;
 
 describe('Testing logo fetching', function() {

@@ -1,13 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
+import env from '../env';
 import { loginRequired } from '../middleware/login';
-import { PACKAGE_DIR } from '../constants';
+import dir from '../util/dir';
 
-var LOGO_ROOT = path.join(PACKAGE_DIR, 'public', 'img', 'logos');
+var LOGO_ROOT = dir('logos');
 
 class LogoFetch {
-  constructor() {
+  constructor(logoRoot=LOGO_ROOT) {
+    this.logoRoot = logoRoot;
     this.colorRegex = /<path fill="#[a-fA-F0-9]+"/g;
   }
 
@@ -30,7 +32,7 @@ class LogoFetch {
 
     if (this.logos.indexOf(filename) < 0) return null;
 
-    let data = await this.readFile_(path.join(LOGO_ROOT, filename));
+    let data = await this.readFile_(path.join(this.logoRoot, filename));
 
     if (color) {
       data = this.colorLogo(data, color);
@@ -40,7 +42,7 @@ class LogoFetch {
   }
 
   async getAllLogos() {
-    let files = await this.getAllLogos_();
+    let files = await this.getAllLogos_(this.logoRoot);
     return files;
   }
 
@@ -52,9 +54,9 @@ class LogoFetch {
   /**
    * Promise-based reading of the files in the logo directory
    */
-  getAllLogos_() {
+  getAllLogos_(folder) {
     return new Promise(function(resolve, reject) {
-      fs.readdir(LOGO_ROOT, function(err, files) {
+      fs.readdir(folder, function(err, files) {
         if (err) reject(err);
 
         resolve(files);
@@ -112,5 +114,6 @@ function registerRoutes(router, passport) {
 }
 
 module.exports = {
-  registerRoutes
+  registerRoutes,
+  LogoFetch
 }
