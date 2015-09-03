@@ -1,27 +1,79 @@
+import { equal, notEqual } from 'assert';
+
 import request from 'supertest';
 
-import { createApp } from '../../src/server/app';
+import { createApp } from '../../dist/app';
 import { createTables } from '../../tasks/db/create';
 import { dropTables } from '../../tasks/db/drop';
 
-let app = createApp(process.env.TEST_DB_URI);
+let app = createApp(process.env.TEST_DB_URI, false);
+let db = app.get('db');
 let agent = request.agent(app);
 
+let userEmail = 'testemail@testemail.com';
+let userPassword = 'test';
+
 describe('Route testing', function() {
-  before(function(done) {
-    createTables(app.get('db'), done);
+  before(async function(done) {
+    createTables(db, function() {
+      db.User.create({
+        email: userEmail,
+        password: userPassword
+      }).then(function() {
+        done();
+      });
+    });
   });
 
   after(function(done) {
     dropTables(app.get('db'), done);
-  })
+  });
 
   it('Test to make sure you have to be logged in for /breakfast/ url', function(done) {
-
     agent
       .get('/breakfast/')
       .expect('Location', '/login/')
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 302);
+        done();
+      });
+  });
+
+  it('Tests an unsuccessful login', function(done) {
+    agent
+      .post('/login')
+      .send({
+        email: 'inavlid email',
+        password: 'asdfasdfasdf'
+      })
+      .expect('Location', '/login/')
+      .end(done);
+
+  })
+
+  it('Tests a successful login', function(done) {
+    agent
+      .post('/login/')
+      .send({
+        email: userEmail,
+        password: userPassword
+      })
+      .expect('Location', '/breakfast/')
       .end(done);
   });
+
+  it('Tests going to /breakfast/ after a login', function(done) {
+    // NOTE: Expected login in the previous test
+    agent
+      .get('/breakfast/')
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 200, 'Should have directed to the /breakfast/ page fine');
+        done();
+      });
+  })
 
 });

@@ -22,6 +22,7 @@ function registerRoutes(app) {
   ));
 
   async function loginCheck(email, password, done) {
+    console.log(`loggin in ${email}: ${password}`)
     let user = await User.find({
       where: {
         email: {

@@ -12,6 +12,8 @@ import flash from 'connect-flash';
 import session from 'express-session';
 
 import router from './routes/router';
+import './env';
+import dir from './util/dir';
 import { connectDb } from './db';
 
 /**
@@ -20,11 +22,11 @@ import { connectDb } from './db';
  *
  * @param {String} dbString - Connection string for DB
  */
-function createApp(dbString=process.env.DB_URI) {
+function createApp(dbString=process.env.DB_URI, enableCsrf=true) {
   var app = express();
   var BASE_DIR = path.dirname(__dirname);
 
-  app.set('views', path.join(BASE_DIR, 'views'));
+  app.set('views', dir('views'));
   app.set('view engine', 'jade');
 
   //app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
@@ -37,7 +39,7 @@ function createApp(dbString=process.env.DB_URI) {
     resave: false,
     saveUninitialized: false
   }));
-  app.use(csrf({ cookie: true }));
+  if (enableCsrf) app.use(csrf({ cookie: true }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());

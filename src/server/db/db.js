@@ -5,7 +5,9 @@ function connectDb(dbString) {
   if (!dbString) {
     throw new Error('No dbString specified. Please define this enviroment variable to connect to your desired database');
   }
-  var sequelize = new Sequelize(dbString, {});
+  var sequelize = new Sequelize(dbString, {
+    logging: function() {}
+  });
 
   // Make the models
   var UserModel = sequelize.define('user', User.attributes, User.methods);

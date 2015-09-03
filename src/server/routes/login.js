@@ -1,4 +1,3 @@
-import passport from 'passport';
 import csrf from 'csurf';
 
 let csrfProtection = csrf({ cookie: true});
@@ -23,7 +22,11 @@ function registerRoutes(router, passport) {
   });
 
   // Handle the login response
-  router.post('/login/', passport.authenticate('local', {
+  router.post('/login/',
+  function(req, res, next) {
+    console.log(req.body);
+    next();
+  }, passport.authenticate('local', {
     failureRedirect: '/login/',
     failureFlash: 'Login failure'
   }), function(req, res) {
