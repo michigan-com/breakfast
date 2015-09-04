@@ -3,6 +3,7 @@ import csrf from 'csurf';
 import uuid from '../util/uuid';
 import { csrfProtection } from '../util/csrf';
 import { Field } from '../util/form';
+import { isValidEmail } from '../util/email';
 
 
 /**
@@ -40,12 +41,22 @@ function registerRoutes(app, router, passport) {
     async function handleRegister(req, res) {
       let email = req.body.email;
 
+      if (!isValidEmail(email)) {
+        res.status(422).send({
+          error: {
+            email: 'Invalid email'
+          }
+        });
+        return;
+      }
+
       // First, make sure this user doesn't already exist
       let user = await User.findOne({
         where: {
           email
         }
       });
+
       if (user) {
         res.render('register/error', {
           error: `User ${email} already exists`

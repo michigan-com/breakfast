@@ -11,10 +11,10 @@ let db = app.get('db');
 let Invite = db.Invite;
 let agent = request.agent(app);
 
-let testEmail = 'test@test.com';
+let testEmail = 'test@michigan.com';
 let testPassword = 'test';
 
-let defaultEmail = 'testemail@testemail.com';
+let defaultEmail = 'testemail@michigan.com';
 let defaultPassword = 'test';
 
 describe('Registration testing', function() {
@@ -44,6 +44,21 @@ describe('Registration testing', function() {
         done();
       });
   });
+
+  it('Tests registering with an invalid email', function(done) {
+    agent
+      .post('/register/')
+      .send({
+        email: 'asdfasdf'
+      })
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 422, 'Status should be 422');
+        equal('email' in res.body.error, true, 'Should have email error in response body');
+        done();
+      });
+  })
 
   it('Tests registering with an already-existing user', function(done) {
     agent
