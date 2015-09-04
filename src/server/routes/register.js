@@ -1,6 +1,7 @@
 import csrf from 'csurf';
 
 import uuid from '../util/uuid';
+import { Field } from '../util/form';
 
 let csrfProtection = csrf({ cookie: true});
 
@@ -70,27 +71,44 @@ function registerRoutes(app, router, passport) {
     })
   });
 
-  router.get('/register/:token/', csrfProtection, async function(req, res) {
-    let token = req.params.token;
+  router.get('/register/:token/', csrfProtection, function(req, res, next) {
+    async function registerEmail() {
+      let token = req.params.token;
 
-    let invite = await Invite.find({
-      where: {
-        token
+      let invite = await Invite.find({
+        where: {
+          token
+        }
+      });
+
+      if (!invite) {
+        res.status(404).end();
       }
-    });
 
-    if (!invite) {
-      res.status(404).end();
+      // Generate form fields
+      let csrf = new Field({ type: 'hidden', name: '_csrf', value: req.csrfToken() });
+      let tokenField = new Field({ type: 'hidden', name: 'token', value: token });
+      let email = new Field({ name: 'email', value: invite.email });
+      let password = new Field({ type: 'password', name: 'password' });
+      let passwordConfirm = new Field({ type: 'password', name: 'passwordConfirm', label: 'Confirm password' });
+
+      res.render('register/createUser', {
+        fields: [ csrf, tokenField, email, password, passwordConfirm ]
+      });
     }
 
-    res.render('register/createUser', {
-      email: invite.email,
-      csrfToken: req.csrfToken()
+    registerEmail().catch(function(err) {
+      next(err);
     });
   });
 
-  router.post('/create-user/', function(req, res) {
-    console.log(req.body);
+  router.post('/create-user/', csrfProtection, function(req, res) {
+    let email = req.body.email;
+    let token = req.body.token;
+    let password = req.body.password;
+    let confirmPassword = req.body.password;
+
+
   });
 }
 

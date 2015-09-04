@@ -1,9 +1,8 @@
 extends ../base
+include ../util/form
 
 block content
-  form(action='/create-user/', action='POST')
-    input(type='hidden', name='_csrf', value='#{ csrfToken }')
-    input(type='text', name='email', id='email', value='#{ email }')
-    input(type='password', name='password', id='password', placeholder='Password')
-    input(type='password', name='passwordConfirm', id='passwordConfirm', placeholder='Confirm Password')
+  form(action='/create-user/', method='POST')
+    for field in fields
+      +renderInput(field)
     input(type='submit')
