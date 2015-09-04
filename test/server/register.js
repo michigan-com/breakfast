@@ -90,6 +90,30 @@ describe('Registration testing', function() {
       })
   });
 
+  it('Tests registering with an already invited user', async function(done) {
+    let count = await Invite.count({ where: { email: testEmail }});
+    equal(count, 1, 'Should only be one invite');
+
+    agent
+      .post('/register/')
+      .send({
+        email: testEmail
+      })
+      .redirects()
+      .end(async function(err, res) {
+        if (err) throw new Error(err);
+
+        let expectedUrl = `/register/email-sent/${testEmail}`;
+        equal(res.status, 200, 'Should have been redirected fine');
+        equal(res.req.path, expectedUrl, `Should have been redirected to ${expectedUrl}`)
+
+        let count = await Invite.count({ where: { email: testEmail }});
+        equal(count, 1, 'Should not have created a second invite');
+
+        done();
+      })
+  });
+
   it('Tests when user tries to create an account with two different passwords', async function(done) {
     let invite = await Invite.findOne({ where: { email: testEmail }});
 
@@ -158,12 +182,17 @@ describe('Registration testing', function() {
         password: 'asdf',
         confirmPassword: 'asdf'
       })
-      .end(function(err, res) {
+      .end(async function(err, res) {
         if (err) throw new Error(err);
 
         equal(res.status, 200);
         equal(res.body.success, true, 'SHould have success: true');
         equal(res.body.user, testEmail, 'Should have included email in response');
+
+        // Make sure the invite got deleted
+        let invite = await Invite.findOne({ where: { email: testEmail }});
+        equal(!!invite, false, 'Should be no invite');
+
         done();
       });
   });

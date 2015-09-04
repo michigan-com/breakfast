@@ -75,6 +75,26 @@ describe('Route testing', function() {
         equal(res.status, 200, 'Should have directed to the /breakfast/ page fine');
         done();
       });
-  })
+  });
 
+  it('Tests the logout', function(done) {
+    agent
+      .get('/logout/')
+      .expect('Location', '/')
+      .redirects()
+      .end(function(err, res) {
+        equal(res.req.path, '/', 'Should have redirected to the index page');
+        done();
+      });
+  });
+
+  it('Test the /breakfast/ url after the logout', function(done) {
+    agent
+      .get('/breakfast/')
+      .redirects()
+      .end(function(err, res) {
+        equal(res.req.path, '/login/', 'Should have redirected to the login page');
+        done();
+      });
+  });
 });

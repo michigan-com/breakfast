@@ -32,12 +32,19 @@ function registerRoutes(app, router, passport) {
   });
 
   // Handle the login response
-  router.post('/login/',
-  passport.authenticate('local', {
-    failureRedirect: '/login/',
-    failureFlash: 'Login failure'
-  }), function(req, res) {
-    return res.redirect('/breakfast/');
+  router.post('/login/', passport.authenticate('local', {
+      failureRedirect: '/login/',
+      failureFlash: 'Login failure'
+    }),
+    function(req, res) {
+      return res.redirect('/breakfast/');
+    }
+  );
+
+  router.get('/logout', function(req, res) {
+    req.logout();
+
+    res.redirect('/');
   });
 }
 
