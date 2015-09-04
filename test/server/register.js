@@ -88,5 +88,84 @@ describe('Registration testing', function() {
           throw new Error(err);
         });
       })
-  })
+  });
+
+  it('Tests when user tries to create an account with two different passwords', async function(done) {
+    let invite = await Invite.findOne({ where: { email: testEmail }});
+
+    agent
+      .post('/create-user/')
+      .send({
+        email: testEmail,
+        token: invite.token,
+        password: 'pwd1',
+        confirmPassword: 'pwd2'
+      })
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 422, 'Should have returned a 422 error for mismatched pwds');
+        equal('errors' in res.body, true, 'Should have "errors" in response body');
+        equal('password' in res.body.errors, true, 'Should have a password error in response body');
+        done();
+      });
+  });
+
+  it('Tests when a user tries to create an account with an invalid token', async function(done) {
+    agent
+      .post('/create-user/')
+      .send({
+        email: testEmail,
+        token: 'inavlid token',
+        password: 'pwd1',
+        confirmPassword: 'pwd1'
+      })
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 422, 'Should have returned a 422 error for invalid token');
+        equal('errors' in res.body, true, 'Should have "errors" in the response body');
+        equal('token' in res.body.errors, true, 'Should have a token error in the response body');
+        done();
+      })
+  });
+
+  it('Tests when a user tries to create an account before being invited', function(done) {
+    agent
+      .post('/create-user/')
+      .send({
+        email: 'This email hasnt been invited',
+        password: 'asdf',
+        confirmPassword: 'asdf'
+      })
+      .redirects()
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.req.path, '/register/', 'Should have forwarded to the /register/ url');
+        done();
+      });
+  });
+
+  it('Tests a valid registration', async function(done) {
+    let invite = await Invite.findOne({ where: { email: testEmail }});
+
+    agent
+      .post('/create-user/')
+      .send({
+        email: testEmail,
+        token: invite.token,
+        password: 'asdf',
+        confirmPassword: 'asdf'
+      })
+      .end(function(err, res) {
+        if (err) throw new Error(err);
+
+        equal(res.status, 200);
+        equal(res.body.success, true, 'SHould have success: true');
+        equal(res.body.user, testEmail, 'Should have included email in response');
+        done();
+      });
+  });
+
 })

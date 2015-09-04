@@ -2,7 +2,7 @@
 import { createApp } from './app';
 import winston from 'winston';
 
-var app = createApp();
+var app = createApp(process.env.DB_URI, false);
 var port = normalizePort(process.env.NODE_PORT || '3000');
 app.set('port', port);
 

@@ -1,9 +1,9 @@
 import csrf from 'csurf';
 
 import uuid from '../util/uuid';
+import { csrfProtection } from '../util/csrf';
 import { Field } from '../util/form';
 
-let csrfProtection = csrf({ cookie: true});
 
 /**
  * Register the 'register' urls
@@ -18,9 +18,13 @@ function registerRoutes(app, router, passport) {
   let User = db.User;
 
   // Render the login form
-  router.get('/register/', csrfProtection, function(req, res) {
+  router.get('/register/', csrfProtection(app), function(req, res) {
+    // TODO abstract this into forms somehow
+    let csrfToken;
+    if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
+
     res.render('register/register', {
-      csrfToken: req.csrfToken()
+      csrfToken
     });
   });
 
@@ -71,9 +75,11 @@ function registerRoutes(app, router, passport) {
     })
   });
 
-  router.get('/register/:token/', csrfProtection, function(req, res, next) {
-    async function registerEmail() {
+  router.get('/register/:token/', csrfProtection(app), function(req, res, next) {
+    async function registerEmail(req, res, next) {
       let token = req.params.token;
+      let csrfToken;
+      if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
 
       let invite = await Invite.find({
         where: {
@@ -86,29 +92,81 @@ function registerRoutes(app, router, passport) {
       }
 
       // Generate form fields
-      let csrf = new Field({ type: 'hidden', name: '_csrf', value: req.csrfToken() });
+      let csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
       let tokenField = new Field({ type: 'hidden', name: 'token', value: token });
       let email = new Field({ name: 'email', value: invite.email });
       let password = new Field({ type: 'password', name: 'password' });
-      let passwordConfirm = new Field({ type: 'password', name: 'passwordConfirm', label: 'Confirm password' });
+      let confirmPassword = new Field({ type: 'password', name: 'confirmPassword', label: 'Confirm password' });
 
       res.render('register/createUser', {
-        fields: [ csrf, tokenField, email, password, passwordConfirm ]
+        fields: [ csrf, tokenField, email, password, confirmPassword ]
       });
     }
 
-    registerEmail().catch(function(err) {
+    registerEmail(req, res, next).catch(function(err) {
       next(err);
     });
   });
 
-  router.post('/create-user/', csrfProtection, function(req, res) {
-    let email = req.body.email;
-    let token = req.body.token;
-    let password = req.body.password;
-    let confirmPassword = req.body.password;
+  router.post('/create-user/', csrfProtection(app), function(req, res, next) {
+    async function createUser(req, res, next) {
+      let email = req.body.email;
+      let token = req.body.token;
+      let password = req.body.password;
+      let confirmPassword = req.body.confirmPassword;
 
+      // Parse the invite stuff first
+      let invite = await Invite.find({
+        where: {
+          email
+        }
+      });
 
+      if (!invite) {
+        // This email hasn't been invited yet. Forward them to the invite page
+        req.flash('error', 'Please register your email before creating an account');
+        res.redirect('/register/');
+        return;
+      }
+
+      if (invite.token !== token) {
+        res.status(422).send({
+          errors: {
+            token: ['Invalid token']
+          }
+        });
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        res.status(422).send({
+          errors: {
+            password: ['Passwords don\'t match']
+          }
+        });
+        return;
+      }
+
+      let user = await User.create({
+        email,
+        password
+      });
+
+      // delete the invite
+      await invite.destroy();
+
+      // Force the login and send a success message
+      passport.authenticate('local')(req, res, function() {
+        res.status(200).send({
+          success: true,
+          user: req.user.email
+        });
+      });
+    }
+
+    createUser(req, res, next).catch(function(err) {
+      next(err);
+    });
   });
 }
 

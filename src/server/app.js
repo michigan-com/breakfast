@@ -28,6 +28,7 @@ function createApp(dbString=process.env.DB_URI, enableCsrf=true) {
 
   app.set('views', dir('views'));
   app.set('view engine', 'jade');
+  app.set('use csrf', enableCsrf);
 
   //app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
   app.use(bodyParser.json());
@@ -39,7 +40,9 @@ function createApp(dbString=process.env.DB_URI, enableCsrf=true) {
     resave: false,
     saveUninitialized: false
   }));
-  if (enableCsrf) app.use(csrf({ cookie: true }));
+  if (enableCsrf) {
+    app.use(csrf({ cookie: true }));
+  }
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());

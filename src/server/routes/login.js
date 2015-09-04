@@ -1,6 +1,6 @@
 import csrf from 'csurf';
 
-let csrfProtection = csrf({ cookie: true});
+import { csrfProtection } from '../util/csrf';
 
 /**
  * Register the login urls
@@ -14,7 +14,7 @@ function registerRoutes(app, router, passport) {
   /** Login Routes */
 
   // Render the login page
-  router.get('/login/', csrfProtection, (req, res) => {
+  router.get('/login/', csrfProtection(app), (req, res) => {
 
     // If the user is already logged in, redirect to breakfast
     if (req.user) {
@@ -22,18 +22,18 @@ function registerRoutes(app, router, passport) {
       return;
     }
 
+    let csrfToken;
+    if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
+
     res.render('login', {
-      csrfToken: req.csrfToken(),
+      csrfToken,
       messages: req.flash('error')
     });
   });
 
   // Handle the login response
   router.post('/login/',
-  function(req, res, next) {
-    console.log(req.body);
-    next();
-  }, passport.authenticate('local', {
+  passport.authenticate('local', {
     failureRedirect: '/login/',
     failureFlash: 'Login failure'
   }), function(req, res) {
