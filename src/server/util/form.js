@@ -26,7 +26,7 @@ class Field {
       label: opts.name,
       value: '',
       placeholder: opts.name,
-      classes: []
+      classes: [opts.name]
     };
 
     this.options = assign({}, defaultOptions, opts);

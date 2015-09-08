@@ -3,7 +3,7 @@ import csrf from 'csurf';
 import uuid from '../util/uuid';
 import { csrfProtection } from '../util/csrf';
 import { Field } from '../util/form';
-import { isValidEmail } from '../util/email';
+import { isValidEmail, validEmailDomains } from '../util/email';
 
 
 /**
@@ -24,8 +24,14 @@ function registerRoutes(app, router, passport) {
     let csrfToken;
     if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
 
+    // Create the fields
+    let csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
+    let username = new Field({ name: 'username', value: ''});
+
     res.render('register/register', {
-      csrfToken
+      csrfToken,
+      fields: [ csrf, username ],
+      validEmailDomains
     });
   });
 
@@ -58,8 +64,10 @@ function registerRoutes(app, router, passport) {
       });
 
       if (user) {
-        res.render('register/error', {
-          error: `User ${email} already exists`
+        res.status(422).send({
+          error: {
+            username: 'Username already exists'
+          }
         });
         return;
       }
@@ -78,6 +86,9 @@ function registerRoutes(app, router, passport) {
         });
       }
 
+      res.status(200).send({
+        success: true
+      });
       res.redirect(`/register/email-sent/${email}`);
     }
 

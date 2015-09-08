@@ -15,9 +15,9 @@ var source = require('vinyl-source-stream');
 var each = require('lodash/collection/forEach');
 var browserifyShim = require('browserify-shim');
 
-var jsSrc = './src/js/';
+var jsSrc = './src/client/';
 var jsDist = './public/js/';
-var jsBundle = ['breakfast.js'];
+var jsBundle = ['breakfast/breakfast.js', 'register.js'];
 var jsFiles = jsSrc + '**/*.js';
 
 /**

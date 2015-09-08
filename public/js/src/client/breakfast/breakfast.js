@@ -46383,4 +46383,4 @@ module.exports = OptionStore;
 },{"../dispatcher":272,"../lib/constants":273,"../lib/logoInfo.json":274,"babel-runtime/helpers/interop-require-default":9,"events":31,"object-assign":37}]},{},[271])
 
 
-//# sourceMappingURL=../../src/js/breakfast.js.map
+//# sourceMappingURL=../../../src/client/breakfast/breakfast.js.map

@@ -1,8 +1,14 @@
 
 let validEmailDomains = [
-  '@michigan.com',
-  '@freep.com',
-  '@lsj.com',
+  'michigan.com',
+  'freepress.com',
+  'detroitnews.com',
+  'thetimesherald.com',
+  'battlecreekenquirer.com',
+  'lsj.com',
+  'hometownlife.com',
+  'livingstondaily.com',
+  'lohud.com',
 ];
 
 // http://stackoverflow.com/a/46181/1337683
@@ -25,7 +31,7 @@ function isValidEmail(email) {
   // Reject if it's not a supported domain
   let validDomain = false;
   for (let domain of validEmailDomains) {
-    let regex = RegExp(`${domain}$`);
+    let regex = RegExp(`@${domain}$`);
 
     if (regex.test(email)) {
       validDomain = true;

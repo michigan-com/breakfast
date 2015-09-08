@@ -46,7 +46,7 @@ describe('Tests email parsing', function() {
     }
 
     for (let domain of Email.validEmailDomains) {
-      let testEmail = `test${domain}`;
+      let testEmail = `test@${domain}`;
       equal(Email.isValidEmail(testEmail), true, `Email ${testEmail} should be valid`);
     }
   });

@@ -1,7 +1,15 @@
 extends ../base
+include ../util/form
 
 block content
-  form(action='/register/', method='POST')
-    input(type='hidden', name='_csrf', value='#{ csrfToken }')
-    input(type='text', name='email', id='email', placeholder='Email')
+  form.register-form(action='/register/', method='POST')
+    for field in fields
+      +renderInput(field)
+    span @
+    select#domains
+      for email in validEmailDomains
+        option(val='#{ email }')  #{ email }
     input(type='submit')
+
+block js
+  script(src='/js/register.js')
