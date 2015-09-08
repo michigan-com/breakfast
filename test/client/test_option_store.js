@@ -1,8 +1,8 @@
 var SRC_ROOT = '../public/js/src';
 
 import Chance from 'chance';
-import { OptionStore } from '../../src/js/store';
-import { OptionActions } from '../../src/js/actions';
+import { OptionStore } from '../../src/client/breakfast/store';
+import { OptionActions } from '../../src/client/breakfast/actions';
 import { equal, notEqual } from 'assert';
 
 let chance = new Chance();

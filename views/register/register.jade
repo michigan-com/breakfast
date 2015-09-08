@@ -2,14 +2,19 @@ extends ../base
 include ../util/form
 
 block content
-  form.register-form(action='/register/', method='POST')
-    for field in fields
-      +renderInput(field)
-    span @
-    select#domains
-      for email in validEmailDomains
-        option(val='#{ email }')  #{ email }
-    input(type='submit')
+  .register-form-container
+    h2 Register for Breakfast!
+    p Input your email below by specifying a username and a domain of one of the Gannett Markets.
+    p This will generate an email containing the necessary steps to complete your registration.
+    p Don't see your domain here? Email #[a(href='mailto:rwilliams@michigan.com') Reid Williams] to get it added
+    form.register-form(action='/register/', method='POST')
+      for field in fields
+        +renderInput(field)
+      #domains
+      input(type='submit', value='Submit')
 
 block js
   script(src='/js/register.js')
+
+block css
+  link(href='/css/register.css', rel='stylesheet')

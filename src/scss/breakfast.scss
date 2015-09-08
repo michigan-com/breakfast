@@ -1,40 +1,13 @@
-@import 'bourbon';
-@import 'neat';
+@import './base';
 
 $body-background: white;
-$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 
-$primary-color: #40912F;
-$secondary-color: #40867C;
-$danger-color: #A83641;
 
 $button-font-size: 30px;
 $button-line-height: $button-font-size * 2;
-$input-font-size: 20px;
-$input-line-height: $input-font-size * 2;
 
 $picker-padding: 30px;
 
-@mixin transition($string) {
-  transition: $string;
-  -o-transition: $string;
-  -moz-transition: $string;
-  -webkit-transition: $string;
-}
-
-@mixin button($color: $primary-color) {
-  text-align: center;
-  color: $color;
-  border: 1px solid $color;
-  cursor: pointer;
-  @include transition(background 250ms ease-in);
-  @include transition(color 250ms ease-in);
-
-  &.active, &:hover {
-    background: $color;
-    color: white;
-  }
-}
 
 @mixin close-button() {
   color: $danger-color;
@@ -78,7 +51,7 @@ body {
 
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: $screen-sm) {
     .image-container, .options-container {
       @include span-columns(12);
     }
@@ -99,7 +72,7 @@ body {
     line-height: $button-line-height;
     text-transform: uppercase;
 
-    @media (max-width: 800px) {
+    @media (max-width: $screen-sm) {
       font-size: $button-font-size * .5;
       line-height: $button-line-height * .5;
 
@@ -178,12 +151,6 @@ body {
   width: 100%;
 
   input {
-    background: $body-background;
-    border: none;
-    border-bottom: 1px solid grey;
-    outline: 0;
-    font-size: $input-font-size;
-    line-height: $input-line-height;
     width: 100%;
     margin: 10px auto;
   }
@@ -207,7 +174,7 @@ body {
       margin: 10px 5%;
       text-transform: capitalize;
 
-      @media (min-width: 800px) and (max-width: 1050px) {
+      @media (min-width: $screen-sm) and (max-width: 1050px) {
         width: 80%;
         margin: 10px 10%;
       }
@@ -332,73 +299,6 @@ body {
 
 .select {
   width: 100%;
-  position: relative;
-
-  &.show {
-    .current-selection {
-      &:after {
-        @include transform(rotate(0deg));
-      }
-    }
-  }
-
-  &.content-type-select {
-    text-transform: capitalize;
-  }
-
-  .current-selection, .select-option {
-    img {
-      max-width: 100%;
-      height: 100%;
-    }
-  }
-
-  .current-selection {
-    width: 100%;
-    text-align: center;
-    font-size: 25px;
-    line-height: 40px;
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-    cursor: pointer;
-    height: 40px;
-
-    &:after {
-      content: '^';
-      position: absolute;
-      right: 3%;
-      @include transform(rotate(180deg));
-      @include transition(all 250ms linear);
-      font-family: $body-font;
-    }
-  }
-
-  .select-options {
-    width: 100%;
-    position: absolute;
-    text-align: center;
-    max-height: 30px * 5; // 5 max height;
-    overflow-y: auto;
-    margin-top: 10px;
-    background: white;
-    border: 1px solid $secondary-color;
-    z-index: 1000;
-
-    .select-option {
-      font-size: 20px;
-      line-height: 30px;
-      color: $secondary-color;
-      @include transition(all 250ms ease-in);
-      cursor: pointer;
-      background: inherit;
-      height: 30px;
-
-      &:hover, &.selected {
-        background: $secondary-color;
-        color: white;
-      }
-    }
-  }
 }
 
 .save {

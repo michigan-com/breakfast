@@ -2,7 +2,7 @@ import React from 'react';
 import ColorPicker from 'react-color';
 import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE } from '../lib/constants';
 import OptionActions from '../actions/options';
-import { Select } from './components';
+import { Select } from '../../util/components';
 
 let actions = new OptionActions();
 

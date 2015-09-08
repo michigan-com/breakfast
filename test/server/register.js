@@ -69,8 +69,8 @@ describe('Registration testing', function() {
       .end(function(err, res) {
         if (err) throw new Error(err);
 
-        equal(res.status, 200, 'Should have been redirected okay');
-        equal(res.req.path, '/register/', 'Should still be on the register page with an error message');
+        equal(res.status, 422, 'Should have generated a 422 error');
+        equal('username' in res.body.error, true, 'Should have username error in response body');
         done();
       });
   });
@@ -96,9 +96,9 @@ describe('Registration testing', function() {
       .end(function(err, res) {
         if (err) throw new Error(err);
 
-        let expectedUrl = `/register/email-sent/${testEmail}`;
         equal(res.status, 200, 'Should have been redirected fine');
-        equal(res.req.path, expectedUrl, `Should have been redirected to ${expectedUrl}`)
+        equal('success' in res.body, true, 'Success value dones\'t exist in response body');
+        equal(res.body.success, true, 'Should be a true success value');
         checkInvites(testEmail, done).catch(function(err) {
           throw new Error(err);
         });
@@ -109,24 +109,31 @@ describe('Registration testing', function() {
     let count = await Invite.count({ where: { email: testEmail }});
     equal(count, 1, 'Should only be one invite');
 
+    async function checkInvites(done) {
+      let count = await Invite.count({ where: { email: testEmail }});
+      equal(count, 1, 'Should not have created a second invite');
+
+      done();
+    }
+
     agent
       .post('/register/')
       .send({
         email: testEmail
       })
       .redirects()
-      .end(async function(err, res) {
+      .end(function(err, res) {
         if (err) throw new Error(err);
 
         let expectedUrl = `/register/email-sent/${testEmail}`;
         equal(res.status, 200, 'Should have been redirected fine');
-        equal(res.req.path, expectedUrl, `Should have been redirected to ${expectedUrl}`)
+        equal('success' in res.body, true, 'Success value dones\'t exist in response body');
+        equal(res.body.success, true, 'Should be a true success value');
 
-        let count = await Invite.count({ where: { email: testEmail }});
-        equal(count, 1, 'Should not have created a second invite');
-
-        done();
-      })
+        checkInvites(done).catch(function(err) {
+          throw new Error(err);
+        });
+      });
   });
 
   it('Tests when user tries to create an account with two different passwords', async function(done) {

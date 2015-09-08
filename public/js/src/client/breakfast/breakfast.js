@@ -44069,7 +44069,7 @@ exports['default'] = OptionActions;
 module.exports = exports['default'];
 
 
-},{"../dispatcher":272,"../lib/constants":273,"../lib/logoInfo.json":274,"../store/options":283,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/interop-require-default":9,"xr":268}],271:[function(require,module,exports){
+},{"../dispatcher":272,"../lib/constants":273,"../lib/logoInfo.json":274,"../store/options":281,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/interop-require-default":9,"xr":268}],271:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -44263,7 +44263,7 @@ var PicEditor = (function (_React$Component) {
 })();
 
 
-},{"./actions/options":270,"./lib/constants":273,"./lib/parse":275,"./obj/canvas.js":276,"./obj/content":279,"./obj/options":280,"./store":282,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"object-assign":37,"react":267,"react-canvas":54}],272:[function(require,module,exports){
+},{"./actions/options":270,"./lib/constants":273,"./lib/parse":275,"./obj/canvas.js":276,"./obj/content":277,"./obj/options":278,"./store":280,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"object-assign":37,"react":267,"react-canvas":54}],272:[function(require,module,exports){
 'use strict';
 
 var _flux = require('flux');
@@ -44900,169 +44900,6 @@ module.exports = exports['default'];
 },{"../lib/constants":273,"../lib/parse":275,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267,"react-canvas":54}],277:[function(require,module,exports){
 'use strict';
 
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
-var _select = require('./select');
-
-var _select2 = _interopRequireDefault(_select);
-
-module.exports = {
-  Select: _select2['default']
-};
-
-
-},{"./select":278,"babel-runtime/helpers/interop-require-default":9}],278:[function(require,module,exports){
-'use strict';
-
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var Select = (function (_React$Component) {
-  _inherits(Select, _React$Component);
-
-  function Select(args) {
-    _classCallCheck(this, Select);
-
-    _get(Object.getPrototypeOf(Select.prototype), 'constructor', this).call(this, args);
-
-    this.state = {
-      optionsHidden: true,
-      currentIndex: this.props.currentIndex ? this.props.currentIndex : 0
-    };
-
-    this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
-  }
-
-  _createClass(Select, [{
-    key: 'toggleOptions',
-    value: function toggleOptions() {
-      this.setState({
-        optionsHidden: !this.state.optionsHidden
-      });
-    }
-  }, {
-    key: 'optionSelected',
-    value: function optionSelected(index) {
-      if (index < 0 || index >= this.props.options.length) {
-        return;
-      }
-
-      this.setState({
-        currentIndex: index,
-        optionsHidden: true
-      });
-
-      if (this.props.onSelect) {
-        this.props.onSelect(this.props.options[index], index);
-      }
-    }
-
-    /**
-     * Get the display value for a given option, override if you want a different
-     * value
-     *
-     * @param {Object} option - Option to be displayed
-     * @param {Number} index - Index of the option being rendered
-     */
-  }, {
-    key: 'getDisplayValue',
-    value: function getDisplayValue(option, index) {
-      var valueKey = this.props.valueKey;
-      if (!valueKey) valueKey = 'value';
-      if (!valueKey in option) console.log('Key ' + valueKey + ' not found');
-
-      return option[valueKey];
-    }
-
-    /**
-     * Override function to make custom style for each option
-     */
-  }, {
-    key: 'getStyle',
-    value: function getStyle(option) {
-      return {};
-    }
-
-    /**
-     * Default rendering of an individual option. Override if you want a custom
-     * rendering
-     *
-     * @param {Object} option - Object representing the choice
-     * @param {Number} index - Index into the array of options that this specific
-     *  option is
-     * @return {Object} React object
-     */
-  }, {
-    key: 'renderOption',
-    value: function renderOption(option, index) {
-      return _react2['default'].createElement(
-        'div',
-        { className: 'select-option ' + (index === this.state.currentIndex ? 'selected' : ''),
-          key: 'option-' + index,
-          onClick: this.optionSelected.bind(this, index),
-          style: this.getStyle(option) },
-        this.getDisplayValue(option, index)
-      );
-    }
-  }, {
-    key: 'renderOptions',
-    value: function renderOptions() {
-      if (this.state.optionsHidden) return;
-
-      return _react2['default'].createElement(
-        'div',
-        { className: 'select-options' },
-        this.props.options.map(this.renderOption.bind(this))
-      );
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      if (!this.props.options.length) {
-        return;
-      }
-
-      var selected = this.props.options[this.state.currentIndex];
-      return _react2['default'].createElement(
-        'div',
-        { className: 'select ' + this.htmlClass + ' ' + (this.state.optionsHidden ? '' : 'show') },
-        _react2['default'].createElement(
-          'div',
-          { className: 'current-selection',
-            onClick: this.toggleOptions.bind(this),
-            style: this.getStyle(selected) },
-          this.getDisplayValue(selected, this.state.currentIndex)
-        ),
-        this.renderOptions()
-      );
-    }
-  }]);
-
-  return Select;
-})(_react2['default'].Component);
-
-exports['default'] = Select;
-module.exports = exports['default'];
-
-
-},{"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267}],279:[function(require,module,exports){
-'use strict';
-
 var _get = require('babel-runtime/helpers/get')['default'];
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -45085,7 +44922,7 @@ var _actionsContent = require('../actions/content');
 
 var _actionsContent2 = _interopRequireDefault(_actionsContent);
 
-var _components = require('./components');
+var _utilComponents = require('../../util/components');
 
 var actions = new _actionsContent2['default']();
 
@@ -45338,12 +45175,12 @@ var ContentTypeSelect = (function (_Select) {
   }]);
 
   return ContentTypeSelect;
-})(_components.Select);
+})(_utilComponents.Select);
 
 module.exports = exports['default'];
 
 
-},{"../actions/content":269,"./components":277,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267}],280:[function(require,module,exports){
+},{"../../util/components":282,"../actions/content":269,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267}],278:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -45374,7 +45211,7 @@ var _actionsOptions = require('../actions/options');
 
 var _actionsOptions2 = _interopRequireDefault(_actionsOptions);
 
-var _components = require('./components');
+var _utilComponents = require('../../util/components');
 
 var actions = new _actionsOptions2['default']();
 
@@ -45904,7 +45741,7 @@ var LogoSelect = (function (_Select) {
   }]);
 
   return LogoSelect;
-})(_components.Select);
+})(_utilComponents.Select);
 
 var FontSelect = (function (_Select2) {
   _inherits(FontSelect, _Select2);
@@ -45938,12 +45775,12 @@ var FontSelect = (function (_Select2) {
   }]);
 
   return FontSelect;
-})(_components.Select);
+})(_utilComponents.Select);
 
 module.exports = exports['default'];
 
 
-},{"../actions/options":270,"../lib/constants":273,"./components":277,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267,"react-color":96}],281:[function(require,module,exports){
+},{"../../util/components":282,"../actions/options":270,"../lib/constants":273,"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267,"react-color":96}],279:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -46137,7 +45974,7 @@ _dispatcher2['default'].register(function (action) {
 module.exports = ContentStore;
 
 
-},{"../dispatcher":272,"../lib/constants":273,"babel-runtime/helpers/interop-require-default":9,"events":31,"object-assign":37}],282:[function(require,module,exports){
+},{"../dispatcher":272,"../lib/constants":273,"babel-runtime/helpers/interop-require-default":9,"events":31,"object-assign":37}],280:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -46156,7 +45993,7 @@ module.exports = {
 };
 
 
-},{"./content":281,"./options":283,"babel-runtime/helpers/interop-require-default":9}],283:[function(require,module,exports){
+},{"./content":279,"./options":281,"babel-runtime/helpers/interop-require-default":9}],281:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -46380,7 +46217,180 @@ _dispatcher2['default'].register(function (action) {
 module.exports = OptionStore;
 
 
-},{"../dispatcher":272,"../lib/constants":273,"../lib/logoInfo.json":274,"babel-runtime/helpers/interop-require-default":9,"events":31,"object-assign":37}]},{},[271])
+},{"../dispatcher":272,"../lib/constants":273,"../lib/logoInfo.json":274,"babel-runtime/helpers/interop-require-default":9,"events":31,"object-assign":37}],282:[function(require,module,exports){
+'use strict';
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+var _select = require('./select');
+
+var _select2 = _interopRequireDefault(_select);
+
+module.exports = {
+  Select: _select2['default']
+};
+
+
+},{"./select":283,"babel-runtime/helpers/interop-require-default":9}],283:[function(require,module,exports){
+'use strict';
+
+var _get = require('babel-runtime/helpers/get')['default'];
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var Select = (function (_React$Component) {
+  _inherits(Select, _React$Component);
+
+  function Select(args) {
+    _classCallCheck(this, Select);
+
+    _get(Object.getPrototypeOf(Select.prototype), 'constructor', this).call(this, args);
+
+    this.state = {
+      optionsHidden: true,
+      currentIndex: this.props.currentIndex ? this.props.currentIndex : 0
+    };
+
+    this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
+  }
+
+  _createClass(Select, [{
+    key: 'toggleOptions',
+    value: function toggleOptions() {
+      this.setState({
+        optionsHidden: !this.state.optionsHidden
+      });
+    }
+  }, {
+    key: 'optionSelected',
+    value: function optionSelected(index) {
+      if (index < 0 || index >= this.props.options.length) {
+        return;
+      }
+
+      this.setState({
+        currentIndex: index,
+        optionsHidden: true
+      });
+
+      if (this.props.onSelect) {
+        this.props.onSelect(this.props.options[index], index);
+      }
+    }
+
+    /**
+     * Returns the currently selected value
+     *
+     */
+  }, {
+    key: 'currentSelection',
+    value: function currentSelection() {
+      return this.props.options[this.state.currentIndex];
+    }
+
+    /**
+     * Get the display value for a given option, override if you want a different
+     * value
+     *
+     * @param {Object} option - Option to be displayed
+     * @param {Number} index - Index of the option being rendered
+     */
+  }, {
+    key: 'getDisplayValue',
+    value: function getDisplayValue(option, index) {
+      var valueKey = this.props.valueKey;
+      if (!valueKey) valueKey = 'value';
+      if (!valueKey in option) console.log('Key ' + valueKey + ' not found');
+
+      return option[valueKey];
+    }
+
+    /**
+     * Override function to make custom style for each option
+     */
+  }, {
+    key: 'getStyle',
+    value: function getStyle(option) {
+      return {};
+    }
+
+    /**
+     * Default rendering of an individual option. Override if you want a custom
+     * rendering
+     *
+     * @param {Object} option - Object representing the choice
+     * @param {Number} index - Index into the array of options that this specific
+     *  option is
+     * @return {Object} React object
+     */
+  }, {
+    key: 'renderOption',
+    value: function renderOption(option, index) {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'select-option ' + (index === this.state.currentIndex ? 'selected' : ''),
+          key: 'option-' + index,
+          onClick: this.optionSelected.bind(this, index),
+          style: this.getStyle(option) },
+        this.getDisplayValue(option, index)
+      );
+    }
+  }, {
+    key: 'renderOptions',
+    value: function renderOptions() {
+      if (this.state.optionsHidden) return;
+
+      return _react2['default'].createElement(
+        'div',
+        { className: 'select-options' },
+        this.props.options.map(this.renderOption.bind(this))
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.props.options.length) {
+        return;
+      }
+
+      var selected = this.props.options[this.state.currentIndex];
+      return _react2['default'].createElement(
+        'div',
+        { className: 'select ' + this.htmlClass + ' ' + (this.state.optionsHidden ? '' : 'show') },
+        _react2['default'].createElement(
+          'div',
+          { className: 'current-selection',
+            onClick: this.toggleOptions.bind(this),
+            style: this.getStyle(selected) },
+          this.getDisplayValue(selected, this.state.currentIndex)
+        ),
+        this.renderOptions()
+      );
+    }
+  }]);
+
+  return Select;
+})(_react2['default'].Component);
+
+exports['default'] = Select;
+module.exports = exports['default'];
+
+
+},{"babel-runtime/helpers/class-call-check":5,"babel-runtime/helpers/create-class":6,"babel-runtime/helpers/get":7,"babel-runtime/helpers/inherits":8,"babel-runtime/helpers/interop-require-default":9,"react":267}]},{},[271])
 
 
 //# sourceMappingURL=../../../src/client/breakfast/breakfast.js.map

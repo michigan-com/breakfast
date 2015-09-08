@@ -1,0 +1,184 @@
+@import 'bourbon';
+@import 'neat';
+
+$primary-color: #40912F;
+$secondary-color: #40867C;
+$danger-color: #A83641;
+
+$body-background: white;
+$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+
+$input-font-size: 20px;
+$input-line-height: $input-font-size * 2;
+
+$screen-md: 992px;
+$screen-sm: 768px;
+
+body {
+  font-family: $body-font;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+@mixin button($color: $primary-color) {
+  text-align: center;
+  color: $color;
+  border: 1px solid $color;
+  cursor: pointer;
+  @include transition(background-color 250ms ease-in, color 250ms ease-in);
+
+  &.active, &:hover {
+    background-color: $color;
+    color: white;
+  }
+}
+
+input[type=text], input[type=password] {
+  background-color: $body-background;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: 0;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+  margin-right: 10px;
+  padding: 0;
+}
+
+input[type=submit] {
+  background-color: white;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+  text-align: center;
+  background-color: $primary-color;
+  color: white;
+  border: 1px solid $primary-color;
+  cursor: pointer;
+  @include transition(background-color 250ms ease-in, color 250ms ease-in);
+
+  &.active, &:hover {
+    background-color: darken($primary-color, 15%);
+  }
+}
+
+/** Form stuff, for login, register, etc forms */
+.form-field {
+  font-family: $body-font;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &.hidden {
+    display: none;
+  }
+
+  &.error {
+    input[type=text], input[type=password] {
+      border: 1px solid $danger-color;
+    }
+  }
+
+  input {
+    width: 50%;
+    display: inline-block;
+  }
+
+  label {
+    text-transform: capitalize;
+    margin-right: 10px;
+    width: 30%;
+    text-align: right;
+    display: inline-block;
+  }
+
+  .errors {
+    color: $danger-color;
+  }
+}
+
+.select {
+  width: 100%;
+  position: relative;
+  border: 1px solid $secondary-color;
+
+  &.show {
+    .current-selection {
+      &:after {
+        @include transform(rotate(0deg));
+      }
+    }
+  }
+
+  &.content-type-select {
+    text-transform: capitalize;
+  }
+
+  .current-selection, .select-option {
+    img {
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+
+  .current-selection {
+    width: 100%;
+    text-align: center;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    color: $secondary-color;
+    cursor: pointer;
+    height: 40px;
+
+    &:after {
+      content: '^';
+      position: absolute;
+      right: 3%;
+      @include transform(rotate(180deg));
+      @include transition(all 250ms linear);
+      font-family: $body-font;
+    }
+  }
+
+  .select-options {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    max-height: 30px * 5; // 5 max height;
+    overflow-y: auto;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid $secondary-color;
+    z-index: 1000;
+
+    .select-option {
+      font-size: $input-font-size * .75;
+      line-height: $input-line-height * .75;
+      color: $secondary-color;
+      @include transition(all 250ms ease-in);
+      cursor: pointer;
+      background: inherit;
+      height: 30px;
+
+      &:hover, &.selected {
+        background: $secondary-color;
+        color: white;
+      }
+    }
+  }
+}
+
+/** Flash messages */
+.flash-messages {
+  position: relative;
+  width: 100%;
+
+  .message {
+    width: 75%;
+    margin: 0 auto;
+    list-style-type: none;
+    background-color: $secondary-color;
+    color: white;
+    padding: 30px 10px;
+    font-size: 15px;
+  }
+}

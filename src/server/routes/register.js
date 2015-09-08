@@ -89,7 +89,7 @@ function registerRoutes(app, router, passport) {
       res.status(200).send({
         success: true
       });
-      res.redirect(`/register/email-sent/${email}`);
+      return;
     }
 
     return handleRegister(req, res).catch(function(err) {

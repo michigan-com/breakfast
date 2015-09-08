@@ -89,14 +89,16 @@ function watchFunction() {
 
   gutil.log('Watching ' + jsFiles);
   gulp.watch(jsFiles, function() {
-    var filePath = jsSrc + jsBundle[0];
-    return gulp.src(filePath)
-      .pipe(plumber(gutil.log))
-      .pipe(tap(bundleJs))
-      .pipe(gulp.dest(jsDist))
-      .on('end', function() {
-        gutil.log('Browserify finished creating: ' + filePath);
-      });
+    each(jsBundle, function(fname) {
+      var filePath = jsSrc + fname;
+      gulp.src(filePath)
+        .pipe(plumber(gutil.log))
+        .pipe(tap(bundleJs))
+        .pipe(gulp.dest(jsDist))
+        .on('end', function() {
+          gutil.log('Browserify finished creating: ' + filePath);
+        });
+    });
   });
 }
 

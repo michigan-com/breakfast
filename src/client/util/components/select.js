@@ -34,6 +34,14 @@ export default class Select extends React.Component {
   }
 
   /**
+   * Returns the currently selected value
+   *
+   */
+  currentSelection() {
+    return this.props.options[this.state.currentIndex];
+  }
+
+  /**
    * Get the display value for a given option, override if you want a different
    * value
    *

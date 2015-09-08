@@ -5,11 +5,13 @@ head
     title Breakfast
 
   block css
+    link(href='/css/base.css', rel='stylesheet')
 body
   block messages
     if messages
-      for message in messages
-        li #{message}
+      ol.flash-messages
+        for message in messages
+          li.message #{message}
   block content
 
   block js

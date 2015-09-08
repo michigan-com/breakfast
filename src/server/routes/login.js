@@ -1,6 +1,7 @@
 import csrf from 'csurf';
 
 import { csrfProtection } from '../util/csrf';
+import { Field } from '../util/form';
 
 /**
  * Register the login urls
@@ -25,8 +26,12 @@ function registerRoutes(app, router, passport) {
     let csrfToken;
     if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
 
+    let csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
+    let email = new Field({ name: 'email' });
+    let password = new Field({ type: 'password', name: 'password' });
+
     res.render('login', {
-      csrfToken,
+      fields: [ csrf, email, password ],
       messages: req.flash('error')
     });
   });
@@ -34,7 +39,7 @@ function registerRoutes(app, router, passport) {
   // Handle the login response
   router.post('/login/', passport.authenticate('local', {
       failureRedirect: '/login/',
-      failureFlash: 'Login failure'
+      failureFlash: 'Username/password combination does not match, please try again'
     }),
     function(req, res) {
       return res.redirect('/breakfast/');

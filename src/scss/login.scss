@@ -1,0 +1,22 @@
+@import './base';
+
+.login-form {
+  width: 75%;
+  margin: 0 auto;
+
+  @media (max-width: $screen-sm) {
+    width: 100%;
+  }
+}
+
+form {
+  input[type=submit] {
+    width: 50%;
+    margin: 10px 25%;
+    text-align: center;
+  }
+}
+
+.register-text {
+  text-align: center;
+}

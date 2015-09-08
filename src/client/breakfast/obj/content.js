@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentActions from '../actions/content';
-import { Select } from './components';
+import { Select } from '../../util/components';
 
 let actions = new ContentActions();
 

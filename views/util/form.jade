@@ -5,7 +5,7 @@
 //-
 mixin renderInput(field)
   div(class='#{ field.options.classString }')
-    .label #{ field.options.name || field.options.label }
+    label #{ field.options.name || field.options.label }
     input(type='#{ field.options.type }', name='#{ field.options.name }', placeholder='#{ field.options.placeholder }', value='#{ field.options.value }')
     .errors
       for error in field.options.errors

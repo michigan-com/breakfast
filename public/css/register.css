@@ -1,0 +1,167 @@
+html {
+  box-sizing: border-box; }
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit; }
+
+body {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; }
+
+*, *:after, *:before {
+  box-sizing: border-box; }
+
+input[type=text], input[type=password] {
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: 0;
+  font-size: 20px;
+  line-height: 40px;
+  margin-right: 10px;
+  padding: 0; }
+
+input[type=submit] {
+  background-color: white;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #40912F;
+  color: white;
+  border: 1px solid #40912F;
+  cursor: pointer;
+  -webkit-transition: background-color 250ms ease-in, color 250ms ease-in;
+  -moz-transition: background-color 250ms ease-in, color 250ms ease-in;
+  transition: background-color 250ms ease-in, color 250ms ease-in; }
+  input[type=submit].active, input[type=submit]:hover {
+    background-color: #27571c; }
+
+/** Form stuff, for login, register, etc forms */
+.form-field {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  width: 100%;
+  margin-bottom: 10px; }
+  .form-field.hidden {
+    display: none; }
+  .form-field.error input[type=text], .form-field.error input[type=password] {
+    border: 1px solid #A83641; }
+  .form-field input {
+    width: 50%;
+    display: inline-block; }
+  .form-field label {
+    text-transform: capitalize;
+    margin-right: 10px;
+    width: 30%;
+    text-align: right;
+    display: inline-block; }
+  .form-field .errors {
+    color: #A83641; }
+
+.select {
+  width: 100%;
+  position: relative;
+  border: 1px solid #40867C; }
+  .select.show .current-selection:after {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  .select.content-type-select {
+    text-transform: capitalize; }
+  .select .current-selection img, .select .select-option img {
+    max-width: 100%;
+    height: 100%; }
+  .select .current-selection {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+    color: #40867C;
+    cursor: pointer;
+    height: 40px; }
+    .select .current-selection:after {
+      content: '^';
+      position: absolute;
+      right: 3%;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+      -webkit-transition: all 250ms linear;
+      -moz-transition: all 250ms linear;
+      transition: all 250ms linear;
+      font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; }
+  .select .select-options {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #40867C;
+    z-index: 1000; }
+    .select .select-options .select-option {
+      font-size: 15px;
+      line-height: 30px;
+      color: #40867C;
+      -webkit-transition: all 250ms ease-in;
+      -moz-transition: all 250ms ease-in;
+      transition: all 250ms ease-in;
+      cursor: pointer;
+      background: inherit;
+      height: 30px; }
+      .select .select-options .select-option:hover, .select .select-options .select-option.selected {
+        background: #40867C;
+        color: white; }
+
+/** Flash messages */
+.flash-messages {
+  position: relative;
+  width: 100%; }
+  .flash-messages .message {
+    width: 75%;
+    margin: 0 auto;
+    list-style-type: none;
+    background-color: #40867C;
+    color: white;
+    padding: 30px 10px;
+    font-size: 15px; }
+
+.register-form-container {
+  width: 75%;
+  margin: 0 auto; }
+  @media (max-width: 768px) {
+    .register-form-container {
+      width: 100%; } }
+
+form {
+  width: 100%;
+  text-align: center; }
+  form .form-field.username, form #domains {
+    width: 50%;
+    text-align: center;
+    margin-bottom: 10px; }
+  form input[type=submit] {
+    width: 100%;
+    display: block; }
+  form input {
+    width: 100% !important;
+    text-align: center;
+    padding-top: 1px !important; }
+  @media (max-width: 768px) {
+    form .form-field, form input, form #domains {
+      width: 100% !important;
+      float: none; } }
+
+.form-field {
+  display: inline-block;
+  float: left; }
+  .form-field label {
+    display: none; }
+
+#domains {
+  display: inline-block; }

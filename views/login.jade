@@ -1,8 +1,14 @@
 extends ./base
+include ./util/form
 
 block content
-  form(action='/login/', method='POST')
-    input(type='hidden', name='_csrf', value='#{ csrfToken }')
-    input(type='text', placeholder='email', id='email', name='email')
-    input(type='password', placeholder='password', id='password', name='password')
-    input(type='submit')
+  .login-form
+    h2 Login to Breakfast
+    form(action='/login/', method='POST')
+      for field in fields
+        +renderInput(field)
+      p.register-text Don't have an account? Register #[a(href='/register/') here]
+      input(type='submit', value='Login')
+
+block css
+  link(href='/css/login.css', rel='stylesheet')
