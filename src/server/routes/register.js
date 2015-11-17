@@ -1,9 +1,10 @@
 import csrf from 'csurf';
 
 import uuid from '../util/uuid';
-import { csrfProtection } from '../util/csrf';
 import { Field } from '../util/form';
 import { isValidEmail, validEmailDomains } from '../util/email';
+import { hash } from '../util/hash';
+import { csrfProtection } from '../middleware/csrf';
 
 
 /**
@@ -15,8 +16,8 @@ import { isValidEmail, validEmailDomains } from '../util/email';
  */
 function registerRoutes(app, router, passport) {
   let db = app.get('db');
-  let Invite = db.Invite;
-  let User = db.User;
+  let Invite = db.collection('Invite');
+  let User = db.collection('User');
 
   // Render the login form
   router.get('/register/', csrfProtection(app), function(req, res) {
@@ -36,6 +37,7 @@ function registerRoutes(app, router, passport) {
   });
 
   // Route for displaying the page after a registration email has been sent
+  // TODO actually send email
   router.get('/register/email-sent/:email', function(req, res) {
     res.render('register/emailSent', {
       email: req.params.email // TODO maybe do this differently
@@ -57,33 +59,22 @@ function registerRoutes(app, router, passport) {
       }
 
       // First, make sure this user doesn't already exist
-      let user = await User.findOne({
-        where: {
-          email
-        }
-      });
+      let user = await User.find({ email }).limit(1).next();
 
       if (user) {
         res.status(422).send({
           error: {
-            username: 'Username already exists'
+            username: 'This email is already in use.'
           }
         });
         return;
       }
 
-      let invite = await Invite.findOne({
-        where: {
-          email
-        }
-      });
+      let invite = await Invite.find({ email }).limit(1).next();
 
       if (!invite) {
         let token = uuid()
-        invite = await Invite.create({
-          email,
-          token
-        });
+        invite = await Invite.find({ email, token }).limit(1).next();
       }
 
       res.status(200).send({
@@ -103,11 +94,7 @@ function registerRoutes(app, router, passport) {
       let csrfToken;
       if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
 
-      let invite = await Invite.find({
-        where: {
-          token
-        }
-      });
+      let invite = await Invite.find({ token }).limit(1).next();
 
       if (!invite) {
         res.status(404).end();
@@ -138,11 +125,7 @@ function registerRoutes(app, router, passport) {
       let confirmPassword = req.body.confirmPassword;
 
       // Parse the invite stuff first
-      let invite = await Invite.find({
-        where: {
-          email
-        }
-      });
+      let invite = await Invite.find({ email }).limit(1).next();
 
       if (!invite) {
         // This email hasn't been invited yet. Forward them to the invite page
@@ -169,13 +152,15 @@ function registerRoutes(app, router, passport) {
         return;
       }
 
-      let user = await User.create({
+      password = hash(password);
+
+      let user = await User.insertOne({
         email,
         password
       });
 
       // delete the invite
-      await invite.destroy();
+      await Invite.deleteOne({ _id: invite._id });
 
       // Force the login and send a success message
       passport.authenticate('local')(req, res, function() {

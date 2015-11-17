@@ -14,7 +14,6 @@ import session from 'express-session';
 import router from './routes/router';
 import './env';
 import dir from './util/dir';
-import { connectDb } from './db';
 
 /**
  * Create an express app and return it. This way, we can spin up apps with
@@ -22,7 +21,7 @@ import { connectDb } from './db';
  *
  * @param {String} dbString - Connection string for DB
  */
-function createApp(dbString=process.env.DB_URI, enableCsrf=true) {
+function createApp(db, enableCsrf=true) {
   var app = express();
   var BASE_DIR = path.dirname(__dirname);
 
@@ -48,7 +47,7 @@ function createApp(dbString=process.env.DB_URI, enableCsrf=true) {
   app.use(flash());
 
   // Set the DB before registering the routes
-  app.set('db', connectDb(dbString));
+  app.set('db', db);
 
   // Register the routes
   router.registerRoutes(app);

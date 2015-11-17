@@ -1,26 +1,38 @@
 'use strict';
+import debug from 'debug';
+import { MongoClient } from 'mongodb';
+
 import { createApp } from './app';
-import winston from 'winston';
 
-var app = createApp(process.env.DB_URI, true);
-var port = normalizePort(process.env.NODE_PORT || '3000');
-app.set('port', port);
+var logger = debug('breakfast:server');
 
-winston.info(`[SERVER] Environment: ${app.get('env')}`);
-var server = app.listen(port, '0.0.0.0', function(err) {
-  if (err) throw new Error(err);
+if (!process.env.DB_URI) {
+  throw new Error('Process.env.DB_URI not set, please set it to a mongoDB instance');
+}
 
-  let host = this.address();
-  winston.info(`[SERVER] Started on ${host.address}:${host.port}`);
-});
+// Connect to the db then start the app
+MongoClient.connect(process.env.DB_URI, function(err, db) {
+  // Create the app
+  var app = createApp(db, true);
+  var port = normalizePort(process.env.NODE_PORT || '3000');
+  app.set('port', port);
 
-server.on('close', function() {
-  winston.info("[SERVER] Closed nodejs application ...");
-  disconnect();
-});
+  logger(`[SERVER] Environment: ${app.get('env')}`);
+  var server = app.listen(port, '0.0.0.0', function(err) {
+    if (err) throw new Error(err);
 
-process.on('SIGTERM', function () {
-  server.close();
+    let host = this.address();
+    logger(`[SERVER] Started on ${host.address}:${host.port}`);
+  });
+
+  server.on('close', function() {
+    logger("[SERVER] Closed nodejs application ...");
+    disconnect();
+  });
+
+  process.on('SIGTERM', function () {
+    server.close();
+  });
 });
 
 function normalizePort(val) {
@@ -29,5 +41,3 @@ function normalizePort(val) {
   if (port >= 0) return port;
   return false;
 }
-
-module.exports = server;

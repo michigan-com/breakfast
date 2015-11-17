@@ -1,6 +1,6 @@
 import csrf from 'csurf';
 
-import { csrfProtection } from '../util/csrf';
+import { csrfProtection } from '../middleware/csrf';
 import { Field } from '../util/form';
 
 /**

@@ -1,8 +1,15 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import debug from 'debug';
+import { ObjectID } from 'mongodb';
+
+import { passwordMatch } from '../util/hash';
+
+var logger = debug('breakfast:routes:passport');
 
 function createPassport(app) {
-  let User = app.get('db').User;
+  let db = app.get('db');
+  let User = db.collection('User');
 
   passport.use(new LocalStrategy({
       usernameField: 'email'
@@ -15,13 +22,9 @@ function createPassport(app) {
   ));
 
   async function loginCheck(email, password, done) {
-    let user = await User.find({
-      where: {
-        email
-      }
-    });
+    let user = await User.find({ email }).limit(1).next();
 
-    if (!user || !user.passwordMatch(password)) {
+    if (!passwordMatch(password, user.password)) {
       return done(null, false);
     }
 
@@ -30,15 +33,22 @@ function createPassport(app) {
 
   passport.serializeUser(function(user, done) {
     // TODO make this better somehow
-    return done(null, user.id);
+    return done(null, user._id);
   });
 
-  passport.deserializeUser(function(id, done) {
-    User.findById(id).then(function(user) {
-      // user will be null if the id isn't found, might want to
-      // revisit this
+  passport.deserializeUser(function(_id, done) {
+    async function deserialize(_id) {
+      let user = await User.find({ _id: ObjectID(_id) }).limit(1).next();
+
+      return user;
+    }
+
+    try {
+      let user = deserialize(_id);
       done(null, user);
-    });
+    } catch(e) {
+      done(e, false);
+    }
   });
 
   return passport;

@@ -2,3 +2,5 @@ node_modules/
 dist/
 *.swp
 env.sh
+public/js
+public/css
