@@ -39,7 +39,7 @@ $('form.register-form').on('submit', function(e) {
   }
 
   xr.post('/register/', values).then(function(resp) {
-    window.location = `/register/email-sent/${email}/`;
+    window.location = `/register/${resp.token}/`;
   }, function(resp) {
     let response = JSON.parse(resp.response);
 

@@ -1,4 +1,3 @@
-
 let validEmailDomains = [
   'michigan.com',
   'freepress.com',
@@ -13,6 +12,7 @@ let validEmailDomains = [
 
 // http://stackoverflow.com/a/46181/1337683
 let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
 
 /**
  * Detemins whether an email is valid or not. Tests for valid email format, and

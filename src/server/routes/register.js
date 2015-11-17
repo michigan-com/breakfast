@@ -3,6 +3,7 @@ import csrf from 'csurf';
 import uuid from '../util/uuid';
 import { Field } from '../util/form';
 import { isValidEmail, validEmailDomains } from '../util/email';
+import { formatInviteUrl } from '../util/parse';
 import { hash } from '../util/hash';
 import { csrfProtection } from '../middleware/csrf';
 
@@ -42,7 +43,7 @@ function registerRoutes(app, router, passport) {
     res.render('register/emailSent', {
       email: req.params.email // TODO maybe do this differently
     });
-  })
+  });
 
   // Handle the initial register form submission
   router.post('/register/', function(req, res, next) {
@@ -77,10 +78,15 @@ function registerRoutes(app, router, passport) {
         invite = await Invite.insertOne({ email, token });
       }
 
+      // for now, just forward to new url
+      let url = formatInviteUrl(invite);
       res.status(200).send({
-        success: true
+        success: true,
+        token: invite.token
       });
-      return;
+
+      // TODO get email working.
+
     }
 
     return handleRegister(req, res).catch(function(err) {
@@ -161,10 +167,7 @@ function registerRoutes(app, router, passport) {
 
       // Force the login and send a success message
       passport.authenticate('local')(req, res, function() {
-        res.status(200).send({
-          success: true,
-          user: req.user.email
-        });
+        res.redirect('/breakfast/');
       });
     }
 
