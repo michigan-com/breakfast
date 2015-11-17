@@ -7,7 +7,7 @@ var tap = require('gulp-tap');
 var sourcemaps = require('gulp-sourcemaps');
 
 var babelify = require("babelify");
-var reactify = require('reactify');
+// var reactify = require('reactify');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var pkgify = require('pkgify');
@@ -63,7 +63,6 @@ function bundleJs(file) {
       //},
       //relative: __dirname
     /*})*/
-    .transform(reactify)
     .transform(browserifyShim, { global: true });
 
   // Do the necessary thing for tap/plumber
