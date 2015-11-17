@@ -14,6 +14,8 @@ let testPassword = 'test';
 let defaultEmail = 'testemail@michigan.com';
 let defaultPassword = 'test';
 
+if (!process.env.TEST_DB_URI) throw new Error('Please set the TEST_DB_URI env variable');
+
 describe('Registration testing', function() {
 
   before(function(done) {
@@ -204,19 +206,28 @@ describe('Registration testing', function() {
         password: 'asdf',
         confirmPassword: 'asdf'
       })
-      .end(async function(err, res) {
+      .redirects()
+      .end(function(err, res) {
         if (err) throw new Error(err);
 
-        equal(res.status, 200);
-        equal(res.body.success, true, 'SHould have success: true');
-        equal(res.body.user, testEmail, 'Should have included email in response');
-
-        // Make sure the invite got deleted
-        let invite = await Invite.find({ email: testEmail }).limit(1).next();
-        equal(!!invite, false, 'Should be no invite');
-
+        equal(res.req.path, '/breakfast/', 'Should have forwarded to /breakfast/ url');
         done();
-      });
+      })
+
+      // TODO will be this when we send emails
+      // .end(async function(err, res) {
+      //   if (err) throw new Error(err);
+
+      //   equal(res.status, 200);
+      //   equal(res.body.success, true, 'SHould have success: true');
+      //   equal(res.body.user, testEmail, 'Should have included email in response');
+
+      //   // Make sure the invite got deleted
+      //   let invite = await Invite.find({ email: testEmail }).limit(1).next();
+      //   equal(!!invite, false, 'Should be no invite');
+
+      //   done();
+      // });
   });
 
 })

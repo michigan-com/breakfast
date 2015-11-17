@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import { clone } from '../lib/parse';
-import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, BACKGROUND_LOADING, BACKGROUND_IMAGE,
+import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, BACKGROUND_LOADING, BACKGROUND_IMAGE,
     BACKGROUND_COLOR } from '../lib/constants';
 
 var Surface = ReactCanvas.Surface;
@@ -16,7 +16,7 @@ export default class Canvas extends React.Component {
   constructor(args) {
     super(args);
 
-    this.canvasPadding = 20;
+    this.canvasPadding = 40;
     this.canvasWidth = 650;
     window.onresize = function() {
       this.setState({ windowChange: true});
@@ -80,6 +80,9 @@ export default class Canvas extends React.Component {
       case TWO_ONE:
         canvasHeight = canvasWidth * 1/2;
         break;
+      case FACEBOOK:
+        canvasHeight = canvasWidth * 1/1.911;
+        break;
       case FIT_IMAGE:
         // Only deal with this aspect ratio if we've loaded an image up
         if (this.props.options.backgroundType !== BACKGROUND_IMAGE) {
@@ -92,7 +95,7 @@ export default class Canvas extends React.Component {
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth: canvasWidth - 20,
+      textWidth: canvasWidth - this.canvasPadding,
     }
   }
 
@@ -133,8 +136,8 @@ export default class Canvas extends React.Component {
     return {
       text: {
         top: this.canvasPadding,
-        left: 10,
-        height: textHeight,
+        left: this.canvasPadding / 2,
+        eight: textHeight,
         lineHeight: textHeight,
         fontSize: this.props.fontSize,
         width: canvasStyle.textWidth,
@@ -142,8 +145,8 @@ export default class Canvas extends React.Component {
         color: this.props.options.fontColor
       },
       source: {
-        top: 50 + 10,
-        left: 10,
+        top: 50 + (this.canvasPadding / 2),
+        left: this.canvasPadding / 2,
         height: textHeight,
         lineHeight: 20,
         fontSize: 15,
@@ -164,7 +167,7 @@ export default class Canvas extends React.Component {
     return {
       headline: {
         top: this.canvasPadding,
-        left: this.canvasPadding,
+        left: this.canvasPadding / 2,
         height: headlineSize,
         lineHeight: headlineSize,
         fontSize: headlineFontSize,
@@ -174,7 +177,7 @@ export default class Canvas extends React.Component {
       },
       listItem: {
         top: headlineSize + 10,
-        left: this.canvasPadding * 2,
+        left: this.canvasPadding,
         height: listItemSize,
         lineHeight: listItemSize * 1.25,
         fontSize: this.props.fontSize,

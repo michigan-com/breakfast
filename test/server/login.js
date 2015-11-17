@@ -11,6 +11,8 @@ var db, Invite, app, agent;
 let defaultEmail = 'testemail@testemail.com';
 let defaultPassword = 'test';
 
+if (!process.env.TEST_DB_URI) throw new Error('Please set the TEST_DB_URI env variable');
+
 describe('Route testing', function() {
   before(function(done) {
     async function init(done) {

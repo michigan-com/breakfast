@@ -1,13 +1,13 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
-import { actions, SQUARE, SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, CHANGE_EVENT,
+import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, TWO_ONE, FIT_IMAGE, CHANGE_EVENT,
   BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../lib/constants';
 import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 
-let aspectRatios = [SQUARE, SIXTEEN_NINE, TWO_ONE, FIT_IMAGE];
+let aspectRatios = [SQUARE, SIXTEEN_NINE, TWO_ONE, FACEBOOK, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let fonts = [
   'Helvetica',

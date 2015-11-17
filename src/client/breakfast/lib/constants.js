@@ -33,6 +33,7 @@ module.exports = {
   SIXTEEN_NINE: '16:9',
   SQUARE: 'square',
   TWO_ONE: '2:1 (Twitter)',
+  FACEBOOK: '1.9:1 (Facebook)',
   FIT_IMAGE: 'Fit Image',
 
   CHANGE_EVENT: 'change',
