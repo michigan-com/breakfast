@@ -1,6 +1,6 @@
 import { equal } from 'assert';
 
-import Email from '../../src/server/util/email';
+import Email from '../../dist/util/email';
 
 describe('Tests email parsing', function() {
 

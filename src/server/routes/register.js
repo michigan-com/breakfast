@@ -61,7 +61,7 @@ function registerRoutes(app, router, passport) {
       // First, make sure this user doesn't already exist
       let user = await User.find({ email }).limit(1).next();
 
-      if (user) {
+      if (!!user) {
         res.status(422).send({
           error: {
             username: 'This email is already in use.'
@@ -74,7 +74,7 @@ function registerRoutes(app, router, passport) {
 
       if (!invite) {
         let token = uuid()
-        invite = await Invite.find({ email, token }).limit(1).next();
+        invite = await Invite.insertOne({ email, token });
       }
 
       res.status(200).send({
@@ -154,10 +154,7 @@ function registerRoutes(app, router, passport) {
 
       password = hash(password);
 
-      let user = await User.insertOne({
-        email,
-        password
-      });
+      let user = await User.insertOne({ email, password });
 
       // delete the invite
       await Invite.deleteOne({ _id: invite._id });

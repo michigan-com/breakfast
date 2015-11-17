@@ -1,8 +1,8 @@
 'use strict';
 import debug from 'debug';
-import { MongoClient } from 'mongodb';
 
 import { createApp } from './app';
+import dbConnect from './util/dbConnect';
 
 var logger = debug('breakfast:server');
 
@@ -11,7 +11,9 @@ if (!process.env.DB_URI) {
 }
 
 // Connect to the db then start the app
-MongoClient.connect(process.env.DB_URI, function(err, db) {
+async function startServer() {
+  let db = await dbConnect(process.env.DB_URI);
+
   // Create the app
   var app = createApp(db, true);
   var port = normalizePort(process.env.NODE_PORT || '3000');
@@ -27,13 +29,14 @@ MongoClient.connect(process.env.DB_URI, function(err, db) {
 
   server.on('close', function() {
     logger("[SERVER] Closed nodejs application ...");
-    disconnect();
+    db.close();
   });
 
   process.on('SIGTERM', function () {
+    db.close();
     server.close();
   });
-});
+}
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -41,3 +44,5 @@ function normalizePort(val) {
   if (port >= 0) return port;
   return false;
 }
+
+startServer();

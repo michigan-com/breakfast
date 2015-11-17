@@ -24,7 +24,7 @@ function createPassport(app) {
   async function loginCheck(email, password, done) {
     let user = await User.find({ email }).limit(1).next();
 
-    if (!passwordMatch(password, user.password)) {
+    if (!user || !passwordMatch(password, user.password)) {
       return done(null, false);
     }
 

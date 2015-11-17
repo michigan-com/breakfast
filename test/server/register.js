@@ -3,13 +3,10 @@ import { equal, notEqual } from 'assert';
 import request from 'supertest';
 
 import { createApp } from '../../dist/app';
-import { createTables } from '../../tasks/db/create';
-import { dropTables } from '../../tasks/db/drop';
+import dbConnect from '../../dist/util/dbConnect';
+import { hash } from '../../dist/util/hash';
 
-let app = createApp(process.env.TEST_DB_URI, false);
-let db = app.get('db');
-let Invite = db.Invite;
-let agent = request.agent(app);
+var db, Invite, app, agent;
 
 let testEmail = 'test@michigan.com';
 let testPassword = 'test';
@@ -18,20 +15,29 @@ let defaultEmail = 'testemail@michigan.com';
 let defaultPassword = 'test';
 
 describe('Registration testing', function() {
-  // TODO abstract this
-  before(async function(done) {
-    createTables(db, function() {
-      db.User.create({
-        email: defaultEmail,
-        password: defaultPassword
-      }).then(function() {
-        done();
-      });
-    });
+
+  before(function(done) {
+    async function init(done) {
+      db = await dbConnect(process.env.TEST_DB_URI);
+      Invite = db.collection('Invite');
+      let User = db.collection('User');
+
+      // Create the default User
+      let user = await User.insertOne({ email: defaultEmail, password: hash(defaultPassword) });
+
+      app = createApp(db, false);
+      agent = request.agent(app);
+
+      done();
+    }
+
+    init(done).catch(function(e) { throw new Error(e) });
   });
 
-  after(function(done) {
-    dropTables(app.get('db'), done);
+  after(async function(done) {
+    await db.dropDatabase();
+
+    done();
   });
 
   it('Tests the /register/ get route', function(done) {
@@ -77,11 +83,7 @@ describe('Registration testing', function() {
 
   it('Tests registering with a new email', function(done) {
     async function checkInvites(email, done) {
-      let invite = await Invite.findOne({
-        where : {
-          email
-        }
-      });
+      let invite = await Invite.find({ email }).limit(1).next();
 
       equal(invite.email, email, 'Invite not saved in the DB');
       done();
@@ -92,7 +94,6 @@ describe('Registration testing', function() {
       .send({
         email: testEmail
       })
-      .redirects()
       .end(function(err, res) {
         if (err) throw new Error(err);
 
@@ -106,11 +107,11 @@ describe('Registration testing', function() {
   });
 
   it('Tests registering with an already invited user', async function(done) {
-    let count = await Invite.count({ where: { email: testEmail }});
+    let count = await Invite.count({ email: testEmail });
     equal(count, 1, 'Should only be one invite');
 
     async function checkInvites(done) {
-      let count = await Invite.count({ where: { email: testEmail }});
+      let count = await Invite.count({ email: testEmail });
       equal(count, 1, 'Should not have created a second invite');
 
       done();
@@ -121,7 +122,6 @@ describe('Registration testing', function() {
       .send({
         email: testEmail
       })
-      .redirects()
       .end(function(err, res) {
         if (err) throw new Error(err);
 
@@ -137,7 +137,7 @@ describe('Registration testing', function() {
   });
 
   it('Tests when user tries to create an account with two different passwords', async function(done) {
-    let invite = await Invite.findOne({ where: { email: testEmail }});
+    let invite = await Invite.find({ email: testEmail }).limit(1).next();
 
     agent
       .post('/create-user/')
@@ -194,7 +194,7 @@ describe('Registration testing', function() {
   });
 
   it('Tests a valid registration', async function(done) {
-    let invite = await Invite.findOne({ where: { email: testEmail }});
+    let invite = await Invite.find({ email: testEmail }).limit(1).next();
 
     agent
       .post('/create-user/')
@@ -212,7 +212,7 @@ describe('Registration testing', function() {
         equal(res.body.user, testEmail, 'Should have included email in response');
 
         // Make sure the invite got deleted
-        let invite = await Invite.findOne({ where: { email: testEmail }});
+        let invite = await Invite.find({ email: testEmail }).limit(1).next();
         equal(!!invite, false, 'Should be no invite');
 
         done();

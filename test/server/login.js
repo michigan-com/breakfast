@@ -3,31 +3,36 @@ import { equal, notEqual } from 'assert';
 import request from 'supertest';
 
 import { createApp } from '../../dist/app';
-import { createTables } from '../../tasks/db/create';
-import { dropTables } from '../../tasks/db/drop';
+import dbConnect from '../../dist/util/dbConnect';
+import { hash } from '../../dist/util/hash';
 
-let app = createApp(process.env.TEST_DB_URI, false);
-let db = app.get('db');
-let agent = request.agent(app);
+var db, Invite, app, agent;
 
 let defaultEmail = 'testemail@testemail.com';
 let defaultPassword = 'test';
 
 describe('Route testing', function() {
-  // TODO abstract this
-  before(async function(done) {
-    createTables(db, function() {
-      db.User.create({
-        email: defaultEmail,
-        password: defaultPassword
-      }).then(function() {
-        done();
-      });
-    });
+  before(function(done) {
+    async function init(done) {
+      db = await dbConnect(process.env.TEST_DB_URI);
+      Invite = db.collection('Invite');
+      let User = db.collection('User');
+
+      // Create the default User
+      let user = await User.insertOne({ email: defaultEmail, password: hash(defaultPassword) });
+
+      app = createApp(db, false);
+      agent = request.agent(app);
+      done();
+    }
+
+    init(done).catch(function(e) { throw new Error(e) });
   });
 
-  after(function(done) {
-    dropTables(app.get('db'), done);
+  after(async function(done) {
+    await db.dropDatabase();
+
+    done();
   });
 
   it('Test to make sure you have to be logged in for /breakfast/ url', function(done) {
@@ -44,13 +49,15 @@ describe('Route testing', function() {
 
   it('Tests an unsuccessful login', function(done) {
     agent
-      .post('/login')
+      .post('/login/')
       .send({
         email: 'inavlid email',
         password: 'asdfasdfasdf'
       })
       .expect('Location', '/login/')
-      .end(done);
+      .end(function(err, res) {
+        done();
+      });
 
   })
 
