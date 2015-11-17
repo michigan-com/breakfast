@@ -217,8 +217,8 @@ export default class Canvas extends React.Component {
     return {
       height,
       width,
-      top: canvasStyle.height - height,
-      left: 0,
+      top: canvasStyle.height - (height * 2),
+      left: canvasStyle.width * .05,
       zIndex: 100
     }
   }

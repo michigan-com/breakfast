@@ -7,7 +7,7 @@ import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 
-let aspectRatios = [SQUARE, SIXTEEN_NINE, TWO_ONE, FACEBOOK, FIT_IMAGE];
+let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, SIXTEEN_NINE, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let fonts = [
   'Helvetica',
