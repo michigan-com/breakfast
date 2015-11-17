@@ -2,7 +2,6 @@
 
 $body-background: white;
 
-
 $button-font-size: 30px;
 $button-line-height: $button-font-size * 2;
 
@@ -10,19 +9,19 @@ $picker-padding: 30px;
 
 
 @mixin close-button() {
-  color: $danger-color;
+  color: grey;
   @include transition(all 250ms ease-in);
   cursor: pointer;
 
   &:hover {
     color: $body-background;
-    background: $danger-color;
+    background: grey;
   }
 }
 
 @mixin picker-open() {
   width: 50%;
-  @include button($secondary-color);
+  @include button(grey);
   margin: 0 auto;
   font-size: 15px;
   line-height: 30px;
@@ -135,7 +134,7 @@ body {
   font-size: 25px;
   line-height: 40px;
   margin: 10px 0px;
-  color: $secondary-color;
+  color: grey;
   text-transform: uppercase;
 }
 
@@ -166,7 +165,7 @@ body {
     width: 100%;
 
     .option-select {
-      @include button($secondary-color);
+      @include button(grey);
       font-size: 20px;
       line-height: 30px;
       display: inline-block;
@@ -255,7 +254,7 @@ body {
 
   .picker-container {
     position: absolute;
-    background: $secondary-color;
+    background: grey;
     padding: $picker-padding;
     z-index: 1000;
     top: -50px;
@@ -286,7 +285,7 @@ body {
   width: 100%;
 
   .aspect-ratio {
-    @include button($secondary-color);
+    @include button(grey);
     font-size: 30px;
     line-height: 40px;
     text-align: center;
