@@ -24,7 +24,7 @@ export default class Controls extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.contentType === 'watermark' && !nextProps.options.backgroundImg.src) {
-      actions.backgroundImageUrlChange('http://localhost:3000/img/default_image.jpg');
+      actions.backgroundImageUrlChange(`${window.location.origin}/img/default_image.jpg`);
     }
   }
 
@@ -204,13 +204,6 @@ export default class Controls extends React.Component {
                 onChange={ this.changeEvent.bind(this,
                   actions.backgroundImageFileChange,
                   this.getFileFromInput.bind(this, 'image-upload') )} />
-          </span>
-        </div>
-        <div className='input-container image-url-background'>
-          <span className='label'>Link</span>
-          <span className='input'>
-            <input type='text' id='image-url' ref='image-url'/>
-            <span className='get-image-url'>Load</span>
           </span>
         </div>
       </div>

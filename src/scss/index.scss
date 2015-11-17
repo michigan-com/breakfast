@@ -1,0 +1,26 @@
+@import './base';
+
+h1 {
+  text-align: center;
+}
+
+.buttons {
+  width: 100%;
+
+  a {
+    display: inline-block;
+    width: 30%;
+    margin: 20px 10%;
+    font-size: 30px;
+    height: 40px;
+    line-height: 40px;
+    background-color: $primary-color;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      background-color: darken($primary-color, 15%);
+    }
+  }
+}

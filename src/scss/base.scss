@@ -1,9 +1,11 @@
 @import 'bourbon';
 @import 'neat';
 
-$primary-color: #40912F;
-$secondary-color: #40867C;
-$danger-color: #A83641;
+// http://paletton.com/#uid=70-0u0ktZqWjExNoNucvQlPDSgL
+$primary-color: #1A3292;
+$secondary-color: #0D6B85;
+$danger-color: #D7730E;
+$warning-color: #D79A0E;
 
 $body-background: white;
 $body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
@@ -22,16 +24,17 @@ body {
   box-sizing: border-box;
 }
 
-@mixin button($color: $primary-color) {
+@mixin button($color: $primary-color, $background-color: white) {
+  background-color: $background-color;
+  border: 1px solid $color;
   text-align: center;
   color: $color;
-  border: 1px solid $color;
   cursor: pointer;
   @include transition(background-color 250ms ease-in, color 250ms ease-in);
 
   &.active, &:hover {
     background-color: $color;
-    color: white;
+    color: $background-color;
   }
 }
 
