@@ -25,7 +25,7 @@ xr.get('/logos/getLogos/')
 
 function generateDefaultOptions() {
   return  {
-    fontSize: 20,
+    fontSize: 40,
     fontColor: '#ffffff',
     fontFace: fonts[0],
 

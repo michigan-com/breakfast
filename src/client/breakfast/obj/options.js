@@ -152,7 +152,7 @@ export default class Controls extends React.Component {
         <div className='input-container'>
           <span className='label'>Size</span>
           <span className='input'>
-            <input type='range' min='10' max='60' ref='font-size'
+            <input type='range' min='10' max='100' ref='font-size'
                 value={ options.fontSize }
                 onChange={ this.changeEvent.bind(this,
                   actions.fontSizeChange,
