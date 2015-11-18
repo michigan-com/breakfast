@@ -2,10 +2,8 @@ import xr from 'xr';
 import Dispatcher from '../dispatcher';
 import { actions } from '../lib/constants';
 import OptionStore from '../store/options';
-import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
-let logos = OptionStore.getLogoOptions();
 let fonts = OptionStore.getFontOptions();
 let backgroundTypes = OptionStore.getBackgroundTypeOptions();
 
@@ -118,6 +116,8 @@ export default class OptionActions {
   }
 
   logoChange(index) {
+    let logos = OptionStore.getLogoOptions();
+    let logoInfo = OptionStore.getLogoInfo();
     if (index < 0 || index >= logos.length) return;
 
     // Clear out the current logo

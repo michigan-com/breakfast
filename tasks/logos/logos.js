@@ -15,12 +15,23 @@ var ROOT_DIR = path.join(__dirname, '..', '..')
  */
 gulp.task('generateLogoJson', function() {
   var logo_root = path.join(ROOT_DIR, 'public', 'img', 'logos');
-  var outfile = path.join(ROOT_DIR, 'src', 'js', 'lib', 'logoInfo.json');
+  var outfile = path.join(ROOT_DIR, 'logoInfo.json');
   var ratioRegex = /width="(\d+(?:\.\d+)?)px"\s+height="(\d+(?:\.\d+)?)px"/;
   var logoNames = {
-    'dfp.svg': 'Detroit Free Press',
-    'dn.svg': 'Detroit News',
-    'michigan.svg': 'Michigan.com'
+    'dfp.svg': {
+      name: 'Detroit Free Press',
+      domain: 'freepress.com'
+    },
+
+    'dn.svg': {
+      name: 'Detroit News',
+      domain: 'detroitnews.com'
+    },
+
+    'michigan.svg': {
+      name: 'Michigan.com',
+      domain: 'michigan.com'
+    }
   };
 
   var files = fs.readdirSync(logo_root);
@@ -44,7 +55,8 @@ gulp.task('generateLogoJson', function() {
       width: match[1],
       height: match[2],
       aspectRatio: match[1] / match[2],
-      name: logoNames[file]
+      name: logoNames[file].name,
+      domain: logoNames[file].domain
     }
   }
   fs.writeFile(outfile, JSON.stringify(logoJson), function(err) {

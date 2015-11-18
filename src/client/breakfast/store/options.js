@@ -1,12 +1,13 @@
+import xr from 'xr';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
 import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, TWO_ONE, FIT_IMAGE, CHANGE_EVENT,
   BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../lib/constants';
-import logoInfo from '../lib/logoInfo.json';
 
 let Actions = actions.options;
 
+let logoInfo = {}; // need to ajax this info in
 let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, SIXTEEN_NINE, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let fonts = [
@@ -14,6 +15,13 @@ let fonts = [
   'Impact',
   'Georgia'
 ];
+
+// Get the logos
+xr.get('/logos/getLogos/')
+  .then((data) => {
+    logoInfo = data;
+    OptionStore.logosLoaded();
+  });
 
 function generateDefaultOptions() {
   return  {
@@ -32,7 +40,8 @@ function generateDefaultOptions() {
     // Aspect ratio for the canvas
     aspectRatio: aspectRatios[0],
 
-    logo: {}
+    logo: {},
+    logoOptions: []
   }
 }
 
@@ -61,14 +70,11 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   },
 
   getLogoOptions() {
-    let logos = [];
-    for (let filename in logoInfo) {
-      logos.push({
-        name: logoInfo[filename].name,
-        filename
-      });
-    }
-    return logos;
+    return options.logoOptions;
+  },
+
+  getLogoInfo() {
+    return logoInfo;
   },
 
   getFontOptions() {
@@ -174,6 +180,23 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   logoChange(filename, aspectRatio) {
     options.logo = { filename, aspectRatio };
     this.emitChange();
+  },
+
+  logosLoaded() {
+    let logos = [];
+    for (let filename in logoInfo) {
+      logos.push({
+        name: logoInfo[filename].name,
+        filename
+      });
+    }
+    options.logoOptions = logos;
+
+    if (logos.length) {
+      let activeLogo = logos[0]
+
+      this.logoChange(activeLogo.filename, logoInfo[activeLogo.filename].aspectRatio);
+    }
   }
 });
 

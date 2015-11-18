@@ -24,7 +24,6 @@ class PicEditor extends React.Component {
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.contentTypes = ContentStore.getContentTypes();
     this.aspectRatios = OptionStore.getAspectRatioOptions();
-    this.logos = OptionStore.getLogoOptions();
     this.fonts = OptionStore.getFontOptions();
     this.logoAspectRatios = {};
     this.defaultOptions = OptionStore.getDefaults();
@@ -113,7 +112,7 @@ class PicEditor extends React.Component {
               defaults={ contentDefaults }
               content={ ContentStore.getContent() }/>
           <Options fonts={ this.fonts }
-              logos={ this.logos }
+              logos={ this.state.logoOptions }
               aspectRatios={ this.aspectRatios }
               contentType={ content.type }
               options={ OptionStore.getOptions() }/>

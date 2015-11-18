@@ -36,7 +36,7 @@ function createPassport(app) {
     return done(null, user._id);
   });
 
-  passport.deserializeUser(function(_id, done) {
+  passport.deserializeUser(async function(_id, done) {
     async function deserialize(_id) {
       let user = await User.find({ _id: ObjectID(_id) }).limit(1).next();
 
@@ -44,7 +44,7 @@ function createPassport(app) {
     }
 
     try {
-      let user = deserialize(_id);
+      let user = await deserialize(_id);
       done(null, user);
     } catch(e) {
       done(e, false);

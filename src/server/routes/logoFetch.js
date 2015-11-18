@@ -3,9 +3,12 @@ import path from 'path';
 
 import env from '../env';
 import { loginRequired } from '../middleware/login';
+import { getDomainFromEmail } from '../util/parse';
 import dir from '../util/dir';
+import logoJson from '../../logoInfo.json';
 
 var LOGO_ROOT = dir('logos');
+
 
 class LogoFetch {
   constructor(logoRoot=LOGO_ROOT) {
@@ -91,6 +94,19 @@ class LogoFetch {
 function registerRoutes(app, router, passport) {
   let logoFetch = new LogoFetch();
 
+  // Getting the logo info
+  router.get('/logos/getLogos/', loginRequired, function(req, res, next) {
+    let domain = getDomainFromEmail(req.user.email);
+    let approvedLogos = {};
+    for (let filename in Object.assign({}, logoJson)) {
+      let logoInfo = logoJson[filename];
+      if (domain !== logoInfo.domain) continue;
+      approvedLogos[filename] = logoInfo;
+    }
+    res.json(approvedLogos);
+  });
+
+  // Getting the logo files
   router.get('/logos/:color/:filename', loginRequired, handleGetLogo);
   router.get('/logos/:filename', loginRequired, handleGetLogo);
 
@@ -103,6 +119,15 @@ function registerRoutes(app, router, passport) {
   async function getLogo(req, res, next) {
     let color = 'color' in req.params ? req.params.color : undefined;
     let filename = req.params.filename;
+    let logoInfo = logoJson[filename];
+    let domain = getDomainFromEmail(req.user.email);
+
+    // Don't load the logo if the user isn't authorized to do so
+    if (domain !== logoInfo.domain) {
+      res.status(403).send();
+      return;
+    }
+
 
     let data = await logoFetch.getLogo(filename, color);
 
@@ -113,6 +138,8 @@ function registerRoutes(app, router, passport) {
       'Content-Length': data.length
     }).send(data);
   }
+
+
 }
 
 module.exports = {
