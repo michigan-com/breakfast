@@ -8,6 +8,7 @@ let validEmailDomains = [
   'hometownlife.com',
   'livingstondaily.com',
   'lohud.com',
+  'usatoday.com'
 ];
 
 // http://stackoverflow.com/a/46181/1337683

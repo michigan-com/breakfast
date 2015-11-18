@@ -7,27 +7,30 @@ import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, TWO_ONE, FIT_IMAGE, CHANGE_EVE
 
 let Actions = actions.options;
 
-let logoInfo = {}; // need to ajax this info in
 let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, SIXTEEN_NINE, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
-let fonts = [
-  'Helvetica',
-  'Impact',
-  'Georgia'
-];
 
-// Get the logos
+// Info that gets ajaxed in bc a login is needed
+let logoInfo = {};
+let fonts = [];
 xr.get('/logos/getLogos/')
   .then((data) => {
     logoInfo = data;
     OptionStore.logosLoaded();
   });
 
+xr.get('/fonts/getFonts/')
+  .then((data) => {
+    fonts = data.fonts;
+    OptionStore.fontsLoaded();
+  })
+
 function generateDefaultOptions() {
   return  {
     fontSize: 40,
     fontColor: '#ffffff',
-    fontFace: fonts[0],
+    fontFace: 'Helvetica',
+    fontOptions: [],
 
     backgroundType: BACKGROUND_COLOR,
     backgroundColor: '#000000',
@@ -197,6 +200,11 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
       this.logoChange(activeLogo.filename, logoInfo[activeLogo.filename].aspectRatio);
     }
+  },
+
+  fontsLoaded() {
+    options.fontOptions = fonts.slice(); // copy
+    this.emitChange();
   }
 });
 

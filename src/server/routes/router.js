@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { createPassport } from './passport';
 import logoFetch from './logoFetch';
+import fontFetch from './fontFetch';
 import login from './login';
 import register from './register';
 import { loginRequired } from '../middleware/login';
@@ -12,6 +13,7 @@ function registerRoutes(app) {
 
   // Create the different routes
   logoFetch.registerRoutes(app, router, passport);
+  fontFetch.registerRoutes(app, router, passport);
   login.registerRoutes(app, router, passport);
   register.registerRoutes(app, router, passport);
 

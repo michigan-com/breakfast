@@ -4,7 +4,6 @@ import { actions } from '../lib/constants';
 import OptionStore from '../store/options';
 
 let Actions = actions.options;
-let fonts = OptionStore.getFontOptions();
 let backgroundTypes = OptionStore.getBackgroundTypeOptions();
 
 export default class OptionActions {
@@ -27,8 +26,9 @@ export default class OptionActions {
   }
 
   fontFaceChange(index) {
-    if (index < 0 || index >= fonts.length) return;
+    let fonts = OptionStore.getFontOptions();
 
+    if (index < 0 || index >= fonts.length) return;
     Dispatcher.dispatch({
       type: Actions.fontFaceChange,
       value: fonts[index]

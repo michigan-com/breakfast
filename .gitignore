@@ -4,3 +4,4 @@ dist/
 env.sh
 public/js
 public/css
+.DS_STORE
