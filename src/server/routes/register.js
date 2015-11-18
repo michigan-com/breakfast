@@ -72,17 +72,20 @@ function registerRoutes(app, router, passport) {
       }
 
       let invite = await Invite.find({ email }).limit(1).next();
-
+      let token;
       if (!invite) {
-        let token = uuid()
+        token = uuid()
         invite = await Invite.insertOne({ email, token });
+      } else {
+        token = invite.token;
       }
+
 
       // for now, just forward to new url
       let url = formatInviteUrl(invite);
       res.status(200).send({
         success: true,
-        token: invite.token
+        token
       });
 
       // TODO get email working.
@@ -104,6 +107,7 @@ function registerRoutes(app, router, passport) {
 
       if (!invite) {
         res.status(404).end();
+        return;
       }
 
       // Generate form fields
