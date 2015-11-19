@@ -44,7 +44,8 @@ function generateDefaultOptions() {
     aspectRatio: aspectRatios[0],
 
     logo: {},
-    logoOptions: []
+    logoOptions: [],
+    logoColor: '#ffffff'
   }
 }
 
@@ -185,6 +186,11 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  logoColorChange(color) {
+    options.logoColor = color;
+    this.emitChange();
+  },
+
   logosLoaded() {
     let logos = [];
     for (let filename in logoInfo) {
@@ -236,6 +242,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.logoChange:
       OptionStore.logoChange(action.filename, action.aspectRatio);
+      break;
+    case Actions.logoColorChange:
+      OptionStore.logoColorChange(action.value);
       break;
   }
 });

@@ -120,13 +120,6 @@ export default class OptionActions {
     let logoInfo = OptionStore.getLogoInfo();
     if (index < 0 || index >= logos.length) return;
 
-    // Clear out the current logo
-    Dispatcher.dispatch({
-      type: Actions.logoChange,
-      filename: '',
-      aspectRatio: 0.0
-    });
-
     let logo = logos[index];
     let filename = logo.filename;
 
@@ -135,13 +128,17 @@ export default class OptionActions {
     }
 
     let aspectRatio = logoInfo[filename].aspectRatio;
+    Dispatcher.dispatch({
+      type: Actions.logoChange,
+      filename,
+      aspectRatio
+    });
+  }
 
-    setTimeout(function() {
-      Dispatcher.dispatch({
-        type: Actions.logoChange,
-        filename,
-        aspectRatio
-      })
-    }, 25);
+  logoColorChange(color) {
+    Dispatcher.dispatch({
+      type: Actions.logoColorChange,
+      value: color
+    });
   }
 }

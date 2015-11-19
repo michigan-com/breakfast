@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
+
 import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
 import Options from './obj/options';

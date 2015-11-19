@@ -344,14 +344,15 @@ export default class Canvas extends React.Component {
 
   renderLogo() {
     let logo = this.props.options.logo;
+    let logoColor = this.props.options.logoColor.replace('#', '');
     if (!logo.filename) {
       return;
     }
 
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/logos/${logo.filename}`;
+    let logoUrl = `${window.location.origin}/logos/${logo.filename}/?color=${logoColor}`;
     return (
-       <Image src={ logoUrl } style={ style }/>
+       <Image src={ logoUrl } style={ style } key={ logoUrl }/>
     )
   }
 
