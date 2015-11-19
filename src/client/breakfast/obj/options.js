@@ -244,7 +244,7 @@ export default class Controls extends React.Component {
 
   renderLogoOptions() {
     let logoSelect = null;
-    if (this.props.logos.length) {
+    if (this.props.logos.length > 1) {
       let currentIndex = 0;
       for (let i = 0; i < this.props.logos.length; i++) {
         let logo = this.props.logos[i];
@@ -285,7 +285,6 @@ export default class Controls extends React.Component {
    */
   renderOptionSelect() {
     function renderOption(option, index) {
-      if (option === 'logo' && this.props.logos.length <= 1) return;
 
       let className = 'option-select';
       let callback = this.selectOption.bind(this, option);
