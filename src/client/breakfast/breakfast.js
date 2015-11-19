@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
+
 import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
 import Options from './obj/options';
@@ -24,7 +25,6 @@ class PicEditor extends React.Component {
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.contentTypes = ContentStore.getContentTypes();
     this.aspectRatios = OptionStore.getAspectRatioOptions();
-    this.fonts = OptionStore.getFontOptions();
     this.logoAspectRatios = {};
     this.defaultOptions = OptionStore.getDefaults();
 
@@ -97,13 +97,14 @@ class PicEditor extends React.Component {
   render() {
     let contentDefaults = ContentStore.getDefaults();
     let content = ContentStore.getContent();
+    let options = OptionStore.getOptions();
     let canvasData = this.state[content.type];
     return(
       <div className='pic-editor'>
         <div className='image-container'>
           <Canvas canvasData={ canvasData }
               fontSize={ this.state.fontSize }
-              options={ OptionStore.getOptions() }
+              options={ options }
               content={ content }
               ref='canvas'/>
         </div>
@@ -111,7 +112,7 @@ class PicEditor extends React.Component {
           <Content contentTypes={ this.contentTypes }
               defaults={ contentDefaults }
               content={ ContentStore.getContent() }/>
-          <Options fonts={ this.fonts }
+          <Options fonts={ options.fontOptions }
               logos={ this.state.logoOptions }
               aspectRatios={ this.aspectRatios }
               contentType={ content.type }

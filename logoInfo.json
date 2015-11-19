@@ -1,1 +1,79 @@
-{"dfp.svg":{"width":"288","height":"61","aspectRatio":4.721311475409836,"name":"Detroit Free Press","domain":"freepress.com"},"dn.svg":{"width":"566.971","height":"74.996","aspectRatio":7.560016534215158,"name":"Detroit News","domain":"detroitnews.com"},"michigan.svg":{"width":"157.5","height":"157.5","aspectRatio":1,"name":"Michigan.com","domain":"michigan.com"}}
+{
+  "alamogordo.svg": {
+    "width": "362",
+    "height": "50",
+    "aspectRatio": 7.24,
+    "name": "alamogordo.svg",
+    "domain": "alamogordonews.com"
+  },
+  "dfp.svg": {
+    "width": "288",
+    "height": "61",
+    "aspectRatio": 4.721311475409836,
+    "name": "dfp.svg",
+    "domain": "freepress.com"
+  },
+  "dn.svg": {
+    "width": "566.971",
+    "height": "74.996",
+    "aspectRatio": 7.560016534215158,
+    "name": "dn.svg",
+    "domain": "detroitnews.com"
+  },
+  "michigan.svg": {
+    "width": "157.5",
+    "height": "157.5",
+    "aspectRatio": 1,
+    "name": "michigan.svg",
+    "domain": "michigan.com"
+  },
+  "usat-life.svg": {
+    "width": "202",
+    "height": "29",
+    "aspectRatio": 6.9655172413793105,
+    "name": "usat-life.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-money.svg": {
+    "width": "246",
+    "height": "29",
+    "aspectRatio": 8.482758620689655,
+    "name": "usat-money.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-news.svg": {
+    "width": "227",
+    "height": "29",
+    "aspectRatio": 7.827586206896552,
+    "name": "usat-news.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-opinion.svg": {
+    "width": "257",
+    "height": "29",
+    "aspectRatio": 8.862068965517242,
+    "name": "usat-opinion.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-sports.svg": {
+    "width": "246",
+    "height": "29",
+    "aspectRatio": 8.482758620689655,
+    "name": "usat-sports.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-tech.svg": {
+    "width": "215",
+    "height": "29",
+    "aspectRatio": 7.413793103448276,
+    "name": "usat-tech.svg",
+    "domain": "usatoday.com"
+  },
+  "usat-travel.svg": {
+    "width": "240",
+    "height": "29",
+    "aspectRatio": 8.275862068965518,
+    "name": "usat-travel.svg",
+    "domain": "usatoday.com"
+  }
+}

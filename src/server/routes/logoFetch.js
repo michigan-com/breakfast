@@ -1,11 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
+import debug from 'debug';
+import cheerio from 'cheerio';
+
 import env from '../env';
 import { loginRequired } from '../middleware/login';
 import { getDomainFromEmail } from '../util/parse';
 import dir from '../util/dir';
 import logoJson from '../../logoInfo.json';
+
+var logger = debug('breakfast:logoFetch');
 
 var LOGO_ROOT = dir('logos');
 
@@ -13,7 +18,6 @@ var LOGO_ROOT = dir('logos');
 class LogoFetch {
   constructor(logoRoot=LOGO_ROOT) {
     this.logoRoot = logoRoot;
-    this.colorRegex = /<path fill="#[a-fA-F0-9]+"/g;
   }
 
 
@@ -50,8 +54,12 @@ class LogoFetch {
   }
 
   colorLogo(data, color) {
-    if (color.length && color[0] !== '#') color = `#${color}`
-    return data.replace(this.colorRegex, `<path fill="${color}"`);
+    let $ = cheerio.load(data);
+    $('path').each(function(index, path) {
+      $(path).attr('fill', `#${color}`);
+      $(path).attr('mask', '');
+    });
+    return $.html()
   }
 
   /**
@@ -107,17 +115,14 @@ function registerRoutes(app, router, passport) {
   });
 
   // Getting the logo files
-  router.get('/logos/:color/:filename', loginRequired, handleGetLogo);
-  router.get('/logos/:filename', loginRequired, handleGetLogo);
-
-  function handleGetLogo(req, res, next) {
+  router.get('/logos/:filename', loginRequired, (req, res, next) => {
     return getLogo(req, res, next).catch(function(err) {
       next(err);
     });
-  }
+  });
 
   async function getLogo(req, res, next) {
-    let color = 'color' in req.params ? req.params.color : undefined;
+    let color = 'color' in req.query ? req.query.color : undefined;
     let filename = req.params.filename;
     let logoInfo = logoJson[filename];
     let domain = getDomainFromEmail(req.user.email);

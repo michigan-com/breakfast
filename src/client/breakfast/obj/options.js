@@ -152,7 +152,7 @@ export default class Controls extends React.Component {
         <div className='input-container'>
           <span className='label'>Size</span>
           <span className='input'>
-            <input type='range' min='10' max='60' ref='font-size'
+            <input type='range' min='10' max='100' ref='font-size'
                 value={ options.fontSize }
                 onChange={ this.changeEvent.bind(this,
                   actions.fontSizeChange,
@@ -243,25 +243,40 @@ export default class Controls extends React.Component {
   }
 
   renderLogoOptions() {
-    if (!this.props.logos.length) {
-      return (<div>No logos found...</div>);
-    }
+    let logoSelect = null;
+    if (this.props.logos.length) {
+      let currentIndex = 0;
+      for (let i = 0; i < this.props.logos.length; i++) {
+        let logo = this.props.logos[i];
 
-    let currentIndex = 0;
-    for (let i = 0; i < this.props.logos.length; i++) {
-      let logo = this.props.logos[i];
-
-      if (logo.filename === this.props.options.logo.filename) {
-        currentIndex = i;
-        break;
+        if (logo.filename === this.props.options.logo.filename) {
+          currentIndex = i;
+          break;
+        }
       }
+
+      logoSelect = (
+        <div className='input-container'>
+          <span className='label'>Logo</span>
+          <span className='input'>
+            <LogoSelect options={ this.props.logos } valueKey='name'
+              onSelect={ this.logoChanged.bind(this) } currentIndex={ currentIndex }/>
+          </span>
+        </div>
+      )
     }
 
     return (
       <div className='option logo'>
         <div className='input-title'>Logo</div>
-        <LogoSelect options={ this.props.logos } valueKey='name'
-            onSelect={ this.logoChanged.bind(this) } currentIndex={ currentIndex }/>
+        { logoSelect }
+        <div className='input-container'>
+          <span className='label'>Color</span>
+          <span className='input'>
+            <PickerToggle color={ this.props.options.logoColor }
+                callback={ this.colorChangeCallback(actions.logoColorChange) }/>
+          </span>
+        </div>
       </div>
     )
   }
@@ -380,7 +395,7 @@ class LogoSelect extends Select {
 
   getDisplayValue(option, index) {
     return (
-      <img src={ `/logos/000000/${option.filename}`} title={ option.name } alt={ option.name }/>
+      <img src={ `/logos/${option.filename}?color=000000`} title={ option.name } alt={ option.name }/>
     )
   }
 }

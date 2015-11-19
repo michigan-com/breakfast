@@ -4,7 +4,6 @@ import { actions } from '../lib/constants';
 import OptionStore from '../store/options';
 
 let Actions = actions.options;
-let fonts = OptionStore.getFontOptions();
 let backgroundTypes = OptionStore.getBackgroundTypeOptions();
 
 export default class OptionActions {
@@ -27,8 +26,9 @@ export default class OptionActions {
   }
 
   fontFaceChange(index) {
-    if (index < 0 || index >= fonts.length) return;
+    let fonts = OptionStore.getFontOptions();
 
+    if (index < 0 || index >= fonts.length) return;
     Dispatcher.dispatch({
       type: Actions.fontFaceChange,
       value: fonts[index]
@@ -120,13 +120,6 @@ export default class OptionActions {
     let logoInfo = OptionStore.getLogoInfo();
     if (index < 0 || index >= logos.length) return;
 
-    // Clear out the current logo
-    Dispatcher.dispatch({
-      type: Actions.logoChange,
-      filename: '',
-      aspectRatio: 0.0
-    });
-
     let logo = logos[index];
     let filename = logo.filename;
 
@@ -135,13 +128,17 @@ export default class OptionActions {
     }
 
     let aspectRatio = logoInfo[filename].aspectRatio;
+    Dispatcher.dispatch({
+      type: Actions.logoChange,
+      filename,
+      aspectRatio
+    });
+  }
 
-    setTimeout(function() {
-      Dispatcher.dispatch({
-        type: Actions.logoChange,
-        filename,
-        aspectRatio
-      })
-    }, 25);
+  logoColorChange(color) {
+    Dispatcher.dispatch({
+      type: Actions.logoColorChange,
+      value: color
+    });
   }
 }

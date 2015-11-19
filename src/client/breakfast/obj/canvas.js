@@ -130,8 +130,9 @@ export default class Canvas extends React.Component {
 
   getQuoteStyle() {
     let canvasStyle = this.getCanvasStyle();
+    let fontSize = canvasStyle.height * .2 * (this.props.fontSize / 100);
 
-    let textHeight = this.props.fontSize * 1.25;
+    let textHeight = fontSize * 1.25;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
     return {
       text: {
@@ -139,7 +140,7 @@ export default class Canvas extends React.Component {
         left: this.canvasPadding / 2,
         eight: textHeight,
         lineHeight: textHeight,
-        fontSize: this.props.fontSize,
+        fontSize: fontSize,
         width: canvasStyle.textWidth,
         fontFace: font,
         color: this.props.options.fontColor
@@ -148,9 +149,10 @@ export default class Canvas extends React.Component {
         top: 50 + (this.canvasPadding / 2),
         left: this.canvasPadding / 2,
         height: textHeight,
-        lineHeight: 20,
-        fontSize: 15,
+        lineHeight: textHeight * 1.25,
+        fontSize: fontSize * .75,
         width: canvasStyle.textWidth,
+        fontFace: font,
         color: this.props.options.fontColor
       }
     }
@@ -159,11 +161,13 @@ export default class Canvas extends React.Component {
   getListStyle() {
     let canvasStyle = this.getCanvasStyle();
 
-    let headlineFontSize = this.props.fontSize * 1.5;
+    // this.props.fontSize is a scale from 0-100. Max font size === half the canvas height
+    let headlineFontSize = canvasStyle.height * .3  *  (this.props.fontSize / 100);
     let headlineSize = headlineFontSize * 1.25;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
-    let listItemSize = this.props.fontSize * 1.25;
+    let listItemFontSize = canvasStyle.height * .2 * (this.props.fontSize / 100);
+    let listItemHeight = listItemFontSize;
     return {
       headline: {
         top: this.canvasPadding,
@@ -178,9 +182,9 @@ export default class Canvas extends React.Component {
       listItem: {
         top: headlineSize + 10,
         left: this.canvasPadding,
-        height: listItemSize,
-        lineHeight: listItemSize * 1.25,
-        fontSize: this.props.fontSize,
+        height: listItemHeight,
+        lineHeight: listItemHeight * 1.25,
+        fontSize: listItemFontSize,
         width: canvasStyle.textWidth - (this.canvasPadding * 2),
         fontFace: font,
         color: this.props.options.fontColor
@@ -340,14 +344,15 @@ export default class Canvas extends React.Component {
 
   renderLogo() {
     let logo = this.props.options.logo;
+    let logoColor = this.props.options.logoColor.replace('#', '');
     if (!logo.filename) {
       return;
     }
 
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/logos/${logo.filename}`;
+    let logoUrl = `${window.location.origin}/logos/${logo.filename}/?color=${logoColor}`;
     return (
-       <Image src={ logoUrl } style={ style }/>
+       <Image src={ logoUrl } style={ style } key={ logoUrl }/>
     )
   }
 

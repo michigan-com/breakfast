@@ -1,0 +1,472 @@
+{
+  "Alamogordo Daily News": {
+    "domain": "alamogordonews.com",
+    "logo": {
+      "filename": "alamogordo.svg"
+    }
+  },
+
+  "Alexandria": {
+    "domain": "thetowntalk.com"
+  },
+
+  "Appleton": {
+    "domain": "postcrescent.com"
+  },
+
+  "Asbury Park": {
+    "domain": "app.com"
+  },
+
+  "Asheville": {
+    "domain": "citizen-times.com"
+  },
+
+  "Battle Creek": {
+    "domain": "battlecreekenquirer.com"
+  },
+
+  "Binghamton": {
+    "domain": "pressconnects.com"
+  },
+
+  "Black Mountain News": {
+    "domain": "blackmountainnews.com"
+  },
+
+  "Brevard": {
+    "domain": "floridatoday.com"
+  },
+
+  "Bucyrus": {
+    "domain": "bucyrustelegraphforum.com"
+  },
+
+  "Burlington": {
+    "domain": "burlingtonfreepress.com"
+  },
+
+  "Carlsbad Current-Argus": {
+    "domain": "currentargus.com"
+  },
+
+  "Central Florida Future": {
+    "domain": "centralfloridafuture.com"
+  },
+
+  "Central Jersey": {
+    "domain": "mycentraljersey.com"
+  },
+
+  "Chambersburg": {
+    "domain": "publicopiniononline.com"
+  },
+
+  "Cherry Hill": {
+    "domain": "courierpostonline.com"
+  },
+
+  "Chillicothe": {
+    "domain": "chillicothegazette.com"
+  },
+
+  "Cincinnati": {
+    "domain": "cincinnati.com"
+  },
+
+  "Clarksville": {
+    "domain": "theleafchronicle.com"
+  },
+
+  "Coshocton": {
+    "domain": "coshoctontribune.com"
+  },
+
+  "Deming Headlight": {
+    "domain": "demingheadlight.com"
+  },
+
+  "Des Moines": {
+    "domain": "desmoinesregister.com"
+  },
+
+  "Detroit Free Press": {
+    "domain": "freepress.com",
+    "logo": {
+      "filename": "dfp.svg"
+    }
+  },
+
+  "Detroit News": {
+    "domain": "detroitnews.com",
+    "logo": {
+      "filename": "dn.svg"
+    }
+  },
+
+  "Elmira": {
+    "domain": "stargazette.com"
+  },
+
+  "El Paso": {
+    "domain": "elpasotimes.com"
+  },
+
+  "El Sol": {
+    "domain": "elsoldesalinas.com"
+  },
+
+  "Farmers Advance": {
+    "domain": "farmersadvance.com"
+  },
+
+  "Farmington Daily Times": {
+    "domain": "daily-times.com"
+  },
+
+  "Fond du Lac": {
+    "domain": "fdlreporter.com"
+  },
+
+  "Fort Collins": {
+    "domain": "coloradoan.com"
+  },
+
+  "Fort Myers": {
+    "domain": "news-press.com"
+  },
+
+  "Fremont": {
+    "domain": "thenews-messenger.com"
+  },
+
+  "FSU News": {
+    "domain": "fsunews.com"
+  },
+
+  "Great Falls": {
+    "domain": "greatfallstribune.com"
+  },
+
+  "Green Bay": {
+    "domain": "greenbaypressgazette.com"
+  },
+
+  "Greenville": {
+    "domain": "greenvilleonline.com"
+  },
+
+  "Guam": {
+    "domain": "guampdn.com"
+  },
+
+  "Hammonton": {
+    "domain": "thehammontonnews.com"
+  },
+
+  "Hanover": {
+    "domain": "eveningsun.com"
+  },
+
+  "Hattiesburg": {
+    "domain": "hattiesburgamerican.com"
+  },
+
+  "Hawk Central": {
+    "domain": "hawkcentral.com"
+  },
+
+  "Indianapolis": {
+    "domain": "indystar.com"
+  },
+
+  "In York": {
+    "domain": "inyork.com"
+  },
+
+  "Iowa City": {
+    "domain": "press-citizen.com"
+  },
+
+  "Ithaca": {
+    "domain": "ithacajournal.com"
+  },
+
+  "Jackson (MS)": {
+    "domain": "clarionledger.com"
+  },
+
+  "Jackson (TN)": {
+    "domain": "jacksonsun.com"
+  },
+
+  "Lafayette (IN)": {
+    "domain": "jconline.com"
+  },
+
+  "Lafayette (LA)": {
+    "domain": "theadvertiser.com"
+  },
+
+  "Lancaster": {
+    "domain": "lancastereaglegazette.com"
+  },
+
+  "Lansing": {
+    "domain": "lsj.com"
+  },
+
+  "Las Cruces Sun-News": {
+    "domain": "lcsun-news.com"
+  },
+
+  "La Voz": {
+    "domain": "lavozarizona.com"
+  },
+
+  "Lebanon Daily News": {
+    "domain": "ldnews.com"
+  },
+
+  "Livingston": {
+    "domain": "livingstondaily.com"
+  },
+
+  "Livonia": {
+    "domain": "hometownlife.com"
+  },
+
+  "Louisville": {
+    "domain": "courier-journal.com"
+  },
+
+  "Manitowoc": {
+    "domain": "htrnews.com"
+  },
+
+  "Mansfield": {
+    "domain": "mansfieldnewsjournal.com"
+  },
+
+  "Marco Island": {
+    "domain": "marcoislandflorida.com"
+  },
+
+  "Marion": {
+    "domain": "marionstar.com"
+  },
+
+  "Marshfield": {
+    "domain": "marshfieldnewsherald.com"
+  },
+
+  "Michigan.com": {
+    "domain": "michigan.com",
+    "logo": {
+      "filename": "michigan.svg"
+    }
+  },
+
+  "MilitaryTimes": {
+    "domain": "militarytimes.com"
+  },
+
+  "Monroe": {
+    "domain": "thenewsstar.com"
+  },
+
+  "Montgomery": {
+    "domain": "montgomeryadvertiser.com"
+  },
+
+  "Morristown": {
+    "domain": "dailyrecord.com"
+  },
+
+  "Mountain Home": {
+    "domain": "baxterbulletin.com"
+  },
+
+  "Muncie": {
+    "domain": "thestarpress.com"
+  },
+
+  "Murfreesboro": {
+    "domain": "dnj.com"
+  },
+
+  "Nashville": {
+    "domain": "tennessean.com"
+  },
+
+  "Newark": {
+    "domain": "newarkadvocate.com"
+  },
+
+  "Opelousas": {
+    "domain": "dailyworld.com"
+  },
+
+  "Oshkosh": {
+    "domain": "thenorthwestern.com"
+  },
+
+  "Packers News": {
+    "domain": "packersnews.com"
+  },
+
+  "Palm Springs": {
+    "domain": "desertsun.com"
+  },
+
+  "Pensacola": {
+    "domain": "pnj.com"
+  },
+
+  "Phoenix": {
+    "domain": "azcentral.com"
+  },
+
+  "Port Clinton": {
+    "domain": "portclintonnewsherald.com"
+  },
+
+  "Port Huron": {
+    "domain": "thetimesherald.com"
+  },
+
+  "Poughkeepsie": {
+    "domain": "poughkeepsiejournal.com"
+  },
+
+  "Reno Gazette-Journal": {
+    "domain": "rgj.com"
+  },
+
+  "Reno-Tahoe": {
+    "domain": "reno.com/"
+  },
+
+  "Richmond": {
+    "domain": "pal-item.com"
+  },
+
+  "Rochester": {
+    "domain": "democratandchronicle.com"
+  },
+
+  "Ruidoso News": {
+    "domain": "ruidosonews.com"
+  },
+
+  "Salem": {
+    "domain": "statesmanjournal.com"
+  },
+
+  "Salinas": {
+    "domain": "thecalifornian.com"
+  },
+
+  "Salisbury": {
+    "domain": "delmarvanow.com"
+  },
+
+  "Sheboygan": {
+    "domain": "sheboyganpress.com"
+  },
+
+  "Shreveport": {
+    "domain": "shreveporttimes.com"
+  },
+
+  "Silver City Sun News": {
+    "domain": "scsun-news.com"
+  },
+
+  "Sioux Falls": {
+    "domain": "argusleader.com"
+  },
+
+  "Somos Frontera": {
+    "domain": "elpasoymas.com"
+  },
+
+  "Springfield": {
+    "domain": "news-leader.com"
+  },
+
+  "St. Cloud": {
+    "domain": "sctimes.com"
+  },
+
+  "St. George": {
+    "domain": "thespectrum.com"
+  },
+
+  "Staunton": {
+    "domain": "newsleader.com"
+  },
+
+  "Stevens Point": {
+    "domain": "stevenspointjournal.com"
+  },
+
+  "Tallahassee": {
+    "domain": "tallahassee.com"
+  },
+
+  "USA Today": {
+    "domain": "usatoday.com",
+    "logo": [{
+      "filename": "usat-life.svg"
+    }, {
+      "filename": "usat-money.svg"
+    }, {
+      "filename": "usat-news.svg"
+    }, {
+      "filename": "usat-opinion.svg"
+    }, {
+      "filename": "usat-sports.svg"
+    }, {
+      "filename": "usat-tech.svg"
+    }, {
+      "filename": "usat-travel.svg"
+    }]
+  },
+
+  "Vineland": {
+    "domain": "thedailyjournal.com"
+  },
+
+  "Visalia-Tulare": {
+    "domain": "visaliatimesdelta.com"
+  },
+
+  "Wausau": {
+    "domain": "wasaudailyherald.com"
+  },
+
+  "Westchester": {
+    "domain": "lohud.com"
+  },
+
+  "Wilmington": {
+    "domain": "delawareonline.com"
+  },
+
+  "Wisconsin Rapids": {
+    "domain": "wisconsinrapidstribune.com"
+  },
+
+  "York Daily Record": {
+    "domain": "ydr.com"
+  },
+
+  "York Dispatch": {
+    "domain": "yorkdispatch.com"
+  },
+
+  "Zanesville": {
+    "domain": "zanesvilletimesrecorder.com"
+  }
+}
