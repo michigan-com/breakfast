@@ -266,16 +266,21 @@ export default class Controls extends React.Component {
       )
     }
 
+    let colorPicker = (<div className='help-text'>This logo cannot be colored. Got another logo we can use? <a href='mailto:rwilliams@michigan.com,mvarano@michigan.com'>Email us!</a></div>);
+    if (/svg$/.test(this.props.options.logo.filename)) {
+        colorPicker = (
+          <PickerToggle color={ this.props.options.logoColor }
+                callback={ this.colorChangeCallback(actions.logoColorChange) }/>
+        )
+    }
+
     return (
       <div className='option logo'>
         <div className='input-title'>Logo</div>
         { logoSelect }
         <div className='input-container'>
           <span className='label'>Color</span>
-          <span className='input'>
-            <PickerToggle color={ this.props.options.logoColor }
-                callback={ this.colorChangeCallback(actions.logoColorChange) }/>
-          </span>
+          <span className='input'>{ colorPicker }</span>
         </div>
       </div>
     )

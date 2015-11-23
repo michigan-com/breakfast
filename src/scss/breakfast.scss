@@ -219,6 +219,12 @@ body {
     & > input {
       width: 100%;
     }
+
+    .help-text {
+      font-size: 10px;
+      line-height: 15px;
+      text-align: center;
+    }
   }
 
 }
