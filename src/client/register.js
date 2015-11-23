@@ -11,6 +11,8 @@ for (let marketName in marketInfo) {
   validEmailDomains.push(market.domain);
 }
 
+validEmailDomains = validEmailDomains.sort();
+
 class DomainSelect extends Select {
   getDisplayValue(option, index) { return `@${option}`; }
 }
