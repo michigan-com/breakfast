@@ -617,10 +617,13 @@
     "domain": "usatoday.com",
     "isSvg": true
   },
-  "usat.png": {
-    "name": "usat.png",
+  "usat.svg": {
+    "width": "240",
+    "height": "29",
+    "aspectRatio": 8.275862068965518,
+    "name": "usat.svg",
     "domain": "usatoday.com",
-    "isSvg": false
+    "isSvg": true
   },
   "vineland.svg": {
     "width": "390",

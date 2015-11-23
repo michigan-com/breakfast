@@ -709,7 +709,7 @@
   "USA Today": {
     "domain": "usatoday.com",
     "logo": [{
-      "filename": "usat.png"
+      "filename": "usat.svg"
     },{
       "filename": "usat-life.svg"
     }, {

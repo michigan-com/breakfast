@@ -54,7 +54,10 @@ class LogoFetch {
 
   colorLogo(data, color) {
     let $ = cheerio.load(data);
-    $('path', 'text').each(function(index, obj) {
+    $('path, text').each(function(index, obj) {
+      if ($(obj).hasClass('no-color-change')) return;
+      else if ($(obj).parents('defs').length) return;
+
       $(obj).attr('fill', `#${color}`);
       $(obj).attr('mask', '');
     });

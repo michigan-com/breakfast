@@ -30,7 +30,6 @@ function registerRoutes(app, router, passport) {
     let username = new Field({ name: 'username', value: ''});
 
     let validDomains = getValidEmailDomains();
-    console.log(validDomains);
 
     res.render('register/register', {
       csrfToken,
