@@ -394,7 +394,7 @@ class LogoSelect extends Select {
 
   getDisplayValue(option, index) {
     return (
-      <img src={ `/logos/${option.filename}?color=000000`} title={ option.name } alt={ option.name }/>
+      <img src={ `/logos/${option.filename}`} title={ option.name } alt={ option.name }/>
     )
   }
 }

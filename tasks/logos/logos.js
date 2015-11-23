@@ -23,37 +23,61 @@ gulp.task('generateLogoJson', function() {
 
   var files = fs.readdirSync(logo_root);
   var logoJson = {};
+  var unusedFiles = [];
+  var invalidFiles = [];
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
-    if (!/\.svg$/.exec(file)) continue;
+    var isSvg = /svg$/.test(file);
 
     if (!(file in logoNames)) {
-      console.error('Need to specify name for ' + file + ' in the logoNames object in the generateLogoJson gulp task');
+      unusedFiles.push(file);
       continue;
     }
 
     var contents = fs.readFileSync(path.join(logo_root, file));
 
-    var match = ratioRegex.exec(contents);
-    if (!match) {
-      console.error('Can\'t find height/width for ' + file);
-      continue;
+    if(isSvg) {
+      var match = ratioRegex.exec(contents);
+      if (!match) {
+        invalidFiles.push('Can\'t find height/width for ' + file);
+        continue;
+      }
+      logoJson[file] = {
+        width: match[1],
+        height: match[2],
+        aspectRatio: match[1] / match[2],
+        name: file,
+        domain: logoNames[file].domain,
+        isSvg: isSvg
+      }
+    } else {
+      logoJson[file] = {
+        name: file,
+        domain: logoNames[file].domain,
+        isSvg: isSvg
+      }
     }
 
-    logoJson[file] = {
-      width: match[1],
-      height: match[2],
-      aspectRatio: match[1] / match[2],
-      name: file,
-      domain: logoNames[file]
-    }
+    logoNames[file].logoFound = true;
   }
   fs.writeFile(outfile, JSON.stringify(logoJson, null, 2), function(err) {
     if (err) throw new Error(err);
 
     console.log('Saved ' + outfile);
-  })
-  console.log(logoJson);
+  });
+
+  var logosNotFound = [];
+  for (var logo in logoNames) {
+    var logoInfo = logoNames[logo];
+    if (logoInfo.logoFound) continue;
+
+    logosNotFound.push('Logo not found for ' + logoInfo.domain + ' (' + logo + ')');
+  }
+
+  // Display stats
+  if (invalidFiles.length) printLogoBreakdown('Invalid Files', invalidFiles);
+  if (unusedFiles.length) printLogoBreakdown('Unused Logo Files', unusedFiles);
+  if (logosNotFound.length) printLogoBreakdown('Logos not found', logosNotFound);
 });
 
 function getLogoNames() {
@@ -65,9 +89,24 @@ function getLogoNames() {
 
     if (!Array.isArray(logos)) logos = [logos];
     for (var i = 0; i < logos.length; i++) {
-      logoNames[logos[i].filename] = market.domain;
+      logoNames[logos[i].filename] = {
+        domain: market.domain,
+        logoFound: false
+      }
     }
   }
 
   return logoNames;
+}
+
+function printLogoBreakdown(breakdownName, infoArray) {
+  console.log(breakdownName);
+  console.log('--------------------------------------------------------------------------------');
+
+  for (var i = 0; i < infoArray.length; i++) {
+    console.log('\t' + infoArray[i]);
+  }
+
+  console.log('--------------------------------------------------------------------------------');
+  console.log('\n')
 }

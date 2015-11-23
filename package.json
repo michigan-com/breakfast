@@ -44,7 +44,7 @@
     "mongodb": "^2.0.48",
     "node-neat": "^1.7.2",
     "object-assign": "^4.0.1",
-    "passport": "^0.3.0",
+    "passport": "^0.3.2",
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "pkgify": "^1.0.3",

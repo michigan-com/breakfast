@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="334" height="33" viewBox="0 0 334 33">
+  <defs>
+    <style>
+
+      .cls-1, .cls-2, .cls-3 {
+        font-size: 50px;
+      }
+
+      .cls-2 {
+        text-anchor: middle;
+      }
+
+      .cls-3 {
+        fill: #656565;
+        font-family: "Futura Light";
+      }
+
+      .cls-4 {
+        font-family: "Futura DemiBold";
+        font-weight: bold;
+      }
+    </style>
+
+    <filter id="color-overlay-1" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend in2="SourceGraphic" result="solidFill"/>
+    </filter>
+  </defs>
+  <text transform="translate(167 25) scale(0.7 0.71)" class="cls-1"><tspan x="0" class="cls-2"><tspan class="cls-3">Burlington<tspan class="cls-4"> Free Press</tspan></tspan></tspan></text>
+</svg>

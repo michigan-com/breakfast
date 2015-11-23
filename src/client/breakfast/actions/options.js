@@ -116,22 +116,9 @@ export default class OptionActions {
   }
 
   logoChange(index) {
-    let logos = OptionStore.getLogoOptions();
-    let logoInfo = OptionStore.getLogoInfo();
-    if (index < 0 || index >= logos.length) return;
-
-    let logo = logos[index];
-    let filename = logo.filename;
-
-    if (!(filename in logoInfo)) {
-      return;
-    }
-
-    let aspectRatio = logoInfo[filename].aspectRatio;
     Dispatcher.dispatch({
       type: Actions.logoChange,
-      filename,
-      aspectRatio
+      value: index
     });
   }
 

@@ -3,7 +3,13 @@ import React from 'react';
 
 import $ from './util/$';
 import { Select } from './util/components';
-import { validEmailDomains } from '../server/util/email';
+import marketInfo from '../../marketInfo';
+
+let validEmailDomains = [];
+for (let marketName in marketInfo) {
+  let market = marketInfo[marketName];
+  validEmailDomains.push(market.domain);
+}
 
 class DomainSelect extends Select {
   getDisplayValue(option, index) { return `@${option}`; }

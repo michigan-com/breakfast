@@ -28,12 +28,12 @@ xr.get('/fonts/getFonts/')
 function generateDefaultOptions() {
   return  {
     fontSize: 40,
-    fontColor: '#ffffff',
+    fontColor: '#000000',
     fontFace: 'Helvetica',
     fontOptions: [],
 
     backgroundType: BACKGROUND_COLOR,
-    backgroundColor: '#000000',
+    backgroundColor: '#ffffff',
     backgroundImg: {
       src: '',
       height: 0,
@@ -45,7 +45,7 @@ function generateDefaultOptions() {
 
     logo: {},
     logoOptions: [],
-    logoColor: '#ffffff'
+    logoColor: '#000000'
   }
 }
 
@@ -177,13 +177,30 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   /**
    * Update the logo. TODO make it so we can pull aspectRatio from a json file
    *
-   * @param {String} filename - URL for the logo in question
-   * @param {Number} aspectRatio - used to calculate where the logo should
-   *  go on the image
+   * @param {Number} index - index into logoInfo array for logo to display
    */
-  logoChange(filename, aspectRatio) {
-    options.logo = { filename, aspectRatio };
-    this.emitChange();
+  logoChange(index) {
+    if (index < 0 || index >= options.logoOptions.length) return;
+
+    let filename = options.logoOptions[index].filename;
+    let logo = logoInfo[filename];
+
+    if (logo.isSvg) {
+      options.logo = { filename, aspectRatio: logo.aspectRatio };
+      this.emitChange();
+    } else {
+      // If we couldnt find an aspect ratio, it's likely because it's a .png and we
+      // couldnt read it from the file contents. Load the image in the browser and
+      // read the aspect ratio from that
+
+      var i = new Image();
+      i.onload = () => {
+        let aspectRatio = i.width / i.height;
+        options.logo = { filename, aspectRatio};
+        this.emitChange();
+      }
+      i.src = `${window.location.origin}/logos/${filename}`;
+    }
   },
 
   logoColorChange(color) {
@@ -202,9 +219,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     options.logoOptions = logos;
 
     if (logos.length) {
-      let activeLogo = logos[0]
-
-      this.logoChange(activeLogo.filename, logoInfo[activeLogo.filename].aspectRatio);
+      this.logoChange(0);
     }
   },
 
@@ -241,7 +256,7 @@ Dispatcher.register(function(action) {
       OptionStore.aspectRatioChange(action.value);
       break;
     case Actions.logoChange:
-      OptionStore.logoChange(action.filename, action.aspectRatio);
+      OptionStore.logoChange(action.value);
       break;
     case Actions.logoColorChange:
       OptionStore.logoColorChange(action.value);

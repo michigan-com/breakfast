@@ -14,7 +14,6 @@ var logger = debug('breakfast:logoFetch');
 
 var LOGO_ROOT = dir('logos');
 
-
 class LogoFetch {
   constructor(logoRoot=LOGO_ROOT) {
     this.logoRoot = logoRoot;
@@ -55,9 +54,9 @@ class LogoFetch {
 
   colorLogo(data, color) {
     let $ = cheerio.load(data);
-    $('path').each(function(index, path) {
-      $(path).attr('fill', `#${color}`);
-      $(path).attr('mask', '');
+    $('path', 'text').each(function(index, obj) {
+      $(obj).attr('fill', `#${color}`);
+      $(obj).attr('mask', '');
     });
     return $.html()
   }
@@ -108,7 +107,7 @@ function registerRoutes(app, router, passport) {
     let approvedLogos = {};
     for (let filename in Object.assign({}, logoJson)) {
       let logoInfo = logoJson[filename];
-      if (domain !== logoInfo.domain) continue;
+      if (domain !== logoInfo.domain && !req.user.admin) continue;
       approvedLogos[filename] = logoInfo;
     }
     res.json(approvedLogos);
@@ -128,7 +127,7 @@ function registerRoutes(app, router, passport) {
     let domain = getDomainFromEmail(req.user.email);
 
     // Don't load the logo if the user isn't authorized to do so
-    if (domain !== logoInfo.domain) {
+    if (domain !== logoInfo.domain && !req.user.admin) {
       res.status(403).send();
       return;
     }
@@ -136,12 +135,16 @@ function registerRoutes(app, router, passport) {
 
     let data = await logoFetch.getLogo(filename, color);
 
-    res.set({
-      'Accept-Ranges': 'bytes',
-      'Cache-Control': 'public, max-age=0',
-      'Content-Type': 'image/svg+xml',
-      'Content-Length': data.length
-    }).send(data);
+    if (logoInfo.isSvg) {
+      res.set({
+        'Accept-Ranges': 'bytes',
+        'Cache-Control': 'public, max-age=0',
+        'Content-Type': 'image/svg+xml',
+        'Content-Length': data.length
+      }).send(data);
+    } else {
+      res.redirect(`/img/logos/${filename}`);
+    }
   }
 
 

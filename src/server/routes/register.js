@@ -2,11 +2,10 @@ import csrf from 'csurf';
 
 import uuid from '../util/uuid';
 import { Field } from '../util/form';
-import { isValidEmail, validEmailDomains } from '../util/email';
+import { isValidEmail, getValidEmailDomains } from '../util/email';
 import { formatInviteUrl } from '../util/parse';
 import { hash } from '../util/hash';
 import { csrfProtection } from '../middleware/csrf';
-
 
 /**
  * Register the 'register' urls
@@ -30,10 +29,13 @@ function registerRoutes(app, router, passport) {
     let csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
     let username = new Field({ name: 'username', value: ''});
 
+    let validDomains = getValidEmailDomains();
+    console.log(validDomains);
+
     res.render('register/register', {
       csrfToken,
       fields: [ csrf, username ],
-      validEmailDomains
+      validDomains
     });
   });
 

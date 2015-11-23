@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="340" height="60" viewBox="0 0 340 60">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        font-size: 50px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        font-size: 50px;
+      }
+
+      .cls-2 {
+        text-anchor: middle;
+      }
+
+      .cls-3 {
+        font-family: "Futura Today";
+      }
+
+      .cls-4 {
+        font-family: "Futura DemiBold";
+        font-weight: bold;
+      }
+    <filter id="color-overlay-1" filterUnits="userSpaceOnUse">
+      <feFlood flood-color="#fff"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+      <feBlend in2="SourceGraphic" result="solidFill"/>
+    </filter>
+    </style>
+  </defs>
+  <text transform="translate(171 39) scale(0.7 0.69)" class="cls-1"><tspan x="0" class="cls-2"><tspan class="cls-3">The Sheboygan <tspan class="cls-4">Press</tspan></tspan></tspan></text>
+</svg>

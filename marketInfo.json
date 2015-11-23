@@ -2,262 +2,442 @@
   "Alamogordo Daily News": {
     "domain": "alamogordonews.com",
     "logo": {
-      "filename": "alamogordo.svg"
+      "filename": "alamogordo.png"
     }
   },
 
   "Alexandria": {
-    "domain": "thetowntalk.com"
+    "domain": "thetowntalk.com",
+    "logo": {
+      "filename": "alexandria.png"
+    }
   },
 
   "Appleton": {
-    "domain": "postcrescent.com"
+    "domain": "postcrescent.com",
+    "logo": {
+      "filename": "appleton.png"
+    }
   },
 
   "Asbury Park": {
-    "domain": "app.com"
+    "domain": "app.com",
+    "logo": {
+      "filename": "asburypark.png"
+    }
   },
 
   "Asheville": {
-    "domain": "citizen-times.com"
+    "domain": "citizen-times.com",
+    "logo": {
+      "filename": "asheville.png"
+    }
   },
 
   "Battle Creek": {
-    "domain": "battlecreekenquirer.com"
+    "domain": "battlecreekenquirer.com",
+    "logo": {
+      "filename": "battlecreek.png"
+    }
   },
 
   "Binghamton": {
-    "domain": "pressconnects.com"
+    "domain": "pressconnects.com",
+    "logo": {
+      "filename": "binghamton.png"
+    }
   },
 
   "Black Mountain News": {
-    "domain": "blackmountainnews.com"
+    "domain": "blackmountainnews.com",
+    "logo": {
+      "filename": "blackmountainnews.png"
+    }
   },
 
   "Brevard": {
-    "domain": "floridatoday.com"
+    "domain": "floridatoday.com",
+    "logo": {
+      "filename": "brevard.png"
+    }
   },
 
   "Bucyrus": {
-    "domain": "bucyrustelegraphforum.com"
+    "domain": "bucyrustelegraphforum.com",
+    "logo": {
+      "filename": "bucyrus.svg"
+    }
   },
 
   "Burlington": {
-    "domain": "burlingtonfreepress.com"
+    "domain": "burlingtonfreepress.com",
+    "logo": {
+      "filename": "burlington.svg"
+    }
   },
 
   "Carlsbad Current-Argus": {
-    "domain": "currentargus.com"
+    "domain": "currentargus.com",
+    "logo": {
+      "filename": "carlsbadcurrentargus.png"
+    }
   },
 
   "Central Florida Future": {
-    "domain": "centralfloridafuture.com"
+    "domain": "centralfloridafuture.com",
+    "logo": {
+      "filename": "centralfloridafuture.png"
+    }
   },
 
   "Central Jersey": {
-    "domain": "mycentraljersey.com"
+    "domain": "mycentraljersey.com",
+    "logo": {
+      "filename": "centraljersey.png"
+    }
   },
 
   "Chambersburg": {
-    "domain": "publicopiniononline.com"
+    "domain": "publicopiniononline.com",
+    "logo": {
+      "filename": "chambersburg.png"
+    }
   },
 
   "Cherry Hill": {
-    "domain": "courierpostonline.com"
+    "domain": "courierpostonline.com",
+    "logo": {
+      "filename": "cherryhill.png"
+    }
   },
 
   "Chillicothe": {
-    "domain": "chillicothegazette.com"
+    "domain": "chillicothegazette.com",
+    "logo": {
+      "filename": "chillicothe.png"
+    }
   },
 
   "Cincinnati": {
-    "domain": "cincinnati.com"
+    "domain": "cincinnati.com",
+    "logo": {
+      "filename": "cincinnati.png"
+    }
   },
 
   "Clarksville": {
-    "domain": "theleafchronicle.com"
+    "domain": "theleafchronicle.com",
+    "logo": {
+      "filename": "clarksville.png"
+    }
   },
 
   "Coshocton": {
-    "domain": "coshoctontribune.com"
+    "domain": "coshoctontribune.com",
+    "logo": {
+      "filename": "coshocton.svg"
+    }
   },
 
   "Deming Headlight": {
-    "domain": "demingheadlight.com"
+    "domain": "demingheadlight.com",
+    "logo": {
+      "filename": "demingheadlight.png"
+    }
   },
 
   "Des Moines": {
-    "domain": "desmoinesregister.com"
+    "domain": "desmoinesregister.com",
+    "logo": {
+      "filename": "desmoines.png"
+    }
   },
 
   "Detroit Free Press": {
     "domain": "freepress.com",
     "logo": {
-      "filename": "dfp.svg"
+      "filename": "detroitfreepress.svg"
     }
   },
 
   "Detroit News": {
     "domain": "detroitnews.com",
     "logo": {
-      "filename": "dn.svg"
+      "filename": "detroitnews.svg"
     }
   },
 
   "Elmira": {
-    "domain": "stargazette.com"
+    "domain": "stargazette.com",
+    "logo": {
+      "filename": "elmira.png"
+    }
   },
 
   "El Paso": {
-    "domain": "elpasotimes.com"
+    "domain": "elpasotimes.com",
+    "logo": {
+      "filename": "elpaso.png"
+    }
   },
 
   "El Sol": {
-    "domain": "elsoldesalinas.com"
+    "domain": "elsoldesalinas.com",
+    "logo": {
+      "filename": "elsol.png"
+    }
   },
 
   "Farmers Advance": {
-    "domain": "farmersadvance.com"
+    "domain": "farmersadvance.com",
+    "logo": {
+      "filename": "farmersadvance.png"
+    }
   },
 
   "Farmington Daily Times": {
-    "domain": "daily-times.com"
+    "domain": "daily-times.com",
+    "logo": {
+      "filename": "farmingtondailytimes.png"
+    }
   },
 
   "Fond du Lac": {
-    "domain": "fdlreporter.com"
+    "domain": "fdlreporter.com",
+    "logo": {
+      "filename": "fonddulac.png"
+    }
   },
 
   "Fort Collins": {
-    "domain": "coloradoan.com"
+    "domain": "coloradoan.com",
+    "logo": {
+      "filename": "fortcollins.png"
+    }
   },
 
   "Fort Myers": {
-    "domain": "news-press.com"
+    "domain": "news-press.com",
+    "logo": {
+      "filename": "fortmyers.png"
+    }
   },
 
   "Fremont": {
-    "domain": "thenews-messenger.com"
+    "domain": "thenews-messenger.com",
+    "logo": {
+      "filename": "fremont.png"
+    }
   },
 
   "FSU News": {
-    "domain": "fsunews.com"
+    "domain": "fsunews.com",
+    "logo": {
+      "filename": "fsunews.png"
+    }
   },
 
   "Great Falls": {
-    "domain": "greatfallstribune.com"
+    "domain": "greatfallstribune.com",
+    "logo": {
+      "filename": "greatfalls.png"
+    }
   },
 
   "Green Bay": {
-    "domain": "greenbaypressgazette.com"
+    "domain": "greenbaypressgazette.com",
+    "logo": {
+      "filename": "greenbay.svg"
+    }
   },
 
   "Greenville": {
-    "domain": "greenvilleonline.com"
+    "domain": "greenvilleonline.com",
+    "logo": {
+      "filename": "greenville.png"
+    }
   },
 
   "Guam": {
-    "domain": "guampdn.com"
+    "domain": "guampdn.com",
+    "logo": {
+      "filename": "guam.png"
+    }
   },
 
   "Hammonton": {
-    "domain": "thehammontonnews.com"
+    "domain": "thehammontonnews.com",
+    "logo": {
+      "filename": "hammonton.png"
+    }
   },
 
   "Hanover": {
-    "domain": "eveningsun.com"
+    "domain": "eveningsun.com",
+    "logo": {
+      "filename": "hanover.png"
+    }
   },
 
   "Hattiesburg": {
-    "domain": "hattiesburgamerican.com"
+    "domain": "hattiesburgamerican.com",
+    "logo": {
+      "filename": "hattiesburg.png"
+    }
   },
 
   "Hawk Central": {
-    "domain": "hawkcentral.com"
+    "domain": "hawkcentral.com",
+    "logo": {
+      "filename": "hawkcentral.png"
+    }
   },
 
   "Indianapolis": {
-    "domain": "indystar.com"
+    "domain": "indystar.com",
+    "logo": {
+      "filename": "indianapolis.png"
+    }
   },
 
   "In York": {
-    "domain": "inyork.com"
+    "domain": "inyork.com",
+    "logo": {
+      "filename": "inyork.png"
+    }
   },
 
   "Iowa City": {
-    "domain": "press-citizen.com"
+    "domain": "press-citizen.com",
+    "logo": {
+      "filename": "iowacity.png"
+    }
   },
 
   "Ithaca": {
-    "domain": "ithacajournal.com"
+    "domain": "ithacajournal.com",
+    "logo": {
+      "filename": "ithaca.png"
+    }
   },
 
   "Jackson (MS)": {
-    "domain": "clarionledger.com"
+    "domain": "clarionledger.com",
+    "logo": {
+      "filename": "jacksonms.png"
+    }
   },
 
   "Jackson (TN)": {
-    "domain": "jacksonsun.com"
+    "domain": "jacksonsun.com",
+    "logo": {
+      "filename": "jacksontn.svg"
+    }
   },
 
   "Lafayette (IN)": {
-    "domain": "jconline.com"
+    "domain": "jconline.com",
+    "logo": {
+      "filename": "lafayettein.png"
+    }
   },
 
   "Lafayette (LA)": {
-    "domain": "theadvertiser.com"
+    "domain": "theadvertiser.com",
+    "logo": {
+      "filename": "lafayettela.png"
+    }
   },
 
   "Lancaster": {
-    "domain": "lancastereaglegazette.com"
+    "domain": "lancastereaglegazette.com",
+    "logo": {
+      "filename": "lancaster.png"
+    }
   },
 
   "Lansing": {
-    "domain": "lsj.com"
+    "domain": "lsj.com",
+    "logo": {
+      "filename": "lansing.png"
+    }
   },
 
   "Las Cruces Sun-News": {
-    "domain": "lcsun-news.com"
+    "domain": "lcsun-news.com",
+    "logo": {
+      "filename": "lascrucessunnews.png"
+    }
   },
 
   "La Voz": {
-    "domain": "lavozarizona.com"
+    "domain": "lavozarizona.com",
+    "logo": {
+      "filename": "lavoz.svg"
+    }
   },
 
   "Lebanon Daily News": {
-    "domain": "ldnews.com"
+    "domain": "ldnews.com",
+    "logo": {
+      "filename": "lebanondailynews.png"
+    }
   },
 
   "Livingston": {
-    "domain": "livingstondaily.com"
+    "domain": "livingstondaily.com",
+    "logo": {
+      "filename": "livingston.png"
+    }
   },
 
   "Livonia": {
-    "domain": "hometownlife.com"
+    "domain": "hometownlife.com",
+    "logo": {
+      "filename": "livonia.png"
+    }
   },
 
   "Louisville": {
-    "domain": "courier-journal.com"
+    "domain": "courier-journal.com",
+    "logo": {
+      "filename": "louisville.png"
+    }
   },
 
   "Manitowoc": {
-    "domain": "htrnews.com"
+    "domain": "htrnews.com",
+    "logo": {
+      "filename": "manitowoc.png"
+    }
   },
 
   "Mansfield": {
-    "domain": "mansfieldnewsjournal.com"
+    "domain": "mansfieldnewsjournal.com",
+    "logo": {
+      "filename": "mansfield.svg"
+    }
   },
 
   "Marco Island": {
-    "domain": "marcoislandflorida.com"
+    "domain": "marcoislandflorida.com",
+    "logo": {
+      "filename": "marcoisland.png"
+    }
   },
 
   "Marion": {
-    "domain": "marionstar.com"
+    "domain": "marionstar.com",
+    "logo": {
+      "filename": "marion.svg"
+    }
   },
 
   "Marshfield": {
-    "domain": "marshfieldnewsherald.com"
+    "domain": "marshfieldnewsherald.com",
+    "logo": {
+      "filename": "marshfield.png"
+    }
   },
 
   "Michigan.com": {
@@ -268,156 +448,269 @@
   },
 
   "MilitaryTimes": {
-    "domain": "militarytimes.com"
+    "domain": "militarytimes.com",
+    "logo": {
+      "filename": "militarytimes.png"
+    }
   },
 
   "Monroe": {
-    "domain": "thenewsstar.com"
+    "domain": "thenewsstar.com",
+    "logo": {
+      "filename": "monroe.png"
+    }
   },
 
   "Montgomery": {
-    "domain": "montgomeryadvertiser.com"
+    "domain": "montgomeryadvertiser.com",
+    "logo": {
+      "filename": "montgomery.png"
+    }
   },
 
   "Morristown": {
-    "domain": "dailyrecord.com"
+    "domain": "dailyrecord.com",
+    "logo": {
+      "filename": "morristown.png"
+    }
   },
 
   "Mountain Home": {
-    "domain": "baxterbulletin.com"
+    "domain": "baxterbulletin.com",
+    "logo": {
+      "filename": "mountainhome.png"
+    }
   },
 
   "Muncie": {
-    "domain": "thestarpress.com"
+    "domain": "thestarpress.com",
+    "logo": {
+      "filename": "muncie.png"
+    }
   },
 
   "Murfreesboro": {
-    "domain": "dnj.com"
+    "domain": "dnj.com",
+    "logo": {
+      "filename": "murfreesboro.png"
+    }
   },
 
   "Nashville": {
-    "domain": "tennessean.com"
+    "domain": "tennessean.com",
+    "logo": {
+      "filename": "nashville.png"
+    }
   },
 
   "Newark": {
-    "domain": "newarkadvocate.com"
+    "domain": "newarkadvocate.com",
+    "logo": {
+      "filename": "newark.svg"
+    }
   },
 
   "Opelousas": {
-    "domain": "dailyworld.com"
+    "domain": "dailyworld.com",
+    "logo": {
+      "filename": "opelousas.png"
+    }
   },
 
   "Oshkosh": {
-    "domain": "thenorthwestern.com"
+    "domain": "thenorthwestern.com",
+    "logo": {
+      "filename": "oshkosh.png"
+    }
   },
 
   "Packers News": {
-    "domain": "packersnews.com"
+    "domain": "packersnews.com",
+    "logo": {
+      "filename": "packersnews.png"
+    }
   },
 
   "Palm Springs": {
-    "domain": "desertsun.com"
+    "domain": "desertsun.com",
+    "logo": {
+      "filename": "palmsprings.png"
+    }
   },
 
   "Pensacola": {
-    "domain": "pnj.com"
+    "domain": "pnj.com",
+    "logo": {
+      "filename": "pensacola.svg"
+    }
   },
 
   "Phoenix": {
-    "domain": "azcentral.com"
+    "domain": "azcentral.com",
+    "logo": {
+      "filename": "phoenix.svg"
+    }
   },
 
   "Port Clinton": {
-    "domain": "portclintonnewsherald.com"
+    "domain": "portclintonnewsherald.com",
+    "logo": {
+      "filename": "portclinton.png"
+    }
   },
 
   "Port Huron": {
-    "domain": "thetimesherald.com"
+    "domain": "thetimesherald.com",
+    "logo": {
+      "filename": "porthuron.png"
+    }
   },
 
   "Poughkeepsie": {
-    "domain": "poughkeepsiejournal.com"
+    "domain": "poughkeepsiejournal.com",
+    "logo": {
+      "filename": "poughkeepsie.png"
+    }
   },
 
   "Reno Gazette-Journal": {
-    "domain": "rgj.com"
+    "domain": "rgj.com",
+    "logo": {
+      "filename": "renogazettejournal.svg"
+    }
   },
 
   "Reno-Tahoe": {
-    "domain": "reno.com/"
+    "domain": "reno.com",
+    "logo": {
+      "filename": "renotahoe.png"
+    }
   },
 
   "Richmond": {
-    "domain": "pal-item.com"
+    "domain": "pal-item.com",
+    "logo": {
+      "filename": "richmond.png"
+    }
   },
 
   "Rochester": {
-    "domain": "democratandchronicle.com"
+    "domain": "democratandchronicle.com",
+    "logo": {
+      "filename": "rochester.png"
+    }
   },
 
   "Ruidoso News": {
-    "domain": "ruidosonews.com"
+    "domain": "ruidosonews.com",
+    "logo": {
+      "filename": "ruidosonews.png"
+    }
   },
 
   "Salem": {
-    "domain": "statesmanjournal.com"
+    "domain": "statesmanjournal.com",
+    "logo": {
+      "filename": "salem.png"
+    }
   },
 
   "Salinas": {
-    "domain": "thecalifornian.com"
+    "domain": "thecalifornian.com",
+    "logo": {
+      "filename": "salinas.svg"
+    }
   },
 
   "Salisbury": {
-    "domain": "delmarvanow.com"
+    "domain": "delmarvanow.com",
+    "logo": {
+      "filename": "salisbury.png"
+    }
   },
 
   "Sheboygan": {
-    "domain": "sheboyganpress.com"
+    "domain": "sheboyganpress.com",
+    "logo": {
+      "filename": "sheboygan.svg"
+    }
   },
 
   "Shreveport": {
-    "domain": "shreveporttimes.com"
+    "domain": "shreveporttimes.com",
+    "logo": {
+      "filename": "shreveport.png"
+    }
   },
 
   "Silver City Sun News": {
-    "domain": "scsun-news.com"
+    "domain": "scsun-news.com",
+    "logo": {
+      "filename": "silvercitysunnews.png"
+    }
   },
 
   "Sioux Falls": {
-    "domain": "argusleader.com"
+    "domain": "argusleader.com",
+    "logo": {
+      "filename": "siouxfalls.svg"
+    }
   },
 
   "Somos Frontera": {
-    "domain": "elpasoymas.com"
+    "domain": "elpasoymas.com",
+    "logo": {
+      "filename": "somosfrontera.png"
+    }
   },
 
   "Springfield": {
-    "domain": "news-leader.com"
+    "domain": "news-leader.com",
+    "logo": {
+      "filename": "springfield.png"
+    }
   },
 
   "St. Cloud": {
-    "domain": "sctimes.com"
+    "domain": "sctimes.com",
+    "logo": {
+      "filename": "stcloud.svg"
+    }
   },
 
   "St. George": {
-    "domain": "thespectrum.com"
+    "domain": "thespectrum.com",
+    "logo": {
+      "filename": "stgeorge.png"
+    }
   },
 
   "Staunton": {
-    "domain": "newsleader.com"
+    "domain": "newsleader.com",
+    "logo": {
+      "filename": "staunton.png"
+    }
   },
 
   "Stevens Point": {
-    "domain": "stevenspointjournal.com"
+    "domain": "stevenspointjournal.com",
+    "logo": {
+      "filename": "stevenspoint.png"
+    }
   },
 
   "Tallahassee": {
-    "domain": "tallahassee.com"
+    "domain": "tallahassee.com",
+    "logo": {
+      "filename": "tallahassee.png"
+    }
   },
 
   "USA Today": {
     "domain": "usatoday.com",
     "logo": [{
+      "filename": "usat.png"
+    },{
       "filename": "usat-life.svg"
     }, {
       "filename": "usat-money.svg"
@@ -435,38 +728,65 @@
   },
 
   "Vineland": {
-    "domain": "thedailyjournal.com"
+    "domain": "thedailyjournal.com",
+    "logo": {
+      "filename": "vineland.svg"
+    }
   },
 
   "Visalia-Tulare": {
-    "domain": "visaliatimesdelta.com"
+    "domain": "visaliatimesdelta.com",
+    "logo": {
+      "filename": "visaliatulare.png"
+    }
   },
 
   "Wausau": {
-    "domain": "wasaudailyherald.com"
+    "domain": "wasaudailyherald.com",
+    "logo": {
+      "filename": "wausau.svg"
+    }
   },
 
   "Westchester": {
-    "domain": "lohud.com"
+    "domain": "lohud.com",
+    "logo": {
+      "filename": "westchester.png"
+    }
   },
 
   "Wilmington": {
-    "domain": "delawareonline.com"
+    "domain": "delawareonline.com",
+    "logo": {
+      "filename": "wilmington.svg"
+    }
   },
 
   "Wisconsin Rapids": {
-    "domain": "wisconsinrapidstribune.com"
+    "domain": "wisconsinrapidstribune.com",
+    "logo": {
+      "filename": "wisconsinrapids.png"
+    }
   },
 
   "York Daily Record": {
-    "domain": "ydr.com"
+    "domain": "ydr.com",
+    "logo": {
+      "filename": "yorkdailyrecord.svg"
+    }
   },
 
   "York Dispatch": {
-    "domain": "yorkdispatch.com"
+    "domain": "yorkdispatch.com",
+    "logo": {
+      "filename": "yorkdispatch.svg"
+    }
   },
 
   "Zanesville": {
-    "domain": "zanesvilletimesrecorder.com"
+    "domain": "zanesvilletimesrecorder.com",
+    "logo": {
+      "filename": "zanesville.png"
+    }
   }
 }
