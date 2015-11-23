@@ -11,6 +11,7 @@ import passport from 'passport';
 import flash from 'connect-flash';
 import session from 'express-session';
 
+import storeLocals from './middleware/storeLocals';
 import router from './routes/router';
 import './env';
 import dir from './util/dir';
@@ -45,6 +46,7 @@ function createApp(db, enableCsrf=true) {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
+  app.use(storeLocals());
 
   // Set the DB before registering the routes
   app.set('db', db);

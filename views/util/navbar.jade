@@ -1,0 +1,8 @@
+#navbar
+    if locals.user
+      .user.logged-in
+        a(href='/logout/') Logout
+        .email #{locals.user.email}
+    else
+      .user
+        a(href='/login/') Login

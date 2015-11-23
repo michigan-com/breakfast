@@ -1,5 +1,5 @@
 head
-  include ./meta
+  include ./util/meta
 
   block title
     title Breakfast
@@ -7,6 +7,8 @@ head
   block css
     link(href='/css/base.css', rel='stylesheet')
 body
+  include ./util/navbar
+
   block messages
     if messages
       ol.flash-messages
