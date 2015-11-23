@@ -1,0 +1,6 @@
+#navbar
+  .user
+    if locals.user
+      .email #{locals.user.email}
+    else
+      a(href='/login/') Login
