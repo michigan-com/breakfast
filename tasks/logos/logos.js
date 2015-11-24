@@ -35,27 +35,23 @@ gulp.task('generateLogoJson', function() {
     }
 
     var contents = fs.readFileSync(path.join(logo_root, file));
+    logoJson[file] = {
+      name: file,
+      domain: logoNames[file].domain,
+      isSvg: isSvg
+    }
 
+    // Do some calculations based the name
     if(isSvg) {
       var match = ratioRegex.exec(contents);
       if (!match) {
         invalidFiles.push('Can\'t find height/width for ' + file);
         continue;
       }
-      logoJson[file] = {
-        width: match[1],
-        height: match[2],
-        aspectRatio: match[1] / match[2],
-        name: file,
-        domain: logoNames[file].domain,
-        isSvg: isSvg
-      }
-    } else {
-      logoJson[file] = {
-        name: file,
-        domain: logoNames[file].domain,
-        isSvg: isSvg
-      }
+
+      logoJson[file].width = match[1];
+      logoJson[file].height = match[2];
+      logoJson[file].aspectRatio = match[1] / match[2];
     }
 
     logoNames[file].logoFound = true;
@@ -89,10 +85,15 @@ function getLogoNames() {
 
     if (!Array.isArray(logos)) logos = [logos];
     for (var i = 0; i < logos.length; i++) {
-      logoNames[logos[i].filename] = {
-        domain: market.domain,
-        logoFound: false
+      var filename = logos[i].filename;
+      if (!(filename in logoNames)) {
+        logoNames[filename] = {
+          domain: [],
+          logoFound: false
+        }
       }
+
+      logoNames[filename].domain.push(market.domain);
     }
   }
 

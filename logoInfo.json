@@ -1,688 +1,927 @@
 {
   "alamogordo.png": {
     "name": "alamogordo.png",
-    "domain": "alamogordonews.com",
+    "domain": [
+      "alamogordonews.com"
+    ],
     "isSvg": false
   },
   "alexandria.png": {
     "name": "alexandria.png",
-    "domain": "thetowntalk.com",
+    "domain": [
+      "thetowntalk.com"
+    ],
     "isSvg": false
   },
   "appleton.png": {
     "name": "appleton.png",
-    "domain": "postcrescent.com",
+    "domain": [
+      "postcrescent.com"
+    ],
     "isSvg": false
   },
   "asburypark.png": {
     "name": "asburypark.png",
-    "domain": "app.com",
+    "domain": [
+      "app.com"
+    ],
     "isSvg": false
   },
   "asheville.png": {
     "name": "asheville.png",
-    "domain": "citizen-times.com",
+    "domain": [
+      "citizen-times.com"
+    ],
     "isSvg": false
   },
   "battlecreek.png": {
     "name": "battlecreek.png",
-    "domain": "battlecreekenquirer.com",
+    "domain": [
+      "battlecreekenquirer.com",
+      "lsj.com"
+    ],
     "isSvg": false
   },
   "binghamton.png": {
     "name": "binghamton.png",
-    "domain": "pressconnects.com",
+    "domain": [
+      "pressconnects.com"
+    ],
     "isSvg": false
   },
   "blackmountainnews.png": {
     "name": "blackmountainnews.png",
-    "domain": "blackmountainnews.com",
+    "domain": [
+      "blackmountainnews.com"
+    ],
     "isSvg": false
   },
   "brevard.png": {
     "name": "brevard.png",
-    "domain": "floridatoday.com",
+    "domain": [
+      "floridatoday.com"
+    ],
     "isSvg": false
   },
   "bucyrus.svg": {
+    "name": "bucyrus.svg",
+    "domain": [
+      "bucyrustelegraphforum.com"
+    ],
+    "isSvg": true,
     "width": "423",
     "height": "55",
-    "aspectRatio": 7.6909090909090905,
-    "name": "bucyrus.svg",
-    "domain": "bucyrustelegraphforum.com",
-    "isSvg": true
+    "aspectRatio": 7.6909090909090905
   },
   "burlington.svg": {
+    "name": "burlington.svg",
+    "domain": [
+      "burlingtonfreepress.com"
+    ],
+    "isSvg": true,
     "width": "334",
     "height": "33",
-    "aspectRatio": 10.121212121212121,
-    "name": "burlington.svg",
-    "domain": "burlingtonfreepress.com",
-    "isSvg": true
+    "aspectRatio": 10.121212121212121
   },
   "carlsbadcurrentargus.png": {
     "name": "carlsbadcurrentargus.png",
-    "domain": "currentargus.com",
+    "domain": [
+      "currentargus.com"
+    ],
     "isSvg": false
   },
   "centralfloridafuture.png": {
     "name": "centralfloridafuture.png",
-    "domain": "centralfloridafuture.com",
+    "domain": [
+      "centralfloridafuture.com"
+    ],
     "isSvg": false
   },
   "centraljersey.png": {
     "name": "centraljersey.png",
-    "domain": "mycentraljersey.com",
+    "domain": [
+      "mycentraljersey.com"
+    ],
     "isSvg": false
   },
   "chambersburg.png": {
     "name": "chambersburg.png",
-    "domain": "publicopiniononline.com",
+    "domain": [
+      "publicopiniononline.com"
+    ],
     "isSvg": false
   },
   "cherryhill.png": {
     "name": "cherryhill.png",
-    "domain": "courierpostonline.com",
+    "domain": [
+      "courierpostonline.com"
+    ],
     "isSvg": false
   },
   "chillicothe.png": {
     "name": "chillicothe.png",
-    "domain": "chillicothegazette.com",
+    "domain": [
+      "chillicothegazette.com"
+    ],
     "isSvg": false
   },
   "cincinnati.png": {
     "name": "cincinnati.png",
-    "domain": "cincinnati.com",
+    "domain": [
+      "cincinnati.com"
+    ],
     "isSvg": false
   },
   "clarksville.png": {
     "name": "clarksville.png",
-    "domain": "theleafchronicle.com",
+    "domain": [
+      "theleafchronicle.com"
+    ],
     "isSvg": false
   },
   "coshocton.svg": {
+    "name": "coshocton.svg",
+    "domain": [
+      "coshoctontribune.com"
+    ],
+    "isSvg": true,
     "width": "296",
     "height": "60",
-    "aspectRatio": 4.933333333333334,
-    "name": "coshocton.svg",
-    "domain": "coshoctontribune.com",
-    "isSvg": true
+    "aspectRatio": 4.933333333333334
   },
   "demingheadlight.png": {
     "name": "demingheadlight.png",
-    "domain": "demingheadlight.com",
+    "domain": [
+      "demingheadlight.com"
+    ],
     "isSvg": false
   },
   "desmoines.png": {
     "name": "desmoines.png",
-    "domain": "desmoinesregister.com",
+    "domain": [
+      "desmoinesregister.com"
+    ],
     "isSvg": false
   },
   "detroitfreepress.svg": {
+    "name": "detroitfreepress.svg",
+    "domain": [
+      "freepress.com"
+    ],
+    "isSvg": true,
     "width": "276",
     "height": "40",
-    "aspectRatio": 6.9,
-    "name": "detroitfreepress.svg",
-    "domain": "freepress.com",
-    "isSvg": true
+    "aspectRatio": 6.9
   },
   "detroitnews.svg": {
+    "name": "detroitnews.svg",
+    "domain": [
+      "detroitnews.com"
+    ],
+    "isSvg": true,
     "width": "566.971",
     "height": "74.996",
-    "aspectRatio": 7.560016534215158,
-    "name": "detroitnews.svg",
-    "domain": "detroitnews.com",
-    "isSvg": true
+    "aspectRatio": 7.560016534215158
   },
   "elmira.png": {
     "name": "elmira.png",
-    "domain": "stargazette.com",
+    "domain": [
+      "stargazette.com"
+    ],
     "isSvg": false
   },
   "elpaso.png": {
     "name": "elpaso.png",
-    "domain": "elpasotimes.com",
+    "domain": [
+      "elpasotimes.com"
+    ],
     "isSvg": false
   },
   "elsol.png": {
     "name": "elsol.png",
-    "domain": "elsoldesalinas.com",
+    "domain": [
+      "elsoldesalinas.com"
+    ],
     "isSvg": false
   },
   "farmersadvance.png": {
     "name": "farmersadvance.png",
-    "domain": "farmersadvance.com",
+    "domain": [
+      "farmersadvance.com"
+    ],
     "isSvg": false
   },
   "farmingtondailytimes.png": {
     "name": "farmingtondailytimes.png",
-    "domain": "daily-times.com",
+    "domain": [
+      "daily-times.com"
+    ],
     "isSvg": false
   },
   "fonddulac.png": {
     "name": "fonddulac.png",
-    "domain": "fdlreporter.com",
+    "domain": [
+      "fdlreporter.com"
+    ],
     "isSvg": false
   },
   "fortcollins.png": {
     "name": "fortcollins.png",
-    "domain": "coloradoan.com",
+    "domain": [
+      "coloradoan.com"
+    ],
     "isSvg": false
   },
   "fortmyers.png": {
     "name": "fortmyers.png",
-    "domain": "news-press.com",
+    "domain": [
+      "news-press.com"
+    ],
     "isSvg": false
   },
   "fremont.png": {
     "name": "fremont.png",
-    "domain": "thenews-messenger.com",
+    "domain": [
+      "thenews-messenger.com"
+    ],
     "isSvg": false
   },
   "fsunews.png": {
     "name": "fsunews.png",
-    "domain": "fsunews.com",
+    "domain": [
+      "fsunews.com"
+    ],
     "isSvg": false
   },
   "greatfalls.png": {
     "name": "greatfalls.png",
-    "domain": "greatfallstribune.com",
+    "domain": [
+      "greatfallstribune.com"
+    ],
     "isSvg": false
   },
   "greenbay.svg": {
+    "name": "greenbay.svg",
+    "domain": [
+      "greenbaypressgazette.com"
+    ],
+    "isSvg": true,
     "width": "715",
     "height": "102",
-    "aspectRatio": 7.009803921568627,
-    "name": "greenbay.svg",
-    "domain": "greenbaypressgazette.com",
-    "isSvg": true
+    "aspectRatio": 7.009803921568627
   },
   "greenville.png": {
     "name": "greenville.png",
-    "domain": "greenvilleonline.com",
+    "domain": [
+      "greenvilleonline.com"
+    ],
     "isSvg": false
   },
   "guam.png": {
     "name": "guam.png",
-    "domain": "guampdn.com",
+    "domain": [
+      "guampdn.com"
+    ],
     "isSvg": false
   },
   "hammonton.png": {
     "name": "hammonton.png",
-    "domain": "thehammontonnews.com",
+    "domain": [
+      "thehammontonnews.com"
+    ],
     "isSvg": false
   },
   "hanover.png": {
     "name": "hanover.png",
-    "domain": "eveningsun.com",
+    "domain": [
+      "eveningsun.com"
+    ],
     "isSvg": false
   },
   "hattiesburg.png": {
     "name": "hattiesburg.png",
-    "domain": "hattiesburgamerican.com",
+    "domain": [
+      "hattiesburgamerican.com"
+    ],
     "isSvg": false
   },
   "hawkcentral.png": {
     "name": "hawkcentral.png",
-    "domain": "hawkcentral.com",
+    "domain": [
+      "hawkcentral.com"
+    ],
     "isSvg": false
   },
   "indianapolis.png": {
     "name": "indianapolis.png",
-    "domain": "indystar.com",
+    "domain": [
+      "indystar.com"
+    ],
     "isSvg": false
   },
   "inyork.png": {
     "name": "inyork.png",
-    "domain": "inyork.com",
+    "domain": [
+      "inyork.com"
+    ],
     "isSvg": false
   },
   "iowacity.png": {
     "name": "iowacity.png",
-    "domain": "press-citizen.com",
+    "domain": [
+      "press-citizen.com"
+    ],
     "isSvg": false
   },
   "ithaca.png": {
     "name": "ithaca.png",
-    "domain": "ithacajournal.com",
+    "domain": [
+      "ithacajournal.com"
+    ],
     "isSvg": false
   },
   "jacksonms.png": {
     "name": "jacksonms.png",
-    "domain": "clarionledger.com",
+    "domain": [
+      "clarionledger.com"
+    ],
     "isSvg": false
   },
   "jacksontn.svg": {
+    "name": "jacksontn.svg",
+    "domain": [
+      "jacksonsun.com"
+    ],
+    "isSvg": true,
     "width": "576",
     "height": "68",
-    "aspectRatio": 8.470588235294118,
-    "name": "jacksontn.svg",
-    "domain": "jacksonsun.com",
-    "isSvg": true
+    "aspectRatio": 8.470588235294118
   },
   "lafayettein.png": {
     "name": "lafayettein.png",
-    "domain": "jconline.com",
+    "domain": [
+      "jconline.com"
+    ],
     "isSvg": false
   },
   "lafayettela.png": {
     "name": "lafayettela.png",
-    "domain": "theadvertiser.com",
+    "domain": [
+      "theadvertiser.com"
+    ],
     "isSvg": false
   },
   "lancaster.png": {
     "name": "lancaster.png",
-    "domain": "lancastereaglegazette.com",
+    "domain": [
+      "lancastereaglegazette.com"
+    ],
     "isSvg": false
   },
   "lansing.png": {
     "name": "lansing.png",
-    "domain": "lsj.com",
+    "domain": [
+      "lsj.com"
+    ],
     "isSvg": false
   },
   "lascrucessunnews.png": {
     "name": "lascrucessunnews.png",
-    "domain": "lcsun-news.com",
+    "domain": [
+      "lcsun-news.com"
+    ],
     "isSvg": false
   },
   "lavoz.svg": {
+    "name": "lavoz.svg",
+    "domain": [
+      "lavozarizona.com"
+    ],
+    "isSvg": true,
     "width": "214",
     "height": "74",
-    "aspectRatio": 2.891891891891892,
-    "name": "lavoz.svg",
-    "domain": "lavozarizona.com",
-    "isSvg": true
+    "aspectRatio": 2.891891891891892
   },
   "lebanondailynews.png": {
     "name": "lebanondailynews.png",
-    "domain": "ldnews.com",
+    "domain": [
+      "ldnews.com"
+    ],
     "isSvg": false
   },
   "livingston.png": {
     "name": "livingston.png",
-    "domain": "livingstondaily.com",
+    "domain": [
+      "lsj.com",
+      "livingstondaily.com"
+    ],
     "isSvg": false
   },
   "livonia.png": {
     "name": "livonia.png",
-    "domain": "hometownlife.com",
+    "domain": [
+      "hometownlife.com"
+    ],
     "isSvg": false
   },
   "louisville.png": {
     "name": "louisville.png",
-    "domain": "courier-journal.com",
+    "domain": [
+      "courier-journal.com"
+    ],
     "isSvg": false
   },
   "manitowoc.png": {
     "name": "manitowoc.png",
-    "domain": "htrnews.com",
+    "domain": [
+      "htrnews.com"
+    ],
     "isSvg": false
   },
   "mansfield.svg": {
+    "name": "mansfield.svg",
+    "domain": [
+      "mansfieldnewsjournal.com"
+    ],
+    "isSvg": true,
     "width": "171",
     "height": "25",
-    "aspectRatio": 6.84,
-    "name": "mansfield.svg",
-    "domain": "mansfieldnewsjournal.com",
-    "isSvg": true
+    "aspectRatio": 6.84
   },
   "marcoisland.png": {
     "name": "marcoisland.png",
-    "domain": "marcoislandflorida.com",
+    "domain": [
+      "marcoislandflorida.com"
+    ],
     "isSvg": false
   },
   "marion.svg": {
+    "name": "marion.svg",
+    "domain": [
+      "marionstar.com"
+    ],
+    "isSvg": true,
     "width": "661",
     "height": "94",
-    "aspectRatio": 7.031914893617022,
-    "name": "marion.svg",
-    "domain": "marionstar.com",
-    "isSvg": true
+    "aspectRatio": 7.031914893617022
   },
   "marshfield.png": {
     "name": "marshfield.png",
-    "domain": "marshfieldnewsherald.com",
+    "domain": [
+      "marshfieldnewsherald.com"
+    ],
     "isSvg": false
   },
   "michigan.svg": {
+    "name": "michigan.svg",
+    "domain": [
+      "michigan.com"
+    ],
+    "isSvg": true,
     "width": "157.5",
     "height": "157.5",
-    "aspectRatio": 1,
-    "name": "michigan.svg",
-    "domain": "michigan.com",
-    "isSvg": true
+    "aspectRatio": 1
   },
   "militarytimes.png": {
     "name": "militarytimes.png",
-    "domain": "militarytimes.com",
+    "domain": [
+      "militarytimes.com"
+    ],
     "isSvg": false
   },
   "monroe.png": {
     "name": "monroe.png",
-    "domain": "thenewsstar.com",
+    "domain": [
+      "thenewsstar.com"
+    ],
     "isSvg": false
   },
   "montgomery.png": {
     "name": "montgomery.png",
-    "domain": "montgomeryadvertiser.com",
+    "domain": [
+      "montgomeryadvertiser.com"
+    ],
     "isSvg": false
   },
   "morristown.png": {
     "name": "morristown.png",
-    "domain": "dailyrecord.com",
+    "domain": [
+      "dailyrecord.com"
+    ],
     "isSvg": false
   },
   "mountainhome.png": {
     "name": "mountainhome.png",
-    "domain": "baxterbulletin.com",
+    "domain": [
+      "baxterbulletin.com"
+    ],
     "isSvg": false
   },
   "muncie.png": {
     "name": "muncie.png",
-    "domain": "thestarpress.com",
+    "domain": [
+      "thestarpress.com"
+    ],
     "isSvg": false
   },
   "murfreesboro.png": {
     "name": "murfreesboro.png",
-    "domain": "dnj.com",
+    "domain": [
+      "dnj.com"
+    ],
     "isSvg": false
   },
   "nashville.png": {
     "name": "nashville.png",
-    "domain": "tennessean.com",
+    "domain": [
+      "tennessean.com"
+    ],
     "isSvg": false
   },
   "newark.svg": {
+    "name": "newark.svg",
+    "domain": [
+      "newarkadvocate.com"
+    ],
+    "isSvg": true,
     "width": "213",
     "height": "25",
-    "aspectRatio": 8.52,
-    "name": "newark.svg",
-    "domain": "newarkadvocate.com",
-    "isSvg": true
+    "aspectRatio": 8.52
   },
   "opelousas.png": {
     "name": "opelousas.png",
-    "domain": "dailyworld.com",
+    "domain": [
+      "dailyworld.com"
+    ],
     "isSvg": false
   },
   "oshkosh.png": {
     "name": "oshkosh.png",
-    "domain": "thenorthwestern.com",
+    "domain": [
+      "thenorthwestern.com"
+    ],
     "isSvg": false
   },
   "packersnews.png": {
     "name": "packersnews.png",
-    "domain": "packersnews.com",
+    "domain": [
+      "packersnews.com"
+    ],
     "isSvg": false
   },
   "palmsprings.png": {
     "name": "palmsprings.png",
-    "domain": "desertsun.com",
+    "domain": [
+      "desertsun.com"
+    ],
     "isSvg": false
   },
   "pensacola.svg": {
+    "name": "pensacola.svg",
+    "domain": [
+      "pnj.com"
+    ],
+    "isSvg": true,
     "width": "340",
     "height": "60",
-    "aspectRatio": 5.666666666666667,
-    "name": "pensacola.svg",
-    "domain": "pnj.com",
-    "isSvg": true
+    "aspectRatio": 5.666666666666667
   },
   "phoenix.svg": {
+    "name": "phoenix.svg",
+    "domain": [
+      "azcentral.com"
+    ],
+    "isSvg": true,
     "width": "340",
     "height": "60",
-    "aspectRatio": 5.666666666666667,
-    "name": "phoenix.svg",
-    "domain": "azcentral.com",
-    "isSvg": true
+    "aspectRatio": 5.666666666666667
   },
   "portclinton.png": {
     "name": "portclinton.png",
-    "domain": "portclintonnewsherald.com",
+    "domain": [
+      "portclintonnewsherald.com"
+    ],
     "isSvg": false
   },
   "porthuron.png": {
     "name": "porthuron.png",
-    "domain": "thetimesherald.com",
+    "domain": [
+      "lsj.com",
+      "thetimesherald.com"
+    ],
     "isSvg": false
   },
   "poughkeepsie.png": {
     "name": "poughkeepsie.png",
-    "domain": "poughkeepsiejournal.com",
+    "domain": [
+      "poughkeepsiejournal.com"
+    ],
     "isSvg": false
   },
   "renogazettejournal.svg": {
+    "name": "renogazettejournal.svg",
+    "domain": [
+      "rgj.com"
+    ],
+    "isSvg": true,
     "width": "713",
     "height": "68",
-    "aspectRatio": 10.485294117647058,
-    "name": "renogazettejournal.svg",
-    "domain": "rgj.com",
-    "isSvg": true
+    "aspectRatio": 10.485294117647058
   },
   "renotahoe.png": {
     "name": "renotahoe.png",
-    "domain": "reno.com",
+    "domain": [
+      "reno.com"
+    ],
     "isSvg": false
   },
   "richmond.png": {
     "name": "richmond.png",
-    "domain": "pal-item.com",
+    "domain": [
+      "pal-item.com"
+    ],
     "isSvg": false
   },
   "rochester.png": {
     "name": "rochester.png",
-    "domain": "democratandchronicle.com",
+    "domain": [
+      "democratandchronicle.com"
+    ],
     "isSvg": false
   },
   "ruidosonews.png": {
     "name": "ruidosonews.png",
-    "domain": "ruidosonews.com",
+    "domain": [
+      "ruidosonews.com"
+    ],
     "isSvg": false
   },
   "salem.png": {
     "name": "salem.png",
-    "domain": "statesmanjournal.com",
+    "domain": [
+      "statesmanjournal.com"
+    ],
     "isSvg": false
   },
   "salinas.svg": {
+    "name": "salinas.svg",
+    "domain": [
+      "thecalifornian.com"
+    ],
+    "isSvg": true,
     "width": "318",
     "height": "80",
-    "aspectRatio": 3.975,
-    "name": "salinas.svg",
-    "domain": "thecalifornian.com",
-    "isSvg": true
+    "aspectRatio": 3.975
   },
   "salisbury.png": {
     "name": "salisbury.png",
-    "domain": "delmarvanow.com",
+    "domain": [
+      "delmarvanow.com"
+    ],
     "isSvg": false
   },
   "sheboygan.svg": {
+    "name": "sheboygan.svg",
+    "domain": [
+      "sheboyganpress.com"
+    ],
+    "isSvg": true,
     "width": "340",
     "height": "60",
-    "aspectRatio": 5.666666666666667,
-    "name": "sheboygan.svg",
-    "domain": "sheboyganpress.com",
-    "isSvg": true
+    "aspectRatio": 5.666666666666667
   },
   "shreveport.png": {
     "name": "shreveport.png",
-    "domain": "shreveporttimes.com",
+    "domain": [
+      "shreveporttimes.com"
+    ],
     "isSvg": false
   },
   "silvercitysunnews.png": {
     "name": "silvercitysunnews.png",
-    "domain": "scsun-news.com",
+    "domain": [
+      "scsun-news.com"
+    ],
     "isSvg": false
   },
   "siouxfalls.svg": {
+    "name": "siouxfalls.svg",
+    "domain": [
+      "argusleader.com"
+    ],
+    "isSvg": true,
     "width": "650",
     "height": "93",
-    "aspectRatio": 6.989247311827957,
-    "name": "siouxfalls.svg",
-    "domain": "argusleader.com",
-    "isSvg": true
+    "aspectRatio": 6.989247311827957
   },
   "somosfrontera.png": {
     "name": "somosfrontera.png",
-    "domain": "elpasoymas.com",
+    "domain": [
+      "elpasoymas.com"
+    ],
     "isSvg": false
   },
   "springfield.png": {
     "name": "springfield.png",
-    "domain": "news-leader.com",
+    "domain": [
+      "news-leader.com"
+    ],
     "isSvg": false
   },
   "staunton.png": {
     "name": "staunton.png",
-    "domain": "newsleader.com",
+    "domain": [
+      "newsleader.com"
+    ],
     "isSvg": false
   },
   "stcloud.svg": {
+    "name": "stcloud.svg",
+    "domain": [
+      "sctimes.com"
+    ],
+    "isSvg": true,
     "width": "206",
     "height": "60",
-    "aspectRatio": 3.433333333333333,
-    "name": "stcloud.svg",
-    "domain": "sctimes.com",
-    "isSvg": true
+    "aspectRatio": 3.433333333333333
   },
   "stevenspoint.png": {
     "name": "stevenspoint.png",
-    "domain": "stevenspointjournal.com",
+    "domain": [
+      "stevenspointjournal.com"
+    ],
     "isSvg": false
   },
   "stgeorge.png": {
     "name": "stgeorge.png",
-    "domain": "thespectrum.com",
+    "domain": [
+      "thespectrum.com"
+    ],
     "isSvg": false
   },
   "tallahassee.png": {
     "name": "tallahassee.png",
-    "domain": "tallahassee.com",
+    "domain": [
+      "tallahassee.com"
+    ],
     "isSvg": false
   },
   "usat-life.svg": {
+    "name": "usat-life.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "202",
     "height": "29",
-    "aspectRatio": 6.9655172413793105,
-    "name": "usat-life.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 6.9655172413793105
   },
   "usat-money.svg": {
+    "name": "usat-money.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "246",
     "height": "29",
-    "aspectRatio": 8.482758620689655,
-    "name": "usat-money.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 8.482758620689655
   },
   "usat-news.svg": {
+    "name": "usat-news.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "227",
     "height": "29",
-    "aspectRatio": 7.827586206896552,
-    "name": "usat-news.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 7.827586206896552
   },
   "usat-opinion.svg": {
+    "name": "usat-opinion.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "257",
     "height": "29",
-    "aspectRatio": 8.862068965517242,
-    "name": "usat-opinion.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 8.862068965517242
   },
   "usat-sports.svg": {
+    "name": "usat-sports.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "246",
     "height": "29",
-    "aspectRatio": 8.482758620689655,
-    "name": "usat-sports.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 8.482758620689655
   },
   "usat-tech.svg": {
+    "name": "usat-tech.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "215",
     "height": "29",
-    "aspectRatio": 7.413793103448276,
-    "name": "usat-tech.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 7.413793103448276
   },
   "usat-travel.svg": {
+    "name": "usat-travel.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "240",
     "height": "29",
-    "aspectRatio": 8.275862068965518,
-    "name": "usat-travel.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 8.275862068965518
   },
   "usat.svg": {
+    "name": "usat.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
     "width": "240",
     "height": "29",
-    "aspectRatio": 8.275862068965518,
-    "name": "usat.svg",
-    "domain": "usatoday.com",
-    "isSvg": true
+    "aspectRatio": 8.275862068965518
   },
   "vineland.svg": {
+    "name": "vineland.svg",
+    "domain": [
+      "thedailyjournal.com"
+    ],
+    "isSvg": true,
     "width": "390",
     "height": "80",
-    "aspectRatio": 4.875,
-    "name": "vineland.svg",
-    "domain": "thedailyjournal.com",
-    "isSvg": true
+    "aspectRatio": 4.875
   },
   "visaliatulare.png": {
     "name": "visaliatulare.png",
-    "domain": "visaliatimesdelta.com",
+    "domain": [
+      "visaliatimesdelta.com"
+    ],
     "isSvg": false
   },
   "wausau.svg": {
+    "name": "wausau.svg",
+    "domain": [
+      "wasaudailyherald.com"
+    ],
+    "isSvg": true,
     "width": "298",
     "height": "60",
-    "aspectRatio": 4.966666666666667,
-    "name": "wausau.svg",
-    "domain": "wasaudailyherald.com",
-    "isSvg": true
+    "aspectRatio": 4.966666666666667
   },
   "westchester.png": {
     "name": "westchester.png",
-    "domain": "lohud.com",
+    "domain": [
+      "lohud.com"
+    ],
     "isSvg": false
   },
   "wilmington.svg": {
+    "name": "wilmington.svg",
+    "domain": [
+      "delawareonline.com"
+    ],
+    "isSvg": true,
     "width": "139",
     "height": "25",
-    "aspectRatio": 5.56,
-    "name": "wilmington.svg",
-    "domain": "delawareonline.com",
-    "isSvg": true
+    "aspectRatio": 5.56
   },
   "wisconsinrapids.png": {
     "name": "wisconsinrapids.png",
-    "domain": "wisconsinrapidstribune.com",
+    "domain": [
+      "wisconsinrapidstribune.com"
+    ],
     "isSvg": false
   },
   "yorkdailyrecord.svg": {
+    "name": "yorkdailyrecord.svg",
+    "domain": [
+      "ydr.com"
+    ],
+    "isSvg": true,
     "width": "434",
     "height": "80",
-    "aspectRatio": 5.425,
-    "name": "yorkdailyrecord.svg",
-    "domain": "ydr.com",
-    "isSvg": true
+    "aspectRatio": 5.425
   },
   "yorkdispatch.svg": {
+    "name": "yorkdispatch.svg",
+    "domain": [
+      "yorkdispatch.com"
+    ],
+    "isSvg": true,
     "width": "434",
     "height": "80",
-    "aspectRatio": 5.425,
-    "name": "yorkdispatch.svg",
-    "domain": "yorkdispatch.com",
-    "isSvg": true
+    "aspectRatio": 5.425
   },
   "zanesville.png": {
     "name": "zanesville.png",
-    "domain": "zanesvilletimesrecorder.com",
+    "domain": [
+      "zanesvilletimesrecorder.com"
+    ],
     "isSvg": false
   }
 }

@@ -358,9 +358,15 @@
 
   "Lansing": {
     "domain": "lsj.com",
-    "logo": {
+    "logo": [{
       "filename": "lansing.png"
-    }
+    }, {
+      "filename": "battlecreek.png"
+    }, {
+      "filename": "porthuron.png"
+    }, {
+      "filename": "livingston.png"
+    }]
   },
 
   "Las Cruces Sun-News": {

@@ -110,7 +110,7 @@ function registerRoutes(app, router, passport) {
     let approvedLogos = {};
     for (let filename in Object.assign({}, logoJson)) {
       let logoInfo = logoJson[filename];
-      if (domain !== logoInfo.domain && !req.user.admin) continue;
+      if (logoInfo.domain.indexOf(domain) < 0 && !req.user.admin) continue;
       approvedLogos[filename] = logoInfo;
     }
     res.json(approvedLogos);
@@ -130,11 +130,10 @@ function registerRoutes(app, router, passport) {
     let domain = getDomainFromEmail(req.user.email);
 
     // Don't load the logo if the user isn't authorized to do so
-    if (domain !== logoInfo.domain && !req.user.admin) {
+    if (logoInfo.domain.indexOf(domain) < 0 && !req.user.admin) {
       res.status(403).send();
       return;
     }
-
 
     let data = await logoFetch.getLogo(filename, color);
 
