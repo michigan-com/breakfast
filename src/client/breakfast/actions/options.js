@@ -59,6 +59,7 @@ export default class OptionActions {
           type: Actions.backgroundImageChange,
           value: {
             src: reader.result,
+            url: '',
             width: img.width,
             height: img.height
           }
@@ -90,6 +91,7 @@ export default class OptionActions {
         type: Actions.backgroundImageChange,
         value: {
           src: canvas.toDataURL('image/png'),
+          url: url,
           width: img.width,
           height: img.height
         }

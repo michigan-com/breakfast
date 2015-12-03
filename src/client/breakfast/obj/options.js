@@ -1,6 +1,6 @@
 import React from 'react';
 import ColorPicker from 'react-color';
-import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE } from '../lib/constants';
+import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../lib/constants';
 import OptionActions from '../actions/options';
 import { Select } from '../../util/components';
 import CornerPicker from '../../util/components/corner-picker';
@@ -17,6 +17,8 @@ export default class Controls extends React.Component {
       optionSelected: false,
       selectedOption: ''
     }
+
+    this.defaultImage = `${window.location.origin}/img/default_image.jpg`
   }
 
   componentDidMount() {
@@ -24,8 +26,15 @@ export default class Controls extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.contentType === 'watermark' && !nextProps.options.backgroundImg.src) {
-      actions.backgroundImageUrlChange(`${window.location.origin}/img/default_image.jpg`);
+    if (nextProps.contentType === 'watermark' && this.props.contentType != 'watermark') {
+      if (!nextProps.options.backgroundImg.src) {
+        actions.backgroundImageUrlChange(this.defaultImage);
+      } else {
+        actions.backgroundTypeChange(BACKGROUND_IMAGE);
+      }
+    } else if (nextProps.contentType !== 'watermark' && this.props.contentType === 'watermark'
+                && this.props.options.backgroundImg.url === this.defaultImage) {
+      actions.backgroundTypeChange(BACKGROUND_COLOR);
     }
   }
 
@@ -100,6 +109,7 @@ export default class Controls extends React.Component {
     let changeEvent = this.changeEvent;
 
     return function(color) {
+      console.log(color);
       changeEvent(action, () => { return `#${color.hex}`; });
     }
   }
@@ -167,8 +177,9 @@ export default class Controls extends React.Component {
         <div className='input-container'>
           <span className='label'>Color</span>
           <span className='input'>
-            <PickerToggle color={ options.fontColor }
-                callback={ this.colorChangeCallback(actions.fontColorChange) }/>
+            <ColorPickerToggle color={ options.fontColor }
+                callback={ this.colorChangeCallback(actions.fontColorChange) }
+                name='font-color-picker'/>
           </span>
         </div>
         <div className='input-container'>
@@ -194,8 +205,9 @@ export default class Controls extends React.Component {
         <div className={ backgroundClass }>
           <span className='label'>Color</span>
           <span className='input'>
-            <PickerToggle color={ this.props.options.backgroundColor }
-                callback={ this.colorChangeCallback(actions.backgroundColorChange) }/>
+            <ColorPickerToggle color={ this.props.options.backgroundColor }
+                callback={ this.colorChangeCallback(actions.backgroundColorChange) }
+                name='background-color-picker'/>
           </span>
         </div>
         <div className='input-container'>
@@ -274,8 +286,9 @@ export default class Controls extends React.Component {
     let colorPicker = (<div className='help-text'>This logo cannot be colored. Got another logo we can use? <a href='mailto:rwilliams@michigan.com,mvarano@michigan.com'>Email us!</a></div>);
     if (/svg$/.test(this.props.options.logo.filename)) {
         colorPicker = (
-          <PickerToggle color={ this.props.options.logoColor }
-                callback={ this.colorChangeCallback(actions.logoColorChange) }/>
+          <ColorPickerToggle color={ this.props.options.logoColor }
+                callback={ this.colorChangeCallback(actions.logoColorChange) }
+                name='logo-color-picker'/>
         )
     }
 
@@ -364,7 +377,7 @@ export default class Controls extends React.Component {
   }
 }
 
-class PickerToggle extends React.Component {
+class ColorPickerToggle extends React.Component {
   constructor(args) {
     super(args);
 
@@ -388,7 +401,10 @@ class PickerToggle extends React.Component {
           <span className='picker-open' onClick={ this.showPicker.bind(this) }>Pick Color</span>
           <div className={ `picker-container ${ this.state.pickerHidden ? 'hide' : ''}` }>
             <span className='picker-close' onClick= { this.hidePicker.bind(this) }>X</span>
-            <ColorPicker className='color-picker' type='chrome' color={ this.props.color } onChangeComplete={  this.props.callback }/>
+            <ColorPicker className='color-picker' type='chrome'
+                color={ this.props.color }
+                onChange={ this.props.callback }
+                key={ this.props.name }/>
           </div>
       </div>
     )

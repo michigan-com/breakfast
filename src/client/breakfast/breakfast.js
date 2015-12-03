@@ -57,16 +57,6 @@ class PicEditor extends React.Component {
       return;
     }
 
-    if (contentType === 'watermark') {
-      this.previousBackroundType = this.state.backgroundType;
-      //actionOptions.backgroundTypeChange('image');
-      //actionOptions.backgroundImageUrlChange('http://localhost:3000/img/default_image.jpg');
-    } else {
-      if (this.state.backgroundType !== this.previousBackgroundType) {
-        actionOptions.backgroundTypeChange(this.previousBackroundType);
-      }
-    }
-
     this.setState({
       contentType
     });

@@ -14,6 +14,7 @@ let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 // Info that gets ajaxed in bc a login is needed
 let logoInfo = {};
 let fonts = [];
+let prevAspectRatio = aspectRatios[0];
 xr.get('/logos/getLogos/')
   .then((data) => {
     logoInfo = data;
@@ -29,14 +30,15 @@ xr.get('/fonts/getFonts/')
 function generateDefaultOptions() {
   return  {
     fontSize: 40,
-    fontColor: '#000000',
+    fontColor: '#000',
     fontFace: 'Helvetica',
     fontOptions: [],
 
     backgroundType: BACKGROUND_COLOR,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     backgroundImg: {
       src: '',
+      url: '',
       height: 0,
       width: 0
     },
@@ -46,7 +48,7 @@ function generateDefaultOptions() {
 
     logo: {},
     logoOptions: [],
-    logoColor: '#000000',
+    logoColor: '#000',
     logoLocation: cornerOptions[cornerOptions.length - 1]
   }
 }
@@ -142,13 +144,16 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   backgroundImageChange(backgroundImg) {
     options.backgroundType = BACKGROUND_IMAGE;
     options.backgroundImg = backgroundImg;
-    options.aspectRatio = FIT_IMAGE;
 
     this.emitChange();
   },
 
   backgroundTypeChange(type) {
     options.backgroundType = type;
+
+    if (type !== 'watermark' && options.aspectRatio === FIT_IMAGE) {
+      options.aspectRatio = prevAspectRatio;
+    }
 
     this.emitChange();
   },
@@ -172,6 +177,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   aspectRatioChange(newRatio) {
     if (aspectRatios.indexOf(newRatio) < 0) return;
 
+    prevAspectRatio = options.aspectRatio;
     options.aspectRatio = newRatio;
     this.emitChange();
   },
