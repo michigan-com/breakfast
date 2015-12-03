@@ -109,7 +109,6 @@ export default class Controls extends React.Component {
     let changeEvent = this.changeEvent;
 
     return function(color) {
-      console.log(color);
       changeEvent(action, () => { return `#${color.hex}`; });
     }
   }
