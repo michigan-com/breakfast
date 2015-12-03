@@ -338,8 +338,8 @@ export default class Canvas extends React.Component {
     // Draw in the bottom right hand corner of the canvas
     attributionStyle.height = metrics.height;
     attributionStyle.width = metrics.width;
-    attributionStyle.top = canvasStyle.height - metrics.height - 5;
-    attributionStyle.left = canvasStyle.width - metrics.width - 5;
+    attributionStyle.top = canvasStyle.height - metrics.height - (canvasStyle.height * .05);
+    attributionStyle.left = canvasStyle.width - metrics.width - (canvasStyle.width * .05);
     return(
       <Group style={ this.getGroupStyle() }>
         <Text className='attribution' style={ attributionStyle }>{ attributionText}</Text>
