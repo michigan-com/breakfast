@@ -324,3 +324,26 @@ body {
     background: darken($primary-color, 10%);
   }
 }
+
+/** Corner picker */
+.corner-picker {
+  display: block;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+
+  .corner {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+    background-color: grey;
+    opacity: .5;
+    transition: opacity 250ms linear;
+    cursor: pointer;
+    border: 1px solid black;
+
+    &.active, &:hover {
+      opacity: 1;
+    }
+  }
+}

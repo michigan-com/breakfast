@@ -28,6 +28,7 @@ let aspectRatioChange = 'aspectRatioChange';
 
 let logoChange = 'logoChange';
 let logoColorChange = 'logoColorChange';
+let logoLocationChange = 'logoLocationChange';
 
 module.exports = {
   // Aspect ratios
@@ -80,7 +81,8 @@ module.exports = {
 
       // Logo
       logoChange,
-      logoColorChange
+      logoColorChange,
+      logoLocationChange
     }
   }
 }

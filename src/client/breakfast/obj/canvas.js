@@ -52,9 +52,6 @@ export default class Canvas extends React.Component {
     this.setState(newState);
   }
 
-  componentWillUpdate(nextProps, nextState) {
-  }
-
   getCanvasStyle() {
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
@@ -105,7 +102,7 @@ export default class Canvas extends React.Component {
 
   getGroupStyle() {
     return {
-      zIndex: 100
+      zIndex: 10
     }
   }
 
@@ -134,9 +131,15 @@ export default class Canvas extends React.Component {
 
     let textHeight = fontSize * 1.25;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
+
+    let top = this.canvasPadding;
+    if (/^top/.test(this.props.options.logoLocation)) {
+      let logoStyle = this.getLogoStyle();
+      top += logoStyle.height * 2;
+    }
     return {
       text: {
-        top: this.canvasPadding,
+        top: top,
         left: this.canvasPadding / 2,
         eight: textHeight,
         lineHeight: textHeight,
@@ -168,9 +171,18 @@ export default class Canvas extends React.Component {
 
     let listItemFontSize = canvasStyle.height * .2 * (this.props.fontSize / 100);
     let listItemHeight = listItemFontSize;
+
+    let headlineTop = this.canvasPadding;
+    let listItemTop = headlineSize + 10;
+    if (/^top/.test(this.props.options.logoLocation)) {
+      let logoStyle = this.getLogoStyle();
+      headlineTop += logoStyle.height * 2;
+      listItemTop += logoStyle.height * 2;
+    }
+
     return {
       headline: {
-        top: this.canvasPadding,
+        top: headlineTop,
         left: this.canvasPadding / 2,
         height: headlineSize,
         lineHeight: headlineSize,
@@ -180,7 +192,7 @@ export default class Canvas extends React.Component {
         color: this.props.options.fontColor
       },
       listItem: {
-        top: headlineSize + 10,
+        top: listItemTop,
         left: this.canvasPadding,
         height: listItemHeight,
         lineHeight: listItemHeight * 1.25,
@@ -208,6 +220,7 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
     let width;
     let height;
+    let zIndex = 10;
 
     if (aspectRatio > 1) {
       // The logo is wider than it is tall
@@ -218,13 +231,27 @@ export default class Canvas extends React.Component {
       width = height * aspectRatio;
     }
 
-    return {
-      height,
-      width,
-      top: canvasStyle.height - (height * 2),
-      left: canvasStyle.width * .05,
-      zIndex: 100
+    let top = 0;
+    let left = 0;
+    switch (/^bottom/.test(this.props.options.logoLocation)) {
+      case false:
+        top = height;
+        break;
+      case true:
+        top = canvasStyle.height - (height * 2);
+        break;
     }
+    switch (/left$/.test(this.props.options.logoLocation)) {
+      case true:
+        left = canvasStyle.width * .05;
+        break;
+      case false:
+        left = canvasStyle.width - (canvasStyle.width * .05) - width;
+        break;
+    }
+
+
+    return { height, width, top, left, zIndex }
   }
 
   renderListItems() {
@@ -235,7 +262,7 @@ export default class Canvas extends React.Component {
     let returnElements = [];
 
     // Render the headline
-    let headline = this.props.canvasData.headline.toUpperCase();
+    let headline = this.props.canvasData.headline;
     let headlineMetrics = measureText(headline, canvasStyle.width - this.canvasPadding,
           headlineStyle.fontFace, headlineStyle.fontSize, headlineStyle.lineHeight);
     prevHeight = headlineMetrics.height;
@@ -253,7 +280,7 @@ export default class Canvas extends React.Component {
       listItemStyle.height = listMetrics.height;
       listItemStyle.top += prevHeight;
       returnElements.push(
-         <Text className='item' style={ clone(listItemStyle) }>{item}</Text>
+         <Text className='item' style={ clone(listItemStyle) } key={ `list-item-${i}` }>{item}</Text>
       )
 
       prevHeight = listMetrics.height + (listItemStyle.lineHeight * .2);

@@ -9,6 +9,7 @@ let Actions = actions.options;
 
 let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, SIXTEEN_NINE, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
+let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 
 // Info that gets ajaxed in bc a login is needed
 let logoInfo = {};
@@ -45,7 +46,8 @@ function generateDefaultOptions() {
 
     logo: {},
     logoOptions: [],
-    logoColor: '#000000'
+    logoColor: '#000000',
+    logoLocation: cornerOptions[cornerOptions.length - 1]
   }
 }
 
@@ -208,6 +210,13 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  logoLocationChange(corner) {
+    if (cornerOptions.indexOf(corner) < 0) return;
+
+    options.logoLocation = corner;
+    this.emitChange();
+  },
+
   logosLoaded() {
     let logos = [];
     for (let filename in logoInfo) {
@@ -260,6 +269,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.logoColorChange:
       OptionStore.logoColorChange(action.value);
+      break;
+    case Actions.logoLocationChange:
+      OptionStore.logoLocationChange(action.value);
       break;
   }
 });

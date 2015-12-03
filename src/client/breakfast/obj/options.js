@@ -3,6 +3,7 @@ import ColorPicker from 'react-color';
 import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE } from '../lib/constants';
 import OptionActions from '../actions/options';
 import { Select } from '../../util/components';
+import CornerPicker from '../../util/components/corner-picker';
 
 let actions = new OptionActions();
 
@@ -83,6 +84,10 @@ export default class Controls extends React.Component {
 
   fontFaceChanged(fontFace, index) {
     this.changeEvent(actions.fontFaceChange, () => { return index; });
+  }
+
+  cornerChange(corner) {
+    this.changeEvent(actions.logoLocationChange, () => { return corner;  });
   }
 
   /**
@@ -282,6 +287,14 @@ export default class Controls extends React.Component {
           <span className='label'>Color</span>
           <span className='input'>{ colorPicker }</span>
         </div>
+        <div className='input-container'>
+          <span className='label'>Location</span>
+          <span className='input'>
+            <CornerPicker name='logo-color'
+                      callback={ this.cornerChange.bind(this) }
+                      activeCorner= { this.props.options.logoLocation }/>
+          </span>
+        </div>
       </div>
     )
   }
@@ -420,3 +433,4 @@ class FontSelect extends Select {
     }
   }
 }
+

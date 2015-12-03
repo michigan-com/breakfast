@@ -128,4 +128,11 @@ export default class OptionActions {
       value: color
     });
   }
+
+  logoLocationChange(corner) {
+    Dispatcher.dispatch({
+      type: Actions.logoLocationChange,
+      value: corner
+    });
+  }
 }
