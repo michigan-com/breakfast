@@ -66,6 +66,8 @@ class PicEditor extends React.Component {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
 
+    console.log(dataUri.length);
+
     let a = document.createElement('a');
     a.setAttribute('href',  dataUri);
     a.setAttribute('download', 'pic.png');
@@ -91,6 +93,7 @@ class PicEditor extends React.Component {
     let canvasData = this.state[content.type];
     return(
       <div className='pic-editor'>
+
         <div className='image-container'>
           <Canvas canvasData={ canvasData }
               fontSize={ this.state.fontSize }
@@ -99,6 +102,9 @@ class PicEditor extends React.Component {
               ref='canvas'/>
         </div>
         <div className='options-container'>
+          <div className='save-container'>
+            <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
+          </div>
           <Content contentTypes={ this.contentTypes }
               defaults={ contentDefaults }
               content={ ContentStore.getContent() }/>
@@ -107,9 +113,6 @@ class PicEditor extends React.Component {
               aspectRatios={ this.aspectRatios }
               contentType={ content.type }
               options={ OptionStore.getOptions() }/>
-          <div className='save'>
-            <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
-          </div>
         </div>
       </div>
     )
