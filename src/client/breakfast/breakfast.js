@@ -8,7 +8,7 @@ import Options from './obj/options';
 import Content from './obj/content';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { ContentStore, OptionStore } from './store';
-import OptionActions from './actions/options';
+import ContentActions from './actions/content';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -16,7 +16,7 @@ var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
 
-var actionOptions = new OptionActions();
+var contentActions = new ContentActions();
 
 class PicEditor extends React.Component {
   constructor(args) {
@@ -28,12 +28,8 @@ class PicEditor extends React.Component {
     this.logoAspectRatios = {};
     this.defaultOptions = OptionStore.getDefaults();
 
-    this.state = {
-      contentType: this.contentTypes[0],
-    }
-
-    objectAssign(this.state, ContentStore.getContent());
-    objectAssign(this.state, OptionStore.getOptions());
+    this.state = objectAssign({}, ContentStore.getContent());
+    this.state = objectAssign({}, this.state, OptionStore.getOptions());
 
     this.previousBackground = this.state.backgroundType;
   }
@@ -51,18 +47,12 @@ class PicEditor extends React.Component {
     this.setState(OptionStore.getOptions());
   }
 
-  contentTypeChange(contentType) {
-    if (this.contentTypes.indexOf(contentType) === -1) {
-      console.log('Invalid conent type ' + contentType);
-      return;
-    }
-
-    this.setState({
-      contentType
-    });
+  getImageName() {
+    let fileName = React.findDOMNode(this.refs['file-name']).value;
+    return fileName ? fileName : 'pic';
   }
 
-  saveImage() {
+  saveImage = () => {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
 
@@ -70,20 +60,14 @@ class PicEditor extends React.Component {
 
     let a = document.createElement('a');
     a.setAttribute('href',  dataUri);
-    a.setAttribute('download', 'pic.png');
+    a.setAttribute('download', `${this.getImageName()}.png`);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
   }
 
-  renderContentOptions(option, index) {
-    return(
-      <div className={ `content-type ${ this.state.contentType === option ? 'active': '' }` }
-          key={ option }
-          onClick={ this.contentTypeChange.bind(this, option) }>
-        { toTitleCase(option) }
-      </div>
-    )
+  updateFileName(e) {
+    contentActions.filenameChange(e.target.value);
   }
 
   render() {
@@ -100,11 +84,12 @@ class PicEditor extends React.Component {
               options={ options }
               content={ content }
               ref='canvas'/>
+          <div className='save-container'>
+            <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName } value={ content.filename }/>
+            <div className='save-image' onClick={ this.saveImage.bind(this) }>Save</div>
+          </div>
         </div>
         <div className='options-container'>
-          <div className='save-container'>
-            <div className='save-image' onClick={ this.saveImage.bind(this) }>Download Image</div>
-          </div>
           <Content contentTypes={ this.contentTypes }
               defaults={ contentDefaults }
               content={ ContentStore.getContent() }/>

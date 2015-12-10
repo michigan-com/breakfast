@@ -14,6 +14,8 @@ let copyrightChange = 'copyrightChange';
 
 let contentTypeChange = 'contentTypeChange';
 
+let filenameChange = 'filenameChange';
+
 // Option Actions
 let fontSizeChange = 'fontSizeChange';
 let fontColorChange = 'fontColorChange';
@@ -61,7 +63,9 @@ module.exports = {
       photographerChange,
       copyrightChange,
 
-      contentTypeChange
+      contentTypeChange,
+
+      filenameChange
     },
 
     options: {

@@ -7,6 +7,8 @@ let Actions = actions.content;
 
 let contentTypes = ['quote', 'list', 'watermark'];
 
+let defaultFilename = 'pic';
+
 // TODO make this more random
 function getRandomDefaults() {
   return {
@@ -39,6 +41,10 @@ let content = {
     photographer: '',
     copyright: ''
   },
+
+  // Filename
+  filename: defaultFilename,
+  manualFilenameInput: false
 };
 
 let ContentStore = assign({}, EventEmitter.prototype, {
@@ -93,6 +99,7 @@ let ContentStore = assign({}, EventEmitter.prototype, {
         break;
     }
 
+    this._updateFilenameToContent();
     this.emitChange();
   },
 
@@ -101,7 +108,6 @@ let ContentStore = assign({}, EventEmitter.prototype, {
    */
   listItemAdd() {
     content.list.items.push('');
-
     this.emitChange();
   },
 
@@ -116,7 +122,7 @@ let ContentStore = assign({}, EventEmitter.prototype, {
       if (i != index) newItems.push(content.list.items[i]);
     }
     content.list.items = newItems;
-
+    this._updateFilenameToContent();
     this.emitChange();
   },
 
@@ -130,7 +136,7 @@ let ContentStore = assign({}, EventEmitter.prototype, {
     if (index < 0 || index >= content.list.items.length) return;
 
     content.list.items[index] = text;
-
+    this._updateFilenameToContent();
     this.emitChange();
   },
 
@@ -143,9 +149,44 @@ let ContentStore = assign({}, EventEmitter.prototype, {
     if (contentTypes.indexOf(type) < 0) return;
 
     content.type = type;
+    this._updateFilenameToContent();
+    this.emitChange();
+  },
+
+  _updateFilenameToContent() {
+    if (content.manualFilenameInput && content.filename) return;
+
+    let makeFilename = (str) => { return str.replace(/\"\'/g, '').split(' ').join('-'); }
+    let filename = 'pic';
+    switch (content.type) {
+      case 'quote':
+        if (content.quote.quote) {
+          filename = makeFilename(content.quote.quote)
+        }
+        break;
+      case 'list':
+        if (content.list.headline) {
+          filename = makeFilename(content.list.headline);
+        } else if (content.list.items.length && content.list.items[0]) {
+          filename = makeFilename(content.list.items[0])
+        }
+        break;
+      case 'watermark':
+        if (content.watermark.photographer) {
+          filename = makeFilename(`${content.watermark.photographer} ${content.watermark.copyright}`);
+        }
+        break;
+    }
+
+    content.manualFilenameInput = false;
+    content.filename = filename.slice(0, 20);
+  },
+
+  filenameChange(value) {
+    content.filename = value;
+    content.manualFilenameInput = true;
     this.emitChange();
   }
-
 });
 
 Dispatcher.register(function(action) {
@@ -173,6 +214,9 @@ Dispatcher.register(function(action) {
 
     case Actions.contentTypeChange:
       ContentStore.contentTypeChange(action.value);
+      break;
+    case Actions.filenameChange:
+      ContentStore.filenameChange(action.value);
       break;
   }
 });
