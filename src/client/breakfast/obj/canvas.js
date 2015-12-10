@@ -92,7 +92,15 @@ export default class Canvas extends React.Component {
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth: canvasWidth - this.canvasPadding,
+      textWidth: canvasWidth - (canvasHeight * .1), // account for padding
+      padding: {
+        // TODO think about this more. want to make it the equal padding all
+        // the way around. Should we do relative height or width?
+        top: canvasHeight * .05,
+        right: canvasHeight * .05,
+        bottom: canvasHeight * .05,
+        left: canvasHeight * .05
+      }
     }
   }
 
@@ -140,8 +148,8 @@ export default class Canvas extends React.Component {
     return {
       text: {
         top: top,
-        left: this.canvasPadding / 2,
-        eight: textHeight,
+        left: canvasStyle.padding.left,
+        height: textHeight,
         lineHeight: textHeight,
         fontSize: fontSize,
         width: canvasStyle.textWidth,
@@ -150,7 +158,7 @@ export default class Canvas extends React.Component {
       },
       source: {
         top: 50 + (this.canvasPadding / 2),
-        left: this.canvasPadding / 2,
+        left: canvasStyle.padding.left * 1.3,
         height: textHeight,
         lineHeight: textHeight * 1.25,
         fontSize: fontSize * .75,
@@ -183,7 +191,7 @@ export default class Canvas extends React.Component {
     return {
       headline: {
         top: headlineTop,
-        left: this.canvasPadding / 2,
+        left: canvasStyle.padding.left,
         height: headlineSize,
         lineHeight: headlineSize,
         fontSize: headlineFontSize,
@@ -193,7 +201,7 @@ export default class Canvas extends React.Component {
       },
       listItem: {
         top: listItemTop,
-        left: this.canvasPadding,
+        left: canvasStyle.padding.left * 1.5,
         height: listItemHeight,
         lineHeight: listItemHeight * 1.3,
         fontSize: listItemFontSize,
@@ -222,11 +230,11 @@ export default class Canvas extends React.Component {
     let height;
     let zIndex = 10;
 
-    if (aspectRatio > 1) {
+    if (aspectRatio > 1.5) {
       // The logo is wider than it is tall
       width = canvasStyle.width / 4;
       height = width / aspectRatio;
-    } else if (aspectRatio <= 1) {
+    } else if (aspectRatio <= 1.5) {
       height = canvasStyle.height / 8;
       width = height * aspectRatio;
     }
@@ -235,18 +243,18 @@ export default class Canvas extends React.Component {
     let left = 0;
     switch (/^bottom/.test(this.props.options.logoLocation)) {
       case false:
-        top = height;
+        top = canvasStyle.padding.top;
         break;
       case true:
-        top = canvasStyle.height - (height * 2);
+        top = canvasStyle.height - (height) - (canvasStyle.padding.top);
         break;
     }
     switch (/left$/.test(this.props.options.logoLocation)) {
       case true:
-        left = canvasStyle.width * .05;
+        left = canvasStyle.padding.left;
         break;
       case false:
-        left = canvasStyle.width - (canvasStyle.width * .05) - width;
+        left = canvasStyle.width - canvasStyle.padding.right - width;
         break;
     }
 
@@ -338,8 +346,8 @@ export default class Canvas extends React.Component {
     // Draw in the bottom right hand corner of the canvas
     attributionStyle.height = metrics.height;
     attributionStyle.width = metrics.width;
-    attributionStyle.top = canvasStyle.height - metrics.height - (canvasStyle.height * .05);
-    attributionStyle.left = canvasStyle.width - metrics.width - (canvasStyle.width * .05);
+    attributionStyle.top = canvasStyle.height - metrics.height - canvasStyle.padding.top;
+    attributionStyle.left = canvasStyle.width - metrics.width - canvasStyle.padding.right;
     return(
       <Group style={ this.getGroupStyle() }>
         <Text className='attribution' style={ attributionStyle }>{ attributionText}</Text>
