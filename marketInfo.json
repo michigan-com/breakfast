@@ -366,6 +366,8 @@
       "filename": "porthuron.png"
     }, {
       "filename": "livingston.png"
+    }, {
+      "filename": "livonia.png"
     }]
   },
 
@@ -392,9 +394,17 @@
 
   "Livingston": {
     "domain": "livingstondaily.com",
-    "logo": {
+    "logo": [{
       "filename": "livingston.png"
-    }
+    }, {
+      "filename": "battlecreek.png"
+    }, {
+      "filename": "porthuron.png"
+    }, {
+      "filename": "lansing.png"
+    }, {
+      "filename": "livonia.png"
+    }]
   },
 
   "Livonia": {

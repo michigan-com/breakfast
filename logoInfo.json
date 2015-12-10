@@ -38,7 +38,8 @@
     "name": "battlecreek.png",
     "domain": [
       "battlecreekenquirer.com",
-      "lsj.com"
+      "lsj.com",
+      "livingstondaily.com"
     ],
     "isSvg": false
   },
@@ -381,7 +382,8 @@
   "lansing.png": {
     "name": "lansing.png",
     "domain": [
-      "lsj.com"
+      "lsj.com",
+      "livingstondaily.com"
     ],
     "isSvg": false
   },
@@ -420,6 +422,8 @@
   "livonia.png": {
     "name": "livonia.png",
     "domain": [
+      "lsj.com",
+      "livingstondaily.com",
       "hometownlife.com"
     ],
     "isSvg": false
@@ -607,6 +611,7 @@
     "name": "porthuron.png",
     "domain": [
       "lsj.com",
+      "livingstondaily.com",
       "thetimesherald.com"
     ],
     "isSvg": false
