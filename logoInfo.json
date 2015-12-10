@@ -77,7 +77,7 @@
   "burlington.svg": {
     "name": "burlington.svg",
     "domain": [
-      "burlingtonfreepress.com"
+      "freepressmedia.com"
     ],
     "isSvg": true,
     "width": "334",
@@ -681,7 +681,7 @@
   "salisbury.png": {
     "name": "salisbury.png",
     "domain": [
-      "delmarvanow.com"
+      "dmg.gannett.com"
     ],
     "isSvg": false
   },
