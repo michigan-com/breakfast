@@ -240,6 +240,20 @@
     ],
     "isSvg": false
   },
+  "fortmyersgrey.png": {
+    "name": "fortmyersgrey.png",
+    "domain": [
+      "news-press.com"
+    ],
+    "isSvg": false
+  },
+  "fortmyerssmall.png": {
+    "name": "fortmyerssmall.png",
+    "domain": [
+      "news-press.com"
+    ],
+    "isSvg": false
+  },
   "fremont.png": {
     "name": "fremont.png",
     "domain": [

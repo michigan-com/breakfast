@@ -218,9 +218,13 @@
 
   "Fort Myers": {
     "domain": "news-press.com",
-    "logo": {
+    "logo": [{
       "filename": "fortmyers.png"
-    }
+    }, {
+      "filename": "fortmyerssmall.png"
+    }, {
+      "filename": "fortmyersgrey.png"
+    }]
   },
 
   "Fremont": {
