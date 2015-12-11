@@ -9,7 +9,8 @@
   "alexandria.png": {
     "name": "alexandria.png",
     "domain": [
-      "thetowntalk.com"
+      "thetowntalk.com",
+      "theadvertiser.com"
     ],
     "isSvg": false
   },
@@ -510,6 +511,7 @@
   "monroe.png": {
     "name": "monroe.png",
     "domain": [
+      "theadvertiser.com",
       "thenewsstar.com"
     ],
     "isSvg": false
@@ -569,6 +571,7 @@
   "opelousas.png": {
     "name": "opelousas.png",
     "domain": [
+      "theadvertiser.com",
       "dailyworld.com"
     ],
     "isSvg": false
@@ -712,6 +715,7 @@
   "shreveport.png": {
     "name": "shreveport.png",
     "domain": [
+      "theadvertiser.com",
       "shreveporttimes.com"
     ],
     "isSvg": false

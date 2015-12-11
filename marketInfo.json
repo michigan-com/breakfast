@@ -348,9 +348,17 @@
 
   "Lafayette (LA)": {
     "domain": "theadvertiser.com",
-    "logo": {
+    "logo": [{
       "filename": "lafayettela.png"
-    }
+    }, {
+      "filename": "shreveport.png"
+    }, {
+      "filename": "alexandria.png"
+    }, {
+      "filename": "monroe.png"
+    }, {
+      "filename": "opelousas.png"
+    }]
   },
 
   "Lancaster": {
