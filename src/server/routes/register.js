@@ -49,7 +49,7 @@ function registerRoutes(app, router, passport) {
   // Handle the initial register form submission
   router.post('/register/', function(req, res, next) {
     async function handleRegister(req, res) {
-      let email = req.body.email;
+      let email = req.body.email.toLowerCase();
 
       if (!isValidEmail(email)) {
         res.status(422).send({
@@ -130,7 +130,7 @@ function registerRoutes(app, router, passport) {
 
   router.post('/create-user/', csrfProtection(app), function(req, res, next) {
     async function createUser(req, res, next) {
-      let email = req.body.email;
+      let email = req.body.email.toLowerCase();
       let token = req.body.token;
       let password = req.body.password;
       let confirmPassword = req.body.confirmPassword;

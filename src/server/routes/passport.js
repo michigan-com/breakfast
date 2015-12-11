@@ -22,6 +22,7 @@ function createPassport(app) {
   ));
 
   async function loginCheck(email, password, done) {
+    email = email.toLowerCase();
     let user = await User.find({ email }).limit(1).next();
 
     if (!user || !passwordMatch(password, user.password)) {
