@@ -331,7 +331,8 @@
   "indianapolis.png": {
     "name": "indianapolis.png",
     "domain": [
-      "indystar.com"
+      "indystar.com",
+      "jconline.com"
     ],
     "isSvg": false
   },
@@ -540,6 +541,7 @@
   "muncie.png": {
     "name": "muncie.png",
     "domain": [
+      "jconline.com",
       "thestarpress.com"
     ],
     "isSvg": false
@@ -660,6 +662,7 @@
   "richmond.png": {
     "name": "richmond.png",
     "domain": [
+      "jconline.com",
       "pal-item.com"
     ],
     "isSvg": false
@@ -873,9 +876,9 @@
       "usatoday.com"
     ],
     "isSvg": true,
-    "width": "240",
+    "width": "157",
     "height": "29",
-    "aspectRatio": 8.275862068965518
+    "aspectRatio": 5.413793103448276
   },
   "vineland.svg": {
     "name": "vineland.svg",

@@ -362,9 +362,15 @@
 
   "Lafayette (IN)": {
     "domain": "jconline.com",
-    "logo": {
+    "logo": [{
       "filename": "lafayettein.png"
-    }
+    }, {
+      "filename": "muncie.png"
+    }, {
+      "filename": "richmond.png"
+    }, {
+      "filename": "indianapolis.png"
+    }]
   },
 
   "Lafayette (LA)": {
