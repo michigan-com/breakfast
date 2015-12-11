@@ -792,6 +792,7 @@
   "usat-life.svg": {
     "name": "usat-life.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -802,6 +803,7 @@
   "usat-money.svg": {
     "name": "usat-money.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -812,6 +814,7 @@
   "usat-news.svg": {
     "name": "usat-news.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -822,6 +825,7 @@
   "usat-opinion.svg": {
     "name": "usat-opinion.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -832,6 +836,7 @@
   "usat-sports.svg": {
     "name": "usat-sports.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -842,6 +847,7 @@
   "usat-tech.svg": {
     "name": "usat-tech.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -852,6 +858,7 @@
   "usat-travel.svg": {
     "name": "usat-travel.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -862,6 +869,7 @@
   "usat.svg": {
     "name": "usat.svg",
     "domain": [
+      "gannett.com",
       "usatoday.com"
     ],
     "isSvg": true,

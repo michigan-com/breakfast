@@ -241,6 +241,27 @@
     }
   },
 
+  "Gannett": {
+    "domain": "gannett.com",
+    "logo": [{
+      "filename": "usat.svg"
+    },{
+      "filename": "usat-life.svg"
+    }, {
+      "filename": "usat-money.svg"
+    }, {
+      "filename": "usat-news.svg"
+    }, {
+      "filename": "usat-opinion.svg"
+    }, {
+      "filename": "usat-sports.svg"
+    }, {
+      "filename": "usat-tech.svg"
+    }, {
+      "filename": "usat-travel.svg"
+    }]
+  },
+
   "Great Falls": {
     "domain": "greatfallstribune.com",
     "logo": {

@@ -8,6 +8,7 @@ import marketInfo from '../../marketInfo';
 let validEmailDomains = [];
 for (let marketName in marketInfo) {
   let market = marketInfo[marketName];
+  if (market.domain === 'gannett.com') continue;
   validEmailDomains.push(market.domain);
 }
 
