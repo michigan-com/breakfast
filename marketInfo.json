@@ -43,9 +43,13 @@
 
   "Binghamton": {
     "domain": "pressconnects.com",
-    "logo": {
+    "logo": [{
       "filename": "binghamton.png"
-    }
+    }, {
+      "filename": "elmira.png"
+    }, {
+      "filename": "ithaca.png"
+    }]
   },
 
   "Black Mountain News": {

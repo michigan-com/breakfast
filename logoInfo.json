@@ -188,6 +188,7 @@
   "elmira.png": {
     "name": "elmira.png",
     "domain": [
+      "pressconnects.com",
       "stargazette.com"
     ],
     "isSvg": false
@@ -353,6 +354,7 @@
   "ithaca.png": {
     "name": "ithaca.png",
     "domain": [
+      "pressconnects.com",
       "ithacajournal.com"
     ],
     "isSvg": false
