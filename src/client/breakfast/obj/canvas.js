@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
+
 import { clone } from '../lib/parse';
 import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, BACKGROUND_LOADING, BACKGROUND_IMAGE,
     BACKGROUND_COLOR } from '../lib/constants';
@@ -264,8 +265,9 @@ export default class Canvas extends React.Component {
 
   renderListItems() {
     let canvasStyle = this.getCanvasStyle();
-    let listItemStyle = this.getListStyle().listItem;
     let headlineStyle = this.getListStyle().headline;
+    let listItemStyle = this.getListStyle().listItem;
+    let listItemBulletStyle = this.getListStyle().listItem;
     let prevHeight = 0;
     let returnElements = [];
 
@@ -280,18 +282,33 @@ export default class Canvas extends React.Component {
 
     // render the text input. Have to manually calculate starting point
     for (let i = 0; i < this.props.canvasData.items.length; i++) {
-      let item = `• ${this.props.canvasData.items[i]}`;
+      let item = this.props.canvasData.items[i];
+      let bullet = `${i+1}.  `;
 
-      let listMetrics = measureText(item, canvasStyle.width - (this.canvasPadding * 4),
+      let bulletMetrics = measureText(bullet, canvasStyle.width,
           listItemStyle.fontFace, listItemStyle.fontSize, listItemStyle.lineHeight);
+
+      let listMaxWidth = (canvasStyle.width - this.canvasPadding * 4) - bulletMetrics.width;
+      let listMetrics = measureText(item, listMaxWidth,
+          listItemStyle.fontFace, listItemStyle.fontSize, listItemStyle.lineHeight);
+
+
+      listItemBulletStyle.height = bulletMetrics.height;
+      listItemBulletStyle.top += prevHeight;
 
       listItemStyle.height = listMetrics.height;
       listItemStyle.top += prevHeight;
+      listItemStyle.left = listItemBulletStyle.left + bulletMetrics.width;
+
+      returnElements.push(
+        <Text className='item' style={ clone(listItemBulletStyle) } key={ `list-item-bullet-${i}`}>{bullet}</Text>
+      )
+
       returnElements.push(
          <Text className='item' style={ clone(listItemStyle) } key={ `list-item-${i}` }>{item}</Text>
       )
 
-      prevHeight = listMetrics.height + (listItemStyle.lineHeight * .2);
+      prevHeight = listMetrics.height + (listItemStyle.lineHeight * .5);
     }
 
     return returnElements;
