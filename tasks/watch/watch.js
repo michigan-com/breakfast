@@ -6,7 +6,7 @@ var tap = require('gulp-tap');
 
 var publicJs = require('../build/public-js.js');
 var serverJs = require('../build/server-js.js');
-var sass = require('../build/sass.js');
+var css = require('../build/css.js');
 
 // This gulp task now restarts after each JS error yaaaaay
 gulp.task('watch', function() {
@@ -17,7 +17,7 @@ gulp.task('watch', function() {
   // Watch the server JS and babelify them
   serverJs.watchFunction();
 
-  // Watch the sass files and compile them into css
-  sass.watchFunction();
+  // Watch the css files and compile them into css
+  css.watchFunction();
 
 });

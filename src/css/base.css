@@ -1,6 +1,4 @@
 @import './fonts';
-@import 'bourbon';
-@import 'neat';
 
 $primary-color: black;
 
@@ -8,7 +6,7 @@ $body-background: white;
 $body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
 
 $input-font-size: 20px;
-$input-line-height: $input-font-size * 2;
+$input-line-height: calc($input-font-size * 2);
 
 $navbar-height: 50px;
 
@@ -17,7 +15,7 @@ $screen-sm: 768px;
 
 body {
   font-family: $body-font;
-  margin-top: $navbar-height * 2/1;
+  margin-top: calc($navbar-height * 2/1);
 }
 
 *, *:after, *:before {
@@ -56,13 +54,13 @@ body {
   }
 }
 
-@mixin button($color: $primary-color, $background-color: white) {
+@define-mixin button $color: $primary-color, $background-color: white {
   background-color: $background-color;
   border: 1px solid $color;
   text-align: center;
   color: $color;
   cursor: pointer;
-  @include transition(background-color 250ms ease-in, color 250ms ease-in);
+  transition: $background-color 250ms ease-in, color 250ms ease-in;
 
   &.active, &:hover {
     background-color: $color;
@@ -90,7 +88,7 @@ input[type=submit] {
   color: white;
   border: 1px solid $primary-color;
   cursor: pointer;
-  @include transition(background-color 250ms ease-in, color 250ms ease-in);
+  transition: background-color 250ms ease-in, color 250ms ease-in;
 
   &.active, &:hover {
     background-color: darken($primary-color, 15%);
@@ -139,7 +137,7 @@ input[type=submit] {
   &.show {
     .current-selection {
       &:after {
-        @include transform(rotate(0deg));
+        transform: rotate(0deg);
       }
     }
   }
@@ -168,8 +166,8 @@ input[type=submit] {
       content: '^';
       position: absolute;
       right: 3%;
-      @include transform(rotate(180deg));
-      @include transition(all 250ms linear);
+      transform: rotate(180deg);
+      transition: all 250ms linear;
       font-family: $body-font;
     }
   }
@@ -178,7 +176,7 @@ input[type=submit] {
     width: 100%;
     position: absolute;
     text-align: center;
-    max-height: 30px * 5; // 5 max height;
+    max-height: calc(30px * 5); /* 5 max height;*/
     overflow-y: auto;
     margin-top: 10px;
     background: white;
@@ -186,10 +184,10 @@ input[type=submit] {
     z-index: 1000;
 
     .select-option {
-      font-size: $input-font-size * .75;
-      line-height: $input-line-height * .75;
+      font-size: calc($input-font-size * .75);
+      line-height: calc($input-line-height * .75);
       color: grey;
-      @include transition(all 250ms ease-in);
+      transition: all 250ms ease-in;
       cursor: pointer;
       background: inherit;
       height: 30px;

@@ -20,7 +20,7 @@ h1 {
     text-decoration: none;
 
     &:hover {
-      background-color: darken($primary-color, 15%);
+      background-color: color($primary-color a(115%));
     }
   }
 }

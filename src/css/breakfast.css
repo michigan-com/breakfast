@@ -3,14 +3,14 @@
 $body-background: white;
 
 $button-font-size: 30px;
-$button-line-height: $button-font-size * 2;
+$button-line-height: calc($button-font-size * 2);
 
 $picker-padding: 30px;
 
 
-@mixin close-button() {
+@define-mixin close-button {
   color: grey;
-  @include transition(all 250ms ease-in);
+  transition: all 250ms ease-in;
   cursor: pointer;
 
   &:hover {
@@ -19,9 +19,9 @@ $picker-padding: 30px;
   }
 }
 
-@mixin picker-open() {
+@define-mixin picker-open {
   width: 50%;
-  @include button(grey);
+  @mixin button grey;
   margin: 0 auto;
   font-size: 15px;
   line-height: 30px;
@@ -40,45 +40,25 @@ body {
   display: block;
   position: relative;
 
+  .save-container {
+  }
   .image-container {
-    @include span-columns(8);
+    width: 70%;
+    float: left;
+    display: inline-block;
     margin-right: 0;
   }
   .options-container {
-    @include span-columns(4);
+    width: 30%;
+    float: left;
+    display: inline-block;
     position: relative;
 
   }
 
   @media (max-width: $screen-sm) {
     .image-container, .options-container {
-      @include span-columns(12);
-    }
-  }
-}
-
-.content-type-selector {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 2%;
-  height: $button-line-height;
-
-  .content-type {
-    @include span-columns(4);
-    @include button($primary-color);
-    font-size: $button-font-size;
-    line-height: $button-line-height;
-    text-transform: uppercase;
-
-    @media (max-width: $screen-sm) {
-      font-size: $button-font-size * .5;
-      line-height: $button-line-height * .5;
-
-    }
-
-    &.active {
-      @include button($primary-color)
+      width: 100%;
     }
   }
 }
@@ -95,15 +75,19 @@ body {
 
 .list-inputs {
   .list-input {
-    @include outer-container;
+    width: 100%;
+    display: block;
+    position: relative;
 
     input {
-      @include span-columns(11);
+      width: 90%;
+      display: inline-block;
     }
 
     .remove-list-item {
-      @include span-columns(1);
-      @include close-button();
+      width: 10%;
+      display: inline-block;
+      @mixin close-button;
       line-height: $input-line-height;
       text-align: center;
       height: $input-line-height;
@@ -121,10 +105,10 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     margin: 10px auto;
-    @include transition(all 250ms ease-in);
+    transition: all 250ms ease-in;
 
     &:hover {
-      background: darken($primary-color, 20%);
+      background: color($primary-color a(90%));
     }
   }
 }
@@ -165,7 +149,7 @@ body {
     width: 100%;
 
     .option-select {
-      @include button(grey);
+      @mixin button grey;
       font-size: 20px;
       line-height: 30px;
       display: inline-block;
@@ -206,13 +190,13 @@ body {
 
   .label {
     display: inline-block;
-    @include span-columns(3);
+    width: 25%;
     text-align: center;
 
   }
 
   .input {
-    @include span-columns(9);
+    width: 75%;
     display: inline-block;
     text-align: center;
 
@@ -229,25 +213,6 @@ body {
 
 }
 
-.input-container.image-url-background {
-
-  input {
-    @include span-columns(7);
-    margin-right: 0;
-    border: 0;
-    border-bottom: 1px solid grey;
-    font-size: inherit;
-    line-height: inherit;
-    outline: none;
-  }
-
-  .get-image-url {
-    @include span-columns(5);
-    @include button($primary-color);
-    margin-left: 0;
-  }
-}
-
 .picker {
   display: inline-block;
   width: 100%;
@@ -255,7 +220,7 @@ body {
   text-align: center;
 
   .picker-open {
-    @include picker-open();
+    @mixin picker-open;
   }
 
   .picker-container {
@@ -271,12 +236,12 @@ body {
     }
 
     .picker-close {
-      @include close-button();
+      @mixin close-button;
       position: absolute;
       top: 0;
       right: 0;
       line-height: $picker-padding;
-      font-size: $picker-padding * .5;
+      font-size: calc($picker-padding * .5);
       color: white;
       padding: 5px;
     }
@@ -284,14 +249,14 @@ body {
 }
 
 .file-upload {
-  @include picker-open();
+  @mixin picker-open;
 }
 
 .ratio-options {
   width: 100%;
 
   .aspect-ratio {
-    @include button(grey);
+    @mixin button grey;
     font-size: 30px;
     line-height: 40px;
     text-align: center;
@@ -306,22 +271,43 @@ body {
   width: 100%;
 }
 
-.save {
-  margin-top: 30px;
-}
-.save-image {
-  background: $primary-color;
-  color: white;
-  font-size: 30px;
-  line-height: 40px;
-  text-align: center;
-  width: 100%;
-  margin: 10px 0px;
-  @include transition(all 250ms ease-in);
-  cursor: pointer;
+.save-container {
+  width: 80%;
+  position: relative;
+  margin: 10px auto;
 
-  &:hover {
-    background: darken($primary-color, 10%);
+  input, .save-image {
+    width: 45%;
+    margin: 0 2%;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    position: relative;
+  }
+
+  .save-image:after {
+    content: "File Name";
+    position: absolute;
+    bottom: -20px;
+    opacity: .5;
+    left: -25%;
+    font-size: 10px;
+    color: black;
+  }
+
+  .save-image {
+    background: $primary-color;
+    color: white;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    margin: 10px 0px;
+    transition: all 250ms ease-in;
+    cursor: pointer;
+
+    &:hover {
+      background: color($primary-color a(110%));
+    }
   }
 }
 

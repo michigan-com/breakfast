@@ -73,4 +73,11 @@ export default class ContentActions {
       value: type
     })
   }
+
+  filenameChange(name) {
+    Dispatcher.dispatch({
+      type: Actions.filenameChange,
+      value: name
+    })
+  }
 }

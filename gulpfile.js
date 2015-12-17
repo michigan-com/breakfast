@@ -6,5 +6,5 @@ var requireDir = require('require-dir');
 requireDir('./tasks', { recurse: true });
 
 // Default task
-gulp.task('default', ['sass', 'babel', 'browserify']);
+gulp.task('default', ['css', 'babel', 'browserify']);
 
