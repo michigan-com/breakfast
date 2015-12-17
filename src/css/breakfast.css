@@ -10,6 +10,7 @@ $picker-padding: 30px;
 
 @define-mixin close-button {
   color: grey;
+  border: 1px solid grey;
   transition: all 250ms ease-in;
   cursor: pointer;
 
@@ -90,7 +91,7 @@ body {
       @mixin close-button;
       line-height: $input-line-height;
       text-align: center;
-      height: $input-line-height;
+      height: calc($input-line-height + 1px);
       margin: 10px 0;
     }
   }

@@ -10,43 +10,57 @@ let contentTypes = ['quote', 'list', 'watermark'];
 let defaultFilename = 'pic';
 
 // TODO make this more random
-function getRandomDefaults() {
-  return {
-    quote: {
+function getDefaultContent(contentType) {
+  if (contentType === 'quote') {
+    return {
       quote: 'Test Quote',
-      source: 'Test Source'
-    },
-    list: {
+      source: 'Test Source',
+      options: {
+        width: 100,
+        isDefault: true,
+      }
+    }
+  } else if (contentType === 'list') {
+    return {
       headline: 'This is a headline',
-      items: ['This is an item in the list']
-    },
-    watermark: {
+      items: ['This is an item in the list'],
+      options: {
+        width: 100,
+        bulletType: 'number',
+        isDefault: true,
+      }
+    }
+  } else if (contentType === 'watermark') {
+      return {
       photographer: 'Peter Parker',
-      copyright: 'Daily Bugle'
+      copyright: 'Daily Bugle',
+      options: {
+        isDefault: true,
+      }
     }
   }
 }
 
-let content = {
-  type: contentTypes[0],
-  quote: {
-    quote: '',
-    source: '',
-  },
-  list: {
-    headline: '',
-    items: [''],
-  },
-  watermark: {
-    photographer: '',
-    copyright: ''
-  },
+function defaultContentStore() {
+  let type = contentTypes[0];
+  let quote = getDefaultContent('quote');
+  let watermark = getDefaultContent('watermark');
+  let list = getDefaultContent('list');
+  return {
+    type,
+    quote,
+    watermark,
+    list,
 
-  // Filename
-  filename: defaultFilename,
-  manualFilenameInput: false
-};
+    // Filename
+    filename: defaultFilename,
+    manualFilenameInput: false
+  }
+}
 
+let defaultContent = defaultContentStore();
+
+let content = assign({}, defaultContent);
 let ContentStore = assign({}, EventEmitter.prototype, {
 
   addChangeListener(callback) {
@@ -65,8 +79,8 @@ let ContentStore = assign({}, EventEmitter.prototype, {
     return content;
   },
 
-  getDefaults() {
-    return getRandomDefaults();
+  getDefaultContent() {
+    return defaultContent;
   },
 
   getContentTypes() {
@@ -82,20 +96,36 @@ let ContentStore = assign({}, EventEmitter.prototype, {
    */
   textChange(actionType, text) {
     switch(actionType) {
+      /** Quote stuff */
       case Actions.quoteChange:
         content.quote.quote = text;
+        if (content.quote.options.isDefault) content.quote.source = '';
+
+        content.quote.options.isDefault = false;
         break;
       case Actions.sourceChange:
         content.quote.source = text;
+        if (content.quote.options.isDefault) content.quote.quote = '';
+        content.quote.options.isDefault = false;
         break;
+
+      /** List stuff */
       case Actions.headlineChange:
         content.list.headline = text;
+        if (content.list.options.isDefault) content.list.items = [''];
+        content.list.options.isDefault = false;
         break;
+
+      /** Watermark stuff */
       case Actions.photographerChange:
         content.watermark.photographer = text;
+        if (content.watermark.options.isDefault) content.watermark.copyright = '';
+        content.watermark.options.isDefault = false;
         break;
       case Actions.copyrightChange:
         content.watermark.copyright = text;
+        if (content.watermark.options.isDefault) content.watermark.photographer = '';
+        content.watermark.options.isDefault = false;
         break;
     }
 
@@ -136,6 +166,8 @@ let ContentStore = assign({}, EventEmitter.prototype, {
     if (index < 0 || index >= content.list.items.length) return;
 
     content.list.items[index] = text;
+    if (content.list.options.isDefault) content.list.headline = '';
+    content.list.options.isDefault = false;
     this._updateFilenameToContent();
     this.emitChange();
   },
@@ -186,6 +218,14 @@ let ContentStore = assign({}, EventEmitter.prototype, {
     content.filename = value;
     content.manualFilenameInput = true;
     this.emitChange();
+  },
+
+  optionsChange(contentType, optionName, value) {
+    if (!(contentType in content) || !content[contentType].options) return;
+    else if (!content[contentType].options[optionName]) return;
+
+    content[contentType].options[optionName] = value;
+    this.emitChange();
   }
 });
 
@@ -217,6 +257,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.filenameChange:
       ContentStore.filenameChange(action.value);
+      break;
+    case Actions.optionsChange:
+      ContentStore.optionsChange(action.contentType, action.optionName, action.value);
       break;
   }
 });

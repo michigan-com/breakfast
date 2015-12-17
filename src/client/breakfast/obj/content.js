@@ -6,6 +6,7 @@ let actions = new ContentActions();
 
 export default class Content extends React.Component {
 
+
   /**
    * Used to emit events through the dispatcher. Takes and event callback,
    * and an optional ref to pull the value from
@@ -37,6 +38,13 @@ export default class Content extends React.Component {
    */
   contentTypeChange(contentType, index) {
     this.changeEvent(actions.contentTypeChange, () => { return contentType; });
+  }
+
+  /**
+   * callback for when an option triggers a content option change
+   */
+  contentOptionChange(contentType, optionName, value) {
+    this.changeEvent(actions.optionChange, () => { return [contentType, optionName, value]; } );
   }
 
   /**
@@ -79,8 +87,9 @@ export default class Content extends React.Component {
   }
 
   renderQuoteInputs() {
-    let defaults = this.props.defaults;
+    let defaults = this.props.defaultContent;
     let content = this.props.content;
+    let isDefault = content.quote.options.isDefault;
     return (
       <div className='inputs quote-inputs'>
         <div className='input-title'>Quote</div>
@@ -90,7 +99,7 @@ export default class Content extends React.Component {
                 this,
                 actions.quoteChange,
                 this.getInputVal.bind(this, 'quote')) }
-            value={ content.quote.quote }/>
+            value={ isDefault ? '' : content.quote.quote }/>
 
         <div className='input-title'>Source</div>
         <input type='text' ref='source'
@@ -99,21 +108,24 @@ export default class Content extends React.Component {
                 this,
                 actions.sourceChange,
                 this.getInputVal.bind(this, 'source')) }
-            value={ content.quote.source }/>
+            value={ isDefault ? '' : content.quote.source }/>
       </div>
     )
   }
 
   renderListInputs() {
-    let defaults = this.props.defaults;
+    let defaults = this.props.defaultContent;
     let content = this.props.content;
+    let isDefault = content.list.options.isDefault;
     function renderListItemInput(item, index) {
       let ref = this.formatListItemRef(index);
+      let defaultList = defaults.list.items ;
       return (
 
         <div className='list-input' key={ `list-item-${index}` }>
           <input type='text' ref={ ref }
-              value={ item }
+              placeholder={ index <= defaultList.length ? defaultList[index] : '' }
+              value={ isDefault ? '' : item }
               onChange={ this.changeEvent.bind(
                 this,
                 actions.listItemChange,
@@ -138,7 +150,7 @@ export default class Content extends React.Component {
                 this,
                 actions.headlineChange,
                 this.getInputVal.bind(this, 'headline')) }
-            value={ content.list.headline }/>
+            value={ isDefault ? '' : content.list.headline }/>
 
         <div className='input-title'>List Items</div>
         { content.list.items.map(renderListItemInput.bind(this)) }
@@ -151,8 +163,9 @@ export default class Content extends React.Component {
   }
 
   renderWatermarkInputs() {
-    let defaults = this.props.defaults;
+    let defaults = this.props.defaultContent;
     let content = this.props.content;
+    let isDefault = content.watermark.options.isDefault;
     return (
       <div className='inputs picture-inputs'>
         <div className='input-title'>Photographer</div>
@@ -162,7 +175,7 @@ export default class Content extends React.Component {
               this,
               actions.photographerChange,
               this.getInputVal.bind(this, 'photographer'))}
-            value={ content.watermark.photographer }/>
+            value={ isDefault ? '' : content.watermark.photographer }/>
         <div className='input-title'>Copyright holder</div>
         <input type='text' ref='copyright'
             placeholder={ defaults.watermark.copyright }
@@ -170,7 +183,54 @@ export default class Content extends React.Component {
               this,
               actions.copyrightChange,
               this.getInputVal.bind(this, 'copyright')) }
-            value={ content.watermark.copyright }/>
+            value={ isDefault ? '' : content.watermark.copyright }/>
+      </div>
+    )
+  }
+
+  renderContentOptions() {
+    let contentType = this.props.content.type;
+    let content = this.props.content[contentType];
+
+    if (!content.options) return null;
+
+    let configItems = [];
+    if (contentType === 'list') {
+      let bulletTypes = ['number', 'bullet'];
+
+      let bullets = [];
+      for (let type of bulletTypes) {
+        bullets.push(
+            <input type='radio'
+                  name='number'
+                  checked={ 'number' === content.options.bulletType }
+                  onClick={
+                    ((bulletType) => {
+                      return () => {
+                        this.contentOptionChange('list', 'bulletType', bulletType);
+                      }
+                    })(type)
+                  }/>
+        )
+      }
+      configItems.push(
+        <div className='list-bullet-type'>
+          { bullets }
+        </div>
+      )
+    }
+
+    if (typeof content.options.width !== 'undefined') {
+      configItems.push(
+        <div className='text-width'>
+          <input type='range' min={ 10 } max={ 100 } value={ content.options.width }/>
+        </div>
+      )
+    }
+
+    return (
+      <div className='content-options'>
+        { configItems }
       </div>
     )
   }
@@ -195,6 +255,7 @@ export default class Content extends React.Component {
             options={ this.props.contentTypes }
             onSelect={ this.contentTypeChange.bind(this) }/>
         { contentInput }
+        { this.renderContentOptions() }
       </div>
     )
   }

@@ -71,7 +71,6 @@ class PicEditor extends React.Component {
   }
 
   render() {
-    let contentDefaults = ContentStore.getDefaults();
     let content = ContentStore.getContent();
     let options = OptionStore.getOptions();
     let canvasData = this.state[content.type];
@@ -91,7 +90,7 @@ class PicEditor extends React.Component {
         </div>
         <div className='options-container'>
           <Content contentTypes={ this.contentTypes }
-              defaults={ contentDefaults }
+              defaultContent={ ContentStore.getDefaultContent() }
               content={ ContentStore.getContent() }/>
           <Options fonts={ options.fontOptions }
               logos={ this.state.logoOptions }

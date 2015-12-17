@@ -80,4 +80,13 @@ export default class ContentActions {
       value: name
     })
   }
+
+  optionChange(contentType, optionName, value) {
+    Dispatcher.dispatch({
+      type: Actions.optionChange,
+      contentType,
+      optionName,
+      value
+    });
+  }
 }
