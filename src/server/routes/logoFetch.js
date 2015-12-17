@@ -104,14 +104,35 @@ class LogoFetch {
 function registerRoutes(app, router, passport) {
   let logoFetch = new LogoFetch();
 
+  /**
+   * Determins whether a user has access to a specific logo file or not.
+   *
+   * @param {Object} logoInfo - logoJson[market] = logoInfo, see logoInfo.json
+   * @param {Object} user - User Object in mongo, from the request object
+   * @returns {Boolean} true if the user has access, false otherwise
+   */
+  function userHasAccess(logoInfo, user) {
+    let domain = getDomainFromEmail(user.email);
+
+    if (logoInfo.domain.indexOf(domain) >= 0) {
+      return true;
+    } else if (logoInfo.domain.indexOf('*') >= 0) {
+      return true;
+    } else if (user.admin) {
+      return true;
+    }
+
+    return false;
+  }
+
   // Getting the logo info
   router.get('/logos/getLogos/', loginRequired, function(req, res, next) {
-    let domain = getDomainFromEmail(req.user.email);
     let approvedLogos = {};
-    for (let filename in Object.assign({}, logoJson)) {
-      let logoInfo = logoJson[filename];
-      if (logoInfo.domain.indexOf(domain) < 0 && !req.user.admin) continue;
-      approvedLogos[filename] = logoInfo;
+    for (let filename in logoJson) {
+      let logoInfo = Object.assign({}, logoJson[filename]);
+      if (userHasAccess(logoInfo, req.user)) {
+        approvedLogos[filename] = logoInfo;
+      }
     }
     res.json(approvedLogos);
   });
@@ -130,7 +151,7 @@ function registerRoutes(app, router, passport) {
     let domain = getDomainFromEmail(req.user.email);
 
     // Don't load the logo if the user isn't authorized to do so
-    if (logoInfo.domain.indexOf(domain) < 0 && !req.user.admin) {
+    if (!userHasAccess(logoInfo, req.user)) {
       res.status(403).send();
       return;
     }

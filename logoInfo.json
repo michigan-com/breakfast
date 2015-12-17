@@ -1,4 +1,11 @@
 {
+  "AP.png": {
+    "name": "AP.png",
+    "domain": [
+      "*"
+    ],
+    "isSvg": false
+  },
   "alamogordo.png": {
     "name": "alamogordo.png",
     "domain": [
