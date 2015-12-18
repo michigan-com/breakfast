@@ -1,11 +1,21 @@
 extends ./base
 
 block css
-    link(href='/css/index.css', rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic', rel='stylesheet', type='text/css')
+  link(href='https://fonts.googleapis.com/css?family=Vast+Shadow', rel='stylesheet', type='text/css')
+  link(href='/css/index.css', rel='stylesheet')
 
 block content
-    h1 Welcome to breakfast!
+  .fancy-title
+    .directive Welcome to
+    .app-name Breakfast
 
-    .buttons
-      a(href='/login/') Login
-      a(href='/register/') Register
+  .subtitle As easy as scrambled eggs, poppin’ like bacon
+
+  .buttons
+    a.register-button(href='/register/') Register
+    .login
+      p Already Registered?
+      p
+        a(href='/login/') Log In
+
