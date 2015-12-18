@@ -1,4 +1,5 @@
 @import './base';
+@import './entry-page';
 
 .register-form-container {
   width: 75%;
@@ -21,13 +22,14 @@ form {
   }
 
   input[type=submit] {
-    width: 100%;
-    display: block;
+    @mixin big-button;
+    width: 200px;
   }
 
-  input {
+  input[type=text] {
     width: 100% !important;
-    text-align: center;
+    text-align: left;
+    padding-left: 10%;
     padding-top: 1px !important;
   }
 
@@ -50,4 +52,15 @@ form {
 
 #domains {
   display: inline-block;
+}
+
+.blurbs {
+  color: white;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+
+  a {
+    color: white;
+  }
 }

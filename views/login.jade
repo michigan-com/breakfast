@@ -1,14 +1,18 @@
-extends ./base
+extends ./entry-page
 include ./util/form
 
 block content
+  .fancy-title
+    .directive Login to
+    .app-name Breakfast
+
   .login-form
-    h2 Login to Breakfast
     form(action='/login/', method='POST')
       for field in fields
         +renderInput(field)
       p.register-text Don't have an account? Register #[a(href='/register/') here]
-      input(type='submit', value='Login')
+      .submit-container
+        input(type='submit', value='Login')
 
 block css
   link(href='/css/login.css', rel='stylesheet')

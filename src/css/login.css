@@ -1,4 +1,5 @@
 @import './base';
+@import './entry-page';
 
 .login-form {
   width: 75%;
@@ -11,12 +12,22 @@
 
 form {
   input[type=submit] {
-    width: 50%;
-    margin: 10px 25%;
-    text-align: center;
+    @mixin big-button;
+  }
+}
+
+.submit-container {
+  width: 100%;
+  input {
+    margin: 0 auto;
   }
 }
 
 .register-text {
   text-align: center;
+  color: white;
+
+  a {
+    color: white;
+  }
 }

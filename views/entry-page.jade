@@ -1,20 +1,18 @@
+doctype html
 head
   include ./util/meta
 
   block title
     title Breakfast
 
+  link(href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic', rel='stylesheet', type='text/css')
+  link(href='https://fonts.googleapis.com/css?family=Vast+Shadow', rel='stylesheet', type='text/css')
   link(href='https://fonts.googleapis.com/css?family=Oswald', rel='stylesheet', type='text/css')
-  block css
-    link(href='/css/base.css', rel='stylesheet')
-body
-  include ./util/navbar
 
-  block messages
-    if messages
-      ol.flash-messages
-        for message in messages
-          li.message #{message}
+  block css
+
+body
+
   block content
 
   block js

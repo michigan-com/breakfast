@@ -42,8 +42,6 @@ $('form.register-form').on('submit', function(e) {
   };
 
   if (!username) {
-    $('.form-field.username').removeClass('error').addClass('error');
-    $('.form-field.username .errors').html('<p>Please specify a username</p>');
     return;
   }
 

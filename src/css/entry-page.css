@@ -1,0 +1,106 @@
+@import './base';
+
+$directive-font-size: 40px;
+$directive-line-height: $directive-font-size * 1.3;
+
+body {
+  background-image: url(/img/overlay.png);
+  background-position: 50% 50%;
+  background-size: cover;
+
+  &:after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1;
+  }
+
+  .content {
+    z-index: 2;
+  }
+}
+
+.fancy-title {
+  text-align: center;
+  width: 100%;
+
+  .directive {
+    width: 35%;
+    font-family: 'Vast Shadow';
+    font-size: $directive-font-size;
+    line-height: 1.3em;
+    color: white;
+    position: relative;
+    margin: 0 auto;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+
+    &:after {
+      content: "";
+      color: transparent;
+      height: calc($directive-line-height * 1.5);
+      width: 100%;
+      position: absolute;
+      top: -25%;
+      left: 0;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+  }
+
+  .app-name {
+    font-family: 'Playfair Display';
+    font-weight: bold;
+    font-size: 140px;
+    line-height: 100px;
+    font-style: italic;
+    color: white;
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}
+
+.subtitle {
+  font-family: 'Playfair Display';
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  margin: 10px 0px;
+}
+
+input[type=text], input[type=password] {
+  font-family: 'Oswald';
+  background-color: transparent !important;
+  border: 1px solid white;
+  border-left: 0;
+  border-right: 0;
+  outline: 0;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+  margin-right: 10px;
+  color: white;
+}
+
+input[type=submit] {
+  @mixin big-button;
+  margin: 10px 0px;
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.input {
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding-left: 10%;
+  }
+}
+

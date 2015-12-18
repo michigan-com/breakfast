@@ -4,8 +4,7 @@
 //- @param {Field} field - Instance of the Field class, see src/server/util/form
 //-
 mixin renderInput(field)
-  div(class='#{ field.options.classString }')
-    label #{ field.options.name || field.options.label }
+  div(class='input #{ field.options.classString }')
     input(type='#{ field.options.type }', name='#{ field.options.name }', placeholder='#{ field.options.placeholder }', value='#{ field.options.value }')
     .errors
       for error in field.options.errors
