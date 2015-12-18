@@ -17,18 +17,18 @@ export default class Canvas extends React.Component {
   constructor(args) {
     super(args);
 
-    this.canvasPadding = 40;
     this.canvasWidth = 650;
     window.onresize = function() {
       this.setState({ windowChange: true});
     }.bind(this);
 
     this.state = {
-      backgroundPos: {
+      textPos: {
         top: 0,
         left: 0
       },
 
+      mouseHover: false,
       mouseDown: false,
       lastMouseX: 0,
       lastMouseY: 0,
@@ -42,13 +42,6 @@ export default class Canvas extends React.Component {
     let newState = {
       backgroundType: nextProps.options.backgroundType
     };
-
-    if (nextProps.options.backgroundType === BACKGROUND_COLOR) {
-      newState.backgroundPos = {
-        top: 0,
-        left: 0
-      }
-    }
 
     this.setState(newState);
   }
@@ -90,17 +83,29 @@ export default class Canvas extends React.Component {
         canvasHeight = canvasWidth  / (backgroundImg.width / backgroundImg.height);
     }
 
+    let textWidth = canvasWidth - (canvasHeight * .1);
+    let content = this.props.content[this.props.content.type];
+    if (content.options && content.options.width) {
+      textWidth *= (content.options.width / 100);
+    }
+
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth: canvasWidth - (canvasHeight * .1), // account for padding
-      padding: {
-        // TODO think about this more. want to make it the equal padding all
-        // the way around. Should we do relative height or width?
+      textWidth,
+      logoPadding: {
         top: canvasHeight * .05,
         right: canvasHeight * .05,
         bottom: canvasHeight * .05,
         left: canvasHeight * .05
+      },
+      padding: {
+        // TODO think about this more. want to make it the equal padding all
+        // the way around. Should we do relative height or width?
+        top: (canvasHeight * .05) + this.state.textPos.top,
+        right: canvasHeight * .05,
+        bottom: canvasHeight * .05,
+        left: (canvasHeight * .05) + this.state.textPos.left
       }
     }
   }
@@ -110,9 +115,17 @@ export default class Canvas extends React.Component {
   }
 
   getGroupStyle() {
-    return {
-      zIndex: 10
+    let style = {
+      zIndex: 10,
+      top: this.state.textPos.top,
+      left: this.state.textPos.left
     }
+
+    if (this.props.content.type !== 'watermark' && this.state.mouseHover) {
+      style.border = '1px solid black';
+    }
+
+    return style;
   }
 
   getBackgroundStyle() {
@@ -120,8 +133,8 @@ export default class Canvas extends React.Component {
 
     let style = {
       zIndex: 1,
-      top: this.state.backgroundPos.top,
-      left: this.state.backgroundPos.left,
+      top: 0,
+      left: 0,
       width: canvasStyle.width,
       height: canvasStyle.height
     }
@@ -136,12 +149,12 @@ export default class Canvas extends React.Component {
 
   getQuoteStyle() {
     let canvasStyle = this.getCanvasStyle();
-    let fontSize = canvasStyle.height * .2 * (this.props.fontSize / 100);
+    let fontSize = canvasStyle.height * (this.props.fontSize / 500);
 
     let textHeight = fontSize * 1.25;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
-    let top = this.canvasPadding;
+    let top = canvasStyle.padding.top;
     if (/^top/.test(this.props.options.logoLocation)) {
       let logoStyle = this.getLogoStyle();
       top += logoStyle.height * 2;
@@ -151,15 +164,15 @@ export default class Canvas extends React.Component {
         top: top,
         left: canvasStyle.padding.left,
         height: textHeight,
-        lineHeight: textHeight,
+        lineHeight: textHeight * 1.2,
         fontSize: fontSize,
         width: canvasStyle.textWidth,
         fontFace: font,
         color: this.props.options.fontColor
       },
       source: {
-        top: 50 + (this.canvasPadding / 2),
-        left: canvasStyle.padding.left * 1.3,
+        top: canvasStyle.padding.top + 50,
+        left: canvasStyle.padding.left + 20,
         height: textHeight,
         lineHeight: textHeight * 1.25,
         fontSize: fontSize * .75,
@@ -174,14 +187,14 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
 
     // this.props.fontSize is a scale from 0-100. Max font size === 1/3 the canvas height
-    let headlineFontSize = canvasStyle.height * .3  *  (this.props.fontSize / 100);
+    let headlineFontSize = canvasStyle.height * (this.props.fontSize / 400);
     let headlineSize = headlineFontSize;
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
-    let listItemFontSize = canvasStyle.height * .2 * (this.props.fontSize / 100);
+    let listItemFontSize = canvasStyle.height * (this.props.fontSize / 600);
     let listItemHeight = listItemFontSize;
 
-    let headlineTop = canvasStyle.height * .1;
+    let headlineTop = canvasStyle.padding.top;
     let listItemTop = headlineTop + headlineSize;
     if (/^top/.test(this.props.options.logoLocation)) {
       let logoStyle = this.getLogoStyle();
@@ -194,7 +207,7 @@ export default class Canvas extends React.Component {
         top: headlineTop,
         left: canvasStyle.padding.left,
         height: headlineSize,
-        lineHeight: headlineSize,
+        lineHeight: headlineSize * 1.15,
         fontSize: headlineFontSize,
         width: canvasStyle.textWidth,
         fontFace: font,
@@ -202,11 +215,11 @@ export default class Canvas extends React.Component {
       },
       listItem: {
         top: listItemTop,
-        left: canvasStyle.padding.left * 1.5,
+        left: canvasStyle.padding.left + 20,
         height: listItemHeight,
         lineHeight: listItemHeight * 1.3,
         fontSize: listItemFontSize,
-        width: canvasStyle.textWidth - (this.canvasPadding * 2),
+        width: canvasStyle.textWidth,
         fontFace: font,
         color: this.props.options.fontColor
       }
@@ -242,20 +255,21 @@ export default class Canvas extends React.Component {
 
     let top = 0;
     let left = 0;
+    let padding = canvasStyle.logoPadding;
     switch (/^bottom/.test(this.props.options.logoLocation)) {
       case false:
-        top = canvasStyle.padding.top;
+        top = padding.top;
         break;
       case true:
-        top = canvasStyle.height - (height) - (canvasStyle.padding.top);
+        top = canvasStyle.height - (height) - (padding.top);
         break;
     }
     switch (/left$/.test(this.props.options.logoLocation)) {
       case true:
-        left = canvasStyle.padding.left;
+        left = padding.left;
         break;
       case false:
-        left = canvasStyle.width - canvasStyle.padding.right - width;
+        left = canvasStyle.width - padding.right - width;
         break;
     }
 
@@ -273,9 +287,10 @@ export default class Canvas extends React.Component {
 
     // Render the headline
     let headline = this.props.canvasData.headline;
-    let headlineMetrics = measureText(headline, canvasStyle.width - this.canvasPadding,
+    let headlineMetrics = measureText(headline, headlineStyle.width,
           headlineStyle.fontFace, headlineStyle.fontSize, headlineStyle.lineHeight);
     prevHeight = headlineMetrics.height;
+    headlineStyle.height = headlineMetrics.height;
     returnElements.push(
       <Text className='headline' style={ headlineStyle }>{ headline }</Text>
     )
@@ -283,12 +298,18 @@ export default class Canvas extends React.Component {
     // render the text input. Have to manually calculate starting point
     for (let i = 0; i < this.props.canvasData.items.length; i++) {
       let item = this.props.canvasData.items[i];
-      let bullet = `${i+1}.  `;
 
-      let bulletMetrics = measureText(bullet, canvasStyle.width,
+      let bulletType = this.props.content.list.options.bulletType;
+      let bulletCharacter = '';
+      if (bulletType === 'number') bulletCharacter = `${i+1}.`;
+      else if (bulletType === 'bullet') bulletCharacter = '•';
+
+      let bullet = `${bulletCharacter}  `;
+
+      let bulletMetrics = measureText(bullet, canvasStyle.textWidth,
           listItemStyle.fontFace, listItemStyle.fontSize, listItemStyle.lineHeight);
 
-      let listMaxWidth = (canvasStyle.width - this.canvasPadding * 4) - bulletMetrics.width;
+      let listMaxWidth = listItemStyle.width - bulletMetrics.width - canvasStyle.padding.right;
       let listMetrics = measureText(item, listMaxWidth,
           listItemStyle.fontFace, listItemStyle.fontSize, listItemStyle.lineHeight);
 
@@ -314,43 +335,23 @@ export default class Canvas extends React.Component {
     return returnElements;
   }
 
-  renderQuoteLine(item, index) {
-
-    let style = this.getQuoteStyle().source
-    style.top += style.height * index;
-    return (
-      <Text className='quote-text' style={ style }>{ item }</Text>
-    )
-  }
-
   renderQuote() {
     let canvasStyle = this.getCanvasStyle();
     let quoteStyle = this.getQuoteStyle();
-    let quoteMetrics = measureText(this.props.canvasData.quote, canvasStyle.width - 50,
+    let quoteMetrics = measureText(this.props.canvasData.quote, canvasStyle.textWidth,
           quoteStyle.text.fontFace, quoteStyle.text.fontSize, quoteStyle.text.lineHeight);
 
     quoteStyle.text.height = quoteMetrics.height;
     quoteStyle.source.top = quoteStyle.text.height + quoteStyle.text.top + 20;
-    return (
-      <Group style={ this.getGroupStyle() }>
-        <Text className='quote-text' style={ clone(quoteStyle.text) }>
-          { this.props.canvasData.quote }
-        </Text>
-        <Text className='source' style={ clone(quoteStyle.source) }>
-          { `- ${this.props.canvasData.source }` }
-        </Text>
-      </Group>
-    )
-  }
-
-  renderList() {
-    return (
-      <Group style={ this.getGroupStyle() }>
-        <Text className='headline'>
-        </Text>
-        { this.renderListItems.call(this) }
-      </Group>
-    )
+    return [(
+      <Text className='quote-text' style={ clone(quoteStyle.text) }>
+        { this.props.canvasData.quote }
+      </Text>
+    ), (
+      <Text className='source' style={ clone(quoteStyle.source) }>
+        { `- ${this.props.canvasData.source }` }
+      </Text>
+    )]
   }
 
   renderPicture() {
@@ -363,13 +364,9 @@ export default class Canvas extends React.Component {
     // Draw in the bottom right hand corner of the canvas
     attributionStyle.height = metrics.height;
     attributionStyle.width = metrics.width;
-    attributionStyle.top = canvasStyle.height - metrics.height - canvasStyle.padding.top;
-    attributionStyle.left = canvasStyle.width - metrics.width - canvasStyle.padding.right;
-    return(
-      <Group style={ this.getGroupStyle() }>
-        <Text className='attribution' style={ attributionStyle }>{ attributionText}</Text>
-      </Group>
-    )
+    attributionStyle.top = canvasStyle.height - metrics.height - canvasStyle.logoPadding.top;
+    attributionStyle.left = canvasStyle.width - metrics.width - canvasStyle.logoPadding.right;
+    return <Text className='attribution' style={ attributionStyle }>{ attributionText}</Text>;
 }
 
   renderBackground() {
@@ -427,11 +424,11 @@ export default class Canvas extends React.Component {
 
     let movementX = this.state.lastMouseX - e.clientX;
     let movementY = this.state.lastMouseY - e.clientY;
-    let newTop = this.state.backgroundPos.top - movementY;
-    let newLeft = this.state.backgroundPos.left - movementX;
+    let newTop = this.state.textPos.top - movementY;
+    let newLeft = this.state.textPos.left - movementX;
 
     this.setState({
-      backgroundPos: {
+      textPos: {
         top: newTop,
         left: newLeft
       },
@@ -440,24 +437,38 @@ export default class Canvas extends React.Component {
     });
   }
 
-  render() {
+  renderCanvasElements() {
     let canvasElements = (<Text className='idk'> Haven't implemented this yet</Text>)
-    let canvasStyle = this.getCanvasStyle();
     let contentType = this.props.content.type;
 
     if (contentType === 'quote') {
       canvasElements = this.renderQuote();
     } else if (contentType === 'list') {
-      canvasElements = this.renderList();
+      canvasElements = this.renderListItems();
     } else if (contentType === 'watermark') {
       canvasElements = this.renderPicture();
     }
 
     return (
-      <div className='image'
-          //onMouseDown={ this.mouseDown.bind(this) }
-          //onMouseUp={ this.mouseUp.bind(this) }
-          //onMouseMove={ this.mouseMove.bind(this) }
+      <Group style={ this.getGroupStyle() }>
+        { canvasElements }
+      </Group>
+    )
+  }
+
+  render() {
+    let canvasStyle = this.getCanvasStyle();
+
+    let className = 'image';
+    if (this.state.hover) className += ' hover';
+
+    return (
+      <div className={ className }
+          onMouseDown={ this.mouseDown.bind(this) }
+          onMouseUp={ this.mouseUp.bind(this) }
+          onMouseMove={ this.mouseMove.bind(this) }
+          onMouseEnter={ () => { this.setState({ mouseHover: true }); } }
+          onMouseLeave={ () => { this.setState({ mouseHover: false }); } }
           style={ canvasStyle }
           ref='image'>
         <Surface className='quote'
@@ -467,7 +478,7 @@ export default class Canvas extends React.Component {
             top={0}
             ref='canvas'>
           { this.renderBackground() }
-          { canvasElements }
+          { this.renderCanvasElements() }
           { this.renderLogo() }
         </Surface>
       </div>

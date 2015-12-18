@@ -188,42 +188,30 @@ export default class Content extends React.Component {
     )
   }
 
-  renderContentOptions() {
+  renderContentOptions = () => {
     let contentType = this.props.content.type;
     let content = this.props.content[contentType];
 
     if (!content.options) return null;
 
     let configItems = [];
-    if (contentType === 'list') {
-      let bulletTypes = ['number', 'bullet'];
-
-      let bullets = [];
-      for (let type of bulletTypes) {
-        bullets.push(
-            <input type='radio'
-                  name='number'
-                  checked={ 'number' === content.options.bulletType }
-                  onClick={
-                    ((bulletType) => {
-                      return () => {
-                        this.contentOptionChange('list', 'bulletType', bulletType);
-                      }
-                    })(type)
-                  }/>
-        )
-      }
-      configItems.push(
-        <div className='list-bullet-type'>
-          { bullets }
-        </div>
-      )
-    }
 
     if (typeof content.options.width !== 'undefined') {
       configItems.push(
-        <div className='text-width'>
-          <input type='range' min={ 10 } max={ 100 } value={ content.options.width }/>
+        <div className='input-container'>
+          <span className='label'>Text Width</span>
+          <span className='input'>
+            <input type='range'
+                  min={ 10 }
+                  max={ 100 }
+                  value={ content.options.width }
+                  ref='content-width'
+                  onChange={
+                    () => {
+                      this.contentOptionChange(contentType, 'width', parseInt(this.getInputVal('content-width')))
+                    }
+                  }/>
+          </span>
         </div>
       )
     }

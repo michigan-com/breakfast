@@ -258,7 +258,7 @@ Dispatcher.register(function(action) {
     case Actions.filenameChange:
       ContentStore.filenameChange(action.value);
       break;
-    case Actions.optionsChange:
+    case Actions.optionChange:
       ContentStore.optionsChange(action.contentType, action.optionName, action.value);
       break;
   }

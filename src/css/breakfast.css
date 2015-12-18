@@ -69,6 +69,10 @@ body {
   width: 650px;
   margin: 0 auto;
 
+  &:hover {
+    cursor: move;
+  }
+
   canvas {
     border: 1px solid black;
   }
@@ -193,7 +197,7 @@ body {
     display: inline-block;
     width: 25%;
     text-align: center;
-
+    font-size: 15px;
   }
 
   .input {

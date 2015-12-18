@@ -231,6 +231,15 @@ let OptionStore = assign({}, EventEmitter.prototype, {
         filename
       });
     }
+
+    // Sort alphabetically, except put AP last
+    logos.sort((a, b) => {
+      if (a.name === 'AP.png' || a.name > b.name) return 1;
+      else if (b.name === 'AP.png' || a.name < b.name) return -1;
+
+      return 0;
+    });
+
     options.logoOptions = logos;
 
     if (logos.length) {
