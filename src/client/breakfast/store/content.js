@@ -26,7 +26,7 @@ function getDefaultContent(contentType) {
       items: ['This is an item in the list'],
       options: {
         width: 100,
-        bulletType: 'number',
+        bulletType: 'bullet',
         isDefault: true,
       }
     }
