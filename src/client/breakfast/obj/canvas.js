@@ -2,8 +2,8 @@ import React from 'react';
 import ReactCanvas from 'react-canvas';
 
 import { clone } from '../lib/parse';
-import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, BACKGROUND_LOADING, BACKGROUND_IMAGE,
-    BACKGROUND_COLOR } from '../lib/constants';
+import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
+  BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../lib/constants';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -73,6 +73,9 @@ export default class Canvas extends React.Component {
         break;
       case FACEBOOK:
         canvasHeight = canvasWidth * 1/1.911;
+        break;
+      case FACEBOOK_COVER:
+        canvasHeight = canvasWidth * 0.370153;
         break;
       case FIT_IMAGE:
         // Only deal with this aspect ratio if we've loaded an image up

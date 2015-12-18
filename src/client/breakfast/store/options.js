@@ -2,12 +2,12 @@ import xr from 'xr';
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
-import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, TWO_ONE, FIT_IMAGE, CHANGE_EVENT,
-  BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../lib/constants';
+import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, FACEBOOK_COVER, TWO_ONE, FIT_IMAGE,
+  CHANGE_EVENT, BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../lib/constants';
 
 let Actions = actions.options;
 
-let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, SIXTEEN_NINE, FIT_IMAGE];
+let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, FACEBOOK_COVER, SIXTEEN_NINE, FIT_IMAGE];
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 

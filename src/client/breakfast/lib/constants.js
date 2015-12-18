@@ -39,6 +39,7 @@ module.exports = {
   SQUARE: 'square',
   TWO_ONE: '2:1 (Twitter)',
   FACEBOOK: '1.9:1 (Facebook)',
+  FACEBOOK_COVER: 'Facebook Cover Photo',
   FIT_IMAGE: 'Fit Image',
 
   CHANGE_EVENT: 'change',
