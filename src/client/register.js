@@ -8,7 +8,7 @@ import marketInfo from '../../marketInfo';
 let validEmailDomains = [];
 for (let marketName in marketInfo) {
   let market = marketInfo[marketName];
-  if (market.domain === 'gannett.com') continue;
+  if (market.domain === 'gannett.com' || !/\.\w{3}$/.test(market.domain)) continue;
   validEmailDomains.push(market.domain);
 }
 
