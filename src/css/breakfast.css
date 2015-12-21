@@ -35,6 +35,12 @@ body {
   background: $body-background;
 }
 
+input[type=text] {
+  font-size: 25px;
+  font-family: 'Oswald';
+
+}
+
 .pic-editor {
   width: 95%;
   margin: 0 auto;

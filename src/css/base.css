@@ -13,6 +13,42 @@ $navbar-height: 50px;
 $screen-md: 992px;
 $screen-sm: 768px;
 
+@define-mixin button $color: $primary-color, $background-color: white {
+  background-color: $background-color;
+  border: 1px solid $color;
+  text-align: center;
+  color: $color;
+  cursor: pointer;
+  transition: $background-color 250ms ease-in, color 250ms ease-in;
+
+  &.active, &:hover {
+    background-color: $color;
+    color: $background-color;
+  }
+}
+
+@define-mixin big-button {
+  display: block;
+  font-size: 26px;
+  line-height: 3em;
+  padding: 0px 1em;
+  border-radius: 100px;
+  background-color: white;
+  text-decoration: none;
+  transition: background-color 250ms linear, color 250ms linear;
+  border: 1px solid white;
+  text-align: center;
+  color: black;
+  font-family: 'Oswald';
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+    color: white;
+  }
+}
+
 body {
   font-family: $body-font;
   margin-top: calc($navbar-height * 2/1);
@@ -54,40 +90,6 @@ body {
   }
 }
 
-@define-mixin button $color: $primary-color, $background-color: white {
-  background-color: $background-color;
-  border: 1px solid $color;
-  text-align: center;
-  color: $color;
-  cursor: pointer;
-  transition: $background-color 250ms ease-in, color 250ms ease-in;
-
-  &.active, &:hover {
-    background-color: $color;
-    color: $background-color;
-  }
-}
-
-@define-mixin big-button {
-  display: block;
-  font-size: 26px;
-  line-height: 3em;
-  padding: 0px 1em;
-  border-radius: 100px;
-  background-color: white;
-  text-decoration: none;
-  transition: background-color 250ms linear, color 250ms linear;
-  border: 1px solid white;
-  text-align: center;
-  color: black;
-  font-family: 'Oswald';
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: transparent;
-    color: white;
-  }
-}
 
 /** Form stuff, for login, register, etc forms */
 
@@ -166,8 +168,11 @@ body {
 
 /** Flash messages */
 .flash-messages {
-  position: relative;
+  position: absolute;
   width: 100%;
+  top: 20px;
+  left: 0;
+  z-index: 1000;
 
   .message {
     width: 75%;
@@ -179,4 +184,3 @@ body {
     font-size: 15px;
   }
 }
-

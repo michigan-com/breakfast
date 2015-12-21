@@ -10,11 +10,6 @@ head
 body
   include ./util/navbar
 
-  block messages
-    if messages
-      ol.flash-messages
-        for message in messages
-          li.message #{message}
   block content
 
   block js

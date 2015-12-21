@@ -346,15 +346,22 @@ export default class Canvas extends React.Component {
 
     quoteStyle.text.height = quoteMetrics.height;
     quoteStyle.source.top = quoteStyle.text.height + quoteStyle.text.top + 20;
+
+
+    let source = null;
+    if (this.props.canvasData.source) {
+      source = (
+        <Text className='source' style={ clone(quoteStyle.source) }>
+          { `— ${this.props.canvasData.source }` }
+        </Text>
+      )
+    }
+
     return [(
       <Text className='quote-text' style={ clone(quoteStyle.text) }>
         { this.props.canvasData.quote }
       </Text>
-    ), (
-      <Text className='source' style={ clone(quoteStyle.source) }>
-        { `- ${this.props.canvasData.source }` }
-      </Text>
-    )]
+    ), source]
   }
 
   renderPicture() {

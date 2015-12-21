@@ -12,6 +12,11 @@ head
   block css
 
 body
+  block messages
+    if messages
+      ol.flash-messages
+        for message in messages
+          li.message #{message}
 
   block content
 
