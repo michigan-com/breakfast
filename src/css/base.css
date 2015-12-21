@@ -51,7 +51,6 @@ $screen-sm: 768px;
 
 body {
   font-family: $body-font;
-  margin-top: calc($navbar-height * 2/1);
 }
 
 *, *:after, *:before {
