@@ -10,9 +10,9 @@ block content
     form(action='/login/', method='POST')
       for field in fields
         +renderInput(field)
-      p.register-text Don't have an account? Register #[a(href='/register/') here]
       .submit-container
         input(type='submit', value='Login')
+      p.register-text Don't have an account? Register #[a(href='/register/') here]
 
 block css
   link(href='/css/login.css', rel='stylesheet')

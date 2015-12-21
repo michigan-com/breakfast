@@ -7,7 +7,6 @@ $button-line-height: calc($button-font-size * 2);
 
 $picker-padding: 30px;
 
-
 @define-mixin close-button {
   color: grey;
   border: 1px solid grey;
@@ -36,9 +35,12 @@ body {
 }
 
 input[type=text] {
-  font-size: 25px;
+  font-size: 20px;
+  line-height: 40px;
   font-family: 'Oswald';
-
+  border: 0;
+  border-bottom: 1px solid black;
+  margin: 10px 0px;
 }
 
 .pic-editor {
@@ -101,7 +103,7 @@ input[type=text] {
       @mixin close-button;
       line-height: $input-line-height;
       text-align: center;
-      height: calc($input-line-height + 1px);
+      height: $input-line-height;
       margin: 10px 0;
     }
   }
@@ -343,4 +345,8 @@ input[type=text] {
       opacity: 1;
     }
   }
+}
+
+.current-selection {
+  border: 1px solid black;
 }

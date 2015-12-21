@@ -158,10 +158,7 @@ export default class Canvas extends React.Component {
     let font = ReactCanvas.FontFace(this.props.options.fontFace, '', {});
 
     let top = canvasStyle.padding.top;
-    if (/^top/.test(this.props.options.logoLocation)) {
-      let logoStyle = this.getLogoStyle();
-      top += logoStyle.height * 2;
-    }
+
     return {
       text: {
         top: top,
@@ -175,10 +172,10 @@ export default class Canvas extends React.Component {
       },
       source: {
         top: canvasStyle.padding.top + 50,
-        left: canvasStyle.padding.left + 20,
+        left: canvasStyle.padding.left,
         height: textHeight,
         lineHeight: textHeight * 1.25,
-        fontSize: fontSize * .75,
+        fontSize: fontSize * .6,
         width: canvasStyle.textWidth,
         fontFace: font,
         color: this.props.options.fontColor
@@ -199,11 +196,6 @@ export default class Canvas extends React.Component {
 
     let headlineTop = canvasStyle.padding.top;
     let listItemTop = headlineTop + headlineSize;
-    if (/^top/.test(this.props.options.logoLocation)) {
-      let logoStyle = this.getLogoStyle();
-      headlineTop += logoStyle.height * 2;
-      listItemTop += logoStyle.height * 2;
-    }
 
     return {
       headline: {
@@ -222,7 +214,7 @@ export default class Canvas extends React.Component {
         height: listItemHeight,
         lineHeight: listItemHeight * 1.3,
         fontSize: listItemFontSize,
-        width: canvasStyle.textWidth,
+        width: canvasStyle.textWidth - (canvasStyle.padding.right * 2),
         fontFace: font,
         color: this.props.options.fontColor
       }

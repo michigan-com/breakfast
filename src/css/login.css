@@ -18,8 +18,11 @@ form {
 
 .submit-container {
   width: 100%;
+  margin: 30px 0px 15px 0px;
+
   input {
     margin: 0 auto;
+    width: 300px;
   }
 }
 
