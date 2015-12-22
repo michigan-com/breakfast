@@ -5,6 +5,7 @@ import logoFetch from './logoFetch';
 import fontFetch from './fontFetch';
 import login from './login';
 import register from './register';
+import aws from './aws';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
@@ -12,10 +13,12 @@ function registerRoutes(app) {
   let passport = createPassport(app);
 
   // Create the different routes
+  // TODO change this, no need to pass around the app for everything
   logoFetch.registerRoutes(app, router, passport);
   fontFetch.registerRoutes(app, router, passport);
   login.registerRoutes(app, router, passport);
   register.registerRoutes(app, router, passport);
+  aws.registerRoutes(app, router, passport);
 
   // Basic routes
   router.get('/', function(req, res) {

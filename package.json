@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^6.1.2",
+    "aws-sdk": "^2.2.25",
     "babel": "^5.8.21",
     "babel-runtime": "^5.8.20",
     "babelify": "^6.1.3",

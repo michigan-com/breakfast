@@ -1,6 +1,9 @@
+'use strict';
+
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
+import xr from 'xr';
 
 import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
@@ -56,14 +59,18 @@ class PicEditor extends React.Component {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
 
-    console.log(dataUri.length);
+    xr.post('/save-image/', { imageData: dataUri })
+      .then(() => {
+        let a = document.createElement('a');
+        a.setAttribute('href',  dataUri);
+        a.setAttribute('download', `${this.getImageName()}.png`);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, () => {
+        alert('failed to save image');
+      });
 
-    let a = document.createElement('a');
-    a.setAttribute('href',  dataUri);
-    a.setAttribute('download', `${this.getImageName()}.png`);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   }
 
   updateFileName(e) {

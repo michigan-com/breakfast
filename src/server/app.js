@@ -41,7 +41,7 @@ function createApp(db, enableCsrf=true) {
     saveUninitialized: false
   }));
   if (enableCsrf) {
-    app.use(csrf({ cookie: true }));
+    //app.use(csrf({ cookie: true }));
   }
   app.use(passport.initialize());
   app.use(passport.session());
