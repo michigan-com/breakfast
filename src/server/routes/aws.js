@@ -37,7 +37,7 @@ function registerRoutes(app, router, passport) {
   let db = app.get('db');
   let Photo = db.collection('Photo');
 
-  router.post('/save-image/', loginRequired, (req, res, next) => {
+  router.put('/save-image/', loginRequired, (req, res, next) => {
     if (!('imageData' in req.body)) {
       res.status(400);
       return next();

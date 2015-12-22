@@ -318,9 +318,15 @@ input[type=text] {
     margin: 10px 0px;
     transition: all 250ms ease-in;
     cursor: pointer;
+    opacity: 1;
 
     &:hover {
       background: color($primary-color a(110%));
+    }
+
+    &.downloading {
+      opacity: .5;
+      cursor: default;
     }
   }
 }

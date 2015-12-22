@@ -33,6 +33,7 @@ class PicEditor extends React.Component {
 
     this.state = objectAssign({}, ContentStore.getContent());
     this.state = objectAssign({}, this.state, OptionStore.getOptions());
+    this.state.downloading = false;
 
     this.previousBackground = this.state.backgroundType;
   }
@@ -56,20 +57,25 @@ class PicEditor extends React.Component {
   }
 
   saveImage = () => {
+    if (this.state.downloading) return;
+
+    this.setState({ downloading: true });
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
 
-    xr.post('/save-image/', { imageData: dataUri })
-      .then(() => {
-        let a = document.createElement('a');
-        a.setAttribute('href',  dataUri);
-        a.setAttribute('download', `${this.getImageName()}.png`);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, () => {
-        alert('failed to save image');
-      });
+    let downloadImage = () => {
+      let a = document.createElement('a');
+      a.setAttribute('href',  dataUri);
+      a.setAttribute('download', `${this.getImageName()}.png`);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      this.setState({ downloading: false });
+    }
+
+    // even if we fail to save to s3, let them download the image
+    xr.put('/save-image/', { imageData: dataUri })
+      .then( downloadImage, downloadImage );
 
   }
 
@@ -81,6 +87,14 @@ class PicEditor extends React.Component {
     let content = ContentStore.getContent();
     let options = OptionStore.getOptions();
     let canvasData = this.state[content.type];
+
+    let buttonClass = 'save-image';
+    let saveButtonContent = 'Save';
+    if (this.state.downloading) {
+      buttonClass += ' downloading';
+      saveButtonContent = 'Saving...';
+    }
+
     return(
       <div className='pic-editor'>
 
@@ -92,7 +106,7 @@ class PicEditor extends React.Component {
               ref='canvas'/>
           <div className='save-container'>
             <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName } value={ content.filename }/>
-            <div className='save-image' onClick={ this.saveImage.bind(this) }>Save</div>
+            <div className={ buttonClass } onClick={ this.saveImage.bind(this) }>{ saveButtonContent }</div>
           </div>
         </div>
         <div className='options-container'>
