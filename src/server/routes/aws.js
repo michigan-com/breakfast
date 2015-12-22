@@ -34,6 +34,9 @@ async function listObjects() {
  * @param {Object} passport - Passport instance
  */
 function registerRoutes(app, router, passport) {
+  let db = app.get('db');
+  let Photo = db.collection('Photo');
+
   router.post('/save-image/', loginRequired, (req, res, next) => {
     if (!('imageData' in req.body)) {
       res.status(400);
@@ -47,7 +50,7 @@ function registerRoutes(app, router, passport) {
       Bucket: breakfastBucket,
       Key: filename,
       Body: new Buffer(imageData, 'base64')
-    }, (err, data) => {
+    }, async (err, data) => {
       if (err) {
         logger(`ERR: ${err}`)
         res.status(500);
@@ -55,6 +58,12 @@ function registerRoutes(app, router, passport) {
         return;
       } else {
         logger(`Saved ${filename}`)
+
+        let photoObj = await Photo.insertOne({
+          email: req.user.email,
+          photo: filename
+        });
+
         res.status(200);
         res.send();
         return;
