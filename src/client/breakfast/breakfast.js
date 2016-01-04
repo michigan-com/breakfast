@@ -9,6 +9,7 @@ import { toTitleCase, clone } from './lib/parse';
 import Canvas from './obj/canvas.js';
 import Options from './obj/options';
 import Content from './obj/content';
+import AspectRatioPicker from './obj/aspect-ratio-picker';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { ContentStore, OptionStore } from './store';
 import ContentActions from './actions/content';
@@ -27,9 +28,14 @@ class PicEditor extends React.Component {
 
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.contentTypes = ContentStore.getContentTypes();
-    this.aspectRatios = OptionStore.getAspectRatioOptions();
     this.logoAspectRatios = {};
     this.defaultOptions = OptionStore.getDefaults();
+    this.aspectRatios = OptionStore.getAspectRatioOptions();
+    this.aspectRatioValues = [];
+
+    for (let aspectRatio of this.aspectRatios) {
+      this.aspectRatioValues.push(OptionStore.getAspectRatioValue(aspectRatio));
+    }
 
     this.state = objectAssign({}, ContentStore.getContent());
     this.state = objectAssign({}, this.state, OptionStore.getOptions());
@@ -97,8 +103,20 @@ class PicEditor extends React.Component {
 
     return(
       <div className='pic-editor'>
-
+        <div className='options-container'>
+          <Content contentTypes={ this.contentTypes }
+              defaultContent={ ContentStore.getDefaultContent() }
+              content={ ContentStore.getContent() }/>
+          <Options fonts={ options.fontOptions }
+              logos={ this.state.logoOptions }
+              contentType={ content.type }
+              options={ OptionStore.getOptions() }/>
+        </div>
         <div className='image-container'>
+          <AspectRatioPicker
+              currentRatio={ options.aspectRatio }
+              aspectRatios={ this.aspectRatios }
+              aspectRatioValues = { this.aspectRatioValues }/>
           <Canvas canvasData={ canvasData }
               fontSize={ this.state.fontSize }
               options={ options }
@@ -108,16 +126,6 @@ class PicEditor extends React.Component {
             <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName } value={ content.filename }/>
             <div className={ buttonClass } onClick={ this.saveImage.bind(this) }>{ saveButtonContent }</div>
           </div>
-        </div>
-        <div className='options-container'>
-          <Content contentTypes={ this.contentTypes }
-              defaultContent={ ContentStore.getDefaultContent() }
-              content={ ContentStore.getContent() }/>
-          <Options fonts={ options.fontOptions }
-              logos={ this.state.logoOptions }
-              aspectRatios={ this.aspectRatios }
-              contentType={ content.type }
-              options={ OptionStore.getOptions() }/>
         </div>
       </div>
     )

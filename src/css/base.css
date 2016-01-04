@@ -1,6 +1,8 @@
 @import './fonts';
 
 $primary-color: black;
+$grey: #e4e4e4;
+$darker-grey: #d8d8d8;
 
 $body-background: white;
 $body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
@@ -58,7 +60,7 @@ body {
 }
 
 #navbar {
-  background-color: $primary-color;
+  background-color: $grey;
   color: white;
   position: fixed;
   height: $navbar-height;

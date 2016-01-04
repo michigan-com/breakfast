@@ -62,29 +62,7 @@ export default class Canvas extends React.Component {
       }
     }
 
-    let canvasHeight = canvasWidth;
-
-    switch (this.props.options.aspectRatio) {
-      case SIXTEEN_NINE:
-        canvasHeight = canvasWidth * 9/16;
-        break;
-      case TWO_ONE:
-        canvasHeight = canvasWidth * 1/2;
-        break;
-      case FACEBOOK:
-        canvasHeight = canvasWidth * 1/1.911;
-        break;
-      case FACEBOOK_COVER:
-        canvasHeight = canvasWidth * 0.370153;
-        break;
-      case FIT_IMAGE:
-        // Only deal with this aspect ratio if we've loaded an image up
-        if (this.props.options.backgroundType !== BACKGROUND_IMAGE) {
-          break;
-        }
-        let backgroundImg = this.props.options.backgroundImg;
-        canvasHeight = canvasWidth  / (backgroundImg.width / backgroundImg.height);
-    }
+    let canvasHeight = canvasWidth * this.props.options.aspectRatioValue;
 
     let textWidth = canvasWidth - (canvasHeight * .1);
     let content = this.props.content[this.props.content.type];

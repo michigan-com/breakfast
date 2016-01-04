@@ -32,7 +32,7 @@ $picker-padding: 30px;
 body {
   font-family: $body-font;
   background: $body-background;
-  margin-top: calc($navbar-height * 2/1);
+  margin: 0;
 }
 
 input[type=text] {
@@ -45,30 +45,74 @@ input[type=text] {
 }
 
 .pic-editor {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   display: block;
   position: relative;
 
   .save-container {
   }
+
   .image-container {
     width: 70%;
     float: left;
     display: inline-block;
     margin-right: 0;
+    margin-top: $navbar-height;
   }
+
   .options-container {
     width: 30%;
     float: left;
     display: inline-block;
     position: relative;
-
+    height: 100%;
+    background-color: $grey;
+    padding-top: $navbar-height;
   }
 
   @media (max-width: $screen-sm) {
     .image-container, .options-container {
       width: 100%;
+    }
+  }
+}
+
+.ratio-picker {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px;
+
+  .ratio-option {
+    display: inline-block;
+    margin: 0 10px;
+    cursor: pointer;
+
+    .ratio-example {
+      background-color: $grey;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      transition: border 250ms linear;
+    }
+
+    .ratio-name {
+      color: $grey;
+      text-align: center;
+      width: 100%;
+      text-transform: capitalize;
+      font-family: 'Oswald';
+      font-weight: light;
+      transition: color 250ms linear;
+    }
+
+    &.active {
+      .ratio-example {
+        border: 1px solid black;
+      }
+
+      .ratio-name {
+        color: black;
+      }
     }
   }
 }

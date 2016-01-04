@@ -45,12 +45,35 @@ function generateDefaultOptions() {
 
     // Aspect ratio for the canvas
     aspectRatio: aspectRatios[0],
+    aspectRatioValue: getAspectRatioValue(aspectRatios[0]),
 
     logo: {},
     logoOptions: [],
     logoColor: '#000',
     logoLocation: cornerOptions[cornerOptions.length - 1]
   }
+}
+
+function getAspectRatioValue(aspectRatio) {
+  switch (aspectRatio) {
+    case SIXTEEN_NINE:
+      return 9/16;
+    case TWO_ONE:
+      return 1/2;
+    case FACEBOOK:
+      return 1/1.911;
+    case FACEBOOK_COVER:
+      return 0.370153;
+    case FIT_IMAGE:
+      // Only deal with this aspect ratio if we've loaded an image up
+      if (options.backgroundType !== BACKGROUND_IMAGE) {
+        break;
+      }
+      let backgroundImg = options.backgroundImg;
+      return (backgroundImg.width / backgroundImg.height);
+  }
+
+  return 1;
 }
 
 let options = generateDefaultOptions();
@@ -95,6 +118,10 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
   getAspectRatioOptions() {
     return aspectRatios;
+  },
+
+  getAspectRatioValue(aspectRatio) {
+    return getAspectRatioValue(aspectRatio);
   },
 
   /**
@@ -153,6 +180,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
     if (type !== 'watermark' && options.aspectRatio === FIT_IMAGE) {
       options.aspectRatio = prevAspectRatio;
+      options.aspectRatioValue = getAspectRatioValue(prevAspectRatio);
     }
 
     this.emitChange();
@@ -179,6 +207,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
 
     prevAspectRatio = options.aspectRatio;
     options.aspectRatio = newRatio;
+    options.aspectRatioValue = getAspectRatioValue(newRatio);
     this.emitChange();
   },
 
