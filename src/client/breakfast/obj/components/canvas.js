@@ -16,10 +16,11 @@ var Layer = ReactCanvas.Layer;
 
 export default class Canvas extends React.Component {
 
+  static canvasWidth = 650;
+
   constructor(args) {
     super(args);
 
-    this.canvasWidth = 650;
     window.onresize = function() {
       this.setState({ windowChange: true});
     }.bind(this);
@@ -44,7 +45,7 @@ export default class Canvas extends React.Component {
   getCanvasStyle() {
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = this.canvasWidth;
+    let canvasWidth = Canvas.canvasWidth;
 
     if (windowWidth <= cutoff) {
       // 800px is the window size the media query cutoff
@@ -90,7 +91,7 @@ export default class Canvas extends React.Component {
     return React.findDOMNode(this.refs.canvas);
   }
 
-  getGroupStyle() {
+  getTextGroupStyle() {
     let style = {
       zIndex: 10,
       top: this.state.textPos.top,
@@ -201,9 +202,8 @@ export default class Canvas extends React.Component {
   renderContent() {
     if (!this.props.textContent || !this.props.textContent.length) return null;
 
-    console.log(this.props.textContent);
     return (
-      <Group style={ this.getGroupStyle() }>
+      <Group style={ this.getTextGroupStyle() }>
         { this.props.textContent }
       </Group>
     )

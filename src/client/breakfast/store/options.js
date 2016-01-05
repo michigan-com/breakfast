@@ -25,14 +25,16 @@ xr.get('/fonts/getFonts/')
   .then((data) => {
     fonts = data.fonts;
     OptionStore.fontsLoaded();
-  })
+  });
 
 function generateDefaultOptions() {
   return  {
-    fontSize: 40,
+    fontSizeMultiplier: 1,
     fontColor: '#000',
     fontFace: 'Helvetica',
     fontOptions: [],
+
+    styleMetrics: generateStyleMetrics(1),
 
     backgroundType: BACKGROUND_COLOR,
     backgroundColor: '#fff',
@@ -74,6 +76,27 @@ function getAspectRatioValue(aspectRatio) {
   }
 
   return 1;
+}
+
+function generateStyleMetrics(fontMultiplier=1) {
+  function generateStyle(initFontSize) {
+    let fontSize = initFontSize * fontMultiplier;
+    let lineHeight = fontSize * 1.05;
+    let marginBottom = fontSize * .65;
+    return { fontSize, lineHeight, marginBottom }
+  }
+
+  let pFontSize = 17;
+  let h1FontSize = 32;
+  let h2FontSize = 24;
+
+  return {
+    p: generateStyle(pFontSize),
+    h1: generateStyle(h1FontSize),
+    h2: generateStyle(h2FontSize),
+    li: generateStyle(pFontSize)
+  }
+
 }
 
 let options = generateDefaultOptions();
@@ -127,10 +150,12 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   /**
    * Update the font size
    *
-   * @param {Number} size - New font size
+   * @param {Number} size - New font size. Min: 1, max: 33. Will normalize to be [1-3];
    */
   fontSizeChange(size) {
-    options.fontSize = size;
+    console.log(size);
+    options.fontSizeMultiplier = size / 11; // Range from 1 - 33, but really only want a multiplier from 1-3
+    options.styleMetrics = generateStyleMetrics(options.fontSizeMultiplier);
 
     this.emitChange();
   },

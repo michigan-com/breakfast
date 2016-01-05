@@ -168,8 +168,8 @@ export default class Controls extends React.Component {
         <div className='input-container'>
           <span className='label'>Size</span>
           <span className='input'>
-            <input type='range' min='10' max='100' ref='font-size'
-                value={ options.fontSize }
+            <input type='range' min='1' max='33' step='1' ref='font-size'
+                placeholder={ options.fontSizeMultiplier * 11 }
                 onChange={ this.changeEvent.bind(this,
                   actions.fontSizeChange,
                   this.getInputVal.bind(this, 'font-size')) }/>

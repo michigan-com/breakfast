@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
-import xr from 'xr';
 
 import { toTitleCase, clone } from './lib/parse';
 import EditingCanvas from './obj/editing-canvas.js';
@@ -11,6 +10,7 @@ import Options from './obj/options';
 import AspectRatioPicker from './obj/aspect-ratio-picker';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { OptionStore } from './store';
+import DownloadCanvas from './obj/download-canvas';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -54,12 +54,24 @@ class PicEditor extends React.Component {
   }
 
   saveImage = () => {
-   let textContent = this.refs.canvas.getTextContent();
-   this.setState({ textContent })
+    if (this.state.downloading) return;
 
-    //if (this.state.downloading) return;
+    let textContent = this.refs.canvas.getTextContent();
+    this.setState({ downloading: true });
 
-    //this.setState({ downloading: true });
+    let doneDownloading = () => {
+      document.getElementById('download-canvas').innerHTML = null;
+      this.setState({ downloading: false });
+    }
+
+    let element = React.render(
+      <DownloadCanvas fontSize={ this.state.fontSize }
+          options={ OptionStore.getOptions() }
+          textContent={ textContent }
+          downloadCallback={ doneDownloading }/>,
+      document.getElementById('download-canvas')
+    )
+
     //let canvas = this.refs.canvas.getCanvasNode();
     //let dataUri = canvas.toDataURL();
 
@@ -108,7 +120,6 @@ class PicEditor extends React.Component {
               aspectRatioValues = { this.aspectRatioValues }/>
           <EditingCanvas fontSize={ this.state.fontSize }
               options={ options }
-              textContent={ this.state.textContent }
               ref='canvas'/>
           <div className='save-container'>
             <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName }/>

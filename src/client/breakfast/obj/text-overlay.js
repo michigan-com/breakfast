@@ -23,7 +23,7 @@ export default class TextOverlay extends React.Component {
       activeButtonClass: 'medium-editor-button-active',
       disableDoubleReturn: true,
       toolbar: {
-        buttons: ['bold', 'italic', 'underline', 'orderedlist', 'unorderedlist', 'h1', 'h2'],
+        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2'],
         static: true,
         updateOnEmptySelection: true
       }
@@ -32,24 +32,39 @@ export default class TextOverlay extends React.Component {
 
   componentDidMount() {
     this.editor = new MediumEditor(document.getElementById('text-overlay'), this.mediumEditorOptions);
-
     this.setState({ initialized: true });
   }
 
   getTextContent() {
     let text = this.editor.serialize()['text-overlay'].value;
 
-    let obj = new StringToCanvasText(text);
+    let obj = new StringToCanvasText(text, this.props.options);
     return obj.getTextElements();
   }
 
   getStyle() {
     let options = this.props.options;
+    let fontFamily = options.fontFace;
+    return { fontFamily }
+  }
 
-    let top = 0, left = 0;
-    let padding = 20;
-    let fontFace = options.fontFace;
-    return { top, left, fontFace, padding }
+  renderStyle() {
+    let styleMetrics = this.props.options.styleMetrics;
+
+    let style = [];
+    for (let tag in styleMetrics) {
+      let metrics = styleMetrics[tag];
+      let s = `{
+        font-size: ${metrics.fontSize}px;
+        margin-bottom: ${metrics.marginBottom}px;
+        line-height: ${metrics.lineHeight}px;
+        color: ${this.props.options.fontColor}
+      }`;
+
+      style.push(`#text-overlay ${tag} ${s}`);
+    }
+
+    return (<style>{ style.join(' ') }</style>);
   }
 
   render() {
@@ -60,22 +75,13 @@ export default class TextOverlay extends React.Component {
     return (
       <div className={ className } style={ style }>
         <div id='text-overlay'></div>
+        { this.renderStyle() }
       </div>
     )
   }
 }
 
 class StringToCanvasText {
-  static defaultOpts = {
-    multipliers: {
-      h1: 2,
-      h2: 1.5,
-      h3: 1.25
-    },
-    fontSize: 30,
-    fontFace: 'Helvetica',
-    textWidth: 610 // 650 - 40 (20 padding on each side)
-  }
 
   possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3'];
 
@@ -83,26 +89,47 @@ class StringToCanvasText {
     this.textString = textString;
     this.$textString = $(textString);
 
-    this.opts = assign({}, StringToCanvasText.defaultOpts, opts);
+    this.opts = opts;
+    this.canvasPadding = 20;
+    this.textWidth = 650 - (this.canvasPadding * 2); // 20 padding on each side, need to abstract this
+    this.canvasMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
+
+    this.listPadding = 40;
   }
 
   getStyle(tagName, content) {
-    let textWidth = this.opts.textWidth, fontSize = this.opts.fontSize;
-    let fontFace = FontFace(this.opts.fontFace, '', {});
+    let lookupTagName = tagName;
+    if (lookupTagName === 'li') lookupTagName = 'p';
 
-    if (this.opts.multipliers && tagName in this.opts.multipliers) {
-      fontSize *= this.opts.multipliers[tagName];
-    }
+    let styleMetrics = this.opts.styleMetrics[lookupTagName];
 
-    let textMetrics = measureText(content, textWidth, fontFace, fontSize, fontSize);
+    let fontWeight = 'normal';
+    if (tagName === 'h1' || tagName === 'h2') fontWeight = 'bold';
+
+    let textWidth = this.textWidth,
+      fontSize = styleMetrics.fontSize * this.canvasMultiplier,
+      lineHeight = styleMetrics.lineHeight,
+      marginBottom = styleMetrics.marginBottom;
+
+    if (tagName === 'li') textWidth -= this.listPadding;
+
+    console.log(fontWeight);
+    let fontFace = FontFace(this.opts.fontFace, '', {
+      weight: fontWeight,
+      style: 'normal' // TODO pull this from element
+    });
+
+    let textMetrics = measureText(content, textWidth, fontFace, fontSize, lineHeight);
 
     let style = {
-      left: 0,
-      fontSize,
+      left: 20,
       fontFace,
+      fontSize,
+      lineHeight,
+      marginBottom,
       width: textWidth,
-      color: 'black',
-      lineHeight: textMetrics.height,
+      color: this.opts.fontColor,
+      fontWeight,
       height: textMetrics.height,
     }
 
@@ -111,24 +138,48 @@ class StringToCanvasText {
 
   getTextElements() {
     let elements = [];
-    let top = 0;
+    let top = 20;
 
     this.$textString.forEach((el) => {
       let tagName = el.tagName.toLowerCase();
       if (this.possibleTags.indexOf(tagName) < 0) return;
 
-      let style = this.getStyle(tagName, el.textContent);
-      style.top = top;
+      if (tagName === 'ul' || tagName === 'ol') {
+        let listCount = 0;
+        let bulletType = tagName === 'ul' ? 'bullet' : 'number';
 
-      console.log(style);
+        $(el).children('li').forEach((el) => {
+          let bullet = bulletType === 'bullet' ? '•' : `${listCount + 1}.`;
 
-      elements.push(
-        <Text style={ style } key={ `text-element-${elements.length}` }>
-          { el.textContent }
-        </Text>
-      );
+          let bulletStyle = this.getStyle('p', bullet);
+          let style = this.getStyle('li', el.textContent);
 
-      top += style.height;
+          bulletStyle.top = top;
+          bulletStyle.left += this.listPadding / 2;
+          style.left += this.listPadding;
+          style.top = top;
+
+          elements.push(<Text style={ bulletStyle } key={ `text-element-${elements.length}` }>{ bullet }</Text>);
+          elements.push(<Text style={ style } key={ `text-element-${elements.length}` }>{ el.textContent }</Text>)
+
+          top += style.height + style.marginBottom;
+          listCount += 1;
+        });
+
+      } else {
+        let style = this.getStyle(tagName, el.textContent);
+
+        style.top = top;
+
+        elements.push(
+          <Text style={ style } key={ `text-element-${elements.length}` }>
+            { el.textContent }
+          </Text>
+        );
+
+        console.log(`height: ${style.height}, margin-bottom; ${style.marginBottom}`);
+        top += style.height + style.marginBottom;
+      }
     });
     return elements;
   }

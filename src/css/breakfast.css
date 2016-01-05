@@ -124,13 +124,13 @@ input[type=text] {
 }
 
 .image {
-  height: 650px;
+  /*height: 650px;*/
   width: 650px;
   margin: 0 auto;
   position: relative;
 
   &:hover {
-    cursor: move;
+    /*cursor: move;*/
   }
 
   canvas {
@@ -144,6 +144,8 @@ input[type=text] {
     left: 0;
     height: 100%;
     width: 100%;
+    padding: 20px;
+    padding-top: 17px;
 
     #text-overlay {
       opacity: 0;
@@ -151,9 +153,11 @@ input[type=text] {
       width: 100%;
       height: 100%;
       z-index: calc($canvas-z-index + 1);
+      padding-top: 3px;
+      padding-right: 3px;
       transition: opacity 250ms linear, border 250ms linear;
 
-      p, h1, h2, h3, h4, h5 {
+      p, h1, h2, h3, h4, h5, ul, ol, li {
         margin-top: 0;
       }
     }

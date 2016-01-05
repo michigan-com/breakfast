@@ -5,6 +5,7 @@ import { css } from 'domtastic/commonjs/css';
 import { some } from 'domtastic/commonjs/array';
 import { append } from 'domtastic/commonjs/dom/index';
 import { forEach } from 'domtastic/commonjs/array';
+import { children } from 'domtastic/commonjs/selector/extra';
 
 $.fn = !!$.fn ? $.fn : {};
 $.fn.on = on;
@@ -16,5 +17,6 @@ $.fn.find = find;
 $.fn.css = css;
 $.fn.append = append;
 $.fn.forEach = forEach;
+$.fn.children = children;
 
 module.exports = $;
