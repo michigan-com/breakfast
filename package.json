@@ -41,7 +41,7 @@
     "jade": "^1.11.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
-    "medium-editor": "^5.5.4",
+    "medium-editor": "^5.12.0",
     "moment": "^2.10.6",
     "mongodb": "^2.0.48",
     "node-neat": "^1.7.2",

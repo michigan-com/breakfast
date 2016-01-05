@@ -1,9 +1,14 @@
 @import './base';
+@import '../../node_modules/medium-editor/dist/css/medium-editor.min.css';
+@import '../../node_modules/medium-editor/dist/css/themes/beagle.min.css';
+@import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
 
 $body-background: white;
 
 $button-font-size: 30px;
 $button-line-height: calc($button-font-size * 2);
+
+$canvas-z-index: 10;
 
 $picker-padding: 30px;
 
@@ -93,6 +98,7 @@ input[type=text] {
       border-radius: 5px;
       border: 1px solid transparent;
       transition: border 250ms linear;
+      margin: 0 auto;
     }
 
     .ratio-name {
@@ -121,6 +127,7 @@ input[type=text] {
   height: 650px;
   width: 650px;
   margin: 0 auto;
+  position: relative;
 
   &:hover {
     cursor: move;
@@ -128,6 +135,34 @@ input[type=text] {
 
   canvas {
     border: 1px solid black;
+    z-index: $canvas-z-index;
+  }
+
+  .text-overlay-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    #text-overlay {
+      opacity: 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: calc($canvas-z-index + 1);
+      transition: opacity 250ms linear, border 250ms linear;
+
+      p, h1, h2, h3, h4, h5 {
+        margin-top: 0;
+      }
+    }
+
+    &.initialized {
+      #text-overlay {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -401,3 +436,4 @@ input[type=text] {
 .current-selection {
   border: 1px solid black;
 }
+

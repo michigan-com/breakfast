@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import ColorPicker from 'react-color';
 import { SIXTEEN_NINE, SQUARE, FIT_IMAGE, BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../lib/constants';
@@ -11,7 +13,7 @@ export default class Controls extends React.Component {
   constructor(args) {
     super(args);
 
-    this.possibleOptions = ['font', 'background', 'aspect ratio', 'logo'];
+    this.possibleOptions = ['font', 'background', 'logo'];
 
     this.state = {
       optionSelected: false,
@@ -26,16 +28,16 @@ export default class Controls extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.contentType === 'watermark' && this.props.contentType != 'watermark') {
-      if (!nextProps.options.backgroundImg.src) {
-        actions.backgroundImageUrlChange(this.defaultImage);
-      } else {
-        actions.backgroundTypeChange(BACKGROUND_IMAGE);
-      }
-    } else if (nextProps.contentType !== 'watermark' && this.props.contentType === 'watermark'
-                && this.props.options.backgroundImg.url === this.defaultImage) {
-      actions.backgroundTypeChange(BACKGROUND_COLOR);
-    }
+    // if (nextProps.contentType === 'watermark' && this.props.contentType != 'watermark') {
+    //   if (!nextProps.options.backgroundImg.src) {
+    //     actions.backgroundImageUrlChange(this.defaultImage);
+    //   } else {
+    //     actions.backgroundTypeChange(BACKGROUND_IMAGE);
+    //   }
+    // } else if (nextProps.contentType !== 'watermark' && this.props.contentType === 'watermark'
+    //             && this.props.options.backgroundImg.url === this.defaultImage) {
+    //   actions.backgroundTypeChange(BACKGROUND_COLOR);
+    // }
   }
 
   /**
@@ -194,9 +196,7 @@ export default class Controls extends React.Component {
   }
 
   renderBackgroundOptions() {
-
-    let contentType = this.props.contentType;
-    let backgroundClass = `input-container ${contentType === 'watermark' ? 'hidden' : ''}`;
+    let backgroundClass = `input-container`;
 
     return (
       <div className='option background'>
@@ -221,38 +221,6 @@ export default class Controls extends React.Component {
                   actions.backgroundImageFileChange,
                   this.getFileFromInput.bind(this, 'image-upload') )} />
           </span>
-        </div>
-      </div>
-    )
-  }
-
-  renderRatioOptions() {
-    let currentRatio = this.props.options.aspectRatio;
-
-    function renderRatioOption(ratio, key) {
-      switch(ratio) {
-        case FIT_IMAGE:
-          if (this.props.options.backgroundType !== BACKGROUND_IMAGE) return null;
-          break;
-        case SQUARE:
-          if (this.props.contentType === 'watermark') return null;
-          break;
-      }
-
-      return (
-        <div className={ `aspect-ratio ${currentRatio === ratio ? 'active' : ''}`}
-          key={ ratio }
-          onClick={ this.changeEvent.bind(this, actions.aspectRatioChange, function() { return ratio; }) }>
-            { ratio }
-        </div>
-      )
-    }
-
-    return (
-      <div className='option aspect-ratio'>
-        <div className='input-title'>Aspect Ratio</div>
-        <div className='ratio-options'>
-          { this.props.aspectRatios.map(renderRatioOption.bind(this)) }
         </div>
       </div>
     )
@@ -347,8 +315,6 @@ export default class Controls extends React.Component {
       optionContent = this.renderFontOptions();
     } else if (selectedOption === 'background') {
       optionContent = this.renderBackgroundOptions();
-    } else if (selectedOption === 'aspect ratio') {
-      optionContent = this.renderRatioOptions();
     } else if (selectedOption === 'logo') {
       optionContent = this.renderLogoOptions();
     }

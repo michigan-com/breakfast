@@ -1,9 +1,13 @@
+'use strict';
+
 import React from 'react';
 import ReactCanvas from 'react-canvas';
 
 import { clone } from '../lib/parse';
 import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
   BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../lib/constants';
+import TextOverlay from './text-overlay';
+import Canvas from './components/canvas';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -12,7 +16,7 @@ var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
 var Layer = ReactCanvas.Layer;
 
-export default class Canvas extends React.Component {
+export default class EditingCanvas extends React.Component {
 
   constructor(args) {
     super(args);
@@ -46,6 +50,10 @@ export default class Canvas extends React.Component {
     this.setState(newState);
   }
 
+  getTextContent() {
+    return this.refs['text-overlay'].getTextContent();
+  }
+
   getCanvasStyle() {
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
@@ -65,10 +73,12 @@ export default class Canvas extends React.Component {
     let canvasHeight = canvasWidth * this.props.options.aspectRatioValue;
 
     let textWidth = canvasWidth - (canvasHeight * .1);
-    let content = this.props.content[this.props.content.type];
-    if (content.options && content.options.width) {
-      textWidth *= (content.options.width / 100);
-    }
+
+    // TODO
+    // let content = this.props.content[this.props.content.type];
+    // if (content.options && content.options.width) {
+    //   textWidth *= (content.options.width / 100);
+    // }
 
     return {
       width: canvasWidth,
@@ -100,10 +110,6 @@ export default class Canvas extends React.Component {
       zIndex: 10,
       top: this.state.textPos.top,
       left: this.state.textPos.left
-    }
-
-    if (this.props.content.type !== 'watermark' && this.state.mouseHover) {
-      style.border = '1px solid black';
     }
 
     return style;
@@ -451,16 +457,11 @@ export default class Canvas extends React.Component {
           onMouseLeave={ () => { this.setState({ mouseHover: false }); } }
           style={ canvasStyle }
           ref='image'>
-        <Surface className='quote'
-            width={ canvasStyle.width }
-            height={ canvasStyle.height }
-            left={0}
-            top={0}
-            ref='canvas'>
-          { this.renderBackground() }
-          { this.renderCanvasElements() }
-          { this.renderLogo() }
-        </Surface>
+        <Canvas fontSize={ this.props.fontSize }
+            options={ this.props.options }
+            textContent={ this.props.textContent }
+            ref='canvas'/>
+        <TextOverlay content={ this.props.content } options={ this.props.options } ref='text-overlay'/>
       </div>
     )
   }

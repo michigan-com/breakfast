@@ -6,13 +6,11 @@ import objectAssign from 'object-assign';
 import xr from 'xr';
 
 import { toTitleCase, clone } from './lib/parse';
-import Canvas from './obj/canvas.js';
+import EditingCanvas from './obj/editing-canvas.js';
 import Options from './obj/options';
-import Content from './obj/content';
 import AspectRatioPicker from './obj/aspect-ratio-picker';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
-import { ContentStore, OptionStore } from './store';
-import ContentActions from './actions/content';
+import { OptionStore } from './store';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -20,14 +18,11 @@ var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var measureText = ReactCanvas.measureText;
 
-var contentActions = new ContentActions();
-
 class PicEditor extends React.Component {
   constructor(args) {
     super(args);
 
     this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
-    this.contentTypes = ContentStore.getContentTypes();
     this.logoAspectRatios = {};
     this.defaultOptions = OptionStore.getDefaults();
     this.aspectRatios = OptionStore.getAspectRatioOptions();
@@ -37,21 +32,17 @@ class PicEditor extends React.Component {
       this.aspectRatioValues.push(OptionStore.getAspectRatioValue(aspectRatio));
     }
 
-    this.state = objectAssign({}, ContentStore.getContent());
-    this.state = objectAssign({}, this.state, OptionStore.getOptions());
+    this.state = objectAssign({}, OptionStore.getOptions());
     this.state.downloading = false;
+    this.state.textContent = null;
 
     this.previousBackground = this.state.backgroundType;
   }
 
   componentDidMount() {
-    ContentStore.addChangeListener(this._contentChange.bind(this));
     OptionStore.addChangeListener(this._optionChange.bind(this));
   }
 
-  _contentChange() {
-    this.setState(ContentStore.getContent());
-  }
 
   _optionChange() {
     this.setState(OptionStore.getOptions());
@@ -63,36 +54,38 @@ class PicEditor extends React.Component {
   }
 
   saveImage = () => {
-    if (this.state.downloading) return;
+   let textContent = this.refs.canvas.getTextContent();
+   this.setState({ textContent })
 
-    this.setState({ downloading: true });
-    let canvas = this.refs.canvas.getCanvasNode();
-    let dataUri = canvas.toDataURL();
+    //if (this.state.downloading) return;
 
-    let downloadImage = () => {
-      let a = document.createElement('a');
-      a.setAttribute('href',  dataUri);
-      a.setAttribute('download', `${this.getImageName()}.png`);
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      this.setState({ downloading: false });
-    }
+    //this.setState({ downloading: true });
+    //let canvas = this.refs.canvas.getCanvasNode();
+    //let dataUri = canvas.toDataURL();
 
-    // even if we fail to save to s3, let them download the image
-    xr.put('/save-image/', { imageData: dataUri })
-      .then( downloadImage, downloadImage );
+    //let downloadImage = () => {
+      //let a = document.createElement('a');
+      //a.setAttribute('href',  dataUri);
+      //a.setAttribute('download', `${this.getImageName()}.png`);
+      //document.body.appendChild(a);
+      //a.click();
+      //document.body.removeChild(a);
+      //this.setState({ downloading: false });
+    //}
+
+    //// even if we fail to save to s3, let them download the image
+    //xr.put('/save-image/', { imageData: dataUri })
+      //.then( downloadImage, downloadImage );
 
   }
 
+  // TODO
   updateFileName(e) {
-    contentActions.filenameChange(e.target.value);
+    // contentActions.filenameChange(e.target.value);
   }
 
   render() {
-    let content = ContentStore.getContent();
     let options = OptionStore.getOptions();
-    let canvasData = this.state[content.type];
 
     let buttonClass = 'save-image';
     let saveButtonContent = 'Save';
@@ -104,12 +97,8 @@ class PicEditor extends React.Component {
     return(
       <div className='pic-editor'>
         <div className='options-container'>
-          <Content contentTypes={ this.contentTypes }
-              defaultContent={ ContentStore.getDefaultContent() }
-              content={ ContentStore.getContent() }/>
           <Options fonts={ options.fontOptions }
               logos={ this.state.logoOptions }
-              contentType={ content.type }
               options={ OptionStore.getOptions() }/>
         </div>
         <div className='image-container'>
@@ -117,13 +106,12 @@ class PicEditor extends React.Component {
               currentRatio={ options.aspectRatio }
               aspectRatios={ this.aspectRatios }
               aspectRatioValues = { this.aspectRatioValues }/>
-          <Canvas canvasData={ canvasData }
-              fontSize={ this.state.fontSize }
+          <EditingCanvas fontSize={ this.state.fontSize }
               options={ options }
-              content={ content }
+              textContent={ this.state.textContent }
               ref='canvas'/>
           <div className='save-container'>
-            <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName } value={ content.filename }/>
+            <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName }/>
             <div className={ buttonClass } onClick={ this.saveImage.bind(this) }>{ saveButtonContent }</div>
           </div>
         </div>

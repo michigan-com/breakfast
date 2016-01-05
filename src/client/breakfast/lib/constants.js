@@ -36,7 +36,7 @@ let logoLocationChange = 'logoLocationChange';
 module.exports = {
   // Aspect ratios
   SIXTEEN_NINE: '16:9',
-  SQUARE: 'square',
+  SQUARE: 'Instagram',
   TWO_ONE: '2:1 (Twitter)',
   FACEBOOK: '1.9:1 (Facebook)',
   FACEBOOK_COVER: 'Facebook Cover Photo',
