@@ -1,5 +1,9 @@
 @import './base';
 
+.medium-editor-action-fontface {
+  border-left: 1px solid #ccc !important;
+}
+
 .medium-editor-toolbar-form {
   select {
     background: transparent;
@@ -18,5 +22,18 @@
     padding-left: 16px;
     width: 220px;
     background: #000;
+    position: relative;
+
+      &#font-size {
+        &:after {
+          content: "Font Size";
+          color: white;
+          position: absolute;
+          font-size: 12px;
+          top: 0%;
+          left: 10%;
+          font-family: $body-font;
+        }
+      }
   }
 }

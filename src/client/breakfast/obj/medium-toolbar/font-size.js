@@ -104,7 +104,7 @@ export default class FontSizeSelector {
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
-        form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
+        form.id = 'medium-editor-toolbar-form-fontsize-' + this.getEditorId();
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
@@ -116,6 +116,7 @@ export default class FontSizeSelector {
         input.setAttribute('value', options.fontSizeMultiplier * 11);
 
         input.className = 'medium-editor-toolbar-input-range';
+        input.id = 'font-size';
         form.appendChild(input);
 
         // Handle typing in the textbox
