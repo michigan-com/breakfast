@@ -2,6 +2,7 @@
 @import '../../node_modules/medium-editor/dist/css/medium-editor.min.css';
 @import '../../node_modules/medium-editor/dist/css/themes/beagle.min.css';
 @import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
+@import './medium-toolbar';
 
 $body-background: white;
 
@@ -59,7 +60,7 @@ input[type=text] {
   }
 
   .image-container {
-    width: 70%;
+    width: 65%;
     float: left;
     display: inline-block;
     margin-right: 0;
@@ -67,7 +68,7 @@ input[type=text] {
   }
 
   .options-container {
-    width: 30%;
+    width: 35%;
     float: left;
     display: inline-block;
     position: relative;
@@ -243,34 +244,35 @@ input[type=text] {
   width: 100%;
 
   .option-select-container {
-    width: 100%;
+    width: 20%;
+    display: inline-block;
+    float: left;
 
     .option-select {
       @mixin button grey;
-      font-size: 20px;
-      line-height: 30px;
-      display: inline-block;
-      width: 40%;
+      font-size: 15px;
+      line-height: 20px;
+      width: 100%;
       margin: 10px 5%;
       text-transform: capitalize;
-
-      @media (min-width: $screen-sm) and (max-width: 1050px) {
-        width: 80%;
-        margin: 10px 10%;
-      }
     }
   }
 
-  .option {
-    display: block;
-    width: 100%;
+  .option-container {
+    display: inline-block;
+    width: 80%;
 
-    &.background {
-      #image-upload {
-        display: none;
+    .option {
+      width: 90%;
+      margin: 0 0 0 auto;
+      position: relative;
+
+      &.background {
+        #image-upload {
+          display: none;
+        }
       }
     }
-
   }
 }
 
@@ -280,6 +282,7 @@ input[type=text] {
   line-height: 30px;
   margin: 5px 0px;
   height: 50px;
+  position: relative;
 
   &.hidden {
     display: none;
@@ -287,9 +290,10 @@ input[type=text] {
 
   .label {
     display: inline-block;
-    width: 25%;
     text-align: center;
-    font-size: 15px;
+    font-size: 10px;
+    width: 10%;
+    left: 0;
   }
 
   .input {

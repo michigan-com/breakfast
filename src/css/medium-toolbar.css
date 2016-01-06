@@ -1,0 +1,16 @@
+@import './base';
+
+.medium-editor-toolbar-form {
+  select {
+    background: transparent;
+    color: white;
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+  }
+}

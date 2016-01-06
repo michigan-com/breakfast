@@ -164,7 +164,6 @@ export default class Controls extends React.Component {
 
     return (
       <div className='option font'>
-        <div className='input-title'>Font</div>
         <div className='input-container'>
           <span className='label'>Size</span>
           <span className='input'>
@@ -200,7 +199,6 @@ export default class Controls extends React.Component {
 
     return (
       <div className='option background'>
-        <div className='input-title'>Background</div>
         <div className={ backgroundClass }>
           <span className='label'>Color</span>
           <span className='input'>
@@ -261,7 +259,6 @@ export default class Controls extends React.Component {
 
     return (
       <div className='option logo'>
-        <div className='input-title'>Logo</div>
         { logoSelect }
         <div className='input-container'>
           <span className='label'>Color</span>
@@ -334,7 +331,6 @@ export default class Controls extends React.Component {
 
     return (
       <div className='options'>
-        <div className='section-title'>Options</div>
         { this.renderOptionSelect() }
         { content }
       </div>

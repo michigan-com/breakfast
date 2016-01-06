@@ -4,7 +4,9 @@ import React from 'react';
 import ReactCanvas from 'react-canvas';
 import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
+
 import $ from '../lib/$';
+import FontFaceSelector from './medium-toolbar/font-face';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
@@ -23,16 +25,32 @@ export default class TextOverlay extends React.Component {
       activeButtonClass: 'medium-editor-button-active',
       disableDoubleReturn: true,
       toolbar: {
-        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2'],
+        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface'],
         static: true,
         updateOnEmptySelection: true
       }
     }
+
+    this.editor = undefined;
   }
 
-  componentDidMount() {
-    this.editor = new MediumEditor(document.getElementById('text-overlay'), this.mediumEditorOptions);
+  loadMediumEditor() {
+    let fontFace = new FontFaceSelector(this.props.options.fontOptions);
+
+    let options = assign({}, this.mediumEditorOptions);
+
+    options.extensions = {
+      'fontface': new fontFace.extension()
+    }
+
+    this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
     this.setState({ initialized: true });
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.options.fontOptions.length > 0 && !this.editor) {
+      this.loadMediumEditor();
+    }
   }
 
   getTextContent() {
