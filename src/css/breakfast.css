@@ -1,6 +1,4 @@
 @import './base';
-@import '../../node_modules/medium-editor/dist/css/medium-editor.min.css';
-@import '../../node_modules/medium-editor/dist/css/themes/beagle.min.css';
 @import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
 @import './medium-toolbar';
 

@@ -8,6 +8,7 @@ import assign from 'object-assign';
 import $ from '../lib/$';
 import FontFaceSelector from './medium-toolbar/font-face';
 import FontSizeSelector from './medium-toolbar/font-size';
+import FontColorSelector from './medium-toolbar/font-color';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
@@ -26,7 +27,7 @@ export default class TextOverlay extends React.Component {
       activeButtonClass: 'medium-editor-button-active',
       disableDoubleReturn: true,
       toolbar: {
-        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontsize'],
+        buttons: ['orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontsize', 'fontcolor'],
         static: true,
         updateOnEmptySelection: true
       }
@@ -38,12 +39,14 @@ export default class TextOverlay extends React.Component {
   loadMediumEditor() {
     let fontFace = new FontFaceSelector(this.props.options.fontOptions);
     let fontSize = new FontSizeSelector();
+    let fontColor = new FontColorSelector();
 
     let options = assign({}, this.mediumEditorOptions);
 
     options.extensions = {
       'fontface': new fontFace.extension(),
-      'fontsize': new fontSize.extension()
+      'fontsize': new fontSize.extension(),
+      'fontcolor': new fontColor.extension()
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);

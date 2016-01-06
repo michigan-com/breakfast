@@ -1,10 +1,53 @@
 @import './base';
+@import '../../node_modules/medium-editor/dist/css/medium-editor.min.css';
+@import '../../node_modules/medium-editor/dist/css/themes/tim.min.css';
 
 .medium-editor-action-fontface {
   border-left: 1px solid #ccc !important;
 }
 
 .medium-editor-toolbar-form {
+
+  &.color-picker {
+    padding: 20px;
+
+    &:before {
+      content: "Font Color";
+      position: absolute;
+      color: white;
+      top: 2%;
+      left: 2%;
+      font-size: 12px;
+    }
+
+    &.black {
+      .font-color-option.black {
+        border: 1px solid #168eea;
+      }
+    }
+
+    &.white {
+      .font-color-option.white {
+        border: 1px solid #168eea;
+      }
+    }
+
+    .font-color-option {
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      margin: 0px 10px;
+
+      &.black {
+        background-color: black;
+      }
+
+      &.white {
+        background-color: white;
+      }
+    }
+  }
+
   select {
     background: transparent;
     color: white;
@@ -31,7 +74,7 @@
           position: absolute;
           font-size: 12px;
           top: 0%;
-          left: 10%;
+          left: 2%;
           font-family: $body-font;
         }
       }

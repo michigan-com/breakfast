@@ -30,7 +30,7 @@ xr.get('/fonts/getFonts/')
 function generateDefaultOptions() {
   return  {
     fontSizeMultiplier: 1,
-    fontColor: '#000',
+    fontColor: 'black',
     fontFace: 'Helvetica',
     fontOptions: [],
 
