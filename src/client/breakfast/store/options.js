@@ -153,7 +153,6 @@ let OptionStore = assign({}, EventEmitter.prototype, {
    * @param {Number} size - New font size. Min: 1, max: 33. Will normalize to be [1-3];
    */
   fontSizeChange(size) {
-    console.log(size);
     options.fontSizeMultiplier = size / 11; // Range from 1 - 33, but really only want a multiplier from 1-3
     options.styleMetrics = generateStyleMetrics(options.fontSizeMultiplier);
 

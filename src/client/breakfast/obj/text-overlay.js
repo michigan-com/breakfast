@@ -7,6 +7,7 @@ import assign from 'object-assign';
 
 import $ from '../lib/$';
 import FontFaceSelector from './medium-toolbar/font-face';
+import FontSizeSelector from './medium-toolbar/font-size';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
@@ -25,7 +26,7 @@ export default class TextOverlay extends React.Component {
       activeButtonClass: 'medium-editor-button-active',
       disableDoubleReturn: true,
       toolbar: {
-        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface'],
+        buttons: [/*'bold', 'italic', 'underline', */'orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontsize'],
         static: true,
         updateOnEmptySelection: true
       }
@@ -36,11 +37,13 @@ export default class TextOverlay extends React.Component {
 
   loadMediumEditor() {
     let fontFace = new FontFaceSelector(this.props.options.fontOptions);
+    let fontSize = new FontSizeSelector();
 
     let options = assign({}, this.mediumEditorOptions);
 
     options.extensions = {
-      'fontface': new fontFace.extension()
+      'fontface': new fontFace.extension(),
+      'fontsize': new fontSize.extension()
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
@@ -131,7 +134,6 @@ class StringToCanvasText {
 
     if (tagName === 'li') textWidth -= this.listPadding;
 
-    console.log(fontWeight);
     let fontFace = FontFace(this.opts.fontFace, '', {
       weight: fontWeight,
       style: 'normal' // TODO pull this from element
@@ -195,7 +197,6 @@ class StringToCanvasText {
           </Text>
         );
 
-        console.log(`height: ${style.height}, margin-bottom; ${style.marginBottom}`);
         top += style.height + style.marginBottom;
       }
     });
