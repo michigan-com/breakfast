@@ -141,7 +141,6 @@ input[type=text] {
     height: 100%;
     width: 100%;
     padding: 20px;
-    padding-top: 17px;
 
     #text-overlay {
       opacity: 0;
