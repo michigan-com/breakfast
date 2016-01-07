@@ -16,20 +16,14 @@ var Layer = ReactCanvas.Layer;
 
 export default class Canvas extends React.Component {
 
-  static canvasWidth = 650;
-
   constructor(args) {
     super(args);
 
-    window.onresize = function() {
+    window.onresize = () => {
       this.setState({ windowChange: true});
-    }.bind(this);
+    }
 
     this.state = {
-      textPos: {
-        top: 0,
-        left: 0
-      },
       backgroundType: this.props.options.backgroundType
     }
   }
@@ -43,9 +37,10 @@ export default class Canvas extends React.Component {
   }
 
   getCanvasStyle() {
+    let options = this.props.options;
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = Canvas.canvasWidth;
+    let canvasWidth = options.canvasWidth;
 
     if (windowWidth <= cutoff) {
       // 800px is the window size the media query cutoff
@@ -60,30 +55,10 @@ export default class Canvas extends React.Component {
 
     let canvasHeight = canvasWidth * this.props.options.aspectRatioValue;
 
-    let textWidth = canvasWidth - (canvasHeight * .1);
-    // let content = this.props.content[this.props.content.type];
-    // if (content.options && content.options.width) {
-    //   textWidth *= (content.options.width / 100);
-    // }
-
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth,
-      logoPadding: {
-        top: canvasHeight * .05,
-        right: canvasHeight * .05,
-        bottom: canvasHeight * .05,
-        left: canvasHeight * .05
-      },
-      padding: {
-        // TODO think about this more. want to make it the equal padding all
-        // the way around. Should we do relative height or width?
-        top: (canvasHeight * .05) + this.state.textPos.top,
-        right: canvasHeight * .05,
-        bottom: canvasHeight * .05,
-        left: (canvasHeight * .05) + this.state.textPos.left
-      }
+      textWidth: options.textWidth,
     }
   }
 
@@ -93,9 +68,7 @@ export default class Canvas extends React.Component {
 
   getTextGroupStyle() {
     let style = {
-      zIndex: 10,
-      top: this.state.textPos.top,
-      left: this.state.textPos.left
+      zIndex: 10
     }
 
     return style;
@@ -138,21 +111,21 @@ export default class Canvas extends React.Component {
 
     let top = 0;
     let left = 0;
-    let padding = canvasStyle.logoPadding;
+    let padding = this.props.options.canvasPadding;
     switch (/^bottom/.test(this.props.options.logoLocation)) {
       case false:
-        top = padding.top;
+        top = padding;
         break;
       case true:
-        top = canvasStyle.height - (height) - (padding.top);
+        top = canvasStyle.height - (height) - (padding);
         break;
     }
     switch (/left$/.test(this.props.options.logoLocation)) {
       case true:
-        left = padding.left;
+        left = padding;
         break;
       case false:
-        left = canvasStyle.width - padding.right - width;
+        left = canvasStyle.width - padding - width;
         break;
     }
 

@@ -22,6 +22,8 @@ let fontSizeChange = 'fontSizeChange';
 let fontColorChange = 'fontColorChange';
 let fontFaceChange = 'fontFaceChange';
 
+let textWidthChange = 'textWidthChange';
+
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
 let backgroundImageLoading = 'backgroundImageLoading';
@@ -77,6 +79,8 @@ module.exports = {
       fontSizeChange,
       fontColorChange,
       fontFaceChange,
+
+      textWidthChange,
 
       // Background
       backgroundColorChange,

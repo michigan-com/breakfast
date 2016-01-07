@@ -9,6 +9,7 @@ import $ from '../lib/$';
 import FontFaceSelector from './medium-toolbar/font-face';
 import FontSizeSelector from './medium-toolbar/font-size';
 import FontColorSelector from './medium-toolbar/font-color';
+import TextWidthSelector from './medium-toolbar/text-width';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
@@ -27,7 +28,7 @@ export default class TextOverlay extends React.Component {
       activeButtonClass: 'medium-editor-button-active',
       disableDoubleReturn: true,
       toolbar: {
-        buttons: ['orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontsize', 'fontcolor'],
+        buttons: ['orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontcolor', 'fontsize', 'textwidth'],
         static: true,
         updateOnEmptySelection: true
       }
@@ -40,13 +41,15 @@ export default class TextOverlay extends React.Component {
     let fontFace = new FontFaceSelector(this.props.options.fontOptions);
     let fontSize = new FontSizeSelector();
     let fontColor = new FontColorSelector();
+    let textWidth = new TextWidthSelector();
 
     let options = assign({}, this.mediumEditorOptions);
 
     options.extensions = {
       'fontface': new fontFace.extension(),
       'fontsize': new fontSize.extension(),
-      'fontcolor': new fontColor.extension()
+      'fontcolor': new fontColor.extension(),
+      'tetwidth': new textWidth.extension()
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
@@ -73,7 +76,9 @@ export default class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    let styleMetrics = this.props.options.styleMetrics;
+    let options = this.props.options;
+    let styleMetrics = options.styleMetrics;
+    let textWidth = options.textWidth;
 
     let style = [];
     for (let tag in styleMetrics) {
@@ -88,6 +93,8 @@ export default class TextOverlay extends React.Component {
       style.push(`#text-overlay ${tag} ${s}`);
     }
 
+    style.push(`#text-overlay { width: ${textWidth}px; }`);
+
     return (<style>{ style.join(' ') }</style>);
   }
 
@@ -98,13 +105,20 @@ export default class TextOverlay extends React.Component {
     let style = this.getStyle();
     return (
       <div className={ className } style={ style }>
-        <div id='text-overlay'></div>
+        <div id='text-overlay'>
+          <span className='move-text'></span>
+        </div>
         { this.renderStyle() }
       </div>
     )
   }
 }
 
+
+/**
+ * Convert the string returned from the medium-editor into <Text> elements to be
+ * drawn to the canvas for image saving
+ */
 class StringToCanvasText {
 
   possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3'];
@@ -114,9 +128,9 @@ class StringToCanvasText {
     this.$textString = $(textString);
 
     this.opts = opts;
-    this.canvasPadding = 20;
-    this.textWidth = 650 - (this.canvasPadding * 2); // 20 padding on each side, need to abstract this
-    this.canvasMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
+    this.canvasPadding = this.opts.canvasPadding;
+    this.textWidth = this.opts.textWidth;
+    this.fontSizeMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
 
     this.listPadding = 40;
   }
@@ -131,7 +145,7 @@ class StringToCanvasText {
     if (tagName === 'h1' || tagName === 'h2') fontWeight = 'bold';
 
     let textWidth = this.textWidth,
-      fontSize = styleMetrics.fontSize * this.canvasMultiplier,
+      fontSize = styleMetrics.fontSize * this.fontSizeMultiplier,
       lineHeight = styleMetrics.lineHeight,
       marginBottom = styleMetrics.marginBottom;
 
@@ -145,7 +159,7 @@ class StringToCanvasText {
     let textMetrics = measureText(content, textWidth, fontFace, fontSize, lineHeight);
 
     let style = {
-      left: 20,
+      left: this.canvasPadding,
       fontFace,
       fontSize,
       lineHeight,
@@ -161,7 +175,7 @@ class StringToCanvasText {
 
   getTextElements() {
     let elements = [];
-    let top = 20;
+    let top = this.canvasPadding;
 
     this.$textString.forEach((el) => {
       let tagName = el.tagName.toLowerCase();

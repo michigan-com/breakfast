@@ -106,13 +106,16 @@ class PicEditor extends React.Component {
       saveButtonContent = 'Saving...';
     }
 
+    // let optionsContainer = (
+    //     <div className='options-container'>
+    //       <Options fonts={ options.fontOptions }
+    //           logos={ this.state.logoOptions }
+    //           options={ OptionStore.getOptions() }/>
+    //     </div>
+    // )
+
     return(
       <div className='pic-editor'>
-        <div className='options-container'>
-          <Options fonts={ options.fontOptions }
-              logos={ this.state.logoOptions }
-              options={ OptionStore.getOptions() }/>
-        </div>
         <div className='image-container'>
           <AspectRatioPicker
               currentRatio={ options.aspectRatio }

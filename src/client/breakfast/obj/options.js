@@ -151,49 +151,6 @@ export default class Controls extends React.Component {
     return value;
   }
 
-  renderFontOptions() {
-    let options = this.props.options;
-    let currentIndex = 0;
-    for (var i = 0; i < this.props.fonts.length; i++) {
-      let font = this.props.fonts[i];
-      if (this.props.options.fontFace === font) {
-        currentIndex = i;
-        break;
-      }
-    }
-
-    return (
-      <div className='option font'>
-        <div className='input-container'>
-          <span className='label'>Size</span>
-          <span className='input'>
-            <input type='range' min='1' max='33' step='1' ref='font-size'
-                placeholder={ options.fontSizeMultiplier * 11 }
-                onChange={ this.changeEvent.bind(this,
-                  actions.fontSizeChange,
-                  this.getInputVal.bind(this, 'font-size')) }/>
-          </span>
-        </div>
-        <div className='input-container'>
-          <span className='label'>Color</span>
-          <span className='input'>
-            <ColorPickerToggle color={ options.fontColor }
-                callback={ this.colorChangeCallback(actions.fontColorChange) }
-                name='font-color-picker'/>
-          </span>
-        </div>
-        <div className='input-container'>
-          <span className='label'>Face</span>
-          <span className='input'>
-            <FontSelect options={ this.props.fonts }
-                onSelect={ this.fontFaceChanged.bind(this) }
-                currentIndex={ currentIndex }/>
-          </span>
-        </div>
-      </div>
-    )
-  }
-
   renderBackgroundOptions() {
     let backgroundClass = `input-container`;
 
@@ -308,9 +265,7 @@ export default class Controls extends React.Component {
     let selectedOption = this.state.selectedOption;
     let optionContent;
 
-    if (selectedOption === 'font') {
-      optionContent = this.renderFontOptions();
-    } else if (selectedOption === 'background') {
+    if (selectedOption === 'background') {
       optionContent = this.renderBackgroundOptions();
     } else if (selectedOption === 'logo') {
       optionContent = this.renderLogoOptions();

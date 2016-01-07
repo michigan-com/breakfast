@@ -2,7 +2,7 @@
 @import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
 @import './medium-toolbar';
 
-$body-background: white;
+$body-background: $dark-grey;
 
 $button-font-size: 30px;
 $button-line-height: calc($button-font-size * 2);
@@ -58,7 +58,7 @@ input[type=text] {
   }
 
   .image-container {
-    width: 65%;
+    width: 100%;
     float: left;
     display: inline-block;
     margin-right: 0;
@@ -74,12 +74,6 @@ input[type=text] {
     background-color: $grey;
     padding-top: $navbar-height;
   }
-
-  @media (max-width: $screen-sm) {
-    .image-container, .options-container {
-      width: 100%;
-    }
-  }
 }
 
 .ratio-picker {
@@ -91,12 +85,13 @@ input[type=text] {
     display: inline-block;
     margin: 0 10px;
     cursor: pointer;
+    opacity: .5;
 
     .ratio-example {
-      background-color: $grey;
+      background-color: transparent;
       border-radius: 5px;
-      border: 1px solid transparent;
-      transition: border 250ms linear;
+      border: 1px solid $grey;
+      transition: background 250ms linear;
       margin: 0 auto;
     }
 
@@ -111,12 +106,14 @@ input[type=text] {
     }
 
     &.active {
+      opacity: 1;
+
       .ratio-example {
-        border: 1px solid black;
+        background-color: $grey;
       }
 
       .ratio-name {
-        color: black;
+        color: white;
       }
     }
   }
@@ -149,11 +146,11 @@ input[type=text] {
     #text-overlay {
       opacity: 0;
       position: relative;
-      width: 100%;
-      height: 100%;
+      min-height: 50%;
+      max-height: 100%;
       z-index: calc($canvas-z-index + 1);
-      padding-top: 3px;
-      padding-right: 3px;
+      padding-top: 3px 3px 3px 0px;
+      border: 2px solid #168eea;
       transition: opacity 250ms linear, border 250ms linear;
 
       p, h1, h2, h3, h4, h5, ul, ol, li {

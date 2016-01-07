@@ -137,4 +137,14 @@ export default class OptionActions {
       value: corner
     });
   }
+
+  /**
+   * @param {Number} width - any value from [0-100]
+   */
+  textWidthChange(width) {
+    Dispatcher.dispatch({
+      type: Actions.textWidthChange,
+      value: width
+    })
+  }
 }

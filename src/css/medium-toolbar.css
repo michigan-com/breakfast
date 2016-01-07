@@ -1,6 +1,6 @@
 @import './base';
 @import '../../node_modules/medium-editor/dist/css/medium-editor.min.css';
-@import '../../node_modules/medium-editor/dist/css/themes/tim.min.css';
+@import '../../node_modules/medium-editor/dist/css/themes/beagle.min.css';
 
 .medium-editor-action-fontface {
   border-left: 1px solid #ccc !important;
@@ -22,13 +22,13 @@
 
     &.black {
       .font-color-option.black {
-        border: 1px solid #168eea;
+        border: 2px solid #168eea;
       }
     }
 
     &.white {
       .font-color-option.white {
-        border: 1px solid #168eea;
+        border: 2px solid #168eea;
       }
     }
 
@@ -37,6 +37,9 @@
       width: 30px;
       display: inline-block;
       margin: 0px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 1px solid white;
 
       &.black {
         background-color: black;
@@ -67,16 +70,29 @@
     background: #000;
     position: relative;
 
-      &#font-size {
-        &:after {
-          content: "Font Size";
-          color: white;
-          position: absolute;
-          font-size: 12px;
-          top: 0%;
-          left: 2%;
-          font-family: $body-font;
-        }
+    &:after {
+      color: white;
+      position: absolute;
+      font-size: 12px;
+      top: 0%;
+      left: 2%;
+      font-family: $body-font;
+    }
+
+    &#font-size:after {
+      content: "Font Size";
+    }
+
+    &#font-size {
+      &:after {
+        content: "Font Size";
+        color: white;
+        position: absolute;
+        font-size: 12px;
+        top: 0%;
+        left: 2%;
+        font-family: $body-font;
       }
+    }
   }
 }

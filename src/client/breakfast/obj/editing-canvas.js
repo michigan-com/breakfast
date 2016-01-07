@@ -58,13 +58,7 @@ export default class EditingCanvas extends React.Component {
     let className = 'image';
 
     return (
-      <div className={ className }
-          onMouseDown={ this.mouseDown.bind(this) }
-          onMouseUp={ this.mouseUp.bind(this) }
-          onMouseMove={ this.mouseMove.bind(this) }
-          onMouseEnter={ () => { this.setState({ mouseHover: true }); } }
-          onMouseLeave={ () => { this.setState({ mouseHover: false }); } }
-          ref='image'>
+      <div className={ className } ref='image'>
         <Canvas fontSize={ this.props.fontSize }
             options={ this.props.options }
             textContent={ this.props.textContent }

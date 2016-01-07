@@ -11,6 +11,10 @@ let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, FACEBOOK_COVER, SIXTEEN_NINE, FIT
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 
+let canvasWidth = 650;
+let canvasPadding = 20;
+let maxTextWidth = 650 - (canvasPadding * 2);
+
 // Info that gets ajaxed in bc a login is needed
 let logoInfo = {};
 let fonts = [];
@@ -44,6 +48,10 @@ function generateDefaultOptions() {
       height: 0,
       width: 0
     },
+
+    canvasWidth: canvasWidth,
+    canvasPadding: canvasPadding,
+    textWidth: maxTextWidth,
 
     // Aspect ratio for the canvas
     aspectRatio: aspectRatios[0],
@@ -79,7 +87,7 @@ function getAspectRatioValue(aspectRatio) {
 }
 
 function generateStyleMetrics(fontMultiplier=1) {
-  function generateStyle(initFontSize) {
+  let generateStyle = (initFontSize) => {
     let fontSize = initFontSize * fontMultiplier;
     let lineHeight = fontSize * 1.05;
     let marginBottom = fontSize * .65;
@@ -276,6 +284,13 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  textWidthChange(width) {
+    if (!(width >= 0 && width <= 100)) return;
+
+    options.textWidth = maxTextWidth * (width / 100);
+    this.emitChange();
+  },
+
   logosLoaded() {
     let logos = [];
     for (let filename in logoInfo) {
@@ -340,6 +355,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.logoLocationChange:
       OptionStore.logoLocationChange(action.value);
+      break;
+    case Actions.textWidthChange:
+      OptionStore.textWidthChange(action.value);
       break;
   }
 });
