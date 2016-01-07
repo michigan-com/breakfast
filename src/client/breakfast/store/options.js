@@ -12,7 +12,7 @@ let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 
 let canvasWidth = 650;
-let canvasPadding = 20;
+let canvasPadding = 25;
 let maxTextWidth = 650 - (canvasPadding * 2);
 
 // Info that gets ajaxed in bc a login is needed

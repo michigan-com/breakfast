@@ -35,7 +35,6 @@ export default class TextOverlay extends React.Component {
     this.mediumEditorOptions = {
       buttonLabels: 'fontawesome',
       activeButtonClass: 'medium-editor-button-active',
-      disableDoubleReturn: true,
       toolbar: {
         buttons: ['orderedlist', 'unorderedlist', 'h1', 'h2', 'fontface', 'fontcolor', 'fontsize', 'textwidth'],
         static: true,
