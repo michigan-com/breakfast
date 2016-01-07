@@ -5,12 +5,12 @@ import ReactCanvas from 'react-canvas';
 import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
-import $ from '../lib/$';
-import FontFaceSelector from './medium-toolbar/font-face';
-import FontSizeSelector from './medium-toolbar/font-size';
-import FontColorSelector from './medium-toolbar/font-color';
-import TextWidthSelector from './medium-toolbar/text-width';
-import Actions from '../actions/options';
+import $ from '../../lib/$';
+import FontFaceSelector from '../medium-toolbar/font-face';
+import FontSizeSelector from '../medium-toolbar/font-size';
+import FontColorSelector from '../medium-toolbar/font-color';
+import TextWidthSelector from '../medium-toolbar/text-width';
+import Actions from '../../actions/options';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;

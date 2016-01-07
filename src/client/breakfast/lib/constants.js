@@ -10,6 +10,7 @@ let textPosChange = 'textPosChange';
 
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
+let removeBackgroundImage = 'removeBackgroundImage';
 let backgroundImageLoading = 'backgroundImageLoading';
 let backgroundTypeChange = 'backgroundTypeChange';
 
@@ -49,6 +50,7 @@ module.exports = {
       // Background
       backgroundColorChange,
       backgroundImageChange,
+      removeBackgroundImage,
       backgroundImageLoading,
       backgroundTypeChange,
 

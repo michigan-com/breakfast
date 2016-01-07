@@ -11,6 +11,8 @@ import AspectRatioPicker from './obj/aspect-ratio-picker';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { OptionStore } from './store';
 import DownloadCanvas from './obj/download-canvas';
+import LogoOptions from './obj/components/logo-options';
+import BackgroundOptions from './obj/components/background-options';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -64,10 +66,13 @@ class PicEditor extends React.Component {
       this.setState({ downloading: false });
     }
 
+    let filename = React.findDOMNode(this.refs['file-name']).value;
+
     let element = React.render(
       <DownloadCanvas fontSize={ this.state.fontSize }
           options={ OptionStore.getOptions() }
           textContent={ textContent }
+          fileName={ filename || 'pic' }
           downloadCallback={ doneDownloading }/>,
       document.getElementById('download-canvas')
     )
@@ -106,14 +111,6 @@ class PicEditor extends React.Component {
       saveButtonContent = 'Saving...';
     }
 
-    // let optionsContainer = (
-    //     <div className='options-container'>
-    //       <Options fonts={ options.fontOptions }
-    //           logos={ this.state.logoOptions }
-    //           options={ OptionStore.getOptions() }/>
-    //     </div>
-    // )
-
     return(
       <div className='pic-editor'>
         <div className='image-container'>
@@ -124,8 +121,12 @@ class PicEditor extends React.Component {
           <EditingCanvas fontSize={ this.state.fontSize }
               options={ options }
               ref='canvas'/>
+        </div>
+        <div className='options-container'>
+          <LogoOptions options={ options }/>
+          <BackgroundOptions options={ options }/>
           <div className='save-container'>
-            <input type='text' ref='file-name' id='file-name' onChange={ this.updateFileName }/>
+            <input placeholder='pic' type='text' ref='file-name' id='file-name' onChange={ this.updateFileName }/>
             <div className={ buttonClass } onClick={ this.saveImage.bind(this) }>{ saveButtonContent }</div>
           </div>
         </div>

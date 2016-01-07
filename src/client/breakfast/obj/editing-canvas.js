@@ -6,8 +6,9 @@ import ReactCanvas from 'react-canvas';
 import { clone } from '../lib/parse';
 import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
   BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../lib/constants';
-import TextOverlay from './text-overlay';
+import TextOverlay from './components/text-overlay';
 import Canvas from './components/canvas';
+import { Select } from '../../util/components';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
@@ -65,6 +66,20 @@ export default class EditingCanvas extends React.Component {
             ref='canvas'/>
         <TextOverlay content={ this.props.content } options={ this.props.options } ref='text-overlay'/>
       </div>
+    )
+  }
+}
+
+class LogoSelect extends Select {
+  constructor(args) {
+    super(args);
+
+    this.htmlClass = 'logo-select';
+  }
+
+  getDisplayValue(option, index) {
+    return (
+      <img src={ `/logos/${option.filename}`} title={ option.name } alt={ option.name }/>
     )
   }
 }

@@ -17,7 +17,7 @@ export default class DownloadCanvas extends React.Component {
     let downloadImage = () => {
       let a = document.createElement('a');
       a.setAttribute('href',  dataUri);
-      a.setAttribute('download', `test.png`); // todo
+      a.setAttribute('download', `${this.props.fileName}.png`); // todo
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

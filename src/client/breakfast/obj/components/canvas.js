@@ -19,9 +19,10 @@ export default class Canvas extends React.Component {
   constructor(args) {
     super(args);
 
-    window.onresize = () => {
-      this.setState({ windowChange: true});
-    }
+    // TODO push this into store?
+    // window.onresize = () => {
+    //   this.setState({ windowChange: true});
+    // }
 
     this.state = {
       backgroundType: this.props.options.backgroundType

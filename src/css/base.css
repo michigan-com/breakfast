@@ -37,19 +37,19 @@ $screen-sm: 768px;
   line-height: 3em;
   padding: 0px 1em;
   border-radius: 100px;
-  background-color: white;
+  background-color: transparent;
   text-decoration: none;
   transition: background-color 250ms linear, color 250ms linear;
   border: 1px solid white;
   text-align: center;
-  color: black;
+  color: white;
   font-family: 'Oswald';
   text-transform: uppercase;
   cursor: pointer;
 
   &:hover {
-    background-color: transparent;
-    color: white;
+    background-color: white;
+    color: black;
   }
 }
 

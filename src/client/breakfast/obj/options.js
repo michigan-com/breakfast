@@ -130,7 +130,7 @@ export default class Controls extends React.Component {
     let input = React.findDOMNode(this.refs[ref]);
     if (!input.files || !input.files.length) return null;
 
-    return input.files[0];
+    actions.backgroundImageFileChange(input.files[0]);
   }
 
   /**
@@ -289,62 +289,6 @@ export default class Controls extends React.Component {
         { this.renderOptionSelect() }
         { content }
       </div>
-    )
-  }
-}
-
-class ColorPickerToggle extends React.Component {
-  constructor(args) {
-    super(args);
-
-    this.state = {
-      pickerHidden: true
-    }
-  }
-
-  showPicker() {
-    this.setState({ pickerHidden: false });
-  }
-
-  hidePicker() {
-    this.setState({ pickerHidden: true });
-  }
-
-  renderPicker() {
-
-    return (
-      <div className='picker'>
-          <span className='picker-open' onClick={ this.showPicker.bind(this) }>Pick Color</span>
-          <div className={ `picker-container ${ this.state.pickerHidden ? 'hide' : ''}` }>
-            <span className='picker-close' onClick= { this.hidePicker.bind(this) }>X</span>
-            <ColorPicker className='color-picker' type='chrome'
-                color={ this.props.color }
-                onChange={ this.props.callback }
-                key={ this.props.name }/>
-          </div>
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div className='picker-toggle'>
-        { this.renderPicker() }
-      </div>
-    )
-  }
-}
-
-class LogoSelect extends Select {
-  constructor(args) {
-    super(args);
-
-    this.htmlClass = 'logo-select';
-  }
-
-  getDisplayValue(option, index) {
-    return (
-      <img src={ `/logos/${option.filename}`} title={ option.name } alt={ option.name }/>
     )
   }
 }

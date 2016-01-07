@@ -31,6 +31,14 @@ xr.get('/fonts/getFonts/')
     OptionStore.fontsLoaded();
   });
 
+function defaultBackgroundImage() {
+  return {
+    src: '',
+    height: 0,
+    width: 0
+  }
+}
+
 function generateDefaultOptions() {
   return  {
     fontSizeMultiplier: 1,
@@ -42,12 +50,8 @@ function generateDefaultOptions() {
 
     backgroundType: BACKGROUND_COLOR,
     backgroundColor: '#fff',
-    backgroundImg: {
-      src: '',
-      url: '',
-      height: 0,
-      width: 0
-    },
+    // backgroundColor: '#1A5A5A',
+    backgroundImg: defaultBackgroundImage(),
 
     canvasWidth: canvasWidth,
     canvasPadding: canvasPadding,
@@ -211,6 +215,13 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  removeBackgroundImage() {
+    options.backgroundType = BACKGROUND_COLOR;
+    options.backgroundImg = defaultBackgroundImage();
+
+    this.emitChange();
+  },
+
   backgroundTypeChange(type) {
     options.backgroundType = type;
 
@@ -347,6 +358,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.backgroundImageChange:
       OptionStore.backgroundImageChange(action.value);
+      break;
+    case Actions.removeBackgroundImage:
+      OptionStore.removeBackgroundImage();
       break;
     case Actions.backgroundImageLoading:
       OptionStore.backgroundImageLoading();

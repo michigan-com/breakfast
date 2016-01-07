@@ -59,7 +59,6 @@ export default class OptionActions {
           type: Actions.backgroundImageChange,
           value: {
             src: reader.result,
-            url: '',
             width: img.width,
             height: img.height
           }
@@ -70,6 +69,12 @@ export default class OptionActions {
 
     }
     reader.readAsDataURL(file);
+  }
+
+  /**
+   */
+  removeBackgroundImage() {
+    Dispatcher.dispatch({ type: Actions.removeBackgroundImage });
   }
 
   /**
