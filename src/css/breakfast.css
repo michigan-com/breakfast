@@ -123,7 +123,7 @@ input[type=text] {
   width: 650px;
   margin: 0 auto;
   position: relative;
-  overflow: hidden;
+  /*overflow: hidden;*/
 
   &:hover, &:active, &:focus {
     .move-text {
