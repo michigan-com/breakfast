@@ -147,4 +147,11 @@ export default class OptionActions {
       value: width
     })
   }
+
+  textPosChange(newPos) {
+    Dispatcher.dispatch({
+      type: Actions.textPosChange,
+      value: newPos
+    });
+  }
 }

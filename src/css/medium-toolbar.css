@@ -83,16 +83,8 @@
       content: "Font Size";
     }
 
-    &#font-size {
-      &:after {
-        content: "Font Size";
-        color: white;
-        position: absolute;
-        font-size: 12px;
-        top: 0%;
-        left: 2%;
-        font-family: $body-font;
-      }
+    &#text-width:after {
+      content: 'Text Box Width';
     }
   }
 }

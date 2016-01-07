@@ -52,6 +52,10 @@ function generateDefaultOptions() {
     canvasWidth: canvasWidth,
     canvasPadding: canvasPadding,
     textWidth: maxTextWidth,
+    textPos: {
+      left: 0,
+      top: 0
+    },
 
     // Aspect ratio for the canvas
     aspectRatio: aspectRatios[0],
@@ -291,6 +295,12 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  textPosChange(newPos) {
+    options.textPos = assign({}, newPos);
+
+    this.emitChange();
+  },
+
   logosLoaded() {
     let logos = [];
     for (let filename in logoInfo) {
@@ -358,6 +368,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.textWidthChange:
       OptionStore.textWidthChange(action.value);
+      break;
+    case Actions.textPosChange:
+      OptionStore.textPosChange(action.value);
       break;
   }
 });

@@ -1,28 +1,12 @@
 /* Action constants */
 
-// Content Actions
-let quoteChange = 'quoteChange';
-let sourceChange = 'sourceChange';
-
-let headlineChange = 'headlineChange';
-let listItemAdd = 'listItemAdd';
-let listItemChange = 'listItemChange';
-let listItemRemove = 'listItemRemove';
-
-let photographerChange = 'photographerChange';
-let copyrightChange = 'copyrightChange';
-
-let contentTypeChange = 'contentTypeChange';
-
-let filenameChange = 'filenameChange';
-let optionsChange = 'optionsChange';
-
 // Option Actions
 let fontSizeChange = 'fontSizeChange';
 let fontColorChange = 'fontColorChange';
 let fontFaceChange = 'fontFaceChange';
 
 let textWidthChange = 'textWidthChange';
+let textPosChange = 'textPosChange';
 
 let backgroundColorChange = 'backgroundColorChange';
 let backgroundImageChange = 'backgroundImageChange';
@@ -52,27 +36,6 @@ module.exports = {
   BACKGROUND_COLOR: 'color',
 
   actions: {
-    content: {
-      // Quote
-      quoteChange,
-      sourceChange,
-
-      // List
-      headlineChange,
-      listItemAdd,
-      listItemRemove,
-      listItemChange,
-
-      // Watermark
-      photographerChange,
-      copyrightChange,
-
-      contentTypeChange,
-
-      filenameChange,
-
-      optionsChange,
-    },
 
     options: {
       // Font
@@ -81,6 +44,7 @@ module.exports = {
       fontFaceChange,
 
       textWidthChange,
+      textPosChange,
 
       // Background
       backgroundColorChange,
