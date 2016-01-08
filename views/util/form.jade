@@ -5,7 +5,10 @@
 //-
 mixin renderInput(field)
   div(class='input #{ field.options.classString }')
-    input(type='#{ field.options.type }', name='#{ field.options.name }', placeholder='#{ field.options.placeholder }', value='#{ field.options.value }')
+    if field.options.readonly
+      input(type='#{ field.options.type }', name='#{ field.options.name }', placeholder='#{ field.options.placeholder }', value='#{ field.options.value }', readonly='readonly')
+    else
+      input(type='#{ field.options.type }', name='#{ field.options.name }', placeholder='#{ field.options.placeholder }', value='#{ field.options.value }')
     .errors
       for error in field.options.errors
         .error error

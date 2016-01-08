@@ -12,8 +12,6 @@
 
 form {
   width: 100%;
-  text-align: center;
-
 
   .form-field.username, #domains {
     width: 50%;
@@ -21,9 +19,22 @@ form {
     margin-bottom: 10px;
   }
 
-  input[type=submit] {
-    @mixin big-button;
-    width: 300px;
+  .submit {
+    width: 100%;
+
+    input[type=submit] {
+      @mixin big-button;
+      text-align: center;
+      display: inline-block;
+      width: 30%;
+    }
+
+    #success-text {
+      display: inline-block;
+      color: white;
+      text-align: left;
+      margin-left: 15px;
+    }
   }
 
   input[type=text] {
@@ -63,4 +74,8 @@ form {
   a {
     color: white;
   }
+}
+
+.errors {
+  color: white;
 }

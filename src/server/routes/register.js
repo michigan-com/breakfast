@@ -1,4 +1,7 @@
 import csrf from 'csurf';
+import nodemailer from 'nodemailer';
+import sendmailTransport from 'nodemailer-sendmail-transport';
+import debug from 'debug';
 
 import uuid from '../util/uuid';
 import { Field } from '../util/form';
@@ -6,6 +9,8 @@ import { isValidEmail, getValidEmailDomains } from '../util/email';
 import { formatInviteUrl } from '../util/parse';
 import { hash } from '../util/hash';
 import { csrfProtection } from '../middleware/csrf';
+
+var logger = debug('breakfast:register');
 
 /**
  * Register the 'register' urls
@@ -18,6 +23,8 @@ function registerRoutes(app, router, passport) {
   let db = app.get('db');
   let Invite = db.collection('Invite');
   let User = db.collection('User');
+
+  let emailTransport = nodemailer.createTransport(sendmailTransport({}));
 
   // Render the login form
   router.get('/register/', csrfProtection(app), function(req, res) {
@@ -76,21 +83,35 @@ function registerRoutes(app, router, passport) {
       let token;
       if (!invite) {
         token = uuid()
-        invite = await Invite.insertOne({ email, token });
+
+        let inviteDoc = { email, token };
+        invite = await Invite.insertOne(inviteDoc);
+
+        logger(inviteDoc);
+        let url = formatInviteUrl(inviteDoc);
+        let mailOptions = {
+          from: 'webmaster@breakfast.im',
+          //to: [email],
+          to: ['mvarano@michigan.com'],
+          subject: 'Complete your Breakfast registration',
+          text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
+          html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
+        };
+
+        if (process.env.NODE_ENV ==='production') {
+          emailTransport.sendMessage(mailOptions);
+        } else {
+          logger(mailOptions);
+        }
       } else {
         token = invite.token;
       }
 
-
       // for now, just forward to new url
-      let url = formatInviteUrl(invite);
       res.status(200).send({
         success: true,
         token
       });
-
-      // TODO get email working.
-
     }
 
     return handleRegister(req, res).catch(function(err) {
@@ -114,7 +135,7 @@ function registerRoutes(app, router, passport) {
       // Generate form fields
       let csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
       let tokenField = new Field({ type: 'hidden', name: 'token', value: token });
-      let email = new Field({ name: 'email', value: invite.email });
+      let email = new Field({ name: 'email', value: invite.email, readonly: true });
       let password = new Field({ type: 'password', name: 'password' });
       let confirmPassword = new Field({ type: 'password', name: 'confirmPassword', label: 'Confirm password' });
 
@@ -130,13 +151,14 @@ function registerRoutes(app, router, passport) {
 
   router.post('/create-user/', csrfProtection(app), function(req, res, next) {
     async function createUser(req, res, next) {
+      logger(req.body);
       let email = req.body.email.toLowerCase();
       let token = req.body.token;
       let password = req.body.password;
       let confirmPassword = req.body.confirmPassword;
 
       // Parse the invite stuff first
-      let invite = await Invite.find({ email }).limit(1).next();
+      let invite = await Invite.find({ token }).limit(1).next();
 
       if (!invite) {
         // This email hasn't been invited yet. Forward them to the invite page
