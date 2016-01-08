@@ -237,6 +237,21 @@ input[type=text] {
     padding: 10px;
     text-align: center;
     cursor: pointer;
+    position: relative;
+
+    .picker {
+      margin-bottom: 20px;
+
+      &:after {
+        color: white;
+        font-size: 10px;
+        line-height: 15px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+      }
+    }
 
     #image-upload-button, .background-image, .color-picker {
       width: 75px;
@@ -251,6 +266,11 @@ input[type=text] {
     }
 
     &.image {
+
+      .picker:after {
+        content: 'Upload Image';
+      }
+
       input[type=file] {
         display: none;
       }
@@ -273,6 +293,10 @@ input[type=text] {
     }
 
     &.color {
+      .picker:after {
+        content: 'Choose color';
+      }
+
       .color-picker {
         .swatch {
           height: 100%;
@@ -321,7 +345,7 @@ input[type=text] {
   }
 
   .save-image:after {
-    content: "File Name";
+    content: 'File Name';
     position: absolute;
     top: -20px;
     height: 20px;
