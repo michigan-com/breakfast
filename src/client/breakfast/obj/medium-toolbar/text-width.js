@@ -10,7 +10,7 @@ let actions = new OptionActions();
 export default class TextWidthSelector {
   constructor() {
 
-    let maxTextWidth = OptionStore.getOptions().textWidth;
+    let maxTextWidth = OptionStore.getOptions().canvas.textWidth;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({

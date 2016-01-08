@@ -11,9 +11,6 @@ let aspectRatios = [TWO_ONE, FACEBOOK, SQUARE, FACEBOOK_COVER, SIXTEEN_NINE, FIT
 let backgroundTypes = [BACKGROUND_COLOR, BACKGROUND_IMAGE];
 let cornerOptions = ['top-left', 'top-right', 'bottom-right', 'bottom-left'];
 
-let canvasWidth = 650;
-let canvasPadding = 25;
-let maxTextWidth = 650 - (canvasPadding * 2);
 
 // Info that gets ajaxed in bc a login is needed
 let logoInfo = {};
@@ -53,9 +50,7 @@ function generateDefaultOptions() {
     // backgroundColor: '#1A5A5A',
     backgroundImg: defaultBackgroundImage(),
 
-    canvasWidth: canvasWidth,
-    canvasPadding: canvasPadding,
-    textWidth: maxTextWidth,
+    canvas: assign({}, getCanvasMetrics()),
     textPos: {
       left: 0,
       top: 0
@@ -94,6 +89,25 @@ function getAspectRatioValue(aspectRatio) {
   return 1;
 }
 
+function getCanvasMetrics() {
+  // Defaults
+  let canvasWidth = 650;
+
+  if (window.innerWidth <= canvasWidth) {
+    canvasWidth = window.innerWidth;
+  }
+
+  let canvasPadding = canvasWidth / 26; // === 25, a nice round number
+  let textWidth = canvasWidth - (canvasPadding * 2);
+
+  return {
+    canvasWidth,
+    canvasPadding,
+    textWidth
+  }
+
+}
+
 function generateStyleMetrics(fontMultiplier=1) {
   let generateStyle = (initFontSize) => {
     let fontSize = initFontSize * fontMultiplier;
@@ -118,6 +132,10 @@ function generateStyleMetrics(fontMultiplier=1) {
 let options = generateDefaultOptions();
 
 let OptionStore = assign({}, EventEmitter.prototype, {
+  windowResize: () => {
+    options.canvas = getCanvasMetrics();
+    this.emitChange();
+  },
 
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
@@ -302,7 +320,8 @@ let OptionStore = assign({}, EventEmitter.prototype, {
   textWidthChange(width) {
     if (!(width >= 0 && width <= 100)) return;
 
-    options.textWidth = maxTextWidth * (width / 100);
+    let maxTextWidth = options.canvas.canvasWidth - (options.canvas.canvasPadding * 2);
+    options.canvas.textWidth = maxTextWidth * (width / 100);
     this.emitChange();
   },
 
@@ -388,5 +407,7 @@ Dispatcher.register(function(action) {
       break;
   }
 });
+
+window.onresize = OptionStore.windowResize;
 
 module.exports = OptionStore;

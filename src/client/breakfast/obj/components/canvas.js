@@ -41,25 +41,13 @@ export default class Canvas extends React.Component {
     let options = this.props.options;
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = options.canvasWidth;
-
-    if (windowWidth <= cutoff) {
-      // 800px is the window size the media query cutoff
-      if (windowWidth > 800) {
-        // our SASS says that the width of the column is 2/3 of the screen
-        // calculate 2/3 of the width, minus some for padding
-        canvasWidth = (windowWidth * 2/3) * .8;
-      } else {
-        canvasWidth = windowWidth * .9;
-      }
-    }
-
+    let canvasWidth = options.canvas.canvasWidth;
     let canvasHeight = canvasWidth * this.props.options.aspectRatioValue;
 
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth: options.textWidth,
+      textWidth: options.canvas.textWidth,
     }
   }
 
@@ -112,7 +100,7 @@ export default class Canvas extends React.Component {
 
     let top = 0;
     let left = 0;
-    let padding = this.props.options.canvasPadding;
+    let padding = this.props.options.canvas.canvasPadding;
     switch (/^bottom/.test(this.props.options.logoLocation)) {
       case false:
         top = padding;

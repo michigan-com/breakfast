@@ -57,14 +57,19 @@ export default class EditingCanvas extends React.Component {
 
   render() {
     let className = 'image';
+    let options = this.props.options;
+
+    let style = {
+      width: options.canvas.canvasWidth
+    }
 
     return (
-      <div className={ className } ref='image'>
+      <div className={ className } style={ style } ref='image'>
         <Canvas fontSize={ this.props.fontSize }
-            options={ this.props.options }
+            options={ options }
             textContent={ this.props.textContent }
             ref='canvas'/>
-        <TextOverlay content={ this.props.content } options={ this.props.options } ref='text-overlay'/>
+        <TextOverlay options={ options } ref='text-overlay'/>
       </div>
     )
   }

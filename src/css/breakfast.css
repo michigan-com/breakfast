@@ -66,7 +66,7 @@ input[type=text] {
 
   .ratio-option {
     display: inline-block;
-    margin: 0 10px;
+    margin: 10px 10px;
     cursor: pointer;
     opacity: .5;
 
@@ -103,7 +103,6 @@ input[type=text] {
 }
 
 .image {
-  width: 650px;
   margin: 0 auto;
   position: relative;
   /*overflow: hidden;*/
@@ -181,6 +180,11 @@ input[type=text] {
 }
 
 .logo-options-container, .background-options-container, .save-container {
+  @media (max-width: $screen-sm) {
+    width: 100% !important;
+    margin: 20px 0px;
+  }
+
   .title {
     width: 100%;
     color: white;

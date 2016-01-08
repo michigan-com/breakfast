@@ -139,7 +139,7 @@ export default class TextOverlay extends React.Component {
   renderStyle() {
     let options = this.props.options;
     let styleMetrics = options.styleMetrics;
-    let textWidth = options.textWidth;
+    let textWidth = options.canvas.textWidth;
 
     let style = [];
     for (let tag in styleMetrics) {
@@ -193,8 +193,8 @@ class StringToCanvasText {
     this.$textString = $(textString);
 
     this.opts = opts;
-    this.canvasPadding = this.opts.canvasPadding;
-    this.textWidth = this.opts.textWidth;
+    this.canvasPadding = this.opts.canvas.canvasPadding;
+    this.textWidth = this.opts.canvas.textWidth;
     this.fontSizeMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
     this.textPos = assign({}, this.opts.textPos);
 

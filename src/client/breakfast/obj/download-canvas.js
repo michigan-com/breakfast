@@ -31,6 +31,8 @@ export default class DownloadCanvas extends React.Component {
   }
 
   render() {
+    let options = this.props.options;
+
     return (
       <Canvas fontSize={ this.props.fontSize }
           options={ this.props.options }
