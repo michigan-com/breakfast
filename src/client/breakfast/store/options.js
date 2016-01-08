@@ -89,9 +89,9 @@ function getAspectRatioValue(aspectRatio) {
   return 1;
 }
 
-function getCanvasMetrics() {
+function getCanvasMetrics(aspectRatio='') {
   // Defaults
-  let canvasWidth = 650;
+  let canvasWidth = aspectRatio === SQUARE ? 400 : 650;
 
   if (window.innerWidth <= canvasWidth) {
     canvasWidth = window.innerWidth;
@@ -240,17 +240,6 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  backgroundTypeChange(type) {
-    options.backgroundType = type;
-
-    if (type !== 'watermark' && options.aspectRatio === FIT_IMAGE) {
-      options.aspectRatio = prevAspectRatio;
-      options.aspectRatioValue = getAspectRatioValue(prevAspectRatio);
-    }
-
-    this.emitChange();
-  },
-
   /**
    * Hacky function to get around image cache. Called when loading a new background
    * image
@@ -273,6 +262,8 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     prevAspectRatio = options.aspectRatio;
     options.aspectRatio = newRatio;
     options.aspectRatioValue = getAspectRatioValue(newRatio);
+
+    options.canvas = getCanvasMetrics(options.aspectRatio);
     this.emitChange();
   },
 

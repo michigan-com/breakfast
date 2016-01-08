@@ -6,7 +6,6 @@ import objectAssign from 'object-assign';
 
 import { toTitleCase, clone } from './lib/parse';
 import EditingCanvas from './obj/editing-canvas.js';
-import Options from './obj/options';
 import AspectRatioPicker from './obj/aspect-ratio-picker';
 import { SIXTEEN_NINE, SQUARE } from './lib/constants';
 import { OptionStore } from './store';
