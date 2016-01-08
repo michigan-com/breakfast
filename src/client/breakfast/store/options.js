@@ -94,7 +94,7 @@ function getCanvasMetrics(aspectRatio='') {
   let canvasWidth = aspectRatio === SQUARE ? 400 : 650;
 
   if (window.innerWidth <= canvasWidth) {
-    canvasWidth = window.innerWidth;
+    canvasWidth = window.innerWidth * .9;
   }
 
   let canvasPadding = canvasWidth / 26; // === 25, a nice round number
@@ -132,7 +132,7 @@ function generateStyleMetrics(fontMultiplier=1) {
 let options = generateDefaultOptions();
 
 let OptionStore = assign({}, EventEmitter.prototype, {
-  windowResize: () => {
+  windowResize() {
     options.canvas = getCanvasMetrics();
     this.emitChange();
   },
@@ -399,6 +399,6 @@ Dispatcher.register(function(action) {
   }
 });
 
-window.onresize = OptionStore.windowResize;
+window.onresize = OptionStore.windowResize.bind(OptionStore);
 
 module.exports = OptionStore;
