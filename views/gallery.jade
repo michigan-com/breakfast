@@ -1,0 +1,27 @@
+extend ./entry-page
+
+block css
+  link(href='/css/gallery.css', rel='stylesheet')
+
+block content
+  .fancy-title
+    .directive What you can do with
+    .app-name Breakfast
+
+  .subtitle Gannett newsrooms across the country made these. And pancakes. Mmmm.
+
+  #gallery
+
+  .fancy-title
+    .directive Register for Breakfast now!
+
+  .buttons
+    a.register-button(href='/register/') Register
+    .login
+      p Already Registered?
+      p
+        a(href='/login/') Log In
+
+block js
+  script(src='/js/gallery.js')
+
