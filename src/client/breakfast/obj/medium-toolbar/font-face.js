@@ -16,7 +16,7 @@ export default class FontFaceSelector {
 
       name: 'fontface',
       action: 'fontFace',
-      aria: 'change font face',
+      aria: 'Change Font Face',
       contentDefault: '&#xB1;', // ±
       contentFA: '<i class="fa fa-font"></i>',
 

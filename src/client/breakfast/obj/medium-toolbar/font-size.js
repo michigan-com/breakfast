@@ -15,7 +15,7 @@ export default class FontSizeSelector {
 
       name: 'fontsize',
       action: 'fontSize',
-      aria: 'change font size',
+      aria: 'Change Font Size',
       contentDefault: '&#xB1;', // ±
       contentFA: '<i class="fa fa-text-height"></i>',
 

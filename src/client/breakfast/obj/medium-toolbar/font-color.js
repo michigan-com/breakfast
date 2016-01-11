@@ -16,7 +16,7 @@ export default class FontColorSelector {
 
       name: 'fontcolor',
       action: 'fontcace',
-      aria: 'change font color',
+      aria: 'Change Font Color',
       contentDefault: '&#xB1;', // ±
       contentFA: '<i class="fa fa-paint-brush"></i>',
 

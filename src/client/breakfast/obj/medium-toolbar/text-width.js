@@ -17,7 +17,7 @@ export default class TextWidthSelector {
 
       name: 'textwidth',
       action: 'textWidth',
-      aria: 'change font size',
+      aria: 'Change Text Box Width',
       contentDefault: '&#xB1;', // ±
       contentFA: '<i class="fa fa-text-width"></i>',
 
