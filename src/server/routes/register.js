@@ -1,3 +1,5 @@
+'use strict';
+
 import csrf from 'csurf';
 import nodemailer from 'nodemailer';
 import sendmailTransport from 'nodemailer-sendmail-transport';
@@ -91,8 +93,7 @@ function registerRoutes(app, router, passport) {
         let url = formatInviteUrl(inviteDoc);
         let mailOptions = {
           from: 'webmaster@breakfast.im',
-          //to: [email],
-          to: ['mvarano@michigan.com'],
+          to: [email],
           subject: 'Complete your Breakfast registration',
           text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
           html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
