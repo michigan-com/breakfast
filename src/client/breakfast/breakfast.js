@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
 
@@ -135,7 +136,7 @@ class PicEditor extends React.Component {
 }
 
 (function(){
-  React.render(
+  ReactDOM.render(
     <PicEditor/>,
     document.getElementById('editor')
   )

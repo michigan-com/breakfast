@@ -25,6 +25,8 @@ function registerRoutes(app) {
     res.render('index');
   });
 
+  router.get('/gallery/', (req, res) => { res.render('gallery'); });
+
   router.get('/breakfast/',
     loginRequired,
     function(req, res) {

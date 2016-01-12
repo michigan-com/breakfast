@@ -16,7 +16,9 @@ block content
       for field in fields
         +renderInput(field)
       #domains
-      input(type='submit', value='Submit')
+      .submit
+        input(type='submit', value='Submit' id='submit')
+        #success-text
 
 block js
   script(src='/js/register.js')

@@ -17,7 +17,7 @@ var browserifyShim = require('browserify-shim');
 
 var jsSrc = './src/client/';
 var jsDist = './public/js/';
-var jsBundle = ['breakfast/breakfast.js', 'register.js'];
+var jsBundle = ['breakfast/breakfast.js', 'register.js', 'gallery.js'];
 var jsFiles = jsSrc + '**/*.js';
 
 /**

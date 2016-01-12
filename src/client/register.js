@@ -46,7 +46,12 @@ $('form.register-form').on('submit', function(e) {
   }
 
   xr.post('/register/', values).then(function(resp) {
-    window.location = `/register/${resp.token}/`;
+    document.getElementById('success-text').innerText = `Please check your email for confirmation.`;
+    let submit = document.getElementById('submit')
+
+    submit.setAttribute('disabled', true);
+    submit.value = '✓';
+
   }, function(resp) {
     let response = JSON.parse(resp.response);
 
@@ -57,8 +62,7 @@ $('form.register-form').on('submit', function(e) {
         error = 'username';
       }
 
-      $(`.form-field.${error}`).removeClass('error').addClass('error');
-      $(`.form-field.${error} .errors`).html(`<p>${errorString}</p>`);
+      document.getElementById('success-text').innerText = errorString;
     }
   });
 });
