@@ -11,12 +11,43 @@
     margin: 0 auto;
   }
 
-  p {
+}
+
+p {
+  color: white;
+  text-align: center;
+
+  a {
     color: white;
+    text-decoration: underline;
+  }
+}
+
+.extra-info {
+  width: 100%;
+  padding: 0% 10%;
+
+  .info-block {
+    display: inline-block;
+    width: 50%;
+    padding: 20px;
     text-align: center;
-    a {
+    float: left;
+
+    @media (max-width: $screen-sm) {
+      width: 100%;
+    }
+
+    .info-title {
+      font-family: 'Oswald';
       color: white;
-      text-decoration: underline;
+      font-size: 30px;
+      line-height: 1.3em;
+      font-weight: bold;
+    }
+
+    p {
+      font-family: 'Playfair';
     }
   }
 }
