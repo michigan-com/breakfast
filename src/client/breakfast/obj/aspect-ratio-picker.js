@@ -4,7 +4,8 @@ import React from 'react';
 
 import Dispatcher from '../dispatcher';
 import OptionActions from '../actions/options';
-import { FIT_IMAGE } from '../lib/constants';
+import OptionStore from '../store/options';
+import { FIT_IMAGE, BACKGROUND_IMAGE} from '../lib/constants';
 
 let actions = new OptionActions();
 
@@ -15,14 +16,14 @@ export default class AspectRatioPicker extends React.Component {
   }
 
   renderRatio(ratio, index) {
-    if (ratio === FIT_IMAGE) return null;
+    if (ratio === FIT_IMAGE) {
+      let store = OptionStore.getOptions();
+      if (store.backgroundType !== BACKGROUND_IMAGE) return null;
+    }
 
     let height = 55;
     let style = { height: `${height}px` };
-    let values = this.props.aspectRatioValues;
-    if (index < values.length) {
-      style.width = 50 / values[index];
-    }
+    style.width = 50 / OptionStore.getAspectRatioValue(ratio);
 
     let className = `ratio-option`;
     if (ratio === this.props.currentRatio) className += ' active';

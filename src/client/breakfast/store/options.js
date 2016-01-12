@@ -83,7 +83,7 @@ function getAspectRatioValue(aspectRatio) {
         break;
       }
       let backgroundImg = options.backgroundImg;
-      return (backgroundImg.width / backgroundImg.height);
+      return (backgroundImg.height / backgroundImg.width);
   }
 
   return 1;
@@ -91,7 +91,22 @@ function getAspectRatioValue(aspectRatio) {
 
 function getCanvasMetrics(aspectRatio='') {
   // Defaults
-  let canvasWidth = aspectRatio === SQUARE ? 400 : 650;
+  let canvasWidth = 650;
+  if (aspectRatio === SQUARE) {
+    canvasWidth = 400;
+  } else if (aspectRatio === FIT_IMAGE && (typeof OptionStore !== 'undefined')) {
+    let options = OptionStore.getOptions();
+
+    if (options.backgroundType === BACKGROUND_IMAGE) {
+      let ratio = options.backgroundImg.width / options.backgroundImg.height;
+
+      if (ratio < .25) {
+        canvasWidth = 300;
+      } else if (ratio <= 1) {
+        canvasWidth = 400;
+      }
+    }
+  }
 
   if (window.innerWidth <= canvasWidth) {
     canvasWidth = window.innerWidth * .9;
@@ -237,7 +252,11 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     options.backgroundType = BACKGROUND_COLOR;
     options.backgroundImg = defaultBackgroundImage();
 
-    this.emitChange();
+    if (options.aspectRatio === FIT_IMAGE) {
+      this.aspectRatioChange(TWO_ONE)
+    } else {
+      this.emitChange();
+    }
   },
 
   /**
