@@ -92,7 +92,7 @@ class Gallery extends React.Component {
       photos = photos.sort((a, b) => { return Math.random() - Math.random(); })
 
       ReactDOM.render(
-        <Gallery photos={ photos.slice(0, 30) }/>,
+        <Gallery photos={ photos.slice(0, 30) } key={ 'gallery-loaded' }/>,
         document.getElementById('gallery')
       )
     }, (err) => {
@@ -103,3 +103,9 @@ class Gallery extends React.Component {
     });
 })();
 
+(() => {
+  ReactDOM.render(
+    <Gallery/>,
+    document.getElementById('gallery')
+  )
+})()

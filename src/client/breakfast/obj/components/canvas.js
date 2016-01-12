@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactCanvas from 'react-canvas';
 
 import { clone } from '../../lib/parse';
@@ -52,7 +53,7 @@ export default class Canvas extends React.Component {
   }
 
   getCanvasNode() {
-    return React.findDOMNode(this.refs.canvas);
+    return ReactDOM.findDOMNode(this.refs.canvas);
   }
 
   getTextGroupStyle() {
@@ -87,7 +88,7 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
     let width;
     let height;
-    let zIndex = 10;
+    let zIndex = 1000;
 
     if (aspectRatio > 1.5) {
       // The logo is wider than it is tall
@@ -152,7 +153,8 @@ export default class Canvas extends React.Component {
     }
 
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/logos/${logo.filename}/?color=${logoColor}`;
+    let logoUrl = `${window.location.origin}/logos/${logo.filename}?color=${logoColor}`;
+    console.log(style, logoUrl);
     return (
        <Image src={ logoUrl } style={ style } key={ logoUrl }/>
     )

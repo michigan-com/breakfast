@@ -138,7 +138,7 @@ function registerRoutes(app, router, passport) {
   });
 
   // Getting the logo files
-  router.get('/logos/:filename', loginRequired, (req, res, next) => {
+  router.get('/logos/:filename', (req, res, next) => {
     return getLogo(req, res, next).catch(function(err) {
       next(err);
     });
@@ -148,13 +148,6 @@ function registerRoutes(app, router, passport) {
     let color = 'color' in req.query ? req.query.color : undefined;
     let filename = req.params.filename;
     let logoInfo = logoJson[filename];
-    let domain = getDomainFromEmail(req.user.email);
-
-    // Don't load the logo if the user isn't authorized to do so
-    if (!userHasAccess(logoInfo, req.user)) {
-      res.status(403).send();
-      return;
-    }
 
     let data = await logoFetch.getLogo(filename, color);
 

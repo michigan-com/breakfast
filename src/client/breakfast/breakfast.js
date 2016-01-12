@@ -51,7 +51,7 @@ class PicEditor extends React.Component {
   }
 
   getImageName() {
-    let fileName = React.findDOMNode(this.refs['file-name']).value;
+    let fileName = ReactDOM.findDOMNode(this.refs['file-name']).value;
     return fileName ? fileName : 'pic';
   }
 
@@ -66,9 +66,9 @@ class PicEditor extends React.Component {
       this.setState({ downloading: false });
     }
 
-    let filename = React.findDOMNode(this.refs['file-name']).value;
+    let filename = ReactDOM.findDOMNode(this.refs['file-name']).value;
 
-    let element = React.render(
+    let element = ReactDOM.render(
       <DownloadCanvas fontSize={ this.state.fontSize }
           options={ OptionStore.getOptions() }
           textContent={ textContent }

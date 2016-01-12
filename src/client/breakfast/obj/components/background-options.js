@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ColorPicker from 'react-color';
 
 import OptionActions from '../../actions/options';
@@ -32,14 +33,14 @@ export default class BackgroundOptions extends React.Component {
   }
 
   triggerFileUpload = () => {
-    let input = React.findDOMNode(this.refs['image-upload']);
+    let input = ReactDOM.findDOMNode(this.refs['image-upload']);
     input.click();
   }
 
   handleFileUpload = () => {
     if (!('image-upload' in this.refs)) return null;
 
-    let input = React.findDOMNode(this.refs['image-upload']);
+    let input = ReactDOM.findDOMNode(this.refs['image-upload']);
     if (!input.files || !input.files.length) return null;
 
     let file = input.files[0];
@@ -127,7 +128,7 @@ export default class BackgroundOptions extends React.Component {
           { picker }
         </div>
         <input type='checkbox' name={ `background-type-${option}` }
-          checked={ checked }
+          defaultChecked={ checked }
           onClick={ this.backgroundTypeCallback(option) }/>
       </div>
     )

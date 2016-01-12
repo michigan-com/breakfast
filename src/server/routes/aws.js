@@ -14,6 +14,15 @@ var s3 = new AWS.S3();
 
 // TODO remove
 var CACHE = undefined;
+var CACHE_DATE = undefined;
+var cacheLimit = 1000 * 60 * 60; // 1 hour
+
+function cacheIsStale() {
+  if (typeof CACHE_DATE === 'undefined') return true;
+
+  let delta = (new Date()) - CACHE_DATE;
+  return delta >= cacheLimit;
+}
 
 function listObjects(opts={}) {
   return new Promise(function(resolve, reject) {
@@ -43,11 +52,15 @@ function registerRoutes(app, router, passport) {
     let photos = [];
     try {
       //let objects = await listObjects({ MaxKeys: 100 });
-      if (!CACHE) {
+      if ((typeof CACHE === 'undefined') || cacheIsStale()) {
+        logger('re-fetching');
         let objects = await listObjects();
         photos = objects.Contents;
+
         CACHE = photos;
+        CACHE_DATE = new Date();
       } else {
+        logger('loading cache')
         photos = CACHE;
       }
 
@@ -70,7 +83,7 @@ function registerRoutes(app, router, passport) {
     // Don't upload unless on prod
     if (process.env.NODE_END != 'production') {
       res.status(200);
-      res.sent();
+      res.send();
       return;
     }
 
