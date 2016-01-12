@@ -53,14 +53,12 @@ function registerRoutes(app, router, passport) {
     try {
       //let objects = await listObjects({ MaxKeys: 100 });
       if ((typeof CACHE === 'undefined') || cacheIsStale()) {
-        logger('re-fetching');
         let objects = await listObjects();
         photos = objects.Contents;
 
         CACHE = photos;
         CACHE_DATE = new Date();
       } else {
-        logger('loading cache')
         photos = CACHE;
       }
 

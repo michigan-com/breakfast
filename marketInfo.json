@@ -510,9 +510,11 @@
 
   "Michigan.com": {
     "domain": "michigan.com",
-    "logo": {
+    "logo": [{
       "filename": "michigan.svg"
-    }
+    }, {
+      "filename": "freepmarathon.png"
+    }]
   },
 
   "MilitaryTimes": {
