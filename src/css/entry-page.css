@@ -43,10 +43,14 @@ body {
     margin: 0 auto;
     position: relative;
 
+    @media (max-width: $screen-sm) {
+      font-size: calc($directive-font-size / 2);
+    }
+
     &:after, &:before {
       content: "";
       color: transparent;
-      height: calc($directive-line-height * 1.5);
+      height: calc($directive-font-size * 2);
       width: 30%;
       left: 35%; /* (100 - width) / 2 */
       position: absolute;
@@ -54,7 +58,7 @@ body {
       border-bottom: 1px solid white;
 
       @media (max-width: $screen-sm) {
-        height: calc($directive-line-height * 1.5 * .6);
+        height: calc($directive-font-size * .5 * 2);
       }
     }
 
@@ -71,15 +75,14 @@ body {
     font-family: 'Playfair Display';
     font-weight: bold;
     font-size: 140px;
-    line-height: 100px;
+    line-height: .7em;
     font-style: italic;
     color: white;
     width: 100%;
     margin-bottom: 50px;
 
     @media (max-width: $screen-sm) {
-      font-size: 75px;
-      line-height: 50px;
+      font-size: 70px;
     }
   }
 }

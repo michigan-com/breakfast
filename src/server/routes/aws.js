@@ -11,6 +11,10 @@ var logger = debug('breakfast:aws');
 var breakfastBucket = 'michigan-breakfast';
 var s3 = new AWS.S3();
 
+
+// TODO remove
+var CACHE = undefined;
+
 function listObjects(opts={}) {
   return new Promise(function(resolve, reject) {
     let awsOpts = assign({}, opts, { Bucket: breakfastBucket });
@@ -38,8 +42,14 @@ function registerRoutes(app, router, passport) {
   router.get('/get-all-images/', async (req, res, next) => {
     let photos = [];
     try {
-      let objects = await listObjects({ MaxKeys: 100 });
-      photos = objects.Contents;
+      //let objects = await listObjects({ MaxKeys: 100 });
+      if (!CACHE) {
+        let objects = await listObjects();
+        photos = objects.Contents;
+        CACHE = photos;
+      } else {
+        photos = CACHE;
+      }
 
       for (let photo of photos) {
         photo.url = `https://michigan-breakfast.s3.amazonaws.com/${photo.Key}`;
@@ -47,7 +57,6 @@ function registerRoutes(app, router, passport) {
     } catch(e) {
       logger(e);
     }
-
 
     res.json({ photos });
   });
