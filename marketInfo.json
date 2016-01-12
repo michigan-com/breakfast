@@ -513,7 +513,9 @@
     "logo": [{
       "filename": "michigan.svg"
     }, {
-      "filename": "freepmarathon.png"
+      "filename": "freepmarathon.svg"
+    }, {
+      "filename": "freepmarathon-dark.svg"
     }]
   },
 

@@ -263,12 +263,25 @@
     ],
     "isSvg": false
   },
-  "freepmarathon.png": {
-    "name": "freepmarathon.png",
+  "freepmarathon-dark.svg": {
+    "name": "freepmarathon-dark.svg",
     "domain": [
       "michigan.com"
     ],
-    "isSvg": false
+    "isSvg": true,
+    "width": "292.353",
+    "height": "281.765",
+    "aspectRatio": 1.0375774138022822
+  },
+  "freepmarathon.svg": {
+    "name": "freepmarathon.svg",
+    "domain": [
+      "michigan.com"
+    ],
+    "isSvg": true,
+    "width": "292.353",
+    "height": "281.765",
+    "aspectRatio": 1.0375774138022822
   },
   "fremont.png": {
     "name": "fremont.png",
