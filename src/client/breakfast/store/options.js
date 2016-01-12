@@ -269,6 +269,16 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  backgroundTypeChange(type) {
+    options.backgroundType = type;
+
+    if (options.aspectRatio === FIT_IMAGE) {
+      this.aspectRatioChange(TWO_ONE);
+    } else {
+      this.emitChange();
+    }
+  },
+
   /**
    * Update the aspect ratio of the canvas. Only accept valid ratios (i.e. the
    * ratios in the aspectRatios array)

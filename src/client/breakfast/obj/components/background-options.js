@@ -24,6 +24,12 @@ export default class BackgroundOptions extends React.Component {
   backgroundTypeCallback = (o) => {
     let option = o;
     return () => {
+      let currentOptions = this.props.options;
+      if (o === BACKGROUND_IMAGE && !currentOptions.backgroundImg.src) {
+        this.triggerFileUpload();
+        return;
+      }
+
       actions.backgroundTypeChange(option);
     }
   }
@@ -122,14 +128,13 @@ export default class BackgroundOptions extends React.Component {
       className += ' active';
       checked = true;
     }
+
     return (
       <div className={ className }>
         <div className='picker'>
           { picker }
         </div>
-        <input type='checkbox' name={ `background-type-${option}` }
-          defaultChecked={ checked }
-          onClick={ this.backgroundTypeCallback(option) }/>
+        <div onClick={ this.backgroundTypeCallback(option) } className='checkbox'><i className='fa fa-check'></i></div>
       </div>
     )
   }
