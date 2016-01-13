@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactCanvas from 'react-canvas';
 
 import { clone } from '../lib/parse';
 import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
@@ -9,13 +8,6 @@ import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_
 import TextOverlay from './components/text-overlay';
 import Canvas from './components/canvas';
 import { Select } from '../../util/components';
-
-var Surface = ReactCanvas.Surface;
-var Image = ReactCanvas.Image;
-var Text = ReactCanvas.Text;
-var Group = ReactCanvas.Group;
-var measureText = ReactCanvas.measureText;
-var Layer = ReactCanvas.Layer;
 
 export default class EditingCanvas extends React.Component {
 

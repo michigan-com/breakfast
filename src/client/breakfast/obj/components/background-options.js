@@ -6,6 +6,7 @@ import ColorPicker from 'react-color';
 
 import OptionActions from '../../actions/options';
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING } from '../../lib/constants';
+import CornerPicker from '../../../util/components/corner-picker';
 
 var actions = new OptionActions();
 
@@ -36,6 +37,10 @@ export default class BackgroundOptions extends React.Component {
 
   removeBackgroundImage = () => {
     actions.removeBackgroundImage();
+  }
+
+  updateAttribution = (e) => {
+    actions.attributionChange(e.target.value);
   }
 
   triggerFileUpload = () => {
@@ -139,12 +144,25 @@ export default class BackgroundOptions extends React.Component {
     )
   }
 
+  renderAttributionInput() {
+    let options = this.props.options;
+    if (options.backgroundType !== BACKGROUND_IMAGE) return null;
+
+    return (
+      <div className='attribution-container'>
+        <input type='text' onChange={ this.updateAttribution } placeholder='Attribution' value={ options.backgroundImg.attribution || null }/>
+        <CornerPicker activeCorner={ options.backgroundImg.attributionLocation } callback={ actions.attributionLocationChange }/>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className='background-options-container'>
         <div className='title'>Background</div>
         { this.renderBackgroundOption(BACKGROUND_COLOR) }
         { this.renderBackgroundOption(BACKGROUND_IMAGE) }
+        { this.renderAttributionInput() }
       </div>
     )
   }

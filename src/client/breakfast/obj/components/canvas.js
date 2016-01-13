@@ -12,6 +12,7 @@ var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
+var FontFace = ReactCanvas.FontFace;
 var measureText = ReactCanvas.measureText;
 var Layer = ReactCanvas.Layer;
 
@@ -50,6 +51,46 @@ export default class Canvas extends React.Component {
       height: canvasHeight,
       textWidth: options.canvas.textWidth,
     }
+  }
+
+  getAttributionStyle() {
+    let options = this.props.options;
+    let attribution = options.backgroundImg.attribution;
+    let canvasStyle = this.getCanvasStyle();
+
+    let fontFace = FontFace(options.fontFace, '', {});
+    let fontSize = canvasStyle.height / 25; // lets try this
+    let lineHeight = fontSize;
+    let textWidth = canvasStyle.width;
+
+    let textMetrics = measureText(attribution, textWidth, fontFace, fontSize, lineHeight);
+
+    let color = options.fontColor;
+    let height = fontSize;
+    let width = textMetrics.width;
+    let zIndex = 1000;
+
+    let top = 0;
+    let left = 0;
+    let padding = options.canvas.canvasPadding;
+    switch (/^bottom/.test(options.backgroundImg.attributionLocation)) {
+      case false:
+        top = padding;
+        break;
+      case true:
+        top = canvasStyle.height - (height) - (padding);
+        break;
+    }
+    switch (/left$/.test(options.backgroundImg.attributionLocation)) {
+      case true:
+        left = padding;
+        break;
+      case false:
+        left = canvasStyle.width - padding - width;
+        break;
+    }
+
+    return { top, left, fontFace, fontSize, lineHeight, height, width, color, zIndex }
   }
 
   getCanvasNode() {
@@ -137,12 +178,29 @@ export default class Canvas extends React.Component {
 
       )
     } else if (type === BACKGROUND_IMAGE) {
+      let options = {
+        backgroundColor: '#ffffff',
+        focusPoint: {
+          x: 0,
+          y: 0
+        }
+      };
       backgroundObj = (
-        <Image style={ backgroundStyle } src={ this.props.options.backgroundImg.src }/>
+        <Image style={ backgroundStyle } src={ this.props.options.backgroundImg.src } options={ options }/>
       )
     }
 
     return backgroundObj;
+  }
+
+  renderAttribution() {
+    let options = this.props.options;
+    if (options.backgroundType !== BACKGROUND_IMAGE) return null;
+
+    let style = this.getAttributionStyle();
+    return (
+      <Text style={ style } key='photo-attribute'>{ options.backgroundImg.attribution }</Text>
+    )
   }
 
   renderLogo() {
@@ -185,6 +243,7 @@ export default class Canvas extends React.Component {
         { this.renderBackground() }
         { this.renderContent() }
         { this.renderLogo() }
+        { this.renderAttribution() }
       </Surface>
     )
   }

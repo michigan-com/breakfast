@@ -115,6 +115,20 @@ export default class OptionActions {
     });
   }
 
+  attributionChange(text) {
+    Dispatcher.dispatch({
+      type: Actions.attributionChange,
+      value: text
+    });
+  }
+
+  attributionLocationChange(corner) {
+    Dispatcher.dispatch({
+      type: Actions.attributionLocationChange,
+      value: corner
+    });
+  }
+
   aspectRatioChange(ratio) {
     Dispatcher.dispatch({
       type: Actions.aspectRatioChange,

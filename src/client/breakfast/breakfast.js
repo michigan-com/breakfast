@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReactCanvas from 'react-canvas';
 import objectAssign from 'object-assign';
 
 import { toTitleCase, clone } from './lib/parse';
@@ -13,12 +12,6 @@ import { OptionStore } from './store';
 import DownloadCanvas from './obj/download-canvas';
 import LogoOptions from './obj/components/logo-options';
 import BackgroundOptions from './obj/components/background-options';
-
-var Surface = ReactCanvas.Surface;
-var Image = ReactCanvas.Image;
-var Text = ReactCanvas.Text;
-var Group = ReactCanvas.Group;
-var measureText = ReactCanvas.measureText;
 
 class PicEditor extends React.Component {
   constructor(args) {

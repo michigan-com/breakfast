@@ -14,6 +14,10 @@ let removeBackgroundImage = 'removeBackgroundImage';
 let backgroundImageLoading = 'backgroundImageLoading';
 let backgroundTypeChange = 'backgroundTypeChange';
 
+let attributionChange = 'attributionChange';
+let attributionLocationChange = 'attributionLocationChange';
+
+
 let aspectRatioChange = 'aspectRatioChange';
 
 let logoChange = 'logoChange';
@@ -53,6 +57,10 @@ module.exports = {
       removeBackgroundImage,
       backgroundImageLoading,
       backgroundTypeChange,
+
+      // Attribution
+      attributionChange,
+      attributionLocationChange,
 
       // Canvas aspect ratio
       aspectRatioChange,

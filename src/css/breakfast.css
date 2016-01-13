@@ -325,6 +325,31 @@ input[type=text] {
       }
     }
   }
+
+  .attribution-container {
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    margin-top: 20px;
+    position: relative;
+
+    &:before {
+      content: 'Attribution';
+      position: absolute;
+      font-size: 15px;
+      top: -20px;
+      left: 0;
+      color: white;
+    }
+
+    input, .corner-picker {
+      width: 45%;
+      height: 100%;
+      margin: 2.5%;
+      display: inline-block;
+      float: left;
+    }
+  }
 }
 
 /** Text input stuff **/

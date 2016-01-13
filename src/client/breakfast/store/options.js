@@ -32,7 +32,9 @@ function defaultBackgroundImage() {
   return {
     src: '',
     height: 0,
-    width: 0
+    width: 0,
+    attribution: '',
+    attributionLocation: 'bottom-right'
   }
 }
 
@@ -48,7 +50,7 @@ function generateDefaultOptions() {
     backgroundType: BACKGROUND_COLOR,
     backgroundColor: '#fff',
     // backgroundColor: '#1A5A5A',
-    backgroundImg: defaultBackgroundImage(),
+    backgroundImg: assign({}, defaultBackgroundImage()),
 
     canvas: assign({}, getCanvasMetrics()),
     textPos: {
@@ -243,7 +245,7 @@ let OptionStore = assign({}, EventEmitter.prototype, {
    */
   backgroundImageChange(backgroundImg) {
     options.backgroundType = BACKGROUND_IMAGE;
-    options.backgroundImg = backgroundImg;
+    options.backgroundImg = assign({}, defaultBackgroundImage(), backgroundImg);
 
     this.emitChange();
   },
@@ -277,6 +279,18 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     } else {
       this.emitChange();
     }
+  },
+
+  attributionChange(text) {
+    options.backgroundImg.attribution = text;
+    this.emitChange();
+  },
+
+  attributionLocationChange(corner) {
+    if (cornerOptions.indexOf(corner) < 0) return;
+
+    options.backgroundImg.attributionLocation = corner;
+    this.emitChange();
   },
 
   /**
@@ -406,6 +420,12 @@ Dispatcher.register(function(action) {
       break;
     case Actions.backgroundTypeChange:
       OptionStore.backgroundTypeChange(action.value);
+      break;
+    case Actions.attributionChange:
+      OptionStore.attributionChange(action.value);
+      break;
+    case Actions.attributionLocationChange:
+      OptionStore.attributionLocationChange(action.value);
       break;
     case Actions.aspectRatioChange:
       OptionStore.aspectRatioChange(action.value);
