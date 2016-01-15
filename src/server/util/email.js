@@ -1,4 +1,10 @@
+'use strict';
+
+import debug from 'debug';
+
 import marketInfo from '../../marketInfo.json';
+
+let logger = debug('breakfast:util:email');
 
 // http://stackoverflow.com/a/46181/1337683
 let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -21,18 +27,23 @@ function getValidEmailDomains() {
  */
 function isValidEmail(email) {
 
+  logger(`Testing ${email}`)
 
   // Reject if the email is formatted incorrectly
-  if (!emailRegex.test(email)) {
-    return false;
-  }
+  //if (!emailRegex.test(email)) {
+    //logger(`${email} failed email regex`)
+    //return false;
+  //}
 
   // Reject if it's not a supported domain
   let validDomain = false;
   for (let domain of getValidEmailDomains()) {
     let regex = RegExp(`@${domain}$`);
 
+    logger(`testing ${regex}`)
+
     if (regex.test(email)) {
+      logger(`${domain} worked!`)
       validDomain = true;
       break;
     }
