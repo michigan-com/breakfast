@@ -1,5 +1,3 @@
-'use strict';
-
 import csrf from 'csurf';
 import nodemailer from 'nodemailer';
 import sendmailTransport from 'nodemailer-sendmail-transport';
@@ -85,27 +83,25 @@ function registerRoutes(app, router, passport) {
       let token;
       if (!invite) {
         token = uuid()
-
-        let inviteDoc = { email, token };
-        invite = await Invite.insertOne(inviteDoc);
-
-        logger(inviteDoc);
-        let url = formatInviteUrl(inviteDoc);
-        let mailOptions = {
-          from: 'webmaster@breakfast.im',
-          to: [email],
-          subject: 'Complete your Breakfast registration',
-          text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
-          html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
-        };
-
-        if (process.env.NODE_ENV ==='production') {
-          emailTransport.sendMail(mailOptions);
-        } else {
-          logger(mailOptions);
-        }
+        invite = await Invite.insertOne({ email, token });
       } else {
         token = invite.token;
+      }
+
+      let url = formatInviteUrl(token);
+      let mailOptions = {
+        from: 'webmaster@breakfast.im',
+        //to: [email],
+        to: ['mvarano@michigan.com'],
+        subject: 'Complete your Breakfast registration',
+        text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
+        html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
+      };
+
+      if (process.env.NODE_ENV ==='production') {
+        emailTransport.sendMessage(mailOptions);
+      } else {
+        logger(mailOptions);
       }
 
       // for now, just forward to new url

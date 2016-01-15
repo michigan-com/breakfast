@@ -1,9 +1,9 @@
 
-function formatInviteUrl(invite) {
+function formatInviteUrl(token) {
   let endpoint = 'http://localhost:3000';
   if (process.env.NODE_ENV) endpoint = 'http://breakfast.im';
 
-  return `${endpoint}/register/${invite.token}/`
+  return `${endpoint}/register/${token}/`
 }
 
 function getDomainFromEmail(email) {
