@@ -99,7 +99,7 @@ function registerRoutes(app, router, passport) {
       };
 
       if (process.env.NODE_ENV ==='production') {
-        emailTransport.sendMessage(mailOptions);
+        emailTransport.sendMail(mailOptions);
       } else {
         logger(mailOptions);
       }

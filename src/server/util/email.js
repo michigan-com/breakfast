@@ -38,6 +38,8 @@ function isValidEmail(email) {
   // Reject if it's not a supported domain
   let validDomain = false;
   for (let domain of getValidEmailDomains()) {
+    if (domain === '*') continue;
+
     let regex = RegExp(`@${domain}$`);
 
     logger(`testing ${regex}`)
