@@ -91,8 +91,8 @@ function registerRoutes(app, router, passport) {
       let url = formatInviteUrl(token);
       let mailOptions = {
         from: 'webmaster@breakfast.im',
-        //to: [email],
-        to: ['mvarano@michigan.com'],
+        to: [email],
+        //to: ['mvarano@michigan.com'],
         subject: 'Complete your Breakfast registration',
         text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
         html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
