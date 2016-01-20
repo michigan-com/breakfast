@@ -2,36 +2,40 @@
   "Alamogordo Daily News": {
     "domain": "alamogordonews.com",
     "logo": {
-      "filename": "alamogordo.png"
+      "filename": "alamogordo.svg"
     }
   },
 
   "Alexandria": {
     "domain": "thetowntalk.com",
     "logo": {
-      "filename": "alexandria.png"
+      "filename": "alexandria.svg"
     }
   },
 
   "Appleton": {
     "domain": "postcrescent.com",
     "logo": {
-      "filename": "appleton.png"
+      "filename": "appleton.svg"
     }
   },
 
   "Asbury Park": {
     "domain": "app.com",
-    "logo": {
-      "filename": "asburypark.png"
-    }
+    "logo": [{
+      "filename": "asburypark-dark.png"
+    }, {
+      "filename": "asburypark-light.png"
+    }]
   },
 
   "Asheville": {
     "domain": "citizen-times.com",
-    "logo": {
-      "filename": "asheville.png"
-    }
+    "logo": [{
+      "filename": "asheville-dark.png"
+    }, {
+      "filename": "asheville-light.png"
+    }]
   },
 
   "Associated Press": {
@@ -44,40 +48,46 @@
   "Battle Creek": {
     "domain": "battlecreekenquirer.com",
     "logo": {
-      "filename": "battlecreek.png"
+      "filename": "battlecreek.svg"
     }
   },
 
   "Binghamton": {
     "domain": "pressconnects.com",
     "logo": [{
-      "filename": "binghamton.png"
+      "filename": "binghamton.svg"
     }, {
-      "filename": "elmira.png"
+      "filename": "elmira-dark.png"
     }, {
-      "filename": "ithaca.png"
+      "filename": "elmira-light.png"
+    }, {
+      "filename": "ithaca.svg"
     }]
   },
 
   "Black Mountain News": {
     "domain": "blackmountainnews.com",
     "logo": {
-      "filename": "blackmountainnews.png"
+      "filename": "blackmountainnews.svg"
     }
   },
 
   "Brevard": {
     "domain": "floridatoday.com",
-    "logo": {
-      "filename": "brevard.png"
-    }
+    "logo": [{
+      "filename": "brevard-dark.png"
+    }, {
+      "filename": "brevard-light.png"
+    }]
   },
 
   "Bucyrus": {
     "domain": "bucyrustelegraphforum.com",
-    "logo": {
-      "filename": "bucyrus.svg"
-    }
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }]
   },
 
   "Burlington": {
@@ -90,35 +100,37 @@
   "Carlsbad Current-Argus": {
     "domain": "currentargus.com",
     "logo": {
-      "filename": "carlsbadcurrentargus.png"
+      "filename": "carlsbadcurrentargus.svg"
     }
   },
 
   "Central Florida Future": {
     "domain": "centralfloridafuture.com",
     "logo": {
-      "filename": "centralfloridafuture.png"
+      "filename": "centralfloridafuture.svg"
     }
   },
 
   "Central Jersey": {
     "domain": "mycentraljersey.com",
     "logo": {
-      "filename": "centraljersey.png"
+      "filename": "centraljersey.svg"
     }
   },
 
   "Chambersburg": {
     "domain": "publicopiniononline.com",
     "logo": {
-      "filename": "chambersburg.png"
+      "filename": "chambersburg.svg"
     }
   },
 
   "Cherry Hill": {
     "domain": "courierpostonline.com",
     "logo": [{
-      "filename": "cherryhill.png"
+      "filename": "cherryhill-dark.png"
+    }, {
+      "filename": "cherryhill-light.png"
     }, {
       "filename": "vineland.svg"
     }]
@@ -127,22 +139,26 @@
   "Chillicothe": {
     "domain": "chillicothegazette.com",
     "logo": {
-      "filename": "chillicothe.png"
+      "filename": "chillicothe.svg"
     }
   },
 
   "Cincinnati": {
     "domain": "cincinnati.com",
-    "logo": {
-      "filename": "cincinnati.png"
-    }
+    "logo": [{
+      "filename": "cincinnati-dark.png"
+    }, {
+      "filename": "cincinnati-light.png"
+    }]
   },
 
   "Clarksville": {
     "domain": "theleafchronicle.com",
-    "logo": {
-      "filename": "clarksville.png"
-    }
+    "logo": [{
+      "filename": "clarksville-dark.png"
+    }, {
+      "filename": "clarksville-light.png"
+    }]
   },
 
   "Coshocton": {
@@ -155,14 +171,14 @@
   "Deming Headlight": {
     "domain": "demingheadlight.com",
     "logo": {
-      "filename": "demingheadlight.png"
+      "filename": "demingheadlight.svg"
     }
   },
 
   "Des Moines": {
     "domain": "dmreg.com",
     "logo": {
-      "filename": "desmoines.png"
+      "filename": "desmoines.svg"
     }
   },
 
@@ -182,83 +198,91 @@
 
   "Elmira": {
     "domain": "stargazette.com",
-    "logo": {
-      "filename": "elmira.png"
-    }
+    "logo": [{
+      "filename": "elmira-dark.png"
+    }, {
+      "filename": "elmira-light.png"
+    }]
   },
 
   "El Paso": {
     "domain": "elpasotimes.com",
     "logo": {
-      "filename": "elpaso.png"
+      "filename": "elpaso.svg"
     }
   },
 
   "El Sol": {
     "domain": "elsoldesalinas.com",
-    "logo": {
-      "filename": "elsol.png"
-    }
+    "logo": [{
+      "filename": "elsol-dark.png"
+    }, {
+      "filename": "elsol-light.png"
+    }]
   },
 
   "Farmers Advance": {
     "domain": "farmersadvance.com",
-    "logo": {
-      "filename": "farmersadvance.png"
-    }
+    "logo": [{
+      "filename": "farmersadvance-dark.png"
+    }, {
+      "filename": "farmersadvance-light.png"
+    }]
   },
 
   "Farmington Daily Times": {
     "domain": "daily-times.com",
     "logo": {
-      "filename": "farmingtondailytimes.png"
+      "filename": "farmingtondailytimes.svg"
     }
   },
 
   "Fond du Lac": {
     "domain": "fdlreporter.com",
     "logo": {
-      "filename": "fonddulac.png"
+      "filename": "fonddulac.svg"
     }
   },
 
   "Fort Collins": {
     "domain": "coloradoan.com",
-    "logo": {
-      "filename": "fortcollins.png"
-    }
+    "logo": [{
+      "filename": "fortcollins-dark.png"
+    }, {
+      "filename": "fortcollins-light.png"
+    }]
   },
 
   "Fort Myers": {
     "domain": "news-press.com",
-    "logo": [{
-      "filename": "fortmyers.png"
-    }, {
-      "filename": "fortmyerssmall.png"
-    }, {
-      "filename": "fortmyersgrey.png"
-    }]
+    "logo": {
+      "filename": "fortmyers.svg"
+    }
   },
 
   "Fremont": {
     "domain": "thenews-messenger.com",
-    "logo": {
-      "filename": "fremont.png"
-    }
+    "logo": [{
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }]
   },
 
   "FSU News": {
     "domain": "fsunews.com",
     "logo": {
-      "filename": "fsunews.png"
+      "filename": "fsunews.svg"
     }
   },
 
   "Gannett": {
     "domain": "gannett.com",
     "logo": [{
-      "filename": "usat.svg"
-    },{
+      "filename": "usat-1.svg"
+    }, {
+      "filename": "usat-2.svg"
+    }, {
       "filename": "usat-life.svg"
     }, {
       "filename": "usat-money.svg"
@@ -278,91 +302,101 @@
   "Great Falls": {
     "domain": "greatfallstribune.com",
     "logo": {
-      "filename": "greatfalls.png"
+      "filename": "greatfalls.svg"
     }
   },
 
   "Green Bay": {
     "domain": "greenbaypressgazette.com",
-    "logo": {
-      "filename": "greenbay.svg"
-    }
+    "logo": [{
+      "filename": "greenbay-dark.png"
+    }, {
+      "filename": "greenbay-light.png"
+    }]
   },
 
   "Greenville": {
     "domain": "greenvillenews.com",
     "logo": {
-      "filename": "greenville.png"
+      "filename": "greenville.svg"
     }
   },
 
   "Guam": {
     "domain": "guampdn.com",
     "logo": {
-      "filename": "guam.png"
+      "filename": "guam.svg"
     }
   },
 
   "Hammonton": {
     "domain": "thehammontonnews.com",
-    "logo": {
-      "filename": "hammonton.png"
-    }
+    "logo": [{
+      "filename": "hammonton-dark.png"
+    }, {
+      "filename": "hammonton-light.png"
+    }]
   },
 
   "Hanover": {
     "domain": "eveningsun.com",
     "logo": {
-      "filename": "hanover.png"
+      "filename": "hanover.svg"
     }
   },
 
   "Hattiesburg": {
     "domain": "hattiesburgamerican.com",
-    "logo": {
-      "filename": "hattiesburg.png"
-    }
+    "logo": [{
+      "filename": "hattiesburg-dark.png"
+    }, {
+      "filename": "hattiesburg-light.png"
+    }]
   },
 
   "Hawk Central": {
     "domain": "hawkcentral.com",
-    "logo": {
-      "filename": "hawkcentral.png"
-    }
+    "logo": [{
+      "filename": "hawkcentral-dark.png"
+    }, {
+      "filename": "hawkcentral-light.png"
+    }]
   },
 
   "Indianapolis": {
     "domain": "indystar.com",
     "logo": {
-      "filename": "indianapolis.png"
+      "filename": "indianapolis.svg"
     }
   },
 
   "In York": {
     "domain": "inyork.com",
     "logo": {
-      "filename": "inyork.png"
+      "filename": "inyork.svg"
     }
   },
 
   "Iowa City": {
     "domain": "press-citizen.com",
-    "logo": {
-      "filename": "iowacity.png"
-    }
+    "logo": [{
+      "filename": "iowacity-dark.png"
+    }, {
+      "filename": "iowacity-light.png"
+    }]
   },
 
   "Ithaca": {
     "domain": "ithacajournal.com",
     "logo": {
-      "filename": "ithaca.png"
+      "filename": "ithaca.svg"
     }
   },
 
   "Jackson (MS)": {
     "domain": "clarionledger.com",
     "logo": {
-      "filename": "jacksonms.png"
+      "filename": "jacksonms.svg"
     }
   },
 
@@ -376,57 +410,61 @@
   "Lafayette (IN)": {
     "domain": "jconline.com",
     "logo": [{
-      "filename": "lafayettein.png"
+      "filename": "lafayettein.svg"
     }, {
-      "filename": "muncie.png"
+      "filename": "muncie.svg"
     }, {
-      "filename": "richmond.png"
+      "filename": "richmond.svg"
     }, {
-      "filename": "indianapolis.png"
+      "filename": "indianapolis.svg"
     }]
   },
 
   "Lafayette (LA)": {
     "domain": "theadvertiser.com",
     "logo": [{
-      "filename": "lafayettela.png"
+      "filename": "lafayettela.svg"
     }, {
-      "filename": "shreveport.png"
+      "filename": "shreveport.svg"
     }, {
-      "filename": "alexandria.png"
+      "filename": "alexandria.svg"
     }, {
-      "filename": "monroe.png"
+      "filename": "monroe-dark.png"
     }, {
-      "filename": "opelousas.png"
+      "filename": "monroe-light.png"
+    }, {
+      "filename": "opelousas.svg"
     }]
   },
 
   "Lancaster": {
     "domain": "lancastereaglegazette.com",
-    "logo": {
-      "filename": "lancaster.png"
-    }
+    "logo": [{
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }]
   },
 
   "Lansing": {
     "domain": "lsj.com",
     "logo": [{
-      "filename": "lansing.png"
+      "filename": "lansing.svg"
     }, {
-      "filename": "battlecreek.png"
+      "filename": "battlecreek.svg"
     }, {
-      "filename": "porthuron.png"
+      "filename": "porthuron.svg"
     }, {
-      "filename": "livingston.png"
+      "filename": "livingston.svg"
     }, {
-      "filename": "livonia.png"
+      "filename": "livonia.svg"
     }]
   },
 
   "Las Cruces Sun-News": {
     "domain": "lcsun-news.com",
     "logo": {
-      "filename": "lascrucessunnews.png"
+      "filename": "lascrucessunnews.svg"
     }
   },
 
@@ -440,43 +478,43 @@
   "Lebanon Daily News": {
     "domain": "ldnews.com",
     "logo": {
-      "filename": "lebanondailynews.png"
+      "filename": "lebanondailynews.svg"
     }
   },
 
   "Livingston": {
     "domain": "livingstondaily.com",
     "logo": [{
-      "filename": "livingston.png"
+      "filename": "livingston.svg"
     }, {
-      "filename": "battlecreek.png"
+      "filename": "battlecreek.svg"
     }, {
-      "filename": "porthuron.png"
+      "filename": "porthuron.svg"
     }, {
-      "filename": "lansing.png"
+      "filename": "lansing.svg"
     }, {
-      "filename": "livonia.png"
+      "filename": "livonia.svg"
     }]
   },
 
   "Livonia": {
     "domain": "hometownlife.com",
     "logo": {
-      "filename": "livonia.png"
+      "filename": "livonia.svg"
     }
   },
 
   "Louisville": {
     "domain": "courier-journal.com",
     "logo": {
-      "filename": "louisville.png"
+      "filename": "louisville.svg"
     }
   },
 
   "Manitowoc": {
     "domain": "htrnews.com",
     "logo": {
-      "filename": "manitowoc.png"
+      "filename": "manitowoc.svg"
     }
   },
 
@@ -489,9 +527,11 @@
 
   "Marco Island": {
     "domain": "marcoislandflorida.com",
-    "logo": {
-      "filename": "marcoisland.png"
-    }
+    "logo": [{
+      "filename": "marcoisland-dark.png"
+    }, {
+      "filename": "marcoisland-light.png"
+    }]
   },
 
   "Marion": {
@@ -504,7 +544,7 @@
   "Marshfield": {
     "domain": "marshfieldnewsherald.com",
     "logo": {
-      "filename": "marshfield.png"
+      "filename": "marshfield.svg"
     }
   },
 
@@ -528,50 +568,54 @@
 
   "Monroe": {
     "domain": "thenewsstar.com",
-    "logo": {
-      "filename": "monroe.png"
-    }
+    "logo": [{
+      "filename": "monroe-dark.png"
+    }, {
+      "filename": "monroe-light.png"
+    }]
   },
 
   "Montgomery": {
     "domain": "montgomeryadvertiser.com",
     "logo": {
-      "filename": "montgomery.png"
+      "filename": "montgomery.svg"
     }
   },
 
   "Morristown": {
     "domain": "dailyrecord.com",
-    "logo": {
-      "filename": "morristown.png"
-    }
+    "logo": [{
+      "filename": "morristown-dark.png"
+    }, {
+      "filename": "morristown-light.png"
+    }]
   },
 
   "Mountain Home": {
     "domain": "baxterbulletin.com",
     "logo": {
-      "filename": "mountainhome.png"
+      "filename": "mountainhome.svg"
     }
   },
 
   "Muncie": {
     "domain": "thestarpress.com",
     "logo": {
-      "filename": "muncie.png"
+      "filename": "muncie.svg"
     }
   },
 
   "Murfreesboro": {
     "domain": "dnj.com",
     "logo": {
-      "filename": "murfreesboro.png"
+      "filename": "murfreesboro.svg"
     }
   },
 
   "Nashville": {
     "domain": "tennessean.com",
     "logo": {
-      "filename": "nashville.png"
+      "filename": "nashville.svg"
     }
   },
 
@@ -585,28 +629,30 @@
   "Opelousas": {
     "domain": "dailyworld.com",
     "logo": {
-      "filename": "opelousas.png"
+      "filename": "opelousas.svg"
     }
   },
 
   "Oshkosh": {
     "domain": "thenorthwestern.com",
     "logo": {
-      "filename": "oshkosh.png"
+      "filename": "oshkosh.svg"
     }
   },
 
   "Packers News": {
     "domain": "packersnews.com",
-    "logo": {
-      "filename": "packersnews.png"
-    }
+    "logo": [{
+      "filename": "packersnews-dark.png"
+    }, {
+      "filename": "packersnews-light.png"
+    }]
   },
 
   "Palm Springs": {
     "domain": "desertsun.com",
     "logo": {
-      "filename": "palmsprings.png"
+      "filename": "palmsprings.svg"
     }
   },
 
@@ -626,22 +672,24 @@
 
   "Port Clinton": {
     "domain": "portclintonnewsherald.com",
-    "logo": {
-      "filename": "portclinton.png"
-    }
+    "logo": [{
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }]
   },
 
   "Port Huron": {
     "domain": "thetimesherald.com",
     "logo": {
-      "filename": "porthuron.png"
+      "filename": "porthuron.svg"
     }
   },
 
   "Poughkeepsie": {
     "domain": "poughkeepsiejournal.com",
     "logo": {
-      "filename": "poughkeepsie.png"
+      "filename": "poughkeepsie.svg"
     }
   },
 
@@ -654,36 +702,38 @@
 
   "Reno-Tahoe": {
     "domain": "reno.com",
-    "logo": {
-      "filename": "renotahoe.png"
-    }
+    "logo": [{
+      "filename": "renotahoe-dark.png"
+    }, {
+      "filename": "renotahoe-light.png"
+    }]
   },
 
   "Richmond": {
     "domain": "pal-item.com",
     "logo": {
-      "filename": "richmond.png"
+      "filename": "richmond.svg"
     }
   },
 
   "Rochester": {
     "domain": "democratandchronicle.com",
     "logo": {
-      "filename": "rochester.png"
+      "filename": "rochester.svg"
     }
   },
 
   "Ruidoso News": {
     "domain": "ruidosonews.com",
     "logo": {
-      "filename": "ruidosonews.png"
+      "filename": "ruidosonews.svg"
     }
   },
 
   "Salem": {
     "domain": "statesmanjournal.com",
     "logo": {
-      "filename": "salem.png"
+      "filename": "salem.svg"
     }
   },
 
@@ -696,9 +746,11 @@
 
   "Salisbury": {
     "domain": "dmg.gannett.com",
-    "logo": {
-      "filename": "salisbury.png"
-    }
+    "logo": [{
+      "filename": "salisbury-dark.png"
+    }, {
+      "filename": "salisbury-light.png"
+    }]
   },
 
   "Sheboygan": {
@@ -711,36 +763,42 @@
   "Shreveport": {
     "domain": "shreveporttimes.com",
     "logo": {
-      "filename": "shreveport.png"
+      "filename": "shreveport.svg"
     }
   },
 
   "Silver City Sun News": {
     "domain": "scsun-news.com",
     "logo": {
-      "filename": "silvercitysunnews.png"
+      "filename": "silvercitysunnews.svg"
     }
   },
 
   "Sioux Falls": {
     "domain": "argusleader.com",
-    "logo": {
-      "filename": "siouxfalls.svg"
-    }
+    "logo": [{
+      "filename": "siouxfalls-dark.png"
+    }, {
+      "filename": "siouxfalls-light.png"
+    }]
   },
 
   "Somos Frontera": {
     "domain": "elpasoymas.com",
-    "logo": {
-      "filename": "somosfrontera.png"
-    }
+    "logo": [{
+      "filename": "somosfrontera-dark.png"
+    }, {
+      "filename": "somosfrontera-light.png"
+    }]
   },
 
   "Springfield": {
     "domain": "news-leader.com",
-    "logo": {
-      "filename": "springfield.png"
-    }
+    "logo": [{
+      "filename": "springfield-dark.png"
+    }, {
+      "filename": "springfield-light.png"
+    }]
   },
 
   "St. Cloud": {
@@ -753,36 +811,40 @@
   "St. George": {
     "domain": "thespectrum.com",
     "logo": {
-      "filename": "stgeorge.png"
+      "filename": "stgeorge.svg"
     }
   },
 
   "Staunton": {
     "domain": "newsleader.com",
-    "logo": {
-      "filename": "staunton.png"
-    }
+    "logo": [{
+      "filename": "staunton-dark.png"
+    }, {
+      "filename": "staunton-light.png"
+    }]
   },
 
   "Stevens Point": {
     "domain": "stevenspointjournal.com",
     "logo": {
-      "filename": "stevenspoint.png"
+      "filename": "stevenspoint.svg"
     }
   },
 
   "Tallahassee": {
     "domain": "tallahassee.com",
     "logo": {
-      "filename": "tallahassee.png"
+      "filename": "tallahassee.svg"
     }
   },
 
   "USA Today": {
     "domain": "usatoday.com",
     "logo": [{
-      "filename": "usat.svg"
-    },{
+      "filename": "usat-1.svg"
+    }, {
+      "filename": "usat-2.svg"
+    }, {
       "filename": "usat-life.svg"
     }, {
       "filename": "usat-money.svg"
@@ -809,7 +871,7 @@
   "Visalia-Tulare": {
     "domain": "visaliatimesdelta.com",
     "logo": {
-      "filename": "visaliatulare.png"
+      "filename": "visaliatulare.svg"
     }
   },
 
@@ -823,7 +885,7 @@
   "Westchester": {
     "domain": "lohud.com",
     "logo": {
-      "filename": "westchester.png"
+      "filename": "westchester.svg"
     }
   },
 
@@ -837,7 +899,7 @@
   "Wisconsin Rapids": {
     "domain": "wisconsinrapidstribune.com",
     "logo": {
-      "filename": "wisconsinrapids.png"
+      "filename": "wisconsinrapids.svg"
     }
   },
 
@@ -858,7 +920,7 @@
   "Zanesville": {
     "domain": "zanesvilletimesrecorder.com",
     "logo": {
-      "filename": "zanesville.png"
+      "filename": "zanesville.svg"
     }
   }
 }

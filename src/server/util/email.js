@@ -42,8 +42,6 @@ function isValidEmail(email) {
 
     let regex = RegExp(`@${domain}$`);
 
-    logger(`testing ${regex}`)
-
     if (regex.test(email)) {
       logger(`${domain} worked!`)
       validDomain = true;

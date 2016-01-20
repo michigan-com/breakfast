@@ -131,11 +131,15 @@ export default class Canvas extends React.Component {
     let height;
     let zIndex = 1000;
 
-    if (aspectRatio > 1.5) {
+    if (aspectRatio > 2.0) {
       // The logo is wider than it is tall
       width = canvasStyle.width / 4;
       height = width / aspectRatio;
-    } else if (aspectRatio <= 1.5) {
+    } else if (Math.abs(aspectRatio - 1.0) <= 0.1) {
+      // The logo is roughly square
+      height = canvasStyle.height / 6;
+      width = height * aspectRatio;
+    } else if (aspectRatio <= 2.0) {
       height = canvasStyle.height / 8;
       width = height * aspectRatio;
     }
@@ -211,7 +215,7 @@ export default class Canvas extends React.Component {
     }
 
     let style = this.getLogoStyle();
-    let logoUrl = `${window.location.origin}/logos/${logo.filename}?color=${logoColor}`;
+    let logoUrl = `${window.location.origin}/logos/${logo.filename}`;
     return (
        <Image src={ logoUrl } style={ style } key={ logoUrl }/>
     )

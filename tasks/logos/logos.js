@@ -19,6 +19,7 @@ gulp.task('generateLogoJson', function() {
   var logo_root = path.join(ROOT_DIR, 'public', 'img', 'logos');
   var outfile = path.join(ROOT_DIR, 'logoInfo.json');
   var ratioRegex = /width="(\d+(?:\.\d+)?)(?:px)?"\s+height="(\d+(?:\.\d+)?)(?:px)?"/;
+  var viewboxRegex = /viewBox="\d+\s+\d+\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)"/;
   var logoNames = getLogoNames();
 
   var files = fs.readdirSync(logo_root);
@@ -45,8 +46,11 @@ gulp.task('generateLogoJson', function() {
     if(isSvg) {
       var match = ratioRegex.exec(contents);
       if (!match) {
-        invalidFiles.push('Can\'t find height/width for ' + file);
-        continue;
+        match = viewboxRegex.exec(contents);
+        if (!match) {
+          invalidFiles.push('Can\'t find height/width for ' + file);
+          continue;
+        }
       }
 
       logoJson[file].width = match[1];

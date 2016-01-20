@@ -176,6 +176,7 @@ body {
       cursor: pointer;
       background: inherit;
       height: 30px;
+      padding: 2px;
 
       &:hover, &.selected {
         background: grey;
