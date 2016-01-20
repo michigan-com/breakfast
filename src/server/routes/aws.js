@@ -79,7 +79,7 @@ function registerRoutes(app, router, passport) {
     }
 
     // Don't upload unless on prod
-    if (process.env.NODE_END != 'production') {
+    if (process.env.NODE_ENV != 'production') {
       res.status(200);
       res.send();
       return;
