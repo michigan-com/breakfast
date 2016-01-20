@@ -22,13 +22,13 @@
 
     &.black {
       .font-color-option.black {
-        border: 2px solid #168eea;
+        border: 2px solid $blue;
       }
     }
 
     &.white {
       .font-color-option.white {
-        border: 2px solid #168eea;
+        border: 2px solid $blue;
       }
     }
 

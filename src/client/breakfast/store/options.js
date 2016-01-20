@@ -49,7 +49,6 @@ function generateDefaultOptions() {
 
     backgroundType: BACKGROUND_COLOR,
     backgroundColor: '#fff',
-    // backgroundColor: '#1A5A5A',
     backgroundImg: assign({}, defaultBackgroundImage()),
 
     canvas: assign({}, getCanvasMetrics()),

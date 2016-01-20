@@ -9,12 +9,40 @@ import CornerPicker from '../../../util/components/corner-picker';
 let actions = new OptionActions();
 
 export default class LogoOptions extends React.Component {
+  static ColorOptions = ['black', 'white'];
+
   cornerChange = (corner) => {
     actions.logoLocationChange(corner);
   }
 
   logoChanged = (logoInfo, index) => {
     actions.logoChange(index);
+  }
+
+  logoColorChange = (c) => {
+    let color;
+    switch (c) {
+      case 'black':
+        color = '#000';
+        break;
+      case 'white':
+        color = '#fff';
+        break;
+    }
+
+    return () => {
+      actions.logoColorChange(color);
+    }
+  }
+
+  isActiveColor(color) {
+    if (color === 'black') {
+      return this.props.options.logoColor === '#000';
+    } else if (color === 'white') {
+      return this.props.options.logoColor === '#fff';
+    }
+
+    return false;
   }
 
   renderLogoSelect() {
@@ -41,6 +69,40 @@ export default class LogoOptions extends React.Component {
 
     return logoSelect;
   }
+
+  renderLogoColorPicker() {
+    let options = this.props.options;
+    let currentLogo = options.logo;
+    let badLogoCheck = /-dark|-light/;
+
+    if (badLogoCheck.exec(currentLogo.filename)) {
+      return (
+        <div className='no-color'>
+          <p>This logo cannot be colored.</p>
+          <p>Got a better logo? <a href='mailto:rwilliams@michigan.com,mvarano@michigan.com,ebower@michigan.com'>Email us!</a></p>
+        </div>
+      )
+    }
+
+    let colorOptions = [];
+    for (let color of LogoOptions.ColorOptions) {
+      let colorClass = ` color ${color}`;
+      if (this.isActiveColor(color)) colorClass += ' active';
+
+      colorOptions.push(
+        <div className='color-container' key={ `logo-color-${color}` }>
+          <div className={ colorClass } onClick={ this.logoColorChange(color) }></div>
+        </div>
+      )
+    }
+
+    return (
+      <div className='color-options'>
+        { colorOptions }
+      </div>
+    )
+  }
+
   render() {
 
     return (
@@ -48,6 +110,9 @@ export default class LogoOptions extends React.Component {
         <div className='title'>Logos</div>
         <div className='logo-select-container'>
           { this.renderLogoSelect() }
+        </div>
+        <div className='logo-color-picker'>
+          { this.renderLogoColorPicker() }
         </div>
         <div className='corner-picker-container'>
           <CornerPicker name='logo-color'
