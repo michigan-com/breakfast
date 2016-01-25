@@ -217,8 +217,8 @@ export default class Canvas extends React.Component {
 
     let style = this.getLogoStyle();
     let logoUrl = `${window.location.origin}/logos/${logo.filename}`;
-    let badLogoCheck = /-dark|-light/;
-    if (!badLogoCheck.exec(logo.filename) && logoColor != '000') {
+    let goodLogoCheck = /\.svg$/;
+    if (goodLogoCheck.test(logo.filename) && logoColor != '000') {
       let color = options.logoColor.replace('#', '');
       logoUrl += `?color=${color}`;
     }

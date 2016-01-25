@@ -1192,6 +1192,20 @@
     "height": "374",
     "aspectRatio": 1.9251336898395721
   },
+  "usat-gametime-dark.jpg": {
+    "name": "usat-gametime-dark.jpg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": false
+  },
+  "usat-gametown-green.gif": {
+    "name": "usat-gametown-green.gif",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": false
+  },
   "usat-life.svg": {
     "name": "usat-life.svg",
     "domain": [

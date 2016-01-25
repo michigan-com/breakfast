@@ -73,13 +73,13 @@ export default class LogoOptions extends React.Component {
   renderLogoColorPicker() {
     let options = this.props.options;
     let currentLogo = options.logo;
-    let badLogoCheck = /-dark|-light/;
+    let goodLogoCheck = /\.svg$/;
 
-    if (badLogoCheck.exec(currentLogo.filename)) {
+    if (!goodLogoCheck.test(currentLogo.filename)) {
       return (
         <div className='no-color'>
           <p>This logo cannot be colored.</p>
-          <p>Got a better logo? <a href='mailto:rwilliams@michigan.com,mvarano@michigan.com,ebower@michigan.com'>Email us!</a></p>
+          <p>Got a better logo? <a href='mailto:help@breakfast.im'>Email us!</a></p>
         </div>
       )
     }
