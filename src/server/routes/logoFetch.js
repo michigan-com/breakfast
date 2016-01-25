@@ -56,7 +56,7 @@ class LogoFetch {
     let $ = cheerio.load(data);
     $('g').attr('style', 'filter: none;');
 
-    $('path, text').each(function(index, obj) {
+    $('path, text, circle').each(function(index, obj) {
       if ($(obj).attr('id') === 'USAT_Network') {
         $(obj).attr('style', 'filter: none; stroke: #999; fill: #999;');
         return;
@@ -64,7 +64,10 @@ class LogoFetch {
       else if ($(obj).hasClass('no-color-change')) return;
       else if ($(obj).parents('defs').length) return;
 
-      $(obj).attr('style', `stroke: #${color}; fill: #${color}; filter: none;`);
+      let style = `stroke: #${color}; filter: none;`;
+      if ($(obj).get(0).tagName !== 'circle') style += `fill: #${color};`
+
+      $(obj).attr('style', style);
     });
 
     // Remove filters? Idk what they do but they mess stuff up
