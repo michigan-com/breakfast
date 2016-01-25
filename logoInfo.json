@@ -426,6 +426,20 @@
     "height": "163",
     "aspectRatio": 4.41717791411043
   },
+  "gametime-dark.jpg": {
+    "name": "gametime-dark.jpg",
+    "domain": [
+      "ydr.com"
+    ],
+    "isSvg": false
+  },
+  "gametown-green.gif": {
+    "name": "gametown-green.gif",
+    "domain": [
+      "ydr.com"
+    ],
+    "isSvg": false
+  },
   "greatfalls.svg": {
     "name": "greatfalls.svg",
     "domain": [
@@ -1198,20 +1212,6 @@
     "width": "720",
     "height": "374",
     "aspectRatio": 1.9251336898395721
-  },
-  "usat-gametime-dark.jpg": {
-    "name": "usat-gametime-dark.jpg",
-    "domain": [
-      "usatoday.com"
-    ],
-    "isSvg": false
-  },
-  "usat-gametown-green.gif": {
-    "name": "usat-gametown-green.gif",
-    "domain": [
-      "usatoday.com"
-    ],
-    "isSvg": false
   },
   "usat-life.svg": {
     "name": "usat-life.svg",

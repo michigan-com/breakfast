@@ -864,10 +864,6 @@
       "filename": "usat-tech.svg"
     }, {
       "filename": "usat-travel.svg"
-    }, {
-      "filename": "usat-gametime-dark.jpg"
-    }, {
-      "filename": "usat-gametown-green.gif"
     }]
   },
 
@@ -915,9 +911,13 @@
 
   "York Daily Record": {
     "domain": "ydr.com",
-    "logo": {
+    "logo": [{
       "filename": "yorkdailyrecord.svg"
-    }
+    }, {
+      "filename": "gametime-dark.jpg"
+    }, {
+      "filename": "gametown-green.gif"
+    }]
   },
 
   "York Dispatch": {
