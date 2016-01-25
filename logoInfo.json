@@ -539,6 +539,7 @@
   "iowacity-dark.png": {
     "name": "iowacity-dark.png",
     "domain": [
+      "dmreg.com",
       "press-citizen.com"
     ],
     "isSvg": false
@@ -546,6 +547,7 @@
   "iowacity-light.png": {
     "name": "iowacity-light.png",
     "domain": [
+      "dmreg.com",
       "press-citizen.com"
     ],
     "isSvg": false
@@ -1237,6 +1239,7 @@
   "usat-sports.svg": {
     "name": "usat-sports.svg",
     "domain": [
+      "dmreg.com",
       "gannett.com",
       "usatoday.com"
     ],

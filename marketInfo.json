@@ -177,9 +177,15 @@
 
   "Des Moines": {
     "domain": "dmreg.com",
-    "logo": {
+    "logo": [{
       "filename": "desmoines.svg"
-    }
+    }, {
+      "filename": "iowacity-dark.png"
+    }, {
+      "filename": "iowacity-light.png"
+    }, {
+      "filename": "usat-sports.svg"
+    }]
   },
 
   "Detroit Free Press": {

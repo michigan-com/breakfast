@@ -117,8 +117,8 @@ body {
 .select {
   width: 100%;
   position: relative;
-  border: 1px solid white;
-  background-color: white;
+  border: 1px solid #eee;
+  background-color: #eee;
   font-family: 'Oswald';
 
   &.show {
@@ -166,7 +166,7 @@ body {
     max-height: calc(30px * 5); /* 5 max height;*/
     overflow-y: auto;
     margin-top: 10px;
-    background: white;
+    background: #eee;
     border: 1px solid grey;
     z-index: 1000;
 
@@ -181,7 +181,7 @@ body {
       padding: 2px;
 
       &:hover, &.selected {
-        background: grey;
+        background: #BDBCBC;
         color: white;
       }
     }
