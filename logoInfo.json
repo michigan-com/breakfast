@@ -277,6 +277,13 @@
     "height": "74.999",
     "aspectRatio": 10.52264696862625
   },
+  "dmjuice.png": {
+    "name": "dmjuice.png",
+    "domain": [
+      "dmreg.com"
+    ],
+    "isSvg": false
+  },
   "elmira-dark.png": {
     "name": "elmira-dark.png",
     "domain": [
@@ -1253,7 +1260,6 @@
   "usat-sports.svg": {
     "name": "usat-sports.svg",
     "domain": [
-      "dmreg.com",
       "gannett.com",
       "usatoday.com"
     ],
