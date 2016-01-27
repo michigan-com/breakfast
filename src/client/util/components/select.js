@@ -1,4 +1,7 @@
+'use strict';
+
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class Select extends React.Component {
   constructor(args) {
@@ -10,6 +13,20 @@ export default class Select extends React.Component {
     }
 
     this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
+  }
+
+  componentDidUpdate = () => {
+    if (this.state.optionsHidden) return;
+
+    let optionsObj = ReactDOM.findDOMNode(this.refs['select-options']);
+    if (optionsObj.scrollHeight <= optionsObj.clientHeight) return;
+
+    // Set scrollTop to make the selected index 2 from the top
+    let step = optionsObj.scrollHeight / this.props.options.length;
+    let scrollTop = step * this.state.currentIndex;
+    if (this.state.currentIndex >= 2) scrollTop -= step * 2;
+
+    optionsObj.scrollTop = scrollTop;
   }
 
   toggleOptions() {
@@ -87,7 +104,7 @@ export default class Select extends React.Component {
     if (this.state.optionsHidden) return;
 
     return (
-      <div className='select-options'>
+      <div className='select-options' ref='select-options'>
         { this.props.options.map(this.renderOption.bind(this)) }
       </div>
     )
