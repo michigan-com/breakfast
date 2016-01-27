@@ -4,22 +4,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import objectAssign from 'object-assign';
 
-import { toTitleCase, clone } from './lib/parse';
-import EditingCanvas from './obj/editing-canvas.js';
-import AspectRatioPicker from './obj/aspect-ratio-picker';
-import { SIXTEEN_NINE, SQUARE } from './lib/constants';
+import { SIXTEEN_NINE, SQUARE } from './util/constants';
 import { OptionStore } from './store';
-import DownloadCanvas from './obj/download-canvas';
-import LogoOptions from './obj/components/logo-options';
-import BackgroundOptions from './obj/components/background-options';
+import EditingCanvas from './components/editing-canvas.js';
+import AspectRatioPicker from './components/aspect-ratio-picker';
+import DownloadCanvas from './components/download-canvas';
+import LogoOptions from './components/logo-options';
+import BackgroundOptions from './components/background-options';
 
 class PicEditor extends React.Component {
   constructor(args) {
     super(args);
 
-    this.defaultImageSrc = `${window.location.origin}/img/default_image.jpg`;
     this.logoAspectRatios = {};
-    this.defaultOptions = OptionStore.getDefaults();
     this.aspectRatios = OptionStore.getAspectRatioOptions();
     this.aspectRatioValues = [];
 
@@ -27,20 +24,17 @@ class PicEditor extends React.Component {
       this.aspectRatioValues.push(OptionStore.getAspectRatioValue(aspectRatio));
     }
 
-    this.state = objectAssign({}, OptionStore.getOptions());
-    this.state.downloading = false;
-    this.state.textContent = null;
-
-    this.previousBackground = this.state.backgroundType;
+    this.state = {
+      downloading: false,
+      optionsLoaded: false, // used to re-render when we get new options
+      textContent: null
+    }
   }
 
   componentDidMount() {
-    OptionStore.addChangeListener(this._optionChange.bind(this));
-  }
-
-
-  _optionChange() {
-    this.setState(OptionStore.getOptions());
+    OptionStore.addChangeListener(() => {
+      this.setState({ optionsLoaded: true });
+    }.bind(this));
   }
 
   getImageName() {
@@ -69,29 +63,6 @@ class PicEditor extends React.Component {
           downloadCallback={ doneDownloading }/>,
       document.getElementById('download-canvas')
     )
-
-    //let canvas = this.refs.canvas.getCanvasNode();
-    //let dataUri = canvas.toDataURL();
-
-    //let downloadImage = () => {
-      //let a = document.createElement('a');
-      //a.setAttribute('href',  dataUri);
-      //a.setAttribute('download', `${this.getImageName()}.png`);
-      //document.body.appendChild(a);
-      //a.click();
-      //document.body.removeChild(a);
-      //this.setState({ downloading: false });
-    //}
-
-    //// even if we fail to save to s3, let them download the image
-    //xr.put('/save-image/', { imageData: dataUri })
-      //.then( downloadImage, downloadImage );
-
-  }
-
-  // TODO
-  updateFileName(e) {
-    // contentActions.filenameChange(e.target.value);
   }
 
   render() {
@@ -111,9 +82,7 @@ class PicEditor extends React.Component {
               currentRatio={ options.aspectRatio }
               aspectRatios={ this.aspectRatios }
               aspectRatioValues = { this.aspectRatioValues }/>
-          <EditingCanvas fontSize={ this.state.fontSize }
-              options={ options }
-              ref='canvas'/>
+          <EditingCanvas  options={ options } ref='canvas'/>
         </div>
         <div className='options-container'>
           <LogoOptions options={ options }/>

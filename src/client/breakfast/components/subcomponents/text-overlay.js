@@ -5,12 +5,12 @@ import ReactCanvas from 'react-canvas';
 import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
-import $ from '../../lib/$';
 import FontFaceSelector from '../medium-toolbar/font-face';
 import FontSizeSelector from '../medium-toolbar/font-size';
 import FontColorSelector from '../medium-toolbar/font-color';
 import TextWidthSelector from '../medium-toolbar/text-width';
 import Actions from '../../actions/options';
+import MediumToCanvasText from './medium-to-canvas-text';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
@@ -126,7 +126,7 @@ export default class TextOverlay extends React.Component {
   getTextContent() {
     let text = this.editor.serialize()['text-overlay'].value;
 
-    let obj = new StringToCanvasText(text, this.props.options);
+    let obj = new MediumToCanvasText(text, this.props.options);
     return obj.getTextElements();
   }
 
@@ -176,113 +176,5 @@ export default class TextOverlay extends React.Component {
         { this.renderStyle() }
       </div>
     )
-  }
-}
-
-
-/**
- * Convert the string returned from the medium-editor into <Text> elements to be
- * drawn to the canvas for image saving
- */
-class StringToCanvasText {
-
-  possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3'];
-
-  constructor(textString, opts={}) {
-    this.textString = textString;
-    this.$textString = $(textString);
-
-    this.opts = opts;
-    this.canvasPadding = this.opts.canvas.canvasPadding;
-    this.textWidth = this.opts.canvas.textWidth;
-    this.fontSizeMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
-    this.textPos = assign({}, this.opts.textPos);
-
-    this.listPadding = 40;
-  }
-
-  getStyle(tagName, content) {
-    let lookupTagName = tagName;
-    if (lookupTagName === 'li') lookupTagName = 'p';
-
-    let styleMetrics = this.opts.styleMetrics[lookupTagName];
-
-    let fontWeight = 'normal';
-    if (tagName === 'h1' || tagName === 'h2') fontWeight = 'bold';
-
-    let textWidth = this.textWidth,
-      fontSize = styleMetrics.fontSize * this.fontSizeMultiplier,
-      lineHeight = styleMetrics.lineHeight,
-      marginBottom = styleMetrics.marginBottom;
-
-    if (tagName === 'li') textWidth -= this.listPadding;
-
-    let fontFace = FontFace(this.opts.fontFace, '', {
-      weight: fontWeight,
-      style: 'normal' // TODO pull this from element
-    });
-
-    let textMetrics = measureText(content, textWidth, fontFace, fontSize, lineHeight);
-
-    let style = {
-      left: this.canvasPadding + this.textPos.left,
-      fontFace,
-      fontSize,
-      lineHeight,
-      marginBottom,
-      width: textWidth,
-      color: this.opts.fontColor,
-      fontWeight,
-      height: textMetrics.height,
-    }
-
-    return style;
-  }
-
-  getTextElements() {
-    let elements = [];
-    let top = this.canvasPadding + this.textPos.top;
-
-    this.$textString.forEach((el) => {
-      let tagName = el.tagName.toLowerCase();
-      if (this.possibleTags.indexOf(tagName) < 0) return;
-
-      if (tagName === 'ul' || tagName === 'ol') {
-        let listCount = 0;
-        let bulletType = tagName === 'ul' ? 'bullet' : 'number';
-
-        $(el).children('li').forEach((el) => {
-          let bullet = bulletType === 'bullet' ? '•' : `${listCount + 1}.`;
-
-          let bulletStyle = this.getStyle('p', bullet);
-          let style = this.getStyle('li', el.textContent);
-
-          bulletStyle.top = top;
-          bulletStyle.left += this.listPadding / 2;
-          style.left += this.listPadding;
-          style.top = top;
-
-          elements.push(<Text style={ bulletStyle } key={ `text-element-${elements.length}` }>{ bullet }</Text>);
-          elements.push(<Text style={ style } key={ `text-element-${elements.length}` }>{ el.textContent }</Text>)
-
-          top += style.height + style.marginBottom;
-          listCount += 1;
-        });
-
-      } else {
-        let style = this.getStyle(tagName, el.textContent);
-
-        style.top = top;
-
-        elements.push(
-          <Text style={ style } key={ `text-element-${elements.length}` }>
-            { el.textContent }
-          </Text>
-        );
-
-        top += style.height + style.marginBottom;
-      }
-    });
-    return elements;
   }
 }

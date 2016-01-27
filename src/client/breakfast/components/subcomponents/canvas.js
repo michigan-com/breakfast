@@ -4,9 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactCanvas from 'react-canvas';
 
-import { clone } from '../../lib/parse';
 import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
-  BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../../lib/constants';
+  BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../../util/constants';
 
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;

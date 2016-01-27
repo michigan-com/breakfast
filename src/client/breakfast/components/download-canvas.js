@@ -3,7 +3,7 @@
 import React from 'react';
 import xr from 'xr';
 
-import Canvas from './components/canvas';
+import Canvas from './subcomponents/canvas';
 
 /**
  * Used to draw the canvas then download it
@@ -34,8 +34,7 @@ export default class DownloadCanvas extends React.Component {
     let options = this.props.options;
 
     return (
-      <Canvas fontSize={ this.props.fontSize }
-          options={ this.props.options }
+      <Canvas options={ this.props.options }
           textContent={ this.props.textContent }
           ref='canvas'/>
     )

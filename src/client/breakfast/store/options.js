@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import Dispatcher from '../dispatcher';
 import { actions, SQUARE, SIXTEEN_NINE, FACEBOOK, FACEBOOK_COVER, TWO_ONE, FIT_IMAGE,
-  CHANGE_EVENT, BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../lib/constants';
+  CHANGE_EVENT, BACKGROUND_LOADING, BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../util/constants';
 
 let Actions = actions.options;
 

@@ -1,6 +1,6 @@
 import xr from 'xr';
 import Dispatcher from '../dispatcher';
-import { actions } from '../lib/constants';
+import { actions } from '../util/constants';
 import OptionStore from '../store/options';
 
 let Actions = actions.options;

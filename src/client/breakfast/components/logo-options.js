@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-import OptionActions from '../../actions/options';
-import Select from '../../../util/components/select';
-import CornerPicker from '../../../util/components/corner-picker';
+import OptionActions from '../actions/options';
+import Select from '../../util/components/select';
+import CornerPicker from '../../util/components/corner-picker';
 
 let actions = new OptionActions();
 

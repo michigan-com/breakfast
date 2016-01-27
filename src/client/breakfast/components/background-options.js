@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ColorPicker from 'react-color';
 
-import OptionActions from '../../actions/options';
-import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING } from '../../lib/constants';
-import CornerPicker from '../../../util/components/corner-picker';
+import OptionActions from '../actions/options';
+import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING } from '../util/constants';
+import CornerPicker from '../../util/components/corner-picker';
 
 var actions = new OptionActions();
 

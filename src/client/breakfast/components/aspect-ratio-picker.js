@@ -5,7 +5,7 @@ import React from 'react';
 import Dispatcher from '../dispatcher';
 import OptionActions from '../actions/options';
 import OptionStore from '../store/options';
-import { FIT_IMAGE, BACKGROUND_IMAGE} from '../lib/constants';
+import { FIT_IMAGE, BACKGROUND_IMAGE} from '../util/constants';
 
 let actions = new OptionActions();
 
