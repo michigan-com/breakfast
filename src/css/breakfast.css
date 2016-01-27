@@ -29,6 +29,28 @@ body {
   margin: 0;
 }
 
+#feedback {
+  text-decoration: none;
+  color: $grey;
+  border: 1px solid $dark-grey;
+  background-color: $black;
+  padding: 0px 15px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-size: 12px;
+  line-height: 40px;
+  height: 40px;
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 .5em black;
+  transition: box-shadow 150ms linear;
+
+  &:hover {
+    box-shadow: 0 0 .75em black;
+  }
+}
+
 input[type=text] {
   font-size: 20px;
   line-height: 40px;
