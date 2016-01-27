@@ -321,17 +321,13 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     let logo = logoInfo[filename];
 
     if (logo.isSvg) {
-      options.logo = { filename, aspectRatio: logo.aspectRatio };
+      options.logo = { filename, aspectRatio: logo.aspectRatio, noColor: logo.noColor };
       this.emitChange();
     } else {
-      // If we couldnt find an aspect ratio, it's likely because it's a .png and we
-      // couldnt read it from the file contents. Load the image in the browser and
-      // read the aspect ratio from that
-
       var i = new Image();
       i.onload = () => {
         let aspectRatio = i.width / i.height;
-        options.logo = { filename, aspectRatio};
+        options.logo = { filename, aspectRatio, noColor: true };
         this.emitChange();
       }
       i.src = `${window.location.origin}/logos/${filename}`;

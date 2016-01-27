@@ -557,11 +557,14 @@
   "Michigan.com": {
     "domain": "michigan.com",
     "logo": [{
-      "filename": "michigan.svg"
+      "filename": "michigan.svg",
+      "noColor": true
     }, {
-      "filename": "freepmarathon-light.svg"
+      "filename": "freepmarathon-light.svg",
+      "noColor": true
     }, {
-      "filename": "freepmarathon-dark.svg"
+      "filename": "freepmarathon-dark.svg",
+      "noColor": true
     }]
   },
 

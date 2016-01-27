@@ -75,7 +75,7 @@ export default class LogoOptions extends React.Component {
     let currentLogo = options.logo;
     let goodLogoCheck = /\.svg$/;
 
-    if (!goodLogoCheck.test(currentLogo.filename)) {
+    if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {
       return (
         <div className='no-color'>
           <p>This logo cannot be colored.</p>

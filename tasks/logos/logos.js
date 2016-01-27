@@ -39,7 +39,8 @@ gulp.task('generateLogoJson', function() {
     logoJson[file] = {
       name: file,
       domain: logoNames[file].domain,
-      isSvg: isSvg
+      isSvg: isSvg,
+      noColor: logoNames[file].noColor
     }
 
     // Do some calculations based the name
@@ -93,7 +94,8 @@ function getLogoNames() {
       if (!(filename in logoNames)) {
         logoNames[filename] = {
           domain: [],
-          logoFound: false
+          logoFound: false,
+          noColor: logos[i].noColor || false
         }
       }
 
