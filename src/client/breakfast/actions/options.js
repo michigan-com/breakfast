@@ -129,6 +129,13 @@ export default class OptionActions {
     });
   }
 
+  attributionColorChange(color) {
+    Dispatcher.dispatch({
+      type: Actions.attributionColorChange,
+      value: color
+    });
+  }
+
   aspectRatioChange(ratio) {
     Dispatcher.dispatch({
       type: Actions.aspectRatioChange,

@@ -34,6 +34,7 @@ function defaultBackgroundImage() {
     height: 0,
     width: 0,
     attribution: '',
+    attributionColor: 'black',
     attributionLocation: 'bottom-right'
   }
 }
@@ -292,6 +293,11 @@ let OptionStore = assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  attributionColorChange(color) {
+    options.backgroundImg.attributionColor = color;
+    this.emitChange();
+  },
+
   /**
    * Update the aspect ratio of the canvas. Only accept valid ratios (i.e. the
    * ratios in the aspectRatios array)
@@ -421,6 +427,9 @@ Dispatcher.register(function(action) {
       break;
     case Actions.attributionLocationChange:
       OptionStore.attributionLocationChange(action.value);
+      break;
+    case Actions.attributionColorChange:
+      OptionStore.attributionColorChange(action.value);
       break;
     case Actions.aspectRatioChange:
       OptionStore.aspectRatioChange(action.value);

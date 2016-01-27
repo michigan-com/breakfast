@@ -64,7 +64,7 @@ export default class Canvas extends React.Component {
 
     let textMetrics = measureText(attribution, textWidth, fontFace, fontSize, lineHeight);
 
-    let color = options.fontColor;
+    let color = options.backgroundImg.attributionColor;
     let height = fontSize;
     let width = textMetrics.width;
     let zIndex = 1000;

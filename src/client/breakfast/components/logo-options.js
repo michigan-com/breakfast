@@ -111,7 +111,7 @@ export default class LogoOptions extends React.Component {
         <div className='logo-select-container'>
           { this.renderLogoSelect() }
         </div>
-        <div className='logo-color-picker'>
+        <div className='color-picker logo'>
           { this.renderLogoColorPicker() }
         </div>
         <div className='corner-picker-container'>

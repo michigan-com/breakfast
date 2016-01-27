@@ -16,7 +16,7 @@ let backgroundTypeChange = 'backgroundTypeChange';
 
 let attributionChange = 'attributionChange';
 let attributionLocationChange = 'attributionLocationChange';
-
+let attributionColorChange = 'attributionColorChange';
 
 let aspectRatioChange = 'aspectRatioChange';
 
@@ -61,6 +61,7 @@ module.exports = {
       // Attribution
       attributionChange,
       attributionLocationChange,
+      attributionColorChange,
 
       // Canvas aspect ratio
       aspectRatioChange,

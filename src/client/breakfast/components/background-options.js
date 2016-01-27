@@ -13,6 +13,7 @@ var actions = new OptionActions();
 export default class BackgroundOptions extends React.Component {
 
   static options = [ BACKGROUND_IMAGE, BACKGROUND_COLOR ];
+  static AttributionColors = ['black', 'white'];
 
   constructor(props) {
     super(props);
@@ -32,6 +33,13 @@ export default class BackgroundOptions extends React.Component {
       }
 
       actions.backgroundTypeChange(option);
+    }
+  }
+
+  attributionColorCallback = (c) => {
+    let color = c;
+    return () => {
+      actions.attributionColorChange(color);
     }
   }
 
@@ -148,10 +156,29 @@ export default class BackgroundOptions extends React.Component {
     let options = this.props.options;
     if (options.backgroundType !== BACKGROUND_IMAGE) return null;
 
+    let attributionColorOptions = [];
+    for (let color of BackgroundOptions.AttributionColors) {
+      let optionClass = `color ${color}`;
+      if (color === options.backgroundImg.attributionColor) optionClass += ' active';
+
+      attributionColorOptions.push(
+        <div className='color-container' key={ `attribution-color-${color}` }>
+          <div className={ optionClass } onClick={ this.attributionColorCallback(color) }></div>
+        </div>
+      )
+    }
+
     return (
       <div className='attribution-container'>
         <input type='text' onChange={ this.updateAttribution } placeholder='Attribution' value={ options.backgroundImg.attribution || null }/>
-        <CornerPicker activeCorner={ options.backgroundImg.attributionLocation } callback={ actions.attributionLocationChange }/>
+        <div className='attribution-options'>
+          <CornerPicker activeCorner={ options.backgroundImg.attributionLocation } callback={ actions.attributionLocationChange }/>
+          <div className='color-picker attribution'>
+            <div className='color-options'>
+              { attributionColorOptions }
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
