@@ -1480,16 +1480,21 @@
     "height": "96.875",
     "aspectRatio": 7.43193806451613
   },
-  "wilmington.svg": {
-    "name": "wilmington.svg",
+  "wilmington-dark.png": {
+    "name": "wilmington-dark.png",
     "domain": [
       "delawareonline.com"
     ],
-    "isSvg": true,
-    "noColor": false,
-    "width": "724.6",
-    "height": "123.4",
-    "aspectRatio": 5.871961102106969
+    "isSvg": false,
+    "noColor": false
+  },
+  "wilmington-light.png": {
+    "name": "wilmington-light.png",
+    "domain": [
+      "delawareonline.com"
+    ],
+    "isSvg": false,
+    "noColor": false
   },
   "wisconsinrapids.svg": {
     "name": "wisconsinrapids.svg",

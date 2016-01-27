@@ -900,9 +900,11 @@
 
   "Wilmington": {
     "domain": "delawareonline.com",
-    "logo": {
-      "filename": "wilmington.svg"
-    }
+    "logo": [{
+      "filename": "wilmington-dark.png"
+    }, {
+      "filename": "wilmington-light.png"
+    }]
   },
 
   "Wisconsin Rapids": {
