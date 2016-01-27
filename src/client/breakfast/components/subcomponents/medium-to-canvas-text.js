@@ -3,7 +3,8 @@
 import React from 'react';
 
 import $ from '../../util/$';
-import { measureText } from 'react-canvas';
+import { measureText, FontFace, Text } from 'react-canvas';
+import assign from 'object-assign';
 
 /**
  * Convert the string returned from the medium-editor into <Text> elements to be
