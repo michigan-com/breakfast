@@ -2,21 +2,20 @@
 
 import React from 'react';
 
-import OptionActions from '../actions/options';
+import Store from '../store';
+import { logoChange, logoColorChange, logoLocationChange } from '../actions/logo';
 import Select from '../../util/components/select';
-import CornerPicker from '../../util/components/corner-picker';
-
-let actions = new OptionActions();
+import CornerPicker from './subcomponents/corner-picker';
 
 export default class LogoOptions extends React.Component {
   static ColorOptions = ['black', 'white'];
 
   cornerChange = (corner) => {
-    actions.logoLocationChange(corner);
+    Store.dispatch(logoLocationChange(corner));
   }
 
   logoChanged = (logoInfo, index) => {
-    actions.logoChange(index);
+    Store.dispatch(logoChange(index));
   }
 
   logoColorChange = (c) => {
@@ -31,7 +30,7 @@ export default class LogoOptions extends React.Component {
     }
 
     return () => {
-      actions.logoColorChange(color);
+      Store.dispatch(logoColorChange(color));
     }
   }
 

@@ -2,23 +2,21 @@
 
 import MediumEditor from 'medium-editor';
 
-import OptionStore from '../../store/options';
-import OptionActions from '../../actions/options';
+import Store from '../../../store';
+import { fontColorChange } from '../../../actions/font';
 
-let actions = new OptionActions();
-
-export default class FontFaceSelector {
+export default class FontColorSelector {
   constructor(fonts) {
     this.fonts = fonts;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({
 
-      name: 'fontface',
-      action: 'fontFace',
-      aria: 'Change Font Face',
+      name: 'fontcolor',
+      action: 'fontcace',
+      aria: 'Change Font Color',
       contentDefault: '&#xB1;', // ±
-      contentFA: '<i class="fa fa-font"></i>',
+      contentFA: '<i class="fa fa-paint-brush"></i>',
 
       fonts: this.fonts,
 
@@ -56,19 +54,17 @@ export default class FontFaceSelector {
 
       hideForm: function () {
         this.getForm().style.display = 'none';
-        this.getSelect().value = '';
       },
 
       showForm: function (fontName) {
-        var select = this.getSelect();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        select.value = fontName || '';
-        select.focus();
+        let options = OptionStore.getOptions();
+        this.getForm().className = this.getFormClassName(options.fontColor);
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -100,48 +96,46 @@ export default class FontFaceSelector {
       createForm: function () {
         var doc = this.document,
           form = doc.createElement('div'),
-          select = doc.createElement('select'),
-          close = doc.createElement('a'),
-          save = doc.createElement('a'),
-          option;
+          option,
+          options = OptionStore.getOptions();
 
         // Font Name Form (div)
-        form.className = 'medium-editor-toolbar-form';
+        form.className = this.getFormClassName(options.fontColor);
         form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        // Add font names
-        for (var i = 0; i<this.fonts.length; i++) {
-          let font = this.fonts[i];
+        let colors = ['black', 'white'];
+        for (let color of colors) {
+          var colorEl = doc.createElement('div');
+          colorEl.className = `font-color-option ${color}`;
+          this.on(colorEl, 'click', this.colorChangeCallback(color));
 
-          option = doc.createElement('option');
-          option.innerHTML = font;
-          option.value = font;
-          option.setAttribute('style', `font-family: '${font}'`);
-
-          select.appendChild(option);
+          form.appendChild(colorEl);
         }
 
-        select.className = 'medium-editor-toolbar-select';
-        form.appendChild(select);
-
-        // Handle typing in the textbox
-        this.on(select, 'change', this.handleFontChange.bind(this));
-
         return form;
+      },
+
+      getFormClassName: function(color) {
+        return`medium-editor-toolbar-form color-picker ${color}`;
+      },
+
+      getColorEl: function(color) {
+        return this.getForm().querySelector(`.font-color-option.${color}`);
       },
 
       getSelect: function () {
         return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      handleFontChange: function () {
-        var font = this.getSelect().value;
-        let index = this.fonts.indexOf(font);
-        actions.fontFaceChange(index);
-        this.execAction('fontName', { name: font });
+      colorChangeCallback: function(c) {
+        let color = c;
+        return (e) => {
+          this.getForm().className = this.getFormClassName(color);
+          Store.dispatch(fontColorChange(color));
+        }
       },
 
       handleFormClick: function (event) {

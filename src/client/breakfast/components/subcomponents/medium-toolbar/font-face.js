@@ -2,26 +2,23 @@
 
 import MediumEditor from 'medium-editor';
 
-import OptionStore from '../../store/options';
-import OptionActions from '../../actions/options';
+import Store from '../../../store';
+import { fontFaceChange } from '../../../actions/font';
 
-let actions = new OptionActions();
-
-export default class TextWidthSelector {
-  constructor() {
-
-    let maxTextWidth = OptionStore.getOptions().canvas.textWidth;
+export default class FontFaceSelector {
+  constructor(fonts) {
+    this.fonts = fonts;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({
 
-      name: 'textwidth',
-      action: 'textWidth',
-      aria: 'Change Text Box Width',
+      name: 'fontface',
+      action: 'fontFace',
+      aria: 'Change Font Face',
       contentDefault: '&#xB1;', // ±
-      contentFA: '<i class="fa fa-text-width"></i>',
+      contentFA: '<i class="fa fa-font"></i>',
 
-      maxTextWidth: maxTextWidth,
+      fonts: this.fonts,
 
       init: function () {
         MediumEditor.extensions.form.prototype.init.apply(this, arguments);
@@ -35,7 +32,8 @@ export default class TextWidthSelector {
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          this.showForm();
+          let options = OptionStore.getOptions();
+          this.showForm(options.fontFace);
         }
 
         return false;
@@ -56,19 +54,19 @@ export default class TextWidthSelector {
 
       hideForm: function () {
         this.getForm().style.display = 'none';
+        this.getSelect().value = '';
       },
 
-      showForm: function () {
-        let options = OptionStore.getOptions();
-        let input = this.getInput();
+      showForm: function (fontName) {
+        var select = this.getSelect();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        input.value = this.getTextWidthPercent();
-        input.focus();
+        select.value = fontName || '';
+        select.focus();
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -100,48 +98,48 @@ export default class TextWidthSelector {
       createForm: function () {
         var doc = this.document,
           form = doc.createElement('div'),
-          input = doc.createElement('input'),
+          select = doc.createElement('select'),
           close = doc.createElement('a'),
           save = doc.createElement('a'),
           option;
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
-        form.id = 'medium-editor-toolbar-form-textwidth-' + this.getEditorId();
+        form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        input.setAttribute('type', 'range');
-        input.setAttribute('min', 1);
-        input.setAttribute('max', 100);
-        input.setAttribute('step', 1);
-        input.setAttribute('value', this.getTextWidthPercent());
+        // Add font names
+        for (var i = 0; i<this.fonts.length; i++) {
+          let font = this.fonts[i];
 
-        input.className = 'medium-editor-toolbar-input-range';
-        input.id = 'text-width';
-        form.appendChild(input);
+          option = doc.createElement('option');
+          option.innerHTML = font;
+          option.value = font;
+          option.setAttribute('style', `font-family: '${font}'`);
+
+          select.appendChild(option);
+        }
+
+        select.className = 'medium-editor-toolbar-select';
+        form.appendChild(select);
 
         // Handle typing in the textbox
-        this.on(input, 'input', this.handleTextWidthChange.bind(this));
+        this.on(select, 'change', this.handleFontChange.bind(this));
 
         return form;
       },
 
-      getInput: function () {
-        return this.getForm().querySelector('input[type=range]');
+      getSelect: function () {
+        return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      getTextWidthPercent: function() {
-        let options = OptionStore.getOptions();
-
-        return (options.textWidth / maxTextWidth) * 100;
-      },
-
-      handleTextWidthChange: function() {
-        let input = this.getInput();
-
-        actions.textWidthChange(input.value);
+      handleFontChange: function () {
+        var font = this.getSelect().value;
+        let index = this.fonts.indexOf(font);
+        Store.dispatch(fontFaceChange(index));
+        this.execAction('fontName', { name: font });
       },
 
       handleFormClick: function (event) {

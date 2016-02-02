@@ -2,28 +2,22 @@
 
 import React from 'react';
 
-import Dispatcher from '../dispatcher';
-import OptionActions from '../actions/options';
-import OptionStore from '../store/options';
-import { FIT_IMAGE, BACKGROUND_IMAGE} from '../util/constants';
-
-let actions = new OptionActions();
+import Store from '../store';
+import { BACKGROUND_IMAGE } from '../actions/background';
+import { ASPECT_RATIOS, FIT_IMAGE, aspectRatio, getAspectRatioValue } from '../actions/aspect-ratio';
 
 export default class AspectRatioPicker extends React.Component {
 
   aspectRatioChange(ratio, e) {
-    actions.aspectRatioChange(ratio);
+    Store.dispatch(aspectRatio(ratio));
   }
 
   renderRatio(ratio, index) {
-    if (ratio === FIT_IMAGE) {
-      let store = OptionStore.getOptions();
-      if (store.backgroundType !== BACKGROUND_IMAGE) return null;
-    }
+    if (ratio === FIT_IMAGE && this.props.backgroundType !== BACKGROUND_IMAGE) return null;
 
     let height = 55;
     let style = { height: `${height}px` };
-    style.width = 50 / OptionStore.getAspectRatioValue(ratio);
+    style.width = 50 / getAspectRatioValue(ratio);
 
     let className = `ratio-option`;
     if (ratio === this.props.currentRatio) className += ' active';
@@ -40,7 +34,7 @@ export default class AspectRatioPicker extends React.Component {
   render() {
     return (
       <div className='ratio-picker'>
-        { this.props.aspectRatios.map(this.renderRatio.bind(this)) }
+        { ASPECT_RATIOS.map(this.renderRatio.bind(this)) }
       </div>
     )
   }

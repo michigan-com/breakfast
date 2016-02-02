@@ -4,9 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactCanvas from 'react-canvas';
 
-import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
-  BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../../util/constants';
-
 var Surface = ReactCanvas.Surface;
 var Image = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
@@ -208,10 +205,25 @@ export default class Canvas extends React.Component {
 
   renderLogo() {
     let options = this.props.options;
-    let logo = options.logo;
-    let logoColor = this.props.options.logoColor.replace('#', '');
+    let logoIndex = options.logoIndex;
+    let logo = options.logoOptions[logoIndex];
+    let logoColor = this.props.options.logologoColor.replace('#', '');
     if (!logo.filename) {
-      return;
+      return null;
+    } else if (!logo.aspectRatio) {
+
+      // This is a .png, we need to find the aspect ratio of this thing before we can use it
+      let filename = logo.filename;
+      let i = new Image();
+      i.onload = ((index) => {
+        return () => {
+          let aspectRatio = i.width / i.height;
+          Store.dispatch(logoAspectRatioFound(index, aspectRatio));
+        }
+      })(logoIndex)
+      i.src = `${window.location.origin}/logos/${filename}`;
+
+      return null;
     }
 
     let style = this.getLogoStyle();

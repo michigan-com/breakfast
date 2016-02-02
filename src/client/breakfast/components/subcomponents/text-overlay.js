@@ -5,18 +5,17 @@ import ReactCanvas from 'react-canvas';
 import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
-import FontFaceSelector from '../medium-toolbar/font-face';
-import FontSizeSelector from '../medium-toolbar/font-size';
-import FontColorSelector from '../medium-toolbar/font-color';
-import TextWidthSelector from '../medium-toolbar/text-width';
-import Actions from '../../actions/options';
+import Store from '../../store';
+import { textPoschange } from '../../actions/text';
+import FontFaceSelector from './medium-toolbar/font-face';
+import FontSizeSelector from './medium-toolbar/font-size';
+import FontColorSelector from './medium-toolbar/font-color';
+import TextWidthSelector from './medium-toolbar/text-width';
 import MediumToCanvasText from './medium-to-canvas-text';
 
 var Text = ReactCanvas.Text;
 var measureText = ReactCanvas.measureText;
 var FontFace = ReactCanvas.FontFace;
-
-var actions = new Actions();
 
 export default class TextOverlay extends React.Component {
   constructor(props) {
@@ -83,7 +82,7 @@ export default class TextOverlay extends React.Component {
 
   mouseUp = (e) => {
     this.stopTrackingMouseMovement();
-    actions.textPosChange(this.state.textPos);
+    Store.dispatch(textPosChange(this.state.textPos));
     this.setState({ mouseDown: false });
   }
 

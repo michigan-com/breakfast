@@ -2,25 +2,20 @@
 
 import MediumEditor from 'medium-editor';
 
-import OptionStore from '../../store/options';
-import OptionActions from '../../actions/options';
+import Store from '../../../store';
+import { fontSizeChange } from '../../../actions/font';
 
-let actions = new OptionActions();
-
-export default class FontColorSelector {
-  constructor(fonts) {
-    this.fonts = fonts;
+export default class FontSizeSelector {
+  constructor() {
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({
 
-      name: 'fontcolor',
-      action: 'fontcace',
-      aria: 'Change Font Color',
+      name: 'fontsize',
+      action: 'fontSize',
+      aria: 'Change Font Size',
       contentDefault: '&#xB1;', // ±
-      contentFA: '<i class="fa fa-paint-brush"></i>',
-
-      fonts: this.fonts,
+      contentFA: '<i class="fa fa-text-height"></i>',
 
       init: function () {
         MediumEditor.extensions.form.prototype.init.apply(this, arguments);
@@ -35,7 +30,7 @@ export default class FontColorSelector {
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
           let options = OptionStore.getOptions();
-          this.showForm(options.fontFace);
+          this.showForm(options.fontSizeMultiplier);
         }
 
         return false;
@@ -58,15 +53,16 @@ export default class FontColorSelector {
         this.getForm().style.display = 'none';
       },
 
-      showForm: function (fontName) {
+      showForm: function (fontSizeMultiplier) {
+        var input = this.getInput();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        let options = OptionStore.getOptions();
-        this.getForm().className = this.getFormClassName(options.fontColor);
+        input.value = fontSizeMultiplier * 11;
+        input.focus();
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -98,46 +94,43 @@ export default class FontColorSelector {
       createForm: function () {
         var doc = this.document,
           form = doc.createElement('div'),
+          input = doc.createElement('input'),
+          close = doc.createElement('a'),
+          save = doc.createElement('a'),
           option,
           options = OptionStore.getOptions();
 
         // Font Name Form (div)
-        form.className = this.getFormClassName(options.fontColor);
-        form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
+        form.className = 'medium-editor-toolbar-form';
+        form.id = 'medium-editor-toolbar-form-fontsize-' + this.getEditorId();
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        let colors = ['black', 'white'];
-        for (let color of colors) {
-          var colorEl = doc.createElement('div');
-          colorEl.className = `font-color-option ${color}`;
-          this.on(colorEl, 'click', this.colorChangeCallback(color));
+        input.setAttribute('type', 'range');
+        input.setAttribute('min', 1);
+        input.setAttribute('max', 33);
+        input.setAttribute('step', 1);
+        input.setAttribute('value', options.fontSizeMultiplier * 11);
 
-          form.appendChild(colorEl);
-        }
+        input.className = 'medium-editor-toolbar-input-range';
+        input.id = 'font-size';
+        form.appendChild(input);
+
+        // Handle typing in the textbox
+        this.on(input, 'input', this.handleFontSizeChange.bind(this));
 
         return form;
       },
 
-      getFormClassName: function(color) {
-        return`medium-editor-toolbar-form color-picker ${color}`;
+      getInput: function () {
+        return this.getForm().querySelector('input[type=range]');
       },
 
-      getColorEl: function(color) {
-        return this.getForm().querySelector(`.font-color-option.${color}`);
-      },
+      handleFontSizeChange: function() {
+        let input = this.getInput();
 
-      getSelect: function () {
-        return this.getForm().querySelector('select.medium-editor-toolbar-select');
-      },
-
-      colorChangeCallback: function(c) {
-        let color = c;
-        return (e) => {
-          this.getForm().className = this.getFormClassName(color);
-          actions.fontColorChange(color);
-        }
+        Store.dispatch(fontSizeChange(input.value));
       },
 
       handleFormClick: function (event) {

@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import objectAssign from 'object-assign';
 
-import { SIXTEEN_NINE, SQUARE } from './util/constants';
-import { OptionStore } from './store';
+import Store from './store';
+import { logosLoaded } from './actions/logo';
 import EditingCanvas from './components/editing-canvas.js';
 import AspectRatioPicker from './components/aspect-ratio-picker';
 import DownloadCanvas from './components/download-canvas';
@@ -16,25 +16,10 @@ class PicEditor extends React.Component {
   constructor(args) {
     super(args);
 
-    this.logoAspectRatios = {};
-    this.aspectRatios = OptionStore.getAspectRatioOptions();
-    this.aspectRatioValues = [];
-
-    for (let aspectRatio of this.aspectRatios) {
-      this.aspectRatioValues.push(OptionStore.getAspectRatioValue(aspectRatio));
-    }
-
     this.state = {
       downloading: false,
-      optionsLoaded: false, // used to re-render when we get new options
-      textContent: null
+      textContent: null // TODO
     }
-  }
-
-  componentDidMount() {
-    OptionStore.addChangeListener(() => {
-      this.setState({ optionsLoaded: true });
-    }.bind(this));
   }
 
   getImageName() {
@@ -57,7 +42,7 @@ class PicEditor extends React.Component {
 
     let element = ReactDOM.render(
       <DownloadCanvas fontSize={ this.state.fontSize }
-          options={ OptionStore.getOptions() }
+          options={ Store.getOptions() }
           textContent={ textContent }
           fileName={ filename || 'pic' }
           downloadCallback={ doneDownloading }/>,
@@ -66,7 +51,7 @@ class PicEditor extends React.Component {
   }
 
   render() {
-    let options = OptionStore.getOptions();
+    let options = Store.getOptions();
 
     let buttonClass = 'save-image';
     let saveButtonContent = 'Save';
@@ -78,10 +63,8 @@ class PicEditor extends React.Component {
     return(
       <div className='pic-editor'>
         <div className='image-container'>
-          <AspectRatioPicker
-              currentRatio={ options.aspectRatio }
-              aspectRatios={ this.aspectRatios }
-              aspectRatioValues = { this.aspectRatioValues }/>
+          <AspectRatioPicker currentRatio={ options.aspectRatio }
+              backgroundType={ options.backgroundType }/>
           <EditingCanvas  options={ options } ref='canvas'/>
         </div>
         <div className='options-container'>
@@ -97,10 +80,31 @@ class PicEditor extends React.Component {
   }
 }
 
-(function(){
+function renderBreakfast() {
   ReactDOM.render(
-    <PicEditor/>,
+    <PicEditor props={ Store.getState() }/>,
     document.getElementById('editor')
   )
+}
+
+(function(){
+  // TODO
+  xr.get('/logos/getLogos/')
+    .then((data) => {
+      logoInfo = data;
+      Store.dispatch(logosLoaded(data));
+    });
+
+  // TODO
+  xr.get('/fonts/getFonts/')
+    .then((data) => {
+      fonts = data.fonts;
+      Store.fontsLoaded();
+  });
+
+
+  Store.subscribe(renderBreakfast);
+  renderBreakfast();
 })();
+
 

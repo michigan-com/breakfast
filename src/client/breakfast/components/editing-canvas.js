@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import { SIXTEEN_NINE, TWO_ONE, FIT_IMAGE, FACEBOOK, FACEBOOK_COVER, BACKGROUND_LOADING,
-  BACKGROUND_IMAGE, BACKGROUND_COLOR } from '../util/constants';
 import TextOverlay from './subcomponents/text-overlay';
 import Canvas from './subcomponents/canvas';
 import { Select } from '../../util/components';

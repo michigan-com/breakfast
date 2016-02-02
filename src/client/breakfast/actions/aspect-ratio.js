@@ -1,0 +1,82 @@
+'use strict';
+
+import { BACKGROUND_IMAGE } from './background';
+
+export const ASPECT_RATIO_CHANGE = 'ASPECT_RATIO_CHANGE';
+
+export const SIXTEEN_NINE = '16:9'
+export const SQUARE = 'Square';
+export const TWO_ONE = '2:1 (Twitter)';
+export const FACEBOOK = '1.9:1 (Facebook)';
+export const FACEBOOK_COVER = 'Facebook Cover Photo';
+export const FIT_IMAGE = 'Fit Image';
+
+export const ASPECT_RATIOS = [TWO_ONE, FACEBOOK, SQUARE, FACEBOOK_COVER, SIXTEEN_NINE, FIT_IMAGE];
+
+export const getDefaultAspectRatioValue = () => {
+  let defaultAspectRatio = ASPECT_RATIOS[0];
+  return getAspectRatioValue({}, defaultAspectRatio);
+}
+
+export const getAspectRatioValue = (state, aspectRatio) => {
+  switch (aspectRatio) {
+    case SIXTEEN_NINE:
+      return 9/16;
+    case TWO_ONE:
+      return 1/2;
+    case FACEBOOK:
+      return 1/1.911;
+    case FACEBOOK_COVER:
+      return 0.370153;
+    case FIT_IMAGE:
+      // Only deal with this aspect ratio if we've loaded an image up
+      if (state.backgroundType === BACKGROUND_IMAGE) {
+        let backgroundImg = state.backgroundImg;
+        return backgroundImg.height / backgroundImg.width;
+      }
+  }
+  return 1;
+}
+
+export const getDefaultCanvasMetrics = () => {
+  let defaultAspectRatio = ASPECT_RATIOS[0];
+  return getCanvasMetrics({}, defaultAspectRatio);
+}
+
+export const getCanvasMetrics = (state, aspectRatio='') => {
+  // Defaults
+  let canvasWidth = 650;
+  if (aspectRatio === SQUARE) {
+    canvasWidth = 400;
+  } else if (aspectRatio === FIT_IMAGE) {
+    if (state.backgroundType === BACKGROUND_IMAGE) {
+      let ratio = state.backgroundImg.width / state.backgroundImg.height;
+
+      if (ratio < .25) {
+        canvasWidth = 300;
+      } else if (ratio <= 1) {
+        canvasWidth = 400;
+      }
+    }
+  }
+
+  if (window.innerWidth <= canvasWidth) {
+    canvasWidth = window.innerWidth * .9;
+  }
+
+  let canvasPadding = canvasWidth / 26; // === 25, a nice round number
+  let textWidth = canvasWidth - (canvasPadding * 2);
+
+  return {
+    canvasWidth,
+    canvasPadding,
+    textWidth
+  }
+}
+
+export function aspectRatio(ratio) {
+  return {
+    type: ASPECT_RATIO_CHANGE,
+    value: ratio
+  }
+}
