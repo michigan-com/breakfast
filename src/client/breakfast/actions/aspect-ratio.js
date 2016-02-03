@@ -64,7 +64,7 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
     canvasWidth = window.innerWidth * .9;
   }
 
-  let canvasPadding = canvasWidth / 26; // === 25, a nice round number
+  let canvasPadding = canvasWidth / 26;
   let maxTextWidth = canvasWidth - (canvasPadding * 2);
 
   return {

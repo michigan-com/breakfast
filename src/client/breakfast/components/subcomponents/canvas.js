@@ -66,7 +66,7 @@ export default class Canvas extends React.Component {
 
     let textMetrics = measureText(attribution, textWidth, fontFace, fontSize, lineHeight);
 
-    let color = options.Background.backgroundImg.attributionColor;
+    let color = options.Attribution.attributionColor;
     let height = fontSize;
     let width = textMetrics.width;
     let zIndex = 1000;
@@ -74,7 +74,7 @@ export default class Canvas extends React.Component {
     let top = 0;
     let left = 0;
     let padding = canvas.canvasPadding;
-    switch (/^bottom/.test(options.Background.backgroundImg.attributionLocation)) {
+    switch (/^bottom/.test(options.Attribution.attributionLocation)) {
       case false:
         top = padding;
         break;
@@ -82,7 +82,7 @@ export default class Canvas extends React.Component {
         top = canvasStyle.height - (height) - (padding);
         break;
     }
-    switch (/left$/.test(options.Background.backgroundImg.attributionLocation)) {
+    switch (/left$/.test(options.Attribution.attributionLocation)) {
       case true:
         left = padding;
         break;
@@ -208,7 +208,7 @@ export default class Canvas extends React.Component {
 
     let style = this.getAttributionStyle();
     return (
-      <Text style={ style } key='photo-attribute'>{ options.Background.backgroundImg.attribution }</Text>
+      <Text style={ style } key='photo-attribute'>{ options.Attribution.attribution }</Text>
     )
   }
 

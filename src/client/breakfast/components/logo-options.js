@@ -46,8 +46,11 @@ export default class LogoOptions extends React.Component {
 
   renderLogoSelect() {
     let logoSelect = null;
+    let logoIndex = this.props.options.Logo.logoIndex;
+    if (logoIndex === null) return null;
+
     let logos = this.props.options.Logo.logoOptions;
-    let currentLogo = this.props.options.Logo.logo;
+    let currentLogo = logos[logoIndex];
 
     if (logos.length > 1) {
       let currentIndex = 0;
@@ -71,7 +74,10 @@ export default class LogoOptions extends React.Component {
 
   renderLogoColorPicker() {
     let options = this.props.options;
-    let currentLogo = options.Logo.logo;
+    let logoIndex = options.Logo.logoIndex;
+    if (logoIndex === null) return;
+
+    let currentLogo = options.Logo.logoOptions[logoIndex];
     let goodLogoCheck = /\.svg$/;
 
     if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {

@@ -41,8 +41,6 @@ export default class MediumToCanvasText {
       lineHeight = styleMetrics.lineHeight,
       marginBottom = styleMetrics.marginBottom;
 
-    textWidth *= .8;
-
     if (tagName === 'li') textWidth -= this.listPadding;
 
     let fontFace = FontFace(this.opts.Font.fontFace, '', {

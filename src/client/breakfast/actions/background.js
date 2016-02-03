@@ -6,8 +6,8 @@ export const BACKGROUND_COLOR_CHANGE = 'BACKGROUND_COLOR_CHANGE';
 export const BACKGROUND_IMAGE_UPLOAD = 'BACKGROUND_IMAGE_UPLOAD';
 export const REMOVE_BACKGROUND_IMAGE = 'REMOVE_BACKGROUND_IMAGE';
 export const BACKGROUND_TYPE_CHANGE = 'BACKGROUND_TYPE_CHANGE';
-const BACKGROUND_IMAGE_CHANGE = 'BACKGROUND_IMAGE_CHANGE';
-const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
+export const BACKGROUND_IMAGE_CHANGE = 'BACKGROUND_IMAGE_CHANGE';
+export const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
 
 export const BACKGROUND_COLOR = 'color';
 export const BACKGROUND_IMAGE = 'image';
@@ -40,11 +40,11 @@ export function backgroundImageUpload(file) {
     reader.onload = e => {
       var img = new Image();
       img.onload = () => {
-        dispatch(backgroundImageChange(assign({}, DEFAULT_BACKGROUND_IMAGE, {
+        dispatch(backgroundImageChange({
           src: reader.result,
           width: img.width,
           height: img.height
-        })));
+        }));
       }
 
       img.src = reader.result;

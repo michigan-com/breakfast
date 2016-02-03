@@ -155,7 +155,7 @@ export default class BackgroundOptions extends React.Component {
     let attributionColorOptions = [];
     for (let color of BackgroundOptions.AttributionColors) {
       let optionClass = `color ${color}`;
-      if (color === options.Background.backgroundImg.attributionColor) optionClass += ' active';
+      if (color === options.Attribution.attributionColor) optionClass += ' active';
 
       attributionColorOptions.push(
         <div className='color-container' key={ `attribution-color-${color}` }>
@@ -168,7 +168,7 @@ export default class BackgroundOptions extends React.Component {
       <div className='attribution-container'>
         <input type='text' onChange={ this.updateAttribution } placeholder='Attribution' value={ options.Background.backgroundImg.attribution || null }/>
         <div className='attribution-options'>
-          <CornerPicker activeCorner={ options.Background.backgroundImg.attributionLocation } callback={ (corner) => { Store.dispatch(attributionLocationChange(corner)) } }/>
+          <CornerPicker activeCorner={ options.Attribution.attributionLocation } callback={ (corner) => { Store.dispatch(attributionLocationChange(corner)) } }/>
           <div className='color-picker attribution'>
             <div className='color-options'>
               { attributionColorOptions }

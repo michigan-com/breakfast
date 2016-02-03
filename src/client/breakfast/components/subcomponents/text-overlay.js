@@ -63,8 +63,8 @@ export default class TextOverlay extends React.Component {
     this.setState({ initialized: true });
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextProps.options.Font.fontOptions.length > 0 && !this.editor) {
+  componentDidUpdate() {
+    if (this.props.options.Font.fontOptions.length > 0 && !this.editor) {
       this.loadMediumEditor();
     }
   }
@@ -88,6 +88,8 @@ export default class TextOverlay extends React.Component {
 
   mouseMove = (e) => {
     if (!this.state.mouseDown) return;
+
+    let options = this.props.options;
 
     let movementX = this.state.lastMouseX - e.clientX;
     let movementY = this.state.lastMouseY - e.clientY;
@@ -140,6 +142,7 @@ export default class TextOverlay extends React.Component {
     let styleMetrics = options.Font.styleMetrics;
     let textWidth = options.Text.textWidth;
     let maxTextWidth = options.AspectRatio.canvas.maxTextWidth;
+    let canvasPadding = options.AspectRatio.canvas.canvasPadding;
 
     let style = [];
     for (let tag in styleMetrics) {
@@ -157,7 +160,8 @@ export default class TextOverlay extends React.Component {
     style.push(`#text-overlay { width: ${maxTextWidth * (textWidth / 100)}px; }`);
 
     let textPos = this.state.textPos;
-    style.push(`.text-overlay-container { top: ${textPos.top}; left: ${textPos.left} }`);
+    style.push(`.text-overlay-container { top: ${textPos.top}; left: ${textPos.left}; padding: ${canvasPadding}px }`);
+    style.push(`.text-overlay-container .move-text { top: ${canvasPadding}px; left: ${canvasPadding - 40}px; }`)
 
     return (<style>{ style.join(' ') }</style>);
   }

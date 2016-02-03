@@ -148,7 +148,7 @@ input[type=text] {
     position: absolute;
     height: 100%;
     width: 100%;
-    padding: 20px;
+    /*padding: 20px;*/
 
     #text-overlay {
       opacity: 0;
@@ -182,8 +182,6 @@ input[type=text] {
 
     .move-text {
       position: absolute;
-      top: 20px;
-      left: -20px;
       width: 40px;
       height: 40px;
       font-size: 25px;

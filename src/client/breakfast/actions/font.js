@@ -49,7 +49,7 @@ export function fontColorChange(color) {
 
 export function fontFaceChange(face) {
   return {
-    FONT_FACE_CHANGE,
+    type: FONT_FACE_CHANGE,
     value: face
   }
 }

@@ -10,11 +10,11 @@ export default function logoReducer(state=DEFAULT_LOGO_STATE, action) {
   let logoIndex, aspectRatio, logoOptions;
   switch (action.type) {
     case LOGO_COLOR_CHANGE:
-      let color = action.value;
-      return assign({}, state, { color });
+      let logoColor = action.value;
+      return assign({}, state, { logoColor });
     case LOGO_LOCATION_CHANGE:
-      let location = action.value;
-      return assign({}, state, { location });
+      let logoLocation = action.value;
+      return assign({}, state, { logoLocation });
     case LOGO_CHANGE:
       logoIndex = action.value;
       if (logoIndex < 0 || logoIndex >= state.logoOptions.length) return state;

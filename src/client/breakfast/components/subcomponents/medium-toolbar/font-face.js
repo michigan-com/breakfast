@@ -137,9 +137,8 @@ export default class FontFaceSelector {
 
       handleFontChange: function () {
         var font = this.getSelect().value;
-        let index = this.fonts.indexOf(font);
-        Store.dispatch(fontFaceChange(index));
-        this.execAction('fontName', { name: font });
+        Store.dispatch(fontFaceChange(font));
+        // this.execAction('fontName', { name: font });
       },
 
       handleFormClick: function (event) {

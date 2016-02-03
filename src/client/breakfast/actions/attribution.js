@@ -1,6 +1,6 @@
 'use strict';
 
-import BOTTOM_RIGHT from './corner';
+import { BOTTOM_RIGHT } from './corner';
 
 export const ATTRIBUTION_CHANGE = 'ATTRIBUTION_CHANGE';
 export const ATTRIBUTION_COLOR_CHANGE = 'ATTRIBUTION_COLOR_CHANGE';

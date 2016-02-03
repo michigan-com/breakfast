@@ -27,7 +27,7 @@ export function logoChange(logoIndex) {
 
 export function logoColorChange(color) {
   return {
-    type: LOGO_CHANGE,
+    type: LOGO_COLOR_CHANGE,
     value: color
   }
 }

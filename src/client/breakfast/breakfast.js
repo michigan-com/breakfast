@@ -66,7 +66,8 @@ class PicEditor extends React.Component {
       <div className='pic-editor'>
         <div className='image-container'>
           <AspectRatioPicker currentRatio={ options.AspectRatio.aspectRatio }
-              backgroundType={ options.Background.backgroundType }/>
+              backgroundType={ options.Background.backgroundType }
+              options={ options }/>
           <EditingCanvas options={ options } options={ options } ref='canvas'/>
         </div>
         <div className='options-container'>
