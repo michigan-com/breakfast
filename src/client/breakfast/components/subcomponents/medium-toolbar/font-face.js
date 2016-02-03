@@ -32,8 +32,8 @@ export default class FontFaceSelector {
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = OptionStore.getOptions();
-          this.showForm(options.fontFace);
+          let options = Store.getState();
+          this.showForm(options.Font.fontFace);
         }
 
         return false;

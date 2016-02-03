@@ -4,8 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactCanvas from 'react-canvas';
 
+import Store from '../../store';
+import { BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../../actions/background';
+import { logoAspectRatioFound } from '../../actions/logo';
+
 var Surface = ReactCanvas.Surface;
-var Image = ReactCanvas.Image;
+var CanvasImage = ReactCanvas.Image;
 var Text = ReactCanvas.Text;
 var Group = ReactCanvas.Group;
 var FontFace = ReactCanvas.FontFace;
@@ -23,53 +27,54 @@ export default class Canvas extends React.Component {
     // }
 
     this.state = {
-      backgroundType: this.props.options.backgroundType
+      backgroundType: this.props.options.Background.backgroundType
     }
   }
 
   componentWillReceiveProps(nextProps) {
     let newState = {
-      backgroundType: nextProps.options.backgroundType
+      backgroundType: nextProps.options.Background.backgroundType
     };
 
     this.setState(newState);
   }
 
   getCanvasStyle() {
-    let options = this.props.options;
+    let canvas = this.props.options.AspectRatio.canvas;
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = options.canvas.canvasWidth;
-    let canvasHeight = canvasWidth * this.props.options.aspectRatioValue;
+    let canvasWidth = canvas.canvasWidth;
+    let canvasHeight = canvasWidth * this.props.options.AspectRatio.aspectRatioValue;
 
     return {
       width: canvasWidth,
       height: canvasHeight,
-      textWidth: options.canvas.textWidth,
+      maxTextWidth: canvas.maxTextWidth,
     }
   }
 
   getAttributionStyle() {
     let options = this.props.options;
-    let attribution = options.backgroundImg.attribution;
+    let canvas = options.AspectRatio.canvas;
+    let attribution = options.Attribution.attribution;
     let canvasStyle = this.getCanvasStyle();
 
-    let fontFace = FontFace(options.fontFace, '', {});
+    let fontFace = FontFace(options.Font.fontFace, '', {});
     let fontSize = canvasStyle.height / 25; // lets try this
     let lineHeight = fontSize;
     let textWidth = canvasStyle.width;
 
     let textMetrics = measureText(attribution, textWidth, fontFace, fontSize, lineHeight);
 
-    let color = options.backgroundImg.attributionColor;
+    let color = options.Background.backgroundImg.attributionColor;
     let height = fontSize;
     let width = textMetrics.width;
     let zIndex = 1000;
 
     let top = 0;
     let left = 0;
-    let padding = options.canvas.canvasPadding;
-    switch (/^bottom/.test(options.backgroundImg.attributionLocation)) {
+    let padding = canvas.canvasPadding;
+    switch (/^bottom/.test(options.Background.backgroundImg.attributionLocation)) {
       case false:
         top = padding;
         break;
@@ -77,7 +82,7 @@ export default class Canvas extends React.Component {
         top = canvasStyle.height - (height) - (padding);
         break;
     }
-    switch (/left$/.test(options.backgroundImg.attributionLocation)) {
+    switch (/left$/.test(options.Background.backgroundImg.attributionLocation)) {
       case true:
         left = padding;
         break;
@@ -112,16 +117,21 @@ export default class Canvas extends React.Component {
       height: canvasStyle.height
     }
 
-    if (this.props.options.backgroundType === BACKGROUND_COLOR) {
-      style.backgroundColor = this.props.options.backgroundColor;
-    } else if (this.props.options.backgroundType === BACKGROUND_IMAGE) {
+    if (this.props.options.Background.backgroundType === BACKGROUND_COLOR) {
+      style.backgroundColor = this.props.options.Background.backgroundColor;
+    } else if (this.props.options.Background.backgroundType === BACKGROUND_IMAGE) {
       style.backgroundColor = '#000000';
     }
     return style;
   }
 
   getLogoStyle() {
-    let aspectRatio = this.props.options.logo.aspectRatio ? this.props.options.logo.aspectRatio : 1;
+    let options = this.props.options;
+    let logoIndex = options.Logo.logoIndex;
+    if (logoIndex === null || logoIndex > options.Logo.logoOptions.length || logoIndex < 0) return {};
+
+    let logo = options.Logo.logoOptions[logoIndex];
+    let aspectRatio = logo.aspectRatio ? logo.aspectRatio : 1;
     let canvasStyle = this.getCanvasStyle();
     let width;
     let height;
@@ -142,8 +152,8 @@ export default class Canvas extends React.Component {
 
     let top = 0;
     let left = 0;
-    let padding = this.props.options.canvas.canvasPadding;
-    switch (/^bottom/.test(this.props.options.logoLocation)) {
+    let padding = options.AspectRatio.canvas.canvasPadding;
+    switch (/^bottom/.test(options.Logo.logoLocation)) {
       case false:
         top = padding;
         break;
@@ -151,7 +161,7 @@ export default class Canvas extends React.Component {
         top = canvasStyle.height - (height) - (padding);
         break;
     }
-    switch (/left$/.test(this.props.options.logoLocation)) {
+    switch (/left$/.test(options.Logo.logoLocation)) {
       case true:
         left = padding;
         break;
@@ -160,12 +170,11 @@ export default class Canvas extends React.Component {
         break;
     }
 
-
     return { height, width, top, left, zIndex }
   }
 
   renderBackground() {
-    let type = this.props.options.backgroundType;
+    let type = this.props.options.Background.backgroundType;
     let backgroundObj;
     let backgroundStyle = this.getBackgroundStyle();
     let layerStyle = {
@@ -186,7 +195,7 @@ export default class Canvas extends React.Component {
         }
       };
       backgroundObj = (
-        <Image style={ backgroundStyle } src={ this.props.options.backgroundImg.src } options={ options }/>
+        <CanvasImage style={ backgroundStyle } src={ this.props.options.Background.backgroundImg.src } options={ options }/>
       )
     }
 
@@ -195,19 +204,21 @@ export default class Canvas extends React.Component {
 
   renderAttribution() {
     let options = this.props.options;
-    if (options.backgroundType !== BACKGROUND_IMAGE) return null;
+    if (options.Background.backgroundType !== BACKGROUND_IMAGE) return null;
 
     let style = this.getAttributionStyle();
     return (
-      <Text style={ style } key='photo-attribute'>{ options.backgroundImg.attribution }</Text>
+      <Text style={ style } key='photo-attribute'>{ options.Background.backgroundImg.attribution }</Text>
     )
   }
 
   renderLogo() {
     let options = this.props.options;
-    let logoIndex = options.logoIndex;
-    let logo = options.logoOptions[logoIndex];
-    let logoColor = this.props.options.logologoColor.replace('#', '');
+    let logoIndex = options.Logo.logoIndex;
+    if (logoIndex === null || logoIndex > options.Logo.logoOptions) return null;
+
+    let logo = options.Logo.logoOptions[logoIndex];
+    let logoColor = this.props.options.Logo.logoColor.replace('#', '');
     if (!logo.filename) {
       return null;
     } else if (!logo.aspectRatio) {
@@ -230,11 +241,11 @@ export default class Canvas extends React.Component {
     let logoUrl = `${window.location.origin}/logos/${logo.filename}`;
     let goodLogoCheck = /\.svg$/;
     if (goodLogoCheck.test(logo.filename) && !logo.noColor) {
-      let color = options.logoColor.replace('#', '');
+      let color = options.Logo.logoColor.replace('#', '');
       logoUrl += `?color=${color}`;
     }
     return (
-       <Image src={ logoUrl } style={ style } key={ logoUrl }/>
+       <CanvasImage src={ logoUrl } style={ style } key={ logoUrl }/>
     )
   }
 

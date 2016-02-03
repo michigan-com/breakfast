@@ -2,6 +2,8 @@
 
 import assign from 'object-assign';
 
+import { CORNER_OPTIONS } from './corner';
+
 export const LOGO_CHANGE = 'LOGO_CHANGE';
 export const LOGO_COLOR_CHANGE = 'LOGO_COLOR_CHANGE';
 export const LOGO_LOCATION_CHANGE = 'LOGO_LOCATION_CHANGE';
@@ -49,4 +51,12 @@ export function logoAspectRatioFound(logoIndex, logoAspectRatio) {
     type: LOGO_ASPECT_RATIO_FOUND,
     value: { logoIndex, logoAspectRatio }
   }
+}
+
+export const DEFAULT_LOGO_STATE = {
+  logo: DEFAULT_LOGO,
+  logoIndex: null,
+  logoOptions: [],
+  logoColor: '#000',
+  logoLocation: CORNER_OPTIONS[CORNER_OPTIONS.length - 1]
 }

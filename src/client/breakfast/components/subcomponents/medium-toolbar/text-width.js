@@ -3,12 +3,12 @@
 import MediumEditor from 'medium-editor';
 
 import Store from '../../../store';
-import textWidthChange from '../../../actions/text';
+import { textWidthChange } from '../../../actions/text';
 
 export default class TextWidthSelector {
   constructor() {
 
-    let maxTextWidth = OptionStore.getOptions().canvas.textWidth;
+    let maxTextWidth = Store.getState().AspectRatio.canvas.maxTextWidth;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({
@@ -57,7 +57,6 @@ export default class TextWidthSelector {
       },
 
       showForm: function () {
-        let options = OptionStore.getOptions();
         let input = this.getInput();
 
         this.base.saveSelection();
@@ -131,9 +130,9 @@ export default class TextWidthSelector {
       },
 
       getTextWidthPercent: function() {
-        let options = OptionStore.getOptions();
+        let options = Store.getState();
 
-        return (options.textWidth / maxTextWidth) * 100;
+        return (options.Text.textWidth);
       },
 
       handleTextWidthChange: function() {

@@ -3,36 +3,33 @@
 import assign from 'object-assign';
 
 import { LOGO_CHANGE, LOGO_COLOR_CHANGE, LOGO_LOCATION_CHANGE,
-  LOGO_LOADING, LOGOS_LOADED, DEFAULT_LOGO } from '../../actions/logo';
+  LOGO_LOADING, LOGOS_LOADED, DEFAULT_LOGO, DEFAULT_LOGO_STATE,
+  LOGO_ASPECT_RATIO_FOUND } from '../../actions/logo';
 
-export function logoReducer(state, action) {
-  switch (action) {
+export default function logoReducer(state=DEFAULT_LOGO_STATE, action) {
+  let logoIndex, aspectRatio, logoOptions;
+  switch (action.type) {
     case LOGO_COLOR_CHANGE:
       let color = action.value;
       return assign({}, state, { color });
     case LOGO_LOCATION_CHANGE:
       let location = action.value;
       return assign({}, state, { location });
-    case: LOGO_CHANGE:
-      let logoIndex = action.value;
+    case LOGO_CHANGE:
+      logoIndex = action.value;
       if (logoIndex < 0 || logoIndex >= state.logoOptions.length) return state;
       return assign({}, state, { logoIndex });
     case LOGO_ASPECT_RATIO_FOUND:
-      let { logoIndex, aspectRatio } = action.value;
+      logoIndex = action.value.logoIndex;
+      aspectRatio = action.value.logoAspectRatio
       if (logoIndex < 0 || logoIndex >= state.logoOptions.length) return state;
 
-      let logoOptions = assign({}, state).logoOptions;
+      logoOptions = assign({}, state).logoOptions;
       logoOptions[logoIndex].aspectRatio = aspectRatio;
       return assign({}, state, { logoOptions });
-    case default:
-      return state;
-  }
-}
 
-export function logoLoadedReducer(state, action) {
-  switch (action) {
     case LOGOS_LOADED:
-      let logoOptions = [];
+      logoOptions = [];
       let logoInfo = action.value;
       for (let filename in logoInfo) {
         let logo = logoInfo[filename];
@@ -41,7 +38,7 @@ export function logoLoadedReducer(state, action) {
           aspectRatio: logo.aspectRatio || null, // Get aspect ratio downstream
           noColor: logo.isSvg ? logo.noColor : true,
           filename
-        });
+        }));
       }
 
       // Sort alphabetically, except put AP last
@@ -52,9 +49,11 @@ export function logoLoadedReducer(state, action) {
         return 0;
       });
 
-      let logo = DEFAULT_LOGO;
-      if (logoOptions.length) logo = logoOptions[0];
+      let logoIndex = null;
+      if (logoOptions.length) logoIndex = 0;
 
-      return assign({}, state, { logo, logoOptions })
+      return assign({}, state, { logoIndex, logoOptions })
   }
+
+  return state;
 }

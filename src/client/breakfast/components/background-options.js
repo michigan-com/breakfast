@@ -27,7 +27,7 @@ export default class BackgroundOptions extends React.Component {
     let option = o;
     return () => {
       let currentOptions = this.props.options;
-      if (option === BACKGROUND_IMAGE && !currentOptions.backgroundImg.src) {
+      if (option === BACKGROUND_IMAGE && !currentOptions.Background.backgroundImg.src) {
         this.triggerFileUpload();
         return;
       }
@@ -70,10 +70,10 @@ export default class BackgroundOptions extends React.Component {
     let options = this.props.options;
 
     // If we already uploaded a file...
-    if (options.backgroundImg.src) {
+    if (options.Background.backgroundImg.src) {
       return (
         <div className='background-image'>
-          <img src={ options.backgroundImg.src } onClick={ this.backgroundTypeCallback(BACKGROUND_IMAGE) }/>
+          <img src={ options.Background.backgroundImg.src } onClick={ this.backgroundTypeCallback(BACKGROUND_IMAGE) }/>
           <div onClick={ () => { Store.dispatch(removeBackgroundImage())} } className='remove-image'><i className='fa fa-times-circle'></i></div>
         </div>
       )
@@ -92,7 +92,7 @@ export default class BackgroundOptions extends React.Component {
   renderColorPicker() {
     let options = this.props.options;
     let style = {
-      backgroundColor: options.backgroundColor
+      backgroundColor: options.Background.backgroundColor
     }
 
     let colorPickerStyle = {
@@ -133,7 +133,7 @@ export default class BackgroundOptions extends React.Component {
 
     let className = `background-option ${option}`;
     let checked = null;
-    if (options.backgroundType === option) {
+    if (options.Background.backgroundType === option) {
       className += ' active';
       checked = true;
     }
@@ -150,12 +150,12 @@ export default class BackgroundOptions extends React.Component {
 
   renderAttributionInput() {
     let options = this.props.options;
-    if (options.backgroundType !== BACKGROUND_IMAGE) return null;
+    if (options.Background.backgroundType !== BACKGROUND_IMAGE) return null;
 
     let attributionColorOptions = [];
     for (let color of BackgroundOptions.AttributionColors) {
       let optionClass = `color ${color}`;
-      if (color === options.backgroundImg.attributionColor) optionClass += ' active';
+      if (color === options.Background.backgroundImg.attributionColor) optionClass += ' active';
 
       attributionColorOptions.push(
         <div className='color-container' key={ `attribution-color-${color}` }>
@@ -166,9 +166,9 @@ export default class BackgroundOptions extends React.Component {
 
     return (
       <div className='attribution-container'>
-        <input type='text' onChange={ this.updateAttribution } placeholder='Attribution' value={ options.backgroundImg.attribution || null }/>
+        <input type='text' onChange={ this.updateAttribution } placeholder='Attribution' value={ options.Background.backgroundImg.attribution || null }/>
         <div className='attribution-options'>
-          <CornerPicker activeCorner={ options.backgroundImg.attributionLocation } callback={ (corner) => { Store.dispatch(attributionLocationChange(corner)) } }/>
+          <CornerPicker activeCorner={ options.Background.backgroundImg.attributionLocation } callback={ (corner) => { Store.dispatch(attributionLocationChange(corner)) } }/>
           <div className='color-picker attribution'>
             <div className='color-options'>
               { attributionColorOptions }

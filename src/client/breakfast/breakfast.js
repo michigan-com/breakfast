@@ -3,9 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import objectAssign from 'object-assign';
+import xr from 'xr';
 
 import Store from './store';
 import { logosLoaded } from './actions/logo';
+import { fontsLoaded } from './actions/font';
 import EditingCanvas from './components/editing-canvas.js';
 import AspectRatioPicker from './components/aspect-ratio-picker';
 import DownloadCanvas from './components/download-canvas';
@@ -42,7 +44,7 @@ class PicEditor extends React.Component {
 
     let element = ReactDOM.render(
       <DownloadCanvas fontSize={ this.state.fontSize }
-          options={ Store.getOptions() }
+          options={ this.props.options }
           textContent={ textContent }
           fileName={ filename || 'pic' }
           downloadCallback={ doneDownloading }/>,
@@ -51,7 +53,7 @@ class PicEditor extends React.Component {
   }
 
   render() {
-    let options = Store.getOptions();
+    let options = this.props.options;
 
     let buttonClass = 'save-image';
     let saveButtonContent = 'Save';
@@ -63,9 +65,9 @@ class PicEditor extends React.Component {
     return(
       <div className='pic-editor'>
         <div className='image-container'>
-          <AspectRatioPicker currentRatio={ options.aspectRatio }
-              backgroundType={ options.backgroundType }/>
-          <EditingCanvas  options={ options } ref='canvas'/>
+          <AspectRatioPicker currentRatio={ options.AspectRatio.aspectRatio }
+              backgroundType={ options.Background.backgroundType }/>
+          <EditingCanvas options={ options } options={ options } ref='canvas'/>
         </div>
         <div className='options-container'>
           <LogoOptions options={ options }/>
@@ -82,7 +84,7 @@ class PicEditor extends React.Component {
 
 function renderBreakfast() {
   ReactDOM.render(
-    <PicEditor props={ Store.getState() }/>,
+    <PicEditor options={ Store.getState() }/>,
     document.getElementById('editor')
   )
 }
@@ -91,15 +93,13 @@ function renderBreakfast() {
   // TODO
   xr.get('/logos/getLogos/')
     .then((data) => {
-      logoInfo = data;
       Store.dispatch(logosLoaded(data));
     });
 
   // TODO
   xr.get('/fonts/getFonts/')
     .then((data) => {
-      fonts = data.fonts;
-      Store.fontsLoaded();
+      Store.dispatch(fontsLoaded(data.fonts));
   });
 
 

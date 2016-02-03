@@ -1,10 +1,10 @@
 'use strict';
 
 import { FONT_SIZE_CHANGE, FONT_COLOR_CHANGE, FONT_FACE_CHANGE,
-  FONTS_LOADED, generateStyleMetrics } from '../../actions/font';
+  FONTS_LOADED, generateStyleMetrics, DEFAULT_FONT } from '../../actions/font';
 import assign from 'object-assign';
 
-export default fontReducer(state, action) {
+export default function fontReducer(state=DEFAULT_FONT, action) {
   switch (action.type) {
     case FONT_SIZE_CHANGE:
       let fontSizeMultiplier = action.value / 11;
@@ -17,9 +17,8 @@ export default fontReducer(state, action) {
       let fontFace = action.value;
       return assign({}, state, { fontFace });
     case FONTS_LOADED:
-      let fonts = action.value;
-      return assign({}, state, { fonts });
-    case default:
-      return state
+      let fontOptions = action.value;
+      return assign({}, state, { fontOptions });
   }
+  return state
 }

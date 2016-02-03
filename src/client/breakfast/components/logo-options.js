@@ -36,9 +36,9 @@ export default class LogoOptions extends React.Component {
 
   isActiveColor(color) {
     if (color === 'black') {
-      return this.props.options.logoColor === '#000';
+      return this.props.options.Logo.logoColor === '#000';
     } else if (color === 'white') {
-      return this.props.options.logoColor === '#fff';
+      return this.props.options.Logo.logoColor === '#fff';
     }
 
     return false;
@@ -46,8 +46,8 @@ export default class LogoOptions extends React.Component {
 
   renderLogoSelect() {
     let logoSelect = null;
-    let logos = this.props.options.logoOptions;
-    let currentLogo = this.props.options.logo;
+    let logos = this.props.options.Logo.logoOptions;
+    let currentLogo = this.props.options.Logo.logo;
 
     if (logos.length > 1) {
       let currentIndex = 0;
@@ -71,7 +71,7 @@ export default class LogoOptions extends React.Component {
 
   renderLogoColorPicker() {
     let options = this.props.options;
-    let currentLogo = options.logo;
+    let currentLogo = options.Logo.logo;
     let goodLogoCheck = /\.svg$/;
 
     if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {
@@ -116,7 +116,7 @@ export default class LogoOptions extends React.Component {
         <div className='corner-picker-container'>
           <CornerPicker name='logo-color'
             callback={ this.cornerChange }
-            activeCorner= { this.props.options.logoLocation }/>
+            activeCorner= { this.props.options.Logo.logoLocation }/>
         </div>
       </div>
     )

@@ -65,12 +65,12 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
   }
 
   let canvasPadding = canvasWidth / 26; // === 25, a nice round number
-  let textWidth = canvasWidth - (canvasPadding * 2);
+  let maxTextWidth = canvasWidth - (canvasPadding * 2);
 
   return {
     canvasWidth,
     canvasPadding,
-    textWidth
+    maxTextWidth
   }
 }
 
@@ -79,4 +79,10 @@ export function aspectRatio(ratio) {
     type: ASPECT_RATIO_CHANGE,
     value: ratio
   }
+}
+
+export const DEFAULT_ASPECT_RATIO = {
+  aspectRatio: ASPECT_RATIOS,
+  aspectRatioValue: getDefaultAspectRatioValue(),
+  canvas: getDefaultCanvasMetrics()
 }

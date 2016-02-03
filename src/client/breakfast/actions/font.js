@@ -53,3 +53,11 @@ export function fontFaceChange(face) {
     value: face
   }
 }
+
+export const DEFAULT_FONT = {
+  fontSizeMultiplier: 1,
+  fontColor: 'black',
+  fontFace: 'Helvetica',
+  fontOptions: [],
+  styleMetrics: generateStyleMetrics()
+}

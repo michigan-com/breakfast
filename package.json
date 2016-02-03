@@ -66,6 +66,7 @@
     "react-masonry-component": "^3.0.0",
     "react-redux": "^4.2.0",
     "redux": "^3.2.1",
+    "redux-thunk": "^1.0.3",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.2",
     "serve-favicon": "^2.3.0",

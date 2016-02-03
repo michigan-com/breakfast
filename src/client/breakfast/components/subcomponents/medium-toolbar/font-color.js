@@ -32,8 +32,8 @@ export default class FontColorSelector {
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = OptionStore.getOptions();
-          this.showForm(options.fontFace);
+          let options = Store.getState();
+          this.showForm(options.Font.fontFace);
         }
 
         return false;
@@ -63,8 +63,8 @@ export default class FontColorSelector {
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        let options = OptionStore.getOptions();
-        this.getForm().className = this.getFormClassName(options.fontColor);
+        let options = Store.getState();
+        this.getForm().className = this.getFormClassName(options.Font.fontColor);
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -97,7 +97,7 @@ export default class FontColorSelector {
         var doc = this.document,
           form = doc.createElement('div'),
           option,
-          options = OptionStore.getOptions();
+          options = Store.getState();
 
         // Font Name Form (div)
         form.className = this.getFormClassName(options.fontColor);

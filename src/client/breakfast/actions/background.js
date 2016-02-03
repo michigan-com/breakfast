@@ -1,5 +1,7 @@
 'use strict';
 
+import assign from 'object-assign';
+
 export const BACKGROUND_COLOR_CHANGE = 'BACKGROUND_COLOR_CHANGE';
 export const BACKGROUND_IMAGE_UPLOAD = 'BACKGROUND_IMAGE_UPLOAD';
 export const REMOVE_BACKGROUND_IMAGE = 'REMOVE_BACKGROUND_IMAGE';
@@ -9,7 +11,7 @@ const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
 
 export const BACKGROUND_COLOR = 'color';
 export const BACKGROUND_IMAGE = 'image';
-export const BACKGROUND_LOADING = 'loading'
+export const BACKGROUND_LOADING = 'loading';
 export const DEFAULT_BACKGROUND_IMAGE = {
   src: '',
   height: 0,
@@ -78,3 +80,8 @@ export function backgroundTypeChange(backgroundType) {
   }
 }
 
+export const DEFAULT_BACKGROUND = {
+  backgroundType: BACKGROUND_COLOR,
+  backgroundColor: '#fff',
+  backgroundImg: assign({}, DEFAULT_BACKGROUND_IMAGE),
+}

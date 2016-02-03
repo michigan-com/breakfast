@@ -12,9 +12,17 @@ export function textWidthChange(width) {
   }
 }
 
-export function textPoschange(pos) {
+export function textPosChange(pos) {
   return {
     type: TEXT_POS_CHANGE,
     value: assign({}, pos)
   }
+}
+
+export const DEFAULT_TEXT = {
+  textPos: {
+    left: 0,
+    top: 0
+  },
+  textWidth: 100
 }

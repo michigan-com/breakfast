@@ -1,36 +1,30 @@
 'use strict';
 
-import 'assign' from 'object-assign';
+import assign from 'object-assign';
 
 import { BACKGROUND_COLOR_CHANGE, BACKGROUND_IMAGE_CHANGE, BACKGROUND_IMAGE_LOADING,
   REMOVE_BACKGROUND_IMAGE, BACKGROUND_TYPE_CHANGE, DEFAULT_BACKGROUND_IMAGE,
-  BACKGROUND_TYPES, BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING } from '../../actions/background';
+  BACKGROUND_TYPES, BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING,
+  DEFAULT_BACKGROUND, BACKGROUND_IMAGE_UPLOAD } from '../../actions/background';
 
 
-export default backgroundReducer(state, action) {
+export default function backgroundReducer(state=DEFAULT_BACKGROUND, action) {
   switch (action.type) {
     case BACKGROUND_COLOR_CHANGE:
-      let color = action.value;
-      let backgroundType = BACKGROUND_COLOR;
-      return assign({}, state, { color, backgroundType });
+      let backgroundColor = action.value;
+      return assign({}, state, { backgroundColor, backgroundType: BACKGROUND_COLOR });
     case BACKGROUND_IMAGE_CHANGE:
-      let backgroundImg = action.value;
-      let backgroundType = BACKGROUND_IMAGE;
-      return assign({}, state, { backgroundImg, backgroundType });
+      return assign({}, state, { backgroundImg: action.value, backgroundType: BACKGROUND_IMAGE });
     case BACKGROUND_IMAGE_UPLOAD:
     case BACKGROUND_IMAGE_LOADING:
-      let backgroundType = BACKGROUND_
-      return assign({}, state, { backgroundType });
+      return assign({}, state, { backgroundType: BACKGROUND_LOADING });
     case REMOVE_BACKGROUND_IMAGE:
-      let backgroundImg = DEFAULT_BACKGROUND_IMAGE;
-      return assign({}, state, { backgroundImg });
+      return assign({}, state, { backgroundImg: assign({}, DEFAULT_BACKGROUND_IMAGE) });
     case BACKGROUND_TYPE_CHANGE:
       if (BACKGROUND_TYPES.indexOf(action.value) >= 0) {
-        let backgroundType = action.value;
-        return assign({}, state, { backgroundType });
+        return assign({}, state, { backgroundType: action.value });
       }
-    case default:
-      return state;
   }
+  return state;
 }
 

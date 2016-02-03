@@ -6,7 +6,7 @@ import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
 import Store from '../../store';
-import { textPoschange } from '../../actions/text';
+import { textPosChange } from '../../actions/text';
 import FontFaceSelector from './medium-toolbar/font-face';
 import FontSizeSelector from './medium-toolbar/font-size';
 import FontColorSelector from './medium-toolbar/font-color';
@@ -28,7 +28,7 @@ export default class TextOverlay extends React.Component {
       lastMouseX: 0,
       lastMouseY: 0,
 
-      textPos: assign({}, this.props.options.textPos)
+      textPos: assign({}, this.props.options.Text.textPos)
     }
 
     this.mediumEditorOptions = {
@@ -45,7 +45,7 @@ export default class TextOverlay extends React.Component {
   }
 
   loadMediumEditor() {
-    let fontFace = new FontFaceSelector(this.props.options.fontOptions);
+    let fontFace = new FontFaceSelector(this.props.options.Font.fontOptions);
     let fontSize = new FontSizeSelector();
     let fontColor = new FontColorSelector();
     let textWidth = new TextWidthSelector();
@@ -64,7 +64,7 @@ export default class TextOverlay extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextProps.options.fontOptions.length > 0 && !this.editor) {
+    if (nextProps.options.Font.fontOptions.length > 0 && !this.editor) {
       this.loadMediumEditor();
     }
   }
@@ -131,14 +131,15 @@ export default class TextOverlay extends React.Component {
 
   getStyle() {
     let options = this.props.options;
-    let fontFamily = options.fontFace;
+    let fontFamily = options.Font.fontFace;
     return { fontFamily }
   }
 
   renderStyle() {
     let options = this.props.options;
-    let styleMetrics = options.styleMetrics;
-    let textWidth = options.canvas.textWidth;
+    let styleMetrics = options.Font.styleMetrics;
+    let textWidth = options.Text.textWidth;
+    let maxTextWidth = options.AspectRatio.canvas.maxTextWidth;
 
     let style = [];
     for (let tag in styleMetrics) {
@@ -147,13 +148,13 @@ export default class TextOverlay extends React.Component {
         font-size: ${metrics.fontSize}px;
         margin-bottom: ${metrics.marginBottom}px;
         line-height: ${metrics.lineHeight}px;
-        color: ${this.props.options.fontColor}
+        color: ${this.props.options.Font.fontColor}
       }`;
 
       style.push(`#text-overlay ${tag} ${s}`);
     }
 
-    style.push(`#text-overlay { width: ${textWidth}px; }`);
+    style.push(`#text-overlay { width: ${maxTextWidth * (textWidth / 100)}px; }`);
 
     let textPos = this.state.textPos;
     style.push(`.text-overlay-container { top: ${textPos.top}; left: ${textPos.left} }`);

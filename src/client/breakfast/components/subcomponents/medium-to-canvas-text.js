@@ -19,10 +19,10 @@ export default class MediumToCanvasText {
     this.$textString = $(textString);
 
     this.opts = opts;
-    this.canvasPadding = this.opts.canvas.canvasPadding;
-    this.textWidth = this.opts.canvas.textWidth;
+    this.canvasPadding = this.opts.AspectRatio.canvas.canvasPadding;
+    this.textWidth = (this.opts.AspectRatio.canvas.maxTextWidth) * (this.opts.Text.textWidth / 100);
     this.fontSizeMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
-    this.textPos = assign({}, this.opts.textPos);
+    this.textPos = assign({}, this.opts.Text.textPos);
 
     this.listPadding = 40;
   }
@@ -31,19 +31,21 @@ export default class MediumToCanvasText {
     let lookupTagName = tagName;
     if (lookupTagName === 'li') lookupTagName = 'p';
 
-    let styleMetrics = this.opts.styleMetrics[lookupTagName];
+    let styleMetrics = this.opts.Font.styleMetrics[lookupTagName];
 
     let fontWeight = 'normal';
     if (tagName === 'h1' || tagName === 'h2') fontWeight = 'bold';
 
     let textWidth = this.textWidth,
-      fontSize = styleMetrics.fontSize * this.fontSizeMultiplier,
+      fontSize = styleMetrics.fontSize,
       lineHeight = styleMetrics.lineHeight,
       marginBottom = styleMetrics.marginBottom;
 
+    textWidth *= .8;
+
     if (tagName === 'li') textWidth -= this.listPadding;
 
-    let fontFace = FontFace(this.opts.fontFace, '', {
+    let fontFace = FontFace(this.opts.Font.fontFace, '', {
       weight: fontWeight,
       style: 'normal' // TODO pull this from element
     });
@@ -57,7 +59,7 @@ export default class MediumToCanvasText {
       lineHeight,
       marginBottom,
       width: textWidth,
-      color: this.opts.fontColor,
+      color: this.opts.Font.fontColor,
       fontWeight,
       height: textMetrics.height,
     }

@@ -29,8 +29,8 @@ export default class FontSizeSelector {
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = OptionStore.getOptions();
-          this.showForm(options.fontSizeMultiplier);
+          let options = Store.getState();
+          this.showForm(options.Font.fontSizeMultiplier);
         }
 
         return false;
@@ -98,7 +98,7 @@ export default class FontSizeSelector {
           close = doc.createElement('a'),
           save = doc.createElement('a'),
           option,
-          options = OptionStore.getOptions();
+          options = Store.getState();
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
@@ -111,7 +111,7 @@ export default class FontSizeSelector {
         input.setAttribute('min', 1);
         input.setAttribute('max', 33);
         input.setAttribute('step', 1);
-        input.setAttribute('value', options.fontSizeMultiplier * 11);
+        input.setAttribute('value', options.Font.fontSizeMultiplier * 11);
 
         input.className = 'medium-editor-toolbar-input-range';
         input.id = 'font-size';
