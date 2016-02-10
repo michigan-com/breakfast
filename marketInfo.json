@@ -786,6 +786,8 @@
   "Sioux Falls": {
     "domain": "argusleader.com",
     "logo": [{
+      "filename": "siouxfalls-small-dark.png"
+    }, {
       "filename": "siouxfalls-dark.png"
     }, {
       "filename": "siouxfalls-light.png"
