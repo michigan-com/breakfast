@@ -29,14 +29,14 @@ function registerRoutes(app) {
 
   router.get('/breakfast/',
     loginRequired,
-    function(req, res) {
+    function(req, res, next) {
+      console.log(res.locals);
       res.render('breakfast');
     }
   );
 
   app.use('/', router);
 }
-
 
 module.exports = {
   registerRoutes
