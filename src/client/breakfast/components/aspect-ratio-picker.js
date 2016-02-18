@@ -17,7 +17,7 @@ export default class AspectRatioPicker extends React.Component {
 
     let height = 55;
     let style = { height: `${height}px` };
-    style.width = 50 / getAspectRatioValue(this.props.options, ratio);
+    style.width = 50 / getAspectRatioValue(this.props.options.Background, ratio);
 
     let className = `ratio-option`;
     if (ratio === this.props.currentRatio) className += ' active';

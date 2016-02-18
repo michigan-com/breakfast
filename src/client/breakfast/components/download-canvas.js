@@ -13,6 +13,7 @@ export default class DownloadCanvas extends React.Component {
   componentDidMount() {
     let canvas = this.refs.canvas.getCanvasNode();
     let dataUri = canvas.toDataURL();
+    console.log(dataUri.length);
 
     let downloadImage = () => {
       let a = document.createElement('a');

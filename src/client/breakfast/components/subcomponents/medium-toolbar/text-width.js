@@ -8,7 +8,7 @@ import { textWidthChange } from '../../../actions/text';
 export default class TextWidthSelector {
   constructor() {
 
-    let maxTextWidth = Store.getState().AspectRatio.canvas.maxTextWidth;
+    let maxTextWidth = Store.getState().Background.canvas.maxTextWidth;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.extension = MediumEditor.extensions.form.extend({

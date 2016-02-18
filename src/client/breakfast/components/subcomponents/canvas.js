@@ -25,26 +25,14 @@ export default class Canvas extends React.Component {
     // window.onresize = () => {
     //   this.setState({ windowChange: true});
     // }
-
-    this.state = {
-      backgroundType: this.props.options.Background.backgroundType
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let newState = {
-      backgroundType: nextProps.options.Background.backgroundType
-    };
-
-    this.setState(newState);
   }
 
   getCanvasStyle() {
-    let canvas = this.props.options.AspectRatio.canvas;
+    let canvas = this.props.options.Background.canvas;
     let windowWidth = window.innerWidth;
     let cutoff = 1200; // The cutoff at which we begin calculating the width
     let canvasWidth = canvas.canvasWidth;
-    let canvasHeight = canvasWidth * this.props.options.AspectRatio.aspectRatioValue;
+    let canvasHeight = canvasWidth * this.props.options.Background.aspectRatioValue;
 
     return {
       width: canvasWidth,
@@ -55,7 +43,7 @@ export default class Canvas extends React.Component {
 
   getAttributionStyle() {
     let options = this.props.options;
-    let canvas = options.AspectRatio.canvas;
+    let canvas = options.Background.canvas;
     let attribution = options.Attribution.attribution;
     let canvasStyle = this.getCanvasStyle();
 
@@ -152,7 +140,7 @@ export default class Canvas extends React.Component {
 
     let top = 0;
     let left = 0;
-    let padding = options.AspectRatio.canvas.canvasPadding;
+    let padding = options.Background.canvas.canvasPadding;
     switch (/^bottom/.test(options.Logo.logoLocation)) {
       case false:
         top = padding;
@@ -194,6 +182,7 @@ export default class Canvas extends React.Component {
           y: 0
         }
       };
+      console.log(this.props.options.Background.backgroundImg.src);
       backgroundObj = (
         <CanvasImage style={ backgroundStyle } src={ this.props.options.Background.backgroundImg.src } options={ options }/>
       )
@@ -264,7 +253,6 @@ export default class Canvas extends React.Component {
 
   render() {
     let canvasStyle = this.getCanvasStyle();
-
     return (
       <Surface className='quote'
           width={ canvasStyle.width }

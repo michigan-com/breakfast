@@ -18,7 +18,7 @@ export const getDefaultAspectRatioValue = () => {
   return getAspectRatioValue({}, defaultAspectRatio);
 }
 
-export const getAspectRatioValue = (state, aspectRatio) => {
+export const getAspectRatioValue = (backgroundState, aspectRatio) => {
   switch (aspectRatio) {
     case SIXTEEN_NINE:
       return 9/16;
@@ -30,8 +30,8 @@ export const getAspectRatioValue = (state, aspectRatio) => {
       return 0.370153;
     case FIT_IMAGE:
       // Only deal with this aspect ratio if we've loaded an image up
-      if (state.backgroundType === BACKGROUND_IMAGE) {
-        let backgroundImg = state.backgroundImg;
+      if (backgroundState.backgroundType === BACKGROUND_IMAGE) {
+        let backgroundImg = backgroundState.backgroundImg;
         return backgroundImg.height / backgroundImg.width;
       }
   }

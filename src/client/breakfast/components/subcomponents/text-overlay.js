@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ReactCanvas from 'react-canvas';
 import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
@@ -12,10 +11,6 @@ import FontSizeSelector from './medium-toolbar/font-size';
 import FontColorSelector from './medium-toolbar/font-color';
 import TextWidthSelector from './medium-toolbar/text-width';
 import MediumToCanvasText from './medium-to-canvas-text';
-
-var Text = ReactCanvas.Text;
-var measureText = ReactCanvas.measureText;
-var FontFace = ReactCanvas.FontFace;
 
 export default class TextOverlay extends React.Component {
   constructor(props) {
@@ -141,8 +136,8 @@ export default class TextOverlay extends React.Component {
     let options = this.props.options;
     let styleMetrics = options.Font.styleMetrics;
     let textWidth = options.Text.textWidth;
-    let maxTextWidth = options.AspectRatio.canvas.maxTextWidth;
-    let canvasPadding = options.AspectRatio.canvas.canvasPadding;
+    let maxTextWidth = options.Background.canvas.maxTextWidth;
+    let canvasPadding = options.Background.canvas.canvasPadding;
 
     let style = [];
     for (let tag in styleMetrics) {

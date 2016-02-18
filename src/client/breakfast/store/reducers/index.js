@@ -9,4 +9,4 @@ import Font from './font';
 import Logo from './logo';
 import Text from './text';
 
-export default { AspectRatio, Attribution, Background, Font, Logo, Text }
+export default { Attribution, Background, Font, Logo, Text }

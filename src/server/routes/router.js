@@ -29,8 +29,7 @@ function registerRoutes(app) {
 
   router.get('/breakfast/',
     loginRequired,
-    function(req, res, next) {
-      console.log(res.locals);
+    (req, res, next) => {
       res.render('breakfast');
     }
   );

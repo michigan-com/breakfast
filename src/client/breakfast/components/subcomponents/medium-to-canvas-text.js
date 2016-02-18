@@ -19,8 +19,8 @@ export default class MediumToCanvasText {
     this.$textString = $(textString);
 
     this.opts = opts;
-    this.canvasPadding = this.opts.AspectRatio.canvas.canvasPadding;
-    this.textWidth = (this.opts.AspectRatio.canvas.maxTextWidth) * (this.opts.Text.textWidth / 100);
+    this.canvasPadding = this.opts.Background.canvas.canvasPadding;
+    this.textWidth = (this.opts.Background.canvas.maxTextWidth) * (this.opts.Text.textWidth / 100);
     this.fontSizeMultiplier = 3/4; // 17px in the DOM -> 20px in canvas. Need to normalize
     this.textPos = assign({}, this.opts.Text.textPos);
 
