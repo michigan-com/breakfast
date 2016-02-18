@@ -93,9 +93,9 @@
     ],
     "isSvg": true,
     "noColor": false,
-    "width": "720",
+    "width": "770",
     "height": "80",
-    "aspectRatio": 9
+    "aspectRatio": 9.625
   },
   "blackmountainnews.svg": {
     "name": "blackmountainnews.svg",

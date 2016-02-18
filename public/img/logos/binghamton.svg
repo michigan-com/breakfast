@@ -1,6 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="720" height="80" viewBox="0 0 720 80">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="770" height="80" viewBox="0 0 770 80">
   <defs>
     <style>
+      path {
+        stroke: none !important;
+      }
       @font-face {
         font-family: 'Futura Today';
         src: url('../../fonts/FuturaToday/FuturaTodayNormal.otf');

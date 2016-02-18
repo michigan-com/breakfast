@@ -56,14 +56,10 @@ class LogoFetch {
     $('g:not(.no-color-change)').attr('style', 'filter: none;');
 
     $('path, text, circle').each(function(index, obj) {
-      if ($(obj).attr('id') === 'USAT_Network') {
-        $(obj).attr('style', 'filter: none; stroke: #999; fill: #999;');
-        return;
-      }
-      else if ($(obj).hasClass('no-color-change')) return;
+      if ($(obj).hasClass('no-color-change')) return;
       else if ($(obj).parents('defs').length) return;
 
-      let style = `stroke: #${color}; filter: none;`;
+      let style = `filter: none;`;
       if ($(obj).get(0).tagName !== 'circle') style += `fill: #${color};`
 
       $(obj).attr('style', style);
