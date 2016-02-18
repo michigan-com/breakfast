@@ -5,6 +5,7 @@ function loginRequired(req, res, next) {
     req.flash('error', 'You need to login to see this page');
     res.redirect('/login/');
   } else {
+    res.locals.user = req.user;
     next();
   }
 }
