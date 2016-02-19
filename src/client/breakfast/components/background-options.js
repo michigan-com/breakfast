@@ -27,7 +27,7 @@ export default class BackgroundOptions extends React.Component {
     let option = o;
     return () => {
       let currentOptions = this.props.options;
-      if (option === BACKGROUND_IMAGE && !currentOptions.Background.backgroundImg.src) {
+      if (option === BACKGROUND_IMAGE && !currentOptions.Background.backgroundImg.img) {
         this.triggerFileUpload();
         return;
       }
@@ -70,10 +70,10 @@ export default class BackgroundOptions extends React.Component {
     let options = this.props.options;
 
     // If we already uploaded a file...
-    if (options.Background.backgroundImg.src) {
+    if (!!options.Background.backgroundImg.img) {
       return (
         <div className='background-image'>
-          <img src={ options.Background.backgroundImg.src } onClick={ this.backgroundTypeCallback(BACKGROUND_IMAGE) }/>
+          <img src={ options.Background.backgroundImg.img.src } onClick={ this.backgroundTypeCallback(BACKGROUND_IMAGE) }/>
           <div onClick={ () => { Store.dispatch(removeBackgroundImage())} } className='remove-image'><i className='fa fa-times-circle'></i></div>
         </div>
       )

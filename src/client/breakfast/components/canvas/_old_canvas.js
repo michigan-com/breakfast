@@ -27,19 +27,6 @@ export default class Canvas extends React.Component {
     // }
   }
 
-  getCanvasStyle() {
-    let canvas = this.props.options.Background.canvas;
-    let windowWidth = window.innerWidth;
-    let cutoff = 1200; // The cutoff at which we begin calculating the width
-    let canvasWidth = canvas.canvasWidth;
-    let canvasHeight = canvasWidth * this.props.options.Background.aspectRatioValue;
-
-    return {
-      width: canvasWidth,
-      height: canvasHeight,
-      maxTextWidth: canvas.maxTextWidth,
-    }
-  }
 
   getAttributionStyle() {
     let options = this.props.options;

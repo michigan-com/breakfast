@@ -3,7 +3,7 @@
 import React from 'react';
 
 import TextOverlay from './subcomponents/text-overlay';
-import Canvas from './subcomponents/canvas';
+import Canvas from './canvas';
 import { Select } from '../../util/components';
 
 export default class EditingCanvas extends React.Component {

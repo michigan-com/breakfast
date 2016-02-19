@@ -28,6 +28,30 @@ export function backgroundColorChange(color) {
 }
 
 /**
+ * Given the current aspect ratio of the canvas, and a background image, calculate
+ * metrics that will be used in the context.drawImage() api
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+ *
+ * @param {Object} state - current state from reducer/background.js
+ * @param {Object} img - HTML Image object, uploaded by user
+ */
+export function getDrawImageMetrics(state, img) {
+  let imgAspectRatio = img.width / img.height;
+  let canvasAspectRatio = state.canvas.aspectRatio;
+
+  // The image is wider than the canvas, so fix the height
+  if (imgAspectRatio > canvasAspectRatio) {
+
+  }
+
+  // The image is taller than the canvas, so fix the width
+  else {
+
+  }
+}
+
+/**
  * Read a file using FileReader, and pass it along to the dispatcher
  *
  * @param {Object} file - File object from an <input type='file'
@@ -41,7 +65,7 @@ export function backgroundImageUpload(file) {
       var img = new Image();
       img.onload = () => {
         dispatch(backgroundImageChange({
-          src: reader.result,
+          img,
           width: img.width,
           height: img.height
         }));

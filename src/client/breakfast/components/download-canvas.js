@@ -3,7 +3,7 @@
 import React from 'react';
 import xr from 'xr';
 
-import Canvas from './subcomponents/canvas';
+import Canvas from './canvas';
 
 /**
  * Used to draw the canvas then download it
