@@ -52,7 +52,9 @@ class LogoFetch {
   }
 
   colorLogo(data, color) {
-    let $ = cheerio.load(data);
+    let $ = cheerio.load(data, {
+      xmlMode: true,
+    });
     $('g:not(.no-color-change)').attr('style', 'filter: none;');
 
     $('path, text, circle').each(function(index, obj) {
@@ -68,10 +70,7 @@ class LogoFetch {
     // Remove filters? Idk what they do but they mess stuff up
     $('filter').remove();
 
-    // UGH
-    // Cherrio looks like it .toLowerCase()-ifies the tag names
-    // This is a problem when tags are camelcase
-    return $.html().replace(/clippath/g, 'clipPath');
+    return $.html();
   }
 
   /**
