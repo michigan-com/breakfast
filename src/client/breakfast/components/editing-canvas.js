@@ -17,7 +17,8 @@ export default class EditingCanvas extends React.Component {
     let options = this.props.options;
 
     let style = {
-      width: options.Background.canvas.canvasWidth
+      width: options.Background.canvas.canvasWidth,
+      height: options.Background.canvas.canvasHeight
     }
 
     return (

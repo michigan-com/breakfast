@@ -17,13 +17,21 @@ export default function backgroundReducer(state=DEFAULT_STATE, action) {
       let backgroundColor = action.value;
       return assign({}, state, { backgroundColor, backgroundType: BACKGROUND_COLOR });
     case BACKGROUND_IMAGE_CHANGE:
-      let drawImageMetrics = getDrawImageMetrics(state, action.value);
-      return assign({}, state, { backgroundImg: action.value, backgroundType: BACKGROUND_IMAGE });
+      let drawImageMetrics = getDrawImageMetrics(state.canvas, action.value);
+      return assign({}, state, {
+        backgroundImg: action.value,
+        backgroundType: BACKGROUND_IMAGE,
+        drawImageMetrics
+      });
     case BACKGROUND_IMAGE_UPLOAD:
     case BACKGROUND_IMAGE_LOADING:
       return assign({}, state, { backgroundType: BACKGROUND_LOADING });
     case REMOVE_BACKGROUND_IMAGE:
-      return assign({}, state, { backgroundImg: assign({}, DEFAULT_BACKGROUND_IMAGE), backgroundType: BACKGROUND_COLOR });
+      return assign({}, state, {
+        backgroundImg: assign({}, DEFAULT_BACKGROUND_IMAGE),
+        backgroundType: BACKGROUND_COLOR,
+        drawImageMetrics: {}
+      });
     case BACKGROUND_TYPE_CHANGE:
       if (BACKGROUND_TYPES.indexOf(action.value) >= 0) {
         return assign({}, state, { backgroundType: action.value });
@@ -33,7 +41,13 @@ export default function backgroundReducer(state=DEFAULT_STATE, action) {
       let aspectRatioValue = getAspectRatioValue(state, aspectRatio);
       if (ASPECT_RATIOS.indexOf(aspectRatio) >= 0) {
         let canvas = getCanvasMetrics(state, aspectRatio);
-        return assign({}, state, { aspectRatio, aspectRatioValue, canvas });
+        let drawImageMetrics = getDrawImageMetrics(canvas, state.backgroundImg);
+        return assign({}, state, {
+          aspectRatio,
+          aspectRatioValue,
+          canvas,
+          drawImageMetrics
+        });
       }
   }
   return state;

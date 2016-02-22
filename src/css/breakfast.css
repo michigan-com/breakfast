@@ -127,7 +127,6 @@ input[type=text] {
 .image {
   margin: 0 auto;
   position: relative;
-  /*overflow: hidden;*/
 
   &:hover, &:active, &:focus {
     .move-text {
@@ -140,6 +139,8 @@ input[type=text] {
   }
 
   canvas {
+    transform: scale(.5); /* Taking a trick from lunchbox */
+    transform-origin: top left;
     border: 1px solid black;
     z-index: $canvas-z-index;
   }

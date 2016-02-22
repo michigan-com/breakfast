@@ -23,6 +23,8 @@ export default class Canvas extends React.Component {
     let canvasStyle = this.getCanvasStyle();
     let context = this.getCanvasContext();
     let options = this.props.options;
+
+    context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
     updateBackground(context, canvasStyle, options.Background);
     //updateLogo();
     //updateAttribution();
@@ -32,15 +34,16 @@ export default class Canvas extends React.Component {
     let canvas = this.props.options.Background.canvas;
 
     return {
-      width: canvas.canvasWidth,
-      height: canvas.canvasHeight,
+      width: canvas.canvasWidth * 2,
+      height: canvas.canvasHeight * 2,
       maxTextWidth: canvas.maxTextWidth,
     }
   }
 
   render() {
+    let style = this.getCanvasStyle();
     return (
-      <canvas style={ this.getCanvasStyle() } ref='canvas'/>
+      <canvas width={ style.width } height={ style.height } ref='canvas'/>
     )
   }
 }

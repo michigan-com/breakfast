@@ -84,8 +84,10 @@ class PicEditor extends React.Component {
 }
 
 function renderBreakfast() {
+  let state = Store.getState();
+  console.log(state);
   ReactDOM.render(
-    <PicEditor options={ Store.getState() }/>,
+    <PicEditor options={ state }/>,
     document.getElementById('editor')
   )
 }

@@ -21,18 +21,22 @@ export const getDefaultAspectRatioValue = () => {
 export const getAspectRatioValue = (backgroundState, aspectRatio) => {
   switch (aspectRatio) {
     case SIXTEEN_NINE:
-      return 9/16;
+      //return 9/16;
+      return 16/9;
     case TWO_ONE:
-      return 1/2;
+      //return 1/2;
+      return 2/1;
     case FACEBOOK:
-      return 1/1.911;
+      //return 1/1.911;
+      return 1.911 / 1;
     case FACEBOOK_COVER:
-      return 0.370153;
+      //return 0.370153;
+      return 1 / 0.370153;
     case FIT_IMAGE:
       // Only deal with this aspect ratio if we've loaded an image up
       if (backgroundState.backgroundType === BACKGROUND_IMAGE) {
         let backgroundImg = backgroundState.backgroundImg;
-        return backgroundImg.height / backgroundImg.width;
+        return backgroundImg.width / backgroundImg.height;
       }
   }
   return 1;
@@ -66,14 +70,14 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
 
   let canvasPadding = canvasWidth / 26;
   let maxTextWidth = canvasWidth - (canvasPadding * 2);
-  let aspectRatio = getAspectRatioValue(state, aspectRatio);
-  let canvasHeight = canvasWidth / aspectRatio;
+  let aspectRatioVal = getAspectRatioValue(state, aspectRatio);
+  let canvasHeight = canvasWidth / aspectRatioVal;
 
   return {
     canvasWidth,
     canvasHeight,
     canvasPadding,
-    aspectRatio,
+    aspectRatio: aspectRatioVal,
     maxTextWidth
   }
 }
