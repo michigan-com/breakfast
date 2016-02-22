@@ -36,7 +36,7 @@ class PicEditor extends React.Component {
     this.setState({ downloading: true });
 
     let doneDownloading = () => {
-      document.getElementById('download-canvas').innerHTML = null;
+      //document.getElementById('download-canvas').innerHTML = null;
       this.setState({ downloading: false });
     }
 

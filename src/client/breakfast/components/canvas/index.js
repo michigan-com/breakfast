@@ -7,12 +7,17 @@ import { BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../../actions/background';
 
 import updateBackground from './background';
 import updateLogo from './logo';
+import updateAttribution from './attribution';
 
 export default class Canvas extends React.Component {
   componentDidMount() { this.updateCanvas() }
   componentDidUpdate() {
     // TODO - figure out if we need to clear out the old canvas
     this.updateCanvas()
+  }
+
+  getCanvasNode() {
+    return findDOMNode(this.refs.canvas);
   }
 
   getCanvasContext() {
@@ -25,10 +30,12 @@ export default class Canvas extends React.Component {
     let context = this.getCanvasContext();
     let options = this.props.options;
 
+    // Clear out and re-draw
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
+
     updateBackground(context, canvasStyle, options.Background);
     updateLogo(context, canvasStyle, options.Logo);
-    //updateAttribution();
+    updateAttribution(context, canvasStyle, options.Attribution, options.Font);
   }
 
   // We double the actual size of the canvas to render images, but scale down
