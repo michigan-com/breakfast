@@ -6,6 +6,7 @@ import { findDOMNode } from 'react-dom';
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../../actions/background';
 
 import updateBackground from './background';
+import updateLogo from './logo';
 
 export default class Canvas extends React.Component {
   componentDidMount() { this.updateCanvas() }
@@ -26,17 +27,21 @@ export default class Canvas extends React.Component {
 
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
     updateBackground(context, canvasStyle, options.Background);
-    //updateLogo();
+    updateLogo(context, canvasStyle, options.Logo);
     //updateAttribution();
   }
 
+  // We double the actual size of the canvas to render images, but scale down
+  // the size using CSS transform. So the actual size of the canvas is double
+  // what we have stored in the store
   getCanvasStyle() {
     let canvas = this.props.options.Background.canvas;
 
     return {
       width: canvas.canvasWidth * 2,
       height: canvas.canvasHeight * 2,
-      maxTextWidth: canvas.maxTextWidth,
+      padding: canvas.canvasPadding * 2,
+      maxTextWidth: canvas.maxTextWidth * 2,
     }
   }
 

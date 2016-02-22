@@ -21,7 +21,9 @@ export default function updateBackground(context, canvasOptions, backgroundOptio
     case BACKGROUND_IMAGE:
       let img = backgroundOptions.backgroundImg.img;
       let metrics = backgroundOptions.drawImageMetrics;
-      context.drawImage(img, 0, 0, img.width, img.height, metrics.dx, metrics.dy, metrics.dWidth, metrics.dHeight);
+      context.drawImage(img,
+                        metrics.sx, metrics.sy, metrics.sWidth, metrics.sHeight,
+                        0, 0, canvasOptions.width, canvasOptions.height);
       break;
   }
 }

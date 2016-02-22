@@ -7,18 +7,19 @@ import { LOGO_CHANGE, LOGO_COLOR_CHANGE, LOGO_LOCATION_CHANGE,
   LOGO_ASPECT_RATIO_FOUND } from '../../actions/logo';
 
 export default function logoReducer(state=DEFAULT_LOGO_STATE, action) {
-  let logoIndex, aspectRatio, logoOptions;
+  let logoIndex, aspectRatio, logoOptions, logo;
   switch (action.type) {
     case LOGO_COLOR_CHANGE:
-      let logoColor = action.value;
-      return assign({}, state, { logoColor });
+      let logoColor = action.value.logoColor;
+      let logo = action.value.logo;
+      return assign({}, state, { logo, logoColor });
     case LOGO_LOCATION_CHANGE:
       let logoLocation = action.value;
       return assign({}, state, { logoLocation });
     case LOGO_CHANGE:
-      logoIndex = action.value;
-      if (logoIndex < 0 || logoIndex >= state.logoOptions.length) return state;
-      return assign({}, state, { logoIndex });
+      logo = action.value.logo;
+      logoIndex = action.value.logoIndex;
+      return assign({}, state, { logo, logoIndex });
     case LOGO_ASPECT_RATIO_FOUND:
       logoIndex = action.value.logoIndex;
       aspectRatio = action.value.logoAspectRatio
@@ -30,29 +31,12 @@ export default function logoReducer(state=DEFAULT_LOGO_STATE, action) {
 
     case LOGOS_LOADED:
       logoOptions = [];
-      let logoInfo = action.value;
-      for (let filename in logoInfo) {
-        let logo = logoInfo[filename];
-        logoOptions.push(assign({}, DEFAULT_LOGO, {
-          name: logo.name,
-          aspectRatio: logo.aspectRatio || null, // Get aspect ratio downstream
-          noColor: logo.isSvg ? logo.noColor : true,
-          filename
-        }));
-      }
-
-      // Sort alphabetically, except put AP last
-      logoOptions.sort((a, b) => {
-        if (a.name === 'AP.png' || a.name > b.name) return 1;
-        else if (b.name === 'AP.png' || a.name < b.name) return -1;
-
-        return 0;
-      });
-
+      let logoOptions = action.value.logos;
+      logo = action.value.logo;
       let logoIndex = null;
-      if (logoOptions.length) logoIndex = 0;
 
-      return assign({}, state, { logoIndex, logoOptions })
+      if (logoOptions.length) logoIndex = 0;
+      return assign({}, state, { logo, logoIndex, logoOptions })
   }
 
   return state;

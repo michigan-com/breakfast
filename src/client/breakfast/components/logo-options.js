@@ -1,5 +1,6 @@
 'use strict';
 
+import assign from 'object-assign';
 import React from 'react';
 
 import Store from '../store';
@@ -15,22 +16,23 @@ export default class LogoOptions extends React.Component {
   }
 
   logoChanged = (logoInfo, index) => {
-    Store.dispatch(logoChange(index));
+    Store.dispatch(logoChange(logoInfo, index, this.props.options.Logo.logoColor));
   }
 
   logoColorChange = (c) => {
-    let color;
+    let logoColor;
     switch (c) {
       case 'black':
-        color = '#000';
+        logoColor = '#000';
         break;
       case 'white':
-        color = '#fff';
+        logoColor = '#fff';
         break;
     }
 
     return () => {
-      Store.dispatch(logoColorChange(color));
+      let logo = this.props.options.Logo.logo;
+      Store.dispatch(logoColorChange(logo, logoColor));
     }
   }
 
@@ -77,7 +79,7 @@ export default class LogoOptions extends React.Component {
     let logoIndex = options.Logo.logoIndex;
     if (logoIndex === null) return;
 
-    let currentLogo = options.Logo.logoOptions[logoIndex];
+    let currentLogo = options.Logo.logo;
     let goodLogoCheck = /\.svg$/;
 
     if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {

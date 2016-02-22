@@ -46,34 +46,25 @@ export function getDrawImageMetrics(canvas, img) {
   let canvasHeight = canvas.canvasHeight * 2;
   let canvasWidth = canvas.canvasWidth * 2;
 
-  let dx, dy, dWidth, dHeight;
+  let sx, sy, sWidth, sHeight;
 
-  // The image is wider than the canvas, so fix the height
+  // Always init to this for simplicity
+  sx = 0;
+  sy = 0;
+
+  // Image is wider than the canvas, so fix the height
   if (imgAspectRatio > canvasAspectRatio) {
-
-    // Center the canvas on the image
-    let remainingWidth = canvasWidth - (canvasWidth * canvasAspectRatio / imgAspectRatio);
-    dx = remainingWidth / -2;
-    dy = 0;
-    dHeight = canvasHeight;
-    //dWidth = canvasHeight * imgAspectRatio;
-    dWidth = canvasWidth;
+    sHeight = img.height;
+    sWidth = img.height * canvasApectRatio;
   }
 
-  // The image is taller than the canvas, so fix the width
+  // Image is skinnier than the canvas, so fix the width
   else {
-
-    // Center the canvas on the image
-    let remainingHeight = canvasHeight - (canvasHeight * imgAspectRatio / canvasAspectRatio);
-    dy = remainingHeight / -2;
-    dx = 0;
-    //dHeight = canvasWidth / imgAspectRatio;
-    dHeight = canvasHeight;
-    dWidth = canvasWidth;
+    sWidth = img.width;
+    sHeight = img.width / canvasAspectRatio;
   }
 
-  dy = 0, dx = 0;
-  return { dx, dy, dWidth, dHeight };
+  return { sx, sy, sWidth, sHeight };
 }
 
 /**
