@@ -9,6 +9,7 @@ import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING, backgroundColor
   backgroundTypeChange, removeBackgroundImage, backgroundImageUpload } from '../actions/background';
 import { attributionChange, attributionColorChange, attributionLocationChange } from '../actions/attribution';
 import CornerPicker from './subcomponents/corner-picker';
+import BackgroundPosition from './subcomponents/background-position';
 
 export default class BackgroundOptions extends React.Component {
 
@@ -73,7 +74,7 @@ export default class BackgroundOptions extends React.Component {
     if (!!options.Background.backgroundImg.img) {
       return (
         <div className='background-image'>
-          <img src={ options.Background.backgroundImg.img.src } onClick={ this.backgroundTypeCallback(BACKGROUND_IMAGE) }/>
+          <BackgroundPosition options={ options }/>
           <div onClick={ () => { Store.dispatch(removeBackgroundImage())} } className='remove-image'><i className='fa fa-times-circle'></i></div>
         </div>
       )

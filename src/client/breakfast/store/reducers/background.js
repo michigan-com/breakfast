@@ -5,7 +5,8 @@ import assign from 'object-assign';
 import { BACKGROUND_COLOR_CHANGE, BACKGROUND_IMAGE_CHANGE, BACKGROUND_IMAGE_LOADING,
   REMOVE_BACKGROUND_IMAGE, BACKGROUND_TYPE_CHANGE, DEFAULT_BACKGROUND_IMAGE,
   BACKGROUND_TYPES, BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING,
-  DEFAULT_BACKGROUND, BACKGROUND_IMAGE_UPLOAD, getDrawImageMetrics } from '../../actions/background';
+  DEFAULT_BACKGROUND, BACKGROUND_IMAGE_UPLOAD, BACKGROUND_SX_CHANGE,
+  BACKGROUND_SY_CHANGE, getDrawImageMetrics } from '../../actions/background';
 import { ASPECT_RATIO_CHANGE, ASPECT_RATIOS, getAspectRatioValue,
   DEFAULT_ASPECT_RATIO, getCanvasMetrics } from '../../actions/aspect-ratio';
 
@@ -36,6 +37,7 @@ export default function backgroundReducer(state=DEFAULT_STATE, action) {
       if (BACKGROUND_TYPES.indexOf(action.value) >= 0) {
         return assign({}, state, { backgroundType: action.value });
       }
+      break;
     case ASPECT_RATIO_CHANGE:
       let aspectRatio = action.value;
       let aspectRatioValue = getAspectRatioValue(state, aspectRatio);
@@ -49,6 +51,21 @@ export default function backgroundReducer(state=DEFAULT_STATE, action) {
           drawImageMetrics
         });
       }
+      break;
+    case BACKGROUND_SX_CHANGE:
+      let sx = action.value;
+      if (state.drawImageMetrics != null && sx >= 0 && sx < state.drawImageMetrics.maxSx) {
+        let drawImageMetrics = assign({}, state.drawImageMetrics, { sx });
+        return assign({}, state, { drawImageMetrics })
+      }
+      break;
+    case BACKGROUND_SY_CHANGE:
+      let sy = action.value;
+      if (state.drawImageMetrics != null && sy >= 0 && sy < state.drawImageMetrics.maxSy) {
+        let drawImageMetrics = assign({}, state.drawImageMetrics, { sy });
+        return assign({}, state, { drawImageMetrics })
+      }
+      break;
   }
   return state;
 }

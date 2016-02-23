@@ -106,18 +106,22 @@ export default class TextOverlay extends React.Component {
 
   trackMouseMovement = () => {
     document.body.addEventListener('mousemove', this.mouseMove);
-    document.body.addEventListener('touchmove', this.mouseMove);
+    // TODO
+    //document.body.addEventListener('touchmove', this.mouseMove);
 
     document.body.addEventListener('mouseup', this.mouseUp);
-    document.body.addEventListener('touchend', this.mouseUp);
+    // TODO
+    //document.body.addEventListener('touchend', this.mouseUp);
   }
 
   stopTrackingMouseMovement = () => {
     document.body.removeEventListener('mousemove', this.mouseMove);
-    document.body.removeEventListener('touchmove', this.mouseMove);
+    // TODO
+    //document.body.removeEventListener('touchmove', this.mouseMove);
 
     document.body.removeEventListener('mouseup', this.mouseUp);
-    document.body.removeEventListener('touchend', this.mouseUp);
+    // TODO
+    //document.body.removeEventListener('touchend', this.mouseUp);
   }
 
   /** End Mouse events */

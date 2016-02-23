@@ -8,6 +8,8 @@ export const REMOVE_BACKGROUND_IMAGE = 'REMOVE_BACKGROUND_IMAGE';
 export const BACKGROUND_TYPE_CHANGE = 'BACKGROUND_TYPE_CHANGE';
 export const BACKGROUND_IMAGE_CHANGE = 'BACKGROUND_IMAGE_CHANGE';
 export const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
+export const BACKGROUND_SX_CHANGE = 'BACKGROUND_SX_CHANGE';
+export const BACKGROUND_SY_CHANGE = 'BACKGROUND_SY_CHANGE';
 
 export const BACKGROUND_COLOR = 'color';
 export const BACKGROUND_IMAGE = 'image';
@@ -46,7 +48,7 @@ export function getDrawImageMetrics(canvas, img) {
   let canvasHeight = canvas.canvasHeight;
   let canvasWidth = canvas.canvasWidth;
 
-  let sx, sy, sWidth, sHeight;
+  let sx, sy, sWidth, sHeight, maxSx, maxSy;
 
   // Always init to this for simplicity
   sx = 0;
@@ -55,16 +57,20 @@ export function getDrawImageMetrics(canvas, img) {
   // Image is wider than the canvas, so fix the height
   if (imgAspectRatio > canvasAspectRatio) {
     sHeight = img.height;
-    sWidth = img.height * canvasApectRatio;
+    sWidth = img.height * canvasAspectRatio;
+    maxSy = 0;
+    maxSx = img.width - sWidth;
   }
 
   // Image is skinnier than the canvas, so fix the width
   else {
     sWidth = img.width;
     sHeight = img.width / canvasAspectRatio;
+    maxSx = 0;
+    maxSy = img.height - sHeight;
   }
 
-  return { sx, sy, sWidth, sHeight };
+  return { sx, sy, sWidth, sHeight, maxSx, maxSy};
 }
 
 /**
@@ -117,6 +123,20 @@ export function backgroundTypeChange(backgroundType) {
   return {
     type: BACKGROUND_TYPE_CHANGE,
     value: backgroundType
+  }
+}
+
+export function updateBackgroundSx(newSx) {
+  return {
+    type: BACKGROUND_SX_CHANGE,
+    value: newSx
+  }
+}
+
+export function updateBackgroundSy(newSy) {
+  return {
+    type: BACKGROUND_SY_CHANGE,
+    value: newSy
   }
 }
 
