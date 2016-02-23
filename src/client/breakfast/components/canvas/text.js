@@ -2,7 +2,6 @@
 
 import $ from '../../util/$';
 
-
 const possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3', 'br'];
 
 /**
@@ -50,10 +49,10 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
         let bulletTextWidth = textWidth - textX + canvasPadding;
 
         context.fillText(bullet, bulletX, y);
-        y = fillAllText(context, el, textX, y, bulletTextWidth, styleMetrics.lineHeight);
+        y = fillAllText(context, el, textX, y, bulletTextWidth, styleMetrics.fontSize);
       });
     } else {
-      y = fillAllText(context, el, x, y, textWidth, styleMetrics.lineHeight);
+      y = fillAllText(context, el, x, y, textWidth, styleMetrics.fontSize);
     }
 
     y += styleMetrics.marginBottom;
