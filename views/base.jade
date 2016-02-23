@@ -21,11 +21,10 @@ body
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 if locals.user
   script.
-    ga('create', 'UA-70544408-1', 'auto', 'breakfast', { userId: '#{locals.user.email}' });
+    ga('create', 'UA-70544408-1', 'auto', { userId: '#{locals.user.email}' });
     ga('send', 'pageview')
 else
   script.
-    ga('create', 'UA-70544408-1', 'auto', 'breakfast');
-
+    ga('create', 'UA-70544408-1', 'auto');
     ga('send', 'pageview');
 
