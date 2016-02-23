@@ -8,6 +8,7 @@ import { BACKGROUND_COLOR, BACKGROUND_IMAGE } from '../../actions/background';
 import updateBackground from './background';
 import updateLogo from './logo';
 import updateAttribution from './attribution';
+import updateText from './text';
 
 export default class Canvas extends React.Component {
   componentDidMount() { this.updateCanvas() }
@@ -36,6 +37,9 @@ export default class Canvas extends React.Component {
     updateBackground(context, canvasStyle, options.Background);
     updateLogo(context, canvasStyle, options.Logo);
     updateAttribution(context, canvasStyle, options.Attribution, options.Font);
+    if (this.props.textContent) {
+      updateText(context, canvasStyle, options.Font, options.Text, this.props.textContent);
+    }
   }
 
   // We double the actual size of the canvas to render images, but scale down
@@ -45,10 +49,10 @@ export default class Canvas extends React.Component {
     let canvas = this.props.options.Background.canvas;
 
     return {
-      width: canvas.canvasWidth * 2,
-      height: canvas.canvasHeight * 2,
-      padding: canvas.canvasPadding * 2,
-      maxTextWidth: canvas.maxTextWidth * 2,
+      width: canvas.canvasWidth,
+      height: canvas.canvasHeight,
+      padding: canvas.canvasPadding,
+      maxTextWidth: canvas.maxTextWidth,
     }
   }
 

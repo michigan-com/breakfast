@@ -43,8 +43,8 @@ export function getDrawImageMetrics(canvas, img) {
   let canvasAspectRatio = canvas.aspectRatio;
 
   // the canvas is twice as big as it looks on the screen
-  let canvasHeight = canvas.canvasHeight * 2;
-  let canvasWidth = canvas.canvasWidth * 2;
+  let canvasHeight = canvas.canvasHeight;
+  let canvasWidth = canvas.canvasWidth;
 
   let sx, sy, sWidth, sHeight;
 

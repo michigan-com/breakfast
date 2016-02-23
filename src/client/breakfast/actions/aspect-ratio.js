@@ -49,6 +49,7 @@ export const getDefaultCanvasMetrics = () => {
 
 export const getCanvasMetrics = (state, aspectRatio='') => {
   // Defaults
+  // Scale up by 2
   let canvasWidth = 650;
   if (aspectRatio === SQUARE) {
     canvasWidth = 400;

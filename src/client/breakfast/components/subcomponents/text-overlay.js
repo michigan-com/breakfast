@@ -55,6 +55,9 @@ export default class TextOverlay extends React.Component {
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
+    this.editor.subscribe('editableKeyup', () => {
+      console.log(this.editor.serialize());
+    });
     this.setState({ initialized: true });
   }
 
@@ -120,10 +123,7 @@ export default class TextOverlay extends React.Component {
   /** End Mouse events */
 
   getTextContent() {
-    let text = this.editor.serialize()['text-overlay'].value;
-
-    let obj = new MediumToCanvasText(text, this.props.options);
-    return obj.getTextElements();
+    return this.editor.serialize()['text-overlay'].value;
   }
 
   getStyle() {
