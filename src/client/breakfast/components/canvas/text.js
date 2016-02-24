@@ -2,7 +2,7 @@
 
 import $ from '../../util/$';
 
-const possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3', 'br'];
+const possibleTags = ['p', 'ol', 'ul', 'h1', 'h2', 'h3', 'br', 'span'];
 
 /**
  * Draw the background based on the current background options
@@ -44,18 +44,21 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
 
       $(el).children('li').forEach((el) => {
         let bullet = bulletType === 'bullet' ? '•' : `${listCount + 1}.`;
-        let bulletX = x + (listPadding / 2);
+        let bulletLength = measureWord(context, bullet);
+        let bulletX = x + (listPadding * .75) - bulletLength;
         let textX = x + listPadding;
-        let bulletTextWidth = textWidth - textX + canvasPadding;
+        let bulletTextWidth = textWidth - listPadding;
 
         context.fillText(bullet, bulletX, y);
-        y = fillAllText(context, el, textX, y, bulletTextWidth, styleMetrics.fontSize);
+        y = fillAllText(context, el, textX, y, bulletTextWidth, styleMetrics.lineHeight);
+        y += styleMetrics.marginBottom * .93; // idk!
+        listCount += 1;
       });
     } else {
       y = fillAllText(context, el, x, y, textWidth, styleMetrics.fontSize);
+      y += styleMetrics.marginBottom;
     }
 
-    y += styleMetrics.marginBottom;
   });
 }
 
@@ -68,10 +71,10 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
  * @param {Number} x - x value to draw text at
  * @param {Number} startY - starting top
  * @param {Number} textWidth - maximum allowable width the text can span
- * @param {Number} lineHeight - so we know where to put the next line of text
+ * @param {Number} fontSize - so we know where to put the next line of text
  * @return {Number} the x coordinate of the next line
  */
-function fillAllText(context, $el, x, startY, textWidth, lineHeight) {
+function fillAllText(context, $el, x, startY, textWidth, fontSize) {
   let y = startY;
   let currentText = $el.textContent.split(' ');
   let line = '';
@@ -80,10 +83,10 @@ function fillAllText(context, $el, x, startY, textWidth, lineHeight) {
   for (let word of currentText) {
     let append = !line ? word : ` ${word}`;
     let newLineWidth = lineWidth + measureWord(context, append);
-    if (newLineWidth > textWidth) {
+    if (newLineWidth >= textWidth) {
       if (!line) line = word;
       context.fillText(line, x, y);
-      y += lineHeight;
+      y += fontSize;
 
       line = word;
       lineWidth = measureWord(context, append);
@@ -95,7 +98,7 @@ function fillAllText(context, $el, x, startY, textWidth, lineHeight) {
 
   // Fill the remainder, if any
   context.fillText(line, x, y);
-  y += lineHeight;
+  y += fontSize;
   return y;
 }
 

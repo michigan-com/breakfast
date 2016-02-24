@@ -143,13 +143,13 @@ export default class TextOverlay extends React.Component {
     for (let tag in styleMetrics) {
       let metrics = styleMetrics[tag];
       let s = `{
-        font-size: ${metrics.fontSize}px;
-        margin-bottom: ${metrics.marginBottom}px;
-        line-height: ${metrics.lineHeight}px;
-        color: ${this.props.options.Font.fontColor}
+        font-size: ${metrics.fontSize}px !important;
+        margin-bottom: ${metrics.marginBottom}px !important;
+        line-height: ${metrics.lineHeight}px !important;
+        color: ${this.props.options.Font.fontColor} !important;
       }`;
 
-      style.push(`#text-overlay ${tag} ${s}`);
+      style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
     }
 
     style.push(`#text-overlay { width: ${maxTextWidth * (textWidth / 100)}px; }`);

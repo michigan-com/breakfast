@@ -23,7 +23,8 @@ export const generateStyleMetrics = (fontMultiplier=1) => {
     p: generateStyle(pFontSize),
     h1: generateStyle(h1FontSize),
     h2: generateStyle(h2FontSize),
-    li: generateStyle(pFontSize)
+    li: generateStyle(pFontSize),
+    span: generateStyle(pFontSize)
   }
 }
 
