@@ -251,7 +251,6 @@ input[type=text] {
   display: inline-block;
   float: left;
   position: relative;
-  overflow: hidden;
 
   .background-option {
     float: left;
@@ -301,7 +300,6 @@ input[type=text] {
       height: 100px;
       margin: 0 auto;
       position: relative;
-
     }
 
     .background-image {
@@ -328,8 +326,11 @@ input[type=text] {
 
     &.image {
 
-      .picker:after {
-        content: 'Upload Image';
+      .picker {
+        overflow: hidden;
+        &:after {
+          content: 'Upload Image';
+        }
       }
 
       &.loaded {
@@ -344,8 +345,8 @@ input[type=text] {
 
       .remove-image {
         position: absolute;
-        right: -30px;
-        top: -30px;
+        right: 15%;
+        top: -15%;
         height: 45px;
         width: 45px;
         cursor: pointer;

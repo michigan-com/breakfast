@@ -62,7 +62,6 @@ export default class BackgroundOptions extends React.Component {
       return (
         <div className='background-image'>
           <BackgroundPosition options={ options }/>
-          <div onClick={ () => { Store.dispatch(removeBackgroundImage())} } className='remove-image'><i className='fa fa-times-circle'></i></div>
         </div>
       )
 
@@ -111,10 +110,18 @@ export default class BackgroundOptions extends React.Component {
     let className = `background-option ${option}`;
     let options = this.props.options;
     let picker = null;
+    let extra = null;
     switch(option) {
       case BACKGROUND_IMAGE:
         picker = this.renderFileUploader();
-        if (options.Background.backgroundImg.img != null) className += ' loaded';
+        if (options.Background.backgroundImg.img != null) {
+          className += ' loaded';
+          extra = (
+            <div onClick={ () => { Store.dispatch(removeBackgroundImage())} } className='remove-image'>
+              <i className='fa fa-times-circle'></i>
+            </div>
+          );
+        }
         break;
       case BACKGROUND_COLOR:
         picker = this.renderColorPicker();
@@ -127,6 +134,7 @@ export default class BackgroundOptions extends React.Component {
         <div className='picker'>
           { picker }
         </div>
+        { extra }
       </div>
     )
   }
