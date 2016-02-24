@@ -282,13 +282,13 @@ input[type=text] {
     }
 
     .picker {
-      margin-bottom: 20px;
 
       &:after {
         color: white;
         font-size: 10px;
         line-height: 15px;
         left: 0;
+        top: 102%;
         position: absolute;
         width: 100%;
         text-align: center;
@@ -309,6 +309,7 @@ input[type=text] {
       .background-position {
         margin: 0 auto;
         position: relative;
+        overflow:hidden;
 
         .overlay {
           position: absolute;
@@ -370,10 +371,6 @@ input[type=text] {
         }
       }
     }
-  }
-
-  .attribution-options {
-
   }
 
   .attribution-container {
