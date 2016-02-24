@@ -16,7 +16,6 @@ export default function attributionReducer(state=DEFAULT_ATTRIBUTION, action) {
       return assign({}, state, {attributionColor });
     case ATTRIBUTION_LOCATION_CHANGE:
       let attributionLocation = action.value;
-      console.log(CORNER_OPTIONS, attributionLocation);
       if (CORNER_OPTIONS.indexOf(attributionLocation) >= 0) {
         return assign({}, state, { attributionLocation });
       }

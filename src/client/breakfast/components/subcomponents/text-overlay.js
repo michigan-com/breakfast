@@ -10,7 +10,6 @@ import FontFaceSelector from './medium-toolbar/font-face';
 import FontSizeSelector from './medium-toolbar/font-size';
 import FontColorSelector from './medium-toolbar/font-color';
 import TextWidthSelector from './medium-toolbar/text-width';
-import MediumToCanvasText from './medium-to-canvas-text';
 
 export default class TextOverlay extends React.Component {
   constructor(props) {
@@ -55,9 +54,6 @@ export default class TextOverlay extends React.Component {
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
-    this.editor.subscribe('editableKeyup', () => {
-      console.log(this.editor.serialize());
-    });
     this.setState({ initialized: true });
   }
 

@@ -34,8 +34,8 @@ export const getAspectRatioValue = (backgroundState, aspectRatio) => {
       return 1 / 0.370153;
     case FIT_IMAGE:
       // Only deal with this aspect ratio if we've loaded an image up
-      if (backgroundState.backgroundType === BACKGROUND_IMAGE) {
-        let backgroundImg = backgroundState.backgroundImg;
+      let backgroundImg = backgroundState.backgroundImg;
+      if (backgroundImg.img != null) {
         return backgroundImg.width / backgroundImg.height;
       }
   }
@@ -54,14 +54,12 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
   if (aspectRatio === SQUARE) {
     canvasWidth = 400;
   } else if (aspectRatio === FIT_IMAGE) {
-    if (state.backgroundType === BACKGROUND_IMAGE) {
-      let ratio = state.backgroundImg.width / state.backgroundImg.height;
+    let ratio = state.backgroundImg.width / state.backgroundImg.height;
 
-      if (ratio < .25) {
-        canvasWidth = 300;
-      } else if (ratio <= 1) {
-        canvasWidth = 400;
-      }
+    if (ratio < .25) {
+      canvasWidth = 300;
+    } else if (ratio <= 1) {
+      canvasWidth = 400;
     }
   }
 
@@ -91,7 +89,7 @@ export function aspectRatio(ratio) {
 }
 
 export const DEFAULT_ASPECT_RATIO = {
-  aspectRatio: ASPECT_RATIOS,
+  aspectRatio: ASPECT_RATIOS[0],
   aspectRatioValue: getDefaultAspectRatioValue(),
   canvas: getDefaultCanvasMetrics()
 }

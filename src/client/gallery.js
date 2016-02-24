@@ -42,7 +42,6 @@ class Gallery extends React.Component {
     let photoToLoad = this.props.photos[index];
     let image = new Image();
     image.onload = (img) => {
-      console.log('img.onload');
       this.setState({ numToLoad });
     }
     image.src = photoToLoad.url;

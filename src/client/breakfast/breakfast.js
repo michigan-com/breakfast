@@ -65,9 +65,7 @@ class PicEditor extends React.Component {
     return(
       <div className='pic-editor'>
         <div className='image-container'>
-          <AspectRatioPicker currentRatio={ options.Background.aspectRatio }
-              backgroundType={ options.Background.backgroundType }
-              options={ options }/>
+          <AspectRatioPicker currentRatio={ options.Background.aspectRatio } options={ options }/>
           <EditingCanvas options={ options } options={ options } ref='canvas'/>
         </div>
         <div className='options-container'>
@@ -85,7 +83,6 @@ class PicEditor extends React.Component {
 
 function renderBreakfast() {
   let state = Store.getState();
-  console.log(state);
   ReactDOM.render(
     <PicEditor options={ state }/>,
     document.getElementById('editor')

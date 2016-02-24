@@ -8,14 +8,13 @@ export const REMOVE_BACKGROUND_IMAGE = 'REMOVE_BACKGROUND_IMAGE';
 export const BACKGROUND_TYPE_CHANGE = 'BACKGROUND_TYPE_CHANGE';
 export const BACKGROUND_IMAGE_CHANGE = 'BACKGROUND_IMAGE_CHANGE';
 export const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
-export const BACKGROUND_SX_CHANGE = 'BACKGROUND_SX_CHANGE';
-export const BACKGROUND_SY_CHANGE = 'BACKGROUND_SY_CHANGE';
+export const BACKGROUND_DRAW_LOCATION_CHANGE = 'BACKGROUND_DRAW_LOCATION_CHANGE';
 
 export const BACKGROUND_COLOR = 'color';
 export const BACKGROUND_IMAGE = 'image';
 export const BACKGROUND_LOADING = 'loading';
 export const DEFAULT_BACKGROUND_IMAGE = {
-  src: '',
+  img: null,
   height: 0,
   width: 0
 }
@@ -48,29 +47,29 @@ export function getDrawImageMetrics(canvas, img) {
   let canvasHeight = canvas.canvasHeight;
   let canvasWidth = canvas.canvasWidth;
 
-  let sx, sy, sWidth, sHeight, maxSx, maxSy;
+  let dx, dy, dWidth, dHeight, minDx, minDy, maxDx = canvasWidth, maxDy = canvasHeight;
 
   // Always init to this for simplicity
-  sx = 0;
-  sy = 0;
+  dx = 0;
+  dy = 0;
 
   // Image is wider than the canvas, so fix the height
   if (imgAspectRatio > canvasAspectRatio) {
-    sHeight = img.height;
-    sWidth = img.height * canvasAspectRatio;
-    maxSy = 0;
-    maxSx = img.width - sWidth;
+    dHeight = canvasHeight;
+    dWidth = canvasHeight * imgAspectRatio;
+    minDx = dWidth * -1;
+    minDy = canvasHeight * -1;
   }
 
   // Image is skinnier than the canvas, so fix the width
   else {
-    sWidth = img.width;
-    sHeight = img.width / canvasAspectRatio;
-    maxSx = 0;
-    maxSy = img.height - sHeight;
+    dWidth = canvasWidth;
+    dHeight = canvasWidth / imgAspectRatio;
+    minDy = dHeight * -1;
+    minDx = canvasWidth * -1;
   }
 
-  return { sx, sy, sWidth, sHeight, maxSx, maxSy};
+  return { dx, dy, dWidth, dHeight, maxDx, maxDy, minDx, minDy };
 }
 
 /**
@@ -119,31 +118,18 @@ export function removeBackgroundImage() {
   }
 }
 
-export function backgroundTypeChange(backgroundType) {
+/**
+ * New dx/dy values to draw image at
+ */
+export function updateDrawLocation(dx, dy) {
   return {
-    type: BACKGROUND_TYPE_CHANGE,
-    value: backgroundType
-  }
-}
-
-export function updateBackgroundSx(newSx) {
-  return {
-    type: BACKGROUND_SX_CHANGE,
-    value: newSx
-  }
-}
-
-export function updateBackgroundSy(newSy) {
-  return {
-    type: BACKGROUND_SY_CHANGE,
-    value: newSy
+    type: BACKGROUND_DRAW_LOCATION_CHANGE,
+    value: { dx, dy }
   }
 }
 
 export const DEFAULT_BACKGROUND = {
-  backgroundType: BACKGROUND_COLOR,
   backgroundColor: '#fff',
   backgroundImg: assign({}, DEFAULT_BACKGROUND_IMAGE),
   drawImageMetrics: null,
-
 }

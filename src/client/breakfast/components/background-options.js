@@ -6,7 +6,7 @@ import ColorPicker from 'react-color';
 
 import Store from '../store';
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING, backgroundColorChange,
-  backgroundTypeChange, removeBackgroundImage, backgroundImageUpload } from '../actions/background';
+  removeBackgroundImage, backgroundImageUpload } from '../actions/background';
 import { attributionChange, attributionColorChange, attributionLocationChange } from '../actions/attribution';
 import CornerPicker from './subcomponents/corner-picker';
 import BackgroundPosition from './subcomponents/background-position';
@@ -21,19 +21,6 @@ export default class BackgroundOptions extends React.Component {
 
     this.state = {
       showColorPicker: false
-    }
-  }
-
-  backgroundTypeCallback = (o) => {
-    let option = o;
-    return () => {
-      let currentOptions = this.props.options;
-      if (option === BACKGROUND_IMAGE && !currentOptions.Background.backgroundImg.img) {
-        this.triggerFileUpload();
-        return;
-      }
-
-      Store.dispatch(backgroundTypeChange(option));
     }
   }
 
@@ -121,37 +108,32 @@ export default class BackgroundOptions extends React.Component {
   renderBackgroundOption(option) {
     if (BackgroundOptions.options.indexOf(option) < 0) return;
 
+    let className = `background-option ${option}`;
     let options = this.props.options;
     let picker = null;
     switch(option) {
       case BACKGROUND_IMAGE:
         picker = this.renderFileUploader();
+        if (options.Background.backgroundImg.img != null) className += ' loaded';
         break;
       case BACKGROUND_COLOR:
         picker = this.renderColorPicker();
         break;
     }
 
-    let className = `background-option ${option}`;
-    let checked = null;
-    if (options.Background.backgroundType === option) {
-      className += ' active';
-      checked = true;
-    }
 
     return (
       <div className={ className }>
         <div className='picker'>
           { picker }
         </div>
-        <div onClick={ this.backgroundTypeCallback(option) } className='checkbox'><i className='fa fa-check'></i></div>
       </div>
     )
   }
 
   renderAttributionInput() {
     let options = this.props.options;
-    if (options.Background.backgroundType !== BACKGROUND_IMAGE) return null;
+    if (options.Background.backgroundImg.img == null) return null;
 
     let attributionColorOptions = [];
     for (let color of BackgroundOptions.AttributionColors) {

@@ -13,7 +13,8 @@ export default class AspectRatioPicker extends React.Component {
   }
 
   renderRatio(ratio, index) {
-    if (ratio === FIT_IMAGE && this.props.backgroundType !== BACKGROUND_IMAGE) return null;
+    let backgroundImg = this.props.options.Background.backgroundImg;
+    if (ratio === FIT_IMAGE && backgroundImg.img == null) return null;
 
     let height = 55;
     let style = { height: `${height}px` };
