@@ -251,6 +251,7 @@ input[type=text] {
   display: inline-block;
   float: left;
   position: relative;
+  overflow: hidden;
 
   .background-option {
     float: left;
@@ -309,7 +310,6 @@ input[type=text] {
       .background-position {
         margin: 0 auto;
         position: relative;
-        overflow:hidden;
 
         .overlay {
           position: absolute;
@@ -334,7 +334,7 @@ input[type=text] {
 
       &.loaded {
         .picker:after {
-          content: 'Click and drag position image'
+          content: 'Click and drag to position image'
         }
       }
 
