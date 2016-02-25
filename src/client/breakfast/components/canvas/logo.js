@@ -43,7 +43,5 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
       dy = canvasHeight - canvasPadding - logoHeight;
       break;
   }
-
-  console.log(imgObj, dx, dy, logoWidth, logoHeight);
   context.drawImage(imgObj, dx, dy, logoWidth, logoHeight);
 }
