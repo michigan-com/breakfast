@@ -63,6 +63,8 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
     }
   }
 
+  canvasWidth *= 2; // higher res canvas for better image quality
+
   if (window.innerWidth <= canvasWidth) {
     canvasWidth = window.innerWidth * .9;
   }

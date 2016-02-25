@@ -21,8 +21,8 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
 
   let logoAspectRatio = imgObj.width / imgObj.height;
   let logoWidth = canvasWidth * .3;
+  if (logoAspectRatio < 1.5) logoWidth /= 2;
   let logoHeight = logoWidth / logoAspectRatio;
-
 
   let dx, dy;
   switch (logoOptions.logoLocation) {
@@ -44,5 +44,6 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
       break;
   }
 
+  console.log(imgObj, dx, dy, logoWidth, logoHeight);
   context.drawImage(imgObj, dx, dy, logoWidth, logoHeight);
 }

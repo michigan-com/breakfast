@@ -389,6 +389,14 @@
     "height": "167",
     "aspectRatio": 4.311377245508982
   },
+  "flipside.jpg": {
+    "name": "flipside.jpg",
+    "domain": [
+      "ydr.com"
+    ],
+    "isSvg": false,
+    "noColor": false
+  },
   "fonddulac.svg": {
     "name": "fonddulac.svg",
     "domain": [
@@ -427,27 +435,21 @@
     "height": "79",
     "aspectRatio": 9.113924050632912
   },
-  "freepmarathon-dark.svg": {
-    "name": "freepmarathon-dark.svg",
+  "freepmarathon-dark.png": {
+    "name": "freepmarathon-dark.png",
     "domain": [
       "michigan.com"
     ],
-    "isSvg": true,
-    "noColor": true,
-    "width": "292.353",
-    "height": "281.765",
-    "aspectRatio": 1.0375774138022822
+    "isSvg": false,
+    "noColor": false
   },
-  "freepmarathon-light.svg": {
-    "name": "freepmarathon-light.svg",
+  "freepmarathon-light.png": {
+    "name": "freepmarathon-light.png",
     "domain": [
       "michigan.com"
     ],
-    "isSvg": true,
-    "noColor": true,
-    "width": "292.353",
-    "height": "281.765",
-    "aspectRatio": 1.0375774138022822
+    "isSvg": false,
+    "noColor": false
   },
   "fremont-dark.png": {
     "name": "fremont-dark.png",

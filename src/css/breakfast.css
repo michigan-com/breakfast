@@ -139,7 +139,7 @@ input[type=text] {
   }
 
   canvas {
-    /* transform: scale(.5);  Taking a trick from lunchbox */
+    transform: scale(.5);  /* Taking a trick from lunchbox */
     transform-origin: top left;
     border: 1px solid black;
     z-index: $canvas-z-index;

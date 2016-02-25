@@ -20,11 +20,13 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
   let $textContext = $(textContent);
   let canvasPadding = canvasStyle.padding;
   let textPos = textOptions.textPos;
-  let y = canvasPadding + textPos.top;
-  let x = canvasPadding + textPos.left;
   let textWidth = (canvasStyle.width * (textOptions.textWidth / 100)) - (canvasPadding * 2);
-  let listPadding = 40;
   let fontFace = fontOptions.fontFace;
+
+  // Scale up for real drawing
+  let y = canvasPadding + (textPos.top * 2);
+  let x = canvasPadding + (textPos.left * 2);
+  let listPadding = 40 * 2;
 
   context.fillStyle = fontOptions.fontColor;
   context.textBaseline = 'top';

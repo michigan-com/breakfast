@@ -16,9 +16,10 @@ export default class EditingCanvas extends React.Component {
     let className = 'image';
     let options = this.props.options;
 
+    // Have to scale down for better UI
     let style = {
-      width: options.Background.canvas.canvasWidth,
-      height: options.Background.canvas.canvasHeight
+      width: options.Background.canvas.canvasWidth / 2,
+      height: options.Background.canvas.canvasHeight / 2
     }
 
     return (

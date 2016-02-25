@@ -136,16 +136,20 @@ export default class TextOverlay extends React.Component {
     let options = this.props.options;
     let styleMetrics = options.Font.styleMetrics;
     let textWidth = options.Text.textWidth;
-    let maxTextWidth = options.Background.canvas.maxTextWidth;
-    let canvasPadding = options.Background.canvas.canvasPadding;
+
+    // Have to scale things down on the DOM for better UI
+    let maxTextWidth = options.Background.canvas.maxTextWidth / 2;
+    let canvasPadding = options.Background.canvas.canvasPadding / 2;
 
     let style = [];
     for (let tag in styleMetrics) {
       let metrics = styleMetrics[tag];
+
+      // Scale down for UI purposes
       let s = `{
-        font-size: ${metrics.fontSize}px !important;
-        margin-bottom: ${metrics.marginBottom}px !important;
-        line-height: ${metrics.lineHeight}px !important;
+        font-size: ${metrics.fontSize / 2}px !important;
+        margin-bottom: ${metrics.marginBottom / 2}px !important;
+        line-height: ${metrics.lineHeight / 2}px !important;
         color: ${this.props.options.Font.fontColor} !important;
       }`;
 

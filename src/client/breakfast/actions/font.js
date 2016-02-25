@@ -15,9 +15,9 @@ export const generateStyleMetrics = (fontMultiplier=1) => {
   }
 
   // Scale up
-  let pFontSize = 17;
-  let h1FontSize = 32;
-  let h2FontSize = 24;
+  let pFontSize = 17 * 2;
+  let h1FontSize = 32 * 2;
+  let h2FontSize = 24 * 2;
 
   return {
     p: generateStyle(pFontSize),

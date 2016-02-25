@@ -560,11 +560,9 @@
       "filename": "michigan.svg",
       "noColor": true
     }, {
-      "filename": "freepmarathon-light.svg",
-      "noColor": true
+      "filename": "freepmarathon-light.png"
     }, {
-      "filename": "freepmarathon-dark.svg",
-      "noColor": true
+      "filename": "freepmarathon-dark.png"
     }]
   },
 
@@ -924,6 +922,8 @@
       "filename": "gametime-dark.jpg"
     }, {
       "filename": "gametown-green.gif"
+    }, {
+      "filename": "flipside.jpg"
     }]
   },
 
