@@ -130,7 +130,7 @@ input[type=text] {
   position: relative;
 
   &:hover, &:active, &:focus {
-    .move-text {
+    .move-text, .text-width-change {
       opacity: 1 !important;
     }
 
@@ -181,13 +181,12 @@ input[type=text] {
       }
     }
 
-    .move-text {
+    .move-text, .text-width-change{
       position: absolute;
       width: 40px;
       height: 40px;
       font-size: 25px;
       text-align: center;
-      cursor: move;
       opacity: 0;
       color: white;
       background: $black;
@@ -196,6 +195,14 @@ input[type=text] {
       .fa {
         line-height: 40px;
       }
+    }
+
+    .move-text {
+      cursor: move;
+    }
+
+    .text-width-change {
+      cursor: ew-resize;
     }
   }
 }

@@ -5,11 +5,13 @@ import MediumEditor from 'medium-editor';
 import assign from 'object-assign';
 
 import Store from '../../store';
-import { textPosChange } from '../../actions/text';
+import { textPosChange, textWidthChange } from '../../actions/text';
 import FontFaceSelector from './medium-toolbar/font-face';
 import FontSizeSelector from './medium-toolbar/font-size';
 import FontColorSelector from './medium-toolbar/font-color';
-import TextWidthSelector from './medium-toolbar/text-width';
+
+const MOVE_TYPE_POS = 'pos';
+const MOVE_TYPE_WIDTH = 'width';
 
 export default class TextOverlay extends React.Component {
   constructor(props) {
@@ -42,7 +44,7 @@ export default class TextOverlay extends React.Component {
     let fontFace = new FontFaceSelector(this.props.options.Font.fontOptions);
     let fontSize = new FontSizeSelector();
     let fontColor = new FontColorSelector();
-    let textWidth = new TextWidthSelector();
+    //let textWidth = new TextWidthSelector();
 
     let options = assign({}, this.mediumEditorOptions);
 
@@ -50,7 +52,7 @@ export default class TextOverlay extends React.Component {
       'fontface': new fontFace.extension(),
       'fontsize': new fontSize.extension(),
       'fontcolor': new fontColor.extension(),
-      'tetwidth': new textWidth.extension()
+      //'tetwidth': new textWidth.extension()
     }
 
     this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
@@ -64,44 +66,60 @@ export default class TextOverlay extends React.Component {
   }
 
   /** Mouse events */
-  mouseDown = (e) => {
-    this.trackMouseMovement();
+  mouseDown = (type) => {
+    let moveType = type;
 
-    this.setState({
-      mouseDown: true,
-      lastMouseX: e.clientX,
-      lastMouseY: e.clientY
-    });
+    return (e) => {
+      this.trackMouseMovement(moveType);
+      this.setState({
+        mouseDown: true,
+        lastMouseX: e.clientX,
+        lastMouseY: e.clientY,
+
+        origTextPos: assign({}, this.props.options.Text.textPos),
+        origTextWidth: this.props.options.Text.textWidth
+      });
+    }
   }
 
   mouseUp = (e) => {
     this.stopTrackingMouseMovement();
-    Store.dispatch(textPosChange(this.state.textPos));
     this.setState({ mouseDown: false });
   }
 
-  mouseMove = (e) => {
-    if (!this.state.mouseDown) return;
+  mouseMove = (type) => {
+    let moveType = type;
 
-    let options = this.props.options;
+    return (e) => {
+      if (!this.state.mouseDown) return;
 
-    let movementX = this.state.lastMouseX - e.clientX;
-    let movementY = this.state.lastMouseY - e.clientY;
-    let newTop = this.state.textPos.top - movementY;
-    let newLeft = this.state.textPos.left - movementX;
+      let options = this.props.options;
+      let backgroundOptions = this.props.options.Background;
 
-    this.setState({
-      textPos: {
-        top: newTop,
-        left: newLeft
-      },
-      lastMouseX: e.clientX,
-      lastMouseY: e.clientY
-    });
+      let movementX = e.clientX - this.state.lastMouseX;
+      let movementY = e.clientY - this.state.lastMouseY;
+
+      // Figure out what to do with the new found information
+      switch (moveType) {
+        case MOVE_TYPE_POS:
+          let top = this.state.origTextPos.top + movementY;
+          let left = this.state.origTextPos.left + movementX;
+          Store.dispatch(textPosChange({ top, left }));
+          break;
+        case MOVE_TYPE_WIDTH:
+          // cause we're scaled up, divide by two
+          let maxTextWidth = backgroundOptions.canvas.maxTextWidth / 2;
+          let percentChange = 100 * (movementX / maxTextWidth);
+          let textWidthPercent = Math.round(percentChange + this.state.origTextWidth);
+          Store.dispatch(textWidthChange(textWidthPercent));
+          break;
+      }
+    }
   }
 
-  trackMouseMovement = () => {
-    document.body.addEventListener('mousemove', this.mouseMove);
+  trackMouseMovement = (type) => {
+    this.mouseMoveCallback = this.mouseMove(type);
+    document.body.addEventListener('mousemove', this.mouseMoveCallback);
     // TODO
     //document.body.addEventListener('touchmove', this.mouseMove);
 
@@ -111,7 +129,7 @@ export default class TextOverlay extends React.Component {
   }
 
   stopTrackingMouseMovement = () => {
-    document.body.removeEventListener('mousemove', this.mouseMove);
+    document.body.removeEventListener('mousemove', this.mouseMoveCallback);
     // TODO
     //document.body.removeEventListener('touchmove', this.mouseMove);
 
@@ -158,9 +176,10 @@ export default class TextOverlay extends React.Component {
 
     style.push(`#text-overlay { width: ${maxTextWidth * (textWidth / 100)}px; }`);
 
-    let textPos = this.state.textPos;
+    let textPos = this.props.options.Text.textPos;
     style.push(`.text-overlay-container { top: ${textPos.top}; left: ${textPos.left}; padding: ${canvasPadding}px }`);
     style.push(`.text-overlay-container .move-text { top: ${canvasPadding}px; left: ${canvasPadding - 40}px; }`)
+    style.push(`.text-overlay-container .text-width-change { top: ${canvasPadding}px; left: ${(maxTextWidth * (textWidth / 100)) + canvasPadding}px }`)
 
     return (<style>{ style.join(' ') }</style>);
   }
@@ -174,9 +193,12 @@ export default class TextOverlay extends React.Component {
       <div className={ className } style={ style }>
         <div id='text-overlay'></div>
         <div className='move-text'
-            onMouseDown={ this.mouseDown }
-            onTouchStart={ this.mouseDown }><i className="fa fa-arrows"></i></div>
+            onMouseDown={ this.mouseDown(MOVE_TYPE_POS) }
+            onTouchStart={ this.mouseDown(MOVE_TYPE_POS) }><i className="fa fa-arrows"></i></div>
         { this.renderStyle() }
+        <div className='text-width-change'
+            onMouseDown={ this.mouseDown(MOVE_TYPE_WIDTH) }
+            onTouchStart={ this.mouseDown(MOVE_TYPE_WIDTH) }><i className='fa fa-arrows-h'></i></div>
       </div>
     )
   }
