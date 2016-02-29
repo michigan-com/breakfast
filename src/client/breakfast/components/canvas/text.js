@@ -20,7 +20,7 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
   let $textContext = $(textContent);
   let canvasPadding = canvasStyle.padding;
   let textPos = textOptions.textPos;
-  let textWidth = (canvasStyle.width * (textOptions.textWidth / 100)) - (canvasPadding * 2);
+  let textWidth = canvasStyle.maxTextWidth * (textOptions.textWidth / 100);
   let fontFace = fontOptions.fontFace;
 
   // Scale up for real drawing
@@ -62,6 +62,18 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
     }
 
   });
+
+  let initY = canvasPadding + (textPos.top * 2);
+  let initX = canvasPadding + (textPos.left * 2);
+  context.beginPath();
+  context.moveTo(initX, 0);
+  context.lineTo(initX, canvasStyle.height);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(initX + textWidth, 0);
+  context.lineTo(initX + textWidth, canvasStyle.height);
+  context.stroke();
 }
 
 /**
@@ -84,14 +96,14 @@ function fillAllText(context, $el, x, startY, textWidth, fontSize) {
 
   for (let word of currentText) {
     let append = !line ? word : ` ${word}`;
-    let newLineWidth = lineWidth + measureWord(context, append);
+    let newLineWidth = lineWidth + Math.round(measureWord(context, append));
     if (newLineWidth >= textWidth) {
       if (!line) line = word;
       context.fillText(line, x, y);
       y += fontSize;
 
       line = word;
-      lineWidth = measureWord(context, append);
+      lineWidth = measureWord(context, word);
     } else {
       line += append;
       lineWidth = newLineWidth;

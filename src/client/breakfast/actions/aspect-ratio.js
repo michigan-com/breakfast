@@ -70,7 +70,7 @@ export const getCanvasMetrics = (state, aspectRatio='') => {
   }
 
   let canvasPadding = canvasWidth / 26;
-  let maxTextWidth = canvasWidth - (canvasPadding * 2);
+  let maxTextWidth = Math.round(canvasWidth - (canvasPadding * 2));
   let aspectRatioVal = getAspectRatioValue(state, aspectRatio);
   let canvasHeight = canvasWidth / aspectRatioVal;
 

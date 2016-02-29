@@ -161,6 +161,7 @@ input[type=text] {
       border: 2px solid transparent;
       transition: opacity 250ms linear, border 250ms linear;
       outline: none;
+      box-sizing: content-box;
 
       &[data-medium-focused=true] {
         border: 2px solid #168eea;
@@ -191,6 +192,7 @@ input[type=text] {
       color: white;
       background: $black;
       transition: opacity 150ms linear;
+      border-radius: 50%;
 
       .fa {
         line-height: 40px;

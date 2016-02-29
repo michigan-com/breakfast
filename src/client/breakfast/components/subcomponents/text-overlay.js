@@ -154,10 +154,13 @@ export default class TextOverlay extends React.Component {
     let options = this.props.options;
     let styleMetrics = options.Font.styleMetrics;
     let textWidth = options.Text.textWidth;
+    let textPos = this.props.options.Text.textPos;
+    let textWidthPx = options.Background.canvas.maxTextWidth * (textWidth / 100);
 
     // Have to scale things down on the DOM for better UI
-    let maxTextWidth = options.Background.canvas.maxTextWidth / 2;
+    textWidthPx /= 2;
     let canvasPadding = options.Background.canvas.canvasPadding / 2;
+
 
     let style = [];
     for (let tag in styleMetrics) {
@@ -174,12 +177,10 @@ export default class TextOverlay extends React.Component {
       style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
     }
 
-    style.push(`#text-overlay { width: ${maxTextWidth * (textWidth / 100)}px; }`);
-
-    let textPos = this.props.options.Text.textPos;
+    style.push(`#text-overlay { width: ${textWidthPx}px; }`);
     style.push(`.text-overlay-container { top: ${textPos.top}; left: ${textPos.left}; padding: ${canvasPadding}px }`);
     style.push(`.text-overlay-container .move-text { top: ${canvasPadding}px; left: ${canvasPadding - 40}px; }`)
-    style.push(`.text-overlay-container .text-width-change { top: ${canvasPadding}px; left: ${(maxTextWidth * (textWidth / 100)) + canvasPadding}px }`)
+    style.push(`.text-overlay-container .text-width-change { top: ${canvasPadding}px; left: ${textWidthPx + canvasPadding + 4}px }`)
 
     return (<style>{ style.join(' ') }</style>);
   }
