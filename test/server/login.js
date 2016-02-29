@@ -6,6 +6,8 @@ import { createApp } from '../../dist/app';
 import dbConnect from '../../dist/util/dbConnect';
 import { hash } from '../../dist/util/hash';
 
+import { testGetRoute, testExpectedRedirect, testPostRoute } from './util';
+
 var db, Invite, app, agent;
 
 let defaultEmail = 'testemail@testemail.com';
@@ -37,73 +39,46 @@ describe('Route testing', function() {
     done();
   });
 
-  it('Test to make sure you have to be logged in for /breakfast/ url', function(done) {
-    agent
-      .get('/breakfast/')
-      .expect('Location', '/login/')
-      .end(function(err, res) {
-        if (err) throw new Error(err);
-
-        equal(res.status, 302);
-        done();
-      });
+  it('Test to make sure you have to be logged in for /breakfast/ url', async (done) => {
+    await testExpectedRedirect(agent, '/breakfast/', '/login/');
+    done();
   });
 
-  it('Tests an unsuccessful login', function(done) {
-    agent
-      .post('/login/')
-      .send({
-        email: 'inavlid email',
-        password: 'asdfasdfasdf'
-      })
-      .expect('Location', '/login/')
-      .end(function(err, res) {
-        done();
-      });
+  it('Tests an unsuccessful login', async (done) => {
+    let res = await testPostRoute(agent, '/login/', {
+      email: 'inavlid email',
+      password: 'asdfasdfasdf'
+    }, 302)
+    equal(res.header.location, '/login/', 'Should have redirected to login');
 
+    done();
   })
 
-  it('Tests a successful login', function(done) {
-    agent
-      .post('/login/')
-      .send({
-        email: defaultEmail,
-        password: defaultPassword
-      })
-      .expect('Location', '/breakfast/')
-      .end(done);
+  it('Tests a successful login and redirect', async (done) => {
+    let res = await testPostRoute(agent, '/login/', {
+      email: defaultEmail,
+      password: defaultPassword
+    }, 302);
+
+    equal(res.header.location, '/breakfast/', 'Should have redirected to /breakfast/');
+    done();
   });
 
-  it('Tests going to /breakfast/ after a login', function(done) {
+  it('Tests going to /breakfast/ after a login', async function(done) {
     // NOTE: Expected login in the previous test
-    agent
-      .get('/breakfast/')
-      .end(function(err, res) {
-        if (err) throw new Error(err);
-
-        equal(res.status, 200, 'Should have directed to the /breakfast/ page fine');
-        done();
-      });
+    let res = await testGetRoute(agent, '/breakfast/');
+    done();
   });
 
-  it('Tests the logout', function(done) {
-    agent
-      .get('/logout/')
-      .expect('Location', '/')
-      .redirects()
-      .end(function(err, res) {
-        equal(res.req.path, '/', 'Should have redirected to the index page');
-        done();
-      });
+  it('Tests the logout', async (done) => {
+    let res = await testGetRoute(agent, '/logout/', 302)
+    equal(res.header.location, '/', 'Should have redirected to the index page');
+    done();
   });
 
-  it('Test the /breakfast/ url after the logout', function(done) {
-    agent
-      .get('/breakfast/')
-      .redirects()
-      .end(function(err, res) {
-        equal(res.req.path, '/login/', 'Should have redirected to the login page');
-        done();
-      });
+  it('Test the /breakfast/ url after the logout', async (done) => {
+    let res = await testGetRoute(agent, '/breakfast/', 302);
+    equal(res.header.location, '/login/', 'Should have redirected to the login page');
+    done();
   });
 });

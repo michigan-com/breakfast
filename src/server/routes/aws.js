@@ -11,7 +11,6 @@ var logger = debug('breakfast:aws');
 var breakfastBucket = 'michigan-breakfast';
 var s3 = new AWS.S3();
 
-
 // TODO remove
 var CACHE = undefined;
 var CACHE_DATE = undefined;

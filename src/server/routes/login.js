@@ -1,3 +1,5 @@
+'use strict';
+
 import csrf from 'csurf';
 
 import { csrfProtection } from '../middleware/csrf';

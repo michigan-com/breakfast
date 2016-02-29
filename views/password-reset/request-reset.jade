@@ -1,0 +1,26 @@
+extends ../entry-page
+include ../util/form
+
+block content
+  .fancy-title
+    .directive Reset Password
+    .app-name Breakfast
+
+  .blurbs
+    p Forgot your password?
+    p Not a problem at all! Put your email in below and we'll send you a link to reset your password.
+
+  .password-reset-form-container
+    form.password-reset-form(action='/password-reset/', method='POST')
+      for field in fields
+        +renderInput(field)
+      .submit
+        input(type='submit', value='Submit', id='submit')
+        #success-text
+
+block js
+  script(src='/js/request-reset.js')
+
+block css
+  link(href='/css/entry-page.css', rel='stylesheet')
+

@@ -1,3 +1,5 @@
+'use strict';
+
 import csrf from 'csurf';
 import nodemailer from 'nodemailer';
 import sendmailTransport from 'nodemailer-sendmail-transport';
@@ -92,7 +94,6 @@ function registerRoutes(app, router, passport) {
       let mailOptions = {
         from: 'webmaster@breakfast.im',
         to: [email],
-        //to: ['mvarano@michigan.com'],
         subject: 'Complete your Breakfast registration',
         text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
         html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
@@ -104,10 +105,8 @@ function registerRoutes(app, router, passport) {
         logger(mailOptions);
       }
 
-      // for now, just forward to new url
       res.status(200).send({
-        success: true,
-        token
+        success: true
       });
     }
 
@@ -148,7 +147,6 @@ function registerRoutes(app, router, passport) {
 
   router.post('/create-user/', csrfProtection(app), function(req, res, next) {
     async function createUser(req, res, next) {
-      logger(req.body);
       let email = req.body.email.toLowerCase();
       let token = req.body.token;
       let password = req.body.password;

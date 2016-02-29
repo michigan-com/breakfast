@@ -1,3 +1,5 @@
+'use strict';
+
 import xr from 'xr';
 import React from 'react';
 

@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router } from 'express';
 
 import { createPassport } from './passport';
@@ -6,6 +8,7 @@ import fontFetch from './fontFetch';
 import login from './login';
 import register from './register';
 import aws from './aws';
+import passwordReset from './password-reset';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
@@ -19,6 +22,13 @@ function registerRoutes(app) {
   login.registerRoutes(app, router, passport);
   register.registerRoutes(app, router, passport);
   aws.registerRoutes(app, router, passport);
+
+  try {
+    passwordReset.registerRoutes(app, router, passport);
+
+  } catch(e) {
+    throw new Error(e);
+  }
 
   // Basic routes
   router.get('/', function(req, res) {

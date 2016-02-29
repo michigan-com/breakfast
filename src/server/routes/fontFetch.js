@@ -1,3 +1,4 @@
+'use strict';
 
 import { loginRequired } from '../middleware/login';
 import { basicFonts, usatFonts } from '../util/fonts';

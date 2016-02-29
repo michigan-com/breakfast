@@ -11,7 +11,7 @@ block content
     p This will generate an email containing the necessary steps to complete your registration.
     p Don't see your domain here? Email #[a(href='mailto:rwilliams@michigan.com') Reid Williams] to get it added
 
-  .register-form-container
+  .form-container
     form.register-form(action='/register/', method='POST')
       for field in fields
         +renderInput(field)
@@ -24,4 +24,4 @@ block js
   script(src='/js/register.js')
 
 block css
-  link(href='/css/register.css', rel='stylesheet')
+  link(href='/css/entry-page.css', rel='stylesheet')
