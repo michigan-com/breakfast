@@ -171,9 +171,8 @@ describe('Registration testing', function() {
       .end(function(err, res) {
         if (err) throw new Error(err);
 
-        equal(res.status, 422, 'Should have returned a 422 error for invalid token');
-        equal('errors' in res.body, true, 'Should have "errors" in the response body');
-        equal('token' in res.body.errors, true, 'Should have a token error in the response body');
+        equal(res.status, 302, 'Should have returned a 302 redirect, invalid token means no invite');
+        equal(res.header.location, '/register/', 'Should be redirecting to the register page');
         done();
       })
   });

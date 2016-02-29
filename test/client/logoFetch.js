@@ -2,7 +2,7 @@ import path from 'path';
 
 import '../../dist/env';
 import dir from '../../dist/util/dir';
-import { LogoFetch } from '../../src/server/routes/logoFetch';
+import { LogoFetch } from '../../dist/routes/logoFetch';
 import { ok, equal, notEqual } from 'assert';
 
 let logoFetch = new LogoFetch(dir('logos'));
@@ -22,17 +22,6 @@ describe('Testing logo fetching', function() {
       result = await logoFetch.getLogo(logoFilename);
 
       notEqual(result, null, 'Shuld be file contents');
-    }
-  });
-
-  it('Tests the coloring of the logo', async function() {
-    let color = '#eeeeee';
-    let data = await logoFetch.getLogo(logoFiles[0], color);
-
-    let matches = logoFetch.colorRegex.exec(data);
-
-    for (var match of matches) {
-      notEqual(match.indexOf(color), -1, `Color ${color} should be in the match`);
     }
   });
 });
