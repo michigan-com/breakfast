@@ -154,6 +154,8 @@ form {
       text-align: center;
       display: inline-block;
       width: 30%;
+      margin-top: 15px;
+      margin-bottom: 15px;
     }
 
     #success-text {
@@ -161,6 +163,11 @@ form {
       color: white;
       text-align: left;
       margin-left: 15px;
+
+      a {
+        color: white;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -181,7 +188,6 @@ form {
 
 .form-field {
   display: inline-block;
-  float: left;
 
   label {
     display: none;
@@ -204,5 +210,9 @@ form {
 }
 
 .errors {
+  color: white;
+}
+
+p {
   color: white;
 }

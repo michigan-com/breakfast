@@ -10,7 +10,7 @@ block content
     p Forgot your password?
     p Not a problem at all! Put your email in below and we'll send you a link to reset your password.
 
-  .password-reset-form-container
+  .form-container
     form.password-reset-form(action='/password-reset/', method='POST')
       for field in fields
         +renderInput(field)

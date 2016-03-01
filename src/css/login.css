@@ -13,6 +13,8 @@
 form {
   input[type=submit] {
     @mixin big-button;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 
@@ -26,7 +28,7 @@ form {
   }
 }
 
-.register-text {
+.register-text, .forgot-password {
   text-align: center;
   color: white;
 

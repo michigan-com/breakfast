@@ -10,7 +10,7 @@ export function formatPasswordResetUrl(token) {
   let endpoint = 'http://localhost:3000';
   if (process.env.NODE_ENV) endpoint = 'http://breakfast.im';
 
-  return `${endpoint}/password-reset/${token}`;
+  return `${endpoint}/password-reset/${token}/`;
 }
 
 export function getDomainFromEmail(email) {

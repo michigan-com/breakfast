@@ -24,8 +24,8 @@ $('form.password-reset-form').on('submit', (e) => {
   }, (resp) => {
       let response = JSON.parse(resp.response);
 
-      for (var error in response.error) {
-        let errorString = response.error[error];
+      for (var error in response.errors) {
+        let errorString = response.errors[error];
         document.getElementById('success-text').innerText = errorString;
       }
   });
