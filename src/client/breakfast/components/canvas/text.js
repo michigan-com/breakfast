@@ -62,18 +62,6 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
     }
 
   });
-
-  let initY = canvasPadding + (textPos.top * 2);
-  let initX = canvasPadding + (textPos.left * 2);
-  context.beginPath();
-  context.moveTo(initX, 0);
-  context.lineTo(initX, canvasStyle.height);
-  context.stroke();
-
-  context.beginPath();
-  context.moveTo(initX + textWidth, 0);
-  context.lineTo(initX + textWidth, canvasStyle.height);
-  context.stroke();
 }
 
 /**
