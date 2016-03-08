@@ -180,9 +180,7 @@
     "logo": [{
       "filename": "desmoines.svg"
     }, {
-      "filename": "iowacity-dark.png"
-    }, {
-      "filename": "iowacity-light.png"
+      "filename": "iowacity.svg"
     }, {
       "filename": "dmjuice.png"
     }]
@@ -386,9 +384,7 @@
   "Iowa City": {
     "domain": "press-citizen.com",
     "logo": [{
-      "filename": "iowacity-dark.png"
-    }, {
-      "filename": "iowacity-light.png"
+      "filename": "iowacity.svg"
     }]
   },
 

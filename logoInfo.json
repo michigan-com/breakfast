@@ -625,23 +625,17 @@
     "height": "164.969",
     "aspectRatio": 4.364456352405604
   },
-  "iowacity-dark.png": {
-    "name": "iowacity-dark.png",
+  "iowacity.svg": {
+    "name": "iowacity.svg",
     "domain": [
       "dmreg.com",
       "press-citizen.com"
     ],
-    "isSvg": false,
-    "noColor": false
-  },
-  "iowacity-light.png": {
-    "name": "iowacity-light.png",
-    "domain": [
-      "dmreg.com",
-      "press-citizen.com"
-    ],
-    "isSvg": false,
-    "noColor": false
+    "isSvg": true,
+    "noColor": false,
+    "width": "632",
+    "height": "117",
+    "aspectRatio": 5.401709401709402
   },
   "ithaca.svg": {
     "name": "ithaca.svg",

@@ -15,14 +15,19 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
   let canvasPadding = canvasOptions.padding;
   let canvasWidth = canvasOptions.width;
   let canvasHeight = canvasOptions.height;
+  let maxLogoWidth = canvasWidth * .3;
   let imgObj = logoOptions.logo.imgObj;
 
   if (imgObj === null) return;
 
   let logoAspectRatio = imgObj.width / imgObj.height;
-  let logoWidth = canvasWidth * .3;
-  if (logoAspectRatio < 1.5) logoWidth /= 2;
-  let logoHeight = logoWidth / logoAspectRatio;
+  let logoHeight = canvasHeight / 6;
+  let logoWidth = logoHeight * logoAspectRatio;
+
+  if (logoWidth > maxLogoWidth) {
+    logoWidth = maxLogoWidth;
+    logoHeight = logoWidth / logoAspectRatio;
+  }
 
   let dx, dy;
   switch (logoOptions.logoLocation) {
