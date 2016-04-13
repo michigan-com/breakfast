@@ -782,6 +782,8 @@
     "logo": [{
       "filename": "siouxfalls-small-dark.png"
     }, {
+      "filename": "siouxfalls-small-white.png"
+    }, {
       "filename": "siouxfalls-dark.png"
     }, {
       "filename": "siouxfalls-light.png"

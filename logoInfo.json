@@ -1239,6 +1239,14 @@
     "isSvg": false,
     "noColor": false
   },
+  "siouxfalls-small-white.png": {
+    "name": "siouxfalls-small-white.png",
+    "domain": [
+      "argusleader.com"
+    ],
+    "isSvg": false,
+    "noColor": false
+  },
   "somosfrontera-dark.png": {
     "name": "somosfrontera-dark.png",
     "domain": [
