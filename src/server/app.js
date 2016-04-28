@@ -10,6 +10,7 @@ import csrf from 'csurf';
 import passport from 'passport';
 import flash from 'connect-flash';
 import session from 'express-session';
+import ConnectMongo from 'connect-mongo';
 
 import storeLocals from './middleware/storeLocals';
 import router from './routes/router';
@@ -25,6 +26,7 @@ import dir from './util/dir';
 function createApp(db, enableCsrf=true) {
   var app = express();
   var BASE_DIR = path.dirname(__dirname);
+  var MongoStore = ConnectMongo(session);
 
   app.set('views', dir('views'));
   app.set('view engine', 'jade');
@@ -38,7 +40,8 @@ function createApp(db, enableCsrf=true) {
   app.use(session({
     secret: 'Whats for breakfast eh?',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ db })
   }));
   if (enableCsrf) {
     //app.use(csrf({ cookie: true }));
