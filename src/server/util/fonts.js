@@ -12,5 +12,4 @@ export var usatFonts = [
   'Futura Light'
 ];
 
-//module.exports = { basicFonts, usatFonts }
-
+module.exports = { basicFonts, usatFonts }

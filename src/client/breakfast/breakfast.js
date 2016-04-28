@@ -21,7 +21,7 @@ class PicEditor extends React.Component {
     this.state = {
       downloading: false,
       textContent: null // TODO
-    }
+    };
   }
 
   getImageName() {
@@ -29,7 +29,7 @@ class PicEditor extends React.Component {
     return fileName ? fileName : 'pic';
   }
 
-  saveImage = () => {
+  saveImage() {
     if (this.state.downloading) return;
 
     let textContent = this.refs.canvas.getTextContent();
@@ -38,7 +38,7 @@ class PicEditor extends React.Component {
     let doneDownloading = () => {
       document.getElementById('download-canvas').innerHTML = null;
       this.setState({ downloading: false });
-    }
+    };
 
     let filename = ReactDOM.findDOMNode(this.refs['file-name']).value;
 
@@ -49,7 +49,7 @@ class PicEditor extends React.Component {
           fileName={ filename || 'pic' }
           downloadCallback={ doneDownloading }/>,
       document.getElementById('download-canvas')
-    )
+    );
   }
 
   render() {
@@ -77,7 +77,7 @@ class PicEditor extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -87,7 +87,7 @@ function renderBreakfast() {
   ReactDOM.render(
     <PicEditor options={ state }/>,
     document.getElementById('editor')
-  )
+  );
 }
 
 (function(){
@@ -107,5 +107,3 @@ function renderBreakfast() {
   Store.subscribe(renderBreakfast);
   renderBreakfast();
 })();
-
-

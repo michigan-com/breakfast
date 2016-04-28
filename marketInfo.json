@@ -668,9 +668,13 @@
 
   "Phoenix": {
     "domain": "arizonarepublic.com",
-    "logo": {
+    "logo": [{
       "filename": "phoenix.svg"
-    }
+    }, {
+      "filename": "phoenix-sports-chevy.png"
+    }, {
+      "filename": "phoenix-sports.png"
+    }]
   },
 
   "Port Clinton": {

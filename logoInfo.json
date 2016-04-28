@@ -1031,6 +1031,22 @@
     "height": "160",
     "aspectRatio": 4.1375
   },
+  "phoenix-sports-chevy.png": {
+    "name": "phoenix-sports-chevy.png",
+    "domain": [
+      "arizonarepublic.com"
+    ],
+    "isSvg": false,
+    "noColor": false
+  },
+  "phoenix-sports.png": {
+    "name": "phoenix-sports.png",
+    "domain": [
+      "arizonarepublic.com"
+    ],
+    "isSvg": false,
+    "noColor": false
+  },
   "phoenix.svg": {
     "name": "phoenix.svg",
     "domain": [
