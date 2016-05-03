@@ -80,6 +80,7 @@
     "passport-local": "^1.0.0",
     "pkgify": "^1.0.3",
     "plumber": "^0.4.8",
+    "postcss": "^5.0.21",
     "postcss-calc": "^5.0.0",
     "postcss-color-function": "^2.0.0",
     "postcss-extend": "^1.0.1",
