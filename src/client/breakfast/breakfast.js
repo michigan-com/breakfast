@@ -90,7 +90,7 @@ function renderBreakfast() {
   );
 }
 
-(function(){
+export default function Breakfast() {
   // TODO
   xr.get('/logos/getLogos/')
     .then((data) => {
@@ -103,7 +103,6 @@ function renderBreakfast() {
       Store.dispatch(fontsLoaded(data.fonts));
   });
 
-
   Store.subscribe(renderBreakfast);
   renderBreakfast();
-})();
+};

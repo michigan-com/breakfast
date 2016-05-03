@@ -1,11 +1,9 @@
 var fs = require('fs');
 var path = require('path');
 
-var gulp = require('gulp');
+var ROOT_DIR = path.join(__dirname);
 
-var ROOT_DIR = path.join(__dirname, '..', '..');
-
-var marketInfo = require(path.join(ROOT_DIR, 'marketInfo.json'));
+var marketInfo = require(path.join(__dirname, 'marketInfo.json'));
 
 /**
  * Generate some basic stats on the logos we currently have in the system,
@@ -15,7 +13,7 @@ var marketInfo = require(path.join(ROOT_DIR, 'marketInfo.json'));
  * Find ./public/img/logo/*.svg, parses the file contents for the width and the
  * height, and saves the information in ./public/js/lib/logos.json
  */
-gulp.task('generateLogoJson', function() {
+function generateLogoJson() {
   var logo_root = path.join(ROOT_DIR, 'public', 'img', 'logos');
   var outfile = path.join(ROOT_DIR, 'logoInfo.json');
   var ratioRegex = /width="(\d+(?:\.\d+)?)(?:px)?"\s+height="(\d+(?:\.\d+)?)(?:px)?"/;
@@ -79,7 +77,7 @@ gulp.task('generateLogoJson', function() {
   if (invalidFiles.length) printLogoBreakdown('Invalid Files', invalidFiles);
   if (unusedFiles.length) printLogoBreakdown('Unused Logo Files', unusedFiles);
   if (logosNotFound.length) printLogoBreakdown('Logos not found', logosNotFound);
-});
+}
 
 function getLogoNames() {
   var logoNames = {};
@@ -117,3 +115,5 @@ function printLogoBreakdown(breakdownName, infoArray) {
   console.log('--------------------------------------------------------------------------------');
   console.log('\n')
 }
+
+generateLogoJson();
