@@ -291,7 +291,7 @@
     "name": "detroitfreepress.svg",
     "domain": [
       "freepress.com",
-      "lsj.com"
+      "livingstondaily.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -974,7 +974,7 @@
   "one-nation.png": {
     "name": "one-nation.png",
     "domain": [
-      "lsj.com"
+      "livingstondaily.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -1368,7 +1368,7 @@
     "name": "usat-1.svg",
     "domain": [
       "gannett.com",
-      "lsj.com",
+      "livingstondaily.com",
       "usatoday.com"
     ],
     "isSvg": true,
@@ -1381,7 +1381,7 @@
     "name": "usat-2.svg",
     "domain": [
       "gannett.com",
-      "lsj.com",
+      "livingstondaily.com",
       "usatoday.com"
     ],
     "isSvg": true,
