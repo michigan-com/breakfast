@@ -479,6 +479,28 @@
     "height": "163",
     "aspectRatio": 4.41717791411043
   },
+  "ftw-large.svg": {
+    "name": "ftw-large.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "421",
+    "height": "53",
+    "aspectRatio": 7.943396226415095
+  },
+  "ftw-small.svg": {
+    "name": "ftw-small.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "173",
+    "height": "52",
+    "aspectRatio": 3.326923076923077
+  },
   "gametime-dark.jpg": {
     "name": "gametime-dark.jpg",
     "domain": [

@@ -59,7 +59,7 @@ class LogoFetch {
     });
     $('g:not(.no-color-change)').attr('style', 'filter: none;');
 
-    $('path, text, circle').each(function(index, obj) {
+    $('path, text, circle, polyline, polygon').each(function(index, obj) {
       if ($(obj).hasClass('no-color-change')) return;
       else if ($(obj).parents('defs').length) return;
 
