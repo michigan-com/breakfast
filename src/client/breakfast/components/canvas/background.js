@@ -1,7 +1,5 @@
 'use strict';
 
-import { BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING } from '../../actions/background';
-
 /**
  * Draw the background based on the current background options
  *
@@ -16,8 +14,17 @@ export default function updateBackground(context, canvasOptions, backgroundOptio
   context.fillStyle = backgroundOptions.backgroundColor;
   context.fillRect(0, 0, canvasOptions.width, canvasOptions.height);
   if (backgroundOptions.backgroundImg.img != null) {
-    let img = backgroundOptions.backgroundImg.img;
-    let metrics = backgroundOptions.drawImageMetrics;
-    context.drawImage(img, 0, 0, img.width, img.height, metrics.dx, metrics.dy, metrics.dWidth, metrics.dHeight);
+    const img = backgroundOptions.backgroundImg.img;
+    const metrics = backgroundOptions.drawImageMetrics;
+    context.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      metrics.dx,
+      metrics.dy,
+      metrics.dWidth,
+      metrics.dHeight);
   }
 }

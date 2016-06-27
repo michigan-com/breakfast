@@ -10,7 +10,7 @@ export default class FontFaceSelector {
     this.fonts = fonts;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
-    this.extension = MediumEditor.extensions.form.extend({
+    this.Extension = MediumEditor.extensions.form.extend({
 
       name: 'fontface',
       action: 'fontFace',
@@ -20,19 +20,19 @@ export default class FontFaceSelector {
 
       fonts: this.fonts,
 
-      init: function () {
-        MediumEditor.extensions.form.prototype.init.apply(this, arguments);
+      init(...args) {
+        MediumEditor.extensions.form.prototype.init.apply(this, args);
       },
 
       // Called when the button the toolbar is clicked
       // Overrides ButtonExtension.handleClick
-      handleClick: function (event) {
+      handleClick(event) {
         event.preventDefault();
         event.stopPropagation();
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = Store.getState();
+          const options = Store.getState();
           this.showForm(options.Font.fontFace);
         }
 
@@ -40,7 +40,7 @@ export default class FontFaceSelector {
       },
 
       // Called by medium-editor to append form to the toolbar
-      getForm: function () {
+      getForm() {
         if (!this.form) {
           this.form = this.createForm();
         }
@@ -48,17 +48,17 @@ export default class FontFaceSelector {
       },
 
       // Used by medium-editor when the default toolbar is to be displayed
-      isDisplayed: function () {
+      isDisplayed() {
         return this.getForm().style.display === 'block';
       },
 
-      hideForm: function () {
+      hideForm() {
         this.getForm().style.display = 'none';
         this.getSelect().value = '';
       },
 
-      showForm: function (fontName) {
-        var select = this.getSelect();
+      showForm(fontName) {
+        const select = this.getSelect();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
@@ -70,7 +70,7 @@ export default class FontFaceSelector {
       },
 
       // Called by core when tearing down medium-editor (destroy)
-      destroy: function () {
+      destroy() {
         if (!this.form) {
           return false;
         }
@@ -80,41 +80,37 @@ export default class FontFaceSelector {
         }
 
         delete this.form;
+        return true;
       },
 
       // core methods
 
-      doFormSave: function () {
+      doFormSave() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
-      doFormCancel: function () {
+      doFormCancel() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
       // form creation and event handling
-      createForm: function () {
-        var doc = this.document,
-          form = doc.createElement('div'),
-          select = doc.createElement('select'),
-          close = doc.createElement('a'),
-          save = doc.createElement('a'),
-          option;
+      createForm() {
+        const doc = this.document;
+        const form = doc.createElement('div');
+        const select = doc.createElement('select');
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
-        form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
+        form.id = `medium-editor-toolbar-form-fontname-${this.getEditorId()}`;
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
         // Add font names
-        for (var i = 0; i<this.fonts.length; i++) {
-          let font = this.fonts[i];
-
-          option = doc.createElement('option');
+        for (const font of this.fonts) {
+          const option = doc.createElement('option');
           option.innerHTML = font;
           option.value = font;
           option.setAttribute('style', `font-family: '${font}'`);
@@ -131,17 +127,17 @@ export default class FontFaceSelector {
         return form;
       },
 
-      getSelect: function () {
+      getSelect() {
         return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      handleFontChange: function () {
-        var font = this.getSelect().value;
+      handleFontChange() {
+        const font = this.getSelect().value;
         Store.dispatch(fontFaceChange(font));
         // this.execAction('fontName', { name: font });
       },
 
-      handleFormClick: function (event) {
+      handleFormClick(event) {
         // make sure not to hide form when clicking inside the form
         event.stopPropagation();
       },

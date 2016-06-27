@@ -2,9 +2,8 @@ import { $, find } from 'domtastic/commonjs/selector';
 import { on, off } from 'domtastic/commonjs/event';
 import { hasClass, toggleClass } from 'domtastic/commonjs/dom/class';
 import { css } from 'domtastic/commonjs/css';
-import { some } from 'domtastic/commonjs/array';
+import { forEach, some } from 'domtastic/commonjs/array';
 import { append } from 'domtastic/commonjs/dom/index';
-import { forEach } from 'domtastic/commonjs/array';
 import { children } from 'domtastic/commonjs/selector/extra';
 
 $.fn = !!$.fn ? $.fn : {};

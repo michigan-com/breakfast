@@ -23,8 +23,8 @@ function cacheIsStale() {
   return delta >= cacheLimit;
 }
 
-function listObjects(opts={}) {
-  return new Promise(function(resolve, reject) {
+function listObjects(opts = {}) {
+  return new Promise(function (resolve, reject) {
     let awsOpts = assign({}, opts, { Bucket: breakfastBucket });
 
     s3.listObjects(awsOpts, (err, data) => {
@@ -50,7 +50,7 @@ function registerRoutes(app, router, passport) {
   router.get('/get-all-images/', async (req, res, next) => {
     let photos = [];
     try {
-      //let objects = await listObjects({ MaxKeys: 100 });
+      // let objects = await listObjects({ MaxKeys: 100 });
       if ((typeof CACHE === 'undefined') || cacheIsStale()) {
         let objects = await listObjects();
         photos = objects.Contents;
@@ -64,7 +64,7 @@ function registerRoutes(app, router, passport) {
       for (let photo of photos) {
         photo.url = `https://michigan-breakfast.s3.amazonaws.com/${photo.Key}`;
       }
-    } catch(e) {
+    } catch (e) {
       logger(e);
     }
 
@@ -84,26 +84,26 @@ function registerRoutes(app, router, passport) {
       return;
     }
 
-    let imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '')
+    let imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '');
     let filename = `${uuid()}.png`;
 
     s3.upload({
       Bucket: breakfastBucket,
       Key: filename,
       Body: new Buffer(imageData, 'base64'),
-      ContentType: 'image/png'
+      ContentType: 'image/png',
     }, async (err, data) => {
       if (err) {
-        logger(`ERR: ${err}`)
+        logger(`ERR: ${err}`);
         res.status(500);
         res.send(err);
         return;
       } else {
-        logger(`Saved ${filename}`)
+        logger(`Saved ${filename}`);
 
         let photoObj = await Photo.insertOne({
           email: req.user.email,
-          photo: filename
+          photo: filename,
         });
 
         res.status(200);
@@ -114,5 +114,4 @@ function registerRoutes(app, router, passport) {
   });
 }
 
-module.exports = { registerRoutes }
-
+module.exports = { registerRoutes };

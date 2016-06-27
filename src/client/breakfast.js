@@ -1,5 +1,5 @@
 'use strict';
 
-import Breakfast from './breakfast/breakfast';
+import breakfast from './breakfast/breakfast';
 
-Breakfast();
+breakfast();

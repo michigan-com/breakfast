@@ -1,24 +1,26 @@
 'use strict';
 
-import assign from 'object-assign';
-
 import { ATTRIBUTION_CHANGE, ATTRIBUTION_COLOR_CHANGE,
   ATTRIBUTION_LOCATION_CHANGE, DEFAULT_ATTRIBUTION } from '../../actions/attribution';
 import { CORNER_OPTIONS } from '../../actions/corner';
 
-export default function attributionReducer(state=DEFAULT_ATTRIBUTION, action) {
+export default function attributionReducer(state = DEFAULT_ATTRIBUTION, action) {
+  let { attribution, attributionColor, attributionLocation } = state;
   switch (action.type) {
     case ATTRIBUTION_CHANGE:
-      let attribution = action.value;
-      return assign({}, state, { attribution });
+      attribution = action.value;
+      return { ...state, attribution };
     case ATTRIBUTION_COLOR_CHANGE:
-      let attributionColor = action.value;
-      return assign({}, state, {attributionColor });
+      attributionColor = action.value;
+      return { ...state, attributionColor };
     case ATTRIBUTION_LOCATION_CHANGE:
-      let attributionLocation = action.value;
+      attributionLocation = action.value;
       if (CORNER_OPTIONS.indexOf(attributionLocation) >= 0) {
-        return assign({}, state, { attributionLocation });
+        return { ...state, attributionLocation };
       }
+      break;
+    default:
+      return state;
   }
   return state;
 }

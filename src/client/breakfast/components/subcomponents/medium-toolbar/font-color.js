@@ -10,7 +10,7 @@ export default class FontColorSelector {
     this.fonts = fonts;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
-    this.extension = MediumEditor.extensions.form.extend({
+    this.Extension = MediumEditor.extensions.form.extend({
 
       name: 'fontcolor',
       action: 'fontcace',
@@ -20,19 +20,19 @@ export default class FontColorSelector {
 
       fonts: this.fonts,
 
-      init: function () {
-        MediumEditor.extensions.form.prototype.init.apply(this, arguments);
+      init(...args) {
+        MediumEditor.extensions.form.prototype.init.apply(this, args);
       },
 
       // Called when the button the toolbar is clicked
       // Overrides ButtonExtension.handleClick
-      handleClick: function (event) {
+      handleClick(event) {
         event.preventDefault();
         event.stopPropagation();
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = Store.getState();
+          const options = Store.getState();
           this.showForm(options.Font.fontFace);
         }
 
@@ -40,7 +40,7 @@ export default class FontColorSelector {
       },
 
       // Called by medium-editor to append form to the toolbar
-      getForm: function () {
+      getForm() {
         if (!this.form) {
           this.form = this.createForm();
         }
@@ -48,27 +48,26 @@ export default class FontColorSelector {
       },
 
       // Used by medium-editor when the default toolbar is to be displayed
-      isDisplayed: function () {
+      isDisplayed() {
         return this.getForm().style.display === 'block';
       },
 
-      hideForm: function () {
+      hideForm() {
         this.getForm().style.display = 'none';
       },
 
-      showForm: function (fontName) {
-
+      showForm() {
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        let options = Store.getState();
+        const options = Store.getState();
         this.getForm().className = this.getFormClassName(options.Font.fontColor);
       },
 
       // Called by core when tearing down medium-editor (destroy)
-      destroy: function () {
+      destroy() {
         if (!this.form) {
           return false;
         }
@@ -78,37 +77,37 @@ export default class FontColorSelector {
         }
 
         delete this.form;
+        return true;
       },
 
       // core methods
 
-      doFormSave: function () {
+      doFormSave() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
-      doFormCancel: function () {
+      doFormCancel() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
       // form creation and event handling
-      createForm: function () {
-        var doc = this.document,
-          form = doc.createElement('div'),
-          option,
-          options = Store.getState();
+      createForm() {
+        const doc = this.document;
+        const form = doc.createElement('div');
+        const options = Store.getState();
 
         // Font Name Form (div)
         form.className = this.getFormClassName(options.fontColor);
-        form.id = 'medium-editor-toolbar-form-fontname-' + this.getEditorId();
+        form.id = `medium-editor-toolbar-form-fontname-${this.getEditorId()}`;
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        let colors = ['black', 'white'];
-        for (let color of colors) {
-          var colorEl = doc.createElement('div');
+        const colors = ['black', 'white'];
+        for (const color of colors) {
+          const colorEl = doc.createElement('div');
           colorEl.className = `font-color-option ${color}`;
           this.on(colorEl, 'click', this.colorChangeCallback(color));
 
@@ -118,27 +117,27 @@ export default class FontColorSelector {
         return form;
       },
 
-      getFormClassName: function(color) {
-        return`medium-editor-toolbar-form color-picker ${color}`;
+      getFormClassName(color) {
+        return `medium-editor-toolbar-form color-picker ${color}`;
       },
 
-      getColorEl: function(color) {
+      getColorEl(color) {
         return this.getForm().querySelector(`.font-color-option.${color}`);
       },
 
-      getSelect: function () {
+      getSelect() {
         return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      colorChangeCallback: function(c) {
-        let color = c;
-        return (e) => {
+      colorChangeCallback(c) {
+        const color = c;
+        return () => {
           this.getForm().className = this.getFormClassName(color);
           Store.dispatch(fontColorChange(color));
-        }
+        };
       },
 
-      handleFormClick: function (event) {
+      handleFormClick(event) {
         // make sure not to hide form when clicking inside the form
         event.stopPropagation();
       },

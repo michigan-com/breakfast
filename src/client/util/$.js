@@ -7,4 +7,3 @@ import { html } from 'domtastic/commonjs/dom/html';
 $.fn = { on, off, val, addClass, hasClass, removeClass, toggleClass, html };
 
 module.exports = $;
-

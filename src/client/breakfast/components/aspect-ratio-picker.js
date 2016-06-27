@@ -3,40 +3,52 @@
 import React from 'react';
 
 import Store from '../store';
-import { BACKGROUND_IMAGE } from '../actions/background';
-import { ASPECT_RATIOS, FIT_IMAGE, aspectRatio, getAspectRatioValue } from '../actions/aspect-ratio';
+import { ASPECT_RATIOS, FIT_IMAGE, aspectRatio, getAspectRatioValue,
+  } from '../actions/aspect-ratio';
 
 export default class AspectRatioPicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.aspectRatioChange = this.aspectRatioChange.bind(this);
+    this.renderRatio = this.renderRatio.bind(this);
+  }
 
-  aspectRatioChange(ratio, e) {
+  aspectRatioChange(ratio) {
     Store.dispatch(aspectRatio(ratio));
   }
 
   renderRatio(ratio, index) {
-    let backgroundImg = this.props.options.Background.backgroundImg;
+    const backgroundImg = this.props.options.Background.backgroundImg;
     if (ratio === FIT_IMAGE && backgroundImg.img == null) return null;
 
-    let height = 55;
+    const height = 55;
     let style = { height: `${height}px` };
     style.width = 50 * getAspectRatioValue(this.props.options.Background, ratio);
 
-    let className = `ratio-option`;
+    let className = 'ratio-option';
     if (ratio === this.props.currentRatio) className += ' active';
     return (
-      <div className={ className }
-          key={ `aspect-ratio-option-${index}` }
-          onClick={ this.aspectRatioChange.bind(this, ratio) }>
-        <div className='ratio-example' style={ style }></div>
-        <div className='ratio-name'>{ ratio }</div>
+      <div
+        className={className}
+        key={`aspect-ratio-option-${index}`}
+        onClick={() => { this.aspectRatioChange(ratio); }}
+      >
+        <div className="ratio-example" style={style}></div>
+        <div className="ratio-name">{ratio}</div>
       </div>
-    )
+    );
   }
 
   render() {
     return (
-      <div className='ratio-picker'>
-        { ASPECT_RATIOS.map(this.renderRatio.bind(this)) }
+      <div className="ratio-picker">
+        {ASPECT_RATIOS.map(this.renderRatio)}
       </div>
-    )
+    );
   }
 }
+
+AspectRatioPicker.propTypes = {
+  options: React.PropTypes.shape(Store.getState()).isRequired,
+  currentRatio: React.PropTypes.string.isRequired,
+};

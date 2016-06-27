@@ -1,6 +1,5 @@
 'use strict';
 
-import assign from 'object-assign';
 import React from 'react';
 
 import Store from '../store';
@@ -10,6 +9,11 @@ import CornerPicker from './subcomponents/corner-picker';
 
 export default class LogoOptions extends React.Component {
   static ColorOptions = ['black', 'white'];
+  constructor(props) {
+    super(props);
+
+    this.logoChanged = this.logoChanged.bind(this);
+  }
 
   cornerChange = (corner) => {
     Store.dispatch(logoLocationChange(corner));
@@ -26,14 +30,15 @@ export default class LogoOptions extends React.Component {
         logoColor = '#000';
         break;
       case 'white':
+      default:
         logoColor = '#fff';
         break;
     }
 
     return () => {
-      let logo = this.props.options.Logo.logo;
+      const logo = this.props.options.Logo.logo;
       Store.dispatch(logoColorChange(logo, logoColor));
-    }
+    };
   }
 
   isActiveColor(color) {
@@ -48,16 +53,16 @@ export default class LogoOptions extends React.Component {
 
   renderLogoSelect() {
     let logoSelect = null;
-    let logoIndex = this.props.options.Logo.logoIndex;
+    const logoIndex = this.props.options.Logo.logoIndex;
     if (logoIndex === null) return null;
 
     let logos = this.props.options.Logo.logoOptions;
-    let currentLogo = logos[logoIndex];
+    const currentLogo = logos[logoIndex];
 
     if (logos.length > 1) {
       let currentIndex = 0;
       for (let i = 0; i < logos.length; i++) {
-        let logo = logos[i];
+        const logo = logos[i];
 
         if (logo.filename === currentLogo.filename) {
           currentIndex = i;
@@ -66,68 +71,73 @@ export default class LogoOptions extends React.Component {
       }
 
       logoSelect = (
-        <LogoSelect options={ logos } valueKey='name'
-          onSelect={ this.logoChanged.bind(this) } currentIndex={ currentIndex }/>
-      )
+        <LogoSelect
+          options={logos}
+          valueKey="name"
+          onSelect={this.logoChanged}
+          currentIndex={currentIndex}
+        />
+      );
     }
 
     return logoSelect;
   }
 
   renderLogoColorPicker() {
-    let options = this.props.options;
-    let logoIndex = options.Logo.logoIndex;
-    if (logoIndex === null) return;
+    const options = this.props.options;
+    const logoIndex = options.Logo.logoIndex;
+    if (logoIndex === null) return null;
 
-    let currentLogo = options.Logo.logo;
-    let goodLogoCheck = /\.svg$/;
+    const currentLogo = options.Logo.logo;
+    const goodLogoCheck = /\.svg$/;
 
     if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {
       return (
-        <div className='no-color'>
+        <div className="no-color">
           <p>This logo cannot be colored.</p>
-          <p>Got a better logo? <a href='mailto:help@breakfast.im'>Email us!</a></p>
+          <p>Got a better logo? <a href="mailto:help@breakfast.im">Email us!</a></p>
         </div>
-      )
+      );
     }
 
     let colorOptions = [];
-    for (let color of LogoOptions.ColorOptions) {
+    for (const color of LogoOptions.ColorOptions) {
       let colorClass = ` color ${color}`;
       if (this.isActiveColor(color)) colorClass += ' active';
 
       colorOptions.push(
-        <div className='color-container' key={ `logo-color-${color}` }>
-          <div className={ colorClass } onClick={ this.logoColorChange(color) }></div>
+        <div className="color-container" key={`logo-color-${color}`}>
+          <div className={colorClass} onClick={this.logoColorChange(color)}></div>
         </div>
-      )
+      );
     }
 
     return (
-      <div className='color-options'>
-        { colorOptions }
+      <div className="color-options">
+        {colorOptions}
       </div>
-    )
+    );
   }
 
   render() {
-
     return (
-      <div className='logo-options-container'>
-        <div className='title'>Logos</div>
-        <div className='logo-select-container'>
-          { this.renderLogoSelect() }
+      <div className="logo-options-container">
+        <div className="title">Logos</div>
+        <div className="logo-select-container">
+          {this.renderLogoSelect()}
         </div>
-        <div className='color-picker logo'>
-          { this.renderLogoColorPicker() }
+        <div className="color-picker logo">
+          {this.renderLogoColorPicker()}
         </div>
-        <div className='corner-picker-container'>
-          <CornerPicker name='logo-color'
-            callback={ this.cornerChange }
-            activeCorner= { this.props.options.Logo.logoLocation }/>
+        <div className="corner-picker-container">
+          <CornerPicker
+            name="logo-color"
+            callback={this.cornerChange}
+            activeCorner={this.props.options.Logo.logoLocation}
+          />
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -138,10 +148,13 @@ class LogoSelect extends Select {
     this.htmlClass = 'logo-select';
   }
 
-  getDisplayValue(option, index) {
+  getDisplayValue(option) {
     return (
-      <img src={ `/logos/${option.filename}`} title={ option.name } alt={ option.name }/>
-    )
+      <img src={`/logos/${option.filename}`} title={option.name} alt={option.name} />
+    );
   }
 }
 
+LogoOptions.propTypes = {
+  options: React.PropTypes.shape(Store.getState()).isRequired,
+};

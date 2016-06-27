@@ -14,23 +14,22 @@ import { TOP_LEFT, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT } from '../../actions/co
  *
  */
 export default function updateAttribution(context, canvasStyle, attributionOptions, fontOptions) {
-  let attribution = attributionOptions.attribution;
+  const attribution = attributionOptions.attribution;
 
   if (!attribution) return;
 
-  let canvasPadding = canvasStyle.padding;
-  let canvasWidth = canvasStyle.width;
-  let canvasHeight = canvasStyle.height;
-  let fontFace = fontOptions.fontFace;
-  let fontSize = canvasStyle.height / 25;
-  let lineHeight = fontSize;
-  let textWidth = canvasStyle.width;
+  const canvasPadding = canvasStyle.padding;
+  const canvasWidth = canvasStyle.width;
+  const canvasHeight = canvasStyle.height;
+  const fontFace = fontOptions.fontFace;
+  const fontSize = canvasStyle.height / 25;
 
   context.font = `${fontSize}px ${fontFace}`;
   context.fillStyle = attributionOptions.attributionColor;
-  let textMetrics = context.measureText(attribution);
+  const textMetrics = context.measureText(attribution);
 
-  let x, y;
+  let x;
+  let y;
   switch (attributionOptions.attributionLocation) {
     case TOP_LEFT:
       x = canvasPadding;
@@ -45,6 +44,7 @@ export default function updateAttribution(context, canvasStyle, attributionOptio
       y = canvasHeight - canvasPadding;
       break;
     case BOTTOM_LEFT:
+    default:
       x = canvasPadding;
       y = canvasHeight - canvasPadding;
       break;

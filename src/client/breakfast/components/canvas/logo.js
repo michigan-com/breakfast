@@ -12,15 +12,15 @@ import { TOP_LEFT, TOP_RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT } from '../../actions/co
  *
  */
 export default function updateLogo(context, canvasOptions, logoOptions) {
-  let canvasPadding = canvasOptions.padding;
-  let canvasWidth = canvasOptions.width;
-  let canvasHeight = canvasOptions.height;
-  let maxLogoWidth = canvasWidth * .3;
-  let imgObj = logoOptions.logo.imgObj;
+  const canvasPadding = canvasOptions.padding;
+  const canvasWidth = canvasOptions.width;
+  const canvasHeight = canvasOptions.height;
+  const maxLogoWidth = canvasWidth * 0.3;
+  const imgObj = logoOptions.logo.imgObj;
 
   if (imgObj === null) return;
 
-  let logoAspectRatio = imgObj.width / imgObj.height;
+  const logoAspectRatio = imgObj.width / imgObj.height;
   let logoHeight = canvasHeight / 6;
   if (logoAspectRatio === 1) {
     logoHeight = canvasHeight / 5;
@@ -34,7 +34,8 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
     logoHeight = logoWidth / logoAspectRatio;
   }
 
-  let dx, dy;
+  let dx;
+  let dy;
   switch (logoOptions.logoLocation) {
     case TOP_LEFT:
       dx = canvasPadding;
@@ -49,6 +50,7 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
       dy = canvasHeight - canvasPadding - logoHeight;
       break;
     case BOTTOM_LEFT:
+    default:
       dx = canvasPadding;
       dy = canvasHeight - canvasPadding - logoHeight;
       break;

@@ -8,26 +8,26 @@ export const ATTRIBUTION_LOCATION_CHANGE = 'ATTRIBUTION_LOCATION_CHANGE';
 export const DEFAULT_ATTRIBUTION = {
   attribution: '',
   attributionColor: 'black',
-  attributionLocation: BOTTOM_RIGHT
-}
+  attributionLocation: BOTTOM_RIGHT,
+};
 
-export function attributionChange(attribution='') {
+export function attributionChange(attribution = '') {
   return {
     type: ATTRIBUTION_CHANGE,
-    value: attribution
-  }
+    value: attribution,
+  };
 }
 
-export function attributionColorChange(color=black) {
+export function attributionColorChange(color = 'black') {
   return {
     type: ATTRIBUTION_COLOR_CHANGE,
-    value: color
-  }
+    value: color,
+  };
 }
 
-export function attributionLocationChange(location=BOTTOM_RIGHT) {
+export function attributionLocationChange(location = BOTTOM_RIGHT) {
   return {
     type: ATTRIBUTION_LOCATION_CHANGE,
-    value: location
-  }
+    value: location,
+  };
 }

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import objectAssign from 'object-assign';
 import xr from 'xr';
 
 import Store from './store';
@@ -20,13 +19,15 @@ class PicEditor extends React.Component {
 
     this.state = {
       downloading: false,
-      textContent: null // TODO
+      textContent: null, // TODO
     };
+
+    this.saveImage = this.saveImage.bind(this);
   }
 
   getImageName() {
-    let fileName = ReactDOM.findDOMNode(this.refs['file-name']).value;
-    return fileName ? fileName : 'pic';
+    const fileName = ReactDOM.findDOMNode(this.refs['file-name']).value;
+    return fileName !== '' ? fileName : 'pic';
   }
 
   saveImage() {
@@ -40,14 +41,16 @@ class PicEditor extends React.Component {
       this.setState({ downloading: false });
     };
 
-    let filename = ReactDOM.findDOMNode(this.refs['file-name']).value;
+    const filename = ReactDOM.findDOMNode(this.refs['file-name']).value;
 
-    let element = ReactDOM.render(
-      <DownloadCanvas fontSize={ this.state.fontSize }
-          options={ this.props.options }
-          textContent={ textContent }
-          fileName={ filename || 'pic' }
-          downloadCallback={ doneDownloading }/>,
+    ReactDOM.render(
+      <DownloadCanvas
+        fontSize={this.state.fontSize}
+        options={this.props.options}
+        textContent={textContent}
+        fileName={filename || 'pic'}
+        downloadCallback={doneDownloading}
+      />,
       document.getElementById('download-canvas')
     );
   }
@@ -62,18 +65,29 @@ class PicEditor extends React.Component {
       saveButtonContent = 'Saving...';
     }
 
-    return(
-      <div className='pic-editor'>
-        <div className='image-container'>
-          <AspectRatioPicker currentRatio={ options.Background.aspectRatio } options={ options }/>
-          <EditingCanvas options={ options } options={ options } ref='canvas'/>
+    return (
+      <div className="pic-editor">
+        <div className="image-container">
+          <AspectRatioPicker currentRatio={options.Background.aspectRatio} options={options} />
+          <EditingCanvas options={options} options={options} ref="canvas" />
         </div>
-        <div className='options-container'>
-          <LogoOptions options={ options }/>
-          <BackgroundOptions options={ options }/>
-          <div className='save-container'>
-            <input placeholder='pic' type='text' ref='file-name' id='file-name' onChange={ this.updateFileName }/>
-            <div className={ buttonClass } onClick={ this.saveImage.bind(this) }>{ saveButtonContent }</div>
+        <div className="options-container">
+          <LogoOptions options={options} />
+          <BackgroundOptions options={options} />
+          <div className="save-container">
+            <input
+              placeholder="pic"
+              type="text"
+              ref="file-name"
+              id="file-name"
+              onChange={this.updateFileName}
+            />
+            <div
+              className={buttonClass}
+              onClick={this.saveImage}
+            >
+              {saveButtonContent}
+            </div>
           </div>
         </div>
       </div>
@@ -81,11 +95,14 @@ class PicEditor extends React.Component {
   }
 }
 
+PicEditor.propTypes = {
+  options: React.PropTypes.shape(Store.getState()).isRequired,
+};
+
 function renderBreakfast() {
   let state = Store.getState();
-  console.log(state);
   ReactDOM.render(
-    <PicEditor options={ state }/>,
+    <PicEditor options={state} />,
     document.getElementById('editor')
   );
 }
@@ -101,8 +118,8 @@ export default function Breakfast() {
   xr.get('/fonts/getFonts/')
     .then((data) => {
       Store.dispatch(fontsLoaded(data.fonts));
-  });
+    });
 
   Store.subscribe(renderBreakfast);
   renderBreakfast();
-};
+}

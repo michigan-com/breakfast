@@ -7,9 +7,8 @@ import { fontSizeChange } from '../../../actions/font';
 
 export default class FontSizeSelector {
   constructor() {
-
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
-    this.extension = MediumEditor.extensions.form.extend({
+    this.Extension = MediumEditor.extensions.form.extend({
 
       name: 'fontsize',
       action: 'fontSize',
@@ -17,19 +16,19 @@ export default class FontSizeSelector {
       contentDefault: '&#xB1;', // ±
       contentFA: '<i class="fa fa-text-height"></i>',
 
-      init: function () {
-        MediumEditor.extensions.form.prototype.init.apply(this, arguments);
+      init(...args) {
+        MediumEditor.extensions.form.prototype.init.apply(this, args);
       },
 
       // Called when the button the toolbar is clicked
       // Overrides ButtonExtension.handleClick
-      handleClick: function (event) {
+      handleClick(event) {
         event.preventDefault();
         event.stopPropagation();
 
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
-          let options = Store.getState();
+          const options = Store.getState();
           this.showForm(options.Font.fontSizeMultiplier);
         }
 
@@ -37,7 +36,7 @@ export default class FontSizeSelector {
       },
 
       // Called by medium-editor to append form to the toolbar
-      getForm: function () {
+      getForm() {
         if (!this.form) {
           this.form = this.createForm();
         }
@@ -45,16 +44,16 @@ export default class FontSizeSelector {
       },
 
       // Used by medium-editor when the default toolbar is to be displayed
-      isDisplayed: function () {
+      isDisplayed() {
         return this.getForm().style.display === 'block';
       },
 
-      hideForm: function () {
+      hideForm() {
         this.getForm().style.display = 'none';
       },
 
-      showForm: function (fontSizeMultiplier) {
-        var input = this.getInput();
+      showForm(fontSizeMultiplier) {
+        const input = this.getInput();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
@@ -66,7 +65,7 @@ export default class FontSizeSelector {
       },
 
       // Called by core when tearing down medium-editor (destroy)
-      destroy: function () {
+      destroy() {
         if (!this.form) {
           return false;
         }
@@ -76,33 +75,31 @@ export default class FontSizeSelector {
         }
 
         delete this.form;
+        return true;
       },
 
       // core methods
 
-      doFormSave: function () {
+      doFormSave() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
-      doFormCancel: function () {
+      doFormCancel() {
         this.base.restoreSelection();
         this.base.checkSelection();
       },
 
       // form creation and event handling
-      createForm: function () {
-        var doc = this.document,
-          form = doc.createElement('div'),
-          input = doc.createElement('input'),
-          close = doc.createElement('a'),
-          save = doc.createElement('a'),
-          option,
-          options = Store.getState();
+      createForm() {
+        const doc = this.document;
+        const form = doc.createElement('div');
+        const input = doc.createElement('input');
+        const options = Store.getState();
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
-        form.id = 'medium-editor-toolbar-form-fontsize-' + this.getEditorId();
+        form.id = `medium-editor-toolbar-form-fontsize-${this.getEditorId()}`;
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
@@ -123,17 +120,17 @@ export default class FontSizeSelector {
         return form;
       },
 
-      getInput: function () {
+      getInput() {
         return this.getForm().querySelector('input[type=range]');
       },
 
-      handleFontSizeChange: function() {
-        let input = this.getInput();
+      handleFontSizeChange() {
+        const input = this.getInput();
 
         Store.dispatch(fontSizeChange(input.value));
       },
 
-      handleFormClick: function (event) {
+      handleFormClick(event) {
         // make sure not to hide form when clicking inside the form
         event.stopPropagation();
       },
