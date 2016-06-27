@@ -18,9 +18,8 @@ let defaultPassword = 'test';
 
 if (!process.env.TEST_DB_URI) throw new Error('Please set the TEST_DB_URI env variable');
 
-describe('Registration testing', function() {
-
-  before(function(done) {
+describe('Registration testing', function () {
+  before(function (done) {
     async function init(done) {
       db = await dbConnect(process.env.TEST_DB_URI);
       Invite = db.collection('Invite');
@@ -35,7 +34,7 @@ describe('Registration testing', function() {
       done();
     }
 
-    init(done).catch(function(e) { throw new Error(e) });
+    init(done).catch(function (e) { throw new Error(e); });
   });
 
   after(async function(done) {
@@ -45,29 +44,29 @@ describe('Registration testing', function() {
   });
 
   it('Tests the /register/ get route', async (done) => {
-    let res = await testGetRoute(agent, '/register/')
+    let res = await testGetRoute(agent, '/register/');
     done();
   });
 
   it('Tests registering with an invalid email', async (done) => {
     let res = await testPostRoute(agent, '/register/', {
-      email: 'asdfasdf'
+      email: 'asdfasdf',
     }, 422);
-    equal('email' in res.body.error, true, 'Should have email error in response body');
+    equal('error' in res.body, true, 'Should have email error in response body');
     done();
   });
 
   it('Tests registering with an already-existing user', async (done) => {
     let res = await testPostRoute(agent, '/register/', {
-      email: defaultEmail
+      email: defaultEmail,
     }, 422);
-    equal('username' in res.body.error, true, 'Should have username error in response body');
+    equal('error' in res.body, true, 'Should have username error in response body');
     done();
   });
 
   it('Tests registering with a new email', async (done) => {
     let res = await testPostRoute(agent, '/register/', {
-      email: testEmail
+      email: testEmail,
     }, 200);
 
     equal(res.status, 200, 'Should have been redirected fine');
@@ -85,7 +84,7 @@ describe('Registration testing', function() {
     equal(count, 1, 'Should only be one invite');
 
     let res = await testPostRoute(agent, '/register/', {
-      email: testEmail
+      email: testEmail,
     }, 200);
 
     let expectedUrl = `/register/email-sent/${testEmail}`;
@@ -105,7 +104,7 @@ describe('Registration testing', function() {
       email: testEmail,
       token: invite.token,
       password: 'pwd1',
-      confirmPassword: 'pwd2'
+      confirmPassword: 'pwd2',
     }, 422);
 
     equal('errors' in res.body, true, 'Should have "errors" in response body');
@@ -118,7 +117,7 @@ describe('Registration testing', function() {
       email: testEmail,
       token: 'inavlid token',
       password: 'pwd1',
-      confirmPassword: 'pwd1'
+      confirmPassword: 'pwd1',
     }, 302);
     equal(res.header.location, '/register/', 'Should be redirecting to the register page');
     done();
@@ -128,7 +127,7 @@ describe('Registration testing', function() {
     let res = await testPostRoute(agent, '/create-user/', {
       email: 'This email hasnt been invited',
       password: 'asdf',
-      confirmPassword: 'asdf'
+      confirmPassword: 'asdf',
     }, 302);
     equal(res.header.location, '/register/', 'Should have forwarded to the /register/ url');
     done();
@@ -140,8 +139,8 @@ describe('Registration testing', function() {
       email: testEmail,
       token: invite.token,
       password: 'asdf',
-      confirmPassword: 'asdf'
-    }, 302)
+      confirmPassword: 'asdf',
+    }, 302);
     equal(res.header.location, '/breakfast/', 'Should have forwarded to /breakfast/ url');
     done();
 
@@ -160,5 +159,4 @@ describe('Registration testing', function() {
       //   done();
       // });
   });
-
-})
+});

@@ -1,3 +1,78 @@
 @import './base';
 @import './entry-page';
 
+.form-container {
+  width: 60%;
+  margin-top: 100px;
+}
+
+#domains {
+  .current-selection {
+    text-align: left;
+    padding-left: 15px;
+  }
+}
+
+.username {
+  position: relative;
+
+  &.error {
+    .input-feedback.error {
+      opacity: 1 !important;
+    }
+
+    input {
+      border-color: red;
+    }
+  }
+
+  &.success {
+    .input-feedback.feedback {
+      opacity: 1 !important;
+    }
+    input {
+      border-color: $green;
+    }
+  }
+
+  .input-feedback{
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    text-align: left;
+    padding: 5px;
+    opacity: 0;
+    background: white;
+    transition: opacity 150ms linear;
+
+    &.error {
+      color: $red;
+    }
+  }
+
+  input {
+    text-align: right !important;
+    padding-right: 15px;
+
+    @media (max-width: $screen-sm) {
+      text-align: left !important;
+    }
+  }
+}
+
+input[type=submit]:disabled {
+  opacity: .5;
+  background: $grey !important;
+  color: black !important;
+  cursor: not-allowed !important;
+}
+
+.full-email {
+  display: inline-block;
+  margin-left: 40px;
+  color: white;
+  text-align: center;
+}

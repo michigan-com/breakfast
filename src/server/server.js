@@ -20,15 +20,15 @@ async function startServer() {
   app.set('port', port);
 
   logger(`[SERVER] Environment: ${app.get('env')}`);
-  var server = app.listen(port, '0.0.0.0', function(err) {
+  var server = app.listen(port, '0.0.0.0', function (err) {
     if (err) throw new Error(err);
 
     let host = this.address();
     logger(`[SERVER] Started on ${host.address}:${host.port}`);
   });
 
-  server.on('close', function() {
-    logger("[SERVER] Closed nodejs application ...");
+  server.on('close', function () {
+    logger('[SERVER] Closed nodejs application ...');
     db.close();
   });
 
@@ -45,4 +45,7 @@ function normalizePort(val) {
   return false;
 }
 
-startServer();
+startServer().catch((e) => {
+  console.error(e);
+  console.error(e.stack);
+});

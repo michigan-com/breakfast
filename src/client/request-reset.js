@@ -2,7 +2,7 @@
 
 import xr from 'xr';
 
-import $ from '../util/$';
+import $ from './util/$';
 
 $('form.password-reset-form').on('submit', (e) => {
   e.preventDefault();
@@ -12,7 +12,7 @@ $('form.password-reset-form').on('submit', (e) => {
   let values = { email };
 
   xr.post('/password-reset/', values).then((resp) => {
-    document.getElementById('success-text').innerText = `Please check your email for the password reset link`;
+    document.getElementById('success-text').innerText = 'Please check your email for the password reset link';
     let submit = document.getElementById('submit');
 
     submit.setAttribute('disabled', true);

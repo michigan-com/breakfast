@@ -2,7 +2,7 @@
 
 import xr from 'xr';
 
-import $ from '../util/$';
+import $ from './util/$';
 
 
 $('form.password-reset-form').on('submit', (e) => {
@@ -16,17 +16,17 @@ $('form.password-reset-form').on('submit', (e) => {
   let values = { password, confirmPassword, _csrf };
 
   xr.post(url, values).then((resp) => {
-    document.getElementById('success-text').innerHTML = '<p>Password successfully changed</p><p>Please <a href=\'/login/\'>Login</a> with your new password.'
+    document.getElementById('success-text').innerHTML = '<p>Password successfully changed</p><p>Please <a href=\'/login/\'>Login</a> with your new password.';
     let submit = document.getElementById('submit');
 
     submit.setAttribute('disabled', true);
     submit.value = '✓';
   }, (resp) => {
-      let response = JSON.parse(resp.response);
+    let response = JSON.parse(resp.response);
 
-      for (var error in response.errors) {
-        let errorString = response.errors[error];
-        document.getElementById('success-text').innerText = errorString;
-      }
+    for (var error in response.errors) {
+      let errorString = response.errors[error];
+      document.getElementById('success-text').innerText = errorString;
+    }
   });
 });
