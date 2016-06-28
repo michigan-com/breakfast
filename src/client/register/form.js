@@ -99,6 +99,8 @@ export default class RegisterForm extends React.Component {
       inputErrorClass.push('success');
       submitDisabled = true;
       submitValue = '✓';
+    } else if (this.props.Input.username === '') {
+      submitDisabled = true;
     }
 
     return (
