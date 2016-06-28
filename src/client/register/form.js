@@ -70,6 +70,10 @@ export default class RegisterForm extends React.Component {
     e.stopPropagation();
 
     if (this.props.Input.inputError) return;
+    else if (this.props.Input.username === '') {
+      Store.dispatch(inputError('Please input your username'));
+      return;
+    }
 
     const email = this.getFullEmail();
     const _csrf = this.csrf;
