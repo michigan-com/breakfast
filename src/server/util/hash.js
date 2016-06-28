@@ -1,3 +1,5 @@
+'use strict';
+
 import crypto from 'crypto';
 
 /**
@@ -6,7 +8,7 @@ import crypto from 'crypto';
  * @param {String} password - Password to hash
  */
 function hash(pwd) {
-  let sha = crypto.createHash('sha256');
+  const sha = crypto.createHash('sha256');
   sha.update(pwd);
   return sha.digest('hex');
 }
@@ -22,4 +24,4 @@ function passwordMatch(input, password) {
   return hash(input) === password;
 }
 
-module.exports = { hash, passwordMatch }
+module.exports = { hash, passwordMatch };

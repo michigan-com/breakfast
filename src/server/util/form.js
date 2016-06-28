@@ -1,3 +1,5 @@
+'use strict';
+
 import assign from 'object-assign';
 
 class Field {
@@ -20,13 +22,13 @@ class Field {
    *        field
    */
   constructor(opts) {
-    let defaultOptions = {
+    const defaultOptions = {
       type: 'text',
       errors: [],
       label: opts.name,
       value: '',
       placeholder: opts.name,
-      classes: [opts.name]
+      classes: [opts.name],
     };
 
     this.options = assign({}, defaultOptions, opts);
@@ -44,5 +46,5 @@ class Field {
 }
 
 module.exports = {
-  Field
-}
+  Field,
+};

@@ -3,7 +3,6 @@
 import fs from 'fs';
 import path from 'path';
 
-import debug from 'debug';
 import cheerio from 'cheerio';
 
 import env from '../env';
@@ -12,12 +11,10 @@ import { getDomainFromEmail } from '../util/parse';
 import dir from '../util/dir';
 import logoJson from '../../logoInfo.json';
 
-var logger = debug('breakfast:logoFetch');
-
-var LOGO_ROOT = dir('logos');
+const LOGO_ROOT = dir('logos');
 
 class LogoFetch {
-  constructor(logoRoot=LOGO_ROOT) {
+  constructor(logoRoot = LOGO_ROOT) {
     this.logoRoot = logoRoot;
   }
 
@@ -40,7 +37,7 @@ class LogoFetch {
 
     if (this.logos.indexOf(filename) < 0) return null;
 
-    let data = await this.readFile_(path.join(this.logoRoot, filename));
+    let data = await this.readFile(path.join(this.logoRoot, filename));
 
     if (color) {
       data = this.colorLogo(data, color);
@@ -49,22 +46,22 @@ class LogoFetch {
   }
 
   async getAllLogos() {
-    let files = await this.getAllLogos_(this.logoRoot);
+    const files = await this.readLogoFile(this.logoRoot);
     return files;
   }
 
   colorLogo(data, color) {
-    let $ = cheerio.load(data, {
+    const $ = cheerio.load(data, {
       xmlMode: true,
     });
     $('g:not(.no-color-change)').attr('style', 'filter: none;');
 
-    $('path, text, circle, polyline, polygon').each(function(index, obj) {
+    $('path, text, circle, polyline, polygon').each((index, obj) => {
       if ($(obj).hasClass('no-color-change')) return;
       else if ($(obj).parents('defs').length) return;
 
-      let style = `filter: none;`;
-      if ($(obj).get(0).tagName !== 'circle') style += `fill: #${color};`
+      let style = 'filter: none;';
+      if ($(obj).get(0).tagName !== 'circle') style += `fill: #${color};`;
 
       $(obj).attr('style', style);
     });
@@ -78,26 +75,25 @@ class LogoFetch {
   /**
    * Promise-based reading of the files in the logo directory
    */
-  getAllLogos_(folder) {
-    return new Promise(function(resolve, reject) {
-      fs.readdir(folder, function(err, files) {
+  readLogoFile(folder) {
+    return new Promise((resolve, reject) => {
+      fs.readdir(folder, (err, files) => {
         if (err) reject(err);
 
         resolve(files);
       });
-
     });
   }
 
   /**
    * Promise-based reading of file
    */
-  readFile_(filepath) {
-    return new Promise(function(resolve, reject){
-      fs.readFile(filepath, 'utf-8', function(err, data){
-        if (err) reject(err);
+  readFile(filepath) {
+    return new Promise((resolve, reject) => {
+      fs.readFile(filepath, 'utf-8', (err, data) => {
+        if (err) return reject(err);
 
-        resolve(data);
+        return resolve(data);
       });
     });
   }
@@ -112,8 +108,8 @@ class LogoFetch {
  * @param {Object} router - express.Router() instance
  * @param {Object} passport - Passport instance
  */
-function registerRoutes(app, router, passport) {
-  let logoFetch = new LogoFetch();
+function registerRoutes(app, router) {
+  const logoFetch = new LogoFetch();
 
   /**
    * Determins whether a user has access to a specific logo file or not.
@@ -123,7 +119,7 @@ function registerRoutes(app, router, passport) {
    * @returns {Boolean} true if the user has access, false otherwise
    */
   function userHasAccess(logoInfo, user) {
-    let domain = getDomainFromEmail(user.email);
+    const domain = getDomainFromEmail(user.email);
 
     if (logoInfo.domain.indexOf(domain) >= 0) {
       return true;
@@ -137,47 +133,45 @@ function registerRoutes(app, router, passport) {
   }
 
   // Getting the logo info
-  router.get('/logos/getLogos/', loginRequired, function(req, res, next) {
-    let approvedLogos = {};
-    for (let filename in logoJson) {
-      let logoInfo = Object.assign({}, logoJson[filename]);
+  router.get('/logos/getLogos/', loginRequired, (req, res) => {
+    const approvedLogos = {};
+    Object.keys(logoJson).forEach((filename) => {
+      const logoInfo = { ...logoJson[filename] };
       if (userHasAccess(logoInfo, req.user)) {
         approvedLogos[filename] = logoInfo;
       }
-    }
+    });
     res.json(approvedLogos);
   });
 
-  // Getting the logo files
-  router.get('/logos/:filename', (req, res, next) => {
-    return getLogo(req, res, next).catch(function(err) {
-      next(err);
-    });
-  });
+  async function getLogo(req, res) {
+    const color = 'color' in req.query ? req.query.color : undefined;
+    const filename = req.params.filename;
+    const logoInfo = logoJson[filename];
 
-  async function getLogo(req, res, next) {
-    let color = 'color' in req.query ? req.query.color : undefined;
-    let filename = req.params.filename;
-    let logoInfo = logoJson[filename];
-
-    let data = await logoFetch.getLogo(filename, color);
+    const data = await logoFetch.getLogo(filename, color);
 
     if (logoInfo.isSvg) {
       res.set({
         'Accept-Ranges': 'bytes',
         'Cache-Control': 'public, max-age=0',
         'Content-Type': 'image/svg+xml',
-        'Content-Length': data.length
+        'Content-Length': data.length,
       }).send(data);
     } else {
       res.redirect(`/img/logos/${filename}`);
     }
   }
 
-
+  // Getting the logo files
+  router.get('/logos/:filename', (req, res, next) => {
+    getLogo(req, res, next).catch((err) => {
+      next(err);
+    });
+  });
 }
 
 module.exports = {
   registerRoutes,
-  LogoFetch
-}
+  LogoFetch,
+};

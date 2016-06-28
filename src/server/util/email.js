@@ -4,17 +4,14 @@ import debug from 'debug';
 
 import marketInfo from '../../marketInfo.json';
 
-let logger = debug('breakfast:util:email');
+const logger = debug('breakfast:util:email');
 
 // http://stackoverflow.com/a/46181/1337683
-let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 function getValidEmailDomains() {
-  let validEmailDomains = [];
-  for (let marketName in marketInfo) {
-    let market = marketInfo[marketName];
-    validEmailDomains.push(market.domain);
-  }
+  const validEmailDomains = [];
+  Object.values(marketInfo).forEach((market) => { validEmailDomains.push(market.domain); });
   return validEmailDomains;
 }
 
@@ -26,24 +23,23 @@ function getValidEmailDomains() {
  * @return {Boolean} True if the email is valid, false otherwise
  */
 function isValidEmail(email) {
-
-  logger(`Testing ${email}`)
+  logger(`Testing ${email}`);
 
   // Reject if the email is formatted incorrectly
-  //if (!emailRegex.test(email)) {
-    //logger(`${email} failed email regex`)
-    //return false;
-  //}
+  // if (!emailRegex.test(email)) {
+    // logger(`${email} failed email regex`)
+    // return false;
+  // }
 
   // Reject if it's not a supported domain
   let validDomain = false;
-  for (let domain of getValidEmailDomains()) {
+  for (const domain of getValidEmailDomains()) {
     if (domain === '*') continue;
 
-    let regex = RegExp(`@${domain}$`);
+    const regex = RegExp(`@${domain}$`);
 
     if (regex.test(email)) {
-      logger(`${domain} worked!`)
+      logger(`${domain} worked!`);
       validDomain = true;
       break;
     }
@@ -55,5 +51,5 @@ function isValidEmail(email) {
 module.exports = {
   getValidEmailDomains,
   emailRegex,
-  isValidEmail
-}
+  isValidEmail,
+};

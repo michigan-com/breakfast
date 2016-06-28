@@ -3,14 +3,12 @@
 import path from 'path';
 
 import express from 'express';
-import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import csrf from 'csurf';
 import passport from 'passport';
 import flash from 'connect-flash';
 import session from 'express-session';
-import ConnectMongo from 'connect-mongo';
+import connectMongo from 'connect-mongo';
 
 import storeLocals from './middleware/storeLocals';
 import router from './routes/router';
@@ -23,16 +21,16 @@ import dir from './util/dir';
  *
  * @param {String} dbString - Connection string for DB
  */
-function createApp(db, enableCsrf=true) {
-  var app = express();
-  var BASE_DIR = path.dirname(__dirname);
-  var MongoStore = ConnectMongo(session);
+function createApp(db, enableCsrf = true) {
+  const app = express();
+  const BASE_DIR = path.dirname(__dirname);
+  const MongoStore = connectMongo(session);
 
   app.set('views', dir('views'));
   app.set('view engine', 'jade');
   app.set('use csrf', enableCsrf);
 
-  //app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
+  // app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
   app.use(cookieParser());
@@ -41,10 +39,10 @@ function createApp(db, enableCsrf=true) {
     secret: 'Whats for breakfast eh?',
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ db })
+    store: new MongoStore({ db }),
   }));
   if (enableCsrf) {
-    //app.use(csrf({ cookie: true }));
+    // app.use(csrf({ cookie: true }));
   }
   app.use(passport.initialize());
   app.use(passport.session());
@@ -61,5 +59,5 @@ function createApp(db, enableCsrf=true) {
 }
 
 module.exports = {
-  createApp
-}
+  createApp,
+};

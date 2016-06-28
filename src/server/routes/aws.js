@@ -7,30 +7,29 @@ import assign from 'object-assign';
 import uuid from '../util/uuid';
 import { loginRequired } from '../middleware/login';
 
-var logger = debug('breakfast:aws');
-var breakfastBucket = 'michigan-breakfast';
-var s3 = new AWS.S3();
+const logger = debug('breakfast:aws');
+const breakfastBucket = 'michigan-breakfast';
+const s3 = new AWS.S3();
 
 // TODO remove
-var CACHE = undefined;
-var CACHE_DATE = undefined;
-var cacheLimit = 1000 * 60 * 60; // 1 hour
+let CACHE = undefined;
+let CACHE_DATE = undefined;
+const cacheLimit = 1000 * 60 * 60; // 1 hour
 
 function cacheIsStale() {
   if (typeof CACHE_DATE === 'undefined') return true;
 
-  let delta = (new Date()) - CACHE_DATE;
+  const delta = (new Date()) - CACHE_DATE;
   return delta >= cacheLimit;
 }
 
 function listObjects(opts = {}) {
-  return new Promise(function (resolve, reject) {
-    let awsOpts = assign({}, opts, { Bucket: breakfastBucket });
+  return new Promise((resolve, reject) => {
+    const awsOpts = assign({}, opts, { Bucket: breakfastBucket });
 
     s3.listObjects(awsOpts, (err, data) => {
       if (err) return reject(err);
-
-      resolve(data);
+      return resolve(data);
     });
   });
 }
@@ -43,16 +42,16 @@ function listObjects(opts = {}) {
  * @param {Object} router - express.Router() instance
  * @param {Object} passport - Passport instance
  */
-function registerRoutes(app, router, passport) {
-  let db = app.get('db');
-  let Photo = db.collection('Photo');
+function registerRoutes(app, router) {
+  const db = app.get('db');
+  const Photo = db.collection('Photo');
 
-  router.get('/get-all-images/', async (req, res, next) => {
+  router.get('/get-all-images/', async (req, res) => {
     let photos = [];
     try {
       // let objects = await listObjects({ MaxKeys: 100 });
       if ((typeof CACHE === 'undefined') || cacheIsStale()) {
-        let objects = await listObjects();
+        const objects = await listObjects();
         photos = objects.Contents;
 
         CACHE = photos;
@@ -61,7 +60,7 @@ function registerRoutes(app, router, passport) {
         photos = CACHE;
       }
 
-      for (let photo of photos) {
+      for (const photo of photos) {
         photo.url = `https://michigan-breakfast.s3.amazonaws.com/${photo.Key}`;
       }
     } catch (e) {
@@ -74,42 +73,42 @@ function registerRoutes(app, router, passport) {
   router.put('/save-image/', loginRequired, (req, res, next) => {
     if (!('imageData' in req.body)) {
       res.status(400);
-      return next();
+      next();
+      return;
     }
 
     // Don't upload unless on prod
-    if (process.env.NODE_ENV != 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       res.status(200);
       res.send();
       return;
     }
 
-    let imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '');
-    let filename = `${uuid()}.png`;
+    const imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '');
+    const filename = `${uuid()}.png`;
 
     s3.upload({
       Bucket: breakfastBucket,
       Key: filename,
       Body: new Buffer(imageData, 'base64'),
       ContentType: 'image/png',
-    }, async (err, data) => {
+    }, async (err) => {
       if (err) {
         logger(`ERR: ${err}`);
         res.status(500);
         res.send(err);
-        return;
       } else {
         logger(`Saved ${filename}`);
 
-        let photoObj = await Photo.insertOne({
+        await Photo.insertOne({
           email: req.user.email,
           photo: filename,
         });
 
         res.status(200);
         res.send();
-        return;
       }
+      return;
     });
   });
 }

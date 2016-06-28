@@ -23,18 +23,27 @@ export default class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      emailDomain: '',
+    };
+
     this.csrfToken = document.getElementById('_csrf').value;
     this.submitForm = this.submitForm.bind(this);
     this.usernameChange = this.usernameChange.bind(this);
+    this.emailDomainUpdate = this.emailDomainUpdate.bind(this);
     this.domainSelect = null;
   }
 
   getFullEmail() {
     if (this.domainSelect === null) return '';
     const username = this.props.Input.username;
-    const domain = this.domainSelect.currentSelection();
+    const domain = this.state.emailDomain;
     const email = `${username}@${domain}`;
     return email;
+  }
+
+  emailDomainUpdate(domain) {
+    this.setState({ emailDomain: domain });
   }
 
   usernameChange(e) {
@@ -115,7 +124,7 @@ export default class RegisterForm extends React.Component {
           <div id="domains">
             <DomainSelect
               ref={(select) => { if (select) this.domainSelect = select; }}
-              onSelect={() => { this.setState({ domainSelect: true }); }}
+              onSelect={this.emailDomainUpdate}
               options={validEmailDomains}
             />
           </div>

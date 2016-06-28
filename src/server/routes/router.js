@@ -12,8 +12,8 @@ import passwordReset from './password-reset';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
-  let router = new Router();
-  let passport = createPassport(app);
+  const router = new Router();
+  const passport = createPassport(app);
 
   // Create the different routes
   // TODO change this, no need to pass around the app for everything
@@ -25,13 +25,12 @@ function registerRoutes(app) {
 
   try {
     passwordReset.registerRoutes(app, router, passport);
-
-  } catch(e) {
+  } catch (e) {
     throw new Error(e);
   }
 
   // Basic routes
-  router.get('/', function(req, res) {
+  router.get('/', (req, res) => {
     res.render('index');
   });
 
@@ -39,7 +38,7 @@ function registerRoutes(app) {
 
   router.get('/breakfast/',
     loginRequired,
-    (req, res, next) => {
+    (req, res) => {
       res.render('breakfast');
     }
   );
@@ -48,5 +47,5 @@ function registerRoutes(app) {
 }
 
 module.exports = {
-  registerRoutes
-}
+  registerRoutes,
+};

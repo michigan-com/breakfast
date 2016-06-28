@@ -12,9 +12,9 @@ import { getDomainFromEmail } from '../util/parse';
  * @param {Object} router - express.Router() instance
  * @param {Object} passport - Passport instance
  */
-function registerRoutes(app, router, passport) {
-  router.get('/fonts/getFonts/', loginRequired, (req, res, next) => {
-    let domain = getDomainFromEmail(req.user.email);
+function registerRoutes(app, router) {
+  router.get('/fonts/getFonts/', loginRequired, (req, res) => {
+    const domain = getDomainFromEmail(req.user.email);
     let fonts = basicFonts.slice(); // copies the array
 
     if (domain === 'usatoday.com') fonts = fonts.concat(usatFonts);
@@ -22,4 +22,4 @@ function registerRoutes(app, router, passport) {
   });
 }
 
-module.exports = { registerRoutes }
+module.exports = { registerRoutes };

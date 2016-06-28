@@ -2,30 +2,17 @@
 
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import debug from 'debug';
 import { ObjectID } from 'mongodb';
 
 import { passwordMatch } from '../util/hash';
 
-var logger = debug('breakfast:routes:passport');
-
 function createPassport(app) {
-  let db = app.get('db');
-  let User = db.collection('User');
+  const db = app.get('db');
+  const User = db.collection('User');
 
-  passport.use(new LocalStrategy({
-      usernameField: 'email'
-    },
-    // this is the function that gets called when a user logs in via posting
-    //  to the /login/ url
-    function(email, password, done) {
-      loginCheck(email, password, done).catch(function(err) { throw new Error(err) });
-    }
-  ));
-
-  async function loginCheck(email, password, done) {
-    email = email.toLowerCase();
-    let user = await User.find({ email }).limit(1).next();
+  async function loginCheck(emailInput, password, done) {
+    const email = emailInput.toLowerCase();
+    const user = await User.find({ email }).limit(1).next();
 
     if (!user || !passwordMatch(password, user.password)) {
       return done(null, false);
@@ -34,22 +21,32 @@ function createPassport(app) {
     return done(null, user);
   }
 
-  passport.serializeUser(function(user, done) {
+  passport.use(new LocalStrategy({
+    usernameField: 'email',
+  },
+    // this is the function that gets called when a user logs in via posting
+    //  to the /login/ url
+    (email, password, done) => {
+      loginCheck(email, password, done).catch((err) => { throw new Error(err); });
+    }
+  ));
+
+  passport.serializeUser((user, done) => {
     // TODO make this better somehow
-    return done(null, user._id);
+    done(null, user._id);
   });
 
-  passport.deserializeUser(async function(_id, done) {
-    async function deserialize(_id) {
-      let user = await User.find({ _id: ObjectID(_id) }).limit(1).next();
+  passport.deserializeUser(async (_id, done) => {
+    async function deserialize() {
+      const user = await User.find({ _id: ObjectID(_id) }).limit(1).next();
 
       return user;
     }
 
     try {
-      let user = await deserialize(_id);
+      const user = await deserialize(_id);
       done(null, user);
-    } catch(e) {
+    } catch (e) {
       done(e, false);
     }
   });
@@ -58,5 +55,5 @@ function createPassport(app) {
 }
 
 module.exports = {
-  createPassport
-}
+  createPassport,
+};

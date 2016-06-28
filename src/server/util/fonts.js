@@ -1,15 +1,15 @@
 'use strict';
 
-export var basicFonts = [
+export const basicFonts = [
   'Helvetica',
   'Impact',
   'Georgia',
 ];
 
-export var usatFonts = [
+export const usatFonts = [
   'Futura Today',
   'Futura Demibold',
-  'Futura Light'
+  'Futura Light',
 ];
 
-module.exports = { basicFonts, usatFonts }
+module.exports = { basicFonts, usatFonts };

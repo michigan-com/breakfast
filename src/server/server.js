@@ -4,7 +4,14 @@ import debug from 'debug';
 import { createApp } from './app';
 import dbConnect from './util/dbConnect';
 
-var logger = debug('breakfast:server');
+const logger = debug('breakfast:server');
+
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+  if (isNaN(port)) return val;
+  if (port >= 0) return port;
+  return false;
+}
 
 if (!process.env.DB_URI) {
   throw new Error('Process.env.DB_URI not set, please set it to a mongoDB instance');
@@ -12,37 +19,30 @@ if (!process.env.DB_URI) {
 
 // Connect to the db then start the app
 async function startServer() {
-  let db = await dbConnect(process.env.DB_URI);
+  const db = await dbConnect(process.env.DB_URI);
 
   // Create the app
-  var app = createApp(db, true);
-  var port = normalizePort(process.env.NODE_PORT || '3000');
+  const app = createApp(db, true);
+  const port = normalizePort(process.env.NODE_PORT || '3000');
   app.set('port', port);
 
   logger(`[SERVER] Environment: ${app.get('env')}`);
-  var server = app.listen(port, '0.0.0.0', function (err) {
+  const server = app.listen(port, '0.0.0.0', function appConnect(err) {
     if (err) throw new Error(err);
 
-    let host = this.address();
+    const host = this.address();
     logger(`[SERVER] Started on ${host.address}:${host.port}`);
   });
 
-  server.on('close', function () {
+  server.on('close', () => {
     logger('[SERVER] Closed nodejs application ...');
     db.close();
   });
 
-  process.on('SIGTERM', function () {
+  process.on('SIGTERM', () => {
     db.close();
     server.close();
   });
-}
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-  if (isNaN(port)) return val;
-  if (port >= 0) return port;
-  return false;
 }
 
 startServer().catch((e) => {
