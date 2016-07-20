@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ColorPicker from 'react-color';
+import { CompactPicker } from 'react-color';
 
 import Store from '../store';
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, backgroundColorChange,
@@ -52,7 +52,7 @@ export default class BackgroundOptions extends React.Component {
   }
 
   backgroundColorChange = (color) => {
-    Store.dispatch(backgroundColorChange(`#${color.hex}`));
+    Store.dispatch(backgroundColorChange(`${color.hex}`));
   }
 
   renderFileUploader() {
@@ -95,11 +95,34 @@ export default class BackgroundOptions extends React.Component {
       backgroundColor: options.Background.backgroundColor,
     };
 
-    let colorPickerStyle = {
-      position: 'absolute',
-      top: '-100%',
-      left: '-50%',
-    };
+    let picker = null;
+    if (this.state.showColorPicker) {
+      const coverStyle = {
+        position: 'fixed',
+        top: '0',
+        right: '0',
+        bottom: '0',
+        left: '0',
+      };
+      const poppoverStyle = {
+        position: 'absolute',
+        zIndex: '2',
+      };
+      picker = (
+        <div style={poppoverStyle}>
+          <div style={coverStyle} onClick={() => { this.setState({ showColorPicker: false }); }} />
+          <CompactPicker
+            className="color-picker"
+            color={options.backgroundColor}
+            display={this.state.showColorPicker}
+            onChange={this.backgroundColorChange}
+            onClose={() => { this.setState({ showColorPicker: false }); }}
+            key={'background-color-picker'}
+          />
+        </div>
+
+      );
+    }
 
     return (
       <div className="color-picker">
@@ -109,16 +132,7 @@ export default class BackgroundOptions extends React.Component {
           onClick={() => { this.setState({ showColorPicker: true }); }}
         ></div>
         <div className="picker-container">
-          <ColorPicker
-            className="color-picker"
-            type="compact"
-            color={options.backgroundColor}
-            display={this.state.showColorPicker}
-            onChange={this.backgroundColorChange}
-            onClose={() => { this.setState({ showColorPicker: false }); }}
-            positionCSS={colorPickerStyle}
-            key={'background-color-picker'}
-          />
+          {picker}
         </div>
       </div>
     );

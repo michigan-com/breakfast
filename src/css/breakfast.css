@@ -510,10 +510,9 @@ input[type=text] {
 
 .picker-container {
   position: absolute;
-  padding: $picker-padding;
   z-index: 1000;
-  left: -100%;
-  bottom: 0;
+  left: -75%;
+  top: 0;
 
   .picker-close {
     @mixin close-button;
