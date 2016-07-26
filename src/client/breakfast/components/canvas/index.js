@@ -7,14 +7,19 @@ import updateBackground from './background';
 import updateLogo from './logo';
 import updateAttribution from './attribution';
 import updateText from './text';
-import Store from '../../store';
 
 export default class Canvas extends React.Component {
+  static propTypes = {
+    textContent: React.PropTypes.string,
+    Background: React.PropTypes.object,
+    Logo: React.PropTypes.object,
+    Attribution: React.PropTypes.object,
+    Font: React.PropTypes.object,
+    Text: React.PropTypes.object,
+  };
+
   componentDidMount() { this.updateCanvas(); }
-  componentDidUpdate() {
-    // TODO - figure out if we need to clear out the old canvas
-    this.updateCanvas();
-  }
+  componentDidUpdate() { this.updateCanvas(); }
 
   getCanvasNode() {
     return findDOMNode(this.refs.canvas);
@@ -29,7 +34,7 @@ export default class Canvas extends React.Component {
   // the size using CSS transform. So the actual size of the canvas is double
   // what we have stored in the store
   getCanvasStyle() {
-    const canvas = this.props.options.Background.canvas;
+    const { canvas } = this.props.Background;
 
     return {
       width: canvas.canvasWidth,
@@ -42,16 +47,16 @@ export default class Canvas extends React.Component {
   updateCanvas() {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
-    const options = this.props.options;
+    const { Background, Attribution, Logo, Font, Text, textContent } = this.props;
 
     // Clear out and re-draw
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
 
-    updateBackground(context, canvasStyle, options.Background);
-    updateLogo(context, canvasStyle, options.Logo);
-    updateAttribution(context, canvasStyle, options.Attribution, options.Font);
-    if (this.props.textContent) {
-      updateText(context, canvasStyle, options.Font, options.Text, this.props.textContent);
+    updateBackground(context, canvasStyle, Background);
+    updateLogo(context, canvasStyle, Logo);
+    updateAttribution(context, canvasStyle, Attribution, Font);
+    if (textContent) {
+      updateText(context, canvasStyle, Font, Text, textContent);
     }
   }
 
@@ -62,8 +67,3 @@ export default class Canvas extends React.Component {
     );
   }
 }
-
-Canvas.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-  textContent: React.PropTypes.object.isRequired,
-};

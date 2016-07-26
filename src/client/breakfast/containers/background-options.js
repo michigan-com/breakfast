@@ -3,17 +3,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CompactPicker } from 'react-color';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Store from '../store';
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, backgroundColorChange,
-  removeBackgroundImage, backgroundImageUpload } from '../actions/background';
+  removeBackgroundImage, backgroundImageUpload, updateDrawLocation } from '../actions/background';
 import { attributionChange, attributionColorChange,
   attributionLocationChange } from '../actions/attribution';
-import CornerPicker from './subcomponents/corner-picker';
-import BackgroundPosition from './subcomponents/background-position';
+import CornerPicker from '../components/corner-picker';
+import BackgroundPosition from '../components/background-position';
 
-export default class BackgroundOptions extends React.Component {
+// TODO component-ize
+class BackgroundOptions extends React.Component {
 
+  static propTypes = {
+    actions: React.PropTypes.object.isRequired,
+    Background: React.PropTypes.object.isRequired,
+    Attribution: React.PropTypes.object.isRequired,
+  }
   static options = [BACKGROUND_IMAGE, BACKGROUND_COLOR];
   static AttributionColors = ['black', 'white'];
 
@@ -28,12 +35,12 @@ export default class BackgroundOptions extends React.Component {
   attributionColorCallback = (c) => {
     const color = c;
     return () => {
-      Store.dispatch(attributionColorChange(color));
+      this.props.actions.attributionColorChange(color);
     };
   }
 
   updateAttribution = (e) => {
-    Store.dispatch(attributionChange(e.target.value));
+    this.props.actions.attributionChange(e.target.value);
   }
 
   triggerFileUpload = () => {
@@ -48,22 +55,25 @@ export default class BackgroundOptions extends React.Component {
     if (!input.files || !input.files.length) return;
 
     const file = input.files[0];
-    Store.dispatch(backgroundImageUpload(file));
+    this.props.actions.backgroundImageUpload(file);
   }
 
   backgroundColorChange = (color) => {
-    Store.dispatch(backgroundColorChange(`${color.hex}`));
+    this.props.actions.backgroundColorChange(`${color.hex}`);
   }
 
   renderFileUploader() {
-    const options = this.props.options;
+    const { Background } = this.props;
 
     // If we already uploaded a file...
     let content = null;
-    if (!!options.Background.backgroundImg.img) {
+    if (!!Background.backgroundImg.img) {
       content = (
         <div className="background-image">
-          <BackgroundPosition options={options} />
+          <BackgroundPosition
+            Background={Background}
+            updateDrawLocation={this.props.actions.updateDrawLocation}
+          />
         </div>
       );
     } else {
@@ -90,9 +100,9 @@ export default class BackgroundOptions extends React.Component {
   }
 
   renderColorPicker() {
-    const options = this.props.options;
+    const { Background } = this.props;
     let style = {
-      backgroundColor: options.Background.backgroundColor,
+      backgroundColor: Background.backgroundColor,
     };
 
     let picker = null;
@@ -113,7 +123,7 @@ export default class BackgroundOptions extends React.Component {
           <div style={coverStyle} onClick={() => { this.setState({ showColorPicker: false }); }} />
           <CompactPicker
             className="color-picker"
-            color={options.backgroundColor}
+            color={Background.backgroundColor}
             display={this.state.showColorPicker}
             onChange={this.backgroundColorChange}
             onClose={() => { this.setState({ showColorPicker: false }); }}
@@ -141,18 +151,18 @@ export default class BackgroundOptions extends React.Component {
   renderBackgroundOption(option) {
     if (BackgroundOptions.options.indexOf(option) < 0) return null;
 
-    const options = this.props.options;
+    const { Background } = this.props;
     let className = `background-option ${option}`;
     let picker = null;
     let extra = null;
     switch (option) {
       case BACKGROUND_IMAGE:
         picker = this.renderFileUploader();
-        if (options.Background.backgroundImg.img != null) {
+        if (Background.backgroundImg.img != null) {
           className += ' loaded';
           extra = (
             <div
-              onClick={() => { Store.dispatch(removeBackgroundImage()); }}
+              onClick={() => { this.props.actions.removeBackgroundImage(); }}
               className="remove-image"
             >
               <i className="fa fa-times-circle"></i>
@@ -178,13 +188,13 @@ export default class BackgroundOptions extends React.Component {
   }
 
   renderAttributionInput() {
-    const options = this.props.options;
-    if (options.Background.backgroundImg.img == null) return null;
+    const { Background, Attribution } = this.props;
+    if (Background.backgroundImg.img == null) return null;
 
     let attributionColorOptions = [];
     for (const color of BackgroundOptions.AttributionColors) {
       let optionClass = `color ${color}`;
-      if (color === options.Attribution.attributionColor) optionClass += ' active';
+      if (color === Attribution.attributionColor) optionClass += ' active';
 
       attributionColorOptions.push(
         <div className="color-container" key={`attribution-color-${color}`}>
@@ -199,12 +209,12 @@ export default class BackgroundOptions extends React.Component {
           type="text"
           onChange={this.updateAttribution}
           placeholder="Attribution"
-          value={options.Background.backgroundImg.attribution || null}
+          value={Background.backgroundImg.attribution || null}
         />
         <div className="attribution-options">
           <CornerPicker
-            activeCorner={options.Attribution.attributionLocation}
-            callback={(corner) => { Store.dispatch(attributionLocationChange(corner)); }}
+            activeCorner={Attribution.attributionLocation}
+            callback={(corner) => { this.props.actions.attributionLocationChange(corner); }}
           />
           <div className="color-picker attribution">
             <div className="color-options">
@@ -228,6 +238,23 @@ export default class BackgroundOptions extends React.Component {
   }
 }
 
-BackgroundOptions.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-};
+function mapStateToProps(state) {
+  const { Background, Attribution } = state;
+  return { Background, Attribution };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      attributionColorChange,
+      attributionChange,
+      backgroundImageUpload,
+      backgroundColorChange,
+      removeBackgroundImage,
+      attributionLocationChange,
+      updateDrawLocation,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BackgroundOptions);

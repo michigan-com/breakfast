@@ -1,15 +1,8 @@
 @import './base';
 @import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
 @import './medium-toolbar';
-
-$body-background: $dark-grey;
-
-$button-font-size: 30px;
-$button-line-height: calc($button-font-size * 2);
-
-$canvas-z-index: 10;
-
-$picker-padding: 30px;
+@import './containers/options-menu';
+@import './constants';
 
 @define-mixin close-button {
   color: grey;

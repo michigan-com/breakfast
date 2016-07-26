@@ -5,6 +5,16 @@ import React from 'react';
 export default class CornerPicker extends React.Component {
   static cornerOptions = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
 
+  static propTypes = {
+    activeCorner: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
+    callback: React.PropTypes.func,
+  };
+
+  static defaultProps = {
+    callback: () => { },
+  };
+
   renderCorner = (corner, index) => {
     let cornerClassName = 'corner';
     if (corner === this.props.activeCorner) cornerClassName += ' active';
@@ -24,13 +34,3 @@ export default class CornerPicker extends React.Component {
     );
   }
 }
-
-CornerPicker.propTypes = {
-  activeCorner: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  callback: React.PropTypes.func,
-};
-
-CornerPicker.defaultProps = {
-  callback: () => { },
-};

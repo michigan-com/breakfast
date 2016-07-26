@@ -2,19 +2,23 @@
 
 import MediumEditor from 'medium-editor';
 
-import Store from '../../../store';
-import { fontSizeChange } from '../../../actions/font';
+import Store from '../../store';
+import { fontFaceChange } from '../../actions/font';
 
-export default class FontSizeSelector {
-  constructor() {
+export default class FontFaceSelector {
+  constructor(fonts) {
+    this.fonts = fonts;
+
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.Extension = MediumEditor.extensions.form.extend({
 
-      name: 'fontsize',
-      action: 'fontSize',
-      aria: 'Change Font Size',
+      name: 'fontface',
+      action: 'fontFace',
+      aria: 'Change Font Face',
       contentDefault: '&#xB1;', // ±
-      contentFA: '<i class="fa fa-text-height"></i>',
+      contentFA: '<i class="fa fa-font"></i>',
+
+      fonts: this.fonts,
 
       init(...args) {
         MediumEditor.extensions.form.prototype.init.apply(this, args);
@@ -29,7 +33,7 @@ export default class FontSizeSelector {
         if (!this.isDisplayed()) {
           // Get FontName of current selection (convert to string since IE returns this as number)
           const options = Store.getState();
-          this.showForm(options.Font.fontSizeMultiplier);
+          this.showForm(options.Font.fontFace);
         }
 
         return false;
@@ -50,18 +54,19 @@ export default class FontSizeSelector {
 
       hideForm() {
         this.getForm().style.display = 'none';
+        this.getSelect().value = '';
       },
 
-      showForm(fontSizeMultiplier) {
-        const input = this.getInput();
+      showForm(fontName) {
+        const select = this.getSelect();
 
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        input.value = fontSizeMultiplier * 11;
-        input.focus();
+        select.value = fontName || '';
+        select.focus();
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -94,40 +99,42 @@ export default class FontSizeSelector {
       createForm() {
         const doc = this.document;
         const form = doc.createElement('div');
-        const input = doc.createElement('input');
-        const options = Store.getState();
+        const select = doc.createElement('select');
 
         // Font Name Form (div)
         form.className = 'medium-editor-toolbar-form';
-        form.id = `medium-editor-toolbar-form-fontsize-${this.getEditorId()}`;
+        form.id = `medium-editor-toolbar-form-fontname-${this.getEditorId()}`;
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        input.setAttribute('type', 'range');
-        input.setAttribute('min', 1);
-        input.setAttribute('max', 33);
-        input.setAttribute('step', 1);
-        input.setAttribute('value', options.Font.fontSizeMultiplier * 11);
+        // Add font names
+        for (const font of this.fonts) {
+          const option = doc.createElement('option');
+          option.innerHTML = font;
+          option.value = font;
+          option.setAttribute('style', `font-family: '${font}'`);
 
-        input.className = 'medium-editor-toolbar-input-range';
-        input.id = 'font-size';
-        form.appendChild(input);
+          select.appendChild(option);
+        }
+
+        select.className = 'medium-editor-toolbar-select';
+        form.appendChild(select);
 
         // Handle typing in the textbox
-        this.on(input, 'input', this.handleFontSizeChange.bind(this));
+        this.on(select, 'change', this.handleFontChange.bind(this));
 
         return form;
       },
 
-      getInput() {
-        return this.getForm().querySelector('input[type=range]');
+      getSelect() {
+        return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      handleFontSizeChange() {
-        const input = this.getInput();
-
-        Store.dispatch(fontSizeChange(input.value));
+      handleFontChange() {
+        const font = this.getSelect().value;
+        Store.dispatch(fontFaceChange(font));
+        // this.execAction('fontName', { name: font });
       },
 
       handleFormClick(event) {

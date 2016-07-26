@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import TextOverlay from './subcomponents/text-overlay';
+import TextOverlay from './text-overlay';
 import Canvas from './canvas';
 import Store from '../store';
 
@@ -33,5 +33,5 @@ export default class EditingCanvas extends React.Component {
 
 EditingCanvas.propTypes = {
   options: React.PropTypes.shape(Store.getState()).isRequired,
-  textContent: React.PropTypes.object,
+  textContent: React.PropTypes.string,
 };

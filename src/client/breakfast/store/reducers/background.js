@@ -33,6 +33,7 @@ export default function backgroundReducer(state = DEFAULT_STATE, action) {
         drawImageMetrics,
       };
     case REMOVE_BACKGROUND_IMAGE:
+    // TODO remove attribution
       return { ...state,
         backgroundImg: { ...DEFAULT_BACKGROUND_IMAGE },
         drawImageMetrics: {},

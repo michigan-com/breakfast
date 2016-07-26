@@ -53,7 +53,7 @@ class Gallery extends React.Component {
     const url = photo.url;
     return (
       <div className={photoClass} key={`gallery-photo-${index}`}>
-        <img src={url} alt={"${url}"} />
+        <img src={url} alt={`${url}`} />
       </div>
     );
   }

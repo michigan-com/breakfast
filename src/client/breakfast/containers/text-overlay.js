@@ -3,11 +3,11 @@
 import React from 'react';
 import MediumEditor from 'medium-editor';
 
-import Store from '../../store';
-import { textPosChange, textWidthChange } from '../../actions/text';
-import FontFaceSelector from './medium-toolbar/font-face';
-import FontSizeSelector from './medium-toolbar/font-size';
-import FontColorSelector from './medium-toolbar/font-color';
+import Store from '../store';
+import { textPosChange, textWidthChange } from '../actions/text';
+import FontFaceSelector from '../components/medium-toolbar/font-face';
+import FontSizeSelector from '../components/medium-toolbar/font-size';
+import FontColorSelector from '../components/medium-toolbar/font-color';
 
 const MOVE_TYPE_POS = 'pos';
 const MOVE_TYPE_WIDTH = 'width';

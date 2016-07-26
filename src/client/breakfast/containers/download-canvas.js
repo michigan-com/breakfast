@@ -4,7 +4,6 @@ import React from 'react';
 import xr from 'xr';
 
 import Canvas from './canvas';
-import Store from '../store';
 
 const MAX_CANVAS_SIZE = 2097152;
 
@@ -12,9 +11,19 @@ const MAX_CANVAS_SIZE = 2097152;
  * Used to draw the canvas then download it
  */
 export default class DownloadCanvas extends React.Component {
+  static propTypes = {
+    fileName: React.PropTypes.string.isRequired,
+    downloadCallback: React.PropTypes.func,
+    textContent: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    downloadCallback: () => {},
+  };
 
   componentDidMount() {
-    const canvas = this.refs.canvas.getCanvasNode();
+    // TODO
+    const canvas = this.refs.canvas.refs.wrappedInstance.getCanvasNode();
     let dataUri = canvas.toDataURL();
     let fileExtension = 'png';
 
@@ -43,21 +52,9 @@ export default class DownloadCanvas extends React.Component {
   render() {
     return (
       <Canvas
-        options={this.props.options}
         textContent={this.props.textContent}
         ref="canvas"
       />
     );
   }
 }
-
-DownloadCanvas.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-  fileName: React.PropTypes.string.isRequired,
-  downloadCallback: React.PropTypes.func,
-  textContent: React.PropTypes.object.isRequired,
-};
-
-React.defaultProps = {
-  downloadCallback: () => {},
-};

@@ -84,6 +84,7 @@ function backgroundImageLoading() {
   };
 }
 
+// TODO remove attribution
 export function removeBackgroundImage() {
   return {
     type: REMOVE_BACKGROUND_IMAGE,
@@ -112,13 +113,13 @@ export function backgroundImageUpload(file) {
     const reader = new FileReader();
     reader.onload = () => {
       const img = new Image();
-      img.onload = () => {
+      img.addEventListener('load', () => {
         dispatch(backgroundImageChange({
           img,
           width: img.width,
           height: img.height,
         }));
-      };
+      });
 
       img.src = reader.result;
     };

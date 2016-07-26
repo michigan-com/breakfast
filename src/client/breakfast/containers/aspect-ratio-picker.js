@@ -1,12 +1,20 @@
 'use strict';
 
-import React from 'react';
+// TODO component-ify
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Store from '../store';
 import { ASPECT_RATIOS, FIT_IMAGE, aspectRatio, getAspectRatioValue,
   } from '../actions/aspect-ratio';
 
-export default class AspectRatioPicker extends React.Component {
+class AspectRatioPicker extends Component {
+  static propTypes = {
+    Background: PropTypes.object.isRequired,
+    currentRatio: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.aspectRatioChange = this.aspectRatioChange.bind(this);
@@ -14,16 +22,16 @@ export default class AspectRatioPicker extends React.Component {
   }
 
   aspectRatioChange(ratio) {
-    Store.dispatch(aspectRatio(ratio));
+    this.props.actions.aspectRatio(ratio);
   }
 
   renderRatio(ratio, index) {
-    const backgroundImg = this.props.options.Background.backgroundImg;
+    const backgroundImg = this.props.Background.backgroundImg;
     if (ratio === FIT_IMAGE && backgroundImg.img == null) return null;
 
     const height = 55;
     let style = { height: `${height}px` };
-    style.width = 50 * getAspectRatioValue(this.props.options.Background, ratio);
+    style.width = 50 * getAspectRatioValue(this.props.Background, ratio);
 
     let className = 'ratio-option';
     if (ratio === this.props.currentRatio) className += ' active';
@@ -48,7 +56,19 @@ export default class AspectRatioPicker extends React.Component {
   }
 }
 
-AspectRatioPicker.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-  currentRatio: React.PropTypes.string.isRequired,
-};
+function mapStateToProps(state) {
+  return {
+    Background: state.Background,
+    currentRatio: state.Background.aspectRatio,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      aspectRatio,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AspectRatioPicker);

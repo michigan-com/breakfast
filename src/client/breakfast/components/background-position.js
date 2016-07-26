@@ -2,10 +2,16 @@
 
 import React from 'react';
 
-import Store from '../../store';
-import { updateDrawLocation } from '../../actions/background';
-
 export default class BackgroundPosition extends React.Component {
+  static propTypes = {
+    Background: React.PropTypes.object.isRequired,
+    updateDrawLocation: React.PropTypes.func,
+  };
+
+  static defaultProps = {
+    updateDrawLocation: () => {},
+  };
+
   constructor(props) {
     super(props);
     this.storedImageMetrics = null;
@@ -15,10 +21,10 @@ export default class BackgroundPosition extends React.Component {
   }
 
   getOverlayStyle() {
-    const options = this.props.options;
-    const backgroundImg = options.Background.backgroundImg;
-    const drawImageMetrics = options.Background.drawImageMetrics;
-    const canvasAspectRatio = options.Background.canvas.aspectRatio;
+    const { Background } = this.props;
+    const backgroundImg = Background.backgroundImg;
+    const drawImageMetrics = Background.drawImageMetrics;
+    const canvasAspectRatio = Background.canvas.aspectRatio;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     if (drawImageMetrics == null) return null;
 
@@ -38,14 +44,14 @@ export default class BackgroundPosition extends React.Component {
   }
 
   getImageStyle() {
-    const options = this.props.options;
-    const drawImageMetrics = options.Background.drawImageMetrics;
-    const canvas = options.Background.canvas;
-    const backgroundImg = options.Background.backgroundImg;
+    const { Background } = this.props;
+    const drawImageMetrics = Background.drawImageMetrics;
+    const canvas = Background.canvas;
+    const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     const overlayStyle = this.getOverlayStyle();
 
-    const backgroundImage = `url(${options.Background.backgroundImg.img.src})`;
+    const backgroundImage = `url(${Background.backgroundImg.img.src})`;
     const width = this.imageWidth;
     const height = this.imageWidth / imageAspectRatio;
     const top = (drawImageMetrics.dy / canvas.canvasHeight) * overlayStyle.height;
@@ -56,16 +62,16 @@ export default class BackgroundPosition extends React.Component {
   mouseDown = (e) => {
     this.clickedMouseX = e.clientX;
     this.clickedMouseY = e.clientY;
-    this.storedImageMetrics = { ...this.props.options.Background.drawImageMetrics };
+    this.storedImageMetrics = { ...this.props.Background.drawImageMetrics };
     this.trackMouseMovement();
   }
 
   mouseMove = (e) => {
-    const options = this.props.options;
+    const { Background } = this.props;
     const deltaX = e.clientX - this.clickedMouseX;
     const deltaY = e.clientY - this.clickedMouseY;
-    const canvas = options.Background.canvas;
-    const backgroundImg = options.Background.backgroundImg;
+    const canvas = Background.canvas;
+    const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     const imageHeight = this.imageWidth / imageAspectRatio;
 
@@ -74,7 +80,7 @@ export default class BackgroundPosition extends React.Component {
 
     const newDx = this.storedImageMetrics.dx + (deltaXPercent * canvas.canvasWidth);
     const newDy = this.storedImageMetrics.dy + (deltaYPercent * canvas.canvasHeight);
-    Store.dispatch(updateDrawLocation(newDx, newDy));
+    this.props.updateDrawLocation(newDx, newDy);
   }
 
   trackMouseMovement = () => {
@@ -116,7 +122,3 @@ export default class BackgroundPosition extends React.Component {
     );
   }
 }
-
-BackgroundPosition.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-};

@@ -1,25 +1,6 @@
 @import './fonts';
+@import './constants';
 
-$primary-color: black;
-$black: #050505;
-$grey: #e4e4e4;
-$darker-grey: #d8d8d8;
-$dark-grey: #4a4a4a;
-
-$blue: #168eea;
-$red: #ff0000;
-$green: #7ed321;
-
-$body-background: white;
-$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
-
-$input-font-size: 20px;
-$input-line-height: calc($input-font-size * 2);
-
-$navbar-height: 50px;
-
-$screen-md: 992px;
-$screen-sm: 768px;
 
 @define-mixin button $color: $primary-color, $background-color: white {
   background-color: $background-color;

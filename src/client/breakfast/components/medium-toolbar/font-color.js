@@ -2,21 +2,21 @@
 
 import MediumEditor from 'medium-editor';
 
-import Store from '../../../store';
-import { fontFaceChange } from '../../../actions/font';
+import Store from '../../store';
+import { fontColorChange } from '../../actions/font';
 
-export default class FontFaceSelector {
+export default class FontColorSelector {
   constructor(fonts) {
     this.fonts = fonts;
 
     // Extending https://github.com/yabwe/medium-editor/blob/master/src/js/extensions/fontname.js
     this.Extension = MediumEditor.extensions.form.extend({
 
-      name: 'fontface',
-      action: 'fontFace',
-      aria: 'Change Font Face',
+      name: 'fontcolor',
+      action: 'fontcace',
+      aria: 'Change Font Color',
       contentDefault: '&#xB1;', // ±
-      contentFA: '<i class="fa fa-font"></i>',
+      contentFA: '<i class="fa fa-paint-brush"></i>',
 
       fonts: this.fonts,
 
@@ -54,19 +54,16 @@ export default class FontFaceSelector {
 
       hideForm() {
         this.getForm().style.display = 'none';
-        this.getSelect().value = '';
       },
 
-      showForm(fontName) {
-        const select = this.getSelect();
-
+      showForm() {
         this.base.saveSelection();
         this.hideToolbarDefaultActions();
         this.getForm().style.display = 'block';
         this.setToolbarPosition();
 
-        select.value = fontName || '';
-        select.focus();
+        const options = Store.getState();
+        this.getForm().className = this.getFormClassName(options.Font.fontColor);
       },
 
       // Called by core when tearing down medium-editor (destroy)
@@ -99,42 +96,45 @@ export default class FontFaceSelector {
       createForm() {
         const doc = this.document;
         const form = doc.createElement('div');
-        const select = doc.createElement('select');
+        const options = Store.getState();
 
         // Font Name Form (div)
-        form.className = 'medium-editor-toolbar-form';
+        form.className = this.getFormClassName(options.fontColor);
         form.id = `medium-editor-toolbar-form-fontname-${this.getEditorId()}`;
 
         // Handle clicks on the form itself
         this.on(form, 'click', this.handleFormClick.bind(this));
 
-        // Add font names
-        for (const font of this.fonts) {
-          const option = doc.createElement('option');
-          option.innerHTML = font;
-          option.value = font;
-          option.setAttribute('style', `font-family: '${font}'`);
+        const colors = ['black', 'white'];
+        for (const color of colors) {
+          const colorEl = doc.createElement('div');
+          colorEl.className = `font-color-option ${color}`;
+          this.on(colorEl, 'click', this.colorChangeCallback(color));
 
-          select.appendChild(option);
+          form.appendChild(colorEl);
         }
 
-        select.className = 'medium-editor-toolbar-select';
-        form.appendChild(select);
-
-        // Handle typing in the textbox
-        this.on(select, 'change', this.handleFontChange.bind(this));
-
         return form;
+      },
+
+      getFormClassName(color) {
+        return `medium-editor-toolbar-form color-picker ${color}`;
+      },
+
+      getColorEl(color) {
+        return this.getForm().querySelector(`.font-color-option.${color}`);
       },
 
       getSelect() {
         return this.getForm().querySelector('select.medium-editor-toolbar-select');
       },
 
-      handleFontChange() {
-        const font = this.getSelect().value;
-        Store.dispatch(fontFaceChange(font));
-        // this.execAction('fontName', { name: font });
+      colorChangeCallback(c) {
+        const color = c;
+        return () => {
+          this.getForm().className = this.getFormClassName(color);
+          Store.dispatch(fontColorChange(color));
+        };
       },
 
       handleFormClick(event) {

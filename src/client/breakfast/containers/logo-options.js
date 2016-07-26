@@ -5,7 +5,7 @@ import React from 'react';
 import Store from '../store';
 import { logoChange, logoColorChange, logoLocationChange } from '../actions/logo';
 import Select from '../../util/components/select';
-import CornerPicker from './subcomponents/corner-picker';
+import CornerPicker from '../components/corner-picker';
 
 export default class LogoOptions extends React.Component {
   static ColorOptions = ['black', 'white'];
