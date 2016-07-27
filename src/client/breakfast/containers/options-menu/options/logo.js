@@ -1,14 +1,21 @@
 'use strict';
 
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Store from '../store';
-import { logoChange, logoColorChange, logoLocationChange } from '../actions/logo';
-import Select from '../../util/components/select';
-import CornerPicker from '../components/corner-picker';
+import { logoChange, logoColorChange, logoLocationChange } from '../../../actions/logo';
+import Select from '../../../../util/components/select';
+import CornerPicker from '../../../components/corner-picker';
 
-export default class LogoOptions extends React.Component {
+
+class LogoOptions extends Component {
   static ColorOptions = ['black', 'white'];
+  static propTypes = {
+    Logo: PropTypes.object,
+    actions: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 
@@ -16,11 +23,12 @@ export default class LogoOptions extends React.Component {
   }
 
   cornerChange = (corner) => {
-    Store.dispatch(logoLocationChange(corner));
+    this.props.actions.logoLocationChange(corner);
   }
 
   logoChanged = (logoInfo, index) => {
-    Store.dispatch(logoChange(logoInfo, index, this.props.options.Logo.logoColor));
+    const { Logo } = this.props;
+    this.props.actions.logoChange(logoInfo, index, Logo.logoColor);
   }
 
   logoColorChange = (c) => {
@@ -36,27 +44,29 @@ export default class LogoOptions extends React.Component {
     }
 
     return () => {
-      const logo = this.props.options.Logo.logo;
-      Store.dispatch(logoColorChange(logo, logoColor));
+      const { Logo } = this.props;
+      this.props.actions.logoColorChange(Logo.logo, logoColor);
     };
   }
 
   isActiveColor(color) {
+    const { Logo } = this.props;
     if (color === 'black') {
-      return this.props.options.Logo.logoColor === '#000';
+      return Logo.logoColor === '#000';
     } else if (color === 'white') {
-      return this.props.options.Logo.logoColor === '#fff';
+      return Logo.logoColor === '#fff';
     }
 
     return false;
   }
 
   renderLogoSelect() {
+    const { Logo } = this.props;
+    const logoIndex = Logo.logoIndex;
     let logoSelect = null;
-    const logoIndex = this.props.options.Logo.logoIndex;
     if (logoIndex === null) return null;
 
-    let logos = this.props.options.Logo.logoOptions;
+    let logos = Logo.logoOptions;
     const currentLogo = logos[logoIndex];
 
     if (logos.length > 1) {
@@ -84,11 +94,11 @@ export default class LogoOptions extends React.Component {
   }
 
   renderLogoColorPicker() {
-    const options = this.props.options;
-    const logoIndex = options.Logo.logoIndex;
+    const { Logo } = this.props;
+    const logoIndex = Logo.logoIndex;
     if (logoIndex === null) return null;
 
-    const currentLogo = options.Logo.logo;
+    const currentLogo = Logo.logo;
     const goodLogoCheck = /\.svg$/;
 
     if (!goodLogoCheck.test(currentLogo.filename) || currentLogo.noColor) {
@@ -133,7 +143,7 @@ export default class LogoOptions extends React.Component {
           <CornerPicker
             name="logo-color"
             callback={this.cornerChange}
-            activeCorner={this.props.options.Logo.logoLocation}
+            activeCorner={this.props.Logo.logoLocation}
           />
         </div>
       </div>
@@ -155,6 +165,19 @@ class LogoSelect extends Select {
   }
 }
 
-LogoOptions.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
-};
+function mapStateToProps(state) {
+  const { Logo } = state;
+  return { Logo };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      logoChange,
+      logoColorChange,
+      logoLocationChange,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogoOptions);

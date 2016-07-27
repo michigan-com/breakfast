@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { ASPECT_RATIOS, FIT_IMAGE, aspectRatio, getAspectRatioValue,
-  } from '../actions/aspect-ratio';
+  } from '../../../actions/aspect-ratio';
 
 class AspectRatioPicker extends Component {
   static propTypes = {

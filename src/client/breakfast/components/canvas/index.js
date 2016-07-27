@@ -18,15 +18,18 @@ export default class Canvas extends React.Component {
     Text: React.PropTypes.object,
   };
 
+
   componentDidMount() { this.updateCanvas(); }
   componentDidUpdate() { this.updateCanvas(); }
 
   getCanvasNode() {
-    return findDOMNode(this.refs.canvas);
+    if (!this.canvas) return null;
+    return findDOMNode(this.canvas);
   }
 
   getCanvasContext() {
-    const canvas = findDOMNode(this.refs.canvas);
+    if (!this.canvas) return null;
+    const canvas = findDOMNode(this.canvas);
     return canvas.getContext('2d');
   }
 
@@ -49,6 +52,8 @@ export default class Canvas extends React.Component {
     const context = this.getCanvasContext();
     const { Background, Attribution, Logo, Font, Text, textContent } = this.props;
 
+    if (!context) return;
+
     // Clear out and re-draw
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
 
@@ -63,7 +68,13 @@ export default class Canvas extends React.Component {
   render() {
     const style = this.getCanvasStyle();
     return (
-      <canvas width={style.width} height={style.height} ref="canvas" />
+      <canvas
+        width={style.width}
+        height={style.height}
+        ref={(canvas) => {
+          if (canvas) this.canvas = canvas;
+        }}
+      />
     );
   }
 }

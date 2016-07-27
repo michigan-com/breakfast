@@ -1,25 +1,26 @@
 'use strict';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { CompactPicker } from 'react-color';
+import React, { Component, PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { CompactPicker } from 'react-color';
+import Dropzone from 'react-dropzone';
 
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, backgroundColorChange,
-  removeBackgroundImage, backgroundImageUpload, updateDrawLocation } from '../actions/background';
+  removeBackgroundImage, backgroundImageUpload, updateDrawLocation,
+} from '../../../actions/background';
 import { attributionChange, attributionColorChange,
-  attributionLocationChange } from '../actions/attribution';
-import CornerPicker from '../components/corner-picker';
-import BackgroundPosition from '../components/background-position';
+  attributionLocationChange } from '../../../actions/attribution';
+import CornerPicker from '../../../components/corner-picker';
+import BackgroundPosition from '../../../components/background-position';
 
-// TODO component-ize
-class BackgroundOptions extends React.Component {
+class BackgroundOptions extends Component {
 
   static propTypes = {
-    actions: React.PropTypes.object.isRequired,
-    Background: React.PropTypes.object.isRequired,
-    Attribution: React.PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    Background: PropTypes.object.isRequired,
+    Attribution: PropTypes.object.isRequired,
   }
   static options = [BACKGROUND_IMAGE, BACKGROUND_COLOR];
   static AttributionColors = ['black', 'white'];
@@ -44,17 +45,12 @@ class BackgroundOptions extends React.Component {
   }
 
   triggerFileUpload = () => {
-    const input = ReactDOM.findDOMNode(this.refs['image-upload']);
+    const input = findDOMNode(this.refs['image-upload']);
     input.click();
   }
 
-  handleFileUpload = () => {
-    if (!('image-upload' in this.refs)) return;
-
-    const input = ReactDOM.findDOMNode(this.refs['image-upload']);
-    if (!input.files || !input.files.length) return;
-
-    const file = input.files[0];
+  handleFileUpload = (files) => {
+    const file = files[0];
     this.props.actions.backgroundImageUpload(file);
   }
 
@@ -77,21 +73,23 @@ class BackgroundOptions extends React.Component {
         </div>
       );
     } else {
+      const dropzoneStyle = {
+        width: '90%',
+        margin: '0 auto',
+        height: '100px',
+        border: '2px dashed black',
+      };
       content = (
         <div className="file-upload">
-          <img
-            id="image-upload-button"
-            src="/img/upload.svg"
-            onClick={this.triggerFileUpload}
-            alt="Upload"
-          />
-          <input
-            type="file"
-            accept="img/*|image/*"
-            ref="image-upload"
-            id="image-upload"
-            onChange={this.handleFileUpload}
-          />
+          <Dropzone
+            onDropAccepted={this.handleFileUpload}
+            multiple={false}
+            accept="image/*"
+            style={dropzoneStyle}
+          >
+            <p>DRAG & DROP</p>
+            <p>your file or click to browse</p>
+          </Dropzone>
         </div>
       );
     }
@@ -101,50 +99,13 @@ class BackgroundOptions extends React.Component {
 
   renderColorPicker() {
     const { Background } = this.props;
-    let style = {
-      backgroundColor: Background.backgroundColor,
-    };
-
-    let picker = null;
-    if (this.state.showColorPicker) {
-      const coverStyle = {
-        position: 'fixed',
-        top: '0',
-        right: '0',
-        bottom: '0',
-        left: '0',
-      };
-      const poppoverStyle = {
-        position: 'absolute',
-        zIndex: '2',
-      };
-      picker = (
-        <div style={poppoverStyle}>
-          <div style={coverStyle} onClick={() => { this.setState({ showColorPicker: false }); }} />
-          <CompactPicker
-            className="color-picker"
-            color={Background.backgroundColor}
-            display={this.state.showColorPicker}
-            onChange={this.backgroundColorChange}
-            onClose={() => { this.setState({ showColorPicker: false }); }}
-            key={'background-color-picker'}
-          />
-        </div>
-
-      );
-    }
-
     return (
-      <div className="color-picker">
-        <div
-          className="swatch"
-          style={style}
-          onClick={() => { this.setState({ showColorPicker: true }); }}
-        ></div>
-        <div className="picker-container">
-          {picker}
-        </div>
-      </div>
+      <CompactPicker
+        className="color-picker"
+        color={Background.backgroundColor}
+        onChange={this.backgroundColorChange}
+        key={'background-color-picker'}
+      />
     );
   }
 
@@ -227,12 +188,27 @@ class BackgroundOptions extends React.Component {
   }
 
   render() {
+    const { Background } = this.props;
+    let attributionInput = null;
+    if (Background.backgroundImg.img !== null) {
+      attributionInput = (
+        <div className="option-container">
+          <div className="option-container-title">Photographer Attribution</div>
+          {this.renderAttributionInput()}
+        </div>
+      );
+    }
     return (
       <div className="background-options-container">
-        <div className="title">Background</div>
-        {this.renderBackgroundOption(BACKGROUND_COLOR)}
-        {this.renderBackgroundOption(BACKGROUND_IMAGE)}
-        {this.renderAttributionInput()}
+        <div className="option-container">
+          <div className="option-container-title">Background Image</div>
+          {this.renderBackgroundOption(BACKGROUND_IMAGE)}
+        </div>
+        {attributionInput}
+        <div className="option-container">
+          <div className="option-container-title">Background Color</div>
+          {this.renderBackgroundOption(BACKGROUND_COLOR)}
+        </div>
       </div>
     );
   }

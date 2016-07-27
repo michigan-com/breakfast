@@ -231,5 +231,5 @@ export default class TextOverlay extends React.Component {
 }
 
 TextOverlay.propTypes = {
-  options: React.PropTypes.shape(Store.getState()).isRequired,
+  options: React.object,
 };

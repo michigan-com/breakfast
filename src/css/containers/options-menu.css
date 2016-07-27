@@ -6,6 +6,9 @@
   left: 0;
   top:  $navbar-height;
   background: white;
+}
+
+.options, .options-menu-container, .options-container {
   z-index: calc($canvas-z-index * 2);
 }
 
@@ -17,9 +20,284 @@
   color: black;
   transition: all 250ms linear;
   cursor: pointer;
+  text-transform: capitalize;
 
   &.selected, &:hover {
     background: black;
     color: white;
+  }
+}
+
+.option-container {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+
+  .option-container-title {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+}
+
+.options-container {
+  position: absolute;
+  top: $navbar-height;
+  left: 20%;
+  width: 20%;
+  max-height: 100vh;
+  background: white;
+}
+
+.background-options-container {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+
+  .background-option {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+
+    .picker {
+
+      &:after {
+        color: black;
+        font-size: 10px;
+        line-height: 15px;
+        left: 0;
+        top: 102%;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    #image-upload-button, .background-image, .color-picker {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .background-image {
+      cursor: move;
+
+      .background-position {
+        margin: 0 auto;
+        position: relative;
+
+        .overlay {
+          position: absolute;
+          background-color: black;
+          opacity: .4;
+        }
+
+        .background-image {
+          position: absolute;
+          background-position: 0 0;
+          background-size: cover;
+        }
+      }
+
+    }
+
+    &.image {
+
+      &.loaded {
+        .picker:after {
+          color: black;
+          content: 'Click and drag to position image'
+        }
+      }
+
+      input[type=file] {
+        display: none;
+      }
+
+      .remove-image {
+        position: absolute;
+        right: 15%;
+        top: -15%;
+        height: 45px;
+        width: 45px;
+        cursor: pointer;
+        color: black;
+        text-align: center;
+
+        .fa {
+          font-size: 45px;
+          line-height: 45px;
+        }
+      }
+    }
+
+    &.color {
+      .picker:after {
+        content: 'Choose color';
+        color: black;
+      }
+
+      .color-picker {
+        .swatch {
+          height: 100%;
+          width: 100%;
+          border: 1px solid black;
+        }
+      }
+    }
+  }
+
+  .attribution-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+
+    input {
+      width: 100%;
+      background: transparent;
+      color: black;
+      border: 0;
+      border-bottom: 1px solid black;
+      text-align: center;
+      font-size: 12px;
+      line-height: 15px;
+      outline: none;
+    }
+
+    .attribution-options {
+      height: 100px;
+    }
+
+    .color-picker, .corner-picker {
+      width: 100%;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.ratio-picker {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px;
+
+  .ratio-option {
+    display: inline-block;
+    margin: 10px 10px;
+    cursor: pointer;
+    opacity: .5;
+
+    .ratio-example {
+      background-color: transparent;
+      border-radius: 5px;
+      border: 1px solid $grey;
+      transition: background 250ms linear;
+      margin: 0 auto;
+    }
+
+    .ratio-name {
+      color: $grey;
+      text-align: center;
+      width: 100%;
+      text-transform: capitalize;
+      font-family: 'Oswald';
+      font-weight: light;
+      transition: color 250ms linear;
+    }
+
+    &.active {
+      opacity: 1;
+
+      .ratio-example {
+        background-color: $grey;
+      }
+
+      .ratio-name {
+        color: black;
+      }
+    }
+  }
+}
+
+.logo-options-container {
+  width: 100%;
+  position: relative;
+
+  .logo-select-container {
+    width: 100%;
+    margin: 10px 0px;
+
+    .select {
+      width: 75%;
+      margin: 0 auto;
+    }
+  }
+
+
+  .corner-picker-container {
+    width: 100%;
+    height: 80px;
+    margin: 10px 0px;
+
+    .corner-picker {
+      width: 75%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.save-container {
+  width: 100%;
+  position: relative;
+  padding: 20px;
+
+  input {
+    width: 100%;
+    background: transparent;
+    color: black;
+    border: 0;
+    border-bottom: solid 2px rgba(0, 0, 0, 0.38);
+    outline: none;
+  }
+
+  .save-image {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .save-image:after {
+    content: 'File Name';
+    position: absolute;
+    top: -20px;
+    height: 20px;
+    line-height: 20px;
+    left: 0%;
+    font-size: 10px;
+    color: black;
+  }
+
+  .save-image {
+    margin: 10px 0px;
+    color: black;
+    cursor: pointer;
+
+    img {
+      transform: rotate(180deg);
+      height: 50px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    &.downloading {
+      opacity: .5;
+      cursor: default;
+    }
   }
 }

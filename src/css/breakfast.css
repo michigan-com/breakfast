@@ -58,6 +58,7 @@ input[type=text] {
   margin: 0 auto;
   display: block;
   position: relative;
+  padding-left: 40%;
 
   .save-container {
   }
@@ -75,48 +76,6 @@ input[type=text] {
   }
 }
 
-.ratio-picker {
-  width: 100%;
-  text-align: center;
-  margin: 10px 0px;
-
-  .ratio-option {
-    display: inline-block;
-    margin: 10px 10px;
-    cursor: pointer;
-    opacity: .5;
-
-    .ratio-example {
-      background-color: transparent;
-      border-radius: 5px;
-      border: 1px solid $grey;
-      transition: background 250ms linear;
-      margin: 0 auto;
-    }
-
-    .ratio-name {
-      color: $grey;
-      text-align: center;
-      width: 100%;
-      text-transform: capitalize;
-      font-family: 'Oswald';
-      font-weight: light;
-      transition: color 250ms linear;
-    }
-
-    &.active {
-      opacity: 1;
-
-      .ratio-example {
-        background-color: $grey;
-      }
-
-      .ratio-name {
-        color: white;
-      }
-    }
-  }
-}
 
 .image {
   margin: 0 auto;
@@ -202,208 +161,6 @@ input[type=text] {
   }
 }
 
-.logo-options-container, .background-options-container, .save-container {
-  @media (max-width: $screen-sm) {
-    width: 100% !important;
-    margin: 20px 0px;
-  }
-
-  .title {
-    width: 100%;
-    color: white;
-    text-align: center;
-    font-size: 25px;
-    line-height: 30px;
-    text-transform: capitalize;
-  }
-}
-
-.logo-options-container {
-  width: 30%;
-  padding: 20px;
-  display: inline-block;
-  float: left;
-  position: relative;
-
-  .logo-select-container {
-    width: 100%;
-    margin: 10px 0px;
-
-    .select {
-      width: 75%;
-      margin: 0 auto;
-    }
-  }
-
-
-  .corner-picker-container {
-    width: 100%;
-    height: 80px;
-    margin: 10px 0px;
-
-    .corner-picker {
-      width: 75%;
-      margin: 0 auto;
-    }
-  }
-}
-
-.background-options-container {
-  width: 40%;
-  padding: 20px;
-  display: inline-block;
-  float: left;
-  position: relative;
-
-  .background-option {
-    float: left;
-    width: 50%;
-    display: inline-block;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-
-    &.active {
-      .checkbox {
-        opacity: 1 !important;
-      }
-    }
-
-    .checkbox {
-      opacity: .1;
-      background-color: white;
-      color: $black;
-      transition: opacity 250ms linear;
-      width: 25px;
-      height: 25px;
-      margin: 0 auto;
-
-      .fa {
-        line-height: 25px;
-      }
-    }
-
-    .picker {
-
-      &:after {
-        color: white;
-        font-size: 10px;
-        line-height: 15px;
-        left: 0;
-        top: 102%;
-        position: absolute;
-        width: 100%;
-        text-align: center;
-      }
-    }
-
-    #image-upload-button, .background-image, .color-picker {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .background-image {
-      cursor: move;
-
-      .background-position {
-        margin: 0 auto;
-        position: relative;
-
-        .overlay {
-          position: absolute;
-          background-color: black;
-          opacity: .4;
-        }
-
-        .background-image {
-          position: absolute;
-          background-position: 0 0;
-          background-size: cover;
-        }
-      }
-
-    }
-
-    &.image {
-
-      .picker {
-        overflow: hidden;
-        &:after {
-          content: 'Upload Image';
-        }
-      }
-
-      &.loaded {
-        .picker:after {
-          content: 'Click and drag to position image'
-        }
-      }
-
-      input[type=file] {
-        display: none;
-      }
-
-      .remove-image {
-        position: absolute;
-        right: 15%;
-        top: -15%;
-        height: 45px;
-        width: 45px;
-        cursor: pointer;
-        color: white;
-        text-align: center;
-
-        .fa {
-          font-size: 45px;
-          line-height: 45px;
-        }
-      }
-    }
-
-    &.color {
-      .picker:after {
-        content: 'Choose color';
-      }
-
-      .color-picker {
-        .swatch {
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  .attribution-container {
-    float: left;
-    width: 100%;
-    text-align: center;
-    height: 50px;
-    margin-top: 10px;
-    position: relative;
-
-    input {
-      width: 100%;
-      background: transparent;
-      color: white;
-      border: 0;
-      border-bottom: 1px solid white;
-      text-align: center;
-      font-size: 12px;
-      line-height: 15px;
-    }
-    .color-picker, .corner-picker {
-      width: 45%;
-      height: 100%;
-      margin: 2.5%;
-      display: inline-block;
-      float: left;
-    }
-  }
-}
 
 /** Text input stuff **/
 .inputs {
@@ -420,58 +177,6 @@ input[type=text] {
   width: 100%;
 }
 
-.save-container {
-  width: 30%;
-  display: inline-block;
-  position: relative;
-  padding: 20px;
-
-  input {
-    width: 100%;
-    background: transparent;
-    color: white;
-    border: 0;
-    border-bottom: 1px solid white;
-    text-align: center;
-  }
-
-  .save-image {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-  }
-
-  .save-image:after {
-    content: 'File Name';
-    position: absolute;
-    top: -20px;
-    height: 20px;
-    line-height: 20px;
-    left: 0%;
-    font-size: 10px;
-    color: white;
-  }
-
-  .save-image {
-    margin: 10px 0px;
-    @mixin big-button;
-
-    img {
-      transform: rotate(180deg);
-      height: 50px;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    &.downloading {
-      opacity: .5;
-      cursor: default;
-    }
-  }
-}
-
 /** Corner picker */
 .corner-picker {
   display: block;
@@ -484,13 +189,12 @@ input[type=text] {
     height: 50%;
     display: inline-block;
     background-color: white;
-    opacity: .5;
-    transition: opacity 250ms linear;
+    transition: background-color 250ms linear;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid $black;
 
     &.active, &:hover {
-      opacity: 1;
+      background-color: $dark-grey;
     }
   }
 }
@@ -530,18 +234,20 @@ input[type=text] {
   position: relative;
 
   &:before {
-    font-size: 13px;
+    font-size: 10px;
     position: absolute;
-    top: -15px;
-    left: 0;
+    top: -10px;
+    left: 15px;
   }
 
   &.logo:before {
     content: 'Logo Color';
+    color: black;
   }
 
   &.attribution:before {
     content: 'Attribution Color';
+    color: black;
   }
 
   .no-color {
@@ -570,7 +276,7 @@ input[type=text] {
       width: 50px;
       margin: 10px auto;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 2px solid $grey;
 
       &.active {
         border: 2px solid $blue;

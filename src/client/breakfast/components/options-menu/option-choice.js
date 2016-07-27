@@ -9,7 +9,7 @@ export default function OptionChoice(props) {
   if (selected) className.push('selected');
 
   return (
-    <div className={className.join(' ')} onClick={() => { console.log(`on click ${index}`); onClick(index); }}>
+    <div className={className.join(' ')} onClick={() => { onClick(index); }}>
       {displayName}
     </div>
   );

@@ -9,7 +9,8 @@ $red: #ff0000;
 $green: #7ed321;
 
 $body-background: white;
-$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+/*$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;*/
+$body-font: "Futura Today";
 
 $input-font-size: 20px;
 $input-line-height: calc($input-font-size * 2);
