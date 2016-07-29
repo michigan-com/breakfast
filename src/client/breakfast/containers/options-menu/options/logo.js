@@ -132,7 +132,6 @@ class LogoOptions extends Component {
   render() {
     return (
       <div className="logo-options-container">
-        <div className="title">Logos</div>
         <div className="logo-select-container">
           {this.renderLogoSelect()}
         </div>

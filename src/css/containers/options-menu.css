@@ -6,6 +6,28 @@
   left: 0;
   top:  $navbar-height;
   background: white;
+  bottom: 0;
+  overflow: scroll;
+}
+
+.options-menu-container-title {
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  background-color: $dark-blue;
+  color: white;
+  text-align: center;
+}
+
+.options-container {
+  position: fixed;
+  top: $navbar-height;
+  left: 20%;
+  width: 20%;
+  max-height: 100vh;
+  background-color: #f5f5f5;
+  bottom: 0;
+  overflow: scroll;
 }
 
 .options, .options-menu-container, .options-container {
@@ -13,18 +35,34 @@
 }
 
 .option-choice-container {
+  position: relative;
   width: 100%;
   height: 50px;
   line-height: 50px;
   text-align: center;
-  color: black;
-  transition: all 250ms linear;
   cursor: pointer;
   text-transform: capitalize;
+  color: black;
+  background: transparent;
+  transition: all 250ms linear;
 
   &.selected, &:hover {
-    background: black;
-    color: white;
+    background: #f5f5f5;
+  }
+
+  &.selected {
+    color: $dark-blue;
+
+    &:after {
+      content: "";
+      height: 0;
+      width: 0;
+      border-top: 20px solid $dark-blue;
+      border-left: 20px solid transparent;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 }
 
@@ -38,15 +76,6 @@
     line-height: 20px;
     font-weight: bold;
   }
-}
-
-.options-container {
-  position: absolute;
-  top: $navbar-height;
-  left: 20%;
-  width: 20%;
-  max-height: 100vh;
-  background: white;
 }
 
 .background-options-container {
@@ -167,57 +196,53 @@
       line-height: 15px;
       outline: none;
     }
-
-    .attribution-options {
-      height: 100px;
-    }
-
-    .color-picker, .corner-picker {
-      width: 100%;
-      height: 50px;
-      margin-bottom: 15px;
-    }
   }
 }
 
 .ratio-picker {
-  width: 100%;
+  width: 80%;
   text-align: center;
-  margin: 10px 0px;
+  margin: 10px auto;
 
   .ratio-option {
     display: inline-block;
     margin: 10px 10px;
     cursor: pointer;
     opacity: .5;
+    float: left;
 
     .ratio-example {
-      background-color: transparent;
+      background-color: #d9d9d9;
       border-radius: 5px;
       border: 1px solid $grey;
       transition: background 250ms linear;
       margin: 0 auto;
     }
 
-    .ratio-name {
-      color: $grey;
+    .ratio-innards {
+      height: 100%;
       text-align: center;
-      width: 100%;
-      text-transform: capitalize;
-      font-family: 'Oswald';
-      font-weight: light;
-      transition: color 250ms linear;
+      color: white;
+
+      .image-container {
+        height: 100%;
+        display: inline-block;
+        float: left;
+        text-align: center;
+
+        img {
+          height: 50%;
+          margin: 0px 5px;
+          margin-top: 25%;
+        }
+      }
     }
 
     &.active {
       opacity: 1;
 
       .ratio-example {
-        background-color: $grey;
-      }
-
-      .ratio-name {
-        color: black;
+        background-color: $dark-blue;
       }
     }
   }
@@ -252,7 +277,9 @@
 
 .save-container {
   width: 100%;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   padding: 20px;
 
   input {
@@ -262,42 +289,41 @@
     border: 0;
     border-bottom: solid 2px rgba(0, 0, 0, 0.38);
     outline: none;
+    margin: 0  0 15px 0 !important;
   }
 
-  .save-image {
+  .save-button {
     width: 100%;
     margin: 0 auto;
     text-align: center;
     position: relative;
   }
 
-  .save-image:after {
-    content: 'File Name';
-    position: absolute;
-    top: -20px;
-    height: 20px;
-    line-height: 20px;
-    left: 0%;
-    font-size: 10px;
-    color: black;
-  }
-
-  .save-image {
-    margin: 10px 0px;
+  .save-button {
+    margin: 15px 0px;
     color: black;
     cursor: pointer;
 
     img {
-      transform: rotate(180deg);
-      height: 50px;
+      height: 100%;
       position: absolute;
-      right: 0;
       top: 0;
+      left: 0;
     }
 
     &.downloading {
       opacity: .5;
       cursor: default;
     }
+  }
+}
+
+.select {
+  .current-selection {
+    padding: 2%
+  }
+
+  .select-option {
+    padding: 3% !important;
   }
 }

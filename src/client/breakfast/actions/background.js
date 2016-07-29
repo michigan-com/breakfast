@@ -1,5 +1,6 @@
 'use strict';
 
+export const ASPECT_RATIO_CHANGE = 'ASPECT_RATIO_CHANGE';
 export const BACKGROUND_COLOR_CHANGE = 'BACKGROUND_COLOR_CHANGE';
 export const BACKGROUND_IMAGE_UPLOAD = 'BACKGROUND_IMAGE_UPLOAD';
 export const REMOVE_BACKGROUND_IMAGE = 'REMOVE_BACKGROUND_IMAGE';
@@ -17,7 +18,102 @@ export const DEFAULT_BACKGROUND_IMAGE = {
   width: 0,
 };
 
+export const SIXTEEN_NINE = '16x9';
+export const SQUARE = 'square';
+export const TWO_ONE = '2:1';
+export const FACEBOOK_COVER = 'cover';
+export const FIT_IMAGE = 'fit';
+
 export const BACKGROUND_TYPES = [BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING];
+
+export function getAspectRatioValue(backgroundState = {}, ratio) {
+  switch (ratio) {
+    case SIXTEEN_NINE:
+      // return 9/16;
+      return 16 / 9;
+    case TWO_ONE:
+      // return 1/2;
+      return 2 / 1;
+    case FACEBOOK_COVER:
+      // return 0.370153;
+      return 1 / 0.370153;
+    case FIT_IMAGE: {
+      // Only deal with this aspect ratio if we've loaded an image up
+      const backgroundImg = backgroundState.backgroundImg;
+      if (backgroundImg && backgroundImg.img != null) {
+        return backgroundImg.width / backgroundImg.height;
+      }
+      break;
+    }
+    default:
+      return 1;
+  }
+  return 1;
+}
+
+export const ASPECT_RATIOS = [{
+  name: TWO_ONE,
+  value: getAspectRatioValue({}, TWO_ONE),
+}, {
+  name: SQUARE,
+  value: getAspectRatioValue({}, SQUARE),
+}, {
+  name: SIXTEEN_NINE,
+  value: getAspectRatioValue({}, SIXTEEN_NINE),
+}, {
+  name: FACEBOOK_COVER,
+  value: getAspectRatioValue({}, FACEBOOK_COVER),
+}, {
+  name: FIT_IMAGE,
+  value: getAspectRatioValue({}, FIT_IMAGE),
+}];
+
+export function getCanvasMetrics(state, ratio = {}) {
+  // Defaults
+  // Scale up by 2
+  let canvasWidth = 650;
+  const { name, value } = ratio;
+  if (name === SQUARE) {
+    canvasWidth = 400;
+  } else if (name === FIT_IMAGE) {
+    const backgroundRatio = state.backgroundImg.width / state.backgroundImg.height;
+
+    if (backgroundRatio < 0.25) {
+      canvasWidth = 300;
+    } else if (backgroundRatio <= 1) {
+      canvasWidth = 400;
+    }
+  }
+
+  canvasWidth *= 2; // higher res canvas for better image quality
+
+  if (window.innerWidth <= canvasWidth) {
+    canvasWidth = window.innerWidth * 0.9;
+  }
+
+  const canvasPadding = canvasWidth / 26;
+  const maxTextWidth = Math.round(canvasWidth - (canvasPadding * 2));
+  const canvasHeight = canvasWidth / value;
+
+  return {
+    canvasWidth,
+    canvasHeight,
+    canvasPadding,
+    aspectRatio: value,
+    maxTextWidth,
+  };
+}
+
+export const getDefaultAspectRatioValue = () => {
+  const defaultAspectRatio = ASPECT_RATIOS[0];
+  return getAspectRatioValue({}, defaultAspectRatio);
+};
+
+
+export function getDefaultCanvasMetrics() {
+  const defaultAspectRatio = ASPECT_RATIOS[0];
+  return getCanvasMetrics({}, defaultAspectRatio);
+}
 
 export function backgroundColorChange(color) {
   return {
@@ -127,8 +223,18 @@ export function backgroundImageUpload(file) {
   };
 }
 
-export const DEFAULT_BACKGROUND = {
+export function aspectRatioChange(ratio) {
+  return {
+    type: ASPECT_RATIO_CHANGE,
+    value: ratio,
+  };
+}
+
+export const DEFAULT_STATE = {
   backgroundColor: '#fff',
   backgroundImg: { ...DEFAULT_BACKGROUND_IMAGE },
   drawImageMetrics: null,
+  aspectRatioIndex: 0,
+  aspectRatioOptions: ASPECT_RATIOS,
+  canvas: getDefaultCanvasMetrics({}, ASPECT_RATIOS[0]),
 };

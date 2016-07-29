@@ -6,8 +6,8 @@ export default function optionsMenu(state = DEFAULT_STATE, action) {
   let { selectedIndex } = state;
   switch (action.type) {
     case OPTION_SELECT:
-      selectedIndex = action.value;
-      if (selectedIndex >= 0 && selectedIndex < state.options.length) {
+      if (action.value >= 0 && action.value < state.options.length) {
+        selectedIndex = action.value === selectedIndex ? -1 : action.value;
         return { ...state, selectedIndex };
       }
       break;

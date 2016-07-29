@@ -57,8 +57,8 @@ class OptionsMenuComponent extends Component {
 
   render() {
     const { OptionsMenu, Downloading } = this.props;
-    let buttonClass = 'save-image';
-    let saveButtonContent = 'Save';
+    let buttonClass = 'save-button';
+    let saveButtonContent = 'Download File';
     if (Downloading.downloading) {
       buttonClass += ' downloading';
       saveButtonContent = 'Saving...';
@@ -67,6 +67,7 @@ class OptionsMenuComponent extends Component {
     return (
       <div className="options">
         <div className="options-menu-container">
+          <div className="options-menu-container-title">Layout Editor</div>
           {OptionsMenu.options.map((option, index) => (
             <OptionChoice
               option={option}
@@ -77,6 +78,7 @@ class OptionsMenuComponent extends Component {
             />
           ))}
           <div className="save-container">
+            <p style={{ margin: 0 }}>Filename</p>
             <input
               placeholder="pic"
               type="text"
@@ -88,6 +90,7 @@ class OptionsMenuComponent extends Component {
               className={buttonClass}
               onClick={this.props.actions.startDownloading}
             >
+              <img src="/img/download.svg" alt="download" className="download-image" />
               {saveButtonContent}
             </div>
           </div>

@@ -23,7 +23,7 @@ export default class CornerPicker extends React.Component {
       className={cornerClassName}
       key={`corner-${this.props.name}-${index}`}
       onClick={() => { this.props.callback(corner); }}
-    ></div>);
+    >{index + 1}</div>);
   }
 
   render() {

@@ -181,20 +181,23 @@ input[type=text] {
 .corner-picker {
   display: block;
   width: 80%;
-  height: 100%;
+  height: 100px;
   margin: 0 auto;
 
   .corner {
     width: 50%;
     height: 50%;
     display: inline-block;
-    background-color: white;
-    transition: background-color 250ms linear;
+    background-color: $grey;
+    transition: border 250ms linear;
     cursor: pointer;
     border: 1px solid $black;
+    text-align: center;
+    border: 2px solid white;
+    line-height: 50px;
 
     &.active, &:hover {
-      background-color: $dark-grey;
+      border: 2px solid $dark-blue;
     }
   }
 }
@@ -230,7 +233,6 @@ input[type=text] {
 .color-picker {
   width: 100%;
   margin: 20px 0px;
-  color: white;
   position: relative;
 
   &:before {
@@ -258,12 +260,13 @@ input[type=text] {
 
     a {
       text-decoration: underline;
-      color: white !important;
+      color: $dark-blue !important;
     }
   }
 
   .color-options {
     width: 100%;
+    height: 75px;
 
     .color-container {
       width: 50%;

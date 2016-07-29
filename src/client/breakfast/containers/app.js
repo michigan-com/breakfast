@@ -26,7 +26,7 @@ class App extends Component {
     if (downloading) {
       const textContent = this.editingCanvas.refs.wrappedInstance.getTextContent();
       downloadCanvas = (
-        <div id="downloading-canvas">
+        <div id="download-canvas">
           <DownloadCanvas
             options={this.props}
             textContent={textContent}
@@ -47,8 +47,6 @@ class App extends Component {
                 if (canvas) this.editingCanvas = canvas;
               }}
             />
-          </div>
-          <div id="downloading-canvas">
           </div>
         </div>
         {downloadCanvas}
