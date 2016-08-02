@@ -132,18 +132,21 @@ class LogoOptions extends Component {
   render() {
     return (
       <div className="logo-options-container">
-        <div className="logo-select-container">
-          {this.renderLogoSelect()}
-        </div>
-        <div className="color-picker logo">
-          {this.renderLogoColorPicker()}
-        </div>
-        <div className="corner-picker-container">
-          <CornerPicker
-            name="logo-color"
-            callback={this.cornerChange}
-            activeCorner={this.props.Logo.logoLocation}
-          />
+        <div className="option-container">
+          <div className="option-container-title">Add your news logo</div>
+          <div className="logo-select-container">
+            {this.renderLogoSelect()}
+          </div>
+          <div className="color-picker logo">
+            {this.renderLogoColorPicker()}
+          </div>
+          <div className="corner-picker-container">
+            <CornerPicker
+              name="logo-color"
+              callback={this.cornerChange}
+              activeCorner={this.props.Logo.logoLocation}
+            />
+          </div>
         </div>
       </div>
     );

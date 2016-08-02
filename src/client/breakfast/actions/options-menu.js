@@ -3,6 +3,7 @@
 const OPTION_CHOICES = [
   'aspect-ratio',
   'background',
+  'text-containers',
   'logo',
 ];
 

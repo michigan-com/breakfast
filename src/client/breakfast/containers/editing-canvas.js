@@ -12,6 +12,7 @@ class EditingCanvas extends Component {
     canvas: PropTypes.object,
     textContent: PropTypes.string,
     Background: PropTypes.object,
+    Text: PropTypes.object,
   };
 
   getTextContent() {
@@ -19,7 +20,7 @@ class EditingCanvas extends Component {
   }
 
   render() {
-    const { textContent, canvas } = this.props;
+    const { textContent, canvas, Text } = this.props;
     let className = 'image';
 
     // Have to scale down for better UI
@@ -34,16 +35,16 @@ class EditingCanvas extends Component {
           textContent={textContent}
           ref="canvas"
         />
-        <TextOverlay ref="text-overlay" />
+        <TextOverlay textContainerOptions={Text.textContainers[0]} ref="text-overlay" />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { Background } = state;
+  const { Background, Text } = state;
   const canvas = canvasMetricsSelector(state);
-  return { Background, canvas };
+  return { Background, Text, canvas };
 }
 
 const connectOptions = {

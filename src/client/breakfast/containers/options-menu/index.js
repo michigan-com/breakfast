@@ -10,6 +10,7 @@ import { updateFilename, startDownloading } from '../../actions/downloading';
 import BackgroundOptions from './options/background';
 import AspectRatioOptions from './options/aspect-ratio';
 import LogoOptions from './options/logo';
+import TextContainerOptions from './options/text-containers';
 
 class OptionsMenuComponent extends Component {
   static propTypes = {
@@ -43,6 +44,9 @@ class OptionsMenuComponent extends Component {
         break;
       case 'logo':
         optionsElement = <LogoOptions />;
+        break;
+      case 'text-containers':
+        optionsElement = <TextContainerOptions />;
         break;
       default:
         optionsElement = null;

@@ -20,6 +20,7 @@ class TextOverlay extends React.Component {
     Font: PropTypes.object,
     canvas: PropTypes.object,
     actions: PropTypes.object,
+    textContainerOptions: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -167,10 +168,9 @@ class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    const { canvas, Font, Text } = this.props;
+    const { canvas, Font, textContainerOptions } = this.props;
     const styleMetrics = Font.styleMetrics;
-    const textWidth = Text.textWidth;
-    const textPos = Text.textPos;
+    const { textPos, textWidth } = textContainerOptions;
     let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
 
     // Have to scale things down on the DOM for better UI

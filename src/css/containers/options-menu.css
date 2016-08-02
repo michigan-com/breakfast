@@ -213,9 +213,7 @@ $options-menu-container-width-sm: 50px;
 }
 
 .ratio-picker {
-  width: 80%;
-  text-align: center;
-  margin: 10px auto;
+  width: 100%;
 
   .ratio-option {
     display: inline-block;
@@ -338,5 +336,39 @@ $options-menu-container-width-sm: 50px;
 
   .select-option {
     padding: 3% !important;
+  }
+}
+
+.text-container-options {
+  .text-container-button-container {
+    display: inline-block;
+    float: left;
+    margin: 10px;
+
+    &.show  {
+      .text-container-button-image {
+        background-color: $dark-blue;
+      }
+    }
+
+    .text-container-button-image {
+      width: 50px;
+      height: 50px;
+      background-color: #d9d9d9;
+      text-align: center;
+      padding: 20%;
+      cursor: pointer;
+      border-radius: 5px;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .text-container-button-text {
+      font-size: 15px;
+      margin: 10px 0px;
+    }
   }
 }
