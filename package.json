@@ -98,6 +98,7 @@
     "redux": "^3.2.1",
     "redux-thunk": "^1.0.3",
     "require-dir": "^0.3.0",
+    "reselect": "^2.5.3",
     "run-sequence": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "sinon": "^1.17.3",

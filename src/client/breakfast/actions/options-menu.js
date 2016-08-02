@@ -1,8 +1,8 @@
 'use strict';
 
 const OPTION_CHOICES = [
-  'background',
   'aspect-ratio',
+  'background',
   'logo',
 ];
 

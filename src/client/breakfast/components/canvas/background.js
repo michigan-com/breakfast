@@ -8,23 +8,26 @@
  *  we need to draw stuff
  * @param {Object} backgroundOptions - current background options (state.Background
  *  for more details)
+ * @param {Object} drawImageMetrics - metrics from drawImageMetricsSelector in selectors/background
  *
  */
-export default function updateBackground(context, canvasOptions, backgroundOptions) {
+ /* eslint-disable no-param-resassign*/
+export default function updateBackground(context, canvasOptions,
+    backgroundOptions, drawImageMetrics) {
   context.fillStyle = backgroundOptions.backgroundColor;
   context.fillRect(0, 0, canvasOptions.width, canvasOptions.height);
   if (backgroundOptions.backgroundImg.img != null) {
     const img = backgroundOptions.backgroundImg.img;
-    const metrics = backgroundOptions.drawImageMetrics;
+    console.log(canvasOptions, drawImageMetrics);
     context.drawImage(
       img,
       0,
       0,
       img.width,
       img.height,
-      metrics.dx,
-      metrics.dy,
-      metrics.dWidth,
-      metrics.dHeight);
+      drawImageMetrics.dx,
+      drawImageMetrics.dy,
+      drawImageMetrics.dWidth,
+      drawImageMetrics.dHeight);
   }
 }

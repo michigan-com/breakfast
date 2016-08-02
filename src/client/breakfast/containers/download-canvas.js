@@ -1,7 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import xr from 'xr';
+import { connect } from 'react-redux';
 
 import Canvas from './canvas';
 
@@ -10,11 +11,11 @@ const MAX_CANVAS_SIZE = 2097152;
 /**
  * Used to draw the canvas then download it
  */
-export default class DownloadCanvas extends React.Component {
+class DownloadCanvas extends Component {
   static propTypes = {
-    fileName: React.PropTypes.string.isRequired,
-    downloadCallback: React.PropTypes.func,
-    textContent: React.PropTypes.string,
+    fileName: PropTypes.string.isRequired,
+    downloadCallback: PropTypes.func,
+    textContent: PropTypes.string,
   };
 
   static defaultProps = {
@@ -58,3 +59,5 @@ export default class DownloadCanvas extends React.Component {
     );
   }
 }
+
+export default connect()(DownloadCanvas);

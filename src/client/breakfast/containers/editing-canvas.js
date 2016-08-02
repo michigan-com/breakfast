@@ -5,38 +5,45 @@ import { connect } from 'react-redux';
 
 import TextOverlay from './text-overlay';
 import Canvas from './canvas';
+import { canvasMetricsSelector } from '../selectors/background';
 
 class EditingCanvas extends Component {
   static propTypes = {
-    state: PropTypes.object,
+    canvas: PropTypes.object,
     textContent: PropTypes.string,
+    Background: PropTypes.object,
   };
 
   getTextContent() {
-    return this.refs['text-overlay'].getTextContent();
+    return this.refs['text-overlay'].refs.wrappedInstance.getTextContent();
   }
 
   render() {
+    const { textContent, canvas } = this.props;
     let className = 'image';
-    let { state } = this.props;
 
     // Have to scale down for better UI
     let style = {
-      width: state.Background.canvas.canvasWidth / 2,
-      height: state.Background.canvas.canvasHeight / 2,
+      width: canvas.canvasWidth / 2,
+      height: canvas.canvasHeight / 2,
     };
 
     return (
       <div className={className} style={style} ref="image">
-        <Canvas options={state} textContent={this.props.textContent} ref="canvas" />
-        <TextOverlay options={state} ref="text-overlay" />
+        <Canvas
+          textContent={textContent}
+          ref="canvas"
+        />
+        <TextOverlay ref="text-overlay" />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { state };
+  const { Background } = state;
+  const canvas = canvasMetricsSelector(state);
+  return { Background, canvas };
 }
 
 const connectOptions = {

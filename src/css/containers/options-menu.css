@@ -1,13 +1,20 @@
 @import '../constants';
 
+$options-menu-container-width-lg: 200px;
+$options-menu-container-width-sm: 50px;
+
 .options-menu-container {
-  width: 20%;
+  width: $options-menu-container-width-lg;
   position: fixed;
   left: 0;
   top:  $navbar-height;
   background: white;
   bottom: 0;
   overflow: scroll;
+
+  @media (max-width: $screen-sm) {
+    width: $options-menu-container-width-sm;
+  }
 }
 
 .options-menu-container-title {
@@ -22,12 +29,18 @@
 .options-container {
   position: fixed;
   top: $navbar-height;
-  left: 20%;
+  left: $options-menu-container-width-lg;
   width: 20%;
   max-height: 100vh;
   background-color: #f5f5f5;
   bottom: 0;
   overflow: scroll;
+
+  @media (max-width: $screen-sm) {
+    left: $options-menu-container-width-sm;
+    right: 0;
+    width: initial;
+  }
 }
 
 .options, .options-menu-container, .options-container {

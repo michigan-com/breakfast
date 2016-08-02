@@ -1,18 +1,27 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import MediumEditor from 'medium-editor';
 
-import Store from '../store';
 import { textPosChange, textWidthChange } from '../actions/text';
 import FontFaceSelector from '../components/medium-toolbar/font-face';
 import FontSizeSelector from '../components/medium-toolbar/font-size';
 import FontColorSelector from '../components/medium-toolbar/font-color';
+import { canvasMetricsSelector } from '../selectors/background';
 
 const MOVE_TYPE_POS = 'pos';
 const MOVE_TYPE_WIDTH = 'width';
 
-export default class TextOverlay extends React.Component {
+class TextOverlay extends React.Component {
+  static propTypes = {
+    Text: PropTypes.object,
+    Font: PropTypes.object,
+    canvas: PropTypes.object,
+    actions: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 
@@ -23,7 +32,7 @@ export default class TextOverlay extends React.Component {
       lastMouseX: 0,
       lastMouseY: 0,
 
-      textPos: { ...this.props.options.Text.textPos },
+      textPos: { ...this.props.Text.textPos },
     };
 
     this.mediumEditorOptions = {
@@ -48,7 +57,7 @@ export default class TextOverlay extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.options.Font.fontOptions.length > 0 && !this.editor) {
+    if (this.props.Font.fontOptions.length > 0 && !this.editor) {
       this.loadMediumEditor();
     }
   }
@@ -58,8 +67,7 @@ export default class TextOverlay extends React.Component {
   }
 
   getStyle() {
-    const options = this.props.options;
-    const fontFamily = options.Font.fontFace;
+    const fontFamily = this.props.Font.fontFace;
     return { fontFamily };
   }
 
@@ -74,8 +82,8 @@ export default class TextOverlay extends React.Component {
         lastMouseX: e.clientX,
         lastMouseY: e.clientY,
 
-        origTextPos: { ...this.props.options.Text.textPos },
-        origTextWidth: this.props.options.Text.textWidth,
+        origTextPos: { ...this.props.Text.textPos },
+        origTextWidth: this.props.Text.textWidth,
       });
     };
   }
@@ -91,7 +99,7 @@ export default class TextOverlay extends React.Component {
     return (e) => {
       if (!this.state.mouseDown) return;
 
-      const backgroundOptions = this.props.options.Background;
+      const { canvas } = this.props;
 
       const movementX = e.clientX - this.state.lastMouseX;
       const movementY = e.clientY - this.state.lastMouseY;
@@ -101,16 +109,16 @@ export default class TextOverlay extends React.Component {
         case MOVE_TYPE_POS: {
           const top = this.state.origTextPos.top + movementY;
           const left = this.state.origTextPos.left + movementX;
-          Store.dispatch(textPosChange({ top, left }));
+          this.props.actions.textPosChange({ top, left });
           break;
         }
         case MOVE_TYPE_WIDTH:
         default: {
           // cause we're scaled up, divide by two
-          const maxTextWidth = backgroundOptions.canvas.maxTextWidth / 2;
+          const maxTextWidth = canvas.maxTextWidth / 2;
           const percentChange = 100 * (movementX / maxTextWidth);
           const textWidthPercent = Math.round(percentChange + this.state.origTextWidth);
-          Store.dispatch(textWidthChange(textWidthPercent));
+          this.props.actions.textWidthChange(textWidthPercent);
           break;
         }
       }
@@ -142,7 +150,7 @@ export default class TextOverlay extends React.Component {
 
 
   loadMediumEditor() {
-    const fontFace = new FontFaceSelector(this.props.options.Font.fontOptions);
+    const fontFace = new FontFaceSelector(this.props.Font.fontOptions);
     const fontSize = new FontSizeSelector();
     const fontColor = new FontColorSelector();
 
@@ -159,15 +167,15 @@ export default class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    const options = this.props.options;
-    const styleMetrics = options.Font.styleMetrics;
-    const textWidth = options.Text.textWidth;
-    const textPos = this.props.options.Text.textPos;
-    let textWidthPx = options.Background.canvas.maxTextWidth * (textWidth / 100);
+    const { canvas, Font, Text } = this.props;
+    const styleMetrics = Font.styleMetrics;
+    const textWidth = Text.textWidth;
+    const textPos = Text.textPos;
+    let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
 
     // Have to scale things down on the DOM for better UI
     textWidthPx /= 2;
-    const canvasPadding = options.Background.canvas.canvasPadding / 2;
+    const canvasPadding = canvas.canvasPadding / 2;
 
 
     let style = [];
@@ -179,7 +187,7 @@ export default class TextOverlay extends React.Component {
         font-size: ${metrics.fontSize / 2}px !important;
         margin-bottom: ${metrics.marginBottom / 2}px !important;
         line-height: ${metrics.lineHeight / 2}px !important;
-        color: ${this.props.options.Font.fontColor} !important;
+        color: ${Font.fontColor} !important;
       }`;
 
       style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
@@ -230,6 +238,20 @@ export default class TextOverlay extends React.Component {
   }
 }
 
-TextOverlay.propTypes = {
-  options: React.PropTypes.object,
-};
+function mapStateToProps(state) {
+  const { Text, Font } = state;
+  const canvas = canvasMetricsSelector(state);
+  return { Text, Font, canvas };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      textPosChange,
+      textWidthChange,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, undefined,
+    { withRef: true })(TextOverlay);

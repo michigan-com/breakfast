@@ -3,9 +3,12 @@
 import { connect } from 'react-redux';
 
 import Canvas from '../components/canvas';
+import { canvasMetricsSelector, drawImageMetricsSelector } from '../selectors/background';
 
 function mapStateToProps(state) {
-  return { ...state };
+  const canvas = canvasMetricsSelector(state);
+  const drawImageMetrics = drawImageMetricsSelector(state);
+  return { ...state, canvas, drawImageMetrics };
 }
 
 const connectOptions = {

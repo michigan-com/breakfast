@@ -14,6 +14,7 @@ import { attributionChange, attributionColorChange,
   attributionLocationChange } from '../../../actions/attribution';
 import CornerPicker from '../../../components/corner-picker';
 import BackgroundPosition from '../../../components/background-position';
+import { canvasMetricsSelector, drawImageMetricsSelector } from '../../../selectors/background';
 
 class BackgroundOptions extends Component {
 
@@ -21,6 +22,8 @@ class BackgroundOptions extends Component {
     actions: PropTypes.object.isRequired,
     Background: PropTypes.object.isRequired,
     Attribution: PropTypes.object.isRequired,
+    canvas: PropTypes.object.isRequired,
+    drawImageMetrics: PropTypes.object.isRequired,
   }
   static options = [BACKGROUND_IMAGE, BACKGROUND_COLOR];
   static AttributionColors = ['black', 'white'];
@@ -59,7 +62,7 @@ class BackgroundOptions extends Component {
   }
 
   renderFileUploader() {
-    const { Background } = this.props;
+    const { Background, canvas, drawImageMetrics } = this.props;
 
     // If we already uploaded a file...
     let content = null;
@@ -69,6 +72,8 @@ class BackgroundOptions extends Component {
           <BackgroundPosition
             Background={Background}
             updateDrawLocation={this.props.actions.updateDrawLocation}
+            canvas={canvas}
+            drawImageMetrics={drawImageMetrics}
           />
         </div>
       );
@@ -216,7 +221,9 @@ class BackgroundOptions extends Component {
 
 function mapStateToProps(state) {
   const { Background, Attribution } = state;
-  return { Background, Attribution };
+  const canvas = canvasMetricsSelector(state);
+  const drawImageMetrics = drawImageMetricsSelector(state);
+  return { Background, Attribution, canvas, drawImageMetrics };
 }
 
 function mapDispatchToProps(dispatch) {

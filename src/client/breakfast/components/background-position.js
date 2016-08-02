@@ -1,11 +1,13 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default class BackgroundPosition extends React.Component {
   static propTypes = {
-    Background: React.PropTypes.object.isRequired,
-    updateDrawLocation: React.PropTypes.func,
+    Background: PropTypes.object.isRequired,
+    canvas: PropTypes.object.isRequired,
+    drawImageMetrics: PropTypes.object,
+    updateDrawLocation: PropTypes.func,
   };
 
   static defaultProps = {
@@ -21,10 +23,9 @@ export default class BackgroundPosition extends React.Component {
   }
 
   getOverlayStyle() {
-    const { Background } = this.props;
+    const { Background, canvas, drawImageMetrics } = this.props;
     const backgroundImg = Background.backgroundImg;
-    const drawImageMetrics = Background.drawImageMetrics;
-    const canvasAspectRatio = Background.canvas.aspectRatio;
+    const canvasAspectRatio = canvas.aspectRatio;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     if (drawImageMetrics == null) return null;
 
@@ -44,9 +45,7 @@ export default class BackgroundPosition extends React.Component {
   }
 
   getImageStyle() {
-    const { Background } = this.props;
-    const drawImageMetrics = Background.drawImageMetrics;
-    const canvas = Background.canvas;
+    const { Background, canvas, drawImageMetrics } = this.props;
     const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     const overlayStyle = this.getOverlayStyle();
@@ -62,15 +61,14 @@ export default class BackgroundPosition extends React.Component {
   mouseDown = (e) => {
     this.clickedMouseX = e.clientX;
     this.clickedMouseY = e.clientY;
-    this.storedImageMetrics = { ...this.props.Background.drawImageMetrics };
+    this.storedImageMetrics = { ...this.props.drawImageMetrics };
     this.trackMouseMovement();
   }
 
   mouseMove = (e) => {
-    const { Background } = this.props;
+    const { Background, canvas } = this.props;
     const deltaX = e.clientX - this.clickedMouseX;
     const deltaY = e.clientY - this.clickedMouseY;
-    const canvas = Background.canvas;
     const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     const imageHeight = this.imageWidth / imageAspectRatio;

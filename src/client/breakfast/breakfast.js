@@ -6,6 +6,7 @@ import xr from 'xr';
 import { Provider } from 'react-redux';
 
 import Store from './store';
+import { windowResize } from './actions/background';
 import { logosLoaded } from './actions/logo';
 import { fontsLoaded } from './actions/font';
 import App from './containers/app';
@@ -22,6 +23,10 @@ export default function Breakfast() {
     .then((data) => {
       Store.dispatch(fontsLoaded(data.fonts));
     });
+
+  window.addEventListener('resize', () => {
+    Store.dispatch(windowResize());
+  });
 
   render(
     <Provider store={Store}>

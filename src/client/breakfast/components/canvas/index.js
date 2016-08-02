@@ -16,8 +16,9 @@ export default class Canvas extends React.Component {
     Attribution: React.PropTypes.object,
     Font: React.PropTypes.object,
     Text: React.PropTypes.object,
+    canvas: React.PropTypes.object,
+    drawImageMetrics: React.PropTypes.object,
   };
-
 
   componentDidMount() { this.updateCanvas(); }
   componentDidUpdate() { this.updateCanvas(); }
@@ -37,11 +38,13 @@ export default class Canvas extends React.Component {
   // the size using CSS transform. So the actual size of the canvas is double
   // what we have stored in the store
   getCanvasStyle() {
-    const { canvas } = this.props.Background;
+    const { canvas } = this.props;
+    const width = canvas.canvasWidth;
+    const height = canvas.canvasHeight;
 
     return {
-      width: canvas.canvasWidth,
-      height: canvas.canvasHeight,
+      width,
+      height,
       padding: canvas.canvasPadding,
       maxTextWidth: canvas.maxTextWidth,
     };
@@ -50,14 +53,14 @@ export default class Canvas extends React.Component {
   updateCanvas() {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
-    const { Background, Attribution, Logo, Font, Text, textContent } = this.props;
+    const { Background, Attribution, Logo, Font, Text, textContent, drawImageMetrics } = this.props;
 
     if (!context) return;
 
     // Clear out and re-draw
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
 
-    updateBackground(context, canvasStyle, Background);
+    updateBackground(context, canvasStyle, Background, drawImageMetrics);
     updateLogo(context, canvasStyle, Logo);
     updateAttribution(context, canvasStyle, Attribution, Font);
     if (textContent) {

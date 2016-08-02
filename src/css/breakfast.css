@@ -60,7 +60,12 @@ input[type=text] {
   position: relative;
   padding-left: 40%;
 
+  @media (max-width: $screen-sm) {
+    padding-left: 0;
+  }
+
   .save-container {
+
   }
 
   .image-container {

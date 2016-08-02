@@ -12,6 +12,7 @@ import DownloadCanvas from './download-canvas';
 class App extends Component {
   static propTypes = {
     Downloading: PropTypes.object,
+    Background: PropTypes.object,
     actions: PropTypes.object,
   };
 
@@ -28,7 +29,6 @@ class App extends Component {
       downloadCanvas = (
         <div id="download-canvas">
           <DownloadCanvas
-            options={this.props}
             textContent={textContent}
             fileName={filename || 'pic'}
             downloadCallback={this.props.actions.doneDownloading}
@@ -57,8 +57,8 @@ class App extends Component {
 
 
 function mapStateToProps(state) {
-  const { Downloading } = state;
-  return { Downloading };
+  const { Downloading, Background } = state;
+  return { Downloading, Background };
 }
 
 function mapDispatchToProps(dispatch) {
