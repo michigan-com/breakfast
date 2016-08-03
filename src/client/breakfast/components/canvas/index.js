@@ -10,7 +10,6 @@ import updateText from './text';
 
 export default class Canvas extends React.Component {
   static propTypes = {
-    textContent: React.PropTypes.string,
     Background: React.PropTypes.object,
     Logo: React.PropTypes.object,
     Attribution: React.PropTypes.object,
@@ -18,7 +17,12 @@ export default class Canvas extends React.Component {
     Text: React.PropTypes.object,
     canvas: React.PropTypes.object,
     drawImageMetrics: React.PropTypes.object,
+    renderText: React.PropTypes.bool,
   };
+
+  static defaultProps = {
+    renderText: false,
+  }
 
   componentDidMount() { this.updateCanvas(); }
   componentDidUpdate() { this.updateCanvas(); }
@@ -53,7 +57,9 @@ export default class Canvas extends React.Component {
   updateCanvas() {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
-    const { Background, Attribution, Logo, Font, Text, textContent, drawImageMetrics } = this.props;
+    const { renderText, Background, Attribution, Logo, Font, Text, drawImageMetrics } = this.props;
+    const { textContainers, blockTypeStyle } = Text;
+
 
     if (!context) return;
 
@@ -63,8 +69,12 @@ export default class Canvas extends React.Component {
     updateBackground(context, canvasStyle, Background, drawImageMetrics);
     updateLogo(context, canvasStyle, Logo);
     updateAttribution(context, canvasStyle, Attribution, Font);
-    if (textContent) {
-      updateText(context, canvasStyle, Font, Text, textContent);
+    if (renderText) {
+      for (const container of textContainers) {
+        if (container.display) {
+          updateText(context, canvasStyle, Font, blockTypeStyle, container);
+        }
+      }
     }
   }
 

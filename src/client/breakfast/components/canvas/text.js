@@ -9,6 +9,14 @@ function measureWord(context, word) {
   return metrics.width;
 }
 
+function getStyleMetrics(blockType, blockTypeStyle) {
+  for (const style of blockTypeStyle) {
+    if (style.blockType.style === blockType) return style;
+  }
+
+  return blockTypeStyle[0];
+}
+
 /**
  * Draw an entire element's textContext to the canvas, accounting for text wrapping
  * Assumes font, fillStyle, and other cnavas context settings are previously set
@@ -21,11 +29,11 @@ function measureWord(context, word) {
  * @param {Number} fontSize - so we know where to put the next line of text
  * @return {Number} the x coordinate of the next line
  */
-function fillAllText(context, $el, x, startY, textWidth, fontSize) {
+function fillAllText(context, text, x, startY, textWidth, fontSize) {
   let y = startY;
   let line = '';
   let lineWidth = 0;
-  const currentText = $el.textContent.split(' ');
+  const currentText = text.split(' ');
 
   for (const word of currentText) {
     const append = !line ? word : ` ${word}`;
@@ -84,20 +92,13 @@ function getFontStyle(fontOptions, tagName) {
  * @param {String} textContext - Context from the medium toolbar serialize() function
  *
  */
-export default function updateText(context, canvasStyle, fontOptions, textOptions, textContent) {
+function _updateText(context, canvasStyle, fontOptions, textOptions, textContent) {
   const $textContext = $(textContent);
   const canvasPadding = canvasStyle.padding;
   const textPos = textOptions.textPos;
   const textWidth = canvasStyle.maxTextWidth * (textOptions.textWidth / 100);
   const fontFace = fontOptions.fontFace;
 
-  // Scale up for real drawing
-  let y = canvasPadding + (textPos.top * 2);
-  const x = canvasPadding + (textPos.left * 2);
-  const listPadding = 40 * 2;
-
-  context.fillStyle = fontOptions.fontColor;
-  context.textBaseline = 'top';
 
   $textContext.forEach((el) => {
     const tagName = el.tagName.toLowerCase();
@@ -129,4 +130,30 @@ export default function updateText(context, canvasStyle, fontOptions, textOption
       y += styleMetrics.marginBottom;
     }
   });
+}
+
+export default function updateText(context, canvasStyle, fontOptions,
+    blockTypeStyle, textContainer) {
+  const { editorState, textPos, fontFace, fontColor, textWidth } = textContainer;
+  const canvasPadding = canvasStyle.padding;
+  const blocks = editorState.getCurrentContent().getBlocksAsArray();
+  const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100);
+
+  // Scale up for real drawing
+  let y = canvasPadding + (textPos.top * 2);
+  const x = canvasPadding + (textPos.left * 2);
+  const listPadding = 40 * 2;
+
+  context.fillStyle = fontColor;
+  context.textBaseline = 'top';
+
+  for (const block of blocks) {
+    // TODO style metrics
+    const styleMetrics = getStyleMetrics(block.getType(), blockTypeStyle);
+    const font = `${styleMetrics.fontWeight} ${styleMetrics.fontSize}px ${fontFace}`;
+    console.log(font);
+    context.font = font;
+    y = fillAllText(context, block.getText(), x, y, canvasTextWidth, styleMetrics.fontSize);
+    y += styleMetrics.marginBottom;
+  }
 }

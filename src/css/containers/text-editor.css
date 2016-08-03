@@ -10,6 +10,9 @@ $text-toolbar-height: 30px;
 .text-toolbar {
   background-color: black;
   height: $text-toolbar-height;
+  position: absolute;
+  width: 100%;
+  top: calc($text-toolbar-height * -.5);
 
   .select {
     border: 0 !important;

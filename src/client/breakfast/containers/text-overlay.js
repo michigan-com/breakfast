@@ -55,7 +55,6 @@ class TextOverlay extends React.Component {
     const { fontFace, textWidth, textAlign, fontColor } = this.props.textContainerOptions;
     let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
     textWidthPx /= 2;
-    console.log(`rendering text align as ${textAlign}`);
     return {
       fontFamily: fontFace,
       width: `${textWidthPx}px`,
@@ -190,8 +189,8 @@ class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    const { canvas, Font, textContainerOptions } = this.props;
-    // const styleMetrics = Font.styleMetrics;
+    const { canvas, Text, textContainerOptions } = this.props;
+    const { blockTypeStyle } = Text;
     const { textPos, textWidth } = textContainerOptions;
     let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
 
@@ -201,21 +200,21 @@ class TextOverlay extends React.Component {
 
 
     let style = [];
-    // Object.keys(styleMetrics).forEach((tag) => {
-    //   const metrics = styleMetrics[tag];
-    //
-    //   // Scale down for UI purposes
-    //   const s = `{
-    //     font-size: ${metrics.fontSize / 2}px !important;
-    //     margin-bottom: ${metrics.marginBottom / 2}px !important;
-    //     line-height: ${metrics.lineHeight / 2}px !important;
-    //     color: ${Font.fontColor} !important;
-    //   }`;
-    //
-    //   style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
-    // });
+    for (const blockStyle of blockTypeStyle) {
+      const { tagName, fontSize, marginBottom, lineHeight } = blockStyle;
 
-    style.push(`#text-overlay { width: ${textWidthPx}px; }`);
+      // Scale down for UI purposes
+      const s = `{
+        font-size: ${fontSize / 2}px !important;
+        margin-bottom: ${marginBottom / 2}px !important;
+        margin-top: 0;
+        line-height: ${lineHeight / 2}px !important;
+      }`;
+
+      style.push(`.text-editor-container ${tagName}, .text-editor-container ${tagName} * ${s}`);
+    }
+
+    style.push(`.text-editor-container { width: ${textWidthPx}px; }`);
     style.push(`
       .text-overlay-container {
         top: ${textPos.top};
@@ -274,7 +273,7 @@ class TextOverlay extends React.Component {
           />
 
         </div>
-        <div style={style}>
+        <div className="text-editor-container" style={style}>
           <Editor
             editorState={editorState}
             onChange={this.onEditorChange}

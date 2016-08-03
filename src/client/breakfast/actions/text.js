@@ -13,6 +13,45 @@ export const HEADER_TEXT_CONTAINER = 'header';
 export const BODY_TEXT_CONTAINER = 'body';
 export const CAPTION_TEXT_CONTAINER = 'caption';
 
+function getStyleMetrics(blockType) {
+  function generateStyle(fontSize) {
+    const lineHeight = fontSize * 1.05;
+    const marginBottom = fontSize * 0.65;
+    return { fontSize, lineHeight, marginBottom };
+  }
+
+  // Scale up
+  const pFontSize = 16.5 * 2;
+  const h1FontSize = 33.5 * 2;
+  const h2FontSize = 26 * 2;
+  const h3FontSize = 19.5 * 2;
+
+  switch (blockType) {
+    case 'header-one':
+      return {
+        ...generateStyle(h1FontSize),
+        fontWeight: 'bold',
+      };
+    case 'header-two':
+      return {
+        ...generateStyle(h2FontSize),
+        fontWeight: 'bold',
+      };
+    case 'header-three':
+      return {
+        ...generateStyle(h3FontSize),
+        fontWeight: 'bold',
+      };
+    case 'unstyled':
+    default:
+      return {
+        ...generateStyle(pFontSize),
+        fontWeight: 'normal',
+      };
+  }
+}
+
+
 const DEFAULT_TEXT_CONTAINER_HEIGHT = 20;
 
 const DEFAULT_TEXT_CONTAINER = {
@@ -40,6 +79,33 @@ const BLOCK_TYPES = [
   { label: 'OL', style: 'ordered-list-item' },
 ];
 
+const BLOCK_TYPE_STYLE = BLOCK_TYPES.map((blockType) => {
+  const styleMetrics = getStyleMetrics(blockType.style);
+  let tagName = 'span';
+  switch (blockType.style) {
+    case 'header-one':
+      tagName = 'h1';
+      break;
+    case 'header-two':
+      tagName = 'h2';
+      break;
+    case 'header-three':
+      tagName = 'h3';
+      break;
+    case 'unordered-list-item':
+      tagName = 'ul';
+      break;
+    case 'ordered-list-item':
+      tagName = 'ol';
+      break;
+    default:
+      break;
+  }
+
+  return { ...styleMetrics, tagName, blockType };
+});
+
+
 // https://github.com/facebook/draft-js/blob/master/examples/rich/rich.html#L205
 const INLINE_STYLES = [
   { label: 'Bold', style: 'BOLD' },
@@ -52,6 +118,7 @@ const TEXT_ALIGN_OPTIONS = [
   'center',
   'right',
 ];
+
 
 function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, display = false) {
   const textPos = { ...DEFAULT_TEXT_CONTAINER.textPos };
@@ -138,4 +205,5 @@ export const DEFAULT_TEXT = {
   possibleBlockTypes: [...BLOCK_TYPES],
   possibleInlineTypes: [...INLINE_STYLES],
   possibleTextAlignOptions: [...TEXT_ALIGN_OPTIONS],
+  blockTypeStyle: BLOCK_TYPE_STYLE,
 };

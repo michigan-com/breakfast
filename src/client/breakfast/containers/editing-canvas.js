@@ -15,10 +15,6 @@ class EditingCanvas extends Component {
     Text: PropTypes.object,
   };
 
-  getTextContent() {
-    return this.refs['text-overlay'].refs.wrappedInstance.getTextContent();
-  }
-
   render() {
     const { textContent, canvas, Text } = this.props;
     let className = 'image';

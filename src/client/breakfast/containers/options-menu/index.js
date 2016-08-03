@@ -19,10 +19,6 @@ class OptionsMenuComponent extends Component {
     actions: PropTypes.object.isRequired,
   };
 
-  getTextContent() {
-    return this.refs.canvas.getTextContent();
-  }
-
   filenameChange = (e) => {
     const filename = e.target.value;
     this.props.actions.updateFilename(filename);

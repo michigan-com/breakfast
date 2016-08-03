@@ -25,11 +25,9 @@ class App extends Component {
     const { downloading, filename } = this.props.Downloading;
     let downloadCanvas = null;
     if (downloading) {
-      const textContent = this.editingCanvas.refs.wrappedInstance.getTextContent();
       downloadCanvas = (
         <div id="download-canvas">
           <DownloadCanvas
-            textContent={textContent}
             fileName={filename || 'pic'}
             downloadCallback={this.props.actions.doneDownloading}
           />

@@ -15,7 +15,6 @@ class DownloadCanvas extends Component {
   static propTypes = {
     fileName: PropTypes.string.isRequired,
     downloadCallback: PropTypes.func,
-    textContent: PropTypes.string,
   };
 
   static defaultProps = {
@@ -52,10 +51,7 @@ class DownloadCanvas extends Component {
 
   render() {
     return (
-      <Canvas
-        textContent={this.props.textContent}
-        ref="canvas"
-      />
+      <Canvas renderText ref="canvas" />
     );
   }
 }
