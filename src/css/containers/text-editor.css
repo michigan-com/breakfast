@@ -1,0 +1,108 @@
+@import '../constants';
+
+$text-toolbar-height: 30px;
+
+.DraftEditor-root {
+  border: 1px solid $blue;
+  padding: 5px;
+}
+
+.text-toolbar {
+  background-color: black;
+  height: $text-toolbar-height;
+
+  .select {
+    border: 0 !important;
+  }
+
+  .select-option, .current-selection {
+    font-size: 15px;
+    height: $text-toolbar-height !important;
+    line-height: $text-toolbar-height !important;
+    background-color: black !important;
+    color: white !important;
+    padding: 0 !important;
+  }
+
+  .select-option {
+    &:hover, &.selected {
+      background-color: $dark-grey !important;
+    }
+  }
+  .select-option, .current-selection {
+    img {
+      height: 50%;
+      margin-top: 15%;
+    }
+  }
+}
+
+.style-control {
+  font-size: 15px;
+  height: $text-toolbar-height;
+  line-height: $text-toolbar-height;
+  display: inline-block;
+  float: left;
+  color: white;
+  margin: 0px 15px;
+  cursor: pointer;
+
+  img {
+    height: 40%;
+    margin-top: 50%;
+  }
+}
+
+.block-style-controls {
+  display: inline-block;
+  float: left;
+}
+
+.font-picker-container {
+  width: 150px;
+  height: $text-toolbar-height !important;
+  display: inline-block;
+  float: left;
+}
+
+.justify-options {
+  width: 50px;
+  height: $text-toolbar-height !important;
+  display: inline-block;
+  float: left;
+}
+
+.block-style-controls {
+  width: 100px;
+
+  .select-option, .current-selection{
+    img {
+      margin-top: 7.5%;
+    }
+  }
+}
+
+.font-color-picker {
+  width: $text-toolbar-height;
+  height: 100%;
+  display: inline-block;
+  float: left;
+  margin: 0 10px;
+  position: relative;
+
+  .color-picker-container {
+    width: 250px;
+    position: absolute;
+    left: -100px;
+    top: 120%;
+  }
+
+  .swatch {
+    border: 1px solid white;
+    cursor: pointer;
+    width: 60%;
+    height: 60%;
+    margin: 20% auto;
+    border-radius: 5px;
+  }
+}

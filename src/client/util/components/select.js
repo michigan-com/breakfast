@@ -28,6 +28,7 @@ export default class Select extends React.Component {
     const step = optionsObj.scrollHeight / this.props.options.length;
     let scrollTop = step * this.state.currentIndex;
     if (this.state.currentIndex >= 2) scrollTop -= step * 2;
+    else scrollTop = 0;
 
     optionsObj.scrollTop = scrollTop;
   }

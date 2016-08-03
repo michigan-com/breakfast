@@ -17,7 +17,8 @@ function registerRoutes(app, router) {
     const domain = getDomainFromEmail(req.user.email);
     let fonts = basicFonts.slice(); // copies the array
 
-    if (domain === 'usatoday.com') fonts = fonts.concat(usatFonts);
+    if (domain === 'usatoday.com' || req.user.admin) fonts = fonts.concat(usatFonts);
+    fonts = fonts.sort((a, b) => (b - a));
     res.json({ fonts });
   });
 }

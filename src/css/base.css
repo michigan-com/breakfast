@@ -136,6 +136,7 @@ body {
       content: '^';
       position: absolute;
       right: 3%;
+      top: 0;
       transform: rotate(180deg);
       transition: all 250ms linear;
       font-family: $body-font;

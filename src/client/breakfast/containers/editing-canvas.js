@@ -35,7 +35,11 @@ class EditingCanvas extends Component {
           textContent={textContent}
           ref="canvas"
         />
-        <TextOverlay textContainerOptions={Text.textContainers[0]} ref="text-overlay" />
+        <TextOverlay
+          textContainerOptions={Text.textContainers[0]}
+          textContainerIndex={0}
+          ref="text-overlay"
+        />
       </div>
     );
   }

@@ -3,13 +3,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MediumEditor from 'medium-editor';
+import { Editor, RichUtils } from 'draft-js';
 
-import { textPosChange, textWidthChange } from '../actions/text';
-import FontFaceSelector from '../components/medium-toolbar/font-face';
-import FontSizeSelector from '../components/medium-toolbar/font-size';
-import FontColorSelector from '../components/medium-toolbar/font-color';
+import { textPosChange, textWidthChange, updateEditorState, updateFontFace,
+  updateTextAlign, updateFontColor } from '../actions/text';
 import { canvasMetricsSelector } from '../selectors/background';
+import BlockStyleControls from '../components/editor-toolbar/block-style-controls';
+import InlineStyleControls from '../components/editor-toolbar/inline-style-controls';
+import FontPicker from '../components/editor-toolbar/font-picker';
+import TextAlign from '../components/editor-toolbar/text-align';
+import FontColorPicker from '../components/editor-toolbar/font-color-picker';
 
 const MOVE_TYPE_POS = 'pos';
 const MOVE_TYPE_WIDTH = 'width';
@@ -21,6 +24,7 @@ class TextOverlay extends React.Component {
     canvas: PropTypes.object,
     actions: PropTypes.object,
     textContainerOptions: PropTypes.object.isRequired,
+    textContainerIndex: PropTypes.number.isRequired,
   };
 
   constructor(props) {
@@ -33,43 +37,41 @@ class TextOverlay extends React.Component {
       lastMouseX: 0,
       lastMouseY: 0,
 
-      textPos: { ...this.props.Text.textPos },
+      origTextPos: null,
+      origTextWidth: this.props.textContainerOptions.textWidth,
+      textPos: { ...this.props.textContainerOptions.textPos },
     };
 
-    this.mediumEditorOptions = {
-      buttonLabels: 'fontawesome',
-      activeButtonClass: 'medium-editor-button-active',
-      toolbar: {
-        buttons: [
-          'orderedlist',
-          'unorderedlist',
-          'h1',
-          'h2',
-          'fontface',
-          'fontcolor',
-          'fontsize',
-          'textwidth'],
-        static: true,
-        updateOnEmptySelection: true,
-      },
-    };
-
-    this.editor = undefined;
-  }
-
-  componentDidUpdate() {
-    if (this.props.Font.fontOptions.length > 0 && !this.editor) {
-      this.loadMediumEditor();
-    }
-  }
-
-  getTextContent() {
-    return this.editor.serialize()['text-overlay'].value;
+    this.toggleBlockType = this.toggleBlockType.bind(this);
+    this.toggleInlineStyle = this.toggleInlineStyle.bind(this);
+    this.onEditorChange = this.onEditorChange.bind(this);
+    this.onFontFaceChange = this.onFontFaceChange.bind(this);
+    this.onTextAlignChange = this.onTextAlignChange.bind(this);
+    this.onFontColorChange = this.onFontColorChange.bind(this);
   }
 
   getStyle() {
-    const fontFamily = this.props.Font.fontFace;
-    return { fontFamily };
+    const { canvas } = this.props;
+    const { fontFace, textWidth, textAlign, fontColor } = this.props.textContainerOptions;
+    let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
+    textWidthPx /= 2;
+    console.log(`rendering text align as ${textAlign}`);
+    return {
+      fontFamily: fontFace,
+      width: `${textWidthPx}px`,
+      textAlign,
+      color: fontColor,
+    };
+  }
+
+  getCurrentBlockType() {
+    const { editorState } = this.props.textContainerOptions;
+    const selection = editorState.getSelection();
+    const blockType = editorState
+      .getCurrentContent()
+      .getBlockForKey(selection.getStartKey())
+      .getType();
+    return blockType;
   }
 
   /** Mouse events */
@@ -83,8 +85,8 @@ class TextOverlay extends React.Component {
         lastMouseX: e.clientX,
         lastMouseY: e.clientY,
 
-        origTextPos: { ...this.props.Text.textPos },
-        origTextWidth: this.props.Text.textWidth,
+        origTextPos: { ...this.props.textContainerOptions.textPos },
+        origTextWidth: this.props.textContainerOptions.textWidth,
       });
     };
   }
@@ -110,7 +112,7 @@ class TextOverlay extends React.Component {
         case MOVE_TYPE_POS: {
           const top = this.state.origTextPos.top + movementY;
           const left = this.state.origTextPos.left + movementX;
-          this.props.actions.textPosChange({ top, left });
+          this.props.actions.textPosChange(this.props.textContainerIndex, { top, left });
           break;
         }
         case MOVE_TYPE_WIDTH:
@@ -119,7 +121,7 @@ class TextOverlay extends React.Component {
           const maxTextWidth = canvas.maxTextWidth / 2;
           const percentChange = 100 * (movementX / maxTextWidth);
           const textWidthPercent = Math.round(percentChange + this.state.origTextWidth);
-          this.props.actions.textWidthChange(textWidthPercent);
+          this.props.actions.textWidthChange(this.props.textContainerIndex, textWidthPercent);
           break;
         }
       }
@@ -148,28 +150,48 @@ class TextOverlay extends React.Component {
   }
 
   /** End Mouse events */
+  toggleBlockType(blockType) {
+    const currentBlockType = this.getCurrentBlockType();
+    if (blockType === 'text') {
+      blockType = currentBlockType;
+    } else if (blockType === currentBlockType) {
+      return;
+    }
 
+    const { editorState } = this.props.textContainerOptions;
+    this.props.actions.updateEditorState(
+      this.props.textContainerIndex,
+      RichUtils.toggleBlockType(editorState, blockType)
+    );
+  }
 
-  loadMediumEditor() {
-    const fontFace = new FontFaceSelector(this.props.Font.fontOptions);
-    const fontSize = new FontSizeSelector();
-    const fontColor = new FontColorSelector();
+  toggleInlineStyle(inlineStyle) {
+    const { editorState } = this.props.textContainerOptions;
+    this.props.actions.updateEditorState(
+      this.props.textContainerIndex,
+      RichUtils.toggleInlineStyle(editorState, inlineStyle)
+    );
+  }
 
-    const options = { ...this.mediumEditorOptions };
+  onEditorChange(editorState) {
+    this.props.actions.updateEditorState(this.props.textContainerIndex, editorState);
+  }
 
-    options.extensions = {
-      fontface: new fontFace.Extension(),
-      fontsize: new fontSize.Extension(),
-      fontcolor: new fontColor.Extension(),
-    };
+  onFontFaceChange(fontFace) {
+    this.props.actions.updateFontFace(this.props.textContainerIndex, fontFace);
+  }
 
-    this.editor = new MediumEditor(document.getElementById('text-overlay'), options);
-    this.setState({ initialized: true });
+  onTextAlignChange(textAlign) {
+    this.props.actions.updateTextAlign(this.props.textContainerIndex, textAlign);
+  }
+
+  onFontColorChange(fontColor) {
+    this.props.actions.updateFontColor(this.props.textContainerIndex, fontColor.hex);
   }
 
   renderStyle() {
     const { canvas, Font, textContainerOptions } = this.props;
-    const styleMetrics = Font.styleMetrics;
+    // const styleMetrics = Font.styleMetrics;
     const { textPos, textWidth } = textContainerOptions;
     let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
 
@@ -179,19 +201,19 @@ class TextOverlay extends React.Component {
 
 
     let style = [];
-    Object.keys(styleMetrics).forEach((tag) => {
-      const metrics = styleMetrics[tag];
-
-      // Scale down for UI purposes
-      const s = `{
-        font-size: ${metrics.fontSize / 2}px !important;
-        margin-bottom: ${metrics.marginBottom / 2}px !important;
-        line-height: ${metrics.lineHeight / 2}px !important;
-        color: ${Font.fontColor} !important;
-      }`;
-
-      style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
-    });
+    // Object.keys(styleMetrics).forEach((tag) => {
+    //   const metrics = styleMetrics[tag];
+    //
+    //   // Scale down for UI purposes
+    //   const s = `{
+    //     font-size: ${metrics.fontSize / 2}px !important;
+    //     margin-bottom: ${metrics.marginBottom / 2}px !important;
+    //     line-height: ${metrics.lineHeight / 2}px !important;
+    //     color: ${Font.fontColor} !important;
+    //   }`;
+    //
+    //   style.push(`#text-overlay ${tag}, #text-overlay ${tag} * ${s}`);
+    // });
 
     style.push(`#text-overlay { width: ${textWidthPx}px; }`);
     style.push(`
@@ -215,13 +237,50 @@ class TextOverlay extends React.Component {
   }
 
   render() {
+    const { possibleBlockTypes, possibleInlineTypes, possibleTextAlignOptions } = this.props.Text;
+    const { fontOptions } = this.props.Font;
+    const { editorState, fontFace, fontColor } = this.props.textContainerOptions;
+    const blockType = this.getCurrentBlockType();
+    const currentInlineStyle = editorState.getCurrentInlineStyle();
+
     let className = 'text-overlay-container';
     if (this.state.initialized) className += ' initialized';
-
     let style = this.getStyle();
     return (
-      <div className={className} style={style}>
-        <div id="text-overlay"></div>
+      <div className={className}>
+        <div className="text-toolbar">
+          <FontPicker
+            fontOptions={fontOptions}
+            currentFontFace={fontFace}
+            onFontChange={this.onFontFaceChange}
+          />
+          <InlineStyleControls
+            inlineTypes={possibleInlineTypes}
+            currentInlineStyle={currentInlineStyle}
+            onToggle={this.toggleInlineStyle}
+          />
+          <TextAlign
+            textAlignOptions={possibleTextAlignOptions}
+            onChange={this.onTextAlignChange}
+          />
+          <BlockStyleControls
+            blockTypes={possibleBlockTypes}
+            currentActiveStyle={blockType}
+            onToggle={this.toggleBlockType}
+          />
+          <FontColorPicker
+            currentColor={fontColor}
+            onChange={this.onFontColorChange}
+          />
+
+        </div>
+        <div style={style}>
+          <Editor
+            editorState={editorState}
+            onChange={this.onEditorChange}
+            style={style}
+          />
+        </div>
         <div
           className="move-text"
           onMouseDown={this.mouseDown(MOVE_TYPE_POS)}
@@ -249,6 +308,10 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       textPosChange,
       textWidthChange,
+      updateFontFace,
+      updateEditorState,
+      updateTextAlign,
+      updateFontColor,
     }, dispatch),
   };
 }

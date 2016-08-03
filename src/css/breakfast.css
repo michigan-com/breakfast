@@ -1,7 +1,7 @@
 @import './base';
 @import '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css';
-@import './medium-toolbar';
 @import './containers/options-menu';
+@import './containers/text-editor';
 @import './constants';
 
 @define-mixin close-button {
