@@ -111,10 +111,20 @@ export default class Select extends React.Component {
 
   renderOptions() {
     if (this.state.optionsHidden) return null;
+    const overlayStyle = {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    };
 
     return (
-      <div className="select-options" ref="select-options">
-        {this.props.options.map(this.renderOption.bind(this))}
+      <div>
+        <div className="overlay" onClick={this.toggleOptions} style={overlayStyle}></div>
+        <div className="select-options" ref="select-options">
+          {this.props.options.map(this.renderOption.bind(this))}
+        </div>
       </div>
     );
   }

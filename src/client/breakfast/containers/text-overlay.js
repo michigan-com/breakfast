@@ -53,7 +53,7 @@ class TextOverlay extends React.Component {
   getStyle() {
     const { canvas } = this.props;
     const { fontFace, textWidth, textAlign, fontColor } = this.props.textContainerOptions;
-    let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
+    let textWidthPx = (canvas.maxTextWidth * (textWidth / 100)) + canvas.textEditorPadding;
     textWidthPx /= 2;
     return {
       fontFamily: fontFace,
@@ -214,7 +214,7 @@ class TextOverlay extends React.Component {
       style.push(`.text-editor-container ${tagName}, .text-editor-container ${tagName} * ${s}`);
     }
 
-    style.push(`.text-editor-container { width: ${textWidthPx}px; }`);
+    // style.push(`.text-editor-container { width: ${textWidthPx + canvas.textEditorPadding}px; }`);
     style.push(`
       .text-overlay-container {
         top: ${textPos.top};
@@ -230,6 +230,14 @@ class TextOverlay extends React.Component {
       .text-overlay-container .text-width-change {
         top: ${canvasPadding}px;
         left: ${textWidthPx + canvasPadding + 4}px
+      }`);
+    // style.push(`
+    //   .DraftEditor-root {
+    //     padding: ${canvas.textEditorPadding / 2}px;
+    //   }`);
+    style.push(`
+      .DraftEditor-root .DraftEditor-editorContainer {
+        border: 1px solid black;
       }`);
 
     return (<style>{style.join(' ')}</style>);

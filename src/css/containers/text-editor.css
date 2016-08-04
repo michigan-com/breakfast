@@ -4,15 +4,30 @@ $text-toolbar-height: 30px;
 
 .DraftEditor-root {
   border: 1px solid $blue;
-  padding: 5px;
 }
 
 .text-toolbar {
   background-color: black;
   height: $text-toolbar-height;
   position: absolute;
-  width: 100%;
   top: calc($text-toolbar-height * -.5);
+  left: 0;
+  border-radius: calc($text-toolbar-height / 2);
+  width: 75%;
+  left: 12.5%;
+  min-width: 500px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: $text-toolbar-height;
+    left: 47%;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 10px solid black;
+    width: 0;
+    height: 0;
+  }
 
   .select {
     border: 0 !important;
@@ -66,6 +81,10 @@ $text-toolbar-height: 30px;
   height: $text-toolbar-height !important;
   display: inline-block;
   float: left;
+
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+  }
 }
 
 .justify-options {

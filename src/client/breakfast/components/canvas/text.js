@@ -81,63 +81,13 @@ function getFontStyle(fontOptions, tagName) {
   };
 }
 
-/**
- * Draw the background based on the current background options
- *
- * @param {Object} context - Canvas context https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
- * @param {Object} canvasStyle - Height/width of the current canvas so we know where
- *  we need to draw stuff
- * @param {Object} fontOptions - current font options (see state.Font)
- * @param {Object} textOptions - current text options (state.Text);
- * @param {String} textContext - Context from the medium toolbar serialize() function
- *
- */
-function _updateText(context, canvasStyle, fontOptions, textOptions, textContent) {
-  const $textContext = $(textContent);
-  const canvasPadding = canvasStyle.padding;
-  const textPos = textOptions.textPos;
-  const textWidth = canvasStyle.maxTextWidth * (textOptions.textWidth / 100);
-  const fontFace = fontOptions.fontFace;
-
-
-  $textContext.forEach((el) => {
-    const tagName = el.tagName.toLowerCase();
-    if (possibleTags.indexOf(tagName) < 0) return;
-
-    // Set context font
-    const styleMetrics = getFontStyle(fontOptions, tagName);
-    if (!styleMetrics) return;
-    context.font = `${styleMetrics.fontWeight} ${styleMetrics.fontSize}px ${fontFace}`;
-
-    if (tagName === 'ul' || tagName === 'ol') {
-      let listCount = 0;
-      const bulletType = tagName === 'ul' ? 'bullet' : 'number';
-
-      $(el).children('li').forEach((element) => {
-        const bullet = bulletType === 'bullet' ? '•' : `${listCount + 1}.`;
-        const bulletLength = measureWord(context, bullet);
-        const bulletX = x + (listPadding * 0.75) - bulletLength;
-        const textX = x + listPadding;
-        const bulletTextWidth = textWidth - listPadding;
-
-        context.fillText(bullet, bulletX, y);
-        y = fillAllText(context, element, textX, y, bulletTextWidth, styleMetrics.lineHeight);
-        y += styleMetrics.marginBottom * 0.93; // idk!
-        listCount += 1;
-      });
-    } else {
-      y = fillAllText(context, el, x, y, textWidth, styleMetrics.fontSize);
-      y += styleMetrics.marginBottom;
-    }
-  });
-}
-
 export default function updateText(context, canvasStyle, fontOptions,
     blockTypeStyle, textContainer) {
   const { editorState, textPos, fontFace, fontColor, textWidth } = textContainer;
   const canvasPadding = canvasStyle.padding;
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100);
+  console.log(canvasTextWidth, textWidth);
 
   // Scale up for real drawing
   let y = canvasPadding + (textPos.top * 2);
@@ -147,13 +97,36 @@ export default function updateText(context, canvasStyle, fontOptions,
   context.fillStyle = fontColor;
   context.textBaseline = 'top';
 
+  let listCount = 0;
   for (const block of blocks) {
-    // TODO style metrics
-    const styleMetrics = getStyleMetrics(block.getType(), blockTypeStyle);
-    const font = `${styleMetrics.fontWeight} ${styleMetrics.fontSize}px ${fontFace}`;
-    console.log(font);
+    const blockType = block.getType();
+    const styleMetrics = getStyleMetrics(blockType, blockTypeStyle);
+
+    // These have to be adjusted slightly to make html and canvas work the same
+    const fontSize = styleMetrics.fontSize;
+    const lineHeight = styleMetrics.lineHeight;
+    const marginBottom = styleMetrics.marginBottom;
+
+    const font = `${styleMetrics.fontWeight} ${fontSize}px ${fontFace}`;
     context.font = font;
-    y = fillAllText(context, block.getText(), x, y, canvasTextWidth, styleMetrics.fontSize);
-    y += styleMetrics.marginBottom;
+
+    if (/(unordered|ordered)-list-item/.test(blockType)) {
+      const bullet = /unordered/.test(blockType) ? '•' : `${listCount + 1}.`;
+      const bulletLength = measureWord(context, bullet);
+      const bulletX = x + (listPadding * 0.75) - bulletLength;
+      const textX = x + listPadding;
+      const bulletTextWidth = canvasTextWidth - listPadding;
+
+      context.fillText(bullet, bulletX, y);
+      y = fillAllText(context, block.getText(), textX, y, bulletTextWidth, fontSize);
+      y += styleMetrics.marginBottom * 0.93; // idk!
+      listCount += 1;
+    } else {
+      y = fillAllText(context, block.getText(), x, y, canvasTextWidth, fontSize);
+
+      if (/header-/.test(blockType)) {
+        y += styleMetrics.marginBottom;
+      }
+    }
   }
 }

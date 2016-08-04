@@ -47,7 +47,9 @@ export const canvasMetricsSelector = createSelector(
     }
 
     const canvasPadding = canvasWidth / 26;
-    const maxTextWidth = Math.round(canvasWidth - (canvasPadding * 2));
+    const textEditorPadding = 10;
+    const totalPadding = canvasPadding + textEditorPadding;
+    const maxTextWidth = Math.round(canvasWidth - (totalPadding * 2));
     const canvasHeight = canvasWidth / value;
 
     return {
@@ -56,6 +58,8 @@ export const canvasMetricsSelector = createSelector(
       canvasPadding,
       aspectRatio: value,
       maxTextWidth,
+      textEditorPadding,
+      totalPadding,
     };
   }
 );
