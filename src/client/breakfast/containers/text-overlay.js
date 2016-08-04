@@ -217,8 +217,6 @@ class TextOverlay extends React.Component {
     // style.push(`.text-editor-container { width: ${textWidthPx + canvas.textEditorPadding}px; }`);
     style.push(`
       .text-overlay-container {
-        top: ${textPos.top};
-        left: ${textPos.left};
         padding: ${canvasPadding}px
       }`);
     style.push(`
@@ -246,15 +244,19 @@ class TextOverlay extends React.Component {
   render() {
     const { possibleBlockTypes, possibleInlineTypes, possibleTextAlignOptions } = this.props.Text;
     const { fontOptions } = this.props.Font;
-    const { editorState, fontFace, fontColor } = this.props.textContainerOptions;
+    const { editorState, fontFace, fontColor, textPos } = this.props.textContainerOptions;
     const blockType = this.getCurrentBlockType();
     const currentInlineStyle = editorState.getCurrentInlineStyle();
 
     let className = 'text-overlay-container';
     if (this.state.initialized) className += ' initialized';
     let style = this.getStyle();
+    const textOverlayContainerStyle = {
+      top: `${textPos.top}px`,
+      left: `${textPos.left}px`,
+    };
     return (
-      <div className={className}>
+      <div className={className} style={textOverlayContainerStyle}>
         <div className="text-toolbar">
           <FontPicker
             fontOptions={fontOptions}

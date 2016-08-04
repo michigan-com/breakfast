@@ -1,6 +1,6 @@
 'use strict';
 
-import { EditorState } from 'draft-js';
+import { EditorState, RichUtils } from 'draft-js';
 
 export const TEXT_WIDTH_CHANGE = 'TEXT_WIDTH_CHANGE';
 export const TEXT_POS_CHANGE = 'TEXT_POS_CHANGE';
@@ -8,6 +8,7 @@ export const UPDATE_EDITOR_STATE = 'UPDATE_EDITOR_STATE';
 export const UPDATE_EDITOR_FONTFACE = 'UPDATE_EDITOR_FONTFACE';
 export const UPDATE_EDITOR_TEXT_ALIGN = 'UPDATE_EDITOR_TEXT_ALIGN';
 export const UPDATE_EDITOR_FONT_COLOR = 'UPDATE_EDITOR_FONT_COLOR';
+export const UPDATE_EDITOR_DISPLAY = 'UPDATE_EDITOR_DISPLAY';
 
 export const HEADER_TEXT_CONTAINER = 'header';
 export const BODY_TEXT_CONTAINER = 'body';
@@ -124,14 +125,21 @@ function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, dis
   const textPos = { ...DEFAULT_TEXT_CONTAINER.textPos };
   switch (containerType) {
     case BODY_TEXT_CONTAINER:
-      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT;
+      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 5;
       return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };
     case CAPTION_TEXT_CONTAINER:
-      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 2;
+      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 7;
       return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };
     case HEADER_TEXT_CONTAINER:
     default:
-      return { ...DEFAULT_TEXT_CONTAINER, display };
+      return {
+        ...DEFAULT_TEXT_CONTAINER,
+        display,
+        editorState: RichUtils.toggleBlockType(
+          EditorState.createEmpty(),
+          'header-one'
+        ),
+      };
   }
 }
 
@@ -192,6 +200,16 @@ export function updateFontColor(textContainerIndex, fontColor) {
     value: {
       textContainerIndex,
       fontColor,
+    },
+  };
+}
+
+export function updateEditorDisplay(textContainerIndex, display) {
+  return {
+    type: UPDATE_EDITOR_DISPLAY,
+    value: {
+      textContainerIndex,
+      display,
     },
   };
 }

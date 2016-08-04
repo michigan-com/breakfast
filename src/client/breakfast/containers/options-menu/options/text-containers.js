@@ -1,20 +1,23 @@
 'use strict';
 
 import React, { PropTypes, Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { HEADER_TEXT_CONTAINER, BODY_TEXT_CONTAINER, CAPTION_TEXT_CONTAINER,
-  } from '../../../actions/text';
+  updateEditorDisplay } from '../../../actions/text';
 
 class TextContainerOptions extends Component {
   static propTypes = {
     Text: PropTypes.object,
+    actions: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
 
     this.renderTextContainerButton = this.renderTextContainerButton.bind(this);
+    this.toggleDisplay = this.toggleDisplay.bind(this);
   }
 
   getButtonImage(containerType) {
@@ -29,6 +32,13 @@ class TextContainerOptions extends Component {
     }
   }
 
+  toggleDisplay(index) {
+    return () => {
+      const textContainer = this.props.Text.textContainers[index];
+      this.props.actions.updateEditorDisplay(index, !textContainer.display);
+    };
+  }
+
   renderTextContainerButton(container, index) {
     const textContainerButtonClass = ['text-container-button-container'];
     if (container.display) textContainerButtonClass.push('show');
@@ -36,7 +46,7 @@ class TextContainerOptions extends Component {
     return (
       <div className={textContainerButtonClass.join(' ')} key={`text-container-button-${index}`}>
         <div className="text-container-button">
-          <div className="text-container-button-image">
+          <div className="text-container-button-image" onClick={this.toggleDisplay(index)}>
             {this.getButtonImage(container.containerType)}
           </div>
           <div className="text-container-button-text">{container.containerType}</div>
@@ -66,4 +76,12 @@ function mapStateToProps(state) {
   return { Text };
 }
 
-export default connect(mapStateToProps)(TextContainerOptions);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      updateEditorDisplay,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextContainerOptions);

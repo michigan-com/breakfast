@@ -16,9 +16,11 @@ export default class BlockStyleControls extends Component {
 
   render() {
     const { blockTypes, currentActiveStyle } = this.props;
+    console.log(currentActiveStyle);
     let selectIndex = 0;
     for (let i = 0; i < blockTypes.length; i++) {
-      if (blockTypes.style === currentActiveStyle) {
+      const blockType = blockTypes[i];
+      if (blockType.style === currentActiveStyle) {
         selectIndex = i;
         break;
       }

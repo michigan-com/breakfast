@@ -10,13 +10,13 @@ import { canvasMetricsSelector } from '../selectors/background';
 class EditingCanvas extends Component {
   static propTypes = {
     canvas: PropTypes.object,
-    textContent: PropTypes.string,
     Background: PropTypes.object,
     Text: PropTypes.object,
   };
 
   render() {
-    const { textContent, canvas, Text } = this.props;
+    const { canvas, Text } = this.props;
+    const { textContainers } = Text;
     let className = 'image';
 
     // Have to scale down for better UI
@@ -27,15 +27,18 @@ class EditingCanvas extends Component {
 
     return (
       <div className={className} style={style} ref="image">
-        <Canvas
-          textContent={textContent}
-          ref="canvas"
-        />
-        <TextOverlay
-          textContainerOptions={Text.textContainers[0]}
-          textContainerIndex={0}
-          ref="text-overlay"
-        />
+        <Canvas ref="canvas" />
+
+        {textContainers.map((container, index) => {
+          if (!container.display) return null;
+          return (
+            <TextOverlay
+              textContainerOptions={container}
+              textContainerIndex={index}
+              key={`text-container-${index}`}
+            />
+          );
+        })}
       </div>
     );
   }
@@ -47,8 +50,4 @@ function mapStateToProps(state) {
   return { Background, Text, canvas };
 }
 
-const connectOptions = {
-  withRef: true,
-};
-
-export default connect(mapStateToProps, {}, undefined, connectOptions)(EditingCanvas);
+export default connect(mapStateToProps)(EditingCanvas);

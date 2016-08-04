@@ -1,7 +1,8 @@
 'use strict';
 
 import { TEXT_WIDTH_CHANGE, TEXT_POS_CHANGE, UPDATE_EDITOR_STATE, UPDATE_EDITOR_FONTFACE,
-  UPDATE_EDITOR_TEXT_ALIGN, UPDATE_EDITOR_FONT_COLOR, DEFAULT_TEXT } from '../../actions/text';
+  UPDATE_EDITOR_TEXT_ALIGN, UPDATE_EDITOR_FONT_COLOR, UPDATE_EDITOR_DISPLAY,
+  DEFAULT_TEXT } from '../../actions/text';
 
 /* eslint-disable no-case-declarations */
 function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
@@ -37,6 +38,10 @@ function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
           const { fontColor } = action.value;
           newTextContainers[i].fontColor = fontColor;
           break;
+        case UPDATE_EDITOR_DISPLAY:
+          const { display } = action.value;
+          newTextContainers[i].display = display;
+          break;
         default:
           break;
       }
@@ -54,6 +59,7 @@ export default function textReducer(state = DEFAULT_TEXT, action) {
     case TEXT_POS_CHANGE:
     case UPDATE_EDITOR_TEXT_ALIGN:
     case UPDATE_EDITOR_FONT_COLOR:
+    case UPDATE_EDITOR_DISPLAY:
       return handleTextContainerUpdate(state, action);
     default:
       return { ...state };
