@@ -14,7 +14,7 @@ function fixValue(value, min, max) {
 }
 
 
-const backgroundSelector = (state) => state.Background;
+const backgroundSelector = (state) => state.Background.present;
 
 export const canvasMetricsSelector = createSelector(
   backgroundSelector,

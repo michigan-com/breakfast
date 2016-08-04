@@ -1,5 +1,7 @@
 'use strict';
 
+import undoable from 'redux-undo';
+
 import { TEXT_WIDTH_CHANGE, TEXT_POS_CHANGE, UPDATE_EDITOR_STATE, UPDATE_EDITOR_FONTFACE,
   UPDATE_EDITOR_TEXT_ALIGN, UPDATE_EDITOR_FONT_COLOR, UPDATE_EDITOR_DISPLAY,
   DEFAULT_TEXT } from '../../actions/text';
@@ -51,7 +53,7 @@ function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
   return { ...state, textContainers: newTextContainers };
 }
 
-export default function textReducer(state = DEFAULT_TEXT, action) {
+function textReducer(state = DEFAULT_TEXT, action) {
   switch (action.type) {
     case UPDATE_EDITOR_STATE:
     case UPDATE_EDITOR_FONTFACE:
@@ -65,3 +67,5 @@ export default function textReducer(state = DEFAULT_TEXT, action) {
       return { ...state };
   }
 }
+
+export default undoable(textReducer);

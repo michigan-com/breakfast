@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { TWO_ONE, SQUARE, FIT_IMAGE, aspectRatioChange,
   } from '../../../actions/background';
+import { getPresentState } from '../../../selectors/present';
 
 class AspectRatioPicker extends Component {
   static propTypes = {
@@ -96,7 +97,7 @@ class AspectRatioPicker extends Component {
 
 function mapStateToProps(state) {
   return {
-    Background: state.Background,
+    Background: getPresentState(state).Background,
   };
 }
 

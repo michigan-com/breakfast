@@ -8,6 +8,7 @@ import { Editor, RichUtils } from 'draft-js';
 import { textPosChange, textWidthChange, updateEditorState, updateFontFace,
   updateTextAlign, updateFontColor } from '../actions/text';
 import { canvasMetricsSelector } from '../selectors/background';
+import { getPresentState } from '../selectors/present';
 import BlockStyleControls from '../components/editor-toolbar/block-style-controls';
 import InlineStyleControls from '../components/editor-toolbar/inline-style-controls';
 import FontPicker from '../components/editor-toolbar/font-picker';
@@ -299,7 +300,7 @@ class TextOverlay extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { Text, Font } = state;
+  const { Text, Font } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
   return { Text, Font, canvas };
 }

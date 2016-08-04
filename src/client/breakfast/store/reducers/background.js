@@ -1,11 +1,13 @@
 'use strict';
 
+import undoable from 'redux-undo';
+
 import { BACKGROUND_COLOR_CHANGE, BACKGROUND_IMAGE_CHANGE,
   REMOVE_BACKGROUND_IMAGE, DEFAULT_BACKGROUND_IMAGE, DEFAULT_STATE,
   BACKGROUND_DRAW_LOCATION_CHANGE, ASPECT_RATIO_CHANGE, FIT_IMAGE, ASPECT_RATIOS,
   DEFAULT_BACKGROUND_OFFSET, getAspectRatioValue } from '../../actions/background';
 
-export default function backgroundReducer(state = DEFAULT_STATE, action) {
+function backgroundReducer(state = DEFAULT_STATE, action) {
   let { backgroundColor, aspectRatioIndex, backgroundOffset } = state;
   let dx;
   let dy;
@@ -59,3 +61,5 @@ export default function backgroundReducer(state = DEFAULT_STATE, action) {
   }
   return { ...state };
 }
+
+export default undoable(backgroundReducer);

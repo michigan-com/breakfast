@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import TextOverlay from './text-overlay';
 import Canvas from './canvas';
 import { canvasMetricsSelector } from '../selectors/background';
+import { getPresentState } from '../selectors/present';
 
 class EditingCanvas extends Component {
   static propTypes = {
@@ -28,7 +29,6 @@ class EditingCanvas extends Component {
     return (
       <div className={className} style={style} ref="image">
         <Canvas ref="canvas" />
-
         {textContainers.map((container, index) => {
           if (!container.display) return null;
           return (
@@ -45,7 +45,7 @@ class EditingCanvas extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Background, Text } = state;
+  const { Background, Text } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
   return { Background, Text, canvas };
 }

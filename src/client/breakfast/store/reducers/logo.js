@@ -1,9 +1,12 @@
 'use strict';
 
+import undoable from 'redux-undo';
+import { ignoreActions } from 'redux-ignore';
+
 import { LOGO_CHANGE, LOGO_COLOR_CHANGE, LOGO_LOCATION_CHANGE,
   LOGOS_LOADED, DEFAULT_LOGO_STATE, LOGO_ASPECT_RATIO_FOUND } from '../../actions/logo';
 
-export default function logoReducer(state = DEFAULT_LOGO_STATE, action) {
+function logoReducer(state = DEFAULT_LOGO_STATE, action) {
   let { logoColor, logo, logoIndex, aspectRatio, logoOptions, logoLocation } = state;
   switch (action.type) {
     case LOGO_COLOR_CHANGE:
@@ -38,3 +41,7 @@ export default function logoReducer(state = DEFAULT_LOGO_STATE, action) {
       return { ...state };
   }
 }
+
+export default undoable(logoReducer, {
+  initTypes: [LOGOS_LOADED],
+});

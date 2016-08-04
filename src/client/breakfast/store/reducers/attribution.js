@@ -1,10 +1,12 @@
 'use strict';
 
+import undoable from 'redux-undo';
+
 import { ATTRIBUTION_CHANGE, ATTRIBUTION_COLOR_CHANGE,
   ATTRIBUTION_LOCATION_CHANGE, DEFAULT_ATTRIBUTION } from '../../actions/attribution';
 import { CORNER_OPTIONS } from '../../actions/corner';
 
-export default function attributionReducer(state = DEFAULT_ATTRIBUTION, action) {
+function attributionReducer(state = DEFAULT_ATTRIBUTION, action) {
   let { attribution, attributionColor, attributionLocation } = state;
   switch (action.type) {
     case ATTRIBUTION_CHANGE:
@@ -24,3 +26,5 @@ export default function attributionReducer(state = DEFAULT_ATTRIBUTION, action) 
   }
   return state;
 }
+
+export default undoable(attributionReducer);

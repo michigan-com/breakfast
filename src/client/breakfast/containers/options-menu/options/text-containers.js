@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { HEADER_TEXT_CONTAINER, BODY_TEXT_CONTAINER, CAPTION_TEXT_CONTAINER,
   updateEditorDisplay } from '../../../actions/text';
+import { getPresentState } from '../../../selectors/present';
 
 class TextContainerOptions extends Component {
   static propTypes = {
@@ -72,7 +73,7 @@ class TextContainerOptions extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Text } = state;
+  const { Text } = getPresentState(state);
   return { Text };
 }
 

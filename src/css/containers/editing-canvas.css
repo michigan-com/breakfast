@@ -1,0 +1,25 @@
+
+$undo-height: 50px;
+
+.undo-container {
+  height: $undo-height;
+  width: 100%;
+
+  .undo-button {
+    width: calc($undo-height);
+    color: white;
+    display: inline-block;
+    float: right;
+    margin: 0px 20px;
+    cursor: pointer;
+
+    img {
+      height: 50%;
+    }
+
+    .text {
+      font-size: calc($undo-height * .3);
+      line-height: calc($undo-height * .4);
+    }
+  }
+}

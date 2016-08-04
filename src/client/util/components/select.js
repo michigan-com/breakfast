@@ -9,7 +9,6 @@ export default class Select extends React.Component {
 
     this.state = {
       optionsHidden: true,
-      currentIndex: this.props.currentIndex ? this.props.currentIndex : 0,
     };
 
     this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
@@ -26,8 +25,8 @@ export default class Select extends React.Component {
 
     // Set scrollTop to make the selected index 2 from the top
     const step = optionsObj.scrollHeight / this.props.options.length;
-    let scrollTop = step * this.state.currentIndex;
-    if (this.state.currentIndex >= 2) scrollTop -= step * 2;
+    let scrollTop = step * this.props.currentIndex;
+    if (this.props.currentIndex >= 2) scrollTop -= step * 2;
     else scrollTop = 0;
 
     optionsObj.scrollTop = scrollTop;
@@ -60,7 +59,7 @@ export default class Select extends React.Component {
   }
 
   currentSelection() {
-    return this.props.options[this.state.currentIndex];
+    return this.props.options[this.props.currentIndex];
   }
 
   toggleOptions() {
@@ -76,7 +75,6 @@ export default class Select extends React.Component {
       }
 
       this.setState({
-        currentIndex: index,
         optionsHidden: true,
       });
 
@@ -99,7 +97,7 @@ export default class Select extends React.Component {
   renderOption(option, index) {
     return (
       <div
-        className={`select-option ${index === this.state.currentIndex ? 'selected' : ''}`}
+        className={`select-option ${index === this.props.currentIndex ? 'selected' : ''}`}
         key={`option-${index}`}
         onClick={this.optionSelected(index)}
         style={this.getStyle(option)}
@@ -134,7 +132,7 @@ export default class Select extends React.Component {
       return null;
     }
 
-    const selected = this.props.options[this.state.currentIndex];
+    const selected = this.props.options[this.props.currentIndex];
     return (
       <div className={`select ${this.htmlClass} ${this.state.optionsHidden ? '' : 'show'}`}>
         <div
@@ -142,7 +140,7 @@ export default class Select extends React.Component {
           onClick={this.toggleOptions}
           style={this.getStyle(selected)}
         >
-          {this.getDisplayValue(selected, this.state.currentIndex)}
+          {this.getDisplayValue(selected, this.props.currentIndex)}
         </div>
         {this.renderOptions()}
       </div>

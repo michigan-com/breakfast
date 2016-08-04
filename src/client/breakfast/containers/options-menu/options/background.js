@@ -15,6 +15,7 @@ import { attributionChange, attributionColorChange,
 import CornerPicker from '../../../components/corner-picker';
 import BackgroundPosition from '../../../components/background-position';
 import { canvasMetricsSelector, drawImageMetricsSelector } from '../../../selectors/background';
+import { getPresentState } from '../../../selectors/present';
 
 class BackgroundOptions extends Component {
 
@@ -220,7 +221,7 @@ class BackgroundOptions extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Background, Attribution } = state;
+  const { Background, Attribution } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
   const drawImageMetrics = drawImageMetricsSelector(state);
   return { Background, Attribution, canvas, drawImageMetrics };

@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { logoChange, logoColorChange, logoLocationChange } from '../../../actions/logo';
 import Select from '../../../../util/components/select';
 import CornerPicker from '../../../components/corner-picker';
+import { getPresentState } from '../../../selectors/present';
 
 
 class LogoOptions extends Component {
@@ -168,7 +169,7 @@ class LogoSelect extends Select {
 }
 
 function mapStateToProps(state) {
-  const { Logo } = state;
+  const { Logo } = getPresentState(state);
   return { Logo };
 }
 
