@@ -9,7 +9,6 @@ $dark-blue: #4a90e2;
 $red: #ff0000;
 $green: #7ed321;
 
-$body-background: white;
 /*$body-font: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;*/
 $body-font: "Futura Today";
 
@@ -21,7 +20,7 @@ $navbar-height: 50px;
 $screen-md: 992px;
 $screen-sm: 768px;
 
-$body-background: $dark-grey;
+$body-background: rgba(0, 0, 0, .6);
 
 $button-font-size: 30px;
 $button-line-height: calc($button-font-size * 2);

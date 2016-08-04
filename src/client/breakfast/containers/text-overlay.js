@@ -189,15 +189,8 @@ class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    const { canvas, Text, textContainerOptions } = this.props;
+    const { Text } = this.props;
     const { blockTypeStyle } = Text;
-    const { textPos, textWidth } = textContainerOptions;
-    let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
-
-    // Have to scale things down on the DOM for better UI
-    textWidthPx /= 2;
-    const canvasPadding = canvas.canvasPadding / 2;
-
 
     let style = [];
     for (const blockStyle of blockTypeStyle) {
@@ -216,37 +209,25 @@ class TextOverlay extends React.Component {
 
     // style.push(`.text-editor-container { width: ${textWidthPx + canvas.textEditorPadding}px; }`);
     style.push(`
-      .text-overlay-container {
-        padding: ${canvasPadding}px
-      }`);
-    style.push(`
-      .text-overlay-container .move-text {
-        top: ${canvasPadding}px;
-        left: ${canvasPadding - 40}px;
-      }`);
-    style.push(`
       .text-overlay-container .text-width-change {
-        top: ${canvasPadding}px;
-        left: ${textWidthPx + canvasPadding + 4}px
-      }`);
-    // style.push(`
-    //   .DraftEditor-root {
-    //     padding: ${canvas.textEditorPadding / 2}px;
-    //   }`);
-    style.push(`
-      .DraftEditor-root .DraftEditor-editorContainer {
-        border: 1px solid black;
       }`);
 
     return (<style>{style.join(' ')}</style>);
   }
 
   render() {
+    const { canvas } = this.props;
     const { possibleBlockTypes, possibleInlineTypes, possibleTextAlignOptions } = this.props.Text;
     const { fontOptions } = this.props.Font;
-    const { editorState, fontFace, fontColor, textPos } = this.props.textContainerOptions;
+    const { editorState, fontFace, fontColor,
+      textPos, textWidth } = this.props.textContainerOptions;
     const blockType = this.getCurrentBlockType();
     const currentInlineStyle = editorState.getCurrentInlineStyle();
+    const canvasPadding = canvas.canvasPadding / 2;
+
+    let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
+    // Have to scale things down on the DOM for better UI
+    textWidthPx /= 2;
 
     let className = 'text-overlay-container';
     if (this.state.initialized) className += ' initialized';
@@ -254,6 +235,15 @@ class TextOverlay extends React.Component {
     const textOverlayContainerStyle = {
       top: `${textPos.top}px`,
       left: `${textPos.left}px`,
+      padding: `${canvasPadding}px`,
+    };
+    const moveTextStyle = {
+      top: `${canvasPadding}px`,
+      left: '-15px',
+    };
+    const textWidthStyle = {
+      top: `${canvasPadding}px`,
+      left: `${textWidthPx + canvasPadding + 4}px`,
     };
     return (
       <div className={className} style={textOverlayContainerStyle}>
@@ -294,12 +284,14 @@ class TextOverlay extends React.Component {
           className="move-text"
           onMouseDown={this.mouseDown(MOVE_TYPE_POS)}
           onTouchStart={this.mouseDown(MOVE_TYPE_POS)}
+          style={moveTextStyle}
         ><i className="fa fa-arrows"></i></div>
         {this.renderStyle()}
         <div
           className="text-width-change"
           onMouseDown={this.mouseDown(MOVE_TYPE_WIDTH)}
           onTouchStart={this.mouseDown(MOVE_TYPE_WIDTH)}
+          style={textWidthStyle}
         ><i className="fa fa-arrows-h"></i></div>
       </div>
     );

@@ -61,6 +61,7 @@ input[type=text] {
   padding-left: 40%;
 
   @media (max-width: $screen-sm) {
+    padding-top: 10%;
     padding-left: 0;
   }
 
@@ -71,7 +72,7 @@ input[type=text] {
   .image-container {
     width: 100%;
     margin-right: 0;
-    margin-top: calc($navbar-height * 1.5);
+    margin-top: calc($navbar-height * 3);
     /*overflow: hidden;*/
   }
 
@@ -87,10 +88,6 @@ input[type=text] {
   position: relative;
 
   &:hover, &:active, &:focus {
-    .move-text, .text-width-change {
-      opacity: 1 !important;
-    }
-
     #text-overlay {
       border: 2px solid #168eea !important;
     }
@@ -108,6 +105,11 @@ input[type=text] {
     height: 100%;
     width: 100%;
     /*padding: 20px;*/
+    &:hover, &:active, &:focus {
+      .move-text, .text-width-change, .text-toolbar {
+        opacity: 1 !important;
+      }
+    }
 
     #text-overlay {
       opacity: 0;

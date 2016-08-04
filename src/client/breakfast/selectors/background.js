@@ -40,7 +40,7 @@ export const canvasMetricsSelector = createSelector(
 
     canvasWidth *= 2; // higher res canvas for better image quality
 
-    if (window.innerWidth <= 552) {
+    if (window.innerWidth <= 768) {
       canvasWidth = window.innerWidth * 1.9;
     } else if (window.innerWidth <= canvasWidth) {
       canvasWidth = window.innerWidth * 0.9;
