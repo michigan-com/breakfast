@@ -8,49 +8,52 @@ import { TEXT_WIDTH_CHANGE, TEXT_POS_CHANGE, UPDATE_EDITOR_STATE, UPDATE_EDITOR_
 
 /* eslint-disable no-case-declarations */
 function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
-  const newTextContainers = [...state.textContainers];
+  const textContainers = [];
 
   const { textContainerIndex } = action.value;
-  for (let i = 0; i < newTextContainers.length; i++) {
+  for (let i = 0; i < state.textContainers.length; i++) {
+    const container = state.textContainers[i];
     if (i === textContainerIndex) {
       switch (action.type) {
         case UPDATE_EDITOR_STATE:
           const { editorState } = action.value;
-          newTextContainers[i].editorState = editorState;
+          container.editorState = editorState;
           break;
         case UPDATE_EDITOR_FONTFACE:
           const { fontFace } = action.value;
-          newTextContainers[i].fontFace = fontFace;
+          container.fontFace = fontFace;
           break;
         case TEXT_WIDTH_CHANGE:
           let { textWidth } = action.value;
           if (textWidth > 100) textWidth = 100;
           else if (textWidth < 0) textWidth = 0;
-          newTextContainers[i].textWidth = textWidth;
+          container.textWidth = textWidth;
           break;
         case TEXT_POS_CHANGE:
           const { textPos } = action.value;
-          newTextContainers[i].textPos = textPos;
+          container.textPos = textPos;
           break;
         case UPDATE_EDITOR_TEXT_ALIGN:
           const { textAlign } = action.value;
-          newTextContainers[i].textAlign = textAlign;
+          container.textAlign = textAlign;
           break;
         case UPDATE_EDITOR_FONT_COLOR:
           const { fontColor } = action.value;
-          newTextContainers[i].fontColor = fontColor;
+          container.fontColor = fontColor;
           break;
         case UPDATE_EDITOR_DISPLAY:
           const { display } = action.value;
-          newTextContainers[i].display = display;
+          container.display = display;
           break;
         default:
           break;
       }
     }
+
+    textContainers.push({ ...container });
   }
 
-  return { ...state, textContainers: newTextContainers };
+  return { ...state, textContainers };
 }
 
 function textReducer(state = DEFAULT_TEXT, action) {
@@ -68,4 +71,27 @@ function textReducer(state = DEFAULT_TEXT, action) {
   }
 }
 
-export default undoable(textReducer);
+function getBlockType(editorState) {
+  const selection = editorState.getSelection();
+  const blockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(selection.getStartKey())
+    .getType();
+  return blockType;
+}
+
+function editorStateFilter(action, state, previousHistory) {
+  const { type, value } = action;
+  if (!previousHistory || type !== UPDATE_EDITOR_STATE) return true;
+
+  const { textContainerIndex } = value;
+  const container = state.textContainers[textContainerIndex];
+  const pastContainer = previousHistory.textContainers[textContainerIndex];
+  const currentContent = container.editorState.getCurrentContent().getPlainText();
+  const pastContent = pastContainer.editorState.getCurrentContent().getPlainText();
+
+  return currentContent !== pastContent ||
+    getBlockType(container.editorState) !== getBlockType(pastContainer.editorState);
+}
+
+export default undoable(textReducer, { filter: editorStateFilter, debug: true });

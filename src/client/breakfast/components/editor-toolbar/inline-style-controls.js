@@ -14,7 +14,7 @@ export default function InlineStyleControls(props) {
           label={type.label}
           style={type.style}
           onToggle={onToggle}
-          active={type.style === currentInlineStyle}
+          active={currentInlineStyle.has(type.style)}
           key={`inline-style-${index}`}
         />
       )}
@@ -25,5 +25,5 @@ export default function InlineStyleControls(props) {
 InlineStyleControls.propTypes = {
   inlineTypes: PropTypes.array,
   onToggle: PropTypes.func,
-  currentInlineStyle: PropTypes.string,
+  currentInlineStyle: PropTypes.object,
 };

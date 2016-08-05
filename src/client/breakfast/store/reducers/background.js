@@ -9,8 +9,6 @@ import { BACKGROUND_COLOR_CHANGE, BACKGROUND_IMAGE_CHANGE,
 
 function backgroundReducer(state = DEFAULT_STATE, action) {
   let { backgroundColor, aspectRatioIndex, backgroundOffset } = state;
-  let dx;
-  let dy;
   let newState = null;
   const { aspectRatioOptions } = state;
   const newAspectRatioOptions = [];

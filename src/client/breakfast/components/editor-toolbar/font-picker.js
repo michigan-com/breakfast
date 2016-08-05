@@ -14,13 +14,12 @@ export default function FontPicker(props) {
       break;
     }
   }
-
   return (
     <div className="font-picker-container">
       <FontSelect
         options={fontOptions}
         onSelect={onFontChange}
-        currenIndex={currentFontIndex}
+        currentIndex={currentFontIndex}
       />
     </div>
   );

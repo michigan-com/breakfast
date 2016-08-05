@@ -6,11 +6,15 @@ $text-toolbar-height: 30px;
   border: 1px solid $blue;
 }
 
+.text-overlay {
+  position: relative;
+}
+
 .text-toolbar {
   background-color: black;
   height: $text-toolbar-height;
   position: absolute;
-  top: calc($text-toolbar-height * -.5);
+  top: calc($text-toolbar-height * -1.5);
   left: 0;
   border-radius: calc($text-toolbar-height / 2);
   width: 100%;
@@ -18,7 +22,7 @@ $text-toolbar-height: 30px;
   left: 0;
   opacity: 0;
   transition: all 250ms linear;
-   
+
   &:after {
     content: '';
     position: absolute;

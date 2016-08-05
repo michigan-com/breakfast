@@ -49,6 +49,12 @@ class TextOverlay extends React.Component {
     this.onFontFaceChange = this.onFontFaceChange.bind(this);
     this.onTextAlignChange = this.onTextAlignChange.bind(this);
     this.onFontColorChange = this.onFontColorChange.bind(this);
+
+    document.addEventListener('mouseout', this.mouseOut);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mouseout', this.mouseOut);
   }
 
   getStyle() {
@@ -75,6 +81,12 @@ class TextOverlay extends React.Component {
   }
 
   /** Mouse events */
+  mouseOut = (e) => {
+    // http://stackoverflow.com/a/3187524/1337683
+    const target = e.relatedTarget || e.toElement;
+    if (!target || target.nodeName === 'HTML') this.mouseUp();
+  }
+
   mouseDown = (type) => {
     const moveType = type;
 
@@ -239,61 +251,66 @@ class TextOverlay extends React.Component {
       padding: `${canvasPadding}px`,
     };
     const moveTextStyle = {
-      top: `${canvasPadding}px`,
-      left: '-15px',
+      top: `${0}px`,
+      left: '-40px',
     };
     const textWidthStyle = {
-      top: `${canvasPadding}px`,
-      left: `${textWidthPx + canvasPadding + 4}px`,
+      top: '0px',
+      left: `${textWidthPx + 4}px`,
+    };
+    const textOverlayStyle = {
+      width: `${textWidthPx}px`,
     };
     return (
       <div className={className} style={textOverlayContainerStyle}>
-        <div className="text-toolbar">
-          <FontPicker
-            fontOptions={fontOptions}
-            currentFontFace={fontFace}
-            onFontChange={this.onFontFaceChange}
-          />
-          <InlineStyleControls
-            inlineTypes={possibleInlineTypes}
-            currentInlineStyle={currentInlineStyle}
-            onToggle={this.toggleInlineStyle}
-          />
-          <TextAlign
-            textAlignOptions={possibleTextAlignOptions}
-            onChange={this.onTextAlignChange}
-          />
-          <BlockStyleControls
-            blockTypes={possibleBlockTypes}
-            currentActiveStyle={blockType}
-            onToggle={this.toggleBlockType}
-          />
-          <FontColorPicker
-            currentColor={fontColor}
-            onChange={this.onFontColorChange}
-          />
+        <div className="text-overlay">
+          <div className="text-toolbar" style={textOverlayStyle}>
+            <FontPicker
+              fontOptions={fontOptions}
+              currentFontFace={fontFace}
+              onFontChange={this.onFontFaceChange}
+            />
+            <InlineStyleControls
+              inlineTypes={possibleInlineTypes}
+              currentInlineStyle={currentInlineStyle}
+              onToggle={this.toggleInlineStyle}
+            />
+            <TextAlign
+              textAlignOptions={possibleTextAlignOptions}
+              onChange={this.onTextAlignChange}
+            />
+            <BlockStyleControls
+              blockTypes={possibleBlockTypes}
+              currentActiveStyle={blockType}
+              onToggle={this.toggleBlockType}
+            />
+            <FontColorPicker
+              currentColor={fontColor}
+              onChange={this.onFontColorChange}
+            />
 
+          </div>
+          <div className="text-editor-container" style={style}>
+            <Editor
+              editorState={editorState}
+              onChange={this.onEditorChange}
+              style={style}
+            />
+          </div>
+          <div
+            className="move-text"
+            onMouseDown={this.mouseDown(MOVE_TYPE_POS)}
+            onTouchStart={this.mouseDown(MOVE_TYPE_POS)}
+            style={moveTextStyle}
+          ><i className="fa fa-arrows"></i></div>
+          {this.renderStyle()}
+          <div
+            className="text-width-change"
+            onMouseDown={this.mouseDown(MOVE_TYPE_WIDTH)}
+            onTouchStart={this.mouseDown(MOVE_TYPE_WIDTH)}
+            style={textWidthStyle}
+          ><i className="fa fa-arrows-h"></i></div>
         </div>
-        <div className="text-editor-container" style={style}>
-          <Editor
-            editorState={editorState}
-            onChange={this.onEditorChange}
-            style={style}
-          />
-        </div>
-        <div
-          className="move-text"
-          onMouseDown={this.mouseDown(MOVE_TYPE_POS)}
-          onTouchStart={this.mouseDown(MOVE_TYPE_POS)}
-          style={moveTextStyle}
-        ><i className="fa fa-arrows"></i></div>
-        {this.renderStyle()}
-        <div
-          className="text-width-change"
-          onMouseDown={this.mouseDown(MOVE_TYPE_WIDTH)}
-          onTouchStart={this.mouseDown(MOVE_TYPE_WIDTH)}
-          style={textWidthStyle}
-        ><i className="fa fa-arrows-h"></i></div>
       </div>
     );
   }

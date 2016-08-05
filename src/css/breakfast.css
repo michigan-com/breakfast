@@ -103,9 +103,8 @@ input[type=text] {
 
   .text-overlay-container {
     position: absolute;
-    height: 100%;
     width: 100%;
-    /*padding: 20px;*/
+    
     &:hover, &:active, &:focus {
       .move-text, .text-width-change, .text-toolbar {
         opacity: 1 !important;

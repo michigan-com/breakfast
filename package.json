@@ -89,7 +89,7 @@
     "postcss-mixins": "^3.0.2",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.1.0",
-    "react": "^0.14.6",
+    "react": "^15.3.0",
     "react-color": "^2.2.0",
     "react-dom": "^0.14.6",
     "react-dropzone": "^3.5.3",
