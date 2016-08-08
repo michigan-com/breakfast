@@ -8,13 +8,11 @@ import { CompactPicker } from 'react-color';
 import Dropzone from 'react-dropzone';
 
 import { BACKGROUND_COLOR, BACKGROUND_IMAGE, backgroundColorChange,
-  removeBackgroundImage, backgroundImageUpload, updateDrawLocation,
-} from '../../../actions/background';
+  removeBackgroundImage, backgroundImageUpload } from '../../../actions/background';
 import { attributionChange, attributionColorChange,
   attributionLocationChange } from '../../../actions/attribution';
 import CornerPicker from '../../../components/corner-picker';
-import BackgroundPosition from '../../../components/background-position';
-import { canvasMetricsSelector, drawImageMetricsSelector } from '../../../selectors/background';
+import { drawImageMetricsSelector } from '../../../selectors/background';
 import { getPresentState } from '../../../selectors/present';
 
 class BackgroundOptions extends Component {
@@ -23,8 +21,6 @@ class BackgroundOptions extends Component {
     actions: PropTypes.object.isRequired,
     Background: PropTypes.object.isRequired,
     Attribution: PropTypes.object.isRequired,
-    canvas: PropTypes.object.isRequired,
-    drawImageMetrics: PropTypes.object.isRequired,
   }
   static options = [BACKGROUND_IMAGE, BACKGROUND_COLOR];
   static AttributionColors = ['black', 'white'];
@@ -63,20 +59,13 @@ class BackgroundOptions extends Component {
   }
 
   renderFileUploader() {
-    const { Background, canvas, drawImageMetrics } = this.props;
+    const { Background } = this.props;
 
     // If we already uploaded a file...
     let content = null;
     if (!!Background.backgroundImg.img) {
       content = (
-        <div className="background-image">
-          <BackgroundPosition
-            Background={Background}
-            updateDrawLocation={this.props.actions.updateDrawLocation}
-            canvas={canvas}
-            drawImageMetrics={drawImageMetrics}
-          />
-        </div>
+        <img src={Background.backgroundImg.img.src} alt="background" />
       );
     } else {
       const dropzoneStyle = {
@@ -128,11 +117,8 @@ class BackgroundOptions extends Component {
         if (Background.backgroundImg.img != null) {
           className += ' loaded';
           extra = (
-            <div
-              onClick={() => { this.props.actions.removeBackgroundImage(); }}
-              className="remove-image"
-            >
-              <i className="fa fa-times-circle"></i>
+            <div className="remove-image" onClick={this.props.actions.removeBackgroundImage}>
+              Remove Background Image
             </div>
           );
         }
@@ -142,7 +128,6 @@ class BackgroundOptions extends Component {
         picker = this.renderColorPicker();
         break;
     }
-
 
     return (
       <div className={className}>
@@ -222,9 +207,8 @@ class BackgroundOptions extends Component {
 
 function mapStateToProps(state) {
   const { Background, Attribution } = getPresentState(state);
-  const canvas = canvasMetricsSelector(state);
   const drawImageMetrics = drawImageMetricsSelector(state);
-  return { Background, Attribution, canvas, drawImageMetrics };
+  return { Background, Attribution, drawImageMetrics };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -236,7 +220,6 @@ function mapDispatchToProps(dispatch) {
       backgroundColorChange,
       removeBackgroundImage,
       attributionLocationChange,
-      updateDrawLocation,
     }, dispatch),
   };
 }

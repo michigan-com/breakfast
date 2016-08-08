@@ -68,15 +68,21 @@ export const drawImageMetricsSelector = createSelector(
   backgroundSelector,
   canvasMetricsSelector,
   (Background, canvasMetrics) => {
-    const { backgroundImg } = Background;
+    const { backgroundImg, backgroundZoom } = Background;
     if (backgroundImg.img === null) return null;
 
     const imgAspectRatio = backgroundImg.width / backgroundImg.height;
     const canvasAspectRatio = canvasMetrics.aspectRatio;
 
     // the canvas is twice as big as it looks on the screen
-    const canvasHeight = canvasMetrics.canvasHeight;
-    const canvasWidth = canvasMetrics.canvasWidth;
+    let canvasHeight = canvasMetrics.canvasHeight;
+    let canvasWidth = canvasMetrics.canvasWidth;
+
+    if (backgroundZoom > 0) {
+      const zoomPercent = backgroundZoom / 100;
+      canvasHeight += canvasHeight * zoomPercent;
+      canvasWidth += canvasWidth * zoomPercent;
+    }
 
     const maxDx = canvasWidth;
     const maxDy = canvasHeight;

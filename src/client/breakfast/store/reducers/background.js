@@ -5,10 +5,11 @@ import undoable from 'redux-undo';
 import { BACKGROUND_COLOR_CHANGE, BACKGROUND_IMAGE_CHANGE,
   REMOVE_BACKGROUND_IMAGE, DEFAULT_BACKGROUND_IMAGE, DEFAULT_STATE,
   BACKGROUND_DRAW_LOCATION_CHANGE, ASPECT_RATIO_CHANGE, FIT_IMAGE, ASPECT_RATIOS,
-  DEFAULT_BACKGROUND_OFFSET, getAspectRatioValue } from '../../actions/background';
+  DEFAULT_BACKGROUND_OFFSET, UPDATE_BACKGROUND_ZOOM,
+  getAspectRatioValue } from '../../actions/background';
 
 function backgroundReducer(state = DEFAULT_STATE, action) {
-  let { backgroundColor, aspectRatioIndex, backgroundOffset } = state;
+  let { backgroundColor, aspectRatioIndex, backgroundOffset, backgroundZoom } = state;
   let newState = null;
   const { aspectRatioOptions } = state;
   const newAspectRatioOptions = [];
@@ -54,6 +55,10 @@ function backgroundReducer(state = DEFAULT_STATE, action) {
         dy: action.value.dy,
       };
       return { ...state, backgroundOffset };
+    case UPDATE_BACKGROUND_ZOOM:
+      backgroundZoom = action.value;
+      if (backgroundZoom < 0 || backgroundZoom > 100) break;
+      return { ...state, backgroundZoom };
     default:
       return { ...state };
   }

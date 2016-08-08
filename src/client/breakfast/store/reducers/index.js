@@ -9,6 +9,7 @@ import Logo from './logo';
 import Text from './text';
 import OptionsMenu from './options-menu';
 import Downloading from './downloading';
+import Nav from './nav';
 
 export default combineReducers({
   Attribution,
@@ -18,4 +19,5 @@ export default combineReducers({
   Text,
   OptionsMenu,
   Downloading,
+  Nav,
 });

@@ -126,7 +126,16 @@ function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, dis
   switch (containerType) {
     case BODY_TEXT_CONTAINER:
       textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 5;
-      return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };
+      return {
+        ...DEFAULT_TEXT_CONTAINER,
+        containerType,
+        textPos,
+        display,
+        editorState: RichUtils.toggleBlockType(
+          EditorState.createEmpty(),
+          'header-three',
+        ),
+      };
     case CAPTION_TEXT_CONTAINER:
       textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 7;
       return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };

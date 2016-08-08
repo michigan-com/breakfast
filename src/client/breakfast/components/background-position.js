@@ -2,6 +2,8 @@
 
 import React, { PropTypes } from 'react';
 
+import updateBackground from './canvas/background';
+
 export default class BackgroundPosition extends React.Component {
   static propTypes = {
     Background: PropTypes.object.isRequired,
@@ -19,43 +21,58 @@ export default class BackgroundPosition extends React.Component {
     this.storedImageMetrics = null;
     this.clickedMouseX = 0;
     this.clickedMouseY = 0;
-    this.imageWidth = 100; //
+
+    this.canvas = null;
+  }
+
+  componentDidMount() { this.updateCanvas(); }
+  componentDidUpdate() { this.updateCanvas(); }
+
+  getImageWidth() {
+    return window.innerWidth * 0.5;
   }
 
   getOverlayStyle() {
-    const { Background, canvas, drawImageMetrics } = this.props;
-    const backgroundImg = Background.backgroundImg;
+    const { canvas, drawImageMetrics } = this.props;
     const canvasAspectRatio = canvas.aspectRatio;
-    const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     if (drawImageMetrics == null) return null;
 
     const top = 0;
     const left = 0;
-    let width;
-    let height;
-    if (imageAspectRatio < canvasAspectRatio) {
-      width = this.imageWidth;
-      height = width / canvasAspectRatio;
-    } else {
-      height = this.imageWidth / imageAspectRatio;
-      width = height * canvasAspectRatio;
-    }
+    const width = this.getImageWidth();
+    const height = width / canvasAspectRatio;
+    // if (imageAspectRatio < canvasAspectRatio) {
+    //   height = width / canvasAspectRatio;
+    // } else {
+    //   height = this.imageWidth / imageAspectRatio;
+    // }
 
     return { top, left, height, width };
   }
 
-  getImageStyle() {
-    const { Background, canvas, drawImageMetrics } = this.props;
-    const backgroundImg = Background.backgroundImg;
-    const imageAspectRatio = backgroundImg.width / backgroundImg.height;
-    const overlayStyle = this.getOverlayStyle();
+  getCanvasContext() {
+    if (!this.canvas) return null;
+    const canvas = this.canvas;
+    return canvas.getContext('2d');
+  }
 
-    const backgroundImage = `url(${Background.backgroundImg.img.src})`;
-    const width = this.imageWidth;
-    const height = this.imageWidth / imageAspectRatio;
-    const top = (drawImageMetrics.dy / canvas.canvasHeight) * overlayStyle.height;
-    const left = (drawImageMetrics.dx / canvas.canvasWidth) * overlayStyle.width;
-    return { top, left, height, width, backgroundImage };
+  getCanvasStyle() {
+    const { canvas } = this.props;
+    return {
+      height: canvas.canvasHeight,
+      width: canvas.canvasWidth,
+    };
+  }
+
+  getCanvasContainerStyle() {
+    const { canvas } = this.props;
+    const height = canvas.canvasHeight / 2;
+    const width = canvas.canvasWidth / 2;
+    return {
+      height,
+      width,
+      margin: '0 auto',
+    };
   }
 
   mouseDown = (e) => {
@@ -71,9 +88,9 @@ export default class BackgroundPosition extends React.Component {
     const deltaY = e.clientY - this.clickedMouseY;
     const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
-    const imageHeight = this.imageWidth / imageAspectRatio;
+    const imageHeight = this.getImageWidth() / imageAspectRatio;
 
-    const deltaXPercent = deltaX / this.imageWidth;
+    const deltaXPercent = deltaX / this.getImageWidth();
     const deltaYPercent = deltaY / imageHeight;
 
     const newDx = this.storedImageMetrics.dx + (deltaXPercent * canvas.canvasWidth);
@@ -85,6 +102,7 @@ export default class BackgroundPosition extends React.Component {
     document.body.addEventListener('mousemove', this.mouseMove);
     document.body.addEventListener('mouseup', this.stopTrackingMouseMovement);
     document.body.addEventListener('blur', this.stopTrackingMouseMovement);
+    document.body.addEventListener('mouseout', this.stopTrackingMouseMovement);
   }
 
   stopTrackingMouseMovement = () => {
@@ -93,29 +111,31 @@ export default class BackgroundPosition extends React.Component {
     document.body.removeEventListener('mousemove', this.mouseMove);
     document.body.removeEventListener('mouseup', this.stopTrackingMouseMovement);
     document.body.removeEventListener('blur', this.stopTrackingMouseMovement);
+    document.body.removeEventListener('mouseout', this.stopTrackingMouseMovement);
   }
 
+  updateCanvas() {
+    if (!this.canvas) return;
+    const { drawImageMetrics, Background } = this.props;
+    const context = this.getCanvasContext();
+    const canvasStyle = this.getCanvasStyle();
 
-  renderPositionOverlay() {
-    let style = this.getOverlayStyle();
-    style.width = `${style.width}px`;
-    style.height = `${style.height}px`;
-    return (
-      <div className="overlay" style={style}></div>
-    );
+    context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
+    updateBackground(context, canvasStyle, Background, drawImageMetrics);
   }
-
 
   render() {
-    let imageStyle = this.getImageStyle();
+    const style = this.getCanvasStyle();
     return (
-      <div
-        className="background-position"
-        onMouseDown={this.mouseDown}
-        style={this.getOverlayStyle()}
-      >
-        <div className="background-image" style={imageStyle}></div>
-        {this.renderPositionOverlay()}
+      <div className="background-position" style={this.getCanvasContainerStyle()}>
+        <canvas
+          height={style.height}
+          width={style.width}
+          onMouseDown={this.mouseDown}
+          ref={(canvas) => {
+            if (canvas) this.canvas = canvas;
+          }}
+        />
       </div>
     );
   }

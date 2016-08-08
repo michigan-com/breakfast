@@ -11,7 +11,6 @@ import { getPresentState } from '../selectors/present';
 class EditingCanvas extends Component {
   static propTypes = {
     canvas: PropTypes.object,
-    Background: PropTypes.object,
     Text: PropTypes.object,
   };
 
@@ -45,9 +44,9 @@ class EditingCanvas extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Background, Text } = getPresentState(state);
+  const { Text } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
-  return { Background, Text, canvas };
+  return { Text, canvas };
 }
 
 export default connect(mapStateToProps)(EditingCanvas);

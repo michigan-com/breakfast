@@ -3,6 +3,7 @@
 @import './containers/options-menu';
 @import './containers/text-editor';
 @import './containers/editing-canvas';
+@import './containers/background-position';
 @import './constants';
 
 @define-mixin close-button {
@@ -60,6 +61,7 @@ input[type=text] {
   display: block;
   position: relative;
   padding-left: 40%;
+  margin-top: calc($navbar-height * 3);
 
   @media (max-width: $screen-sm) {
     padding-top: 10%;
@@ -73,7 +75,6 @@ input[type=text] {
   .image-container {
     width: 100%;
     margin-right: 0;
-    margin-top: calc($navbar-height * 3);
     /*overflow: hidden;*/
   }
 
@@ -97,14 +98,14 @@ input[type=text] {
   canvas {
     transform: scale(.5);  /* Taking a trick from lunchbox */
     transform-origin: top left;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     z-index: $canvas-z-index;
   }
 
   .text-overlay-container {
     position: absolute;
     width: 100%;
-    
+
     &:hover, &:active, &:focus {
       .move-text, .text-width-change, .text-toolbar {
         opacity: 1 !important;

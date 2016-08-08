@@ -1,5 +1,6 @@
 
-$undo-height: 50px;
+$undo-height: 40px;
+$reposition-height: $undo-height;
 
 .undo-container {
   height: $undo-height;
@@ -20,6 +21,28 @@ $undo-height: 50px;
     .text {
       font-size: calc($undo-height * .3);
       line-height: calc($undo-height * .4);
+    }
+  }
+}
+
+.reposition-button-container {
+  height: $reposition-height;
+  width: 100%;
+
+  .reposition-button {
+    width: calc($reposition-height);
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 20px;
+
+    img {
+      height: 50%;
+    }
+
+    .text {
+      font-size: calc($reposition-height * .3);
+      line-height: calc($reposition-height * .4);
     }
   }
 }

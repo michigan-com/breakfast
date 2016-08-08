@@ -103,6 +103,7 @@ $options-menu-container-width-sm: 50px;
     cursor: pointer;
     position: relative;
 
+
     .picker {
 
       &:after {
@@ -124,35 +125,10 @@ $options-menu-container-width-sm: 50px;
       position: relative;
     }
 
-    .background-image {
-      cursor: move;
-
-      .background-position {
-        margin: 0 auto;
-        position: relative;
-
-        .overlay {
-          position: absolute;
-          background-color: black;
-          opacity: .4;
-        }
-
-        .background-image {
-          position: absolute;
-          background-position: 0 0;
-          background-size: cover;
-        }
-      }
-
-    }
-
     &.image {
 
-      &.loaded {
-        .picker:after {
-          color: black;
-          content: 'Click and drag to position image'
-        }
+      img {
+        max-width: 75%;
       }
 
       input[type=file] {
@@ -160,19 +136,12 @@ $options-menu-container-width-sm: 50px;
       }
 
       .remove-image {
-        position: absolute;
-        right: 15%;
-        top: -15%;
-        height: 45px;
-        width: 45px;
         cursor: pointer;
-        color: black;
+        text-decoration: underline;
         text-align: center;
-
-        .fa {
-          font-size: 45px;
-          line-height: 45px;
-        }
+        font-size: 12px;
+        line-height: 20px;
+        margin-top: 10px;
       }
     }
 

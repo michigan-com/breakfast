@@ -9,6 +9,7 @@ export const BACKGROUND_IMAGE_CHANGE = 'BACKGROUND_IMAGE_CHANGE';
 export const BACKGROUND_IMAGE_LOADING = 'BACKGROUND_IMAGE_LOADING';
 export const BACKGROUND_DRAW_LOCATION_CHANGE = 'BACKGROUND_DRAW_LOCATION_CHANGE';
 export const WINDOW_RESIZE = 'WINDOW_RESIZE';
+export const UPDATE_BACKGROUND_ZOOM = 'UPDATE_BACKGROUND_ZOOM';
 
 export const BACKGROUND_COLOR = 'color';
 export const BACKGROUND_IMAGE = 'image';
@@ -153,10 +154,18 @@ export function windowResize() {
   return { type: WINDOW_RESIZE };
 }
 
+export function updateBackgroundZoom(zoom) {
+  return {
+    type: UPDATE_BACKGROUND_ZOOM,
+    value: zoom,
+  };
+}
+
 export const DEFAULT_STATE = {
   backgroundColor: '#fff',
   backgroundImg: { ...DEFAULT_BACKGROUND_IMAGE },
   aspectRatioIndex: 0,
   aspectRatioOptions: ASPECT_RATIOS,
   backgroundOffset: { ...DEFAULT_BACKGROUND_OFFSET },
+  backgroundZoom: 0,
 };

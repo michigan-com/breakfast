@@ -1,0 +1,66 @@
+@import '../constants';
+
+.background-position-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $grey;
+  z-index: calc($navbar-z-index * 2);
+  padding-top: 100px;
+
+  canvas {
+    transform: scale(.5);
+    transform-origin: top left;
+    cursor: move;
+  }
+
+  .zoom-container {
+    width: 100%;
+
+    text-align: center;
+
+    .label {
+      text-align: center;
+      font-size: 20px;
+      line-height: 25px;
+    }
+  }
+
+  .background-image {
+    .instructions {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+
+  .close-background-position-container {
+    margin: 15px auto;
+    width: 100%;
+
+    .close-background-position {
+      margin: 0 auto;
+      width: 25%;
+      font-size: 25px;
+      line-height: 35px;
+      height: 35px;
+      cursor: pointer;
+      color: $dark-blue;
+      border: 1px solid $dark-blue;
+      background-color: transparent;
+      border-radius: 10px;
+      text-align: center;
+      transition: all 250ms linear;
+
+      @media (max-width: $screen-sm) {
+        width: 50%;
+      }
+
+      &:hover {
+        background-color: $dark-blue;
+        color: white;
+      }
+    }
+  }
+}
