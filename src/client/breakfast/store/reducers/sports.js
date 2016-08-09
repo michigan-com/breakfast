@@ -3,7 +3,7 @@
 import undoable, { excludeAction } from 'redux-undo';
 
 import { TOGGLE_SPORTS, TEAMS_LOADED, FILTER_TEAMS, SELECT_TEAM, DEFAULT_TEAM_SCORE,
-  SCORE_CHANGE, TIME_CHANGE, DEFAULT_STATE } from '../../actions/sports';
+  SCORE_CHANGE, TIME_CHANGE, POSITION_CHANGE, DEFAULT_STATE } from '../../actions/sports';
 
 function filterIndexReducer(state, action) {
   let { filter, filterTeamIndex } = state;
@@ -39,7 +39,7 @@ function filterIndexReducer(state, action) {
 }
 
 function sports(state = DEFAULT_STATE, action) {
-  let { teams, showSports } = state;
+  let { teams, showSports, currentPositionIndex } = state;
   const scoreData = { ...state.scoreData };
   switch (action.type) {
     case FILTER_TEAMS:
@@ -55,6 +55,9 @@ function sports(state = DEFAULT_STATE, action) {
     case TIME_CHANGE:
       scoreData.time = action.value;
       return { ...state, scoreData };
+    case POSITION_CHANGE:
+      currentPositionIndex = action.value;
+      return { ...state, currentPositionIndex };
     default:
       return { ...state };
   }

@@ -2,118 +2,162 @@
 
 import { fillAllText } from './text';
 
-const HORIZONTAL_HEIGHT_PERCENT = 0.10;
+const HORIZONTAL_HEIGHT_PERCENT = 0.2;
 const VERTICAL_WIDTH_PERCENT = 0.33;
 
-/* Rectangle: */
-// opacity: 0.75;
-// background-image: linear-gradient(-90deg, #000000 50%, rgba(0,0,0,0.10) 100%);
+/* eslint-disable no-param-reassign */
 
 function measureWord(context, word) {
   const metrics = context.measureText(word);
   return metrics.width;
 }
 
-function getScoreContainerHeight(canvasStyle) {
-  // TODO pivot based on layout type
-  return canvasStyle.width * HORIZONTAL_HEIGHT_PERCENT;
+function getScoreContainerMetrics(canvasStyle, position) {
+  let height = canvasStyle.height * HORIZONTAL_HEIGHT_PERCENT;
+  let width = canvasStyle.width;
+  if (/left|right/.test(position)) {
+    width = canvasStyle.width * VERTICAL_WIDTH_PERCENT;
+    height = canvasStyle.height;
+  }
+
+  let x = 0;
+  let y = canvasStyle.height - height;
+  if (position === 'top') {
+    y = 0;
+  } else if (position !== 'bottom') {
+    y = 0;
+    if (position === 'right') {
+      x = canvasStyle.width - width;
+    }
+  }
+
+  return { width, height, y, x };
 }
 
-function getScoreContainerWidth(canvasStyle) {
-  // TODO pivot based on layout type
-  return canvasStyle.width * 0.45;
+function getTeamContainerMetrics(scoreContainerMetrics, position) {
+  // Team abbr
+  let width = scoreContainerMetrics.width * 0.40;
+  let height = scoreContainerMetrics.height;
+  if (/right|left/.test(position)) {
+    width = scoreContainerMetrics.width;
+    height = scoreContainerMetrics.height * 0.45;
+  }
+
+  const paddingTop = height * 0.05;
+  const paddingLeft = width * 0.05;
+  let writableHeight = height * 0.8;
+  if (/right|left/.test(position)) {
+    writableHeight /= 2;
+  }
+
+  const fontSize = writableHeight * 0.5;
+  return { width, height, paddingTop, paddingLeft, writableHeight, fontSize };
 }
 
-function getTimeContainerWidth(canvasStyle) {
-  // TODO pivot based on layout type
-  return canvasStyle.width * 0.1;
-}
+function drawTeamScore(context, canvasMetrics, teamContainerMetrics, team, score, teamIndex) {
+  const { x, y } = canvasMetrics;
+  const { height, width, paddingLeft, writableHeight, fontSize } = teamContainerMetrics;
 
-function drawTeamScore(context, canvasStyle, team, score, leftStart, logoFlip) {
-  const height = canvasStyle.width * 0.08;
-  const smallWidth = height;
-  const largeWidth = smallWidth * 3;
-  const scoreContainerHeight = getScoreContainerHeight(canvasStyle);
-  const drawTop = canvasStyle.height - scoreContainerHeight + ((scoreContainerHeight - height) / 2);
-  const scoreContainerWidth = getScoreContainerWidth(canvasStyle);
-  const fontSize = height * 0.5;
-  const sidePadding = scoreContainerWidth * 0.05;
+  const drawTop = y + ((height - writableHeight) / 2);
 
   // draw abbreviation
   context.fillStyle = 'white';
   context.font = `normal ${fontSize}px Futura Today`;
   context.textBaseline = 'top';
   const teamAbbrTextWidth = measureWord(context, team.teamAbbr);
-  const teamAbbrDrawLeft = leftStart + ((scoreContainerWidth - teamAbbrTextWidth) / 2);
-  const teamAbbrDrawTop = drawTop + ((height - fontSize) / 2);
+  const teamAbbrDrawLeft = x + ((width - teamAbbrTextWidth) / 2);
+  const teamAbbrDrawTop = drawTop + ((writableHeight - fontSize) / 2);
   context.fillText(team.teamAbbr, teamAbbrDrawLeft, teamAbbrDrawTop);
 
   // draw score
   context.font = `bold ${fontSize}px Futura Today`;
   const teamScoreTextWidth = measureWord(context, score);
-  let teamScoreDrawLeft = 0;
-  if (logoFlip) {
-    teamScoreDrawLeft = leftStart + sidePadding;
-  } else {
-    teamScoreDrawLeft = (leftStart + scoreContainerWidth) - teamScoreTextWidth - sidePadding;
+  let teamScoreDrawLeft = (x + width) - teamScoreTextWidth - paddingLeft;
+  if (teamIndex === 1) {
+    teamScoreDrawLeft = x + paddingLeft;
   }
   context.fillText(score, teamScoreDrawLeft, teamAbbrDrawTop);
 
-
   // draw logo
   if (team.logo !== null) {
-    const logoHeight = height * 0.75;
-    const logoDrawTop = drawTop + ((height - logoHeight) / 2);
-    let logoDrawLeft = 0;
-    if (logoFlip) {
-      logoDrawLeft = (leftStart + scoreContainerWidth) - logoHeight - sidePadding;
-    } else {
-      logoDrawLeft = leftStart + sidePadding;
+    const logoHeight = writableHeight * 0.75;
+    const logoDrawTop = drawTop + ((writableHeight - logoHeight) / 2);
+    let logoDrawLeft = x + paddingLeft;
+    if (teamIndex === 1) {
+      logoDrawLeft = x + width - logoHeight - paddingLeft;
     }
     context.drawImage(team.logo, logoDrawLeft, logoDrawTop, logoHeight, logoHeight);
   }
 }
 
-function drawTime(context, canvasStyle, time) {
+function drawTime(context, canvasStyle, scoreContainerMetrics, position, time) {
   const fontSize = canvasStyle.width * 0.02;
-  const containerHeight = getScoreContainerHeight(canvasStyle);
-  const containerWidth = getTimeContainerWidth(canvasStyle);
+  const { height, width, x, y } = scoreContainerMetrics;
   context.fillStyle = 'white';
   context.font = `normal ${fontSize}px Futura Today`;
   context.textBaseline = 'top';
 
-  const timeDrawLeft = (canvasStyle.width - containerWidth) / 2;
-  const timeDrawTop = (canvasStyle.height - containerHeight) + ((containerHeight - fontSize) / 2);
-  fillAllText(context, time, timeDrawLeft, timeDrawTop, containerWidth, fontSize, 'center');
+  const timeDrawLeft = x;
+  const timeDrawTop = y + ((height - fontSize) / 2);
+  fillAllText(context, time, timeDrawLeft, timeDrawTop, width, fontSize, 'center');
 }
 
-function drawScore(context, canvasStyle, scoreData) {
+function drawScore(context, canvasStyle, scoreContainerMetrics, position, scoreData) {
   // first logo
-
-  let leftStart = 0;
+  const { width, height } = scoreContainerMetrics;
+  let { x, y } = scoreContainerMetrics;
   for (let i = 0; i < scoreData.teams.length; i++) {
     const team = scoreData.teams[i];
     const score = scoreData.teamScores[i];
-    drawTeamScore(context, canvasStyle, team, score, leftStart, i === 1);
-    leftStart = canvasStyle.width * 0.55;
+    const teamContainerMetrics = getTeamContainerMetrics(scoreContainerMetrics, position);
+    drawTeamScore(context, { x, y }, teamContainerMetrics, team, score, i);
+
+    if (/right|left/.test(position)) {
+      y = height - teamContainerMetrics.height;
+    } else if (/bottom|top/.test(position)) {
+      x = width - teamContainerMetrics.width;
+    }
   }
 }
 
-function drawBackgroundRect(context, canvasStyle) {
-  const rectHeight = getScoreContainerHeight(canvasStyle);
-  const rectTop = canvasStyle.height - rectHeight;
+function drawBackgroundRect(context, canvasStyle, scoreContainerMetrics, position) {
+  const { height, width, x, y } = scoreContainerMetrics;
 
-  const gradient = context.createLinearGradient(0, 0, canvasStyle.width, 0);
-  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.75)');
-  gradient.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
+  // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient#Using_the_createLinearGradient_method
+  // default is "bottom"
+  let linearStartX = 0;
+  let linearStartY = canvasStyle.height;
+  let linearEndX = 0;
+  let linearEndY = canvasStyle.height - height;
+
+  if (position === 'top') {
+    linearStartY = 0;
+    linearEndY = height;
+  } else if (position !== 'bottom') {
+    linearStartY = 0;
+    linearEndY = 0;
+    if (position === 'left') {
+      linearEndX = width;
+    } else if (position === 'right') {
+      linearStartX = canvasStyle.width;
+      linearEndX = canvasStyle.width - width;
+    }
+  }
+
+
+  const gradient = context.createLinearGradient(linearStartX, linearStartY, linearEndX, linearEndY);
+  gradient.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
+  gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.2)');
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
   context.fillStyle = gradient;
-  context.fillRect(0, rectTop, canvasStyle.width, rectHeight);
+  context.fillRect(x, y, width, height);
 }
 
 export default function updateSports(context, canvasStyle, Sports) {
-  drawBackgroundRect(context, canvasStyle);
+  const position = Sports.positionOptions[Sports.currentPositionIndex];
+  const scoreContainerMetrics = getScoreContainerMetrics(canvasStyle, position);
 
-  drawScore(context, canvasStyle, Sports.scoreData);
-
-  drawTime(context, canvasStyle, Sports.scoreData.time);
+  drawBackgroundRect(context, canvasStyle, scoreContainerMetrics, position);
+  drawScore(context, canvasStyle, scoreContainerMetrics, position, Sports.scoreData);
+  drawTime(context, canvasStyle, scoreContainerMetrics, position, Sports.scoreData.time);
 }

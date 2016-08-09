@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="18px" height="2px" viewBox="0 0 18 2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="18px" height="2px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: sketchtool 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
-    <title>A9DC2E25-4DAA-4423-BABC-24128BB51E1D</title>
+    <title>0C09CE37-79C3-421D-8A96-BDA9EE8ABC4C</title>
     <desc>Created with sketchtool.</desc>
     <defs></defs>
     <g id="[Assets]-canvas-elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Canvas-Elements" transform="translate(-1089.000000, -325.000000)" fill="#FFFFFF">
-            <g id="score-layout" transform="translate(1080.000000, 287.000000)">
-                <g id="Group-2" transform="translate(2.000000, 34.000000)">
-                    <g id="top">
-                        <rect id="Combined-Shape-Copy" fill-opacity="0" x="0" y="0" width="32" height="32" rx="2"></rect>
-                        <rect id="Rectangle-2" x="7" y="4" width="18" height="2"></rect>
-                    </g>
-                </g>
-            </g>
-        </g>
+      <rect id="Rectangle" x="0" y="0" width="32" height="32" rx="2"></rect>
+      <rect fill="#FFFFFF" x="7" y="4" width="18" height="2"></rect>
     </g>
 </svg>

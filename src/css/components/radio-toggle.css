@@ -7,6 +7,8 @@ $button-knob-height: 20px;
 
 .radio-toggle-container {
   width: 100%;
+  height: $button-height;
+  margin-bottom: calc($button-height * 0.5);
 
   .radio-label {
     display: inline-block;

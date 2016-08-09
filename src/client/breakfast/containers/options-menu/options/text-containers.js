@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { HEADER_TEXT_CONTAINER, BODY_TEXT_CONTAINER, CAPTION_TEXT_CONTAINER,
   updateEditorDisplay } from '../../../actions/text';
 import { filterTeams, selectTeam, scoreChange, toggleSportsScore, timeChange,
-    DEFAULT_TEAM_SCORE } from '../../../actions/sports';
+    scorePositionChange, DEFAULT_TEAM_SCORE } from '../../../actions/sports';
 import { getPresentState } from '../../../selectors/present';
 import { filteredTeamsSelector } from '../../../selectors/sports';
 import SportsTeamPicker from '../../../components/options-menu/sports-team-picker';
@@ -56,6 +56,12 @@ class TextContainerOptions extends Component {
     this.props.actions.toggleSportsScore(show);
   }
 
+  onScorePositionChange = (index) => (
+    () => {
+      this.props.actions.scorePositionChange(index);
+    }
+  )
+
   getButtonImage(containerType) {
     switch (containerType) {
       case HEADER_TEXT_CONTAINER:
@@ -93,46 +99,82 @@ class TextContainerOptions extends Component {
 
   renderTeamFilters() {
     const { Sports, filteredTeams } = this.props;
-    const { scoreData, filter, filterTeamIndex } = Sports;
+    const { scoreData, filter, filterTeamIndex, positionOptions, currentPositionIndex } = Sports;
 
     let pickerTeams = [];
     if (filter.length > 2) pickerTeams = filteredTeams.slice(0, 5);
 
-
-    const teamFilters = [];
+    const sportsStuff = [];
     if (Sports.showSports) {
-      for (let i = 0; i < scoreData.teams.length; i++) {
-        const team = scoreData.teams[i];
-        teamFilters.push(
-          <SportsTeamPicker
-            filter={i === filterTeamIndex ? filter : team.teamName}
-            filteredTeams={i === filterTeamIndex ? pickerTeams : []}
-            selectedTeam={team.teamName}
-            teamScore={scoreData.teamScores[i]}
-            onTeamSelect={this.onTeamSelect(i)}
-            onFilterChange={this.onFilterChange(i)}
-            onScoreChange={this.onScoreChange(i)}
-            key={`sports-team-filter-${i}`}
-          />
+      const positionData = [];
+      for (let i = 0; i < positionOptions.length; i++) {
+        const position = positionOptions[i];
+        const className = ['position-option-container'];
+        if (i === currentPositionIndex) className.push('active');
+        positionData.push(
+          <div
+            className={className.join(' ')}
+            onClick={this.onScorePositionChange(i)}
+            key={`score-position-option-${i}`}
+          >
+            <div className="position-option">
+              <div className="position-option-image-container">
+                <img src={`/img/score-align-${position}.svg`} alt={position} />
+              </div>
+              <div className="text">{position}</div>
+            </div>
+          </div>
         );
       }
+
+      sportsStuff.push(
+        <div className="option-container">
+          <div className="option-container-title">Score Layout</div>
+          {positionData}
+        </div>
+      );
+
+      for (let i = 0; i < scoreData.teams.length; i++) {
+        const team = scoreData.teams[i];
+        sportsStuff.push(
+          <div className="option-container" key={`sports-team-picker-${i}`}>
+            <div className="option-container-title">{`Team ${i}`}</div>
+            <SportsTeamPicker
+              filter={i === filterTeamIndex ? filter : team.teamName}
+              filteredTeams={i === filterTeamIndex ? pickerTeams : []}
+              selectedTeam={team.teamName}
+              teamScore={scoreData.teamScores[i]}
+              onTeamSelect={this.onTeamSelect(i)}
+              onFilterChange={this.onFilterChange(i)}
+              onScoreChange={this.onScoreChange(i)}
+              key={`sports-team-filter-${i}`}
+            />
+          </div>
+        );
+      }
+
+      sportsStuff.push(
+        <div className="option-container">
+          <div className="option-container-title">Time (Quarter, Inning, etc)</div>
+          <input
+            type="text"
+            name="time"
+            value={scoreData.time}
+            placeholder={"Half Time"}
+            onChange={(e) => { this.props.actions.timeChange(`${e.target.value}`); }}
+          />
+        </div>
+      );
     }
 
     return (
-      <div className="team-filters">
+      <div className="sports-score">
         <RadioToggle
           label={"Add Sports Score"}
           active={Sports.showSports}
           onToggle={this.onToggleSportsScore}
         />
-        {teamFilters}
-        <input
-          type="text"
-          name="time"
-          value={scoreData.time}
-          placeholder={"Half Time"}
-          onChange={(e) => { this.props.actions.timeChange(`${e.target.value}`); }}
-        />
+        {sportsStuff}
       </div>
     );
   }
@@ -171,6 +213,7 @@ function mapDispatchToProps(dispatch) {
       scoreChange,
       toggleSportsScore,
       timeChange,
+      scorePositionChange,
     }, dispatch),
   };
 }

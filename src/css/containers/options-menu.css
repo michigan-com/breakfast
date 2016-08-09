@@ -340,4 +340,41 @@ $options-menu-container-width-sm: 50px;
       margin: 10px 0px;
     }
   }
+
+}
+
+.sports-score {
+  .position-option-container {
+    display: inline-block;
+    float: left;
+    cursor: pointer;
+    margin-right: 7px;
+
+    &:hover, &.active {
+      .position-option-image-container {
+        background-color: $blue !important;
+      }
+    }
+
+    .position-option {
+
+      .position-option-image-container {
+        margin: 0 auto;
+        height: 30px;
+        width: 30px;
+        background-color: $grey;
+        transition: all 250ms linear;
+
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      .text {
+        font-size: 13px;
+        text-align: center;
+      }
+    }
+  }
 }

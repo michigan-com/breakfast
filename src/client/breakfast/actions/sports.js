@@ -6,6 +6,12 @@ export const FILTER_TEAMS = 'FILTER_TEAMS';
 export const SELECT_TEAM = 'SELECT_TEAM';
 export const SCORE_CHANGE = 'SCORE_CHANGE';
 export const TIME_CHANGE = 'TIME_CHANGE';
+export const POSITION_CHANGE = 'POSITION_CHANGE';
+
+export const TOP = 'top';
+export const BOTTOM = 'bottom';
+export const LEFT = 'left';
+export const RIGHT = 'right';
 
 export const DEFAULT_TEAM_SCORE = {
   teamName: '',
@@ -104,6 +110,13 @@ export function timeChange(time = '') {
   };
 }
 
+export function scorePositionChange(index) {
+  return {
+    type: POSITION_CHANGE,
+    value: index,
+  };
+}
+
 export const DEFAULT_STATE = {
   // showSports: false,
   showSports: true,
@@ -111,4 +124,6 @@ export const DEFAULT_STATE = {
   filter: '',
   filterTeamIndex: 0, // Which team is being filterd
   scoreData: { ...DEFAULT_SCORE_DATA },
+  positionOptions: [TOP, BOTTOM, LEFT, RIGHT],
+  currentPositionIndex: 1,
 };
