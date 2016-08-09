@@ -7,6 +7,7 @@ import { ActionCreators } from 'redux-undo';
 
 import { doneDownloading } from '../actions/downloading';
 import { getPresentState } from '../selectors/present';
+import { canvasMetricsSelector } from '../selectors/background';
 import { showRepositioning } from '../actions/nav';
 import OptionsMenu from './options-menu';
 import EditingCanvas from './editing-canvas';
@@ -19,6 +20,7 @@ class App extends Component {
     Background: PropTypes.object,
     Nav: PropTypes.object,
     actions: PropTypes.object,
+    canvas: PropTypes.object,
   };
 
   constructor(props) {
@@ -26,24 +28,32 @@ class App extends Component {
     this.editingCanvas = null;
   }
 
+  getCanvasWidth() {
+    const { canvas } = this.props;
+    const width = canvas.canvasWidth / 2;
+    return {
+      width,
+    };
+  }
+
   renderRespositionButton() {
     const { Background } = this.props;
     if (Background.backgroundImg.img === null) return null;
 
     return (
-      <div className="reposition-button-container">
+      <div className="reposition-button-container" style={this.getCanvasWidth()}>
         <div className="reposition-button" onClick={this.props.actions.showRepositioning}>
           <div className="image-container">
             <img src="/img/reposition.svg" alt="reposition" />
-            <div className="text">Reposition</div>
           </div>
+          <div className="text">Reposition</div>
         </div>
       </div>
     );
   }
 
   render() {
-    const { Background, Downloading, Nav } = this.props;
+    const { Downloading, Nav } = this.props;
     const { downloading, filename } = Downloading;
     let downloadCanvas = null;
     if (downloading) {
@@ -61,13 +71,11 @@ class App extends Component {
       return <BackgroundPosition />;
     }
 
-
     return (
       <div>
         <OptionsMenu />
-
-        <div className="pic-editor">
-          <div className="undo-container">
+        <div className="pic-editor" >
+          <div className="undo-container" style={this.getCanvasWidth()}>
             <div className="undo-button" onClick={this.props.actions.redo}>
               <div className="image-container">
                 <img src="/img/redo.svg" alt="Undo" />
@@ -81,7 +89,7 @@ class App extends Component {
               <div className="text">Undo</div>
             </div>
           </div>
-          <div className="image-container">
+          <div className="breakfast-image-container">
             <EditingCanvas
               ref={(canvas) => {
                 if (canvas) this.editingCanvas = canvas;
@@ -99,7 +107,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   const { Downloading, Background, Nav } = getPresentState(state);
-  return { Downloading, Background, Nav };
+  const canvas = canvasMetricsSelector(state);
+  return { Downloading, Background, Nav, canvas };
 }
 
 function mapDispatchToProps(dispatch) {

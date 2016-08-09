@@ -1,0 +1,65 @@
+'use strict';
+
+import undoable, { excludeAction } from 'redux-undo';
+
+import { TOGGLE_SPORTS, TEAMS_LOADED, FILTER_TEAMS, SELECT_TEAM, DEFAULT_TEAM_SCORE,
+  SCORE_CHANGE, TIME_CHANGE, DEFAULT_STATE } from '../../actions/sports';
+
+function filterIndexReducer(state, action) {
+  let { filter, filterTeamIndex } = state;
+  const scoreData = { ...state.scoreData };
+  filterTeamIndex = action.value.filterTeamIndex;
+
+  for (let i = 0; i < scoreData.teams.length; i++) {
+    if (i === filterTeamIndex) {
+      switch (action.type) {
+        case FILTER_TEAMS:
+          filter = action.value.filter;
+          scoreData.teams[i] = { ...DEFAULT_TEAM_SCORE };
+          break;
+        case SELECT_TEAM:
+          filter = '';
+          scoreData.teams[i] = action.value.team;
+          break;
+        case SCORE_CHANGE:
+          scoreData.teamScores[i] = action.value.score;
+          break;
+        default:
+          continue;
+      }
+    }
+  }
+
+  return {
+    ...state,
+    filterTeamIndex,
+    filter,
+    scoreData,
+  };
+}
+
+function sports(state = DEFAULT_STATE, action) {
+  let { teams, showSports } = state;
+  const scoreData = { ...state.scoreData };
+  switch (action.type) {
+    case FILTER_TEAMS:
+    case SELECT_TEAM:
+    case SCORE_CHANGE:
+      return filterIndexReducer(state, action);
+    case TOGGLE_SPORTS:
+      showSports = action.value;
+      return { ...state, showSports };
+    case TEAMS_LOADED:
+      teams = action.value;
+      return { ...state, teams };
+    case TIME_CHANGE:
+      scoreData.time = action.value;
+      return { ...state, scoreData };
+    default:
+      return { ...state };
+  }
+}
+
+export default undoable(sports, {
+  filter: excludeAction(TEAMS_LOADED),
+});

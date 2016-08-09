@@ -1,8 +1,8 @@
 'use strict';
 
-import { FIT_IMAGE, SQUARE } from '../actions/background';
-
 import { createSelector } from 'reselect';
+
+import { FIT_IMAGE, SQUARE } from '../actions/background';
 
 /**
  * ensure min <= value <= max
@@ -41,9 +41,9 @@ export const canvasMetricsSelector = createSelector(
     canvasWidth *= 2; // higher res canvas for better image quality
 
     if (window.innerWidth <= 768) {
-      canvasWidth = window.innerWidth * 1.9;
+      canvasWidth = (window.innerWidth * 1.9) - 150;
     } else if (window.innerWidth <= canvasWidth) {
-      canvasWidth = window.innerWidth * 0.9;
+      canvasWidth = (window.innerWidth * 0.9);
     }
 
     const canvasPadding = canvasWidth / 26;

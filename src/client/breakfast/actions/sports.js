@@ -1,0 +1,114 @@
+'use strict';
+
+export const TOGGLE_SPORTS = 'TOGGLE_SPORTS';
+export const TEAMS_LOADED = 'TEAMS_LOADED';
+export const FILTER_TEAMS = 'FILTER_TEAMS';
+export const SELECT_TEAM = 'SELECT_TEAM';
+export const SCORE_CHANGE = 'SCORE_CHANGE';
+export const TIME_CHANGE = 'TIME_CHANGE';
+
+export const DEFAULT_TEAM_SCORE = {
+  teamName: '',
+  teamAbbr: '',
+  logo: null,
+  logoUrl: '',
+};
+
+const DEFAULT_SCORE_DATA = {
+  teams: [{
+    ...DEFAULT_TEAM_SCORE,
+  }, {
+    ...DEFAULT_TEAM_SCORE,
+  }],
+  teamScores: ['', ''],
+  time: '',
+};
+
+export function toggleSportsScore(show = false) {
+  return {
+    type: TOGGLE_SPORTS,
+    value: show,
+  };
+}
+
+export function teamsLoaded(teamData) {
+  const teams = [];
+
+  Object.keys(teamData).forEach((league) => {
+    for (const team of teamData[league].teams) {
+      const searchTerm = `${team.team_first} ${team.team_last}`;
+
+      teams.push({
+        ...team,
+        league,
+        searchTerm,
+      });
+    }
+  });
+
+  return {
+    type: TEAMS_LOADED,
+    value: teams,
+  };
+}
+
+export function filterTeams(filter = '', filterTeamIndex = 0) {
+  return {
+    type: FILTER_TEAMS,
+    value: {
+      filter,
+      filterTeamIndex,
+    },
+  };
+}
+
+function loadTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
+  return {
+    type: SELECT_TEAM,
+    value: {
+      team,
+      filterTeamIndex,
+    },
+  };
+}
+
+export function selectTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
+  return (dispatch) => {
+    dispatch(loadTeam(team, filterTeamIndex));
+
+    const i = new Image();
+    i.crossOrigin = 'anonymous';
+    i.addEventListener('load', () => {
+      const newTeam = { ...team };
+      newTeam.logo = i;
+      dispatch(loadTeam(newTeam, filterTeamIndex));
+    });
+    i.src = team.logoUrl;
+  };
+}
+
+export function scoreChange(score = -1, filterTeamIndex = 0) {
+  return {
+    type: SCORE_CHANGE,
+    value: {
+      score,
+      filterTeamIndex,
+    },
+  };
+}
+
+export function timeChange(time = '') {
+  return {
+    type: TIME_CHANGE,
+    value: time,
+  };
+}
+
+export const DEFAULT_STATE = {
+  // showSports: false,
+  showSports: true,
+  teams: [],
+  filter: '',
+  filterTeamIndex: 0, // Which team is being filterd
+  scoreData: { ...DEFAULT_SCORE_DATA },
+};

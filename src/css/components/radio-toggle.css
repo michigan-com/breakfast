@@ -1,0 +1,54 @@
+@import '../constants';
+
+$button-height: 25px;
+$button-width: 40px;
+
+$button-knob-height: 20px;
+
+.radio-toggle-container {
+  width: 100%;
+
+  .radio-label {
+    display: inline-block;
+    float: left;
+    font-size: 15px;
+    margin-right: 15px;
+    line-height: $button-height;
+  }
+
+  .radio-toggle-button-container {
+    float: left;
+    display: inline-block;
+    background-color: $grey;
+    height: $button-height;
+    width: $button-width;
+    border-radius: calc($button-height / 2);
+    transition: background-color 250ms linear;
+    cursor: pointer;
+
+    &.active {
+      background-color: $light-blue;
+
+      .button-knob {
+        left: calc(($button-width - $button-knob-height) - 2) !important;
+      }
+    }
+  }
+
+  .radio-toggle-button {
+    height: $button-height;
+    width: $button-width;
+    position: relative;
+
+    .button-knob {
+      background-color: white;
+      position: absolute;
+      height: $button-knob-height;
+      width: $button-knob-height;
+      border-radius: 50%;
+      top: calc(($button-height - $button-knob-height) / 2);
+      left: 2;
+      transition: all 250ms ease-in;
+    }
+  }
+}

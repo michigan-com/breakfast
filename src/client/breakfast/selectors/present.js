@@ -1,4 +1,4 @@
-
+'use strict';
 
 export function getPresentState(state) {
   const presentState = {};

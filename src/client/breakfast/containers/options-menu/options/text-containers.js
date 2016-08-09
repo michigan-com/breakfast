@@ -6,11 +6,18 @@ import { connect } from 'react-redux';
 
 import { HEADER_TEXT_CONTAINER, BODY_TEXT_CONTAINER, CAPTION_TEXT_CONTAINER,
   updateEditorDisplay } from '../../../actions/text';
+import { filterTeams, selectTeam, scoreChange, toggleSportsScore, timeChange,
+    DEFAULT_TEAM_SCORE } from '../../../actions/sports';
 import { getPresentState } from '../../../selectors/present';
+import { filteredTeamsSelector } from '../../../selectors/sports';
+import SportsTeamPicker from '../../../components/options-menu/sports-team-picker';
+import RadioToggle from '../../../components/radio-toggle';
 
 class TextContainerOptions extends Component {
   static propTypes = {
+    Sports: PropTypes.object,
     Text: PropTypes.object,
+    filteredTeams: PropTypes.array,
     actions: PropTypes.object,
   };
 
@@ -19,6 +26,34 @@ class TextContainerOptions extends Component {
 
     this.renderTextContainerButton = this.renderTextContainerButton.bind(this);
     this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+
+  onTeamSelect = (index) => (
+    (team) => {
+      const teamData = {
+        ...DEFAULT_TEAM_SCORE,
+        teamName: team.searchTerm,
+        teamAbbr: team.team_abbr,
+        logoUrl: team.team_logo,
+      };
+      this.props.actions.selectTeam(teamData, index);
+    }
+  )
+
+  onFilterChange = (index) => (
+    (filter) => {
+      this.props.actions.filterTeams(filter, index);
+    }
+  )
+
+  onScoreChange = (index) => (
+    (score) => {
+      this.props.actions.scoreChange(score, index);
+    }
+  )
+
+  onToggleSportsScore = (show) => {
+    this.props.actions.toggleSportsScore(show);
   }
 
   getButtonImage(containerType) {
@@ -56,6 +91,51 @@ class TextContainerOptions extends Component {
     );
   }
 
+  renderTeamFilters() {
+    const { Sports, filteredTeams } = this.props;
+    const { scoreData, filter, filterTeamIndex } = Sports;
+
+    let pickerTeams = [];
+    if (filter.length > 2) pickerTeams = filteredTeams.slice(0, 5);
+
+
+    const teamFilters = [];
+    if (Sports.showSports) {
+      for (let i = 0; i < scoreData.teams.length; i++) {
+        const team = scoreData.teams[i];
+        teamFilters.push(
+          <SportsTeamPicker
+            filter={i === filterTeamIndex ? filter : team.teamName}
+            filteredTeams={i === filterTeamIndex ? pickerTeams : []}
+            selectedTeam={team.teamName}
+            teamScore={scoreData.teamScores[i]}
+            onTeamSelect={this.onTeamSelect(i)}
+            onFilterChange={this.onFilterChange(i)}
+            onScoreChange={this.onScoreChange(i)}
+            key={`sports-team-filter-${i}`}
+          />
+        );
+      }
+    }
+
+    return (
+      <div className="team-filters">
+        <RadioToggle
+          label={"Add Sports Score"}
+          active={Sports.showSports}
+          onToggle={this.onToggleSportsScore}
+        />
+        {teamFilters}
+        <input
+          type="text"
+          name="time"
+          value={scoreData.time}
+          placeholder={"Half Time"}
+          onChange={(e) => { this.props.actions.timeChange(`${e.target.value}`); }}
+        />
+      </div>
+    );
+  }
 
   render() {
     const { Text } = this.props;
@@ -67,20 +147,30 @@ class TextContainerOptions extends Component {
           <div className="option-container-title">Add up to three containers</div>
             {textContainers.map(this.renderTextContainerButton)}
         </div>
+        <div className="option-container">
+          <div className="option-container-title">Sports Score</div>
+          {this.renderTeamFilters()}
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { Text } = getPresentState(state);
-  return { Text };
+  const { Text, Sports } = getPresentState(state);
+  const filteredTeams = filteredTeamsSelector(state);
+  return { Text, Sports, filteredTeams };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       updateEditorDisplay,
+      filterTeams,
+      selectTeam,
+      scoreChange,
+      toggleSportsScore,
+      timeChange,
     }, dispatch),
   };
 }

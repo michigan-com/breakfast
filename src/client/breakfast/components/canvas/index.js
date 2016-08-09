@@ -1,23 +1,25 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import updateBackground from './background';
 import updateLogo from './logo';
 import updateAttribution from './attribution';
 import updateText from './text';
+import updateSports from './sports';
 
 export default class Canvas extends React.Component {
   static propTypes = {
-    Background: React.PropTypes.object,
-    Logo: React.PropTypes.object,
-    Attribution: React.PropTypes.object,
-    Font: React.PropTypes.object,
-    Text: React.PropTypes.object,
-    canvas: React.PropTypes.object,
-    drawImageMetrics: React.PropTypes.object,
-    renderText: React.PropTypes.bool,
+    Sports: PropTypes.object,
+    Background: PropTypes.object,
+    Logo: PropTypes.object,
+    Attribution: PropTypes.object,
+    Font: PropTypes.object,
+    Text: PropTypes.object,
+    canvas: PropTypes.object,
+    drawImageMetrics: PropTypes.object,
+    renderText: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -57,7 +59,8 @@ export default class Canvas extends React.Component {
   updateCanvas() {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
-    const { renderText, Background, Attribution, Logo, Font, Text, drawImageMetrics } = this.props;
+    const { renderText, Background, Attribution, Logo, Font, Text,
+      drawImageMetrics, Sports } = this.props;
     const { textContainers, blockTypeStyle } = Text;
 
 
@@ -75,6 +78,10 @@ export default class Canvas extends React.Component {
           updateText(context, canvasStyle, Font, blockTypeStyle, container);
         }
       }
+    }
+
+    if (Sports.showSports) {
+      updateSports(context, canvasStyle, Sports);
     }
   }
 

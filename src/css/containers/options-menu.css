@@ -1,4 +1,5 @@
 @import '../constants';
+@import '../components/radio-toggle';
 
 $options-menu-container-width-lg: 200px;
 $options-menu-container-width-sm: 50px;
@@ -300,18 +301,17 @@ $options-menu-container-width-sm: 50px;
 
 .select {
   .current-selection {
-    padding: 2%
+    padding: 2px;
   }
 
   .select-option {
-    padding: 3% !important;
+    padding: 3px !important;
   }
 }
 
 .text-container-options {
   .text-container-button-container {
     display: inline-block;
-    float: left;
     margin: 10px;
 
     &.show  {

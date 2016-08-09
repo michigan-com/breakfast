@@ -9,6 +9,7 @@ import login from './login';
 import register from './register';
 import aws from './aws';
 import passwordReset from './password-reset';
+import sports from './sports';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
@@ -22,6 +23,7 @@ function registerRoutes(app) {
   login.registerRoutes(app, router, passport);
   register.registerRoutes(app, router, passport);
   aws.registerRoutes(app, router, passport);
+  sports.registerRoutes(app);
 
   try {
     passwordReset.registerRoutes(app, router, passport);

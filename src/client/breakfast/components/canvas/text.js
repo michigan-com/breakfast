@@ -27,7 +27,7 @@ function getStyleMetrics(blockType, blockTypeStyle) {
  * @param {String} textAlign - how to align the text, will affect what x is drawn to
  * @return {Number} the x coordinate of the next line
  */
-function fillAllText(context, text, x, startY, textWidth, fontSize, textAlign) {
+export function fillAllText(context, text, x, startY, textWidth, fontSize, textAlign) {
   let y = startY;
   let line = '';
   let lineWidth = 0;

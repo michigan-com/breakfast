@@ -10,6 +10,7 @@ import Text from './text';
 import OptionsMenu from './options-menu';
 import Downloading from './downloading';
 import Nav from './nav';
+import Sports from './sports';
 
 export default combineReducers({
   Attribution,
@@ -20,4 +21,5 @@ export default combineReducers({
   OptionsMenu,
   Downloading,
   Nav,
+  Sports,
 });

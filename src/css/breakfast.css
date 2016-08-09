@@ -65,14 +65,14 @@ input[type=text] {
 
   @media (max-width: $screen-sm) {
     padding-top: 10%;
-    padding-left: 0;
+    padding-left: 75px;
   }
 
   .save-container {
 
   }
 
-  .image-container {
+  .breakfast-image-container {
     width: 100%;
     margin-right: 0;
     /*overflow: hidden;*/
