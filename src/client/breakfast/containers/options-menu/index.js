@@ -59,7 +59,9 @@ class OptionsMenuComponent extends Component {
     const { OptionsMenu, Downloading } = this.props;
     let buttonClass = 'save-button';
     let saveButtonContent = 'Download File';
-    if (Downloading.downloading) {
+    if (window.innerWidth < 768) {
+      saveButtonContent = '';
+    } else if (Downloading.downloading) {
       buttonClass += ' downloading';
       saveButtonContent = 'Saving...';
     }

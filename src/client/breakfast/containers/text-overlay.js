@@ -50,6 +50,8 @@ class TextOverlay extends React.Component {
     this.onTextAlignChange = this.onTextAlignChange.bind(this);
     this.onFontColorChange = this.onFontColorChange.bind(this);
 
+    this.trackingTarget = document;
+
     document.addEventListener('mouseout', this.mouseOut);
   }
 
@@ -91,6 +93,8 @@ class TextOverlay extends React.Component {
     const moveType = type;
 
     return (e) => {
+      console.log('mouse down');
+      this.trackingTarget = e.target;
       this.trackMouseMovement(moveType);
       this.setState({
         mouseDown: true,
@@ -112,6 +116,7 @@ class TextOverlay extends React.Component {
     const moveType = type;
 
     return (e) => {
+      console.log('mousemove');
       if (!this.state.mouseDown) return;
 
       const { canvas } = this.props;
@@ -148,17 +153,17 @@ class TextOverlay extends React.Component {
 
     document.body.addEventListener('mouseup', this.mouseUp);
     // TODO
-    document.body.addEventListener('touchend', this.mouseUp);
+    this.trackingTarget.addEventListener('touchend', this.mouseUp);
   }
 
   stopTrackingMouseMovement = () => {
     document.body.removeEventListener('mousemove', this.mouseMoveCallback);
     // TODO
-    document.body.removeEventListener('touchmove', this.mouseMove);
+    this.trackingTarget.removeEventListener('touchmove', this.mouseMove);
 
     document.body.removeEventListener('mouseup', this.mouseUp);
     // TODO
-    document.body.removeEventListener('touchend', this.mouseUp);
+    this.trackingTarget.removeEventListener('touchend', this.mouseUp);
   }
 
   /** End Mouse events */

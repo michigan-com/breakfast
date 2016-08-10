@@ -16,7 +16,6 @@ $options-menu-container-width-sm: 50px;
 
   @media (max-width: $screen-sm) {
     width: $options-menu-container-width-sm;
-    overflow: visible;
   }
 }
 
@@ -320,8 +319,15 @@ $options-menu-container-width-sm: 50px;
   background-color: white;
 
   @media (max-width: $screen-sm) {
-    width: 50vw;
-    border-top-right-radius: 5px;
+    padding: 0;
+
+    input, p {
+      display: none;
+    }
+
+    .save-button {
+      margin: 0 !important;
+    }
   }
 
   input {
@@ -332,6 +338,7 @@ $options-menu-container-width-sm: 50px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.38);
     outline: none;
     margin: 0  0 15px 0 !important;
+
   }
 
   .save-button {
@@ -343,6 +350,7 @@ $options-menu-container-width-sm: 50px;
 
   .save-button {
     margin: 15px 0px;
+    height: 50px;
     color: black;
     cursor: pointer;
 
@@ -351,6 +359,12 @@ $options-menu-container-width-sm: 50px;
       position: absolute;
       top: 0;
       left: 0;
+
+      @media (max-width: $screen-sm) {
+        height: 50%;
+        top: 25%;
+        left: 25%;
+      }
     }
 
     &.downloading {
