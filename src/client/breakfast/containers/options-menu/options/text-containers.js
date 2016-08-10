@@ -138,7 +138,7 @@ class TextContainerOptions extends Component {
         const team = scoreData.teams[i];
         sportsStuff.push(
           <div className="option-container" key={`sports-team-picker-${i}`}>
-            <div className="option-container-title">{`Team ${i}`}</div>
+            <div className="option-container-title">{`Team ${i + 1}`}</div>
             <SportsTeamPicker
               filter={i === filterTeamIndex ? filter : team.teamName}
               filteredTeams={i === filterTeamIndex ? pickerTeams : []}
@@ -155,8 +155,9 @@ class TextContainerOptions extends Component {
 
       sportsStuff.push(
         <div className="option-container">
-          <div className="option-container-title">Time (Quarter, Inning, etc)</div>
+          <div className="game-time-text">Time (Quarter, Inning, etc)</div>
           <input
+            className="game-time-input"
             type="text"
             name="time"
             value={scoreData.time}

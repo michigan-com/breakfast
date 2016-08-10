@@ -118,12 +118,11 @@ export function scorePositionChange(index) {
 }
 
 export const DEFAULT_STATE = {
-  // showSports: false,
-  showSports: true,
+  showSports: false,
   teams: [],
   filter: '',
   filterTeamIndex: 0, // Which team is being filterd
   scoreData: { ...DEFAULT_SCORE_DATA },
   positionOptions: [TOP, BOTTOM, LEFT, RIGHT],
-  currentPositionIndex: 1,
+  currentPositionIndex: 0,
 };

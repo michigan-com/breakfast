@@ -1,5 +1,6 @@
 @import '../constants';
 @import '../components/radio-toggle';
+@import '../components/sports-team-picker';
 
 $options-menu-container-width-lg: 200px;
 $options-menu-container-width-sm: 50px;
@@ -82,7 +83,7 @@ $options-menu-container-width-sm: 50px;
 
 .option-container {
   width: 100%;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   padding: 10px;
 
   .option-container-title {
@@ -346,7 +347,6 @@ $options-menu-container-width-sm: 50px;
 .sports-score {
   .position-option-container {
     display: inline-block;
-    float: left;
     cursor: pointer;
     margin-right: 7px;
 
@@ -362,6 +362,7 @@ $options-menu-container-width-sm: 50px;
         margin: 0 auto;
         height: 30px;
         width: 30px;
+        border-radius: 2px;
         background-color: $grey;
         transition: all 250ms linear;
 
@@ -376,5 +377,21 @@ $options-menu-container-width-sm: 50px;
         text-align: center;
       }
     }
+  }
+
+  .game-time-text {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+
+  .game-time-input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid $light-blue;
+    width: 40%;
+    font-size: 15px;
+    height: 20px;
+    line-height: 20px;
   }
 }

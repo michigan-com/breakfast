@@ -42,18 +42,23 @@ export default class SportsTeamPicker extends Component {
     const { filter, selectedTeam, teamScore } = this.props;
 
     return (
-      <div className="sports-team-filter">
-        <input
-          type="text"
-          value={selectedTeam || filter}
-          placeholder={'Detroit Lions'}
-          name="sports-team-filter"
-          onChange={(e) => { this.props.onFilterChange(e.target.value); }}
-        />
+      <div className="sports-team-picker">
+        <div className="team-picker-container">
+          <img src="/img/magnifying-glass.svg" alt="magnifying-glass" className="search-image" />
+          <input
+            className="team-picker"
+            type="text"
+            value={selectedTeam || filter}
+            placeholder={'Detroit Lions'}
+            name="sports-team-filter"
+            onChange={(e) => { this.props.onFilterChange(e.target.value); }}
+          />
+        </div>
         {this.renderFilteredTeams()}
         <div className="team-score-container">
           <div className="team-score-text">Team Score</div>
           <input
+            className="team-score-input"
             type="text"
             value={teamScore}
             placeholder={'Score'}
