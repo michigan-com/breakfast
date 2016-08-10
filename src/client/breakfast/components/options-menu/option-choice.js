@@ -10,7 +10,10 @@ export default function OptionChoice(props) {
 
   return (
     <div className={className.join(' ')} onClick={() => { onClick(index); }}>
-      {displayName}
+      <div className="option-image-container">
+        <img src={`/img/${option}.svg`} alt={displayName} />
+      </div>
+      <div className="display-name">{displayName}</div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 $text-toolbar-height: 30px;
 
 .DraftEditor-root {
-  border: 1px solid $blue;
+  border: 1px solid $light-blue;
 }
 
 .text-overlay {

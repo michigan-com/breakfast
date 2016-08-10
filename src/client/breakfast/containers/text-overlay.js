@@ -144,21 +144,21 @@ class TextOverlay extends React.Component {
     this.mouseMoveCallback = this.mouseMove(type);
     document.body.addEventListener('mousemove', this.mouseMoveCallback);
     // TODO
-    // document.body.addEventListener('touchmove', this.mouseMove);
+    document.body.addEventListener('touchmove', this.mouseMove);
 
     document.body.addEventListener('mouseup', this.mouseUp);
     // TODO
-    // document.body.addEventListener('touchend', this.mouseUp);
+    document.body.addEventListener('touchend', this.mouseUp);
   }
 
   stopTrackingMouseMovement = () => {
     document.body.removeEventListener('mousemove', this.mouseMoveCallback);
     // TODO
-    // document.body.removeEventListener('touchmove', this.mouseMove);
+    document.body.removeEventListener('touchmove', this.mouseMove);
 
     document.body.removeEventListener('mouseup', this.mouseUp);
     // TODO
-    // document.body.removeEventListener('touchend', this.mouseUp);
+    document.body.removeEventListener('touchend', this.mouseUp);
   }
 
   /** End Mouse events */
@@ -232,7 +232,7 @@ class TextOverlay extends React.Component {
     const { canvas } = this.props;
     const { possibleBlockTypes, possibleInlineTypes, possibleTextAlignOptions } = this.props.Text;
     const { fontOptions } = this.props.Font;
-    const { editorState, fontFace, fontColor,
+    const { editorState, fontFace, fontColor, textAlign,
       textPos, textWidth } = this.props.textContainerOptions;
     const blockType = this.getCurrentBlockType();
     const currentInlineStyle = editorState.getCurrentInlineStyle();
@@ -276,6 +276,7 @@ class TextOverlay extends React.Component {
               onToggle={this.toggleInlineStyle}
             />
             <TextAlign
+              currentJustifyIndex={possibleTextAlignOptions.indexOf(textAlign)}
               textAlignOptions={possibleTextAlignOptions}
               onChange={this.onTextAlignChange}
             />

@@ -27,13 +27,13 @@ TextAlign.propTypes = {
 class JustifySelect extends Select {
   getDisplayValue(option) {
     switch (option) {
-      case 'left':
-      default:
-        return <img src="/img/left.svg" alt="Left Justify" />;
       case 'center':
         return <img src="/img/center.svg" alt="Center Justify" />;
       case 'right':
         return <img src="/img/right.svg" alt="Right Justify" />;
+      case 'left':
+      default:
+        return <img src="/img/left.svg" alt="Left Justify" />;
     }
   }
 }

@@ -67,7 +67,14 @@ class OptionsMenuComponent extends Component {
     return (
       <div className="options">
         <div className="options-menu-container">
-          <div className="options-menu-container-title">Layout Editor</div>
+          <div className="options-menu-container-title">
+            <div className="options-menu-title-image">
+              <img src="/img/menu-icon.svg" alt="Menu" />
+            </div>
+            <div className="options-menu-title-text">
+              Layout Editor
+            </div>
+          </div>
           {OptionsMenu.options.map((option, index) => (
             <OptionChoice
               option={option}

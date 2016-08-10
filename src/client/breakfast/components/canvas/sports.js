@@ -36,6 +36,7 @@ function getScoreContainerMetrics(canvasStyle, position) {
 
 function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
   const leftOrRightPosition = /right|left/.test(position);
+  const smallCanvas = !leftOrRightPosition && scoreContainerMetrics.width === 800;
 
   // Team abbr
   let width = scoreContainerMetrics.width * 0.40;
@@ -58,10 +59,10 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
     if (teamIndex === 1) drawTop += height;
   }
 
-  const fontSize = writableHeight * 0.5;
+  const fontSize = smallCanvas ? writableHeight * 0.4 : writableHeight * 0.5;
 
   // logo stuff
-  const logoHeight = writableHeight * 0.75;
+  const logoHeight = writableHeight * 0.7;
   const logoWidth = logoHeight;
   let logoTop = drawTop + ((writableHeight - logoHeight) / 2);
   let logoLeft = scoreContainerMetrics.x + paddingLeft;
@@ -97,8 +98,7 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
     scoreLeft = scoreContainerMetrics.x;
     if (teamIndex === 1) {
       scoreTop = scoreContainerMetrics.height - height + (height * 0.3) - (fontSize / 2);
-    }
-    else {
+    } else {
       scoreTop = height - (height * 0.3) - (fontSize / 2);
     }
   } else if (teamIndex === 1) {
@@ -110,9 +110,8 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
     logoContainerMetrics, abbrContainerMetrics, scoreMetrics };
 }
 
-function drawTeamScore(context, canvasMetrics, teamContainerMetrics, team, score, teamIndex) {
-  const { x } = canvasMetrics;
-  const { width, paddingLeft, fontSize, logoContainerMetrics, abbrContainerMetrics,
+function drawTeamScore(context, teamContainerMetrics, team, score) {
+  const { fontSize, logoContainerMetrics, abbrContainerMetrics,
     scoreMetrics } = teamContainerMetrics;
 
   // draw abbreviation
@@ -120,26 +119,47 @@ function drawTeamScore(context, canvasMetrics, teamContainerMetrics, team, score
   context.font = `normal ${fontSize}px Futura Today`;
   context.textBaseline = 'top';
   const { abbrTop, abbrLeft, abbrWidth } = abbrContainerMetrics;
-  const teamAbbrTextWidth = measureWord(context, team.teamAbbr);
+  const abbrString = team.teamAbbr || 'AAA';
+  const teamAbbrTextWidth = measureWord(context, abbrString);
   const teamAbbrDrawLeft = abbrLeft + ((abbrWidth - teamAbbrTextWidth) / 2);
-  context.fillText(team.teamAbbr, teamAbbrDrawLeft, abbrTop);
+  if (team.teamAbbr) {
+    context.fillText(team.teamAbbr, teamAbbrDrawLeft, abbrTop);
+  } else {
+    const oldStroke = context.strokeStyle;
+    context.strokeStyle = 'white';
+    context.strokeRect(teamAbbrDrawLeft, abbrTop, teamAbbrTextWidth, fontSize);
+    context.strokeStyle = oldStroke;
+  }
 
   // draw score
   context.font = `bold ${fontSize}px Futura Today`;
   const { scoreTop, scoreLeft, scoreWidth } = scoreMetrics;
-  const teamScoreTextWidth = measureWord(context, score);
+  const scoreString = score || '0';
+  const teamScoreTextWidth = measureWord(context, scoreString);
   const teamScoreDrawLeft = (scoreLeft) + ((scoreWidth - teamScoreTextWidth) / 2);
-  context.fillText(score, teamScoreDrawLeft, scoreTop);
+  if (score) {
+    context.fillText(score, teamScoreDrawLeft, scoreTop);
+  } else {
+    const oldStroke = context.strokeStyle;
+    context.strokeStyle = 'white';
+    context.strokeRect(teamScoreDrawLeft, scoreTop, teamScoreTextWidth, fontSize);
+    context.strokeStyle = oldStroke;
+  }
 
   // draw logo
+  const { logoHeight, logoWidth, logoTop, logoLeft } = logoContainerMetrics;
   if (team.logo !== null) {
-    const { logoHeight, logoWidth, logoTop, logoLeft } = logoContainerMetrics;
     context.drawImage(team.logo, logoLeft, logoTop, logoWidth, logoHeight);
+  } else {
+    const oldStroke = context.strokeStyle;
+    context.strokeStyle = 'white';
+    context.strokeRect(logoLeft, logoTop, logoWidth, logoHeight);
+    context.strokeStyle = oldStroke;
   }
 }
 
 function drawTime(context, canvasStyle, scoreContainerMetrics, position, time) {
-  const fontSize = canvasStyle.width * 0.02;
+  const fontSize = canvasStyle.width * 0.03;
   const { height, width, y } = scoreContainerMetrics;
   context.fillStyle = 'white';
   context.font = `normal ${fontSize}px Futura Today`;
@@ -157,19 +177,11 @@ function drawTime(context, canvasStyle, scoreContainerMetrics, position, time) {
 
 function drawScore(context, canvasStyle, scoreContainerMetrics, position, scoreData) {
   // first logo
-  const { width, height } = scoreContainerMetrics;
-  let { x, y } = scoreContainerMetrics;
   for (let i = 0; i < scoreData.teams.length; i++) {
     const team = scoreData.teams[i];
     const score = scoreData.teamScores[i];
     const teamContainerMetrics = getTeamContainerMetrics(scoreContainerMetrics, position, i);
-    drawTeamScore(context, { x, y }, teamContainerMetrics, team, score, i);
-
-    if (/right|left/.test(position)) {
-      y = height - teamContainerMetrics.height;
-    } else if (/bottom|top/.test(position)) {
-      x = width - teamContainerMetrics.width;
-    }
+    drawTeamScore(context, teamContainerMetrics, team, score);
   }
 }
 
