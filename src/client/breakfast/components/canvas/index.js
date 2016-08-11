@@ -20,6 +20,7 @@ export default class Canvas extends React.Component {
     canvas: PropTypes.object,
     drawImageMetrics: PropTypes.object,
     renderText: PropTypes.bool,
+    blockTypeStyle: PropTypes.array,
   };
 
   static defaultProps = {
@@ -60,8 +61,8 @@ export default class Canvas extends React.Component {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
     const { renderText, Background, Attribution, Logo, Font, Text,
-      drawImageMetrics, Sports } = this.props;
-    const { textContainers, blockTypeStyle } = Text;
+      drawImageMetrics, Sports, blockTypeStyle } = this.props;
+    const { textContainers } = Text;
 
 
     if (!context) return;

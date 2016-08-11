@@ -9,6 +9,7 @@ import { textPosChange, textWidthChange, updateEditorState, updateFontFace,
   updateTextAlign, updateFontColor } from '../actions/text';
 import { canvasMetricsSelector } from '../selectors/background';
 import { getPresentState } from '../selectors/present';
+import { blockStyleMetricsSelector } from '../selectors/text';
 import BlockStyleControls from '../components/editor-toolbar/block-style-controls';
 import InlineStyleControls from '../components/editor-toolbar/inline-style-controls';
 import FontPicker from '../components/editor-toolbar/font-picker';
@@ -26,6 +27,7 @@ class TextOverlay extends React.Component {
     actions: PropTypes.object,
     textContainerOptions: PropTypes.object.isRequired,
     textContainerIndex: PropTypes.number.isRequired,
+    blockTypeStyle: PropTypes.array,
   };
 
   constructor(props) {
@@ -212,8 +214,7 @@ class TextOverlay extends React.Component {
   }
 
   renderStyle() {
-    const { Text } = this.props;
-    const { blockTypeStyle } = Text;
+    const { blockTypeStyle } = this.props;
 
     let style = [];
     for (const blockStyle of blockTypeStyle) {
@@ -330,7 +331,8 @@ class TextOverlay extends React.Component {
 function mapStateToProps(state) {
   const { Text, Font } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
-  return { Text, Font, canvas };
+  const blockTypeStyle = blockStyleMetricsSelector(state);
+  return { Text, Font, canvas, blockTypeStyle };
 }
 
 function mapDispatchToProps(dispatch) {
