@@ -1,5 +1,6 @@
 'use strict';
 
+/* eslint-disable no-param-reassign */
 
 function measureWord(context, word) {
   const metrics = context.measureText(word);
@@ -64,57 +65,112 @@ export function fillAllText(context, text, x, startY, textWidth, fontSize, textA
   const drawX = getDrawX(line);
   context.fillText(line, drawX, y);
   y += fontSize;
-  return { y, x };
+  return y;
 }
 
 function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign) {
   const { fontWeight, fontFace, fontSize } = fontInfo;
   const text = block.getText();
   const characterList = block.getCharacterList();
+  const textChunks = [];
+  const makeFont = (contextFontWeight, italic) => {
+    let fontStyle = `${contextFontWeight}`;
+    if (italic) fontStyle += ' italic';
+    return `${fontStyle} ${fontSize}px ${fontFace}`;
+  };
 
-  let stringToWrite = '';
-  let italics = false;
-  let currentInlineStyle = '';
+  // A "chunk" is definited by a block of text that needs to be drawn.
+  // Each chunk has an x, y, font, and text, so that we can write it to the canvsa
+  const makeChunk = (stringToWrite, stringX, stringY, font) => (
+    { text: stringToWrite, x: stringX, y: stringY, font }
+  );
+
+  let currentString = '';
+  let currentItalic = false;
+  let currentFontWeight = fontWeight;
+  let currentX = x;
+  let currentY = startY;
+  let currentWord = '';
+  let currentFont = makeFont(currentFontWeight, currentItalic);
   for (let i = 0; i < text.length; i++) {
-    currentInlineStyle = `${fontWeight}`;
-    if (italics) currentInlineStyle += ' italic';
-
-    const style = characterList.get(i).getStyle();
-    let inlineItalics = false;
+    let currentChar = text[i];
+    let inlineItalic = false;
     let inlineFontWeight = fontWeight;
+    const style = characterList.get(i).getStyle();
     style.forEach((value) => {
       const lowerValue = value.toLowerCase();
       if (lowerValue === 'italic') {
-        inlineItalics = true;
+        inlineItalic = true;
       } else {
-        inlineFontWeight = 'fontWeight';
+        inlineFontWeight = lowerValue;
       }
     });
 
-    let inlineStyle = `${inlineFontWeight}`;
-    if (inlineItalics) inlineStyle += ' italic';
+    const inlineFont = makeFont(inlineFontWeight, inlineItalic);
+    let shouldMakeChunk = false;
+    let newLineChunk = false;
 
-    if (inlineStyle !== currentInlineStyle) {
-      const font = `${currentInlineStyle || fontWeight} ${fontSize}px ${fontFace}`;
-      context.font = font;
-      fillAllText(context, stringToWrite, x, startY, textWidth, fontSize, textAlign);
-
-      stringToWrite = '';
-      italics = false;
+    // This is a chunk
+    if (inlineFont !== currentFont) {
+      if (currentWord) currentString += `${currentWord}`;
+      if (currentChar === ' ') {
+        currentString += ' ';
+        currentChar = '';
+      }
+      shouldMakeChunk = true;
     } else {
-      italics = inlineItalics;
+      // Only test chunk widths on line breaks
+      if (currentChar === ' ') {
+        const testString = currentString ? `${currentString} ${currentWord}` : currentWord;
+        const contextFont = context.font;
+        context.font = currentFont;
+        const newLineWidth = Math.round(measureWord(context, testString));
+        if (newLineWidth + currentX >= textWidth) {
+          shouldMakeChunk = true;
+          newLineChunk = true;
+        } else {
+          currentString += `${currentWord} `;
+          currentWord = '';
+        }
+        context.font = contextFont;
+      } else {
+        currentWord += currentChar;
+      }
     }
 
-    currentInlineStyle = inlineStyle;
-    stringToWrite = stringToWrite + text[i];
+    if (shouldMakeChunk) {
+      const contextFont = context.font;
+      context.font = currentFont;
+      const newLineWidth = Math.round(measureWord(context, currentString));
+      context.font = contextFont;
+      textChunks.push(makeChunk(currentString, currentX, currentY, currentFont));
+
+      if (newLineChunk) {
+        currentX = x;
+        currentY += fontSize;
+      } else {
+        currentX += newLineWidth;
+      }
+      currentString = '';
+      currentWord = `${currentChar}`;
+    }
+
+    currentItalic = inlineItalic;
+    currentFontWeight = inlineFontWeight;
+    currentFont = makeFont(currentFontWeight, currentItalic);
   }
-  const font = `${currentInlineStyle || fontWeight} ${fontSize}px ${fontFace}`;
-  console.log(font);
-  context.font = font;
-  return fillAllText(context, text, x, startY, textWidth, fontSize, textAlign);
+
+  // push any reamining chunk
+  if (currentWord) currentString += `${currentWord} `;
+  textChunks.push(makeChunk(currentString, currentX, currentY, currentFont));
+  for (const chunk of textChunks) {
+    context.font = chunk.font;
+    context.fillText(chunk.text, chunk.x, chunk.y);
+  }
+
+  return currentY + fontSize;
 }
 
-/* eslint-disable no-param-reassign */
 export default function updateText(context, canvasStyle, fontOptions,
     blockTypeStyle, textContainer) {
   const { editorState, textPos, fontFace, fontColor, textWidth, textAlign } = textContainer;
@@ -141,30 +197,24 @@ export default function updateText(context, canvasStyle, fontOptions,
     const styleMetrics = getStyleMetrics(blockType, blockTypeStyle);
 
     const fontInfo = {
-      fontWeight: styleMetrics.fontWeight,
+      fontWeight: styleMetrics.fontWeight === 'normal' ? '' : styleMetrics.fontWeight,
       fontSize: styleMetrics.fontSize,
       fontFace,
     };
 
     if (/(unordered|ordered)-list-item/.test(blockType)) {
-      const bullet = /unordered/.test(blockType) ? '•' : `${listCount + 1}.`;
+      const bullet = /unordered/.test(blockType) ? '•' : `${++listCount}.`;
       const bulletLength = measureWord(context, bullet);
       const bulletX = x + (listPadding * 0.75) - bulletLength;
       const textX = x + listPadding;
       const bulletTextWidth = canvasTextWidth - listPadding;
 
       context.fillText(bullet, bulletX, y);
-      const newPos = fillTextBlock(context, block, textX, y, bulletTextWidth, fontInfo, textAlign);
-      y = newPos.y;
-      x = newPos.x;
+      y = fillTextBlock(context, block, textX, y, bulletTextWidth, fontInfo, textAlign);
 
       y += styleMetrics.marginBottom * 0.93; // idk!
-      listCount += 1;
     } else {
-      const newPos = fillTextBlock(context, block, x, y, canvasTextWidth, fontInfo, textAlign);
-
-      y = newPos.y;
-      x = newPos.x;
+      y = fillTextBlock(context, block, x, y, canvasTextWidth, fontInfo, textAlign);
 
       if (/header-/.test(blockType)) {
         y += styleMetrics.marginBottom;
