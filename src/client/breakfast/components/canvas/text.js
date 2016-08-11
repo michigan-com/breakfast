@@ -81,19 +81,20 @@ function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign
 
   // A "chunk" is definited by a block of text that needs to be drawn.
   // Each chunk has an x, y, font, and text, so that we can write it to the canvsa
-  const makeChunk = (stringToWrite, stringX, stringY, font) => (
-    { text: stringToWrite, x: stringX, y: stringY, font }
+  const makeChunk = (stringToWrite, width, font) => (
+    { text: stringToWrite, width, font }
   );
 
-  let currentString = '';
-  let currentItalic = false;
-  let currentFontWeight = fontWeight;
   let currentX = x;
   let currentY = startY;
+  let currentFont = makeFont(fontWeight, false);
+  let lineChunks = [];
+  let chunkStringWidth = 0;
+  let currentChunkString = '';
   let currentWord = '';
-  let currentFont = makeFont(currentFontWeight, currentItalic);
   for (let i = 0; i < text.length; i++) {
-    let currentChar = text[i];
+    const isLastChar = i === (text.length - 1);
+    const currentChar = text[i];
     let inlineItalic = false;
     let inlineFontWeight = fontWeight;
     const style = characterList.get(i).getStyle();
@@ -106,63 +107,58 @@ function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign
       }
     });
 
-    const inlineFont = makeFont(inlineFontWeight, inlineItalic);
-    let shouldMakeChunk = false;
-    let newLineChunk = false;
+    // spaces are always included with the previous string
+    const inlineFont = currentChar === ' ' ? currentFont : makeFont(inlineFontWeight, inlineItalic);
+    const testWord = currentWord + currentChar;
+    const testString = `${currentChunkString}${testWord}`;
+    context.font = currentFont;
 
-    // This is a chunk
-    if (inlineFont !== currentFont) {
-      if (currentWord) currentString += `${currentWord}`;
-      if (currentChar === ' ') {
-        currentString += ' ';
-        currentChar = '';
+    const testStringWidth = measureWord(context, testString);
+    const stringIsTooLong = testStringWidth + currentX >= textWidth;
+
+    // Make a new chunk
+    if (inlineFont !== currentFont || stringIsTooLong || isLastChar) {
+      if (isLastChar) {
+        chunkStringWidth = testStringWidth;
+        currentChunkString = testString;
       }
-      shouldMakeChunk = true;
-    } else {
-      // Only test chunk widths on line breaks
-      if (currentChar === ' ') {
-        const testString = currentString ? `${currentString} ${currentWord}` : currentWord;
-        const contextFont = context.font;
-        context.font = currentFont;
-        const newLineWidth = Math.round(measureWord(context, testString));
-        if (newLineWidth + currentX >= textWidth) {
-          shouldMakeChunk = true;
-          newLineChunk = true;
-        } else {
-          currentString += `${currentWord} `;
-          currentWord = '';
-        }
-        context.font = contextFont;
-      } else {
-        currentWord += currentChar;
+      lineChunks.push(makeChunk(currentChunkString, chunkStringWidth, currentFont));
+
+      let chunkX = currentX;
+      if (textAlign === 'center') chunkX = (textWidth - chunkStringWidth) / 2;
+      else if (textAlign === 'right') chunkX = (textWidth - currentChunkString);
+      for (const lineChunk of lineChunks) {
+        lineChunk.x = chunkX;
+        lineChunk.y = currentY;
+        textChunks.push({ ...lineChunk });
+
+        chunkX += lineChunk.width;
       }
-    }
 
-    if (shouldMakeChunk) {
-      const contextFont = context.font;
-      context.font = currentFont;
-      const newLineWidth = Math.round(measureWord(context, currentString));
-      context.font = contextFont;
-      textChunks.push(makeChunk(currentString, currentX, currentY, currentFont));
-
-      if (newLineChunk) {
-        currentX = x;
+      currentWord = testWord;
+      currentChunkString = '';
+      lineChunks = [];
+      chunkStringWidth = measureWord(context, currentChunkString);
+      if (stringIsTooLong) {
         currentY += fontSize;
+        currentX = x;
       } else {
-        currentX += newLineWidth;
+        currentX = chunkX;
       }
-      currentString = '';
-      currentWord = `${currentChar}`;
+    } else {
+      if (currentChar === ' ') {
+        currentChunkString = `${currentChunkString}${testWord}`;
+        chunkStringWidth = measureWord(context, currentChunkString);
+        currentWord = '';
+      } else {
+        currentWord = testWord;
+      }
     }
 
-    currentItalic = inlineItalic;
-    currentFontWeight = inlineFontWeight;
-    currentFont = makeFont(currentFontWeight, currentItalic);
+    currentFont = inlineFont;
   }
 
   // push any reamining chunk
-  if (currentWord) currentString += `${currentWord} `;
-  textChunks.push(makeChunk(currentString, currentX, currentY, currentFont));
   for (const chunk of textChunks) {
     context.font = chunk.font;
     context.fillText(chunk.text, chunk.x, chunk.y);
@@ -203,6 +199,7 @@ export default function updateText(context, canvasStyle, fontOptions,
     };
 
     if (/(unordered|ordered)-list-item/.test(blockType)) {
+      context.font = `${fontInfo.fontWeight} ${fontInfo.fontSize}px ${fontInfo.fontFace}`;
       const bullet = /unordered/.test(blockType) ? '•' : `${++listCount}.`;
       const bulletLength = measureWord(context, bullet);
       const bulletX = x + (listPadding * 0.75) - bulletLength;
