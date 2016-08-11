@@ -111,7 +111,6 @@ const BLOCK_TYPE_STYLE = BLOCK_TYPES.map((blockType) => {
 const INLINE_STYLES = [
   { label: 'Bold', style: 'BOLD' },
   { label: 'Italic', style: 'ITALIC' },
-  { label: 'Underline', style: 'UNDERLINE' },
 ];
 
 const TEXT_ALIGN_OPTIONS = [
@@ -119,7 +118,6 @@ const TEXT_ALIGN_OPTIONS = [
   'center',
   'right',
 ];
-
 
 function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, display = false) {
   const textPos = { ...DEFAULT_TEXT_CONTAINER.textPos };

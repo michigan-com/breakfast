@@ -64,7 +64,54 @@ export function fillAllText(context, text, x, startY, textWidth, fontSize, textA
   const drawX = getDrawX(line);
   context.fillText(line, drawX, y);
   y += fontSize;
-  return y;
+  return { y, x };
+}
+
+function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign) {
+  const { fontWeight, fontFace, fontSize } = fontInfo;
+  const text = block.getText();
+  const characterList = block.getCharacterList();
+
+  let stringToWrite = '';
+  let italics = false;
+  let currentInlineStyle = '';
+  for (let i = 0; i < text.length; i++) {
+    currentInlineStyle = `${fontWeight}`;
+    if (italics) currentInlineStyle += ' italic';
+
+    const style = characterList.get(i).getStyle();
+    let inlineItalics = false;
+    let inlineFontWeight = fontWeight;
+    style.forEach((value) => {
+      const lowerValue = value.toLowerCase();
+      if (lowerValue === 'italic') {
+        inlineItalics = true;
+      } else {
+        inlineFontWeight = 'fontWeight';
+      }
+    });
+
+    let inlineStyle = `${inlineFontWeight}`;
+    if (inlineItalics) inlineStyle += ' italic';
+
+    if (inlineStyle !== currentInlineStyle) {
+      const font = `${currentInlineStyle || fontWeight} ${fontSize}px ${fontFace}`;
+      context.font = font;
+      fillAllText(context, stringToWrite, x, startY, textWidth, fontSize, textAlign);
+
+      stringToWrite = '';
+      italics = false;
+    } else {
+      italics = inlineItalics;
+    }
+
+    currentInlineStyle = inlineStyle;
+    stringToWrite = stringToWrite + text[i];
+  }
+  const font = `${currentInlineStyle || fontWeight} ${fontSize}px ${fontFace}`;
+  console.log(font);
+  context.font = font;
+  return fillAllText(context, text, x, startY, textWidth, fontSize, textAlign);
 }
 
 /* eslint-disable no-param-reassign */
@@ -77,7 +124,7 @@ export default function updateText(context, canvasStyle, fontOptions,
 
   // Scale up for real drawing
   let y = canvasPadding + (textPos.top * 2);
-  const x = canvasPadding + (textPos.left * 2);
+  let x = canvasPadding + (textPos.left * 2);
   const listPadding = 40 * 2;
 
   context.fillStyle = fontColor;
@@ -88,11 +135,11 @@ export default function updateText(context, canvasStyle, fontOptions,
     const blockType = block.getType();
     const styleMetrics = getStyleMetrics(blockType, blockTypeStyle);
 
-    // These have to be adjusted slightly to make html and canvas work the same
-    const fontSize = styleMetrics.fontSize;
-
-    const font = `${styleMetrics.fontWeight} ${fontSize}px ${fontFace}`;
-    context.font = font;
+    const fontInfo = {
+      fontWeight: styleMetrics.fontWeight,
+      fontSize: styleMetrics.fontSize,
+      fontFace,
+    };
 
     if (/(unordered|ordered)-list-item/.test(blockType)) {
       const bullet = /unordered/.test(blockType) ? '•' : `${listCount + 1}.`;
@@ -102,11 +149,17 @@ export default function updateText(context, canvasStyle, fontOptions,
       const bulletTextWidth = canvasTextWidth - listPadding;
 
       context.fillText(bullet, bulletX, y);
-      y = fillAllText(context, block.getText(), textX, y, bulletTextWidth, fontSize, textAlign);
+      const newPos = fillTextBlock(context, block, textX, y, bulletTextWidth, fontInfo, textAlign);
+      y = newPos.y;
+      x = newPos.x;
+
       y += styleMetrics.marginBottom * 0.93; // idk!
       listCount += 1;
     } else {
-      y = fillAllText(context, block.getText(), x, y, canvasTextWidth, fontSize, textAlign);
+      const newPos = fillTextBlock(context, block, x, y, canvasTextWidth, fontInfo, textAlign);
+
+      y = newPos.y;
+      x = newPos.x;
 
       if (/header-/.test(blockType)) {
         y += styleMetrics.marginBottom;

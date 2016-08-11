@@ -85,6 +85,8 @@ class TextOverlay extends React.Component {
   /** Mouse events */
   mouseOut = (e) => {
     // http://stackoverflow.com/a/3187524/1337683
+    e.stopPropagation();
+    e.preventDefault();
     const target = e.relatedTarget || e.toElement;
     if (!target || target.nodeName === 'HTML') this.mouseUp();
   }
@@ -93,13 +95,17 @@ class TextOverlay extends React.Component {
     const moveType = type;
 
     return (e) => {
-      console.log('mouse down');
+      e.stopPropagation();
+      e.preventDefault();
+      const clientX = e.clientX || e.changedTouches[0].clientX;
+      const clientY = e.clientY || e.changedTouches[0].clientY;
+
       this.trackingTarget = e.target;
       this.trackMouseMovement(moveType);
       this.setState({
         mouseDown: true,
-        lastMouseX: e.clientX,
-        lastMouseY: e.clientY,
+        lastMouseX: clientX,
+        lastMouseY: clientY,
 
         origTextPos: { ...this.props.textContainerOptions.textPos },
         origTextWidth: this.props.textContainerOptions.textWidth,
@@ -116,13 +122,18 @@ class TextOverlay extends React.Component {
     const moveType = type;
 
     return (e) => {
-      console.log('mousemove');
+      e.stopPropagation();
+      e.preventDefault();
       if (!this.state.mouseDown) return;
 
       const { canvas } = this.props;
 
-      const movementX = e.clientX - this.state.lastMouseX;
-      const movementY = e.clientY - this.state.lastMouseY;
+      const clientX = e.clientX || e.changedTouches[0].clientX;
+      const clientY = e.clientY || e.changedTouches[0].clientY;
+
+
+      const movementX = clientX - this.state.lastMouseX;
+      const movementY = clientY - this.state.lastMouseY;
 
       // Figure out what to do with the new found information
       switch (moveType) {
@@ -148,22 +159,16 @@ class TextOverlay extends React.Component {
   trackMouseMovement = (type) => {
     this.mouseMoveCallback = this.mouseMove(type);
     document.body.addEventListener('mousemove', this.mouseMoveCallback);
-    // TODO
-    document.body.addEventListener('touchmove', this.mouseMove);
-
+    document.body.addEventListener('touchmove', this.mouseMoveCallback);
     document.body.addEventListener('mouseup', this.mouseUp);
-    // TODO
-    this.trackingTarget.addEventListener('touchend', this.mouseUp);
+    document.body.addEventListener('touchend', this.mouseUp);
   }
 
   stopTrackingMouseMovement = () => {
     document.body.removeEventListener('mousemove', this.mouseMoveCallback);
-    // TODO
-    this.trackingTarget.removeEventListener('touchmove', this.mouseMove);
-
+    document.body.removeEventListener('touchmove', this.mouseMoveCallback);
     document.body.removeEventListener('mouseup', this.mouseUp);
-    // TODO
-    this.trackingTarget.removeEventListener('touchend', this.mouseUp);
+    document.body.removeEventListener('touchend', this.mouseUp);
   }
 
   /** End Mouse events */

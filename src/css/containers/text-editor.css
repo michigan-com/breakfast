@@ -71,6 +71,10 @@ $text-toolbar-height: 30px;
   margin: 0px 15px;
   cursor: pointer;
 
+  &.active {
+    color: $light-blue;
+  }
+
   img {
     height: 40%;
     margin-top: 50%;

@@ -355,7 +355,6 @@ $options-menu-container-width-sm: 50px;
     cursor: pointer;
 
     img {
-      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
