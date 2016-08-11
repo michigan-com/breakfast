@@ -122,9 +122,14 @@ export default function updateText(context, canvasStyle, fontOptions,
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100);
 
+  const textPosPx = {
+    top: textPos.top * (canvasStyle.height / 2),
+    left: textPos.left * (canvasStyle.width / 2),
+  };
+
   // Scale up for real drawing
-  let y = canvasPadding + (textPos.top * 2);
-  let x = canvasPadding + (textPos.left * 2);
+  let y = canvasPadding + (textPosPx.top * 2);
+  let x = canvasPadding + (textPosPx.left * 2);
   const listPadding = 40 * 2;
 
   context.fillStyle = fontColor;

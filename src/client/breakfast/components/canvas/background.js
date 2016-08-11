@@ -18,7 +18,6 @@ export default function updateBackground(context, canvasOptions,
   context.fillRect(0, 0, canvasOptions.width, canvasOptions.height);
   if (backgroundOptions.backgroundImg.img != null) {
     const img = backgroundOptions.backgroundImg.img;
-    console.log(drawImageMetrics);
     context.drawImage(
       img,
       0,

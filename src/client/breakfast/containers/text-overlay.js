@@ -133,15 +133,18 @@ class TextOverlay extends React.Component {
       const clientX = e.clientX || e.changedTouches[0].clientX;
       const clientY = e.clientY || e.changedTouches[0].clientY;
 
-
       const movementX = clientX - this.state.lastMouseX;
       const movementY = clientY - this.state.lastMouseY;
 
       // Figure out what to do with the new found information
       switch (moveType) {
         case MOVE_TYPE_POS: {
-          const top = this.state.origTextPos.top + movementY;
-          const left = this.state.origTextPos.left + movementX;
+          const movementXPercent = movementX / (canvas.canvasWidth / 2);
+          const movementYPercent = movementY / (canvas.canvasHeight / 2);
+
+          const left = this.state.origTextPos.left + movementXPercent;
+          const top = this.state.origTextPos.top + movementYPercent;
+
           this.props.actions.textPosChange(this.props.textContainerIndex, { top, left });
           break;
         }
@@ -231,11 +234,6 @@ class TextOverlay extends React.Component {
       style.push(`.text-editor-container ${tagName}, .text-editor-container ${tagName} * ${s}`);
     }
 
-    // style.push(`.text-editor-container { width: ${textWidthPx + canvas.textEditorPadding}px; }`);
-    style.push(`
-      .text-overlay-container .text-width-change {
-      }`);
-
     return (<style>{style.join(' ')}</style>);
   }
 
@@ -250,6 +248,11 @@ class TextOverlay extends React.Component {
     const canvasPadding = canvas.canvasPadding / 2;
 
     let textWidthPx = canvas.maxTextWidth * (textWidth / 100);
+    const pxTextPos = {
+      top: textPos.top * (canvas.canvasHeight / 2),
+      left: textPos.left * (canvas.canvasWidth / 2),
+    };
+
     // Have to scale things down on the DOM for better UI
     textWidthPx /= 2;
 
@@ -257,8 +260,8 @@ class TextOverlay extends React.Component {
     if (this.state.initialized) className += ' initialized';
     let style = this.getStyle();
     const textOverlayContainerStyle = {
-      top: `${textPos.top}px`,
-      left: `${textPos.left}px`,
+      top: `${pxTextPos.top}px`,
+      left: `${pxTextPos.left}px`,
       padding: `${canvasPadding}px`,
     };
     const moveTextStyle = {

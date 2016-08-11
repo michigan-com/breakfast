@@ -58,7 +58,7 @@ function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, dis
   const textPos = { ...DEFAULT_TEXT_CONTAINER.textPos };
   switch (containerType) {
     case BODY_TEXT_CONTAINER:
-      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 5;
+      textPos.top = 0.4;
       return {
         ...DEFAULT_TEXT_CONTAINER,
         containerType,
@@ -70,7 +70,7 @@ function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, dis
         ),
       };
     case CAPTION_TEXT_CONTAINER:
-      textPos.top = DEFAULT_TEXT_CONTAINER_HEIGHT * 7;
+      textPos.top = 0.6;
       return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };
     case HEADER_TEXT_CONTAINER:
     default:

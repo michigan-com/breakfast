@@ -76,16 +76,24 @@ export default class BackgroundPosition extends React.Component {
   }
 
   mouseDown = (e) => {
-    this.clickedMouseX = e.clientX;
-    this.clickedMouseY = e.clientY;
+    const clientX = e.clientX || e.changedTouches[0].clientX;
+    const clientY = e.clientY || e.changedTouches[0].clientY;
+    this.clickedMouseX = clientX;
+    this.clickedMouseY = clientY;
     this.storedImageMetrics = { ...this.props.drawImageMetrics };
     this.trackMouseMovement();
   }
 
   mouseMove = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const clientX = e.clientX || e.changedTouches[0].clientX;
+    const clientY = e.clientY || e.changedTouches[0].clientY;
+
     const { Background, canvas } = this.props;
-    const deltaX = e.clientX - this.clickedMouseX;
-    const deltaY = e.clientY - this.clickedMouseY;
+    const deltaX = clientX - this.clickedMouseX;
+    const deltaY = clientY - this.clickedMouseY;
     const backgroundImg = Background.backgroundImg;
     const imageAspectRatio = backgroundImg.width / backgroundImg.height;
     const imageHeight = this.getImageWidth() / imageAspectRatio;
@@ -100,18 +108,22 @@ export default class BackgroundPosition extends React.Component {
 
   trackMouseMovement = () => {
     document.body.addEventListener('mousemove', this.mouseMove);
+    document.body.addEventListener('touchmove', this.mouseMove);
     document.body.addEventListener('mouseup', this.stopTrackingMouseMovement);
     document.body.addEventListener('blur', this.stopTrackingMouseMovement);
     document.body.addEventListener('mouseout', this.stopTrackingMouseMovement);
+    document.body.addEventListener('touchend', this.stopTrackingMouseMovement);
   }
 
   stopTrackingMouseMovement = () => {
     this.clickedMouseX = 0;
     this.clickedMouseY = 0;
     document.body.removeEventListener('mousemove', this.mouseMove);
+    document.body.removeEventListener('touchmove', this.mouseMove);
     document.body.removeEventListener('mouseup', this.stopTrackingMouseMovement);
     document.body.removeEventListener('blur', this.stopTrackingMouseMovement);
     document.body.removeEventListener('mouseout', this.stopTrackingMouseMovement);
+    document.body.removeEventListener('touchend', this.stopTrackingMouseMovement);
   }
 
   updateCanvas() {
@@ -132,6 +144,7 @@ export default class BackgroundPosition extends React.Component {
           height={style.height}
           width={style.width}
           onMouseDown={this.mouseDown}
+          onTouchStart={this.mouseDown}
           ref={(canvas) => {
             if (canvas) this.canvas = canvas;
           }}
