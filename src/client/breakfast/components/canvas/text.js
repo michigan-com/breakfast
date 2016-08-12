@@ -68,7 +68,7 @@ export function fillAllText(context, text, x, startY, textWidth, fontSize, textA
   return y;
 }
 
-function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign) {
+function fillTextBlock(context, block, textPosX, startY, textWidth, fontInfo, textAlign) {
   const { fontWeight, fontFace, fontSize } = fontInfo;
   const text = block.getText();
   const characterList = block.getCharacterList();
@@ -85,7 +85,7 @@ function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign
     { text: stringToWrite, width, font }
   );
 
-  let currentX = x;
+  let canvasX = 0;
   let currentY = startY;
   let currentFont = makeFont(fontWeight, false);
   let lineChunks = [];
@@ -114,41 +114,67 @@ function fillTextBlock(context, block, x, startY, textWidth, fontInfo, textAlign
     context.font = currentFont;
 
     const testStringWidth = measureWord(context, testString);
-    const stringIsTooLong = testStringWidth + currentX >= textWidth;
+
+    const stringIsTooLong = Math.round(testStringWidth + canvasX) > Math.round(textWidth);
 
     // Make a new chunk
     if (inlineFont !== currentFont || stringIsTooLong || isLastChar) {
-      if (isLastChar) {
-        chunkStringWidth = testStringWidth;
-        currentChunkString = testString;
+      if (isLastChar && !stringIsTooLong) {
+        currentChunkString = currentChar === ' ' ? testString.slice(0, -1) : testString;
+      } else if (textAlign !== 'left' && (stringIsTooLong || isLastChar)) {
+        // slice off the newline character for a new line
+        currentChunkString = currentChunkString.slice(0, -1);
       }
+      chunkStringWidth = Math.round(measureWord(context, currentChunkString));
       lineChunks.push(makeChunk(currentChunkString, chunkStringWidth, currentFont));
 
-      let chunkX = currentX;
-      if (textAlign === 'center') chunkX = (textWidth - chunkStringWidth) / 2;
-      else if (textAlign === 'right') chunkX = (textWidth - currentChunkString);
-      for (const lineChunk of lineChunks) {
-        lineChunk.x = chunkX;
-        lineChunk.y = currentY;
-        textChunks.push({ ...lineChunk });
 
-        chunkX += lineChunk.width;
+      // the only way to know the position of the left or center justifications is
+      // to know the entire length of the string we're writing
+      if (stringIsTooLong || isLastChar) {
+        const lineWidth = lineChunks.reduce((total, val) => (total += val.width), 0);
+        let chunkX = 0;
+        if (textAlign === 'center') chunkX = (textWidth - lineWidth) / 2;
+        else if (textAlign === 'right') chunkX = (textWidth - lineWidth);
+        for (const lineChunk of lineChunks) {
+          lineChunk.x = chunkX + (textPosX);
+          lineChunk.y = currentY;
+          textChunks.push({ ...lineChunk });
+
+          chunkX += lineChunk.width;
+        }
+
+        lineChunks = [];
+      }
+
+      // bleeehhh
+      // super corner case, which probably means my code should be restructured
+      if (isLastChar && stringIsTooLong) {
+        const lastChunk = testWord;
+        const lastChunkWidth = Math.round(measureWord(context, lastChunk));
+        const lineChunk = makeChunk(lastChunk, lastChunkWidth, currentFont);
+        let chunkX = 0;
+        if (textAlign === 'center') chunkX = (textWidth - lastChunkWidth) / 2;
+        else if (textAlign === 'right') chunkX = (textWidth - lastChunkWidth);
+        lineChunk.x = chunkX + textPosX;
+        lineChunk.y = currentY + fontSize;
+        textChunks.push({ ...lineChunk });
+      }
+
+      if (stringIsTooLong) {
+        currentY += fontSize;
+        canvasX = 0;
+      } else {
+        canvasX += chunkStringWidth;
       }
 
       currentWord = testWord;
       currentChunkString = '';
-      lineChunks = [];
-      chunkStringWidth = measureWord(context, currentChunkString);
-      if (stringIsTooLong) {
-        currentY += fontSize;
-        currentX = x;
-      } else {
-        currentX = chunkX;
-      }
+      chunkStringWidth = Math.round(measureWord(context, currentChunkString));
     } else {
       if (currentChar === ' ') {
         currentChunkString = `${currentChunkString}${testWord}`;
-        chunkStringWidth = measureWord(context, currentChunkString);
+        chunkStringWidth = Math.round(measureWord(context, currentChunkString));
         currentWord = '';
       } else {
         currentWord = testWord;
@@ -181,7 +207,7 @@ export default function updateText(context, canvasStyle, fontOptions,
 
   // Scale up for real drawing
   let y = canvasPadding + (textPosPx.top * 2);
-  let x = canvasPadding + (textPosPx.left * 2);
+  const x = canvasPadding + (textPosPx.left * 2);
   const listPadding = 40 * 2;
 
   context.fillStyle = fontColor;

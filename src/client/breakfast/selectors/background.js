@@ -49,7 +49,7 @@ export const canvasMetricsSelector = createSelector(
     const canvasPadding = canvasWidth / 26;
     const textEditorPadding = 10;
     const totalPadding = canvasPadding + textEditorPadding;
-    const maxTextWidth = Math.round(canvasWidth - (totalPadding * 2));
+    const maxTextWidth = canvasWidth - (totalPadding * 2);
     const canvasHeight = canvasWidth / value;
 
     return {
