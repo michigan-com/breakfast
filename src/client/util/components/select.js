@@ -158,5 +158,6 @@ Select.propTypes = {
 
 Select.defaultProps = {
   htmlClass: '',
+  curretnIndex: 0,
   onSelect: () => { },
 };
