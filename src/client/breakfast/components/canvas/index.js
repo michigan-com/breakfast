@@ -73,7 +73,7 @@ export default class Canvas extends React.Component {
     updateBackground(context, canvasStyle, Background, drawImageMetrics);
     updateLogo(context, canvasStyle, Logo);
     updateAttribution(context, canvasStyle, Attribution, Font);
-    if (renderText || true) {
+    if (renderText) {
       for (const container of textContainers) {
         if (container.display) {
           updateText(context, canvasStyle, Font, blockTypeStyle, container);
