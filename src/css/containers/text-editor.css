@@ -1,5 +1,6 @@
 @import '../constants';
 
+$text-toolbar-screen-sm: 550px;
 $text-toolbar-height: 30px;
 
 .DraftEditor-root {
@@ -16,12 +17,18 @@ $text-toolbar-height: 30px;
   position: absolute;
   top: calc($text-toolbar-height * -1.5);
   left: 0;
+  min-width: 500px;
   border-radius: calc($text-toolbar-height / 2);
   width: 100%;
-  min-width: 500px;
   left: 0;
   opacity: 0;
   transition: all 250ms linear;
+
+  @media (max-width: $text-toolbar-screen-sm) {
+    min-width: 250px;
+    height: calc($text-toolbar-height * 2);
+    top: calc($text-toolbar-height * -2.5);
+  }
 
   &:after {
     content: '';
@@ -70,6 +77,10 @@ $text-toolbar-height: 30px;
   color: white;
   margin: 0px 15px;
   cursor: pointer;
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+    background-color: black;
+  }
 
   &.active {
     color: $light-blue;
@@ -84,6 +95,10 @@ $text-toolbar-height: 30px;
 .block-style-controls {
   display: inline-block;
   float: left;
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+    background-color: black;
+  }
 }
 
 .font-picker-container {
@@ -94,6 +109,7 @@ $text-toolbar-height: 30px;
 
   &, .select, .current-selection {
     border-radius: 15px 0px 0px 15px;
+    background-color: black;
   }
 }
 
@@ -102,10 +118,18 @@ $text-toolbar-height: 30px;
   height: $text-toolbar-height !important;
   display: inline-block;
   float: left;
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+    background-color: black;
+  }
 }
 
 .block-style-controls {
   width: 100px;
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+    background-color: black;
+  }
 
   .select-option, .current-selection{
     img {
@@ -116,17 +140,30 @@ $text-toolbar-height: 30px;
 
 .font-color-picker {
   width: $text-toolbar-height;
-  height: 100%;
+  height: $text-toolbar-height;
   display: inline-block;
   float: left;
   margin: 0 10px;
   position: relative;
+  &, .select, .current-selection {
+    border-radius: 15px 0px 0px 15px;
+    background-color: black;
+  }
+
+  @media (max-width: $text-toolbar-screen-sm) {
+    position: initial;
+  }
 
   .color-picker-container {
     width: 250px;
     position: absolute;
     left: -100px;
     top: 120%;
+    z-index: 100;
+
+    @media (max-width: $text-toolbar-screen-sm) {
+      left: 0;
+    }
   }
 
   .swatch {

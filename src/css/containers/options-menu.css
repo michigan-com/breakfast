@@ -58,16 +58,17 @@ $options-menu-container-width-sm: 50px;
   position: fixed;
   top: $navbar-height;
   left: $options-menu-container-width-lg;
-  width: 20%;
+  /*width: 20%;*/
   max-height: 100vh;
   background-color: #f5f5f5;
   bottom: 0;
   overflow: scroll;
+  width: 300px;
 
   @media (max-width: $screen-sm) {
     left: $options-menu-container-width-sm;
     right: 0;
-    width: initial;
+    /*width: initial;*/
   }
 }
 

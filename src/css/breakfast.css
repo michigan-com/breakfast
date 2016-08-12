@@ -61,13 +61,15 @@ input[type=text] {
   margin: 0 auto;
   display: block;
   position: relative;
-  padding-left: 40%;
-  margin-top: calc($navbar-height * 3);
+  padding-left: 35%;
+  padding-top: calc($navbar-height * 3);
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
 
   @media (max-width: $screen-sm) {
-    margin-top: calc($navbar-height * 1.5);
+    padding-top: calc($navbar-height * 1.5);
     padding-left: 75px;
-    overflow-y: hidden;
   }
 
   .breakfast-image-container {
