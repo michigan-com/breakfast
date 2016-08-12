@@ -1,0 +1,142 @@
+@import '../constants';
+
+#navbar {
+  background-color: $navbar-black;
+  color: white;
+  position: fixed;
+  height: $navbar-height;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $navbar-z-index;
+
+  a {
+    cursor: pointer;
+  }
+
+  .links-container {
+    .title {
+      height: $navbar-height;
+      line-height: calc($navbar-height * 0.8);
+      font-size: calc($navbar-height * .75);
+      text-align: center;
+      font-family: 'Playfair Display';
+      font-style: italic;
+      font-weight: bold;
+      margin: 0px 20px;
+      float: left;
+
+      @media (max-width: $screen-sm) {
+        font-size: 20px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .links {
+      display: inline-block;
+      margin: 0px 20px;
+      float: left;
+
+      @media (max-width: $screen-sm) {
+        display: none;
+      }
+
+      a {
+        height: $navbar-height;
+        line-height: $navbar-height;
+        text-transform: uppercase;
+        margin: 0px 15px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+  }
+
+
+  .user-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+
+    .email {
+      margin: 0px 10px;
+      height: $navbar-height;
+      line-height: $navbar-height;
+      float: left;
+      display: inline-block;
+
+      @media (max-width: $screen-sm) {
+        font-size: 10px;
+      }
+    }
+
+    .user-dropdown-toggle-container {
+      display: inline-block;
+      position: relative;
+    }
+
+    .user-dropdown-toggle {
+      width: $navbar-height;
+      height: $navbar-height;
+      margin: 0 20px;
+      cursor: pointer;
+
+      img {
+        height: 50%;
+        left: 25%;
+        top: 25%;
+        position: absolute;
+      }
+
+      .down-arrow {
+        position: absolute;
+        bottom: 5;
+        left: calc(($navbar-height / 2) + 5);
+
+        border-right: 5px solid transparent;
+        border-left: 5px solid transparent;
+        border-top: 4px solid white;
+      }
+    }
+  }
+
+  .user-dropdown{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border-radius: 5px;
+    background-color: white;
+    top: 100%;
+    width: 200px;
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.24), 0 0 8px 0 rgba(0, 0, 0, 0.12);
+
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: $navbar-black;
+      font-size: 15px;
+      line-height: 30px;
+      height: 30px;
+      margin: 10px;
+      transition: all 250ms linear;
+      border-radius: 5px;
+      text-align: center;
+
+      &:hover {
+        color: white;
+        background-color: $navbar-black;
+      }
+    }
+  }
+}

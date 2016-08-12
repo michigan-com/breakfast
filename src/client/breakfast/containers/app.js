@@ -13,6 +13,7 @@ import OptionsMenu from './options-menu';
 import EditingCanvas from './editing-canvas';
 import DownloadCanvas from './download-canvas';
 import BackgroundPosition from './background-position';
+import Navbar from '../components/navbar';
 
 class App extends Component {
   static propTypes = {
@@ -73,6 +74,7 @@ class App extends Component {
 
     return (
       <div>
+        <Navbar email={window.BFAST_USER_EMAIL} />
         <OptionsMenu />
         <div className="pic-editor" >
           <div className="undo-container" style={this.getCanvasWidth()}>

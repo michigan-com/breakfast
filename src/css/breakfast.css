@@ -4,6 +4,7 @@
 @import './containers/text-editor';
 @import './containers/editing-canvas';
 @import './containers/background-position';
+@import './components/navbar';
 @import './constants';
 
 @define-mixin close-button {

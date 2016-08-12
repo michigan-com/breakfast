@@ -9,13 +9,15 @@ block css
 
 
 block content
-  include ./util/navbar
   #editor
 
   a#download-link
   #download-canvas
 
   a#feedback(href='mailto:help@breakfast.im?subject=Breakfast Support Question') Need help? Drop us a line!
+  
 
 block js
   script(src='/js/breakfast.js')
+  script.
+    window.BFAST_USER_EMAIL = '#{locals.user.email}';
