@@ -19,7 +19,8 @@ export default function reducer(state = DEFAULT_STATE, action) {
       return { ...state, username };
     case INPUT_ERROR:
       inputError = action.value;
-      return { ...state, inputError };
+      sendingEmail = false;
+      return { ...state, inputError, sendingEmail };
     case INPUT_FEEDBACK:
       inputFeedback = action.value;
       return { ...state, inputFeedback };
