@@ -1,7 +1,7 @@
 'use strict';
 
 import nodemailer from 'nodemailer';
-import sendmailTransport from 'nodemailer-sendmail-transport';
+import sesTransport from 'nodemailer-ses-transport';
 import debug from 'debug';
 
 import uuid from '../util/uuid';
@@ -25,7 +25,15 @@ function registerRoutes(app, router, passport) {
   const Invite = db.collection('Invite');
   const User = db.collection('User');
 
-  const emailTransport = nodemailer.createTransport(sendmailTransport({}));
+  const emailTransport = nodemailer.createTransport(sesTransport({
+    accessKeyId: process.env.SES_USERNAME,
+    secretAccessKey: process.env.SES_PASSWORD,
+
+  }));
+  console.log({
+    accessKeyId: process.env.SES_USERNAME,
+    secretAccessKey: process.env.SES_PASSWORD,
+  });
 
   // Render the login form
   router.get('/register/', csrfProtection(app), (req, res) => {
@@ -87,15 +95,16 @@ function registerRoutes(app, router, passport) {
 
       const url = formatInviteUrl(token);
       const mailOptions = {
-        from: 'webmaster@breakfast.im',
+        from: 'help@breakfast.im',
         to: [email],
         subject: 'Complete your Breakfast registration',
         text: `Thanks for registering with breakfast!\n\nVisit the link below to complete your registraion:\n\n\t${url}\n\nThanks!\nBreakfast Team`,
         html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
       };
 
-      if (process.env.NODE_ENV === 'production') {
-        emailTransport.sendMail(mailOptions);
+      if (process.env.NODE_ENV === 'production' || true) {
+        const emailRes = await emailTransport.sendMail(mailOptions);
+        console.log(emailRes);
       } else {
         logger(mailOptions);
       }

@@ -1,7 +1,7 @@
 node_modules/
 dist/
 *.swp
-env.sh
+.env
 public/js
 public/css
 .DS_STORE
