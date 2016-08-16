@@ -30,10 +30,6 @@ function registerRoutes(app, router, passport) {
     secretAccessKey: process.env.SES_PASSWORD,
 
   }));
-  console.log({
-    accessKeyId: process.env.SES_USERNAME,
-    secretAccessKey: process.env.SES_PASSWORD,
-  });
 
   // Render the login form
   router.get('/register/', csrfProtection(app), (req, res) => {
