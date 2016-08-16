@@ -106,6 +106,9 @@ export default class RegisterForm extends React.Component {
       submitValue = '✓';
     } else if (this.props.Input.username === '') {
       submitDisabled = true;
+    } else if (this.props.Input.sendingEmail) {
+      submitDisabled = true;
+      submitValue = 'Sending...';
     }
 
     return (

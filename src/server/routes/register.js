@@ -102,9 +102,8 @@ function registerRoutes(app, router, passport) {
         html: `<p>Thanks for registering with breakfast!</p><p>Visit the link below to complete your registraion:</p><br><p><a href='${url}'>Registration Link</a></p><br><p>Thanks!</p><p>Breakfast Team</p>`,
       };
 
-      if (process.env.NODE_ENV === 'production' || true) {
-        const emailRes = await emailTransport.sendMail(mailOptions);
-        console.log(emailRes);
+      if (process.env.NODE_ENV === 'production') {
+        await emailTransport.sendMail(mailOptions);
       } else {
         logger(mailOptions);
       }
