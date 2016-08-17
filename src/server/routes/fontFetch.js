@@ -2,7 +2,6 @@
 
 import { loginRequired } from '../middleware/login';
 import { basicFonts, usatFonts } from '../util/fonts';
-import { getDomainFromEmail } from '../util/parse';
 
 /**
  * Register the routes for LogoFetch. Registers URLs for getting
@@ -14,10 +13,8 @@ import { getDomainFromEmail } from '../util/parse';
  */
 function registerRoutes(app, router) {
   router.get('/fonts/getFonts/', loginRequired, (req, res) => {
-    const domain = getDomainFromEmail(req.user.email);
     let fonts = basicFonts.slice(); // copies the array
-
-    if (domain === 'usatoday.com' || req.user.admin) fonts = fonts.concat(usatFonts);
+    fonts = fonts.concat(usatFonts);
     fonts = fonts.sort((a, b) => (b - a));
     res.json({ fonts });
   });
