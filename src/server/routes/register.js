@@ -28,7 +28,6 @@ function registerRoutes(app, router, passport) {
   const emailTransport = nodemailer.createTransport(sesTransport({
     accessKeyId: process.env.SES_USERNAME,
     secretAccessKey: process.env.SES_PASSWORD,
-
   }));
 
   // Render the login form
