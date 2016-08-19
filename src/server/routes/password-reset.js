@@ -78,7 +78,7 @@ function registerRoutes(app, router) {
 
       const url = formatPasswordResetUrl(token);
       const mailOptions = {
-        from: 'webmaster@breakfast.im',
+        from: 'help@breakfast.im',
         to: [email],
         subject: 'Password Reset for Breakfast',
         text: `Greetings!\n\nThis email was generated because someone requested a password reset for this email account in Breakfast.\n\nClick the following link to reset your password.\n\n\t${url}\n\n(If you did not request this reset, please ignore this email.)\n\nThanks!\nBreakfast Team`,
