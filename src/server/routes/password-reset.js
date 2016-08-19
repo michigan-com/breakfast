@@ -85,9 +85,13 @@ function registerRoutes(app, router) {
         email: `<p>Greetings!</p><p>This email was generated because someone requested a password reset for this email account in Breakfast.</p><p>Click the following link to reset your password.</p><br><p><a href='${url}'>Reset Link</a></p><br><p style='italics'>(If you did not request this reset, please ignore this email.)</p><br><p>Thanks!<br>Breakfast Team</p>`,
       };
 
+      console.log(process.env.NODE_ENV);
       if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
-        emailTransport.sendMail(mailOptions);
+        console.log('sending email');
+        const result = await emailTransport.sendMail(mailOptions);
+        console.log(result);
       } else {
+        console.log('logging email');
         logger(mailOptions);
       }
 
