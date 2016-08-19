@@ -2,7 +2,7 @@
 
 import debug from 'debug';
 import nodemailer from 'nodemailer';
-import sendmailTransport from 'nodemailer-sendmail-transport';
+import sesTransport from 'nodemailer-ses-transport';
 
 import { Field } from '../util/form';
 import { csrfProtection } from '../middleware/csrf';
@@ -26,7 +26,10 @@ function registerRoutes(app, router) {
   const User = db.collection('User');
 
   // TODO abstract
-  const emailTransport = nodemailer.createTransport(sendmailTransport({}));
+  const emailTransport = nodemailer.createTransport(sesTransport({
+    accessKeyId: process.env.SES_USERNAME,
+    secretAccessKey: process.env.SES_PASSWORD,
+  }));
 
   router.get('/password-reset/', csrfProtection(app), (req, res) => {
     let csrfToken;
