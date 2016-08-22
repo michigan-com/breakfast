@@ -38,13 +38,6 @@
     }]
   },
 
-  "Associated Press": {
-    "domain": "*",
-    "logo": {
-      "filename": "AP.png"
-    }
-  },
-
   "Battle Creek": {
     "domain": "battlecreekenquirer.com",
     "logo": {
