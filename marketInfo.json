@@ -1,4 +1,11 @@
 {
+  "Abilene": {
+    "domain": "reporternews.com",
+    "logo": {
+      "filename": "abilene.svg"
+    }
+  },
+
   "Alamogordo Daily News": {
     "domain": "alamogordonews.com",
     "logo": {
@@ -10,6 +17,13 @@
     "domain": "thetowntalk.com",
     "logo": {
       "filename": "alexandria.svg"
+    }
+  },
+
+  "Anderson": {
+    "domain": "independentmail.com",
+    "logo": {
+      "filename": "anderson.svg"
     }
   },
 
@@ -62,6 +76,13 @@
     "domain": "blackmountainnews.com",
     "logo": {
       "filename": "blackmountainnews.svg"
+    }
+  },
+
+  "Bremerton": {
+    "domain": "kitsapsun.com",
+    "logo": {
+      "filename": "bremerton.svg"
     }
   },
 
@@ -154,6 +175,13 @@
     }]
   },
 
+  "Corpus": {
+    "domain": "caller.com",
+    "logo": {
+      "filename": "corpus.svg"
+    }
+  },
+
   "Coshocton": {
     "domain": "coshoctontribune.com",
     "logo": {
@@ -216,6 +244,13 @@
     }, {
       "filename": "elsol-light.png"
     }]
+  },
+
+  "Evansville": {
+    "domain": "courierpress.com",
+    "logo": {
+      "filename": "evansville.svg"
+    }
   },
 
   "Farmers Advance": {
@@ -360,6 +395,13 @@
     }]
   },
 
+  "Henderson": {
+    "domain": "thegleaner.com",
+    "logo": {
+      "filename": "henderson.svg"
+    }
+  },
+
   "Indianapolis": {
     "domain": "indystar.com",
     "logo": {
@@ -399,6 +441,20 @@
     "domain": "jacksonsun.com",
     "logo": {
       "filename": "jacksontn.svg"
+    }
+  },
+
+  "Knoxville Blogs": {
+    "domain": "knoxblogs.com",
+    "logo": {
+      "filename": "knoxville.svg"
+    }
+  },
+
+  "Knoxville News": {
+    "domain": "knoxnews.com",
+    "logo": {
+      "filename": "knoxville.svg"
     }
   },
 
@@ -551,6 +607,13 @@
     }
   },
 
+  "Memphis": {
+    "domain": "commercialappeal.com",
+    "logo": {
+      "filename": "memphis.svg"
+    }
+  },
+
   "Michigan.com": {
     "domain": "michigan.com",
     "logo": [{
@@ -567,6 +630,13 @@
     "domain": "militarytimes.com",
     "logo": {
       "filename": "militarytimes.png"
+    }
+  },
+
+  "Milwaukee": {
+    "domain": "jsonline.com",
+    "logo": {
+      "filename": "milwaukee.svg"
     }
   },
 
@@ -613,6 +683,13 @@
     "domain": "dnj.com",
     "logo": {
       "filename": "murfreesboro.svg"
+    }
+  },
+
+  "Naples": {
+    "domain": "naplesnews.com",
+    "logo": {
+      "filename": "naples.svg"
     }
   },
 
@@ -701,6 +778,13 @@
     }
   },
 
+  "Redding": {
+    "domain": "redding.com",
+    "logo": {
+      "filename": "redding.svg"
+    }
+  },
+
   "Reno Gazette-Journal": {
     "domain": "rgj.com",
     "logo": {
@@ -759,6 +843,13 @@
     }, {
       "filename": "salisbury-light.png"
     }]
+  },
+
+  "San Angelo": {
+    "domain": "gosanangelo.com",
+    "logo": {
+      "filename": "san-angelo.svg"
+    }
   },
 
   "Sheboygan": {
@@ -850,6 +941,19 @@
     }
   },
 
+  "Treasure Coast": {
+    "domain": "tcpalm.com",
+    "logo": [{
+      "filename": "tc-indian-river.svg"
+    }, {
+      "filename": "tc-st-lucie.svg"
+    }, {
+      "filename": "tc-stuart.svg"
+    }, {
+      "filename": "tc-1-treasure-coast.svg"
+    }]
+  },
+
   "USA Today": {
     "domain": "usatoday.com",
     "logo": [{
@@ -891,6 +995,13 @@
     }
   },
 
+  "Visalia": {
+    "domain": "vcstar.com",
+    "logo": {
+      "filename": "visalia.svg"
+    }
+  },
+
   "Wausau": {
     "domain": "wasaudailyherald.com",
     "logo": {
@@ -918,6 +1029,13 @@
     "domain": "wisconsinrapidstribune.com",
     "logo": {
       "filename": "wisconsinrapids.svg"
+    }
+  },
+
+  "Witchita Falls" : {
+    "domain": "timesrecordnews.com",
+    "logo": {
+      "filename": "witchita-falls.svg"
     }
   },
 

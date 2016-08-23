@@ -1,4 +1,15 @@
 {
+  "abilene.svg": {
+    "name": "abilene.svg",
+    "domain": [
+      "reporternews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "435.6",
+    "height": "68.98",
+    "aspectRatio": 6.314873876485938
+  },
   "alamogordo.svg": {
     "name": "alamogordo.svg",
     "domain": [
@@ -21,6 +32,17 @@
     "width": "719.563",
     "height": "119.938",
     "aspectRatio": 5.999458053327553
+  },
+  "anderson.svg": {
+    "name": "anderson.svg",
+    "domain": [
+      "independentmail.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "596.97",
+    "height": "131.65",
+    "aspectRatio": 4.534523357387011
   },
   "appleton.svg": {
     "name": "appleton.svg",
@@ -99,6 +121,17 @@
     "width": "720",
     "height": "155",
     "aspectRatio": 4.645161290322581
+  },
+  "bremerton.svg": {
+    "name": "bremerton.svg",
+    "domain": [
+      "kitsapsun.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "385.92",
+    "height": "125.09",
+    "aspectRatio": 3.0851387001359023
   },
   "brevard-dark.png": {
     "name": "brevard-dark.png",
@@ -246,6 +279,17 @@
     "isSvg": false,
     "noColor": false
   },
+  "corpus.svg": {
+    "name": "corpus.svg",
+    "domain": [
+      "caller.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "432.28",
+    "height": "124.99",
+    "aspectRatio": 3.4585166813345065
+  },
   "coshocton.svg": {
     "name": "coshocton.svg",
     "domain": [
@@ -354,6 +398,17 @@
     ],
     "isSvg": false,
     "noColor": false
+  },
+  "evansville.svg": {
+    "name": "evansville.svg",
+    "domain": [
+      "courierpress.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "425.85",
+    "height": "98.54",
+    "aspectRatio": 4.321595291252283
   },
   "farmersadvance-dark.png": {
     "name": "farmersadvance-dark.png",
@@ -595,6 +650,17 @@
     "isSvg": false,
     "noColor": false
   },
+  "henderson.svg": {
+    "name": "henderson.svg",
+    "domain": [
+      "thegleaner.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "323.97",
+    "height": "121.21",
+    "aspectRatio": 2.672799273987295
+  },
   "indianapolis.svg": {
     "name": "indianapolis.svg",
     "domain": [
@@ -663,6 +729,18 @@
     "width": "724",
     "height": "160",
     "aspectRatio": 4.525
+  },
+  "knoxville.svg": {
+    "name": "knoxville.svg",
+    "domain": [
+      "knoxblogs.com",
+      "knoxnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "430.28",
+    "height": "107.87",
+    "aspectRatio": 3.988875498284972
   },
   "lafayettein.svg": {
     "name": "lafayettein.svg",
@@ -843,6 +921,17 @@
     "height": "160",
     "aspectRatio": 5
   },
+  "memphis.svg": {
+    "name": "memphis.svg",
+    "domain": [
+      "commercialappeal.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "432.82",
+    "height": "81.21",
+    "aspectRatio": 5.329639206994213
+  },
   "michigan.svg": {
     "name": "michigan.svg",
     "domain": [
@@ -861,6 +950,17 @@
     ],
     "isSvg": false,
     "noColor": false
+  },
+  "milwaukee.svg": {
+    "name": "milwaukee.svg",
+    "domain": [
+      "jsonline.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "783",
+    "height": "4.3",
+    "aspectRatio": 182.09302325581396
   },
   "monroe-dark.png": {
     "name": "monroe-dark.png",
@@ -940,6 +1040,17 @@
     "width": "769",
     "height": "160",
     "aspectRatio": 4.80625
+  },
+  "naples.svg": {
+    "name": "naples.svg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "342",
+    "height": "66",
+    "aspectRatio": 5.181818181818182
   },
   "nashville.svg": {
     "name": "nashville.svg",
@@ -1099,6 +1210,17 @@
     "height": "160",
     "aspectRatio": 5
   },
+  "redding.svg": {
+    "name": "redding.svg",
+    "domain": [
+      "redding.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "421.88",
+    "height": "82.65",
+    "aspectRatio": 5.104416212946158
+  },
   "renogazettejournal.svg": {
     "name": "renogazettejournal.svg",
     "domain": [
@@ -1197,6 +1319,17 @@
     ],
     "isSvg": false,
     "noColor": false
+  },
+  "san-angelo.svg": {
+    "name": "san-angelo.svg",
+    "domain": [
+      "gosanangelo.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "425.52",
+    "height": "120.26",
+    "aspectRatio": 3.53833361051056
   },
   "sheboygan.svg": {
     "name": "sheboygan.svg",
@@ -1356,6 +1489,50 @@
     "height": "160",
     "aspectRatio": 4.5875
   },
+  "tc-1-treasure-coast.svg": {
+    "name": "tc-1-treasure-coast.svg",
+    "domain": [
+      "tcpalm.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "649.97",
+    "height": "256",
+    "aspectRatio": 2.5389453125
+  },
+  "tc-indian-river.svg": {
+    "name": "tc-indian-river.svg",
+    "domain": [
+      "tcpalm.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "412.35",
+    "height": "89.17",
+    "aspectRatio": 4.624313109790289
+  },
+  "tc-st-lucie.svg": {
+    "name": "tc-st-lucie.svg",
+    "domain": [
+      "tcpalm.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "424.86",
+    "height": "58.09",
+    "aspectRatio": 7.313823377517645
+  },
+  "tc-stuart.svg": {
+    "name": "tc-stuart.svg",
+    "domain": [
+      "tcpalm.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "426.52",
+    "height": "72.45",
+    "aspectRatio": 5.887094547964113
+  },
   "usat-1.svg": {
     "name": "usat-1.svg",
     "domain": [
@@ -1500,6 +1677,17 @@
     "height": "160",
     "aspectRatio": 5
   },
+  "visalia.svg": {
+    "name": "visalia.svg",
+    "domain": [
+      "vcstar.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "232.13",
+    "height": "123.09",
+    "aspectRatio": 1.8858558778129824
+  },
   "visaliatulare.svg": {
     "name": "visaliatulare.svg",
     "domain": [
@@ -1559,6 +1747,17 @@
     "width": "800",
     "height": "160",
     "aspectRatio": 5
+  },
+  "witchita-falls.svg": {
+    "name": "witchita-falls.svg",
+    "domain": [
+      "timesrecordnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "433.09",
+    "height": "75.21",
+    "aspectRatio": 5.758409785932722
   },
   "yorkdailyrecord.svg": {
     "name": "yorkdailyrecord.svg",
