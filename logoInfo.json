@@ -1041,8 +1041,8 @@
     "height": "160",
     "aspectRatio": 4.80625
   },
-  "naples.svg": {
-    "name": "naples.svg",
+  "naples-1.svg": {
+    "name": "naples-1.svg",
     "domain": [
       "naplesnews.com"
     ],
@@ -1051,6 +1051,14 @@
     "width": "342",
     "height": "66",
     "aspectRatio": 5.181818181818182
+  },
+  "naples-prep-zone.jpg": {
+    "name": "naples-prep-zone.jpg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": false,
+    "noColor": false
   },
   "nashville.svg": {
     "name": "nashville.svg",

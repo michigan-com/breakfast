@@ -688,9 +688,11 @@
 
   "Naples": {
     "domain": "naplesnews.com",
-    "logo": {
-      "filename": "naples.svg"
-    }
+    "logo": [{
+      "filename": "naples-1.svg"
+    }, {
+      "filename": "naples-prep-zone.jpg"
+    }]
   },
 
   "Nashville": {
