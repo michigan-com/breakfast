@@ -10,6 +10,17 @@ import ncaab from '../../data/sports/ncaab.json';
 import ncaaf from '../../data/sports/ncaaf.json';
 import mls from '../../data/sports/mls.json';
 
+function addRequestedChanges(sport) {
+  const teams = [];
+  for (const team of sport.teams) {
+    if (team.team_first.toLowerCase() === 'louisiana-lafayette') {
+      team.team_abbr = 'UL';
+    }
+    teams.push(team);
+  }
+  return { teams };
+}
+
 function registerRoutes(app) {
   const router = new Router();
 
@@ -20,8 +31,8 @@ function registerRoutes(app) {
       nba,
       nfl,
       nhl,
-      ncaab,
-      ncaaf,
+      ncaab: addRequestedChanges(ncaab),
+      ncaaf: addRequestedChanges(ncaaf),
       mls,
     });
   });
