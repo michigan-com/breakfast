@@ -101,6 +101,30 @@
       "filename": "bucyrus-dark.png"
     }, {
       "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
     }]
   },
 
@@ -152,10 +176,35 @@
 
   "Chillicothe": {
     "domain": "chillicothegazette.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
       "filename": "chillicothe.svg"
-    }
-  },
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
+    }]  },
 
   "Cincinnati": {
     "domain": "cincinnati.com",
@@ -184,9 +233,35 @@
 
   "Coshocton": {
     "domain": "coshoctontribune.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
       "filename": "coshocton.svg"
-    }
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
+    }]
   },
 
   "Deming Headlight": {
@@ -293,11 +368,35 @@
   },
 
   "Fremont": {
-    "domain": "thenews-messenger.com",
+    "domain": "fremont.gannett.com",
     "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
       "filename": "fremont-dark.png"
     }, {
       "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
     }]
   },
 
@@ -491,9 +590,33 @@
   "Lancaster": {
     "domain": "lancastereaglegazette.com",
     "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
       "filename": "lancaster-dark.png"
     }, {
       "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
     }]
   },
 
@@ -579,9 +702,35 @@
 
   "Mansfield": {
     "domain": "mansfieldnewsjournal.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
       "filename": "mansfield.svg"
-    }
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
+    }]
   },
 
   "Marco Island": {
@@ -595,9 +744,35 @@
 
   "Marion": {
     "domain": "marionstar.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
       "filename": "marion.svg"
-    }
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
+    }]
   },
 
   "Marshfield": {
@@ -704,9 +879,35 @@
 
   "Newark": {
     "domain": "newarkadvocate.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
       "filename": "newark.svg"
-    }
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
+    }]
   },
 
   "Opelousas": {
@@ -760,9 +961,33 @@
   "Port Clinton": {
     "domain": "portclintonnewsherald.com",
     "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
       "filename": "portclinton-dark.png"
     }, {
       "filename": "portclinton-light.png"
+    }, {
+      "filename": "zanesville.svg"
     }]
   },
 
@@ -1063,8 +1288,34 @@
 
   "Zanesville": {
     "domain": "zanesvilletimesrecorder.com",
-    "logo": {
+    "logo": [{
+      "filename": "bucyrus-dark.png"
+    }, {
+      "filename": "bucyrus-light.png"
+    }, {
+      "filename": "chillicothe.svg"
+    }, {
+      "filename": "coshocton.svg"
+    }, {
+      "filename": "fremont-dark.png"
+    }, {
+      "filename": "fremont-light.png"
+    }, {
+      "filename": "lancaster-dark.png"
+    }, {
+      "filename": "lancaster-light.png"
+    }, {
+      "filename": "mansfield.svg"
+    }, {
+      "filename": "marion.svg"
+    }, {
+      "filename": "newark.svg"
+    }, {
+      "filename": "portclinton-dark.png"
+    }, {
+      "filename": "portclinton-light.png"
+    }, {
       "filename": "zanesville.svg"
-    }
+    }]
   }
 }

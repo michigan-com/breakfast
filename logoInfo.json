@@ -152,7 +152,16 @@
   "bucyrus-dark.png": {
     "name": "bucyrus-dark.png",
     "domain": [
-      "bucyrustelegraphforum.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -160,7 +169,16 @@
   "bucyrus-light.png": {
     "name": "bucyrus-light.png",
     "domain": [
-      "bucyrustelegraphforum.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -239,7 +257,16 @@
   "chillicothe.svg": {
     "name": "chillicothe.svg",
     "domain": [
-      "chillicothegazette.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -293,7 +320,16 @@
   "coshocton.svg": {
     "name": "coshocton.svg",
     "domain": [
-      "coshoctontribune.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -502,7 +538,16 @@
   "fremont-dark.png": {
     "name": "fremont-dark.png",
     "domain": [
-      "thenews-messenger.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -510,7 +555,16 @@
   "fremont-light.png": {
     "name": "fremont-light.png",
     "domain": [
-      "thenews-messenger.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -767,7 +821,16 @@
   "lancaster-dark.png": {
     "name": "lancaster-dark.png",
     "domain": [
-      "lancastereaglegazette.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -775,7 +838,16 @@
   "lancaster-light.png": {
     "name": "lancaster-light.png",
     "domain": [
-      "lancastereaglegazette.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -875,7 +947,16 @@
   "mansfield.svg": {
     "name": "mansfield.svg",
     "domain": [
-      "mansfieldnewsjournal.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -902,7 +983,16 @@
   "marion.svg": {
     "name": "marion.svg",
     "domain": [
-      "marionstar.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -1074,7 +1164,16 @@
   "newark.svg": {
     "name": "newark.svg",
     "domain": [
-      "newarkadvocate.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
@@ -1181,7 +1280,16 @@
   "portclinton-dark.png": {
     "name": "portclinton-dark.png",
     "domain": [
-      "portclintonnewsherald.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -1189,7 +1297,16 @@
   "portclinton-light.png": {
     "name": "portclinton-light.png",
     "domain": [
-      "portclintonnewsherald.com"
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
+      "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
     "noColor": false
@@ -1792,6 +1909,15 @@
   "zanesville.svg": {
     "name": "zanesville.svg",
     "domain": [
+      "bucyrustelegraphforum.com",
+      "chillicothegazette.com",
+      "coshoctontribune.com",
+      "fremont.gannett.com",
+      "lancastereaglegazette.com",
+      "mansfieldnewsjournal.com",
+      "marionstar.com",
+      "newarkadvocate.com",
+      "portclintonnewsherald.com",
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
