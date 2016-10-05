@@ -32,7 +32,7 @@ class BackgroundPositionContainer extends Component {
         <div className="zoom-container">
           <div className="label">Zoom</div>
           <input
-            type="range" min="0" max="100"
+            type="range" min="-100" max="100"
             value={Background.backgroundZoom}
             onChange={this.updateBackgroundZoom}
           />

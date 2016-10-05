@@ -78,14 +78,14 @@ export const drawImageMetricsSelector = createSelector(
     let canvasHeight = canvasMetrics.canvasHeight;
     let canvasWidth = canvasMetrics.canvasWidth;
 
-    if (backgroundZoom > 0) {
-      const zoomPercent = backgroundZoom / 100;
-      canvasHeight += canvasHeight * zoomPercent;
-      canvasWidth += canvasWidth * zoomPercent;
-    }
+    // if (backgroundZoom > 0) {
+    // }
 
+    const zoomPercent = backgroundZoom / 100;
     const maxDx = canvasWidth;
     const maxDy = canvasHeight;
+    canvasHeight += canvasHeight * zoomPercent;
+    canvasWidth += canvasWidth * zoomPercent;
     let dWidth;
     let dHeight;
     let minDx;

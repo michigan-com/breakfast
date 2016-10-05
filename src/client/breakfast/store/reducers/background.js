@@ -57,7 +57,7 @@ function backgroundReducer(state = DEFAULT_STATE, action) {
       return { ...state, backgroundOffset };
     case UPDATE_BACKGROUND_ZOOM:
       backgroundZoom = action.value;
-      if (backgroundZoom < 0 || backgroundZoom > 100) break;
+      if (backgroundZoom < -100 || backgroundZoom > 100) break;
       return { ...state, backgroundZoom };
     default:
       return { ...state };
