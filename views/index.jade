@@ -1,8 +1,9 @@
 extends ./entry-page
+include ./util/static
 
 block css
-  link(href='/css/index.css', rel='stylesheet')
-
+  +getCssLink('/css/index.css')
+  
 block content
   .fancy-title
     .directive Welcome to

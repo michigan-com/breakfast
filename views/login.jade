@@ -1,5 +1,6 @@
 extends ./entry-page
 include ./util/form
+include ./util/static
 
 block content
   .fancy-title
@@ -16,4 +17,4 @@ block content
         p.forgot-password Forgot your password? Reset #[a(href='/password-reset/') here]
 
 block css
-  link(href='/css/login.css', rel='stylesheet')
+  +getCssLink('/css/login.css')

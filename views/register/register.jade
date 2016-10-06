@@ -1,5 +1,6 @@
 extends ../entry-page
 include ../util/form
+include ../util/static
 
 block content
   .fancy-title
@@ -18,7 +19,7 @@ block content
   input(type='hidden', value='#{csrfToken}', id='_csrf')
 
 block js
-  script(src='/js/register.js')
+  +getScript('/js/register.js')
 
 block css
-  link(href='/css/register.css', rel='stylesheet')
+  +getCssLink('/css/register.css')

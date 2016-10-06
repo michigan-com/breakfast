@@ -1,0 +1,20 @@
+//-
+//- Generate a URL for the css file based on env variables. Loads from local, or s3
+//-
+//- @param {String} file - File to be loaded
+mixin getCssLink(path)
+  if locals.s3_bucket != ''
+    link(href='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }', rel='stylesheet')
+  else
+    link(href='#{ path }', rel='stylesheet')
+    
+
+//-
+//- Generate a URL for the js file based on env variables. Loads from local, or s3
+//-
+//- @param {String} file - File to be loaded
+mixin getScript(path)
+  if locals.s3_bucket != ''
+    script(src='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }')
+  else
+    script(src='#{ path }')

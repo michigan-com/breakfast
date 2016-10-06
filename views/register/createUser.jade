@@ -1,5 +1,6 @@
 extends ../base
 include ../util/form
+include ../util/static
 
 block content
   .fancy-title
@@ -12,4 +13,4 @@ block content
       input(type='submit')
 
 block css
-  link(href='/css/entry-page.css', rel='stylesheet')
+  +getCssLink('/css/entry-page.css')

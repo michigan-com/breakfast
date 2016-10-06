@@ -1,5 +1,6 @@
 extends ../entry-page
 include ../util/form
+include ../util/static
 
 block content
   .fancy-title
@@ -19,8 +20,7 @@ block content
         #success-text
 
 block js
-  script(src='/js/request-reset.js')
+  +getScript('/js/request-reset.js')
 
 block css
-  link(href='/css/entry-page.css', rel='stylesheet')
-
+  +getCssLink('/css/entry-page.css')

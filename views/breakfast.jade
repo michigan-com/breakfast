@@ -1,12 +1,12 @@
 extends ./base
+import ./util/static
 
 block title
   title Breakfast
 
 block css
   link(href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic', rel='stylesheet', type='text/css')
-  link(href='/css/breakfast.css', rel='stylesheet')
-
+  +getCssLink('/css/breakfast.css')
 
 block content
   #editor
@@ -18,6 +18,6 @@ block content
   
 
 block js
-  script(src='/js/breakfast.js')
+  +getScript('/js/breakfast.js')
   script.
     window.BFAST_USER_EMAIL = '#{locals.user.email}';

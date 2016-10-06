@@ -4,7 +4,7 @@ $directive-font-size: 40px;
 $directive-line-height: $directive-font-size * 1.3;
 
 body {
-  background-image: url(/img/overlay.png);
+  background-image: url(../img/overlay.png);
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
