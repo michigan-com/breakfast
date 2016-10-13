@@ -29,13 +29,57 @@ body {
 
 .gallery-container {
   width: 100vw;
+  padding-top: 4vh;
   background-color: #1f1f1f;
+
+  h1 {
+    text-align: center;
+    color: white;
+  }
+}
+
+.section-tab-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: $screen-sm) {
+    flex-direction: column;
+  }
+}
+
+.section-tab {
+  border-radius: 5px 5px 0px 0px;
+  width: 20%;
+  font-size: 3vh;
+  height: 4vh;
+  line-height: 4vh;
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  cursor: pointer;
+  text-align: center;
+  opacity: .5;
+  transition: all 250ms linear;
+
+  @media (max-width: $screen-sm) {
+    width: 100%;
+  }
+
+  &.active, &:hover {
+    color: #1f1f1f;
+    background: white;
+    opacity: 1;
+  }
 }
 
 .gallery-section {
   width: 90%;
-  margin: 5vh auto;
+  margin: 0 auto;
+  margin-bottom: 5vh;
   padding-top: 5vh;
+  min-height: 50vh;
 
   .section-title {
     text-align: center;
@@ -49,6 +93,7 @@ body {
   .section-explainer {
     text-align: center;
     color: white;
+    font-size: 3vh;
   }
 }
 

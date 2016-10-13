@@ -54,68 +54,99 @@ class Gallery extends Component {
     listImages: PropTypes.array,
     brandingImages: PropTypes.array,
     infoImages: PropTypes.array,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeSectionIndex: 0,
+    };
+
+    this.getSections = this.getSections.bind(this);
+  }
+
+  getSections() {
+    const { scoreImages, quoteImages, listImages, brandingImages, infoImages } = this.props;
+
+    return [{
+      title: 'Branding',
+      explainer: 'Simple branding of the best images your photo team has to offer',
+      images: brandingImages,
+    }, {
+      title: 'Quotes',
+      explainer: 'Enhance your social media posts with quotes',
+      images: quoteImages,
+    }, {
+      title: 'Sports Scores',
+      explainer: 'Show scores from your area\'s teams (professional and college)',
+      images: scoreImages,
+    }, {
+      title: 'Lists',
+      explainer: 'Inform your audience on current events using lists',
+      images: listImages,
+    }, {
+      title: 'Info and Headlines',
+      explainer: 'Include headlines and other information in your social media images',
+      images: infoImages,
+    }];
+  }
+
+  setActiveTab(activeSectionIndex) {
+    return () => { this.setState({ activeSectionIndex }); };
+  }
+
+  renderTabs() {
+    const sections = this.getSections();
+    const { activeSectionIndex } = this.state;
+
+    const sectionTabs = sections.map((sectionType, index) => {
+      const className = ['section-tab'];
+      if (index === activeSectionIndex) className.push('active');
+      return (
+        <div
+          className={className.join(' ')}
+          onClick={this.setActiveTab(index)}
+          key={`section-tab-${index}`}
+        >
+          {sectionType.title}
+        </div>
+      );
+    });
+
+    return (
+      <div className="section-tab-container">
+        {sectionTabs}
+      </div>
+    );
+  }
+
+  renderActiveSection() {
+    const { activeSectionIndex } = this.state;
+    const sections = this.getSections();
+    if (activeSectionIndex < 0 || activeSectionIndex >= sections.length) return null;
+
+    const activeSection = sections[activeSectionIndex];
+    return (
+      <div className="gallery-section">
+        <p className="section-explainer">
+          {activeSection.explainer}
+        </p>
+        <div className="section-images-container">
+          {activeSection.images.map((img, index) => (
+            <GalleryImage url={img} key={`${activeSection.title}-image-${index}`} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   render() {
-    const { scoreImages, quoteImages, listImages, brandingImages, infoImages } = this.props;
     return (
       <div className="gallery-container">
-        <div className="gallery-section">
-          <h2 className="section-title">Branding</h2>
-          <p className="section-explainer">
-            Simple branding of the best images your photo team has to offer
-          </p>
-          <div className="section-images-container">
-            {brandingImages.map((img, index) => (
-              <GalleryImage url={img} key={`branding-image-${index}`} />
-            ))}
-
-          </div>
-        </div>
-        <div className="gallery-section">
-          <h2 className="section-title">Quotes</h2>
-          <p className="section-explainer">
-            Enhance your social media posts with quotes
-          </p>
-          <div className="section-images-container">
-            {quoteImages.map((img, index) => (
-              <GalleryImage url={img} key={`quote-image-${index}`} />
-            ))}
-          </div>
-        </div>
-        <div className="gallery-section">
-          <h2 className="section-title">Sports Scores</h2>
-          <p className="section-explainer">
-            Show scores from your area's teams (professional and college)
-          </p>
-          <div className="section-images-container">
-            {scoreImages.map((img, index) => (
-              <GalleryImage url={img} key={`sports-score-image-${index}`} />
-            ))}
-          </div>
-        </div>
-        <div className="gallery-section">
-          <h2 className="section-title">Lists</h2>
-          <p className="section-explainer">
-            Inform your audience on current events using lists
-          </p>
-          <div className="section-images-container">
-            {listImages.map((img, index) => (
-              <GalleryImage url={img} key={`list-image-${index}`} />
-            ))}
-          </div>
-        </div>
-        <div className="gallery-section">
-          <h2 className="section-title">Info and Headlines</h2>
-          <p className="section-explainer">
-            Include headlines and other information in your social media images
-          </p>
-          <div className="section-images-container">
-            {infoImages.map((img, index) => (
-              <GalleryImage url={img} key={`info-image-${index}`} />
-            ))}
-          </div>
-        </div>
+        <h1>What kind of images can you make with Breakfast?</h1>
+        {this.renderTabs()}
+        {this.renderActiveSection()}
       </div>
     );
   }
