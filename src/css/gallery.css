@@ -7,48 +7,6 @@ body {
   background-color: #1f1f1f;
 }
 
-#gallery {
-  min-height: 200px;
-  text-align: center;
-  color: white;
-}
-
-.photos-container {
-  width: 100%;
-  padding: 0% 12.5%;
-  margin: 30vh 0px 100px 0px;
-  background-color: #1F1F1F;
-  transition: opacity 250ms linear;
-  min-height: 100vh;
-
-  @media (max-width: $screen-sm) {
-    margin-top: 20px;
-  }
-
-}
-
-.masonry {
-  .gallery-photo {
-    width: calc(1/3 * 100)%;
-    text-align: center;
-    margin: 20px 0px;
-    padding: 0px 20px;
-    opacity: 1;
-
-    &.loading {
-      opacity: 0;
-    }
-
-    @media (max-width: $screen-sm) {
-      width: 100% !important;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
-}
-
 .buttons {
   width: 100%;
   margin-top: 60px;
@@ -66,5 +24,49 @@ body {
       color: white;
       text-decoration: underline;
     }
+  }
+}
+
+.gallery-container {
+  width: 100vw;
+  background-color: #1f1f1f;
+}
+
+.gallery-section {
+  width: 90%;
+  margin: 5vh auto;
+  padding-top: 5vh;
+
+  .section-title {
+    text-align: center;
+    color: white;
+    font-size: 4vh;
+    line-height: 5vh;
+    height: 5vh;
+    text-transform: capitalize;
+  }
+
+  .section-explainer {
+    text-align: center;
+    color: white;
+  }
+}
+
+.section-images-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.gallery-image-container {
+  /*width: 30vw;
+  max-height: 30vh;*/
+  padding: 2%;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    opacity: 0;
+    transition: opacity 150ms linear;
   }
 }
