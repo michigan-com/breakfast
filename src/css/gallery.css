@@ -110,6 +110,7 @@ body {
   max-height: 30vh;*/
   padding: 2%;
   overflow: hidden;
+  text-align: center;
 
   img {
     height: 100%;

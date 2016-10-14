@@ -10,6 +10,16 @@ function loginRequired(req, res, next) {
   }
 }
 
+function adminRequired(req, res, next) {
+  if (!req.user || !req.user.admin) {
+    req.flash('error', 'Access denied');
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   loginRequired,
+  adminRequired,
 };

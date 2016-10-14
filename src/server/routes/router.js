@@ -10,6 +10,7 @@ import register from './register';
 import aws from './aws';
 import passwordReset from './password-reset';
 import sports from './sports';
+import admin from './admin';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
@@ -24,6 +25,7 @@ function registerRoutes(app) {
   register.registerRoutes(app, router, passport);
   aws.registerRoutes(app, router, passport);
   sports.registerRoutes(app);
+  admin.registerRoutes(app);
 
   try {
     passwordReset.registerRoutes(app, router, passport);
@@ -33,7 +35,9 @@ function registerRoutes(app) {
 
   // Basic routes
   router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+      messages: req.flash('error'),
+    });
   });
 
   router.get('/gallery/', (req, res) => { res.render('gallery'); });
