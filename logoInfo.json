@@ -100,6 +100,17 @@
     "height": "83",
     "aspectRatio": 8.674698795180722
   },
+  "bergen.svg": {
+    "name": "bergen.svg",
+    "domain": [
+      "northjersey.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "779",
+    "height": "154",
+    "aspectRatio": 5.058441558441558
+  },
   "binghamton.svg": {
     "name": "binghamton.svg",
     "domain": [
@@ -1181,6 +1192,17 @@
     "height": "160",
     "aspectRatio": 4.75
   },
+  "northjersey.svg": {
+    "name": "northjersey.svg",
+    "domain": [
+      "northjersey.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "617",
+    "height": "102",
+    "aspectRatio": 6.049019607843137
+  },
   "one-nation.png": {
     "name": "one-nation.png",
     "domain": [
@@ -1657,6 +1679,17 @@
     "width": "426.52",
     "height": "72.45",
     "aspectRatio": 5.887094547964113
+  },
+  "therecord.svg": {
+    "name": "therecord.svg",
+    "domain": [
+      "northjersey.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "259",
+    "height": "83",
+    "aspectRatio": 3.1204819277108435
   },
   "usat-1.svg": {
     "name": "usat-1.svg",

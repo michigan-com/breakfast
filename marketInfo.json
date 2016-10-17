@@ -910,6 +910,17 @@
     }]
   },
 
+  "North Jersey": {
+    "domain": "northjersey.com",
+    "logo": [{
+      "filename": "bergen.svg"
+    }, {
+      "filename": "northjersey.svg"
+    }, {
+      "filename": "therecord.svg"
+    }]
+  },
+
   "Opelousas": {
     "domain": "dailyworld.com",
     "logo": {
