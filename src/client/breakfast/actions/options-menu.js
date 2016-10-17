@@ -23,5 +23,5 @@ export function optionDeselect() {
 
 export const DEFAULT_STATE = {
   options: OPTION_CHOICES,
-  selectedIndex: -1,
+  selectedIndex: 0,
 };

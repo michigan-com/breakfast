@@ -95,6 +95,7 @@
     "react-dropzone": "^3.5.3",
     "react-masonry-component": "^3.0.0",
     "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
     "redux": "^3.2.1",
     "redux-ignore": "^1.2.3",
     "redux-thunk": "^1.0.3",
@@ -122,6 +123,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
+    "chokidar": "^1.6.1",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.9.2",
