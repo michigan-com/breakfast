@@ -19,7 +19,7 @@ export default class DataTable extends Component {
     this.searchTimeout = null;
 
     this.state = {
-      data: null,
+      data: [],
 
       filter: '',
       currentPage: 1,
@@ -27,11 +27,13 @@ export default class DataTable extends Component {
       sortDir: DESC,
       sortColIndex: this.props.sortColIndex,
 
-      totalCount: -1,
+      totalCount: this.props.data.length,
 
       fetchingData: false,
     };
 
+    this.fetchData = this.fetchData.bind(this);
+    this.processData = this.processData.bind(this);
     this.filterChange = this.filterChange.bind(this);
     this.decrementPage = this.decrementPage.bind(this);
     this.incrementPage = this.incrementPage.bind(this);
@@ -39,9 +41,7 @@ export default class DataTable extends Component {
   }
 
   componentWillMount() {
-    if (this.props.ajaxUrl) {
-      this.fetchData();
-    }
+    this.processData();
   }
 
   componentDidUpdate(nextProps, nextState) {
@@ -50,9 +50,42 @@ export default class DataTable extends Component {
           && this.state.totalCount === nextState.totalCount) ||
       this.state.sortDir !== nextState.sortDir ||
       this.state.sortColIndex !== nextState.sortColIndex ||
-      this.state.filter !== nextState.filter
+      this.state.filter !== nextState.filter ||
+      this.props.data.length !== nextProps.data.length
     ) {
+      this.processData();
+    }
+  }
+
+  processData() {
+    if (this.props.ajaxUrl) {
       this.fetchData();
+    } else {
+      const { data, pageSize } = this.props;
+      const { sortColIndex, sortDir, currentPage, filter } = this.state;
+      const offset = pageSize * (currentPage - 1);
+
+      const stateData = data
+        .sort((a, b) => {
+          if (typeof a[sortColIndex] === 'string') {
+            return sortDir === ASC ?
+              b[sortColIndex].localeCompare(a[sortColIndex]) :
+              a[sortColIndex].localeCompare(b[sortColIndex]);
+          }
+          return sortDir === ASC ?
+            a[sortColIndex] - b[sortColIndex] :
+            b[sortColIndex] - a[sortColIndex];
+        })
+        .filter((a) => {
+          if (!filter) return true;
+          for (const v of a) {
+            if (typeof v === 'string' && v.indexOf(filter) >= 0) return true;
+          }
+          return false;
+        })
+        .slice(offset, offset + pageSize);
+
+      this.setState({ data: stateData, totalCount: data.length });
     }
   }
 
@@ -94,7 +127,7 @@ export default class DataTable extends Component {
 
     if (this.searchTimeout != null) clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      this.fetchData();
+      this.processData();
     }, 500);
   }
 
@@ -206,8 +239,7 @@ export default class DataTable extends Component {
   }
 
   renderTableData() {
-    let data = this.props.data;
-    if (this.state.data !== null) data = this.state.data;
+    const { data } = this.state;
 
 
     if (!data.length) return <h3>No results found</h3>;
@@ -293,7 +325,7 @@ DataTable.propTypes = {
    * table.
    * @return {Array} array of arrays, representing the arrays to display
    */
-  formatData: PropTypes.function,
+  formatData: PropTypes.func,
   /**
    * Data to be renderd. Array of arrays
    * e.g. [[1, 2, 3], [4, 5, 6]]
