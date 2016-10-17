@@ -1,2 +1,168 @@
 @import ./base;
 @import './components/data-table';
+
+.admin-options {
+  width: 100%;
+  h1 {
+    text-align: center;
+    color: $blue;
+  }
+
+}
+
+.admin-nav {
+  color: $blue;
+  font-size: 5vh;
+  line-heigth: 7vh;
+  height: 7vh;
+
+  a {
+    color: $blue !important;
+    text-decoration: none;
+  }
+}
+
+.admin-options-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10vh;
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .option-container {
+    width: 50%;
+    height: 80%;
+
+    .option {
+      width: 80%;
+      height: 100%;
+      padding: 5% 0;
+      margin: 0 auto;
+      background-color: $blue;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      font-size: 5vh;
+      transition: all 250ms linear;
+
+      &:hover {
+        background-color: color($blue blackness(20%));
+      }
+
+    }
+  }
+}
+
+.photo-admin-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .table-container {
+    width: 50%;
+    padding: 20px;
+  }
+}
+
+.user-admin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .table-container {
+    width: 50%;
+  }
+}
+
+.user-permission-picker-container {
+  width: 50%;
+
+  .user-permission-picker {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    .search-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin: 20px auto;
+
+      input {
+        width: 80%;
+      }
+
+      .search-button {
+        width: 10%;
+        margin-left: 20px;
+        border-radius: 10px;
+        color: white;
+        background-color: $blue;
+        cursor: pointer;
+        opacity: 1;
+        text-align: center;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+        appearance: none;
+        -webkit-appearance: none;
+        transition: all 250ms linear;
+        padding: 0;
+        border: none;
+
+        &.disabled {
+          opacity: .1;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .search-results {
+      display: flex;
+      flex-direction: column;
+
+      .search-result {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+
+        .email {
+          width: 70%;
+        }
+
+        .admin-toggle {
+          width: 20%;
+          margin-left: 10px;
+          cursor: pointer;
+          color: white;
+          text-align: center;
+          border-radius: 10px;
+          transition: all 250ms linear;
+
+          &.add {
+            background-color: $green;
+
+            &:hover {
+              background-color: color($green blackness(25%));
+            }
+          }
+
+          &.remove {
+            background-color: $red;
+
+            &:hover {
+              background-color: color($red blackness(25%));
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

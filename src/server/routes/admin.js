@@ -30,7 +30,27 @@ function registerRoutes(app) {
     res.render('admin');
   });
 
+  router.get('/photos/', adminRequired, (req, res) => {
+    res.render('admin');
+  });
+
+  router.get('/users/', adminRequired, (req, res) => {
+    res.render('admin');
+  });
+
   /* Data Fetching functions */
+  router.get('/user/', adminRequired, catchAsync(async (req, res) => {
+    const { email } = req.query;
+
+    const users = await User.find({
+      email: new RegExp(email.toLowerCase()),
+    }, { email: true, admin: true })
+      .limit(10)
+      .toArray();
+
+    res.json({ users });
+  }));
+
   router.get('/users/all/', adminRequired, catchAsync(async (req, res) => {
     const { pageSize, page, sortCol, sortDir, filter } = req.query;
     const limit = parseInt(pageSize, 10);
