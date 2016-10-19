@@ -4,6 +4,7 @@ const OPTION_CHOICES = [
   'aspect-ratio',
   'background',
   'text-containers',
+  'sports-score',
   'logo',
 ];
 
