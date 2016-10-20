@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getPresentState } from '../../../selectors/present';
 import { filteredTeamsSelector } from '../../../selectors/sports';
 import { filterTeams, selectTeam, scoreChange, toggleSportsScore, timeChange,
-    scorePositionChange, DEFAULT_TEAM_SCORE } from '../../../actions/sports';
+    scorePositionChange, manualTeamInput, DEFAULT_TEAM } from '../../../actions/sports';
 import SportsTeamPicker from '../../../components/options-menu/sports-team-picker';
 import RadioToggle from '../../../components/radio-toggle';
 
@@ -21,7 +21,7 @@ class SportsScoreOptions extends Component {
   onTeamSelect = (index) => (
     (team) => {
       const teamData = {
-        ...DEFAULT_TEAM_SCORE,
+        ...DEFAULT_TEAM,
         teamName: team.searchTerm,
         teamAbbr: team.team_abbr,
         logoUrl: team.team_logo,
@@ -49,6 +49,12 @@ class SportsScoreOptions extends Component {
   onScorePositionChange = (index) => (
     () => {
       this.props.actions.scorePositionChange(index);
+    }
+  )
+
+  onManualTeamInput = (index) => (
+    () => {
+      this.props.actions.manualTeamInput(index);
     }
   )
 
@@ -102,6 +108,7 @@ class SportsScoreOptions extends Component {
               onTeamSelect={this.onTeamSelect(i)}
               onFilterChange={this.onFilterChange(i)}
               onScoreChange={this.onScoreChange(i)}
+              onManualTeamInput={this.onManualTeamInput(i)}
               key={`sports-team-filter-${i}`}
             />
           </div>
@@ -160,6 +167,7 @@ function mapDispatchToProps(dispatch) {
       toggleSportsScore,
       timeChange,
       scorePositionChange,
+      manualTeamInput,
     }, dispatch),
   };
 }

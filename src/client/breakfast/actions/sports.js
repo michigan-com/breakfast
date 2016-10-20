@@ -4,6 +4,7 @@ export const TOGGLE_SPORTS = 'TOGGLE_SPORTS';
 export const TEAMS_LOADED = 'TEAMS_LOADED';
 export const FILTER_TEAMS = 'FILTER_TEAMS';
 export const SELECT_TEAM = 'SELECT_TEAM';
+export const MANUAL_TEAM_INPUT = 'MANUAL_TEAM_INPUT';
 export const SCORE_CHANGE = 'SCORE_CHANGE';
 export const TIME_CHANGE = 'TIME_CHANGE';
 export const POSITION_CHANGE = 'POSITION_CHANGE';
@@ -13,7 +14,7 @@ export const BOTTOM = 'bottom';
 export const LEFT = 'left';
 export const RIGHT = 'right';
 
-export const DEFAULT_TEAM_SCORE = {
+export const DEFAULT_TEAM = {
   teamName: '',
   teamAbbr: '',
   logo: null,
@@ -22,9 +23,9 @@ export const DEFAULT_TEAM_SCORE = {
 
 const DEFAULT_SCORE_DATA = {
   teams: [{
-    ...DEFAULT_TEAM_SCORE,
+    ...DEFAULT_TEAM,
   }, {
-    ...DEFAULT_TEAM_SCORE,
+    ...DEFAULT_TEAM,
   }],
   teamScores: ['', ''],
   time: '',
@@ -68,7 +69,7 @@ export function filterTeams(filter = '', filterTeamIndex = 0) {
   };
 }
 
-function loadTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
+function loadTeam(team = DEFAULT_TEAM, filterTeamIndex = 0) {
   return {
     type: SELECT_TEAM,
     value: {
@@ -78,7 +79,7 @@ function loadTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
   };
 }
 
-export function selectTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
+export function selectTeam(team = DEFAULT_TEAM, filterTeamIndex = 0) {
   return (dispatch) => {
     dispatch(loadTeam(team, filterTeamIndex));
 
@@ -90,6 +91,13 @@ export function selectTeam(team = DEFAULT_TEAM_SCORE, filterTeamIndex = 0) {
       dispatch(loadTeam(newTeam, filterTeamIndex));
     });
     i.src = team.logoUrl;
+  };
+}
+
+export function manualTeamInput(filterTeamIndex) {
+  return {
+    type: MANUAL_TEAM_INPUT,
+    value: { filterTeamIndex },
   };
 }
 
@@ -118,7 +126,7 @@ export function scorePositionChange(index) {
 }
 
 export const DEFAULT_STATE = {
-  showSports: false,
+  showSports: true,
   teams: [],
   filter: '',
   filterTeamIndex: 0, // Which team is being filterd

@@ -11,6 +11,7 @@ export default class SportsTeamPicker extends Component {
     onTeamSelect: PropTypes.func,
     onFilterChange: PropTypes.func,
     onScoreChange: PropTypes.func,
+    onManualTeamInput: PropTypes.func,
   };
 
   teamSelect(team) {
@@ -23,12 +24,26 @@ export default class SportsTeamPicker extends Component {
   }
 
   renderFilteredTeams() {
-    const { filteredTeams } = this.props;
-    if (filteredTeams.length === 0) return null;
+    const { filteredTeams, filter, onManualTeamInput, selectedTeam } = this.props;
+    if (filter === '' || selectedTeam) return null;
+
+    const displayName = filter.length >= 22 ? `${filter.slice(0, 21)}...` : filter;
     return (
       <div className="sports-team-options">
-        {filteredTeams.map((team) => (
-          <div className="sports-team-option-container" onClick={this.teamSelect(team)}>
+        <div className="sports-team-option-container high-school" onClick={onManualTeamInput}>
+          <div className="suggestion">
+            {`Add "${displayName}"?`}
+          </div>
+        </div>
+        {filteredTeams.map((team, i) => (
+          <div
+            className="sports-team-option-container"
+            onClick={this.teamSelect(team)}
+            key={`filtered-team-${i}`}
+          >
+            <div className="sport-team-logo">
+              <img src={team.team_logo} alt={team.searchTerm} />
+            </div>
             <div className="sports-team-name">
               {team.searchTerm}
             </div>

@@ -2,8 +2,9 @@
 
 import undoable, { excludeAction } from 'redux-undo';
 
-import { TOGGLE_SPORTS, TEAMS_LOADED, FILTER_TEAMS, SELECT_TEAM, DEFAULT_TEAM_SCORE,
-  SCORE_CHANGE, TIME_CHANGE, POSITION_CHANGE, DEFAULT_STATE } from '../../actions/sports';
+import { TOGGLE_SPORTS, TEAMS_LOADED, FILTER_TEAMS, SELECT_TEAM, DEFAULT_TEAM,
+  SCORE_CHANGE, TIME_CHANGE, POSITION_CHANGE, MANUAL_TEAM_INPUT, DEFAULT_STATE,
+  } from '../../actions/sports';
 
 function filterIndexReducer(state, action) {
   let { filter, filterTeamIndex } = state;
@@ -15,11 +16,18 @@ function filterIndexReducer(state, action) {
       switch (action.type) {
         case FILTER_TEAMS:
           filter = action.value.filter;
-          scoreData.teams[i] = { ...DEFAULT_TEAM_SCORE };
+          scoreData.teams[i] = { ...DEFAULT_TEAM };
           break;
         case SELECT_TEAM:
           filter = '';
           scoreData.teams[i] = action.value.team;
+          break;
+        case MANUAL_TEAM_INPUT:
+          scoreData.teams[i] = {
+            ...DEFAULT_TEAM,
+            teamName: filter,
+          };
+          filter = '';
           break;
         case SCORE_CHANGE:
           scoreData.teamScores[i] = action.value.score;
@@ -45,6 +53,7 @@ function sports(state = DEFAULT_STATE, action) {
     case FILTER_TEAMS:
     case SELECT_TEAM:
     case SCORE_CHANGE:
+    case MANUAL_TEAM_INPUT:
       return filterIndexReducer(state, action);
     case TOGGLE_SPORTS:
       showSports = action.value;
