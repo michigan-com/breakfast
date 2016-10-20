@@ -81,7 +81,7 @@ function loadTeam(team = DEFAULT_TEAM, filterTeamIndex = 0) {
 
 export function selectTeam(team = DEFAULT_TEAM, filterTeamIndex = 0) {
   return (dispatch) => {
-    dispatch(loadTeam(team, filterTeamIndex));
+    // dispatch(loadTeam(team, filterTeamIndex));
 
     const i = new Image();
     i.crossOrigin = 'anonymous';

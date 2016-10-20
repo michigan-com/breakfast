@@ -47,8 +47,7 @@ export function fillAllText(context, text, x, startY, textWidth, fontSize, textA
   for (const word of currentText) {
     const append = !line ? word : ` ${word}`;
     const newLineWidth = lineWidth + Math.round(measureWord(context, append));
-    if (newLineWidth >= textWidth) {
-      if (!line) line = word;
+    if (newLineWidth >= textWidth && line) {
       const drawX = getDrawX(line);
       context.fillText(line, drawX, y);
       y += fontSize;

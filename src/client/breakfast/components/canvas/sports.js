@@ -34,9 +34,9 @@ function getScoreContainerMetrics(canvasStyle, position) {
   return { width, height, y, x };
 }
 
-function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
+function getTeamContainerMetrics(canvasStyle, scoreContainerMetrics, position, teamIndex) {
   const leftOrRightPosition = /right|left/.test(position);
-  const smallCanvas = !leftOrRightPosition && scoreContainerMetrics.width === 800;
+  const smallCanvas = canvasStyle.height === canvasStyle.width;
 
   // Team abbr
   let width = scoreContainerMetrics.width * 0.40;
@@ -62,7 +62,7 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
   const fontSize = smallCanvas ? writableHeight * 0.4 : writableHeight * 0.5;
 
   // logo stuff
-  const logoHeight = writableHeight * 0.7;
+  const logoHeight = leftOrRightPosition ? writableHeight * 0.5 : writableHeight * 0.7;
   const logoWidth = logoHeight;
   let logoTop = drawTop + ((writableHeight - logoHeight) / 2);
   let logoLeft = scoreContainerMetrics.x + paddingLeft;
@@ -72,6 +72,7 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
   } else if (teamIndex === 1) {
     logoLeft = scoreContainerMetrics.width - logoWidth - paddingLeft;
   }
+
   const logoContainerMetrics = { logoHeight, logoWidth, logoTop, logoLeft };
 
   // abbr stuff
@@ -97,9 +98,9 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
     scoreWidth = scoreContainerMetrics.width;
     scoreLeft = scoreContainerMetrics.x;
     if (teamIndex === 1) {
-      scoreTop = scoreContainerMetrics.height - height + (height * 0.3) - (fontSize / 2);
+      scoreTop = drawTop + (height * 0.3);
     } else {
-      scoreTop = height - (height * 0.3) - (fontSize / 2);
+      scoreTop = drawTop + height - (height * 0.3) - (fontSize / 2);
     }
   } else if (teamIndex === 1) {
     scoreLeft = scoreContainerMetrics.width - width;
@@ -107,22 +108,28 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
   const scoreMetrics = { scoreTop, scoreLeft, scoreWidth };
 
   // if the team doesnt have a logo we draw the whole team name
+  const teamNameWidth = leftOrRightPosition ? scoreContainerMetrics.width - (paddingLeft * 2) : width - (scoreWidth * 1.5);
   let teamNameTextAlign = 'left';
   let teamNameLeft = scoreContainerMetrics.x + paddingLeft;
-  let teamNameTop = logoTop;
+  let teamNameFontSize = smallCanvas ? fontSize * 0.75 : fontSize;
+  let teamNameTop = scoreContainerMetrics.y + (writableHeight / 2) - (smallCanvas ? teamNameFontSize : (teamNameFontSize / 2));
+  let teamNameHeight = smallCanvas ? teamNameFontSize * 3 : teamNameFontSize * 2;
   if (leftOrRightPosition) {
     teamNameTextAlign = 'center';
-    teamNameLeft = scoreContainerMetrics.x;
-    if (teamIndex === 1) teamNameTop = (scoreContainerMetrics.height * 0.85) - (fontSize);
+    // if (smallCanvas) teamNameFontSize *= 0.4;
+    if (teamIndex === 1) teamNameTop = drawTop + (height * 0.85) - teamNameFontSize;
+    else teamNameTop = drawTop + (height * 0.15) - (teamNameFontSize / 2);
   } else if (teamIndex === 1 && !leftOrRightPosition) {
     teamNameTextAlign = 'right';
-    teamNameLeft = (scoreContainerMetrics.x + scoreContainerMetrics.width - width + scoreWidth);
+    teamNameLeft = (scoreContainerMetrics.x + scoreContainerMetrics.width - teamNameWidth - paddingLeft);
   }
   const teamNameContainerMetrics = {
     teamNameTop,
     teamNameLeft,
-    teamNameWidth: leftOrRightPosition ? scoreContainerMetrics.width : width - (scoreWidth * 1.5),
+    teamNameWidth,
     textAlign: teamNameTextAlign,
+    teamNameFontSize,
+    teamNameHeight,
   };
 
 
@@ -166,21 +173,28 @@ function drawTeamScore(context, teamContainerMetrics, team, score) {
     }
 
   // Else just draw the team name
-  } else if (team.teamName) {
-    const { teamNameTop, teamNameLeft, teamNameWidth, textAlign } = teamNameContainerMetrics;
-    const teamNameString = team.teamName;
-    let drawTop = teamNameTop;
-
-    const stringWidth = measureWord(context, teamNameString);
-    if (stringWidth < teamNameWidth) drawTop = teamNameTop + (fontSize * 0.33);
-    fillAllText(context, teamNameString, teamNameLeft, drawTop, teamNameWidth,
-      fontSize, textAlign);
   } else {
-    const oldStroke = context.strokeStyle;
-    const { teamNameTop, teamNameLeft, teamNameWidth } = teamNameContainerMetrics;
-    context.strokeStyle = 'white';
-    context.strokeRect(teamNameLeft, teamNameTop, teamNameWidth, fontSize * 2);
-    context.strokeStyle = oldStroke;
+    const { teamNameTop, teamNameLeft, teamNameWidth,
+        textAlign, teamNameFontSize, teamNameHeight } = teamNameContainerMetrics;
+    if (team.teamName) {
+      const teamNameString = team.teamName;
+      let drawTop = teamNameTop;
+      context.font = `normal ${teamNameFontSize}px Futura Today`;
+
+      const stringWidth = measureWord(context, teamNameString);
+      if (stringWidth <= (teamNameWidth * 2)) {
+        const numLines = Math.ceil(stringWidth / teamNameWidth);
+        console.log(`${teamNameString}: ${numLines} lines`);
+        drawTop = teamNameTop + (teamNameHeight / 2) - (teamNameFontSize * (numLines / (teamNameHeight / teamNameFontSize)));
+      }
+      fillAllText(context, teamNameString, teamNameLeft, drawTop, teamNameWidth,
+        teamNameFontSize, textAlign);
+    } else {
+      const oldStroke = context.strokeStyle;
+      context.strokeStyle = 'white';
+      context.strokeRect(teamNameLeft, teamNameTop, teamNameWidth, teamNameHeight);
+      context.strokeStyle = oldStroke;
+    }
   }
 
   // draw score
@@ -221,13 +235,13 @@ function drawScore(context, canvasStyle, scoreContainerMetrics, position, scoreD
   for (let i = 0; i < scoreData.teams.length; i++) {
     const team = scoreData.teams[i];
     const score = scoreData.teamScores[i];
-    const teamContainerMetrics = getTeamContainerMetrics(scoreContainerMetrics, position, i);
+    const teamContainerMetrics = getTeamContainerMetrics(canvasStyle, scoreContainerMetrics, position, i);
     drawTeamScore(context, teamContainerMetrics, team, score);
   }
 }
 
 function drawBackgroundRect(context, canvasStyle, scoreContainerMetrics, position) {
-  const { height, width, x, y } = scoreContainerMetrics;
+  const { height, width, x } = scoreContainerMetrics;
 
   const backgroundHeight = height * 1.25;
 
