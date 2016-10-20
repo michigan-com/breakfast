@@ -133,7 +133,6 @@ function getTeamContainerMetrics(scoreContainerMetrics, position, teamIndex) {
 function drawTeamScore(context, teamContainerMetrics, team, score) {
   const { fontSize, logoContainerMetrics, abbrContainerMetrics,
     teamNameContainerMetrics, scoreMetrics } = teamContainerMetrics;
-  console.log(teamContainerMetrics);
 
   context.fillStyle = 'white';
   context.font = `normal ${fontSize}px Futura Today`;
@@ -170,7 +169,11 @@ function drawTeamScore(context, teamContainerMetrics, team, score) {
   } else if (team.teamName) {
     const { teamNameTop, teamNameLeft, teamNameWidth, textAlign } = teamNameContainerMetrics;
     const teamNameString = team.teamName;
-    fillAllText(context, teamNameString, teamNameLeft, teamNameTop, teamNameWidth,
+    let drawTop = teamNameTop;
+
+    const stringWidth = measureWord(context, teamNameString);
+    if (stringWidth < teamNameWidth) drawTop = teamNameTop + (fontSize * 0.33);
+    fillAllText(context, teamNameString, teamNameLeft, drawTop, teamNameWidth,
       fontSize, textAlign);
   } else {
     const oldStroke = context.strokeStyle;
