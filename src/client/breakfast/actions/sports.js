@@ -126,7 +126,7 @@ export function scorePositionChange(index) {
 }
 
 export const DEFAULT_STATE = {
-  showSports: true,
+  showSports: false,
   teams: [],
   filter: '',
   filterTeamIndex: 0, // Which team is being filterd
