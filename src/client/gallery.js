@@ -33,11 +33,15 @@ class GalleryImage extends Component {
     const imgStyle = {
       opacity: loaded ? 1 : 0,
     };
+
+    const containerWidth = window.innerWidth < 768 ? 100 : 30;
     const containerStyle = {
-      width: '30vw',
+      width: `${containerWidth}vw`,
     };
 
-    if (height !== 0 && width !== 0) containerStyle.height = `${30 * (height / width)}vw`;
+    if (height !== 0 && width !== 0) {
+      containerStyle.height = `${containerWidth * (height / width)}vw`;
+    }
 
     return (
       <div className="gallery-image-container" style={containerStyle}>
@@ -64,6 +68,7 @@ class Gallery extends Component {
     };
 
     this.getSections = this.getSections.bind(this);
+    window.onresize = () => { this.setState({ resize: true }); };
   }
 
   getSections() {
@@ -104,12 +109,14 @@ class Gallery extends Component {
       const className = ['section-tab'];
       if (index === activeSectionIndex) className.push('active');
       return (
-        <div
-          className={className.join(' ')}
-          onClick={this.setActiveTab(index)}
-          key={`section-tab-${index}`}
-        >
-          {sectionType.title}
+        <div className="tab-container" key={`section-tab-${index}`}>
+          <div
+            className={className.join(' ')}
+            onClick={this.setActiveTab(index)}
+
+          >
+            {sectionType.title}
+          </div>
         </div>
       );
     });
@@ -144,7 +151,9 @@ class Gallery extends Component {
   render() {
     return (
       <div className="gallery-container">
-        <h1>What kind of images can you make with Breakfast?</h1>
+        <div className="zebra">
+          <p>See examples of headlines paired with our fantastic photography.</p>
+        </div>
         {this.renderTabs()}
         {this.renderActiveSection()}
       </div>

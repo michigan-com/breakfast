@@ -29,14 +29,9 @@ body {
 
 .gallery-container {
   width: 100vw;
-  padding-top: 4vh;
   background-color: #1f1f1f;
   font-family: 'Oswald';
 
-  h1 {
-    text-align: center;
-    color: white;
-  }
 }
 
 .section-tab-container {
@@ -44,6 +39,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   @media (max-width: $screen-sm) {
     flex-direction: column;
@@ -52,21 +48,24 @@ body {
 
 .section-tab {
   border-radius: 5px 5px 0px 0px;
-  width: 20%;
+  border-radius: 2vh;
+  padding: 0 20px;
   font-size: 3vh;
   height: 4vh;
   line-height: 4vh;
   color: white;
   background-color: transparent;
-  border: 1px solid white;
   cursor: pointer;
   text-align: center;
   opacity: .5;
   font-family: 'Playfair Display';
+  color: #ced4da;
   transition: all 250ms linear;
+
 
   @media (max-width: $screen-sm) {
     width: 100%;
+    margin: 0;
   }
 
   &.active, &:hover {
@@ -116,5 +115,18 @@ body {
     height: 100%;
     opacity: 0;
     transition: opacity 150ms linear;
+  }
+}
+
+.zebra {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 4vh;
+  font-family: 'LucidaGrande';
+
+  p {
+    color: black;
+    font-size: 3vh;
   }
 }
