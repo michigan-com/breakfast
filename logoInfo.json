@@ -317,6 +317,17 @@
     "isSvg": false,
     "noColor": false
   },
+  "colliercitizen.svg": {
+    "name": "colliercitizen.svg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "664",
+    "height": "107",
+    "aspectRatio": 6.205607476635514
+  },
   "corpus.svg": {
     "name": "corpus.svg",
     "domain": [
@@ -990,6 +1001,17 @@
     ],
     "isSvg": false,
     "noColor": false
+  },
+  "margoeagle.svg": {
+    "name": "margoeagle.svg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "615",
+    "height": "104",
+    "aspectRatio": 5.913461538461538
   },
   "marion.svg": {
     "name": "marion.svg",
@@ -1680,6 +1702,17 @@
     "height": "72.45",
     "aspectRatio": 5.887094547964113
   },
+  "thebanner.svg": {
+    "name": "thebanner.svg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "625",
+    "height": "114",
+    "aspectRatio": 5.482456140350878
+  },
   "therecord.svg": {
     "name": "therecord.svg",
     "domain": [
@@ -1856,6 +1889,17 @@
     "width": "640",
     "height": "160",
     "aspectRatio": 4
+  },
+  "vistasemanal.svg": {
+    "name": "vistasemanal.svg",
+    "domain": [
+      "naplesnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "width": "532",
+    "height": "100",
+    "aspectRatio": 5.32
   },
   "wausau.svg": {
     "name": "wausau.svg",
