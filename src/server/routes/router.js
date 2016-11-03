@@ -11,6 +11,7 @@ import aws from './aws';
 import passwordReset from './password-reset';
 import sports from './sports';
 import admin from './admin';
+import profile from './profile';
 import { loginRequired } from '../middleware/login';
 
 function registerRoutes(app) {
@@ -26,6 +27,7 @@ function registerRoutes(app) {
   aws.registerRoutes(app, router, passport);
   sports.registerRoutes(app);
   admin.registerRoutes(app);
+  profile.registerRoutes(app);
 
   try {
     passwordReset.registerRoutes(app, router, passport);
@@ -43,6 +45,12 @@ function registerRoutes(app) {
   router.get('/gallery/', (req, res) => { res.render('gallery'); });
 
   router.get('/breakfast/',
+    loginRequired,
+    (req, res) => {
+      res.render('breakfast');
+    }
+  );
+  router.get('/breakfast/profile/',
     loginRequired,
     (req, res) => {
       res.render('breakfast');

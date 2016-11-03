@@ -1,0 +1,52 @@
+
+@import ../constants;
+
+.profile-container {
+  margin-top: calc($navbar-height * 1.3);
+  width: 100vw;
+}
+
+.user-photos-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .image-container {
+    width: 30%;
+    padding: 2%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 100%;
+      max-height: 100%;
+    }
+
+    .download {
+      text-decoration: underline;
+      color: white !important;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+  }
+}
+
+.user-info-container {
+  color: white;
+  margin-left: 5%;
+
+  h2 {
+    font-family: 'Playfair Display';
+    font-style: italic;
+  }
+}
+
+.back-button-container {
+  font-size: 20px;
+  line-height: 20px;
+  color: white !important;
+}

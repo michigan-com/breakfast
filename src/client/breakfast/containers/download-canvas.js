@@ -3,8 +3,10 @@
 import React, { PropTypes, Component } from 'react';
 import xr from 'xr';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Canvas from './canvas';
+import { userDataLoaded } from '../actions/user';
 
 const MAX_CANVAS_SIZE = 2097152;
 
@@ -15,6 +17,7 @@ class DownloadCanvas extends Component {
   static propTypes = {
     fileName: PropTypes.string.isRequired,
     downloadCallback: PropTypes.func,
+    actions: PropTypes.object,
   };
 
   static defaultProps = {
@@ -42,6 +45,11 @@ class DownloadCanvas extends Component {
       document.body.removeChild(a);
 
       if (this.props.downloadCallback) this.props.downloadCallback();
+
+      xr.get('/profile/data/')
+        .then((data) => {
+          this.props.actions.userDataLoaded(data);
+        });
     };
 
     // even if we fail to save to s3, let them download the image
@@ -56,4 +64,12 @@ class DownloadCanvas extends Component {
   }
 }
 
-export default connect()(DownloadCanvas);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      userDataLoaded,
+    }, dispatch),
+  };
+}
+
+export default connect(() => ({}), mapDispatchToProps)(DownloadCanvas);

@@ -2,23 +2,9 @@
 import { Router } from 'express';
 
 import { adminRequired } from '../middleware/login';
+import catchAsync from '../middleware/catchAsync';
 
 const DEFAULT_LIMIT = 10;
-
-function catchAsync(fn) {
-  return function (req, res, next) {
-    fn(req, res, next).catch((err) => { next(err); });
-  };
-}
-
-/**
- * Take URL params sent by the DataTable component (src/client/admin/components/data-table)
- * and
- */
-function parseTableQueryParams(req, res, next) {
-  console.log(req.query);
-  next();
-}
 
 function registerRoutes(app) {
   const router = new Router();

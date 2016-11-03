@@ -4,6 +4,7 @@
 @import './containers/text-editor';
 @import './containers/editing-canvas';
 @import './containers/background-position';
+@import './containers/profile';
 @import './components/navbar';
 @import './constants';
 
