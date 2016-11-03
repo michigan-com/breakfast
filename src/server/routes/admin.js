@@ -61,7 +61,7 @@ function registerRoutes(app) {
     const filterValues = {};
     if (filter) filterValues.email = new RegExp(filter.toLowerCase());
 
-    const users = await User.find(filterValues, { email: true, admin: true })
+    const users = await User.find(filterValues, { email: true, admin: true, createdAt: true })
       .sort(sortVals)
       .skip(pageOffset)
       .limit(isNaN(limit) ? DEFAULT_LIMIT : 10)

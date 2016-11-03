@@ -76,16 +76,21 @@ function registerRoutes(app, router) {
       next();
       return;
     }
-
+    const filename = `${uuid()}.png`;
 
     // Don't upload unless on prod
     if (process.env.NODE_ENV !== 'production') {
+      await Photo.insertOne({
+        email: req.user.email,
+        photo: filename,
+        createdAt: new Date(),
+      });
+
       res.status(200);
       res.send();
       return;
     }
 
-    const filename = `${uuid()}.png`;
     const imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '');
     s3.upload({
       Bucket: breakfastBucket,
