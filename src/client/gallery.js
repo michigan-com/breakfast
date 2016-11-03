@@ -163,6 +163,12 @@ class Gallery extends Component {
 }
 
 const SCORE_IMAGES = [
+  'https://michigan-breakfast.s3.amazonaws.com/bfc1d9e5-814a-44c5-98c4-8f805e84afe4.png',
+  'https://michigan-breakfast.s3.amazonaws.com/d68b9999-43db-4265-9a71-6e041d23e39b.png',
+  'https://michigan-breakfast.s3.amazonaws.com/f9cc00b5-af93-4ad1-853b-c03fbcefc92e.png',
+  'https://michigan-breakfast.s3.amazonaws.com/355dc9aa-d385-48b4-878d-20f6e02cdcaa.png',
+  'https://michigan-breakfast.s3.amazonaws.com/f84f32e3-6281-4ec8-a9d3-b71697706c1d.png',
+  'https://michigan-breakfast.s3.amazonaws.com/c56bef11-9592-4ac2-af56-9246eead5f0d.png',
   'https://michigan-breakfast.s3.amazonaws.com/173dbbcf-6252-4990-a93c-a295faef1d22.png',
   'https://michigan-breakfast.s3.amazonaws.com/222c3e5f-f516-44de-9a22-671ebeaff0af.png',
   // 'https://michigan-breakfast.s3.amazonaws.com/11b5ae75-5e4f-464e-8283-1d30a4b76c9c.png',
