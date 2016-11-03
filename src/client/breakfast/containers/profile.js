@@ -66,7 +66,7 @@ function Profile({ user, userPhotos, orgPhotoCount }) {
     <div className="profile-container">
       <div className="user-info-container">
         <Link className="back-button-container" to="/breakfast/">
-          {'< Back'}
+          <i className="fa fa-chevron-left"></i>Back to Photo Editor
         </Link>
         <h2>{`Hey, ${user.email}!`}</h2>
         {blurbs.map((blurb, i) => (

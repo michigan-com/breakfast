@@ -49,4 +49,8 @@
   font-size: 20px;
   line-height: 20px;
   color: white !important;
+
+  .fa {
+    margin-right: 10px;
+  }
 }
