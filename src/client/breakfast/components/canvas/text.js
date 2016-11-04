@@ -2,6 +2,16 @@
 
 /* eslint-disable no-param-reassign */
 
+// default is chrome
+let WIDTH_THRESHOLD = 0.993;
+
+// http://stackoverflow.com/a/9851769/1337683
+// Firefox
+if (typeof InstallTrigger !== 'undefined') WIDTH_THRESHOLD = 0.96;
+
+// Safari
+if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === '[object SafariRemoteNotification]'; })(!window['safari'] || safari.pushNotification)) WIDTH_THRESHOLD = 0.97;
+
 class TextChunk {
   constructor({ x, y, globalFont }) {
     this.words = [];
@@ -190,7 +200,7 @@ function fillTextBlock(context, block, textPosX, startY, textWidth, fontInfo, te
     // If the length is 99% or more of the textWidth, create a new
     // this was done for cornercase purposes, where the HTML input would show one thing
     // but we would render something else. It came down to about 0.5%
-    } else if ((lengthIfAppened / textWidth) > 0.993) {
+    } else if ((lengthIfAppened / textWidth) > WIDTH_THRESHOLD) {
       if (currentChunk.words.length === 0) {
         currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
         currentWord = '';
