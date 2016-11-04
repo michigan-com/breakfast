@@ -148,6 +148,10 @@ function drawTeamScore(context, teamContainerMetrics, team, score) {
   // Draw abbr and logo if we have it
   if (team.teamAbbr && team.logo) {
     // draw abbreviation
+    const abbrFontSize = team.teamAbbr.length > 3 ? fontSize * 0.8 : fontSize;
+    const currentFont = context.font;
+    context.font = `normal ${abbrFontSize * 0.75}px Futura Today`;
+
     const { abbrTop, abbrLeft, abbrWidth } = abbrContainerMetrics;
     const abbrString = team.teamAbbr;
     const teamAbbrTextWidth = measureWord(context, abbrString);
@@ -157,9 +161,10 @@ function drawTeamScore(context, teamContainerMetrics, team, score) {
     } else {
       const oldStroke = context.strokeStyle;
       context.strokeStyle = 'white';
-      context.strokeRect(teamAbbrDrawLeft, abbrTop, teamAbbrTextWidth, fontSize);
+      context.strokeRect(teamAbbrDrawLeft, abbrTop, teamAbbrTextWidth, abbrFontSize);
       context.strokeStyle = oldStroke;
     }
+    context.font = currentFont;
 
     // draw logo
     const { logoHeight, logoWidth, logoTop, logoLeft } = logoContainerMetrics;

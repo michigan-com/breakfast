@@ -54,6 +54,7 @@ export default class Canvas extends React.Component {
       height,
       padding: canvas.canvasPadding,
       maxTextWidth: canvas.maxTextWidth,
+      textEditorPadding: canvas.textEditorPadding,
     };
   }
 

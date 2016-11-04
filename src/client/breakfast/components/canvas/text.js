@@ -2,6 +2,88 @@
 
 /* eslint-disable no-param-reassign */
 
+class TextChunk {
+  constructor({ x, y, globalFont }) {
+    this.words = [];
+    this.length = 0;
+    this.x = x || 0;
+    this.y = y || 0;
+    this.textLength = 0;
+    this.globalFont = globalFont;
+  }
+
+  appendWholeWordPlusSpace = (word, font) => {
+    if (this.words.length > 0) this.words.push({ word: ' ', font: this.globalFont });
+    this.words.push({ word, font });
+  }
+
+
+  measureChunk = (context) => {
+    const currentContextFont = context.font;
+    let chunkWidth = 0;
+    for (const word of this.words) {
+      context.font = word.font;
+      chunkWidth += context.measureText(word.word).width;
+    }
+    context.font = currentContextFont;
+    return Math.round(chunkWidth);
+  }
+
+  measureChunkWithWord = (context, word, font) => {
+    const currentContextFont = context.font;
+    let chunkWidth = this.measureChunk(context);
+
+
+    const testWord = this.words.length > 0 ? ` ${word}` : word;
+    context.font = font;
+    chunkWidth += context.measureText(testWord).width;
+
+    context.font = currentContextFont;
+    return Math.round(chunkWidth);
+  }
+
+  renderChunk = (context) => {
+    let x = this.x;
+    for (const word of this.words) {
+      context.font = word.font;
+      const wordLength = context.measureText(word.word).width;
+
+      context.fillText(word.word, x, this.y);
+      x += wordLength;
+    }
+  }
+}
+
+class TextChunkStore {
+  constructor({ textAlign, textWidth }) {
+    this.chunks = [];
+    this.textAlign = textAlign;
+    this.textWidth = textWidth;
+  }
+
+  addFullLineChunk(context, chunk) {
+    const chunkWidth = chunk.measureChunk(context);
+    switch (this.textAlign) {
+      case 'center':
+        chunk.x = chunk.x + ((this.textWidth - chunkWidth) / 2);
+        break;
+      case 'right':
+        chunk.x = chunk.x + (this.textWidth - chunkWidth);
+        break;
+      default:
+        chunk.x = chunk.x;
+    }
+
+    this.chunks.push(chunk);
+  }
+
+  drawTextChunks(context) {
+    for (const chunk of this.chunks) {
+      chunk.renderChunk(context);
+    }
+  }
+}
+
 function measureWord(context, word) {
   const metrics = context.measureText(word);
   return metrics.width;
@@ -68,128 +150,87 @@ export function fillAllText(context, text, x, startY, textWidth, fontSize, textA
 }
 
 function fillTextBlock(context, block, textPosX, startY, textWidth, fontInfo, textAlign) {
-  const { fontWeight, fontFace, fontSize } = fontInfo;
+  const { fontWeight, fontFace, fontSize, lineHeight } = fontInfo;
   const text = block.getText();
   const characterList = block.getCharacterList();
-  const textChunks = [];
   const makeFont = (contextFontWeight, italic) => {
     let fontStyle = `${contextFontWeight}`;
     if (italic) fontStyle += ' italic';
     return `${fontStyle} ${fontSize}px ${fontFace}`;
   };
 
-  // A "chunk" is definited by a block of text that needs to be drawn.
-  // Each chunk has an x, y, font, and text, so that we can write it to the canvsa
-  const makeChunk = (stringToWrite, width, font) => (
-    { text: stringToWrite, width, font }
-  );
-
-  let canvasX = 0;
+  const globalFont = makeFont(fontWeight, false);
+  const chunkStore = new TextChunkStore({ textAlign, textWidth });
+  let currentX = textPosX;
   let currentY = startY;
-  let currentFont = makeFont(fontWeight, false);
-  let lineChunks = [];
-  let chunkStringWidth = 0;
-  let currentChunkString = '';
+  let currentChunk = new TextChunk({ x: currentX, y: currentY, globalFont });
   let currentWord = '';
+  let currentFont = globalFont;
   for (let i = 0; i < text.length; i++) {
-    const isLastChar = i === (text.length - 1);
     const currentChar = text[i];
+
     let inlineItalic = false;
     let inlineFontWeight = fontWeight;
     const style = characterList.get(i).getStyle();
     style.forEach((value) => {
       const lowerValue = value.toLowerCase();
-      if (lowerValue === 'italic') {
-        inlineItalic = true;
-      } else {
-        inlineFontWeight = lowerValue;
-      }
+      if (lowerValue === 'italic') inlineItalic = true;
+      else inlineFontWeight = lowerValue;
     });
 
-    // spaces are always included with the previous string
-    const inlineFont = currentChar === ' ' ? currentFont : makeFont(inlineFontWeight, inlineItalic);
-    const testWord = currentWord + currentChar;
-    const testString = `${currentChunkString}${testWord}`;
-    context.font = currentFont;
+    const currentCharFont = makeFont(inlineFontWeight, inlineItalic);
 
-    const testStringWidth = measureWord(context, testString);
-
-    const stringIsTooLong = Math.round(testStringWidth + canvasX) > Math.round(textWidth);
-
-    // Make a new chunk
-    if (inlineFont !== currentFont || stringIsTooLong || isLastChar) {
-      if (isLastChar && !stringIsTooLong) {
-        currentChunkString = currentChar === ' ' ? testString.slice(0, -1) : testString;
-      } else if (textAlign !== 'left' && (stringIsTooLong || isLastChar)) {
-        // slice off the newline character for a new line
-        currentChunkString = currentChunkString.slice(0, -1);
-      }
-      chunkStringWidth = Math.round(measureWord(context, currentChunkString));
-      lineChunks.push(makeChunk(currentChunkString, chunkStringWidth, currentFont));
-
-
-      // the only way to know the position of the left or center justifications is
-      // to know the entire length of the string we're writing
-      if (stringIsTooLong || isLastChar) {
-        const lineWidth = lineChunks.reduce((total, val) => (total += val.width), 0);
-        let chunkX = 0;
-        if (textAlign === 'center') chunkX = (textWidth - lineWidth) / 2;
-        else if (textAlign === 'right') chunkX = (textWidth - lineWidth);
-        for (const lineChunk of lineChunks) {
-          lineChunk.x = chunkX + (textPosX);
-          lineChunk.y = currentY;
-          textChunks.push({ ...lineChunk });
-
-          chunkX += lineChunk.width;
-        }
-
-        lineChunks = [];
-      }
-
-      // bleeehhh
-      // super corner case, which probably means my code should be restructured
-      if (isLastChar && stringIsTooLong) {
-        const lastChunk = testWord;
-        const lastChunkWidth = Math.round(measureWord(context, lastChunk));
-        const lineChunk = makeChunk(lastChunk, lastChunkWidth, currentFont);
-        let chunkX = 0;
-        if (textAlign === 'center') chunkX = (textWidth - lastChunkWidth) / 2;
-        else if (textAlign === 'right') chunkX = (textWidth - lastChunkWidth);
-        lineChunk.x = chunkX + textPosX;
-        lineChunk.y = currentY + fontSize;
-        textChunks.push({ ...lineChunk });
-      }
-
-      if (stringIsTooLong) {
-        currentY += fontSize;
-        canvasX = 0;
-      } else {
-        canvasX += chunkStringWidth;
-      }
-
-      currentWord = testWord;
-      currentChunkString = '';
-      chunkStringWidth = Math.round(measureWord(context, currentChunkString));
-    } else {
-      if (currentChar === ' ') {
-        currentChunkString = `${currentChunkString}${testWord}`;
-        chunkStringWidth = Math.round(measureWord(context, currentChunkString));
+    const lengthIfAppened = currentChunk.measureChunkWithWord(context, currentWord, currentFont);
+    if (currentCharFont !== currentFont) {
+      if (currentWord) {
+        currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
         currentWord = '';
-      } else {
-        currentWord = testWord;
       }
+
+    // If the length is 99% or more of the textWidth, create a new
+    // this was done for cornercase purposes, where the HTML input would show one thing
+    // but we would render something else. It came down to about 0.5%
+    } else if ((lengthIfAppened / textWidth) > 0.993) {
+      if (currentChunk.words.length === 0) {
+        currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
+        currentWord = '';
+      }
+
+      chunkStore.addFullLineChunk(context, currentChunk);
+      currentY += lineHeight;
+      currentX = textPosX;
+
+      currentChunk = new TextChunk({ x: currentX, y: currentY, globalFont });
+      if (currentChar === ' ') {
+        currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
+        currentWord = '';
+      }
+    } else if (currentChar === ' ') {
+      // Append to the chunk cause we have a new word
+      currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
+      currentWord = '';
     }
 
-    currentFont = inlineFont;
+    if (currentChar !== ' ') currentWord = `${currentWord}${currentChar}`;
+    currentFont = currentCharFont;
   }
 
-  // push any reamining chunk
-  for (const chunk of textChunks) {
-    context.font = chunk.font;
-    context.fillText(chunk.text, chunk.x, chunk.y);
+  // leftovers
+  if (currentWord) {
+    const lengthIfAppened = currentChunk.measureChunkWithWord(context, currentWord, currentFont);
+    if (lengthIfAppened > textWidth) {
+      chunkStore.addFullLineChunk(context, currentChunk);
+      currentY += lineHeight;
+      currentX = textPosX;
+
+      currentChunk = new TextChunk({ x: currentX, y: currentY, globalFont });
+    }
+    currentChunk.appendWholeWordPlusSpace(currentWord, currentFont);
   }
 
-  return currentY + fontSize;
+  if (currentChunk.words.length > 0) chunkStore.addFullLineChunk(context, currentChunk);
+  chunkStore.drawTextChunks(context);
+  return currentY + lineHeight;
 }
 
 export default function updateText(context, canvasStyle, fontOptions,
@@ -197,7 +238,7 @@ export default function updateText(context, canvasStyle, fontOptions,
   const { editorState, textPos, fontFace, fontColor, textWidth, textAlign } = textContainer;
   const canvasPadding = canvasStyle.padding;
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
-  const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100);
+  const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100) + canvasStyle.textEditorPadding;
 
   const textPosPx = {
     top: textPos.top * (canvasStyle.height / 2),
@@ -205,7 +246,7 @@ export default function updateText(context, canvasStyle, fontOptions,
   };
 
   // Scale up for real drawing
-  let y = canvasPadding + (textPosPx.top * 2);
+  let y = canvasPadding + (textPosPx.top * 2) - 1;
   const x = canvasPadding + (textPosPx.left * 2);
   const listPadding = 40 * 2;
 
@@ -220,6 +261,7 @@ export default function updateText(context, canvasStyle, fontOptions,
     const fontInfo = {
       fontWeight: styleMetrics.fontWeight === 'normal' ? '' : styleMetrics.fontWeight,
       fontSize: styleMetrics.fontSize,
+      lineHeight: styleMetrics.lineHeight,
       fontFace,
     };
 

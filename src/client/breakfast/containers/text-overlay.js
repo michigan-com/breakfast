@@ -68,7 +68,7 @@ class TextOverlay extends React.Component {
     textWidthPx /= 2;
     return {
       fontFamily: fontFace,
-      width: `${textWidthPx}px`,
+      width: `${Math.round(textWidthPx)}px`,
       textAlign,
       color: fontColor,
     };
