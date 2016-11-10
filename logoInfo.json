@@ -809,6 +809,8 @@
   "knoxville.svg": {
     "name": "knoxville.svg",
     "domain": [
+      "knoxblogs.com",
+      "knoxnews.com",
       "knoxville.com"
     ],
     "isSvg": true,

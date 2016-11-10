@@ -543,6 +543,20 @@
     }
   },
 
+  "Knoxville Blogs": {
+    "domain": "knoxblogs.com",
+    "logo": {
+      "filename": "knoxville.svg"
+    }
+  },
+
+  "Knoxville News": {
+    "domain": "knoxnews.com",
+    "logo": {
+      "filename": "knoxville.svg"
+    }
+  },
+
   "Knoxville": {
     "domain": "knoxville.com",
     "logo": {
