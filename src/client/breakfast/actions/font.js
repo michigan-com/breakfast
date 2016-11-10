@@ -11,32 +11,6 @@ export function fontsLoaded(fonts) {
     value: fonts,
   };
 }
-
-export function fontSizeChange(size) {
-  return {
-    type: FONT_SIZE_CHANGE,
-    value: size,
-  };
-}
-
-export function fontColorChange(color) {
-  return {
-    type: FONT_COLOR_CHANGE,
-    value: color,
-  };
-}
-
-export function fontFaceChange(face) {
-  return {
-    type: FONT_FACE_CHANGE,
-    value: face,
-  };
-}
-
 export const DEFAULT_FONT = {
-  fontSizeMultiplier: 1,
-  fontColor: 'black',
-  fontFace: 'Helvetica',
   fontOptions: [],
-  // styleMetrics: getStyleMetrics(),
 };

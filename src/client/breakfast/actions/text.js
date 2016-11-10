@@ -9,10 +9,15 @@ export const UPDATE_EDITOR_FONTFACE = 'UPDATE_EDITOR_FONTFACE';
 export const UPDATE_EDITOR_TEXT_ALIGN = 'UPDATE_EDITOR_TEXT_ALIGN';
 export const UPDATE_EDITOR_FONT_COLOR = 'UPDATE_EDITOR_FONT_COLOR';
 export const UPDATE_EDITOR_DISPLAY = 'UPDATE_EDITOR_DISPLAY';
+export const FONT_SIZE_CHANGE = 'FONT_SIZE_CHANGE';
+export const FONT_SIZE_TOGGLE = 'FONT_SIZE_TOGGLE';
 
 export const HEADER_TEXT_CONTAINER = 'header';
 export const BODY_TEXT_CONTAINER = 'body';
 export const CAPTION_TEXT_CONTAINER = 'caption';
+
+export const INCREASE = 'INCREASE';
+export const DECREASE = 'DECREASE';
 
 const DEFAULT_TEXT_CONTAINER_HEIGHT = 20;
 
@@ -23,6 +28,8 @@ const DEFAULT_TEXT_CONTAINER = {
     top: 0,
   },
   textWidth: 100,
+  fontSizeMultiplier: 1,
+  showFontSizeChanger: false,
   textHeight: DEFAULT_TEXT_CONTAINER_HEIGHT,
   display: false,
   fontFace: 'Helvetica',
@@ -153,6 +160,23 @@ export function updateEditorDisplay(textContainerIndex, display) {
       textContainerIndex,
       display,
     },
+  };
+}
+
+export function fontSizeChange(textContainerIndex, direction) {
+  return {
+    type: FONT_SIZE_CHANGE,
+    value: {
+      textContainerIndex,
+      direction,
+    },
+  };
+}
+
+export function fontSizeToggle(textContainerIndex) {
+  return {
+    type: FONT_SIZE_TOGGLE,
+    value: { textContainerIndex },
   };
 }
 

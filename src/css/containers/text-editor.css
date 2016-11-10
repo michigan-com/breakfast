@@ -175,3 +175,46 @@ $text-toolbar-height: 30px;
     border-radius: 5px;
   }
 }
+
+.font-size {
+  display: inline-block;
+  width: $text-toolbar-height;
+  width: $text-toolbar-height;
+  position: relative;
+  cursor: pointer;
+
+  .font-size-image {
+    height: 80%;
+    width: 80%;
+    margin: 10% auto;
+  }
+
+  .font-size-option-container {
+    position: absolute;
+    margin-top: 10px;
+    color: white;
+    width: 150%;
+    left: -25%;
+    background-color: white;
+    z-index: 100;
+
+    .font-size-option {
+      width: 100%;
+      height: $text-toolbar-height;
+      line-height: calc($text-toolbar-height * 1.3);
+      font-size: calc($text-toolbar-height * 0.7);
+      text-align: center;
+      cursor: pointer;
+      background: $black;
+      transition: background 150ms linear;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .6);
+      }
+
+      &.decrease {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

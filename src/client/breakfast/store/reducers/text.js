@@ -4,7 +4,7 @@ import undoable from 'redux-undo';
 
 import { TEXT_WIDTH_CHANGE, TEXT_POS_CHANGE, UPDATE_EDITOR_STATE, UPDATE_EDITOR_FONTFACE,
   UPDATE_EDITOR_TEXT_ALIGN, UPDATE_EDITOR_FONT_COLOR, UPDATE_EDITOR_DISPLAY,
-  DEFAULT_TEXT } from '../../actions/text';
+  FONT_SIZE_CHANGE, FONT_SIZE_TOGGLE, DECREASE, DEFAULT_TEXT } from '../../actions/text';
 
 /* eslint-disable no-case-declarations */
 function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
@@ -45,6 +45,15 @@ function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
           const { display } = action.value;
           container.display = display;
           break;
+        case FONT_SIZE_CHANGE:
+          const { direction } = action.value;
+          let valueChange = 0.1;
+          if (direction === DECREASE) valueChange *= -1;
+          container.fontSizeMultiplier += valueChange;
+          break;
+        case FONT_SIZE_TOGGLE:
+          container.showFontSizeChanger = !container.showFontSizeChanger;
+          break;
         default:
           break;
       }
@@ -65,6 +74,8 @@ function textReducer(state = DEFAULT_TEXT, action) {
     case UPDATE_EDITOR_TEXT_ALIGN:
     case UPDATE_EDITOR_FONT_COLOR:
     case UPDATE_EDITOR_DISPLAY:
+    case FONT_SIZE_CHANGE:
+    case FONT_SIZE_TOGGLE:
       return handleTextContainerUpdate(state, action);
     default:
       return { ...state };

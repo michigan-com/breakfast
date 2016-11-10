@@ -17,13 +17,13 @@ function getStyleMetrics(blockType, canvasHeight) {
   // These are for the regular sized canvas
   // If we have a smaller canvas, we have to scale it down
   // let pFontSize = 16.5; // 325 * 0.06
-  let pFontSize = canvasHeight * 0.05;
-  // let h1FontSize = 33.5 * 2; // 325 * 0.1
-  let h1FontSize = canvasHeight * 0.1;
-  // let h2FontSize = 26 * 2;
-  let h2FontSize = canvasHeight * 0.08;
-  // let h3FontSize = 19.5 * 2;
-  let h3FontSize = canvasHeight * 0.06;
+  const pFontSize = canvasHeight * 0.05;
+  // const  h1FontSize = 33.5 * 2; // 325 * 0.1
+  const h1FontSize = canvasHeight * 0.1;
+  // const  h2FontSize = 26 * 2;
+  const h2FontSize = canvasHeight * 0.08;
+  // const  h3FontSize = 19.5 * 2;
+  const h3FontSize = canvasHeight * 0.06;
 
   // Scale up
   // pFontSize *= 2;

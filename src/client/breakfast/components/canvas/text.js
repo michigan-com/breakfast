@@ -3,14 +3,14 @@
 /* eslint-disable no-param-reassign */
 
 // default is chrome
-let WIDTH_THRESHOLD = 0.993;
+let WIDTH_THRESHOLD = 0.9937;
 
 // http://stackoverflow.com/a/9851769/1337683
 // Firefox
-if (typeof InstallTrigger !== 'undefined') WIDTH_THRESHOLD = 0.96;
+if (typeof InstallTrigger !== 'undefined') WIDTH_THRESHOLD = 0.955;
 
 // Safari
-if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === '[object SafariRemoteNotification]'; })(!window['safari'] || safari.pushNotification)) WIDTH_THRESHOLD = 0.97;
+if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === '[object SafariRemoteNotification]'; })(!window['safari'] || safari.pushNotification)) WIDTH_THRESHOLD = 0.965;
 
 class TextChunk {
   constructor({ x, y, globalFont }) {
@@ -245,7 +245,8 @@ function fillTextBlock(context, block, textPosX, startY, textWidth, fontInfo, te
 
 export default function updateText(context, canvasStyle, fontOptions,
     blockTypeStyle, textContainer) {
-  const { editorState, textPos, fontFace, fontColor, textWidth, textAlign } = textContainer;
+  const { editorState, textPos, fontFace, fontColor, textWidth, textAlign,
+    fontSizeMultiplier } = textContainer;
   const canvasPadding = canvasStyle.padding;
   const blocks = editorState.getCurrentContent().getBlocksAsArray();
   const canvasTextWidth = canvasStyle.maxTextWidth * (textWidth / 100) + canvasStyle.textEditorPadding;
@@ -270,8 +271,8 @@ export default function updateText(context, canvasStyle, fontOptions,
 
     const fontInfo = {
       fontWeight: styleMetrics.fontWeight === 'normal' ? '' : styleMetrics.fontWeight,
-      fontSize: styleMetrics.fontSize,
-      lineHeight: styleMetrics.lineHeight,
+      fontSize: styleMetrics.fontSize * fontSizeMultiplier,
+      lineHeight: styleMetrics.lineHeight * fontSizeMultiplier,
       fontFace,
     };
 

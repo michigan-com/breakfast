@@ -6,7 +6,8 @@ import { bindActionCreators } from 'redux';
 import { Editor, RichUtils } from 'draft-js';
 
 import { textPosChange, textWidthChange, updateEditorState, updateFontFace,
-  updateTextAlign, updateFontColor } from '../actions/text';
+  updateTextAlign, updateFontColor, fontSizeChange, fontSizeToggle, INCREASE,
+  DECREASE } from '../actions/text';
 import { canvasMetricsSelector } from '../selectors/background';
 import { getPresentState } from '../selectors/present';
 import { blockStyleMetricsSelector } from '../selectors/text';
@@ -15,6 +16,7 @@ import InlineStyleControls from '../components/editor-toolbar/inline-style-contr
 import FontPicker from '../components/editor-toolbar/font-picker';
 import TextAlign from '../components/editor-toolbar/text-align';
 import FontColorPicker from '../components/editor-toolbar/font-color-picker';
+import FontSize from '../components/editor-toolbar/font-size';
 
 const MOVE_TYPE_POS = 'pos';
 const MOVE_TYPE_WIDTH = 'width';
@@ -51,6 +53,8 @@ class TextOverlay extends React.Component {
     this.onFontFaceChange = this.onFontFaceChange.bind(this);
     this.onTextAlignChange = this.onTextAlignChange.bind(this);
     this.onFontColorChange = this.onFontColorChange.bind(this);
+    this.onFontSizeChange = this.onFontSizeChange.bind(this);
+    this.onFontSizeToggle = this.onFontSizeToggle.bind(this);
 
     this.trackingTarget = document;
 
@@ -216,8 +220,17 @@ class TextOverlay extends React.Component {
     this.props.actions.updateFontColor(this.props.textContainerIndex, fontColor.hex);
   }
 
+  onFontSizeChange(direction) {
+    this.props.actions.fontSizeChange(this.props.textContainerIndex, direction);
+  }
+
+  onFontSizeToggle() {
+    this.props.actions.fontSizeToggle(this.props.textContainerIndex);
+  }
+
   renderStyle() {
     const { blockTypeStyle } = this.props;
+    const { fontSizeMultiplier } = this.props.textContainerOptions;
 
     let style = [];
     for (const blockStyle of blockTypeStyle) {
@@ -225,10 +238,10 @@ class TextOverlay extends React.Component {
 
       // Scale down for UI purposes
       const s = `{
-        font-size: ${fontSize / 2}px !important;
-        margin-bottom: ${marginBottom / 2}px !important;
+        font-size: ${(fontSize / 2) * fontSizeMultiplier}px !important;
+        margin-bottom: ${(marginBottom / 2) * fontSizeMultiplier}px !important;
         margin-top: 0;
-        line-height: ${lineHeight / 2}px !important;
+        line-height: ${(lineHeight / 2) * fontSizeMultiplier}px !important;
       }`;
 
       style.push(`.text-editor-container ${tagName}, .text-editor-container ${tagName} * ${s}`);
@@ -242,7 +255,7 @@ class TextOverlay extends React.Component {
     const { possibleBlockTypes, possibleInlineTypes, possibleTextAlignOptions } = this.props.Text;
     const { fontOptions } = this.props.Font;
     const { editorState, fontFace, fontColor, textAlign,
-      textPos, textWidth } = this.props.textContainerOptions;
+      textPos, textWidth, showFontSizeChanger } = this.props.textContainerOptions;
     const blockType = this.getCurrentBlockType();
     const currentInlineStyle = editorState.getCurrentInlineStyle();
     const canvasPadding = canvas.canvasPadding / 2;
@@ -303,7 +316,12 @@ class TextOverlay extends React.Component {
               currentColor={fontColor}
               onChange={this.onFontColorChange}
             />
-
+            <FontSize
+              options={[INCREASE, DECREASE]}
+              active={showFontSizeChanger}
+              onFontSizeChange={this.onFontSizeChange}
+              onFontSizeToggle={this.onFontSizeToggle}
+            />
           </div>
           <div className="text-editor-container" style={style}>
             <Editor
@@ -347,6 +365,8 @@ function mapDispatchToProps(dispatch) {
       updateEditorState,
       updateTextAlign,
       updateFontColor,
+      fontSizeChange,
+      fontSizeToggle,
     }, dispatch),
   };
 }
