@@ -21,7 +21,7 @@ export default function updateAttribution(context, canvasStyle, attributionOptio
   const canvasPadding = canvasStyle.padding;
   const canvasWidth = canvasStyle.width;
   const canvasHeight = canvasStyle.height;
-  const fontFace = fontOptions.fontFace;
+  const fontFace = 'Futura Today';
   const fontSize = canvasStyle.height / 25;
 
   context.font = `${fontSize}px ${fontFace}`;
