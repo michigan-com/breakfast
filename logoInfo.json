@@ -6,6 +6,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Abilene",
     "width": "435.6",
     "height": "68.98",
     "aspectRatio": 6.314873876485938
@@ -17,6 +18,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Alamogordo Daily News",
     "width": "720",
     "height": "174",
     "aspectRatio": 4.137931034482759
@@ -29,6 +31,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Alexandria",
     "width": "719.563",
     "height": "119.938",
     "aspectRatio": 5.999458053327553
@@ -40,6 +43,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Anderson",
     "width": "596.97",
     "height": "131.65",
     "aspectRatio": 4.534523357387011
@@ -51,6 +55,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Appleton",
     "width": "719",
     "height": "139.094",
     "aspectRatio": 5.169166175392181
@@ -61,7 +66,8 @@
       "app.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Asbury Park"
   },
   "asburypark-light.png": {
     "name": "asburypark-light.png",
@@ -69,7 +75,8 @@
       "app.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Asbury Park"
   },
   "asheville-dark.png": {
     "name": "asheville-dark.png",
@@ -77,7 +84,8 @@
       "citizen-times.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Asheville"
   },
   "asheville-light.png": {
     "name": "asheville-light.png",
@@ -85,7 +93,8 @@
       "citizen-times.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Asheville"
   },
   "battlecreek.svg": {
     "name": "battlecreek.svg",
@@ -96,6 +105,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Battle Creek",
     "width": "720",
     "height": "83",
     "aspectRatio": 8.674698795180722
@@ -107,6 +117,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "North Jersey",
     "width": "779",
     "height": "154",
     "aspectRatio": 5.058441558441558
@@ -118,6 +129,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Binghamton",
     "width": "720",
     "height": "80",
     "aspectRatio": 9
@@ -129,6 +141,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Black Mountain News",
     "width": "720",
     "height": "155",
     "aspectRatio": 4.645161290322581
@@ -140,6 +153,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bremerton",
     "width": "385.92",
     "height": "125.09",
     "aspectRatio": 3.0851387001359023
@@ -150,7 +164,8 @@
       "floridatoday.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Brevard"
   },
   "brevard-light.png": {
     "name": "brevard-light.png",
@@ -158,7 +173,8 @@
       "floridatoday.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Brevard"
   },
   "bucyrus-dark.png": {
     "name": "bucyrus-dark.png",
@@ -175,7 +191,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "bucyrus-light.png": {
     "name": "bucyrus-light.png",
@@ -192,7 +209,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "burlington.svg": {
     "name": "burlington.svg",
@@ -201,6 +219,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Burlington",
     "width": "720",
     "height": "111",
     "aspectRatio": 6.486486486486487
@@ -212,6 +231,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Carlsbad Current-Argus",
     "width": "719.5",
     "height": "113.125",
     "aspectRatio": 6.360220994475138
@@ -223,6 +243,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Central Florida Future",
     "width": "375",
     "height": "146.7",
     "aspectRatio": 2.556237218813906
@@ -234,6 +255,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Central Jersey",
     "width": "720",
     "height": "83",
     "aspectRatio": 8.674698795180722
@@ -245,6 +267,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Chambersburg",
     "width": "720",
     "height": "109.969",
     "aspectRatio": 6.547299693550001
@@ -255,7 +278,8 @@
       "courierpostonline.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Cherry Hill"
   },
   "cherryhill-light.png": {
     "name": "cherryhill-light.png",
@@ -263,7 +287,8 @@
       "courierpostonline.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Cherry Hill"
   },
   "chillicothe.svg": {
     "name": "chillicothe.svg",
@@ -281,6 +306,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "720",
     "height": "94",
     "aspectRatio": 7.659574468085107
@@ -291,7 +317,8 @@
       "cincinnati.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Cincinnati"
   },
   "cincinnati-light.png": {
     "name": "cincinnati-light.png",
@@ -299,7 +326,8 @@
       "cincinnati.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Cincinnati"
   },
   "clarksville-dark.png": {
     "name": "clarksville-dark.png",
@@ -307,7 +335,8 @@
       "theleafchronicle.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Clarksville"
   },
   "clarksville-light.png": {
     "name": "clarksville-light.png",
@@ -315,7 +344,8 @@
       "theleafchronicle.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Clarksville"
   },
   "colliercitizen.svg": {
     "name": "colliercitizen.svg",
@@ -324,6 +354,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Naples",
     "width": "664",
     "height": "107",
     "aspectRatio": 6.205607476635514
@@ -335,6 +366,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Corpus",
     "width": "432.28",
     "height": "124.99",
     "aspectRatio": 3.4585166813345065
@@ -355,6 +387,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "720",
     "height": "94",
     "aspectRatio": 7.659574468085107
@@ -366,6 +399,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Deming Headlight",
     "width": "721",
     "height": "142",
     "aspectRatio": 5.077464788732394
@@ -377,6 +411,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Des Moines",
     "width": "720",
     "height": "114",
     "aspectRatio": 6.315789473684211
@@ -389,6 +424,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Detroit Free Press",
     "width": "717.75",
     "height": "117.375",
     "aspectRatio": 6.115015974440895
@@ -400,6 +436,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Detroit News",
     "width": "789.188",
     "height": "74.999",
     "aspectRatio": 10.52264696862625
@@ -410,7 +447,8 @@
       "dmreg.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Des Moines"
   },
   "elmira-dark.png": {
     "name": "elmira-dark.png",
@@ -419,7 +457,8 @@
       "stargazette.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Binghamton"
   },
   "elmira-light.png": {
     "name": "elmira-light.png",
@@ -428,7 +467,8 @@
       "stargazette.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Binghamton"
   },
   "elpaso.svg": {
     "name": "elpaso.svg",
@@ -437,6 +477,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "El Paso",
     "width": "719",
     "height": "192",
     "aspectRatio": 3.7447916666666665
@@ -447,7 +488,8 @@
       "elsoldesalinas.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "El Sol"
   },
   "elsol-light.png": {
     "name": "elsol-light.png",
@@ -455,7 +497,8 @@
       "elsoldesalinas.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "El Sol"
   },
   "evansville.svg": {
     "name": "evansville.svg",
@@ -464,6 +507,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Evansville",
     "width": "425.85",
     "height": "98.54",
     "aspectRatio": 4.321595291252283
@@ -474,7 +518,8 @@
       "farmersadvance.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Farmers Advance"
   },
   "farmersadvance-light.png": {
     "name": "farmersadvance-light.png",
@@ -482,7 +527,8 @@
       "farmersadvance.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Farmers Advance"
   },
   "farmingtondailytimes.svg": {
     "name": "farmingtondailytimes.svg",
@@ -491,6 +537,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Farmington Daily Times",
     "width": "720",
     "height": "167",
     "aspectRatio": 4.311377245508982
@@ -501,7 +548,8 @@
       "ydr.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "York Daily Record"
   },
   "fonddulac.svg": {
     "name": "fonddulac.svg",
@@ -510,6 +558,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Fond du Lac",
     "width": "720",
     "height": "157",
     "aspectRatio": 4.585987261146497
@@ -520,7 +569,8 @@
       "coloradoan.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Fort Collins"
   },
   "fortcollins-light.png": {
     "name": "fortcollins-light.png",
@@ -528,7 +578,8 @@
       "coloradoan.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Fort Collins"
   },
   "fortmyers.svg": {
     "name": "fortmyers.svg",
@@ -537,6 +588,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Fort Myers",
     "width": "720",
     "height": "79",
     "aspectRatio": 9.113924050632912
@@ -547,7 +599,8 @@
       "michigan.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Michigan.com"
   },
   "freepmarathon-light.png": {
     "name": "freepmarathon-light.png",
@@ -555,7 +608,8 @@
       "michigan.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Michigan.com"
   },
   "fremont-dark.png": {
     "name": "fremont-dark.png",
@@ -572,7 +626,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "fremont-light.png": {
     "name": "fremont-light.png",
@@ -589,7 +644,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "fsunews.svg": {
     "name": "fsunews.svg",
@@ -598,6 +654,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "FSU News",
     "width": "720",
     "height": "163",
     "aspectRatio": 4.41717791411043
@@ -608,7 +665,8 @@
       "ydr.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "York Daily Record"
   },
   "gametown-green.gif": {
     "name": "gametown-green.gif",
@@ -616,7 +674,8 @@
       "ydr.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "York Daily Record"
   },
   "greatfalls.svg": {
     "name": "greatfalls.svg",
@@ -625,6 +684,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Great Falls",
     "width": "720",
     "height": "97",
     "aspectRatio": 7.422680412371134
@@ -635,7 +695,8 @@
       "greenbaypressgazette.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Green Bay"
   },
   "greenbay-light.png": {
     "name": "greenbay-light.png",
@@ -643,7 +704,8 @@
       "greenbaypressgazette.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Green Bay"
   },
   "greenville.svg": {
     "name": "greenville.svg",
@@ -652,6 +714,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Greenville",
     "width": "720",
     "height": "197",
     "aspectRatio": 3.6548223350253806
@@ -663,6 +726,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Guam",
     "width": "720",
     "height": "97",
     "aspectRatio": 7.422680412371134
@@ -673,7 +737,8 @@
       "thehammontonnews.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hammonton"
   },
   "hammonton-light.png": {
     "name": "hammonton-light.png",
@@ -681,7 +746,8 @@
       "thehammontonnews.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hammonton"
   },
   "hanover.svg": {
     "name": "hanover.svg",
@@ -690,6 +756,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Hanover",
     "width": "719.281",
     "height": "109.75",
     "aspectRatio": 6.553813211845102
@@ -700,7 +767,8 @@
       "hattiesburgamerican.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hattiesburg"
   },
   "hattiesburg-light.png": {
     "name": "hattiesburg-light.png",
@@ -708,7 +776,8 @@
       "hattiesburgamerican.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hattiesburg"
   },
   "hawkcentral-dark.png": {
     "name": "hawkcentral-dark.png",
@@ -716,7 +785,8 @@
       "hawkcentral.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hawk Central"
   },
   "hawkcentral-light.png": {
     "name": "hawkcentral-light.png",
@@ -724,7 +794,8 @@
       "hawkcentral.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Hawk Central"
   },
   "henderson.svg": {
     "name": "henderson.svg",
@@ -733,6 +804,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Henderson",
     "width": "323.97",
     "height": "121.21",
     "aspectRatio": 2.672799273987295
@@ -745,6 +817,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Indianapolis",
     "width": "720",
     "height": "150",
     "aspectRatio": 4.8
@@ -756,6 +829,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "In York",
     "width": "720",
     "height": "164.969",
     "aspectRatio": 4.364456352405604
@@ -768,6 +842,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Des Moines",
     "width": "637.8",
     "height": "125",
     "aspectRatio": 5.102399999999999
@@ -780,6 +855,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Binghamton",
     "width": "719.969",
     "height": "167.969",
     "aspectRatio": 4.286320690127345
@@ -791,6 +867,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Jackson (MS)",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -802,6 +879,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Jackson (TN)",
     "width": "724",
     "height": "160",
     "aspectRatio": 4.525
@@ -815,6 +893,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Knoxville Blogs",
     "width": "430.28",
     "height": "107.87",
     "aspectRatio": 3.988875498284972
@@ -826,6 +905,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (IN)",
     "width": "726",
     "height": "160",
     "aspectRatio": 4.5375
@@ -837,6 +917,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (LA)",
     "width": "720",
     "height": "137",
     "aspectRatio": 5.255474452554744
@@ -856,7 +937,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "lancaster-light.png": {
     "name": "lancaster-light.png",
@@ -873,7 +955,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "lansing.svg": {
     "name": "lansing.svg",
@@ -883,6 +966,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lansing",
     "width": "624",
     "height": "160",
     "aspectRatio": 3.9
@@ -894,6 +978,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Las Cruces Sun-News",
     "width": "783.08",
     "height": "160",
     "aspectRatio": 4.89425
@@ -905,6 +990,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "La Voz",
     "width": "585.6",
     "height": "75.9",
     "aspectRatio": 7.715415019762846
@@ -916,6 +1002,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lebanon Daily News",
     "width": "784.06",
     "height": "160",
     "aspectRatio": 4.9003749999999995
@@ -928,6 +1015,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lansing",
     "width": "520",
     "height": "160",
     "aspectRatio": 3.25
@@ -941,6 +1029,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lansing",
     "width": "665",
     "height": "160",
     "aspectRatio": 4.15625
@@ -952,6 +1041,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Louisville",
     "width": "720",
     "height": "120",
     "aspectRatio": 6
@@ -963,6 +1053,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Manitowoc",
     "width": "663",
     "height": "160",
     "aspectRatio": 4.14375
@@ -983,6 +1074,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -993,7 +1085,8 @@
       "marcoislandflorida.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Marco Island"
   },
   "marcoisland-light.png": {
     "name": "marcoisland-light.png",
@@ -1001,7 +1094,8 @@
       "marcoislandflorida.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Marco Island"
   },
   "margoeagle.svg": {
     "name": "margoeagle.svg",
@@ -1010,6 +1104,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Naples",
     "width": "615",
     "height": "104",
     "aspectRatio": 5.913461538461538
@@ -1030,6 +1125,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "752",
     "height": "160",
     "aspectRatio": 4.7
@@ -1041,6 +1137,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Marshfield",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1052,6 +1149,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Memphis",
     "width": "432.82",
     "height": "81.21",
     "aspectRatio": 5.329639206994213
@@ -1063,6 +1161,7 @@
     ],
     "isSvg": true,
     "noColor": true,
+    "marketName": "Michigan.com",
     "width": "157.5",
     "height": "157.5",
     "aspectRatio": 1
@@ -1073,7 +1172,8 @@
       "militarytimes.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "MilitaryTimes"
   },
   "milwaukee.svg": {
     "name": "milwaukee.svg",
@@ -1082,6 +1182,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Milwaukee",
     "width": "783",
     "height": "4.3",
     "aspectRatio": 182.09302325581396
@@ -1093,7 +1194,8 @@
       "thenewsstar.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Lafayette (LA)"
   },
   "monroe-light.png": {
     "name": "monroe-light.png",
@@ -1102,7 +1204,8 @@
       "thenewsstar.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Lafayette (LA)"
   },
   "montgomery.svg": {
     "name": "montgomery.svg",
@@ -1111,6 +1214,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Montgomery",
     "width": "772",
     "height": "160",
     "aspectRatio": 4.825
@@ -1121,7 +1225,8 @@
       "dailyrecord.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Morristown"
   },
   "morristown-light.png": {
     "name": "morristown-light.png",
@@ -1129,7 +1234,8 @@
       "dailyrecord.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Morristown"
   },
   "mountainhome.svg": {
     "name": "mountainhome.svg",
@@ -1138,6 +1244,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Mountain Home",
     "width": "782",
     "height": "160",
     "aspectRatio": 4.8875
@@ -1150,6 +1257,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (IN)",
     "width": "623",
     "height": "160",
     "aspectRatio": 3.89375
@@ -1161,6 +1269,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Murfreesboro",
     "width": "769",
     "height": "160",
     "aspectRatio": 4.80625
@@ -1172,6 +1281,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Naples",
     "width": "342",
     "height": "66",
     "aspectRatio": 5.181818181818182
@@ -1182,7 +1292,8 @@
       "naplesnews.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Naples"
   },
   "nashville.svg": {
     "name": "nashville.svg",
@@ -1191,6 +1302,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Nashville",
     "width": "797",
     "height": "160",
     "aspectRatio": 4.98125
@@ -1211,6 +1323,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "760",
     "height": "160",
     "aspectRatio": 4.75
@@ -1222,6 +1335,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "North Jersey",
     "width": "617",
     "height": "102",
     "aspectRatio": 6.049019607843137
@@ -1232,7 +1346,8 @@
       "livingstondaily.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Livingston"
   },
   "opelousas.svg": {
     "name": "opelousas.svg",
@@ -1242,6 +1357,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (LA)",
     "width": "720",
     "height": "148",
     "aspectRatio": 4.864864864864865
@@ -1253,6 +1369,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Oshkosh",
     "width": "751",
     "height": "160",
     "aspectRatio": 4.69375
@@ -1263,7 +1380,8 @@
       "packersnews.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Packers News"
   },
   "packersnews-light.png": {
     "name": "packersnews-light.png",
@@ -1271,7 +1389,8 @@
       "packersnews.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Packers News"
   },
   "palmsprings.svg": {
     "name": "palmsprings.svg",
@@ -1280,6 +1399,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Palm Springs",
     "width": "676",
     "height": "160",
     "aspectRatio": 4.225
@@ -1291,6 +1411,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Pensacola",
     "width": "662",
     "height": "160",
     "aspectRatio": 4.1375
@@ -1302,6 +1423,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Phoenix",
     "width": "735.969",
     "height": "118.656",
     "aspectRatio": 6.202543487055016
@@ -1321,7 +1443,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "portclinton-light.png": {
     "name": "portclinton-light.png",
@@ -1338,7 +1461,8 @@
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Bucyrus"
   },
   "porthuron.svg": {
     "name": "porthuron.svg",
@@ -1349,6 +1473,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lansing",
     "width": "788",
     "height": "160",
     "aspectRatio": 4.925
@@ -1360,6 +1485,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Poughkeepsie",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1371,6 +1497,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Redding",
     "width": "421.88",
     "height": "82.65",
     "aspectRatio": 5.104416212946158
@@ -1382,6 +1509,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Reno Gazette-Journal",
     "width": "728",
     "height": "160",
     "aspectRatio": 4.55
@@ -1392,7 +1520,8 @@
       "reno.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Reno-Tahoe"
   },
   "renotahoe-light.png": {
     "name": "renotahoe-light.png",
@@ -1400,7 +1529,8 @@
       "reno.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Reno-Tahoe"
   },
   "richmond.svg": {
     "name": "richmond.svg",
@@ -1410,6 +1540,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (IN)",
     "width": "372",
     "height": "160",
     "aspectRatio": 2.325
@@ -1421,6 +1552,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Rochester",
     "width": "705.7",
     "height": "96.47",
     "aspectRatio": 7.315227531875195
@@ -1432,6 +1564,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Ruidoso News",
     "width": "556",
     "height": "160",
     "aspectRatio": 3.475
@@ -1443,6 +1576,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Salem",
     "width": "720",
     "height": "115",
     "aspectRatio": 6.260869565217392
@@ -1454,6 +1588,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Salinas",
     "width": "720",
     "height": "156",
     "aspectRatio": 4.615384615384615
@@ -1464,7 +1599,8 @@
       "dmg.gannett.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Salisbury"
   },
   "salisbury-light.png": {
     "name": "salisbury-light.png",
@@ -1472,7 +1608,8 @@
       "dmg.gannett.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Salisbury"
   },
   "san-angelo.svg": {
     "name": "san-angelo.svg",
@@ -1481,6 +1618,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "San Angelo",
     "width": "425.52",
     "height": "120.26",
     "aspectRatio": 3.53833361051056
@@ -1492,6 +1630,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Sheboygan",
     "width": "656",
     "height": "160",
     "aspectRatio": 4.1
@@ -1504,6 +1643,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Lafayette (LA)",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1515,6 +1655,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Silver City Sun News",
     "width": "800.01",
     "height": "160",
     "aspectRatio": 5.0000625
@@ -1525,7 +1666,8 @@
       "argusleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Sioux Falls"
   },
   "siouxfalls-light.png": {
     "name": "siouxfalls-light.png",
@@ -1533,7 +1675,8 @@
       "argusleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Sioux Falls"
   },
   "siouxfalls-small-dark.png": {
     "name": "siouxfalls-small-dark.png",
@@ -1541,7 +1684,8 @@
       "argusleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Sioux Falls"
   },
   "siouxfalls-small-white.png": {
     "name": "siouxfalls-small-white.png",
@@ -1549,7 +1693,8 @@
       "argusleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Sioux Falls"
   },
   "somosfrontera-dark.png": {
     "name": "somosfrontera-dark.png",
@@ -1557,7 +1702,8 @@
       "elpasoymas.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Somos Frontera"
   },
   "somosfrontera-light.png": {
     "name": "somosfrontera-light.png",
@@ -1565,7 +1711,8 @@
       "elpasoymas.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Somos Frontera"
   },
   "springfield-dark.png": {
     "name": "springfield-dark.png",
@@ -1573,7 +1720,8 @@
       "news-leader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Springfield"
   },
   "springfield-light.png": {
     "name": "springfield-light.png",
@@ -1581,7 +1729,8 @@
       "news-leader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Springfield"
   },
   "staunton-dark.png": {
     "name": "staunton-dark.png",
@@ -1589,7 +1738,8 @@
       "newsleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Staunton"
   },
   "staunton-light.png": {
     "name": "staunton-light.png",
@@ -1597,7 +1747,8 @@
       "newsleader.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Staunton"
   },
   "stcloud.svg": {
     "name": "stcloud.svg",
@@ -1606,6 +1757,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "St. Cloud",
     "width": "720",
     "height": "170",
     "aspectRatio": 4.235294117647059
@@ -1617,6 +1769,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Stevens Point",
     "width": "751",
     "height": "160",
     "aspectRatio": 4.69375
@@ -1628,6 +1781,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "St. George",
     "width": "720",
     "height": "121",
     "aspectRatio": 5.950413223140496
@@ -1639,6 +1793,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Tallahassee",
     "width": "734",
     "height": "160",
     "aspectRatio": 4.5875
@@ -1650,6 +1805,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Treasure Coast",
     "width": "649.97",
     "height": "256",
     "aspectRatio": 2.5389453125
@@ -1661,6 +1817,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Treasure Coast",
     "width": "412.35",
     "height": "89.17",
     "aspectRatio": 4.624313109790289
@@ -1672,6 +1829,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Treasure Coast",
     "width": "424.86",
     "height": "58.09",
     "aspectRatio": 7.313823377517645
@@ -1683,6 +1841,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Treasure Coast",
     "width": "426.52",
     "height": "72.45",
     "aspectRatio": 5.887094547964113
@@ -1694,6 +1853,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Naples",
     "width": "625",
     "height": "114",
     "aspectRatio": 5.482456140350878
@@ -1705,6 +1865,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "North Jersey",
     "width": "259",
     "height": "83",
     "aspectRatio": 3.1204819277108435
@@ -1718,6 +1879,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "157",
     "height": "29",
     "aspectRatio": 5.413793103448276
@@ -1731,6 +1893,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "720",
     "height": "374",
     "aspectRatio": 1.9251336898395721
@@ -1742,6 +1905,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "USA Today",
     "width": "421",
     "height": "53",
     "aspectRatio": 7.943396226415095
@@ -1753,6 +1917,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "USA Today",
     "width": "173",
     "height": "52",
     "aspectRatio": 3.326923076923077
@@ -1765,6 +1930,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "202",
     "height": "29",
     "aspectRatio": 6.9655172413793105
@@ -1777,6 +1943,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "246",
     "height": "29",
     "aspectRatio": 8.482758620689655
@@ -1789,6 +1956,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "227",
     "height": "29",
     "aspectRatio": 7.827586206896552
@@ -1801,6 +1969,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "257",
     "height": "29",
     "aspectRatio": 8.862068965517242
@@ -1813,6 +1982,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "246",
     "height": "29",
     "aspectRatio": 8.482758620689655
@@ -1825,6 +1995,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "215",
     "height": "29",
     "aspectRatio": 7.413793103448276
@@ -1837,6 +2008,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Gannett",
     "width": "240",
     "height": "29",
     "aspectRatio": 8.275862068965518
@@ -1849,6 +2021,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Cherry Hill",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1860,6 +2033,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Visalia",
     "width": "232.13",
     "height": "123.09",
     "aspectRatio": 1.8858558778129824
@@ -1871,6 +2045,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Visalia-Tulare",
     "width": "640",
     "height": "160",
     "aspectRatio": 4
@@ -1882,6 +2057,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Naples",
     "width": "532",
     "height": "100",
     "aspectRatio": 5.32
@@ -1893,6 +2069,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Wausau",
     "width": "749",
     "height": "160",
     "aspectRatio": 4.68125
@@ -1904,6 +2081,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Westchester",
     "width": "719.969",
     "height": "96.875",
     "aspectRatio": 7.43193806451613
@@ -1914,7 +2092,8 @@
       "delawareonline.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Wilmington"
   },
   "wilmington-light.png": {
     "name": "wilmington-light.png",
@@ -1922,7 +2101,8 @@
       "delawareonline.com"
     ],
     "isSvg": false,
-    "noColor": false
+    "noColor": false,
+    "marketName": "Wilmington"
   },
   "wisconsinrapids.svg": {
     "name": "wisconsinrapids.svg",
@@ -1931,6 +2111,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Wisconsin Rapids",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1942,6 +2123,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Witchita Falls",
     "width": "433.09",
     "height": "75.21",
     "aspectRatio": 5.758409785932722
@@ -1953,6 +2135,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "York Daily Record",
     "width": "800",
     "height": "160",
     "aspectRatio": 5
@@ -1964,6 +2147,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "York Dispatch",
     "width": "434",
     "height": "80",
     "aspectRatio": 5.425
@@ -1984,6 +2168,7 @@
     ],
     "isSvg": true,
     "noColor": false,
+    "marketName": "Bucyrus",
     "width": "756",
     "height": "160",
     "aspectRatio": 4.725

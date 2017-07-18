@@ -110,6 +110,8 @@ class LogoFetch {
  */
 function registerRoutes(app, router) {
   const logoFetch = new LogoFetch();
+  const db = app.get('db');
+  const LogoFavorites = db.collection('LogoFavorites');
 
   /**
    * Determins whether a user has access to a specific logo file or not.
@@ -132,16 +134,76 @@ function registerRoutes(app, router) {
     return false;
   }
 
-  // Getting the logo info
-  router.get('/logos/getLogos/', loginRequired, (req, res) => {
+  /**
+   * Given a user's email, return an array of favorite logos
+   *
+   * @param {String} email - email of the user whose favorites are desired
+   * @returns {Array} array of logo names (string)
+   */
+  async function getUserFavorites(email) {
+    const results = await LogoFavorites.find({ email }).toArray();
+
+    return results.map((r) => {
+      return r.logo;
+    });
+  }
+
+  async function getLogos(req, res) {
     const approvedLogos = {};
+    const favorites = await getUserFavorites(req.user ? req.user.email : '');
+    const favoritesMap = favorites.reduce((a, f) => {
+      a[f] = true;
+      return a;
+    }, {});
+
     Object.keys(logoJson).forEach((filename) => {
       const logoInfo = { ...logoJson[filename] };
-      if (userHasAccess(logoInfo, req.user)) {
-        approvedLogos[filename] = logoInfo;
-      }
+      if (filename in favoritesMap) logoInfo.favorite = true;
+      approvedLogos[filename] = logoInfo;
     });
     res.json(approvedLogos);
+  }
+
+  // Getting the logo info
+  router.get('/logos/getLogos/', loginRequired, (req, res, next) => {
+    getLogos(req, res).catch((err) => {
+      next(err);
+    });
+  });
+
+  async function manageLogoFavorite(req, res, add = true) {
+    const logo = req.query.logo;
+    if (!logo) {
+      res.json({ error: 'logo is required' });
+      return;
+    }
+
+    const query = {
+      email: req.user.email,
+      logo,
+    };
+
+    if (add) {
+      const data = await LogoFavorites.update(query, query, {
+        upsert: true,
+      });
+    } else {
+      const data = await LogoFavorites.remove(query);
+    }
+
+    await getLogos(req, res);
+  }
+
+  router.get('/logo/favorite/add/', loginRequired, (req, res, next) => {
+    manageLogoFavorite(req, res, true).catch((err) => {
+      next(err);
+    });
+  });
+
+  router.get('/logo/favorite/remove/', loginRequired, (req, res, next) => {
+    manageLogoFavorite(req, res, false).catch((err) => {
+      next(err);
+    });
   });
 
   async function getLogo(req, res) {

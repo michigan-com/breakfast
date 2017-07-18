@@ -11,6 +11,9 @@ $text-toolbar-height: 30px;
   position: relative;
 }
 
+.text-editor-container {
+}
+
 .text-toolbar {
   background-color: black;
   height: $text-toolbar-height;

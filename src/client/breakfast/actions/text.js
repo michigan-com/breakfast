@@ -11,6 +11,7 @@ export const UPDATE_EDITOR_FONT_COLOR = 'UPDATE_EDITOR_FONT_COLOR';
 export const UPDATE_EDITOR_DISPLAY = 'UPDATE_EDITOR_DISPLAY';
 export const FONT_SIZE_CHANGE = 'FONT_SIZE_CHANGE';
 export const FONT_SIZE_TOGGLE = 'FONT_SIZE_TOGGLE';
+export const SET_ACTIVE_CONTAINER_INDEX = 'SET_ACTIVE_CONTAINER_INDEX';
 
 export const HEADER_TEXT_CONTAINER = 'header';
 export const BODY_TEXT_CONTAINER = 'body';
@@ -78,7 +79,13 @@ function generateDefaultTextContainer(containerType = HEADER_TEXT_CONTAINER, dis
       };
     case CAPTION_TEXT_CONTAINER:
       textPos.top = 0.6;
-      return { ...DEFAULT_TEXT_CONTAINER, containerType, textPos, display };
+      return {
+        ...DEFAULT_TEXT_CONTAINER,
+        containerType,
+        textPos,
+        display,
+        editorState: EditorState.createEmpty(),
+      };
     case HEADER_TEXT_CONTAINER:
     default:
       return {
@@ -180,12 +187,20 @@ export function fontSizeToggle(textContainerIndex) {
   };
 }
 
+export function setActiveTextContainerIndex(index = -1) {
+  return {
+    type: SET_ACTIVE_CONTAINER_INDEX,
+    value: index,
+  };
+}
+
 export const DEFAULT_TEXT = {
   textContainers: [
     generateDefaultTextContainer(HEADER_TEXT_CONTAINER, true),
     generateDefaultTextContainer(BODY_TEXT_CONTAINER, false),
     generateDefaultTextContainer(CAPTION_TEXT_CONTAINER, false),
   ],
+  activeContainerIndex: -1,
   possibleBlockTypes: [...BLOCK_TYPES],
   possibleInlineTypes: [...INLINE_STYLES],
   possibleTextAlignOptions: [...TEXT_ALIGN_OPTIONS],

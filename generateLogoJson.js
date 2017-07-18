@@ -37,12 +37,13 @@ function generateLogoJson() {
     logoJson[file] = {
       name: file,
       domain: logoNames[file].domain,
-      isSvg: isSvg,
-      noColor: logoNames[file].noColor
-    }
+      isSvg,
+      noColor: logoNames[file].noColor,
+      marketName: logoNames[file].marketName,
+    };
 
     // Do some calculations based the name
-    if(isSvg) {
+    if (isSvg) {
       var match = ratioRegex.exec(contents);
       if (!match) {
         match = viewboxRegex.exec(contents);
@@ -59,7 +60,7 @@ function generateLogoJson() {
 
     logoNames[file].logoFound = true;
   }
-  fs.writeFile(outfile, JSON.stringify(logoJson, null, 2), function(err) {
+  fs.writeFile(outfile, JSON.stringify(logoJson, null, 2), function (err) {
     if (err) throw new Error(err);
 
     console.log('Saved ' + outfile);
@@ -82,7 +83,7 @@ function generateLogoJson() {
 function getLogoNames() {
   var logoNames = {};
   for (var marketName in marketInfo) {
-    var market = marketInfo[marketName]
+    var market = marketInfo[marketName];
     var logos = market.logo;
     if (!logos) continue;
 
@@ -93,8 +94,9 @@ function getLogoNames() {
         logoNames[filename] = {
           domain: [],
           logoFound: false,
-          noColor: logos[i].noColor || false
-        }
+          noColor: logos[i].noColor || false,
+          marketName,
+        };
       }
 
       logoNames[filename].domain.push(market.domain);
@@ -113,7 +115,7 @@ function printLogoBreakdown(breakdownName, infoArray) {
   }
 
   console.log('--------------------------------------------------------------------------------');
-  console.log('\n')
+  console.log('\n');
 }
 
 generateLogoJson();

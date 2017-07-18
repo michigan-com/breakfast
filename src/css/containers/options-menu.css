@@ -295,6 +295,30 @@ $options-menu-container-width-sm: 50px;
     .select {
       width: 75%;
       margin: 0 auto;
+
+      .current-selection {
+        .favorite-button {
+          display: none;
+        }
+      }
+
+      .logo-display-value {
+        height: 100%;
+        position: relative;
+      }
+
+      .favorite-button {
+        left: 0px;
+        top: 10%;
+        height: 80%;
+        margin-right: 5%;
+        position: absolute;
+      }
+
+      .logo-image {
+        max-width: 80%;
+        height: 100%;
+      }
     }
   }
 

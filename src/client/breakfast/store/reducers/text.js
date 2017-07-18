@@ -4,13 +4,14 @@ import undoable from 'redux-undo';
 
 import { TEXT_WIDTH_CHANGE, TEXT_POS_CHANGE, UPDATE_EDITOR_STATE, UPDATE_EDITOR_FONTFACE,
   UPDATE_EDITOR_TEXT_ALIGN, UPDATE_EDITOR_FONT_COLOR, UPDATE_EDITOR_DISPLAY,
-  FONT_SIZE_CHANGE, FONT_SIZE_TOGGLE, DECREASE, DEFAULT_TEXT } from '../../actions/text';
+  FONT_SIZE_CHANGE, FONT_SIZE_TOGGLE, SET_ACTIVE_CONTAINER_INDEX, DECREASE, DEFAULT_TEXT } from '../../actions/text';
 
 /* eslint-disable no-case-declarations */
 function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
   const textContainers = [];
 
   const { textContainerIndex } = action.value;
+  console.log(action.type, textContainerIndex);
   for (let i = 0; i < state.textContainers.length; i++) {
     const container = state.textContainers[i];
     if (i === textContainerIndex) {
@@ -77,6 +78,9 @@ function textReducer(state = DEFAULT_TEXT, action) {
     case FONT_SIZE_CHANGE:
     case FONT_SIZE_TOGGLE:
       return handleTextContainerUpdate(state, action);
+    case SET_ACTIVE_CONTAINER_INDEX:
+      const activeContainerIndex = action.value;
+      return { ...state, activeContainerIndex };
     default:
       return { ...state };
   }

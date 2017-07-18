@@ -9,12 +9,15 @@ export default class Select extends React.Component {
 
     this.state = {
       optionsHidden: true,
+      filter: '',
     };
 
     this.htmlClass = this.props.htmlClass ? this.props.htmlClass : '';
 
     this.optionSelected = this.optionSelected.bind(this);
     this.toggleOptions = this.toggleOptions.bind(this);
+    this.updateFilter = this.updateFilter.bind(this);
+    this.renderOption = this.renderOption.bind(this);
   }
 
   componentDidUpdate = () => {
@@ -65,7 +68,17 @@ export default class Select extends React.Component {
   toggleOptions() {
     this.setState({
       optionsHidden: !this.state.optionsHidden,
+      filter: '',
     });
+  }
+
+  /**
+   * Update the filter value based on text box input
+   */
+  updateFilter(e) {
+    const filter = e.target.value;
+    console.log(e.target.value);
+    this.setState({ filter });
   }
 
   optionSelected(index) {
@@ -95,6 +108,17 @@ export default class Select extends React.Component {
    * @return {Object} React object
    */
   renderOption(option, index) {
+    if (this.state.filter) {
+      let displayOption = false;
+      Object.values(option).forEach((v) => {
+        if (typeof v === 'string' && v.indexOf(this.state.filter) !== -1 && !displayOption) {
+          displayOption = true;
+        }
+      });
+
+      if (!displayOption) return null;
+    }
+
     return (
       <div
         className={`select-option ${index === this.props.currentIndex ? 'selected' : ''}`}
@@ -107,6 +131,21 @@ export default class Select extends React.Component {
     );
   }
 
+  renderSearchFilter() {
+    if (this.state.optionsHidden) return null;
+
+    return (
+      <div className="search-filter-container">
+        <input
+          type="text"
+          value={this.state.filter}
+          placeholder="Type to filter"
+          onChange={this.updateFilter}
+        />
+      </div>
+    );
+  }
+
   renderOptions() {
     if (this.state.optionsHidden) return null;
     const overlayStyle = {
@@ -115,13 +154,14 @@ export default class Select extends React.Component {
       left: 0,
       right: 0,
       bottom: 0,
+      zIndex: 99,
     };
 
     return (
       <div>
         <div className="overlay" onClick={this.toggleOptions} style={overlayStyle}></div>
         <div className="select-options" ref="select-options">
-          {this.props.options.map(this.renderOption.bind(this))}
+          {this.props.options.map(this.renderOption)}
         </div>
       </div>
     );
@@ -135,6 +175,7 @@ export default class Select extends React.Component {
     const selected = this.props.options[this.props.currentIndex];
     return (
       <div className={`select ${this.htmlClass} ${this.state.optionsHidden ? '' : 'show'}`}>
+        {this.renderSearchFilter()}
         <div
           className="current-selection"
           onClick={this.toggleOptions}

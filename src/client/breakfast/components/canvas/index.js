@@ -21,10 +21,12 @@ export default class Canvas extends React.Component {
     drawImageMetrics: PropTypes.object,
     renderText: PropTypes.bool,
     blockTypeStyle: PropTypes.array,
+    onCanvasClick: PropTypes.func,
   };
 
   static defaultProps = {
     renderText: false,
+    onCanvasClick: () => {},
   }
 
   componentDidMount() { this.updateCanvas(); }
@@ -93,6 +95,7 @@ export default class Canvas extends React.Component {
       <canvas
         width={style.width}
         height={style.height}
+        onClick={this.props.onCanvasClick}
         ref={(canvas) => {
           if (canvas) this.canvas = canvas;
         }}

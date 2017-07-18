@@ -1,5 +1,6 @@
 'use strict';
 
+import xr from 'xr';
 import { CORNER_OPTIONS } from './corner';
 
 export const LOGO_CHANGE = 'LOGO_CHANGE';
@@ -15,6 +16,9 @@ export const DEFAULT_LOGO = {
   noColor: true,
   filename: '',
   imgObj: null,
+  favorite: false,
+  marketName: '',
+  domains: '',
 };
 
 /**
@@ -38,6 +42,54 @@ function loadLogoImage(logoObj, logoColor = '#000') {
     }
     imgObj.src = logoUrl;
   });
+}
+
+async function formatLogos(logoInfo = {}, loadFirstImage = true) {
+  const logos = [];
+  Object.keys(logoInfo).forEach((filename) => {
+    const logo = logoInfo[filename];
+    logos.push({ ...DEFAULT_LOGO,
+      favorite: logo.favorite ? true : false,
+      marketName: logo.marketName,
+      name: logo.name,
+      domains: logo.domain.join(','),
+      aspectRatio: logo.aspectRatio || null, // Get aspect ratio downstream
+      noColor: logo.isSvg ? logo.noColor : true,
+      filename,
+    });
+  });
+
+  // Sort alphabetically, except put AP last
+  logos.sort((a, b) => {
+    if (a.favorite && b.favorite) return a.name - b.name;
+    else if (a.favorite) return -1;
+    else if (b.favorite) return 1;
+    return a.name - b.name;
+  });
+
+  if (!logos.length) {
+    return {
+      type: LOGOS_LOADED,
+      value: {
+        logos,
+        logo: { ...DEFAULT_LOGO },
+      },
+    };
+  }
+
+  const action = {
+    type: LOGOS_LOADED,
+    value: {
+      logos,
+    },
+  };
+
+  if (loadFirstImage) {
+    const imgObj = await loadLogoImage(logos[0]);
+    action.value.logo = { ...logos[0], imgObj };
+  }
+
+  return action;
 }
 
 /**
@@ -79,47 +131,26 @@ export function logoLocationChange(location) {
   };
 }
 
-export function logosLoaded(logoInfo = {}) {
+export function logosLoaded(logoInfo = {}, loadFirstImage = true) {
   // No logos? Load the defaults
 
   // Load the first logo image for drawing
   return async (dispatch) => {
-    const logos = [];
-    Object.keys(logoInfo).forEach((filename) => {
-      const logo = logoInfo[filename];
-      logos.push({ ...DEFAULT_LOGO,
-        name: logo.name,
-        aspectRatio: logo.aspectRatio || null, // Get aspect ratio downstream
-        noColor: logo.isSvg ? logo.noColor : true,
-        filename,
+    const action = await formatLogos(logoInfo, loadFirstImage);
+    dispatch(action);
+  };
+}
+
+export function toggleLogoFavorite(logo, add = true) {
+  return dispatch => {
+    const url = `/logo/favorite/${add ? 'add' : 'remove'}/`;
+    const params = { logo };
+
+    xr.get(url, params)
+      .then(async (resp) => {
+        const action = await formatLogos(resp, false);
+        dispatch(action);
       });
-    });
-
-    // Sort alphabetically, except put AP last
-    logos.sort((a, b) => {
-      if (a.name === 'AP.png' || a.name > b.name) return 1;
-      else if (b.name === 'AP.png' || a.name < b.name) return -1;
-      return 0;
-    });
-
-    if (!logos.length) {
-      return dispatch({
-        type: LOGOS_LOADED,
-        value: {
-          logos,
-          logo: { ...DEFAULT_LOGO },
-        },
-      });
-    }
-
-    const imgObj = await loadLogoImage(logos[0]);
-    return dispatch({
-      type: LOGOS_LOADED,
-      value: {
-        logos,
-        logo: { ...logos[0], imgObj },
-      },
-    });
   };
 }
 

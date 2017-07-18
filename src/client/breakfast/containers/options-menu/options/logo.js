@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { logoChange, logoColorChange, logoLocationChange } from '../../../actions/logo';
+import { logoChange, logoColorChange, logoLocationChange, toggleLogoFavorite } from '../../../actions/logo';
 import Select from '../../../../util/components/select';
 import CornerPicker from '../../../components/corner-picker';
 import { getPresentState } from '../../../selectors/present';
@@ -86,6 +86,7 @@ class LogoOptions extends Component {
           options={logos}
           valueKey="name"
           onSelect={this.logoChanged}
+          toggleFavorite={this.props.actions.toggleLogoFavorite}
           currentIndex={currentIndex}
         />
       );
@@ -161,9 +162,22 @@ class LogoSelect extends Select {
     this.htmlClass = 'logo-select';
   }
 
+  favoriteButtonClick(name, favorite) {
+    return (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      this.props.toggleFavorite(name, !favorite);
+    };
+  }
+
   getDisplayValue(option) {
+    const starSrc = option.favorite ? '/img/star-active.svg' : '/img/star-inactive.svg';
+
     return (
-      <img src={`/logos/${option.filename}`} title={option.name} alt={option.name} />
+      <div className="logo-display-value">
+        <img src={starSrc} className="favorite-button" onClick={this.favoriteButtonClick(option.name, option.favorite)} />
+        <img className="logo-image" src={`/logos/${option.filename}`} title={option.name} alt={option.name} />
+      </div>
     );
   }
 }
@@ -179,6 +193,7 @@ function mapDispatchToProps(dispatch) {
       logoChange,
       logoColorChange,
       logoLocationChange,
+      toggleLogoFavorite,
     }, dispatch),
   };
 }

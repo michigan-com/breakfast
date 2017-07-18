@@ -108,7 +108,10 @@ input[type=text] {
     width: 100%;
     z-index: calc($canvas-z-index + 1);
 
-    &:hover, &:active, &:focus {
+
+    &.active {
+      z-index: calc($canvas-z-index + 2);
+      
       .move-text, .text-width-change, .text-toolbar {
         opacity: 1 !important;
       }

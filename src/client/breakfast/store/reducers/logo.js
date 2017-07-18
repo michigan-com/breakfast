@@ -32,7 +32,7 @@ function logoReducer(state = DEFAULT_LOGO_STATE, action) {
     case LOGOS_LOADED:
       logoOptions = [];
       logoOptions = action.value.logos;
-      logo = action.value.logo;
+      logo = action.value.logo || state.logo;
       logoIndex = null;
 
       if (logoOptions.length) logoIndex = 0;
