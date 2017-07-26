@@ -295,6 +295,7 @@ $options-menu-container-width-sm: 50px;
     .select {
       width: 75%;
       margin: 0 auto;
+      margin-top: $filter-height !important;
 
       .current-selection {
         .favorite-button {

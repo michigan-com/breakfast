@@ -18,10 +18,13 @@ export default class Select extends React.Component {
     this.toggleOptions = this.toggleOptions.bind(this);
     this.updateFilter = this.updateFilter.bind(this);
     this.renderOption = this.renderOption.bind(this);
+
+    this.filter = null;
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (lastProps, lastState) => {
     if (this.state.optionsHidden) return;
+    else if (lastState.optionsHidden && !this.state.optionsHidden && this.filter) this.filter.focus();
 
     const optionsObj = ReactDOM.findDOMNode(this.refs['select-options']);
     if (optionsObj.scrollHeight <= optionsObj.clientHeight) return;
@@ -77,7 +80,6 @@ export default class Select extends React.Component {
    */
   updateFilter(e) {
     const filter = e.target.value;
-    console.log(e.target.value);
     this.setState({ filter });
   }
 
@@ -111,7 +113,7 @@ export default class Select extends React.Component {
     if (this.state.filter) {
       let displayOption = false;
       Object.values(option).forEach((v) => {
-        if (typeof v === 'string' && v.indexOf(this.state.filter) !== -1 && !displayOption) {
+        if (typeof v === 'string' && v.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1 && !displayOption) {
           displayOption = true;
         }
       });
@@ -132,7 +134,7 @@ export default class Select extends React.Component {
   }
 
   renderSearchFilter() {
-    if (this.state.optionsHidden) return null;
+    if (this.state.optionsHidden || !this.props.displayFilter) return null;
 
     return (
       <div className="search-filter-container">
@@ -141,6 +143,10 @@ export default class Select extends React.Component {
           value={this.state.filter}
           placeholder="Type to filter"
           onChange={this.updateFilter}
+          ref={(r) => {
+            if (!this.filter) r.focus();
+            this.filter = r;
+          }}
         />
       </div>
     );
@@ -195,10 +201,12 @@ Select.propTypes = {
   options: React.PropTypes.array.isRequired,
   onSelect: React.PropTypes.func,
   valueKey: React.PropTypes.string,
+  displayFilter: React.PropTypes.bool,
 };
 
 Select.defaultProps = {
   htmlClass: '',
   curretnIndex: 0,
   onSelect: () => { },
+  displayFilter: false,
 };

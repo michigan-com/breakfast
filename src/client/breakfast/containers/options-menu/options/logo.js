@@ -88,6 +88,7 @@ class LogoOptions extends Component {
           onSelect={this.logoChanged}
           toggleFavorite={this.props.actions.toggleLogoFavorite}
           currentIndex={currentIndex}
+          displayFilter
         />
       );
     }
@@ -175,7 +176,11 @@ class LogoSelect extends Select {
 
     return (
       <div className="logo-display-value">
-        <img src={starSrc} className="favorite-button" onClick={this.favoriteButtonClick(option.name, option.favorite)} />
+        <img
+          src={starSrc}
+          className="favorite-button"
+          onClick={this.favoriteButtonClick(option.name, option.favorite)}
+        />
         <img className="logo-image" src={`/logos/${option.filename}`} title={option.name} alt={option.name} />
       </div>
     );

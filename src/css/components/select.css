@@ -8,7 +8,6 @@ $filter-height: 25px;
   border: 1px solid #eee;
   background-color: #eee;
   font-family: 'Oswald';
-  margin-top: $filter-height !important;
 
   &.show {
     .current-selection {
@@ -86,10 +85,11 @@ $filter-height: 25px;
       background: transparent;
       outline: none;
       border-bottom: 1px solid $grey;
-      height: calc($filter-height * 0.8);
       font-size: calc($filter-height * 0.7);
       line-height: 1;
       width: 100%;
+      margin: 0;
+      height: $filter-height;
     }
   }
 }
