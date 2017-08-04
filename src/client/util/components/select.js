@@ -35,6 +35,8 @@ export default class Select extends React.Component {
     if (this.props.currentIndex >= 2) scrollTop -= step * 2;
     else scrollTop = 0;
 
+    if (this.input) this.input.focus();
+
     optionsObj.scrollTop = scrollTop;
   }
 
