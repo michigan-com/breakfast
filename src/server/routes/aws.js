@@ -91,7 +91,7 @@ function registerRoutes(app, router) {
       return;
     }
 
-    const imageData = req.body.imageData.replace(/^data:image\/png;base64,/, '');
+    const imageData = req.body.imageData.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
     s3.upload({
       Bucket: breakfastBucket,
       Key: filename,
