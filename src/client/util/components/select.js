@@ -114,11 +114,17 @@ export default class Select extends React.Component {
   renderOption(option, index) {
     if (this.state.filter) {
       let displayOption = false;
-      Object.values(option).forEach((v) => {
-        if (typeof v === 'string' && v.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1 && !displayOption) {
+      if (typeof option === 'string') {
+        if (typeof option === 'string' && option.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1) {
           displayOption = true;
         }
-      });
+      } else if (typeof option === 'object') {
+        Object.values(option).forEach((v) => {
+          if (typeof v === 'string' && v.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1 && !displayOption) {
+            displayOption = true;
+          }
+        });
+      }
 
       if (!displayOption) return null;
     }

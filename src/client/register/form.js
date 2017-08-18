@@ -11,7 +11,7 @@ import { Select } from '../util/components';
 
 const validEmailDomains = [];
 Object.values(marketInfo)
-  .filter((market) => (market.domain !== 'gannett.com' && /\.\w{3}$/.test(market.domain)))
+  // .filter((market) => (market.domain !== 'gannett.com' && /\.\w{3}$/.test(market.domain)))
   .forEach((market) => { validEmailDomains.push(market.domain); });
 validEmailDomains.sort();
 
@@ -137,6 +137,7 @@ export default class RegisterForm extends React.Component {
               onSelect={this.emailDomainUpdate}
               currentIndex={this.state.emailDomainIndex}
               options={validEmailDomains}
+              displayFilter
             />
           </div>
           <div className="submit">
