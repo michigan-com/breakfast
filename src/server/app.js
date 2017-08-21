@@ -47,7 +47,7 @@ function createApp(db, enableCsrf = true) {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
-  app.use(storeLocals());
+  app.use(storeLocals(app));
 
   // Set the DB before registering the routes
   app.set('db', db);

@@ -4,9 +4,9 @@
 //- @param {String} file - File to be loaded
 mixin getCssLink(path)
   if locals.s3_bucket != ''
-    link(href='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }', rel='stylesheet')
+    link(href='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }?v=#{ locals.gitHash }', rel='stylesheet')
   else
-    link(href='#{ path }', rel='stylesheet')
+    link(href='#{ path }?v=#{ locals.gitHash }', rel='stylesheet')
     
 
 //-
@@ -15,6 +15,6 @@ mixin getCssLink(path)
 //- @param {String} file - File to be loaded
 mixin getScript(path)
   if locals.s3_bucket != ''
-    script(src='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }')
+    script(src='https://s3.amazonaws.com/#{ locals.s3_bucket }#{ path }?v=#{ locals.gitHash }')
   else
-    script(src='#{ path }')
+    script(src='#{ path }?v=#{ locals.gitHash }')

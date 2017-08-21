@@ -1,5 +1,6 @@
 'use strict';
 import debug from 'debug';
+import childProcess from 'child_process';
 
 import { createApp } from './app';
 import dbConnect from './util/dbConnect';
@@ -18,13 +19,15 @@ if (!process.env.DB_URI) {
 }
 
 // Connect to the db then start the app
-async function startServer() {
+async function startServer(gitHash = '') {
   const db = await dbConnect(process.env.DB_URI);
+
 
   // Create the app
   const app = createApp(db, true);
   const port = normalizePort(process.env.NODE_PORT || '3000');
   app.set('port', port);
+  app.set('gitHash', gitHash);
 
   logger(`[SERVER] Environment: ${app.get('env')}`);
   const server = app.listen(port, '0.0.0.0', function appConnect(err) {
@@ -45,7 +48,10 @@ async function startServer() {
   });
 }
 
-startServer().catch((e) => {
-  console.error(e);
-  console.error(e.stack);
+childProcess.exec('git rev-parse HEAD', function (err, stdout) {
+  const gitHash = stdout.slice(0, 7);
+  startServer(gitHash).catch((e) => {
+    console.error(e);
+    console.error(e.stack);
+  });
 });
