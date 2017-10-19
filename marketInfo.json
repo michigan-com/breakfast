@@ -36,20 +36,16 @@
 
   "Asbury Park": {
     "domain": "app.com",
-    "logo": [{
-      "filename": "asburypark-dark.png"
-    }, {
-      "filename": "asburypark-light.png"
-    }]
+    "logo": {
+      "filename": "asburypark.svg"
+    }
   },
 
   "Asheville": {
     "domain": "citizen-times.com",
-    "logo": [{
-      "filename": "asheville-dark.png"
-    }, {
-      "filename": "asheville-light.png"
-    }]
+    "logo":   {
+      "filename": "asheville.svg"
+    }
   },
 
   "Battle Creek": {
@@ -135,10 +131,10 @@
     }
   },
 
-  "Carlsbad Current-Argus": {
+  "Carlsbad": {
     "domain": "currentargus.com",
     "logo": {
-      "filename": "carlsbadcurrentargus.svg"
+      "filename": "carlsbad.svg"
     }
   },
 
@@ -227,7 +223,7 @@
   "Corpus": {
     "domain": "caller.com",
     "logo": {
-      "filename": "corpus.svg"
+      "filename": "corpuschristi.svg"
     }
   },
 
@@ -264,10 +260,10 @@
     }]
   },
 
-  "Deming Headlight": {
+  "Deming": {
     "domain": "demingheadlight.com",
     "logo": {
-      "filename": "demingheadlight.svg"
+      "filename": "deming.svg"
     }
   },
 
@@ -353,17 +349,15 @@
 
   "Fort Collins": {
     "domain": "coloradoan.com",
-    "logo": [{
-      "filename": "fortcollins-dark.png"
-    }, {
-      "filename": "fortcollins-light.png"
-    }]
+    "logo": {
+      "filename": "fortcollins.svg"
+    }
   },
 
   "Fort Myers": {
     "domain": "news-press.com",
     "logo": {
-      "filename": "fortmyers.svg"
+      "filename": "fortmeyers.svg"
     }
   },
 
@@ -478,11 +472,9 @@
 
   "Hattiesburg": {
     "domain": "hattiesburgamerican.com",
-    "logo": [{
-      "filename": "hattiesburg-dark.png"
-    }, {
-      "filename": "hattiesburg-light.png"
-    }]
+    "logo": {
+      "filename": "hattiesburg.svg"
+    }
   },
 
   "Hawk Central": {
@@ -524,9 +516,11 @@
 
   "Ithaca": {
     "domain": "ithacajournal.com",
-    "logo": {
+    "logo": [{
       "filename": "ithaca.svg"
-    }
+    }, {
+      "filename": "centralnewyork.svg"
+    }]
   },
 
   "Jackson (MS)": {
@@ -645,7 +639,7 @@
   "Las Cruces Sun-News": {
     "domain": "lcsun-news.com",
     "logo": {
-      "filename": "lascrucessunnews.svg"
+      "filename": "lascruces.svg"
     }
   },
 
@@ -871,7 +865,7 @@
   "Naples": {
     "domain": "naplesnews.com",
     "logo": [{
-      "filename": "naples-1.svg"
+      "filename": "naples.svg"
     }, {
       "filename": "naples-prep-zone.png"
     }, {
@@ -1022,9 +1016,11 @@
 
   "Poughkeepsie": {
     "domain": "poughkeepsiejournal.com",
-    "logo": {
+    "logo": [{
       "filename": "poughkeepsie.svg"
-    }
+    }, {
+      "filename": "hudsonvalley.svg"
+    }]
   },
 
   "Redding": {
@@ -1036,9 +1032,11 @@
 
   "Reno Gazette-Journal": {
     "domain": "rgj.com",
-    "logo": {
+    "logo": [{
       "filename": "renogazettejournal.svg"
-    }
+    }, {
+      "filename": "northernnevada.svg"
+    }]
   },
 
   "Reno-Tahoe": {
@@ -1059,15 +1057,17 @@
 
   "Rochester": {
     "domain": "democratandchronicle.com",
-    "logo": {
+    "logo": [{
       "filename": "rochester.svg"
-    }
+    }, {
+      "filename": "upstatenewyork.svg"
+    }]
   },
 
   "Ruidoso News": {
     "domain": "ruidosonews.com",
     "logo": {
-      "filename": "ruidosonews.svg"
+      "filename": "ruidoso.svg"
     }
   },
 
@@ -1080,24 +1080,24 @@
 
   "Salinas": {
     "domain": "thecalifornian.com",
-    "logo": {
+    "logo": [{
       "filename": "salinas.svg"
-    }
+    }, {
+      "filename": "montereycounty.svg"
+    }]
   },
 
   "Salisbury": {
     "domain": "dmg.gannett.com",
-    "logo": [{
-      "filename": "salisbury-dark.png"
-    }, {
-      "filename": "salisbury-light.png"
-    }]
+    "logo":   {
+      "filename": "delmarva.svg"
+    }
   },
 
   "San Angelo": {
     "domain": "gosanangelo.com",
     "logo": {
-      "filename": "san-angelo.svg"
+      "filename": "sanangelo.svg"
     }
   },
 
@@ -1118,21 +1118,15 @@
   "Silver City Sun News": {
     "domain": "scsun-news.com",
     "logo": {
-      "filename": "silvercitysunnews.svg"
+      "filename": "silvercity.svg"
     }
   },
 
   "Sioux Falls": {
     "domain": "argusleader.com",
-    "logo": [{
-      "filename": "siouxfalls-small-dark.png"
-    }, {
-      "filename": "siouxfalls-small-white.png"
-    }, {
-      "filename": "siouxfalls-dark.png"
-    }, {
-      "filename": "siouxfalls-light.png"
-    }]
+    "logo": {
+      "filename": "siouxfalls.svg"
+    }
   },
 
   "Somos Frontera": {
@@ -1141,16 +1135,16 @@
       "filename": "somosfrontera-dark.png"
     }, {
       "filename": "somosfrontera-light.png"
+    }, {
+      "filename": "elpaso.svg"
     }]
   },
 
   "Springfield": {
     "domain": "news-leader.com",
-    "logo": [{
-      "filename": "springfield-dark.png"
-    }, {
-      "filename": "springfield-light.png"
-    }]
+    "logo":   {
+      "filename": "springfield.svg"
+    }
   },
 
   "St. Cloud": {
@@ -1162,9 +1156,11 @@
 
   "St. George": {
     "domain": "smgp.gannett.com",
-    "logo": {
+    "logo": [{
       "filename": "stgeorge.svg"
-    }
+    },{
+      "filename": "southernutah.svg"
+    }]
   },
 
   "Staunton": {
@@ -1173,6 +1169,8 @@
       "filename": "staunton-dark.png"
     }, {
       "filename": "staunton-light.png"
+    }, {
+      "filename": "shenandoahvalley.svg"
     }]
   },
 
@@ -1193,6 +1191,8 @@
   "Treasure Coast": {
     "domain": "tcpalm.com",
     "logo": [{
+      "filename": "treasurecoast.svg"
+    }, {
       "filename": "tc-indian-river.svg"
     }, {
       "filename": "tc-st-lucie.svg"
@@ -1268,6 +1268,8 @@
   "Wilmington": {
     "domain": "delawareonline.com",
     "logo": [{
+      "filename": "wilmington.svg"
+    }, {
       "filename": "wilmington-dark.png"
     }, {
       "filename": "wilmington-light.png"
