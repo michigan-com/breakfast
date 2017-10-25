@@ -84,11 +84,9 @@
 
   "Brevard": {
     "domain": "floridatoday.com",
-    "logo": [{
-      "filename": "brevard-dark.png"
-    }, {
-      "filename": "brevard-light.png"
-    }]
+    "logo": {
+      "filename": "brevard.svg"
+    }
   },
 
   "Bucyrus": {
@@ -357,7 +355,7 @@
   "Fort Myers": {
     "domain": "news-press.com",
     "logo": {
-      "filename": "fortmeyers.svg"
+      "filename": "fortmyers.svg"
     }
   },
 

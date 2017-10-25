@@ -146,23 +146,17 @@
     "height": "125.09",
     "aspectRatio": 3.0851387001359023
   },
-  "brevard-dark.png": {
-    "name": "brevard-dark.png",
+  "brevard.svg": {
+    "name": "brevard.svg",
     "domain": [
       "floridatoday.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Brevard"
-  },
-  "brevard-light.png": {
-    "name": "brevard-light.png",
-    "domain": [
-      "floridatoday.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Brevard"
+    "marketName": "Brevard",
+    "width": "286",
+    "height": "44",
+    "aspectRatio": 6.5
   },
   "bucyrus-dark.png": {
     "name": "bucyrus-dark.png",
@@ -588,17 +582,17 @@
     "height": "55",
     "aspectRatio": 6.345454545454546
   },
-  "fortmeyers.svg": {
-    "name": "fortmeyers.svg",
+  "fortmyers.svg": {
+    "name": "fortmyers.svg",
     "domain": [
       "news-press.com"
     ],
     "isSvg": true,
     "noColor": false,
     "marketName": "Fort Myers",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "271",
+    "height": "43",
+    "aspectRatio": 6.3023255813953485
   },
   "freepmarathon-dark.png": {
     "name": "freepmarathon-dark.png",
@@ -907,9 +901,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Knoxville Blogs",
-    "width": "430.28",
-    "height": "107.87",
-    "aspectRatio": 3.988875498284972
+    "width": "244",
+    "height": "34",
+    "aspectRatio": 7.176470588235294
   },
   "lafayettein.svg": {
     "name": "lafayettein.svg",
@@ -1055,9 +1049,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Louisville",
-    "width": "720",
-    "height": "120",
-    "aspectRatio": 6
+    "width": "320",
+    "height": "43",
+    "aspectRatio": 7.441860465116279
   },
   "manitowoc.svg": {
     "name": "manitowoc.svg",
@@ -1316,9 +1310,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Naples",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "401",
+    "height": "46",
+    "aspectRatio": 8.717391304347826
   },
   "nashville.svg": {
     "name": "nashville.svg",
@@ -1449,9 +1443,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Pensacola",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "507",
+    "height": "43",
+    "aspectRatio": 11.790697674418604
   },
   "phoenix.svg": {
     "name": "phoenix.svg",
