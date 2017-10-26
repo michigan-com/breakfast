@@ -1281,6 +1281,13 @@
     }
   },
 
+  "Wisconsin Regional": {
+    "domain": "wisconsin",
+    "logo": {
+      "filename": "wisconsin.svg"
+    }
+  },
+
   "Witchita Falls" : {
     "domain": "timesrecordnews.com",
     "logo": {

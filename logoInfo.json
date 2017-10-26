@@ -2147,6 +2147,18 @@
     "height": "123.4",
     "aspectRatio": 5.871961102106969
   },
+  "wisconsin.svg": {
+    "name": "wisconsin.svg",
+    "domain": [
+      "wisconsin"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Wisconsin Regional",
+    "width": "210",
+    "height": "110",
+    "aspectRatio": 1.9090909090909092
+  },
   "wisconsinrapids.svg": {
     "name": "wisconsinrapids.svg",
     "domain": [
