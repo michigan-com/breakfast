@@ -2,7 +2,7 @@
 
 import { createSelector } from 'reselect';
 
-import { FIT_IMAGE, SQUARE, VERTICAL } from '../actions/background';
+import { FIT_IMAGE, SQUARE, SNAPCHAT } from '../actions/background';
 
 /**
  * ensure min <= value <= max
@@ -28,7 +28,7 @@ export const canvasMetricsSelector = createSelector(
     let canvasWidth = 650;
     if (name === SQUARE) {
       canvasWidth = 400;
-    } else if (name === VERTICAL) {
+    } else if (name === SNAPCHAT) {
       canvasWidth = 300;
     } else if (name === FIT_IMAGE) {
       const backgroundRatio = backgroundImg.width / backgroundImg.height;

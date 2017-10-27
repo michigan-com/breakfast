@@ -63,10 +63,10 @@ input[type=text] {
   display: block;
   position: relative;
   padding-left: 35%;
-  padding-top: calc($navbar-height * 3);
+  padding-top: calc($navbar-height * 2);
   width: 100vw;
   height: 100vh;
-  overflow-y: hidden;
+  overflow: hidden;
 
   @media (max-width: $screen-sm) {
     padding-top: calc($navbar-height * 1.5);
@@ -111,7 +111,7 @@ input[type=text] {
 
     &.active {
       z-index: calc($canvas-z-index + 2);
-      
+
       .move-text, .text-width-change, .text-toolbar {
         opacity: 1 !important;
       }

@@ -30,6 +30,7 @@ export const TWO_ONE = '2:1';
 export const FACEBOOK_COVER = 'cover';
 export const FIT_IMAGE = 'fit';
 export const VERTICAL = 'vertical';
+export const SNAPCHAT = 'snapchat';
 
 export const BACKGROUND_TYPES = [BACKGROUND_COLOR, BACKGROUND_IMAGE, BACKGROUND_LOADING];
 
@@ -54,6 +55,8 @@ export function getAspectRatioValue(backgroundState = {}, ratio) {
     }
     case VERTICAL:
       return 1 / 1.77866666666667;
+    case SNAPCHAT:
+      return 9 / 16;
     default:
       return 1;
   }
@@ -67,6 +70,9 @@ export const ASPECT_RATIOS = [{
   name: SQUARE,
   value: getAspectRatioValue({}, SQUARE),
 }, {
+  name: SNAPCHAT,
+  value: getAspectRatioValue({}, SNAPCHAT),
+}, {
   name: SIXTEEN_NINE,
   value: getAspectRatioValue({}, SIXTEEN_NINE),
 }, {
@@ -75,7 +81,7 @@ export const ASPECT_RATIOS = [{
 }, {
   name: FIT_IMAGE,
   value: getAspectRatioValue({}, FIT_IMAGE),
-}, /* , {
+},  /* , {
   name: VERTICAL,
   value: getAspectRatioValue({}, VERTICAL),
 }*/];

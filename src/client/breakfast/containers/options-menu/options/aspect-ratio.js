@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { TWO_ONE, SQUARE, FIT_IMAGE, aspectRatioChange,
+import { TWO_ONE, SQUARE, FIT_IMAGE, aspectRatioChange, SNAPCHAT,
   } from '../../../actions/background';
 import { getPresentState } from '../../../selectors/present';
 
@@ -50,6 +50,13 @@ class AspectRatioPicker extends Component {
           </div>
         );
         break;
+      case SNAPCHAT:
+        innards = (
+          <div className="image-container" style={instagramStyle}>
+            <img src="/img/snap-ghost.svg" alt="Instagram" />
+          </div>
+        );
+        break;
       default:
         innards = <div style={style}>{ratio.name}</div>;
     }
@@ -65,10 +72,12 @@ class AspectRatioPicker extends Component {
     const backgroundImg = this.props.Background.backgroundImg;
     if (ratio.name === FIT_IMAGE && backgroundImg.img == null) return null;
 
-    let style = { height: `${AspectRatioPicker.ratioPickerHeight}px` };
-    style.width = AspectRatioPicker.ratioPickerHeight * ratio.value;
+    const multiplier = ratio.name === SNAPCHAT ? 1.3 : 1;
 
-    let className = 'ratio-option';
+    let style = { height: `${AspectRatioPicker.ratioPickerHeight * multiplier}px` };
+    style.width = AspectRatioPicker.ratioPickerHeight * ratio.value * multiplier;
+
+    let className = `ratio-option ${ratio.name}`;
     if (index === this.props.Background.aspectRatioIndex) className += ' active';
     return (
       <div

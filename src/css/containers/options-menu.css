@@ -274,6 +274,13 @@ $options-menu-container-width-sm: 50px;
       }
     }
 
+    &.snapchat img {
+      height: 46% !important;
+      margin: 0 !important;
+      margin-top: 43% !important;
+    }
+
+
     &.active {
       opacity: 1;
 

@@ -15,8 +15,12 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
   const canvasPadding = canvasOptions.padding;
   const canvasWidth = canvasOptions.width;
   const canvasHeight = canvasOptions.height;
-  const maxLogoWidth = canvasWidth * 0.3;
+  const canvasAspectRatio = canvasOptions.width / canvasOptions.height;
   const imgObj = logoOptions.logo.imgObj;
+
+  let maxLogoWidth = canvasWidth * 0.3;
+  if (canvasAspectRatio === 1) maxLogoWidth = canvasWidth * 0.4;
+  else if (canvasAspectRatio < 1) maxLogoWidth = canvasWidth * 0.6;
 
   if (imgObj === null) return;
 
@@ -25,7 +29,7 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
   if (logoAspectRatio === 1) {
     logoHeight = canvasHeight / 5;
   } else if (logoAspectRatio < 1) {
-    logoHeight = canvasHeight / 5;
+    logoHeight = canvasHeight / 4;
   }
   let logoWidth = logoHeight * logoAspectRatio;
 
