@@ -160,9 +160,7 @@
   "Cherry Hill": {
     "domain": "courierpostonline.com",
     "logo": [{
-      "filename": "cherryhill-dark.png"
-    }, {
-      "filename": "cherryhill-light.png"
+      "filename": "cherryhill.svg"
     }, {
       "filename": "vineland.svg"
     }]
@@ -1242,10 +1240,10 @@
     }
   },
 
-  "Visalia": {
+  "Ventura": {
     "domain": "vcstar.com",
     "logo": {
-      "filename": "visalia.svg"
+      "filename": "ventura.svg"
     }
   },
 
