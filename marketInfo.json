@@ -547,6 +547,13 @@
     }
   },
 
+  "Knoxville News (Biz)": {
+    "domain": "knoxvillebiz.com",
+    "logo": {
+      "filename": "knoxville.svg"
+    }
+  },
+
   "Knoxville": {
     "domain": "knoxville.com",
     "logo": {
