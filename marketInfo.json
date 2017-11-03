@@ -819,6 +819,13 @@
     }
   },
 
+  "Milwaukee": {
+    "domain": "jrn.com",
+    "logo": {
+      "filename": "milwaukee.svg"
+    }
+  },
+
   "Monroe": {
     "domain": "thenewsstar.com",
     "logo": [{
