@@ -890,7 +890,6 @@
     "domain": [
       "knoxblogs.com",
       "knoxnews.com",
-      "knoxvillebiz.com",
       "knoxville.com"
     ],
     "isSvg": true,
@@ -899,6 +898,15 @@
     "width": "244",
     "height": "34",
     "aspectRatio": 7.176470588235294
+  },
+  "knoxvillebiz.jpg": {
+    "name": "knoxvillebiz.jpg",
+    "domain": [
+      "knoxvillebiz.com"
+    ],
+    "isSvg": false,
+    "noColor": false,
+    "marketName": "Knoxville News (Biz)"
   },
   "lafayettein.svg": {
     "name": "lafayettein.svg",
