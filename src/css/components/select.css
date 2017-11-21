@@ -41,6 +41,7 @@ $filter-height: 25px;
       transform: rotate(180deg);
       transition: all 250ms linear;
       font-family: $body-font;
+      transform-origin: center;
     }
   }
 

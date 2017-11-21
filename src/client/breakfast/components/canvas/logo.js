@@ -25,11 +25,13 @@ export default function updateLogo(context, canvasOptions, logoOptions) {
   if (imgObj === null) return;
 
   const logoAspectRatio = imgObj.width / imgObj.height;
-  let logoHeight = canvasHeight / 7;
+  let logoHeight = canvasHeight / 9;
   if (logoAspectRatio === 1) {
     logoHeight = canvasHeight / 5;
   } else if (logoAspectRatio < 1) {
     logoHeight = canvasHeight / 3;
+  } else if (logoAspectRatio > 5) {
+    logoHeight = canvasHeight / 7;
   }
   let logoWidth = logoHeight * logoAspectRatio;
 

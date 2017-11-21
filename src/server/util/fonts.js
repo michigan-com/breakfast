@@ -1,11 +1,11 @@
 'use strict';
 
 export const basicFonts = [
-  'Alfa Slab One',
+  // 'Alfa Slab One', // these dont exist?
   'Arial',
-  'Bebas Neue',
+  // 'Bebas Neue', // these dont exist?
   'Courier',
-  'Didot',
+  // 'Didot', // these dont exist?
   'Garamond',
   // 'Josefin Sans', // TODO use this? its a google font
   'Helvetica',
@@ -18,6 +18,7 @@ export const basicFonts = [
 
 export const usatFonts = [
   'Futura Today',
+  'Unify Sans',
   // 'Futura Demibold',
   // 'Futura Light',
 ];

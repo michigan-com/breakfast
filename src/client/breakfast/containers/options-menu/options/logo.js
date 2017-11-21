@@ -4,14 +4,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { logoChange, logoColorChange, logoLocationChange, toggleLogoFavorite } from '../../../actions/logo';
+import { logoChange, logoColorChange, logoLocationChange, toggleLogoFavorite,
+  DARK_LOGO_COLOR } from '../../../actions/logo';
 import Select from '../../../../util/components/select';
 import CornerPicker from '../../../components/corner-picker';
 import { getPresentState } from '../../../selectors/present';
 
 
 class LogoOptions extends Component {
-  static ColorOptions = ['black', 'white'];
+  static ColorOptions = [DARK_LOGO_COLOR, 'white'];
   static propTypes = {
     Logo: PropTypes.object,
     actions: PropTypes.object,
@@ -39,8 +40,10 @@ class LogoOptions extends Component {
         logoColor = '#000';
         break;
       case 'white':
-      default:
         logoColor = '#fff';
+        break;
+      default:
+        logoColor = c;
         break;
     }
 
@@ -115,12 +118,14 @@ class LogoOptions extends Component {
 
     let colorOptions = [];
     for (const color of LogoOptions.ColorOptions) {
-      let colorClass = ` color ${color}`;
+      const style = { backgroundColor: color };
+      let colorClass = ' color';
       if (this.isActiveColor(color)) colorClass += ' active';
+
 
       colorOptions.push(
         <div className="color-container" key={`logo-color-${color}`}>
-          <div className={colorClass} onClick={this.logoColorChange(color)}></div>
+          <div className={colorClass} onClick={this.logoColorChange(color)} style={style}></div>
         </div>
       );
     }

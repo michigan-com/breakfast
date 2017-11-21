@@ -10,6 +10,8 @@ export const LOGO_LOADING = 'LOGO_LOADING';
 export const LOGOS_LOADED = 'LOGOS_LOADED';
 export const LOGO_ASPECT_RATIO_FOUND = 'LOGO_ASPECT_RATIO_FOUND';
 
+export const DARK_LOGO_COLOR = '#404040';
+
 export const DEFAULT_LOGO = {
   name: '',
   aspectRatio: null, // Get aspect ratio downstream
@@ -27,7 +29,7 @@ export const DEFAULT_LOGO = {
  * @param {Object} imgObj - see DEFAULT_LOGO for attributes
  * @param {String} color - color of the logo we want
  */
-function loadLogoImage(logoObj, logoColor = '#000') {
+function loadLogoImage(logoObj, logoColor = DARK_LOGO_COLOR) {
   return new Promise((resolve) => {
     const imgObj = new Image();
     imgObj.onload = () => {
@@ -98,7 +100,7 @@ async function formatLogos(logoInfo = {}, loadFirstImage = true) {
  * @param {Object} logo, see DEFAULT_LOGO for props
  *
  */
-export function logoChange(logo, logoIndex, logoColor = '#000') {
+export function logoChange(logo, logoIndex, logoColor = DARK_LOGO_COLOR) {
   return async (dispatch) => {
     const imgObj = await loadLogoImage(logo, logoColor);
     return dispatch({
@@ -163,7 +165,7 @@ export function logoAspectRatioFound(logoIndex, logoAspectRatio) {
 
 export const DEFAULT_LOGO_STATE = {
   logo: DEFAULT_LOGO,
-  logoColor: '#000',
+  logoColor: DARK_LOGO_COLOR,
   logoIndex: null,
   logoOptions: [],
   logoLocation: CORNER_OPTIONS[CORNER_OPTIONS.length - 1],

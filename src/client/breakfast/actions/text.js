@@ -33,7 +33,7 @@ const DEFAULT_TEXT_CONTAINER = {
   showFontSizeChanger: false,
   textHeight: DEFAULT_TEXT_CONTAINER_HEIGHT,
   display: false,
-  fontFace: 'Helvetica',
+  fontFace: 'Unify Sans',
   fontColor: '#000000',
   textAlign: 'left',
   editorState: EditorState.createEmpty(),

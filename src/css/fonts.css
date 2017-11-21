@@ -16,3 +16,8 @@
   font-weight: thin;
 }
 
+@font-face {
+  font-family: 'Unify Sans';
+  src: url('../fonts/UnifySans/UnifySans_Rg.ttf');
+  font-weight: normal;
+}

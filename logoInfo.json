@@ -1914,9 +1914,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "157",
-    "height": "29",
-    "aspectRatio": 5.413793103448276
+    "width": "78",
+    "height": "28",
+    "aspectRatio": 2.7857142857142856
   },
   "usat-2.svg": {
     "name": "usat-2.svg",
@@ -1928,9 +1928,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "720",
-    "height": "374",
-    "aspectRatio": 1.9251336898395721
+    "width": "102",
+    "height": "19",
+    "aspectRatio": 5.368421052631579
   },
   "usat-ftw-large.svg": {
     "name": "usat-ftw-large.svg",
@@ -1965,9 +1965,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "202",
-    "height": "29",
-    "aspectRatio": 6.9655172413793105
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-money.svg": {
     "name": "usat-money.svg",
@@ -1978,9 +1978,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "246",
-    "height": "29",
-    "aspectRatio": 8.482758620689655
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-news.svg": {
     "name": "usat-news.svg",
@@ -1991,9 +1991,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "227",
-    "height": "29",
-    "aspectRatio": 7.827586206896552
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-opinion.svg": {
     "name": "usat-opinion.svg",
@@ -2004,9 +2004,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "257",
-    "height": "29",
-    "aspectRatio": 8.862068965517242
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-sports.svg": {
     "name": "usat-sports.svg",
@@ -2017,9 +2017,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "246",
-    "height": "29",
-    "aspectRatio": 8.482758620689655
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-tech.svg": {
     "name": "usat-tech.svg",
@@ -2030,9 +2030,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "215",
-    "height": "29",
-    "aspectRatio": 7.413793103448276
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "usat-travel.svg": {
     "name": "usat-travel.svg",
@@ -2043,9 +2043,21 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Gannett (USA Today)",
-    "width": "240",
-    "height": "29",
-    "aspectRatio": 8.275862068965518
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
+  },
+  "usat-weather.svg": {
+    "name": "usat-weather.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Gannett (USA Today)",
+    "width": "109",
+    "height": "28",
+    "aspectRatio": 3.892857142857143
   },
   "ventura.svg": {
     "name": "ventura.svg",
