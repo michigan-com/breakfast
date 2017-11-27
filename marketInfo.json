@@ -1190,7 +1190,10 @@
   },
 
   "Stevens Point": {
-    "domain": "stevenspointjournal.com",
+    "domain": [
+      "stevenspointjournal.com",
+      "stevenspoint.gannett.com"
+    ],
     "logo": {
       "filename": "stevenspoint.svg"
     }

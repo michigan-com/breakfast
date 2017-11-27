@@ -1776,7 +1776,8 @@
   "stevenspoint.svg": {
     "name": "stevenspoint.svg",
     "domain": [
-      "stevenspointjournal.com"
+      "stevenspointjournal.com",
+      "stevenspoint.gannett.com"
     ],
     "isSvg": true,
     "noColor": false,
