@@ -9,10 +9,13 @@ import { DEFAULT_STATE, usernameUpdate, inputError, sendingEmail, doneSendingEma
 import marketInfo from '../../../marketInfo';
 import { Select } from '../util/components';
 
-const validEmailDomains = [];
+let validEmailDomains = [];
 Object.values(marketInfo)
   // .filter((market) => (market.domain !== 'gannett.com' && /\.\w{3}$/.test(market.domain)))
-  .forEach((market) => { validEmailDomains.push(market.domain); });
+  .forEach((market) => {
+    if (Array.isArray(market.domain)) validEmailDomains = validEmailDomains.concat(market.domain);
+    else if (typeof market.domain === 'string') validEmailDomains.push(market.domain);
+  });
 validEmailDomains.sort();
 
 class DomainSelect extends Select {

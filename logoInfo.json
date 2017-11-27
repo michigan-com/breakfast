@@ -75,7 +75,8 @@
   "asheville.svg": {
     "name": "asheville.svg",
     "domain": [
-      "citizen-times.com"
+      "citizen-times.com",
+      "ashevill.gannett.com"
     ],
     "isSvg": true,
     "noColor": false,

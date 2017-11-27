@@ -42,7 +42,10 @@
   },
 
   "Asheville": {
-    "domain": "citizen-times.com",
+    "domain": [
+      "citizen-times.com",
+      "ashevill.gannett.com"
+    ],
     "logo":   {
       "filename": "asheville.svg"
     }

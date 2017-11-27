@@ -99,7 +99,16 @@ function getLogoNames() {
         };
       }
 
-      logoNames[filename].domain.push(market.domain);
+      let domains = [];
+      if (Array.isArray(market.domain)) {
+        domains = [...market.domain];
+      } else {
+        domains = [market.domain];
+      }
+
+      for (const domain of domains) {
+        logoNames[filename].domain.push(domain);
+      }
     }
   }
 

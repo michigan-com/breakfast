@@ -10,8 +10,11 @@ const logger = debug('breakfast:util:email');
 const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 function getValidEmailDomains() {
-  const validEmailDomains = [];
-  Object.values(marketInfo).forEach((market) => { validEmailDomains.push(market.domain); });
+  let validEmailDomains = [];
+  Object.values(marketInfo).forEach((market) => {
+    if (Array.isArray(market.domain)) validEmailDomains = validEmailDomains.concat(market.domain);
+    else if (typeof market.domain === 'string') validEmailDomains.push(market.domain);
+  });
   return validEmailDomains;
 }
 
