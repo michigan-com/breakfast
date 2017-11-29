@@ -86,9 +86,14 @@ $options-menu-container-width-sm: 50px;
   color: black;
   background: transparent;
   transition: all 250ms linear;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   .option-image-container {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: 20%;
     height: 100%;
     text-align: center;
@@ -500,4 +505,38 @@ $options-menu-container-width-sm: 50px;
     height: 20px;
     line-height: 20px;
   }
+}
+
+.upload-container {
+  text-align: center;
+
+  .upload-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .image-container {
+      width: 90%;
+      margin: 10px auto;
+      position: relative;
+
+      img {
+        width: 100%;
+      }
+      .remove-upload {
+        position: absolute;
+        color: white;
+        background-color: $light-blue;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 35px;
+        cursor: pointer;
+        top: -10px;
+        right: -10px;
+      }
+    }
+
+  }
+
 }

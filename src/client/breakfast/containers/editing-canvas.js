@@ -5,15 +5,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import TextOverlay from './text-overlay';
+import ImageOverlay from '../components/image-overlay';
 import Canvas from './canvas';
 import { canvasMetricsSelector } from '../selectors/background';
 import { getPresentState } from '../selectors/present';
 import { setActiveTextContainerIndex } from '../actions/text';
+import { updateImage, activateImage } from '../actions/uploads';
 
 class EditingCanvas extends Component {
   static propTypes = {
     canvas: PropTypes.object,
     Text: PropTypes.object,
+    Uploads: PropTypes.object,
     actions: PropTypes.object,
   };
 
@@ -28,8 +31,9 @@ class EditingCanvas extends Component {
   }
 
   render() {
-    const { canvas, Text } = this.props;
+    const { canvas, Text, Uploads } = this.props;
     const { textContainers, activeContainerIndex } = Text;
+    const { images, activeImageIndex } = Uploads;
     let className = 'image';
 
     // Have to scale down for better UI
@@ -55,21 +59,39 @@ class EditingCanvas extends Component {
             />
           );
         })}
+
+        <div className="images-container">
+          {
+            images.map((img, index) => (
+              <ImageOverlay
+                image={img}
+                imageIndex={index}
+                updateImage={this.props.actions.updateImage}
+                activateImage={this.props.actions.activateImage}
+                activeImageIndex={activeImageIndex}
+                canvas={canvas}
+                key={`image-overlay-${index}`}
+              />
+            ))
+          }
+        </div>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { Text } = getPresentState(state);
+  const { Text, Uploads } = getPresentState(state);
   const canvas = canvasMetricsSelector(state);
-  return { Text, canvas };
+  return { Text, Uploads, canvas };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       setActiveTextContainerIndex,
+      updateImage,
+      activateImage,
     }, dispatch),
   };
 }

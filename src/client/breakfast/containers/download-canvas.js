@@ -51,7 +51,7 @@ class DownloadCanvas extends Component {
 
   render() {
     return (
-      <Canvas renderText ref="canvas" />
+      <Canvas renderText renderImages ref="canvas" />
     );
   }
 }

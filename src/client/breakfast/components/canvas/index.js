@@ -8,6 +8,7 @@ import updateLogo from './logo';
 import updateAttribution from './attribution';
 import updateText from './text';
 import updateSports from './sports';
+import updateUploads from './uploads';
 
 export default class Canvas extends React.Component {
   static propTypes = {
@@ -17,9 +18,11 @@ export default class Canvas extends React.Component {
     Attribution: PropTypes.object,
     Font: PropTypes.object,
     Text: PropTypes.object,
+    Uploads: PropTypes.object,
     canvas: PropTypes.object,
     drawImageMetrics: PropTypes.object,
     renderText: PropTypes.bool,
+    renderImages: PropTypes.bool,
     blockTypeStyle: PropTypes.array,
     onCanvasClick: PropTypes.func,
   };
@@ -63,7 +66,7 @@ export default class Canvas extends React.Component {
   updateCanvas() {
     const canvasStyle = this.getCanvasStyle();
     const context = this.getCanvasContext();
-    const { renderText, Background, Attribution, Logo, Font, Text,
+    const { renderText, renderImages, Background, Attribution, Logo, Font, Text, Uploads,
       drawImageMetrics, Sports, blockTypeStyle } = this.props;
     const { textContainers } = Text;
 
@@ -74,6 +77,9 @@ export default class Canvas extends React.Component {
     context.clearRect(0, 0, canvasStyle.width, canvasStyle.height);
 
     updateBackground(context, canvasStyle, Background, drawImageMetrics);
+    if (renderImages || true) {
+      updateUploads(context, Uploads.images, canvasStyle);
+    }
     updateLogo(context, canvasStyle, Logo);
     updateAttribution(context, canvasStyle, Attribution, Font);
     if (renderText) {

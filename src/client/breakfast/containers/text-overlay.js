@@ -230,7 +230,6 @@ class TextOverlay extends React.Component {
   }
 
   activateTextEditor() {
-    console.log('activateTextEditor');
     this.props.actions.setActiveTextContainerIndex(this.props.textContainerIndex);
   }
 
