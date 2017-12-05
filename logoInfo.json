@@ -81,9 +81,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Asheville",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "296",
+    "height": "46",
+    "aspectRatio": 6.434782608695652
   },
   "battlecreek.svg": {
     "name": "battlecreek.svg",
@@ -107,9 +107,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "North Jersey",
-    "width": "779",
-    "height": "154",
-    "aspectRatio": 5.058441558441558
+    "width": "418",
+    "height": "61",
+    "aspectRatio": 6.852459016393443
   },
   "binghamton.svg": {
     "name": "binghamton.svg",
@@ -356,9 +356,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Corpus",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "269",
+    "height": "47",
+    "aspectRatio": 5.723404255319149
   },
   "coshocton.svg": {
     "name": "coshocton.svg",
@@ -389,9 +389,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Salisbury",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "319",
+    "height": "35",
+    "aspectRatio": 9.114285714285714
   },
   "deming.svg": {
     "name": "deming.svg",
@@ -480,9 +480,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "El Paso",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "295",
+    "height": "47",
+    "aspectRatio": 6.276595744680851
   },
   "elsol-dark.png": {
     "name": "elsol-dark.png",
@@ -573,9 +573,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Fort Collins",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "265",
+    "height": "46",
+    "aspectRatio": 5.760869565217392
   },
   "fortmyers.svg": {
     "name": "fortmyers.svg",
@@ -1371,9 +1371,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "North Jersey",
-    "width": "617",
-    "height": "102",
-    "aspectRatio": 6.049019607843137
+    "width": "356",
+    "height": "44",
+    "aspectRatio": 8.090909090909092
   },
   "one-nation.png": {
     "name": "one-nation.png",
@@ -1521,9 +1521,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Poughkeepsie",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "472",
+    "height": "47",
+    "aspectRatio": 10.042553191489361
   },
   "redding.svg": {
     "name": "redding.svg",
@@ -1628,6 +1628,18 @@
     "height": "156",
     "aspectRatio": 4.615384615384615
   },
+  "salisbury.svg": {
+    "name": "salisbury.svg",
+    "domain": [
+      "dmg.gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Salisbury",
+    "width": "527",
+    "height": "48",
+    "aspectRatio": 10.979166666666666
+  },
   "sanangelo.svg": {
     "name": "sanangelo.svg",
     "domain": [
@@ -1673,9 +1685,21 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lafayette (LA)",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "445",
+    "height": "55",
+    "aspectRatio": 8.090909090909092
+  },
+  "shreveporttimes.svg": {
+    "name": "shreveporttimes.svg",
+    "domain": [
+      "shreveporttimes.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Shreveport",
+    "width": "392",
+    "height": "43",
+    "aspectRatio": 9.116279069767442
   },
   "silvercity.svg": {
     "name": "silvercity.svg",
@@ -1769,9 +1793,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "St. Cloud",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "200",
+    "height": "47",
+    "aspectRatio": 4.25531914893617
   },
   "stevenspoint.svg": {
     "name": "stevenspoint.svg",
@@ -1806,9 +1830,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Tallahassee",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "495",
+    "height": "46",
+    "aspectRatio": 10.76086956521739
   },
   "tc-1-treasure-coast.svg": {
     "name": "tc-1-treasure-coast.svg",
@@ -1869,18 +1893,6 @@
     "width": "625",
     "height": "114",
     "aspectRatio": 5.482456140350878
-  },
-  "therecord.svg": {
-    "name": "therecord.svg",
-    "domain": [
-      "northjersey.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "North Jersey",
-    "width": "259",
-    "height": "83",
-    "aspectRatio": 3.1204819277108435
   },
   "treasurecoast.svg": {
     "name": "treasurecoast.svg",
@@ -2200,17 +2212,17 @@
     "height": "75.21",
     "aspectRatio": 5.758409785932722
   },
-  "yorkdailyrecord.svg": {
-    "name": "yorkdailyrecord.svg",
+  "york.svg": {
+    "name": "york.svg",
     "domain": [
       "ydr.com"
     ],
     "isSvg": true,
     "noColor": false,
     "marketName": "York Daily Record",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "374",
+    "height": "48",
+    "aspectRatio": 7.791666666666667
   },
   "yorkdispatch.svg": {
     "name": "yorkdispatch.svg",

@@ -940,8 +940,6 @@
       "filename": "bergen.svg"
     }, {
       "filename": "northjersey.svg"
-    }, {
-      "filename": "therecord.svg"
     }]
   },
 
@@ -1104,9 +1102,11 @@
 
   "Salisbury": {
     "domain": "dmg.gannett.com",
-    "logo":   {
+    "logo":   [{
       "filename": "delmarva.svg"
-    }
+    },{
+      "filename": "salisbury.svg"
+      }]
   },
 
   "San Angelo": {
@@ -1125,9 +1125,11 @@
 
   "Shreveport": {
     "domain": "shreveporttimes.com",
-    "logo": {
+    "logo": [{
       "filename": "shreveport.svg"
-    }
+    }, {
+      "filename": "shreveporttimes.svg"
+    }]
   },
 
   "Silver City Sun News": {
@@ -1318,7 +1320,7 @@
   "York Daily Record": {
     "domain": "ydr.com",
     "logo": [{
-      "filename": "yorkdailyrecord.svg"
+      "filename": "york.svg"
     }, {
       "filename": "gametime-dark.jpg"
     }, {
