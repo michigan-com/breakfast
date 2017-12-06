@@ -3,6 +3,7 @@
 const OPTION_CHOICES = [
   'aspect-ratio',
   'background',
+  'uploads',
   'text-containers',
   'sports-score',
   'logo',

@@ -12,6 +12,7 @@ import AspectRatioOptions from './options/aspect-ratio';
 import LogoOptions from './options/logo';
 import TextContainerOptions from './options/text-containers';
 import SportsScoreOptions from './options/sports-score';
+import Uploads from './options/uploads';
 
 class OptionsMenuComponent extends Component {
   static propTypes = {
@@ -47,6 +48,9 @@ class OptionsMenuComponent extends Component {
         break;
       case 'sports-score':
         optionsElement = <SportsScoreOptions />;
+        break;
+      case 'uploads':
+        optionsElement = <Uploads />;
         break;
       default:
         optionsElement = null;

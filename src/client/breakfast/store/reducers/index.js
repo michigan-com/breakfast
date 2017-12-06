@@ -11,6 +11,7 @@ import OptionsMenu from './options-menu';
 import Downloading from './downloading';
 import Nav from './nav';
 import Sports from './sports';
+import Uploads from './uploads';
 
 export default combineReducers({
   Attribution,
@@ -22,4 +23,5 @@ export default combineReducers({
   Downloading,
   Nav,
   Sports,
+  Uploads,
 });
