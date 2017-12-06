@@ -508,7 +508,15 @@ $options-menu-container-width-sm: 50px;
 }
 
 .upload-container {
-  text-align: center;
+
+  .file-upload {
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .remove-upload {
+    text-align: center;
+  }
 
   .upload-gallery {
     display: flex;
