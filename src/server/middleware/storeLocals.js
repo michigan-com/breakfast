@@ -9,6 +9,8 @@ export default function storeLocals(app) {
     res.locals.user = req.user;
     res.locals.s3_bucket = process.env.S3_BUCKET || '';
     res.locals.gitHash = app.get('gitHash');
+
+    res.locals.oktaLogin = process.env.OKTA_LOGIN_LINK;
     next();
   };
 }

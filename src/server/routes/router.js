@@ -6,9 +6,7 @@ import { createPassport } from './passport';
 import logoFetch from './logoFetch';
 import fontFetch from './fontFetch';
 import login from './login';
-import register from './register';
 import aws from './aws';
-import passwordReset from './password-reset';
 import sports from './sports';
 import admin from './admin';
 import { loginRequired } from '../middleware/login';
@@ -22,16 +20,9 @@ function registerRoutes(app) {
   logoFetch.registerRoutes(app, router, passport);
   fontFetch.registerRoutes(app, router, passport);
   login.registerRoutes(app, router, passport);
-  register.registerRoutes(app, router, passport);
   aws.registerRoutes(app, router, passport);
   sports.registerRoutes(app);
   admin.registerRoutes(app);
-
-  try {
-    passwordReset.registerRoutes(app, router, passport);
-  } catch (e) {
-    throw new Error(e);
-  }
 
   // Basic routes
   router.get('/', (req, res) => {

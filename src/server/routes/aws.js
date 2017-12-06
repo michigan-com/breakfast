@@ -81,7 +81,7 @@ function registerRoutes(app, router) {
     // Don't upload unless on prod
     if (process.env.NODE_ENV !== 'production') {
       await Photo.insertOne({
-        email: req.user.email,
+        email: req.user.emailAddress,
         photo: filename,
         createdAt: new Date(),
       });
@@ -106,7 +106,7 @@ function registerRoutes(app, router) {
         logger(`Saved ${filename}`);
 
         await Photo.insertOne({
-          email: req.user.email,
+          email: req.user.emailAddress,
           photo: filename,
           createdAt: new Date(),
         });

@@ -3,7 +3,7 @@
     if locals.user
       .user.logged-in
         a(href='/logout/') Logout
-        .email #{locals.user.email}
+        .email #{locals.user.emailAddress}
     else
       .user
         a(href='/login/') Login

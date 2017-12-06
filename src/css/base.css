@@ -22,19 +22,19 @@
   line-height: 3em;
   padding: 0px 1em;
   border-radius: 100px;
-  background-color: transparent;
+  background-color: white;
   text-decoration: none;
   transition: background-color 250ms linear, color 250ms linear;
   border: 1px solid white;
   text-align: center;
-  color: white;
+  color: black;
   font-family: 'Oswald';
   text-transform: uppercase;
   cursor: pointer;
 
   &:hover {
-    background-color: white;
-    color: black;
+    background-color: transparent;
+    color: white;
   }
 }
 

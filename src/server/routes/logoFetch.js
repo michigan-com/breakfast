@@ -150,7 +150,7 @@ function registerRoutes(app, router) {
 
   async function getLogos(req, res) {
     const approvedLogos = {};
-    const favorites = await getUserFavorites(req.user ? req.user.email : '');
+    const favorites = await getUserFavorites(req.user ? req.user.emailAddress : '');
     const favoritesMap = favorites.reduce((a, f) => {
       a[f] = true;
       return a;
@@ -179,7 +179,7 @@ function registerRoutes(app, router) {
     }
 
     const query = {
-      email: req.user.email,
+      email: req.user.emailAddress,
       logo,
     };
 

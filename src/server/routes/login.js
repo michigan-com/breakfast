@@ -16,27 +16,20 @@ function registerRoutes(app, router, passport) {
   // Render the login page
   router.get('/login/', csrfProtection(app), (req, res) => {
     // If the user is already logged in, redirect to breakfast
-    if (req.user) {
-      res.redirect('/breakfast/');
-      return;
-    }
+    res.redirect(res.locals.oktaLogin);
+  });
 
-    let csrfToken;
-    if (typeof req.csrfToken === 'function') csrfToken = req.csrfToken();
+  router.get('/login/failed/', (req, res) => {
+    res.json({ error: 'failed to login' });
+  });
 
-    const csrf = new Field({ type: 'hidden', name: '_csrf', value: csrfToken });
-    const email = new Field({ name: 'email' });
-    const password = new Field({ type: 'password', name: 'password' });
-
-    res.render('login', {
-      fields: [csrf, email, password],
-      messages: req.flash('error'),
-    });
+  router.get('/login/callback/', (req, res) => {
+    res.redirect('/breakfast/');
   });
 
   // Handle the login response
-  router.post('/login/', passport.authenticate('local', {
-    failureRedirect: '/login/',
+  router.post('/auth/saml/callback/', passport.authenticate('saml', {
+    failureRedirect: '/login/failed/',
     failureFlash: 'Username/password combination does not match, please try again',
   }),
     (req, res) => {

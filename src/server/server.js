@@ -25,7 +25,7 @@ async function startServer(gitHash = '') {
 
   // Create the app
   const app = createApp(db, true);
-  const port = normalizePort(process.env.NODE_PORT || '3000');
+  const port = normalizePort(process.env.NODE_PORT || '3001');
   app.set('port', port);
   app.set('gitHash', gitHash);
 

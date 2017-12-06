@@ -36,7 +36,7 @@ body
 if locals.user
   script.
     ga('create', 'UA-70544408-1', 'auto');
-    ga('set', 'userId', '#{locals.user.email}');
+    ga('set', 'userId', '#{locals.user.emailAddress}');
     ga('send', 'pageview')
 else
   script.

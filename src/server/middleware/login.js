@@ -3,7 +3,7 @@
 function loginRequired(req, res, next) {
   if (!req.user) {
     req.flash('error', 'You need to login to see this page');
-    res.redirect('/login/');
+    res.redirect('/');
   } else {
     res.locals.user = req.user;
     next();
@@ -11,7 +11,11 @@ function loginRequired(req, res, next) {
 }
 
 function adminRequired(req, res, next) {
-  if (!req.user || !req.user.admin) {
+  const adminEmails = {
+    'mvarano@michigan.com': true,
+    'rwilliams@gannett.com': true,
+  };
+  if (!req.user || !(req.user.emailAddress in adminEmails)) {
     req.flash('error', 'Access denied');
     res.redirect('/');
   } else {
