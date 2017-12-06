@@ -99,18 +99,6 @@
     "height": "83",
     "aspectRatio": 8.674698795180722
   },
-  "bergen.svg": {
-    "name": "bergen.svg",
-    "domain": [
-      "northjersey.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "North Jersey",
-    "width": "418",
-    "height": "61",
-    "aspectRatio": 6.852459016393443
-  },
   "binghamton.svg": {
     "name": "binghamton.svg",
     "domain": [
@@ -380,18 +368,6 @@
     "width": "720",
     "height": "94",
     "aspectRatio": 7.659574468085107
-  },
-  "delmarva.svg": {
-    "name": "delmarva.svg",
-    "domain": [
-      "dmg.gannett.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "Salisbury",
-    "width": "319",
-    "height": "35",
-    "aspectRatio": 9.114285714285714
   },
   "deming.svg": {
     "name": "deming.svg",
@@ -1636,9 +1612,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Salisbury",
-    "width": "527",
-    "height": "48",
-    "aspectRatio": 10.979166666666666
+    "width": "319",
+    "height": "46",
+    "aspectRatio": 6.934782608695652
   },
   "sanangelo.svg": {
     "name": "sanangelo.svg",
@@ -1685,21 +1661,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lafayette (LA)",
-    "width": "445",
-    "height": "55",
-    "aspectRatio": 8.090909090909092
-  },
-  "shreveporttimes.svg": {
-    "name": "shreveporttimes.svg",
-    "domain": [
-      "shreveporttimes.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "Shreveport",
     "width": "392",
-    "height": "43",
-    "aspectRatio": 9.116279069767442
+    "height": "47",
+    "aspectRatio": 8.340425531914894
   },
   "silvercity.svg": {
     "name": "silvercity.svg",
