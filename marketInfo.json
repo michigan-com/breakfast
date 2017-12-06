@@ -937,8 +937,6 @@
   "North Jersey": {
     "domain": "northjersey.com",
     "logo": [{
-      "filename": "bergen.svg"
-    }, {
       "filename": "northjersey.svg"
     }]
   },
@@ -1102,11 +1100,9 @@
 
   "Salisbury": {
     "domain": "dmg.gannett.com",
-    "logo":   [{
-      "filename": "delmarva.svg"
-    },{
+    "logo":   {
       "filename": "salisbury.svg"
-      }]
+    }
   },
 
   "San Angelo": {
@@ -1127,8 +1123,6 @@
     "domain": "shreveporttimes.com",
     "logo": [{
       "filename": "shreveport.svg"
-    }, {
-      "filename": "shreveporttimes.svg"
     }]
   },
 
