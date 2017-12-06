@@ -108,8 +108,8 @@
     "noColor": false,
     "marketName": "Binghamton",
     "width": "331",
-    "height": "38",
-    "aspectRatio": 8.710526315789474
+    "height": "43",
+    "aspectRatio": 7.6976744186046515
   },
   "blackmountainnews.svg": {
     "name": "blackmountainnews.svg",
@@ -144,8 +144,8 @@
     "noColor": false,
     "marketName": "Brevard",
     "width": "286",
-    "height": "44",
-    "aspectRatio": 6.5
+    "height": "46",
+    "aspectRatio": 6.217391304347826
   },
   "bucyrus-dark.png": {
     "name": "bucyrus-dark.png",
@@ -264,8 +264,8 @@
     "noColor": false,
     "marketName": "Cherry Hill",
     "width": "274",
-    "height": "35",
-    "aspectRatio": 7.828571428571428
+    "height": "47",
+    "aspectRatio": 5.829787234042553
   },
   "chillicothe.svg": {
     "name": "chillicothe.svg",
@@ -390,8 +390,8 @@
     "noColor": false,
     "marketName": "Des Moines",
     "width": "447",
-    "height": "43",
-    "aspectRatio": 10.395348837209303
+    "height": "48",
+    "aspectRatio": 9.3125
   },
   "detroitfreepress.svg": {
     "name": "detroitfreepress.svg",
@@ -487,8 +487,8 @@
     "noColor": false,
     "marketName": "Evansville",
     "width": "333",
-    "height": "36",
-    "aspectRatio": 9.25
+    "height": "47",
+    "aspectRatio": 7.085106382978723
   },
   "farmersadvance-dark.png": {
     "name": "farmersadvance-dark.png",
@@ -688,8 +688,8 @@
     "noColor": false,
     "marketName": "Greenville",
     "width": "355",
-    "height": "35",
-    "aspectRatio": 10.142857142857142
+    "height": "47",
+    "aspectRatio": 7.553191489361702
   },
   "guam.svg": {
     "name": "guam.svg",
@@ -847,8 +847,8 @@
     "noColor": false,
     "marketName": "Jackson (MS)",
     "width": "322",
-    "height": "44",
-    "aspectRatio": 7.318181818181818
+    "height": "46",
+    "aspectRatio": 7
   },
   "jacksontn.svg": {
     "name": "jacksontn.svg",
@@ -873,8 +873,8 @@
     "noColor": false,
     "marketName": "Knoxville Blogs",
     "width": "244",
-    "height": "34",
-    "aspectRatio": 7.176470588235294
+    "height": "46",
+    "aspectRatio": 5.304347826086956
   },
   "knoxvillebiz.jpg": {
     "name": "knoxvillebiz.jpg",
@@ -955,8 +955,8 @@
     "noColor": false,
     "marketName": "Lansing",
     "width": "474",
-    "height": "44",
-    "aspectRatio": 10.772727272727273
+    "height": "47",
+    "aspectRatio": 10.085106382978724
   },
   "lascruces.svg": {
     "name": "lascruces.svg",
@@ -1030,8 +1030,8 @@
     "noColor": false,
     "marketName": "Louisville",
     "width": "320",
-    "height": "43",
-    "aspectRatio": 7.441860465116279
+    "height": "47",
+    "aspectRatio": 6.808510638297872
   },
   "manitowoc.svg": {
     "name": "manitowoc.svg",
@@ -1424,8 +1424,8 @@
     "noColor": false,
     "marketName": "Pensacola",
     "width": "507",
-    "height": "43",
-    "aspectRatio": 11.790697674418604
+    "height": "47",
+    "aspectRatio": 10.787234042553191
   },
   "phoenix.svg": {
     "name": "phoenix.svg",
@@ -1513,8 +1513,8 @@
     "height": "55",
     "aspectRatio": 6.345454545454546
   },
-  "renogazettejournal.svg": {
-    "name": "renogazettejournal.svg",
+  "reno.svg": {
+    "name": "reno.svg",
     "domain": [
       "rgj.com"
     ],
@@ -1522,8 +1522,8 @@
     "noColor": false,
     "marketName": "Reno Gazette-Journal",
     "width": "444",
-    "height": "43",
-    "aspectRatio": 10.325581395348838
+    "height": "46",
+    "aspectRatio": 9.652173913043478
   },
   "renotahoe-dark.png": {
     "name": "renotahoe-dark.png",
@@ -1565,8 +1565,8 @@
     "noColor": false,
     "marketName": "Rochester",
     "width": "471",
-    "height": "36",
-    "aspectRatio": 13.083333333333334
+    "height": "48",
+    "aspectRatio": 9.8125
   },
   "ruidoso.svg": {
     "name": "ruidoso.svg",
@@ -1589,8 +1589,8 @@
     "noColor": false,
     "marketName": "Salem",
     "width": "394",
-    "height": "43",
-    "aspectRatio": 9.162790697674419
+    "height": "48",
+    "aspectRatio": 8.208333333333334
   },
   "salinas.svg": {
     "name": "salinas.svg",
@@ -1686,8 +1686,8 @@
     "noColor": false,
     "marketName": "Sioux Falls",
     "width": "305",
-    "height": "43",
-    "aspectRatio": 7.093023255813954
+    "height": "47",
+    "aspectRatio": 6.48936170212766
   },
   "somosfrontera-dark.png": {
     "name": "somosfrontera-dark.png",
@@ -1728,8 +1728,8 @@
     "noColor": false,
     "marketName": "Springfield",
     "width": "550",
-    "height": "44",
-    "aspectRatio": 12.5
+    "height": "48",
+    "aspectRatio": 11.458333333333334
   },
   "staunton-dark.png": {
     "name": "staunton-dark.png",
