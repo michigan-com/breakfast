@@ -31,7 +31,6 @@ function createApp(db, enableCsrf = true) {
   app.set('use csrf', enableCsrf);
 
   // app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
-  app.use((req, res, next) => { console.log('middlware!'); next(); });
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
   app.use(cookieParser());
@@ -42,11 +41,14 @@ function createApp(db, enableCsrf = true) {
     saveUninitialized: false,
     store: new MongoStore({ db }),
   }));
+  app.use((req, res, next) => { console.log('middlware!'); next(); });
   if (enableCsrf) {
     // app.use(csrf({ cookie: true }));
   }
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use((req, res, next) => { console.log('middlware (post passport)!'); next(); });
+
   app.use(flash());
   app.use(storeLocals(app));
 
