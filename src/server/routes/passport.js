@@ -17,8 +17,6 @@ function createPassport(app) {
     }
   ));
 
-  console.log('done setting up passport');
-
   passport.serializeUser((user, done) => {
     // TODO make this better somehow
     done(null, JSON.stringify(user));

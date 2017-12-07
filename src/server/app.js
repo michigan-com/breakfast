@@ -31,6 +31,7 @@ function createApp(db, enableCsrf = true) {
   app.set('use csrf', enableCsrf);
 
   // app.use(favicon(path.join(BASE_DIR, '/public/favicon.ico')));
+  app.use((req, res, next) => { console.log('middlware!'); next(); });
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
   app.use(cookieParser());
