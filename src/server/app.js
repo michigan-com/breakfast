@@ -46,8 +46,9 @@ function createApp(db, enableCsrf = true) {
     // app.use(csrf({ cookie: true }));
   }
   app.use(passport.initialize());
+  app.use((req, res, next) => { console.log('middlware (post passport.initialize)!'); next(); });
   app.use(passport.session());
-  app.use((req, res, next) => { console.log('middlware (post passport)!'); next(); });
+  app.use((req, res, next) => { console.log('middlware (post passport.session)!'); next(); });
 
   app.use(flash());
   app.use(storeLocals(app));
