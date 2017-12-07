@@ -2,10 +2,6 @@
 
 import passport from 'passport';
 import { Strategy as SamlStrategy } from 'passport-saml';
-import { ObjectID } from 'mongodb';
-
-import { passwordMatch } from '../util/hash';
-
 
 function createPassport(app) {
   const samlConfig = {
@@ -20,6 +16,8 @@ function createPassport(app) {
       done(null, profile);
     }
   ));
+
+  console.log('done setting up passport');
 
   passport.serializeUser((user, done) => {
     // TODO make this better somehow
