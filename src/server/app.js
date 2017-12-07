@@ -41,14 +41,11 @@ function createApp(db, enableCsrf = true) {
     saveUninitialized: false,
     store: new MongoStore({ db }),
   }));
-  app.use((req, res, next) => { console.log('middlware!'); next(); });
   if (enableCsrf) {
     // app.use(csrf({ cookie: true }));
   }
   app.use(passport.initialize());
-  app.use((req, res, next) => { console.log('middlware (post passport.initialize)!'); next(); });
   app.use(passport.session());
-  app.use((req, res, next) => { console.log('middlware (post passport.session)!'); next(); });
 
   app.use(flash());
   app.use(storeLocals(app));
