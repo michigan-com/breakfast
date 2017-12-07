@@ -77,7 +77,7 @@
     "nodemailer": "^1.11.0",
     "nodemailer-ses-transport": "^1.4.0",
     "object-assign": "^4.0.1",
-    "passport": "^0.3.2",
+    "passport": "^0.4.0",
     "passport-saml": "^0.31.0",
     "pkgify": "^1.0.3",
     "plumber": "^0.4.8",
