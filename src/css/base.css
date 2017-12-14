@@ -1,6 +1,8 @@
 @import './fonts';
 @import './constants';
 @import './components/select';
+@import './components/alert';
+
 
 @define-mixin button $color: $primary-color, $background-color: white {
   background-color: $background-color;
