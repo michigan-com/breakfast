@@ -1,12 +1,19 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css);
 
-.alert.message .inner {
-  border: 1px solid rgb(214,233,198);
-  background-color: rgb(223,240,216);
+.alert.message {
   position:fixed;
   top: 0px;
-  z-index: 50;
+  padding: 5px;
+  z-index: 2;
 }
+
+.alert.message .message-content{
+  position: relative;
+  border: 1px solid rgb(214,233,198);
+  background-color: rgb(223,240,216);
+  border-radius: 3px;  
+}
+
 
 .alert.message.hide {
   display: none;
@@ -25,8 +32,14 @@
   animation-delay: 0s,100ms;
 }
 
+.dismiss-forever{
+  color: rgb(70,136,71);
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+}
 
-.alert input {
+.alert .cross{
   display: none;
 }
 
@@ -41,11 +54,10 @@
 
 .alert .inner {
   display: block;
-  padding: 6px;
+  padding: 15px 25px 20px;
   margin: 6px;
-  border-radius: 3px;
-  border: 1px solid rgb(180,180,180);
-  background-color: rgb(212,212,212);
+  /*border: 1px solid $dark-grey;
+  background-color: $grey;*/
 }
 
 

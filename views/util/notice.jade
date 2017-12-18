@@ -1,24 +1,33 @@
 .alert.message.hide
-  input#alert2(type='checkbox', onclick='clickME()')
-  label.close(title='close', for='alert2')
-    i.icon-remove
-  p.inner
-    | On Jan. 2, 2018, log-in for Breakfast will be switching to authorization through
-    | Gannett's single sign-on service, Okta. After this switch, you will only be able to
-    | access Breakfast from http://sso.gannett.com. On Jan. 2, you should see the Breakfast
-    | badge on your Okta page. If you do not, please contact support@gannett.com to be
-    | granted access.
+  .message-content
+    div.dismiss-forever
+      | Dismiss forever 
+      input#dismissal(type='checkbox')
+    input.cross#close(type='checkbox', onclick='Dismiss4ever()')
+    label.close(title='close', for='close')
+      i.icon-remove
+    p.inner
+      | On Jan. 2, 2018, log-in for Breakfast will be switching to authorization through
+      | Gannett's single sign-on service, Okta. After this switch, you will only be able to
+      | access Breakfast from http://sso.gannett.com. On Jan. 2, you should see the Breakfast
+      | badge on your Okta page. If you do not, please contact support@gannett.com to be
+      | granted access.
 script(src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js')    
 script.
-  let clickME = () => {
-    Cookies.set('bf_alert_message', true, { expires: 365 });
+  let Dismiss4ever = () => {
+    let isChecked = document.getElementById('dismissal').checked;
+
+    console.log(isChecked)
+
+    if (isChecked){
+      Cookies.set('bf_alert_message', true, { expires: 365 });
+    }
+    
   }
 
   let displayMessage = () => {
 
     let alert_Message = Cookies.get('bf_alert_message');
-
-    console.log(alert_Message)
 
     if (!alert_Message) {
       document.getElementsByClassName("alert message hide")[0].classList.remove("hide");
