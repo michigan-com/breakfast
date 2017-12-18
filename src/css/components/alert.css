@@ -5,6 +5,10 @@
   top: 0px;
   padding: 5px;
   z-index: 2;
+  width: 75%;
+  margin:0 auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .alert.message .message-content{
@@ -46,7 +50,7 @@
 .alert .close {
   top: 10px;
   right: 10px;
-  position: fixed;
+  position: absolute;
   z-index: 52;
   margin: 3px 12px 0px 0px;
   cursor: pointer;

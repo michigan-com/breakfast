@@ -17,8 +17,6 @@ script.
   let Dismiss4ever = () => {
     let isChecked = document.getElementById('dismissal').checked;
 
-    console.log(isChecked)
-
     if (isChecked){
       Cookies.set('bf_alert_message', true, { expires: 365 });
     }
