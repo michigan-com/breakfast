@@ -7,8 +7,7 @@
   z-index: 2;
   width: 75%;
   margin:0 auto;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 12.5%;
 }
 
 .alert.message .message-content{
@@ -27,13 +26,18 @@
   color: rgb(70,136,71);
 }
 
-.alert.message input:checked ~ * {
+/*.alert.message input:checked ~ * {
   animation-name: dismiss,hide;
   animation-duration: 300ms;
   animation-iteration-count: 1;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
   animation-delay: 0s,100ms;
+}*/
+
+.alert.message.animate-me {
+  transition: top 250ms ease-out;
+  top: -300px;
 }
 
 .dismiss-forever{

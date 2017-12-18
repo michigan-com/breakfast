@@ -20,6 +20,8 @@ script.
     if (isChecked){
       Cookies.set('bf_alert_message', true, { expires: 365 });
     }
+
+    document.getElementsByClassName("alert message")[0].classList.add("animate-me");
     
   }
 
