@@ -4,17 +4,17 @@
   position:fixed;
   top: 0px;
   padding: 5px;
-  z-index: 2;
   width: 75%;
   margin:0 auto;
   left: 12.5%;
+  z-index: 1000;
 }
 
 .alert.message .message-content{
   position: relative;
   border: 1px solid rgb(214,233,198);
   background-color: rgb(223,240,216);
-  border-radius: 3px;  
+  border-radius: 3px;
 }
 
 
@@ -90,4 +90,3 @@
     border: 0px;
   }
 }
-  
