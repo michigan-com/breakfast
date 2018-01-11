@@ -5,10 +5,18 @@
   width: 100%;
   margin-top: 60px;
 
-  .register-button {
+  .login-button {
     @mixin big-button;
     width: 200px;
     margin: 0 auto;
+  }
+
+  a {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    text-decoration: underline;
+    font-size: 25px;
   }
 
 }
@@ -21,7 +29,9 @@ p {
     color: white;
     text-decoration: underline;
   }
+
 }
+
 
 .extra-info {
   width: 100%;

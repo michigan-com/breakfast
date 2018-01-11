@@ -5,7 +5,6 @@ block css
   +getCssLink('/css/index.css')
   
 block content
-  include ./util/notice
   .fancy-title
     .directive Welcome to
     .app-name Breakfast
@@ -13,11 +12,7 @@ block content
   .subtitle As easy as scrambled eggs, poppin’ like bacon
 
   .buttons
-    a.register-button(href='/register/') Register
-    .login
-      p Already Registered?
-      p
-        a(href='/login/') Log In
+    a.login-button(href='/login/') Login 
 
   .extra-info
     .info-block
