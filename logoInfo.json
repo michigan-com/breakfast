@@ -1786,6 +1786,18 @@
     "height": "121",
     "aspectRatio": 5.950413223140496
   },
+  "storytellers-project.svg": {
+    "name": "storytellers-project.svg",
+    "domain": [
+      "usatoday.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "USA Today",
+    "width": "535.89",
+    "height": "133.95",
+    "aspectRatio": 4.000671892497201
+  },
   "tallahassee.svg": {
     "name": "tallahassee.svg",
     "domain": [
