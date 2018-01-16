@@ -1786,17 +1786,257 @@
     "height": "121",
     "aspectRatio": 5.950413223140496
   },
-  "storytellers-project.svg": {
-    "name": "storytellers-project.svg",
+  "storytellers-cincinnati.svg": {
+    "name": "storytellers-cincinnati.svg",
     "domain": [
-      "usatoday.com"
+      "gannett.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "USA Today",
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-des-moines.svg": {
+    "name": "storytellers-des-moines.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-detroit.svg": {
+    "name": "storytellers-detroit.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "263",
+    "aspectRatio": 7.300380228136882
+  },
+  "storytellers-fort-collins.svg": {
+    "name": "storytellers-fort-collins.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-indianapolis.svg": {
+    "name": "storytellers-indianapolis.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-jackson.svg": {
+    "name": "storytellers-jackson.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "263",
+    "aspectRatio": 7.300380228136882
+  },
+  "storytellers-jersey.svg": {
+    "name": "storytellers-jersey.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1921",
+    "height": "250",
+    "aspectRatio": 7.684
+  },
+  "storytellers-lafayette.svg": {
+    "name": "storytellers-lafayette.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "264",
+    "aspectRatio": 7.2727272727272725
+  },
+  "storytellers-lansing.svg": {
+    "name": "storytellers-lansing.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-louisville.svg": {
+    "name": "storytellers-louisville.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-nashville.svg": {
+    "name": "storytellers-nashville.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-palm-springs.svg": {
+    "name": "storytellers-palm-springs.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-phoenix.svg": {
+    "name": "storytellers-phoenix.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "280",
+    "height": "43",
+    "aspectRatio": 6.511627906976744
+  },
+  "storytellers-project.svg": {
+    "name": "storytellers-project.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
     "width": "535.89",
     "height": "133.95",
     "aspectRatio": 4.000671892497201
+  },
+  "storytellers-reno.svg": {
+    "name": "storytellers-reno.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1921",
+    "height": "249",
+    "aspectRatio": 7.714859437751004
+  },
+  "storytellers-rochester.svg": {
+    "name": "storytellers-rochester.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1921",
+    "height": "249",
+    "aspectRatio": 7.714859437751004
+  },
+  "storytellers-southwest-florida.svg": {
+    "name": "storytellers-southwest-florida.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "250",
+    "aspectRatio": 7.68
+  },
+  "storytellers-tallahassee.svg": {
+    "name": "storytellers-tallahassee.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "263",
+    "aspectRatio": 7.300380228136882
+  },
+  "storytellers-tucson.svg": {
+    "name": "storytellers-tucson.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1920",
+    "height": "249",
+    "aspectRatio": 7.710843373493976
+  },
+  "storytellers-ventura.svg": {
+    "name": "storytellers-ventura.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1921",
+    "height": "264",
+    "aspectRatio": 7.276515151515151
+  },
+  "storytellers-york.svg": {
+    "name": "storytellers-york.svg",
+    "domain": [
+      "gannett.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Storytellers Project",
+    "width": "1921",
+    "height": "250",
+    "aspectRatio": 7.684
   },
   "tallahassee.svg": {
     "name": "tallahassee.svg",

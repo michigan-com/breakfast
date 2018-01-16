@@ -1195,6 +1195,53 @@
     }
   },
 
+  "Storytellers Project": {
+    "domain": "gannett.com",
+    "logo": [{
+      "filename": "storytellers-project.svg"
+    }, {
+      "filename": "storytellers-cincinnati.svg"
+    }, {
+      "filename": "storytellers-des-moines.svg"
+    }, {
+      "filename": "storytellers-detroit.svg"
+    }, {
+      "filename": "storytellers-fort-collins.svg"
+    }, {
+      "filename": "storytellers-indianapolis.svg"
+    }, {
+      "filename": "storytellers-jackson.svg"
+    }, {
+      "filename": "storytellers-jersey.svg"
+    }, {
+      "filename": "storytellers-lafayette.svg"
+    }, {
+      "filename": "storytellers-lansing.svg"
+    }, {
+      "filename": "storytellers-louisville.svg"
+    }, {
+      "filename": "storytellers-nashville.svg"
+    }, {
+      "filename": "storytellers-palm-springs.svg"
+    }, {
+      "filename": "storytellers-phoenix.svg"
+    }, {
+      "filename": "storytellers-reno.svg"
+    }, {
+      "filename": "storytellers-rochester.svg"
+    }, {
+      "filename": "storytellers-southwest-florida.svg"
+    }, {
+      "filename": "storytellers-tallahassee.svg"
+    }, {
+      "filename": "storytellers-tucson.svg"
+    }, {
+      "filename": "storytellers-ventura.svg"
+    }, {
+      "filename": "storytellers-york.svg"
+    }]
+  },
+
   "Tallahassee": {
     "domain": "tallahassee.com",
     "logo": {
@@ -1241,8 +1288,6 @@
       "filename": "usat-ftw-small.svg"
     }, {
       "filename": "usat-ftw-large.svg"
-    }, {
-      "filename": "storytellers-project.svg"
     }]
   },
 
