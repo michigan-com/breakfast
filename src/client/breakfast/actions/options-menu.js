@@ -1,7 +1,8 @@
 'use strict';
 
 const OPTION_CHOICES = [
-  'aspect-ratio',
+  'templates',
+  // 'aspect-ratio',
   'background',
   'uploads',
   'text-containers',

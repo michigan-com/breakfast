@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/facebook_16</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6.40958881,12 L0.66230788,12 C0.296418164,12 0,11.7033979 0,11.3376507 L0,0.662302741 C0,0.296462426 0.296464727,0 0.66230788,0 L11.3377387,0 C11.7034887,0 12,0.296462426 12,0.662302741 L12,11.3376507 C12,11.7034444 11.7034421,12 11.3377387,12 L8.27982632,12 L8.27982632,7.35293867 L9.83963029,7.35293867 L10.0731888,5.54189641 L8.27982632,5.54189641 L8.27982632,4.38566035 C8.27982632,3.86132183 8.42542789,3.50400242 9.17732241,3.50400242 L10.1363278,3.50358336 L10.1363278,1.88377264 C9.97047149,1.86170209 9.40119589,1.81239257 8.73888801,1.81239257 C7.35620855,1.81239257 6.40958881,2.65638156 6.40958881,4.20630221 L6.40958881,5.54189641 L4.84578045,5.54189641 L4.84578045,7.35293867 L6.40958881,7.35293867 L6.40958881,12 L6.40958881,12 Z" id="path-1"></path>
+    </defs>
+    <g id="BreakfastTemplate_Chooser" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-438.000000, -140.000000)">
+        <g id="templatePanel" transform="translate(260.000000, 56.000000)">
+            <g id="layoutPicker" transform="translate(24.000000, 24.000000)">
+                <g id="16:9-ratio" transform="translate(111.000000, 43.000000)">
+                    <g id="icon/facebook_16" transform="translate(43.000000, 17.000000)">
+                        <g id="icon-facebook_16">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="icon" fill="#4460A0" xlink:href="#path-1"></use>
+                            <g id="icon/_color/black-100%" mask="url(#mask-2)" fill="#FFFFFF">
+                                <g transform="translate(-0.333333, -1.333333)" id="ui-color">
+                                    <rect x="0" y="0" width="14.6666667" height="14.6666667"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

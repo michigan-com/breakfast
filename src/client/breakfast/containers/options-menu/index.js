@@ -9,6 +9,7 @@ import { optionSelect } from '../../actions/options-menu';
 import { updateFilename, startDownloading } from '../../actions/downloading';
 import BackgroundOptions from './options/background';
 import AspectRatioOptions from './options/aspect-ratio';
+import TemplatesOption from './options/templates';
 import LogoOptions from './options/logo';
 import TextContainerOptions from './options/text-containers';
 import SportsScoreOptions from './options/sports-score';
@@ -34,12 +35,15 @@ class OptionsMenuComponent extends Component {
     const option = options[selectedIndex];
     let optionsElement = null;
     switch (option) {
+      case 'templates':
+        optionsElement = <TemplatesOption />;
+        break;
       case 'background':
         optionsElement = <BackgroundOptions />;
         break;
-      case 'aspect-ratio':
-        optionsElement = <AspectRatioOptions />;
-        break;
+      // case 'aspect-ratio':
+      //   optionsElement = <AspectRatioOptions />;
+      //   break;
       case 'logo':
         optionsElement = <LogoOptions />;
         break;

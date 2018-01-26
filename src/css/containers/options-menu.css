@@ -2,7 +2,7 @@
 @import '../components/radio-toggle';
 @import '../components/sports-team-picker';
 
-$options-menu-container-width-lg: 200px;
+$options-menu-container-width-lg: 250px;
 $options-menu-container-width-sm: 50px;
 
 .options-menu-container {
@@ -10,9 +10,10 @@ $options-menu-container-width-sm: 50px;
   position: fixed;
   left: 0;
   top:  $navbar-height;
-  background: white;
+  background: #FFFFFF;
   bottom: 0;
   overflow: scroll;
+  box-shadow: inset 0 1px 0 0 #EEEEEE , inset -1px 0 0 0 #EEEEEE , inset 1px 0 0 0 #EEEEEE , inset 0 -1px 0 0 #CED7DF ;
 
   @media (max-width: $screen-sm) {
     width: $options-menu-container-width-sm;
@@ -60,10 +61,12 @@ $options-menu-container-width-sm: 50px;
   left: $options-menu-container-width-lg;
   /*width: 20%;*/
   max-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #FFFFFF;
   bottom: 0;
   overflow: scroll;
   width: 300px;
+  border: 1px solid #CCCCCC;
+  box-shadow: 0 0 16px 0 rgba(0,0,0,0.24);
 
   @media (max-width: $screen-sm) {
     left: $options-menu-container-width-sm;
@@ -240,6 +243,78 @@ $options-menu-container-width-sm: 50px;
       outline: none;
     }
   }
+}
+
+.layout-picker-container{
+  width: 90%;
+  margin: 24px auto;
+  position: relative;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+}
+
+.layout-picker {
+  padding: 20px;
+}
+
+.layout-picker-title{
+  color: rgba(0,0,0,0.53);
+  margin-bottom: 2.5%;
+}
+
+.divider-line{
+  box-sizing: border-box;
+  height: 2px;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 5%;
+}
+
+.snapchat-template{
+  width: 17%;
+  margin-right: 7%;
+  border: 1px solid #D2DAE2;
+  border-radius: 3px;
+  background-color: #FbFcFD;
+
+}
+
+.template-container, .template-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-btn{
+  height: 45px;
+}
+
+.template-btn .active, .template-btn.selected img {
+  display: none;
+}
+
+.template-btn.selected {
+  background: linear-gradient(180deg, #00AEFF 0%, #009bff 100%);
+}
+
+.template-btn.selected .active {
+  display: flex;
+  }
+
+.instagram-template {
+  width: 27%;
+  margin-right: 7%;
+  border: 1px solid #D2DAE2;
+  border-radius: 3px;
+  background-color: #FbFcFD;
+}
+
+.face-tweet-template{
+  width: 42%;
+  border: 1px solid #D2DAE2;
+  border-radius: 3px;
+  background-color: #FbFcFD;
+  justify-content: space-around;
+
 }
 
 .ratio-picker {

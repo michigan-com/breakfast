@@ -82,8 +82,7 @@ class BackgroundOptions extends Component {
             accept="image/*"
             style={dropzoneStyle}
           >
-            <p>DRAG & DROP</p>
-            <p>your file or click to browse</p>
+          <p className="default-font">Insert photo background</p>
           </Dropzone>
         </div>
       );
@@ -190,15 +189,13 @@ class BackgroundOptions extends Component {
       );
     }
     return (
-      <div className="background-options-container">
-        <div className="option-container">
-          <div className="option-container-title">Background Image</div>
+      <div className="layout-picker-container">
+        <div className="layout-picker">
+          <div className="layout-picker-title">Background</div>
+          <div className="divider-line"></div>
+          <div className="template-container">
           {this.renderBackgroundOption(BACKGROUND_IMAGE)}
-        </div>
-        {attributionInput}
-        <div className="option-container">
-          <div className="option-container-title">Background Color</div>
-          {this.renderBackgroundOption(BACKGROUND_COLOR)}
+          </div>
         </div>
       </div>
     );

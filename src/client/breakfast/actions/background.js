@@ -63,16 +63,17 @@ export function getAspectRatioValue(backgroundState = {}, ratio) {
   return 1;
 }
 
-export const ASPECT_RATIOS = [{
-  name: TWO_ONE,
-  value: getAspectRatioValue({}, TWO_ONE),
-}, {
+export const ASPECT_RATIOS = [
+ {
   name: SQUARE,
   value: getAspectRatioValue({}, SQUARE),
-}, {
+},{
   name: SNAPCHAT,
   value: getAspectRatioValue({}, SNAPCHAT),
-}, {
+  }, {
+  name: TWO_ONE,
+  value: getAspectRatioValue({}, TWO_ONE),
+},{
   name: SIXTEEN_NINE,
   value: getAspectRatioValue({}, SIXTEEN_NINE),
 }, {

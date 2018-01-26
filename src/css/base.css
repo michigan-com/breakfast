@@ -69,3 +69,12 @@ body {
     font-size: 15px;
   }
 }
+
+/** default font */
+.default-font{
+  font-family: "Unify Sans";
+  color: rgba(0,0,0,0.53);
+  font-size: 12px;
+  line-height: 13px;
+}
+

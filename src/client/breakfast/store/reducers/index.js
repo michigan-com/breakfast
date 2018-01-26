@@ -7,6 +7,7 @@ import Background from './background';
 import Font from './font';
 import Logo from './logo';
 import Text from './text';
+import Templates from './templates';
 import OptionsMenu from './options-menu';
 import Downloading from './downloading';
 import Nav from './nav';
@@ -20,6 +21,7 @@ export default combineReducers({
   Logo,
   Text,
   OptionsMenu,
+  Templates,
   Downloading,
   Nav,
   Sports,
