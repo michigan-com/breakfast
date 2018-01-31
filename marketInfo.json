@@ -204,9 +204,7 @@
   "Cincinnati": {
     "domain": "cincinnati.com",
     "logo": [{
-      "filename": "cincinnati-dark.png"
-    }, {
-      "filename": "cincinnati-light.png"
+      "filename": "cincinnati.svg"
     }]
   },
 
@@ -294,9 +292,7 @@
   "Elmira": {
     "domain": "stargazette.com",
     "logo": [{
-      "filename": "elmira-dark.png"
-    }, {
-      "filename": "elmira-light.png"
+      "filename": "elmira.svg"
     }]
   },
 
@@ -435,9 +431,7 @@
   "Green Bay": {
     "domain": "greenbaypressgazette.com",
     "logo": [{
-      "filename": "greenbay-dark.png"
-    }, {
-      "filename": "greenbay-light.png"
+      "filename": "greenbay.svg"
     }]
   },
 
@@ -1259,8 +1253,6 @@
       "filename": "tc-st-lucie.svg"
     }, {
       "filename": "tc-stuart.svg"
-    }, {
-      "filename": "tc-1-treasure-coast.svg"
     }]
   },
 

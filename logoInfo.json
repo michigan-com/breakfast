@@ -56,9 +56,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Appleton",
-    "width": "719",
-    "height": "139.094",
-    "aspectRatio": 5.169166175392181
+    "width": "318",
+    "height": "45",
+    "aspectRatio": 7.066666666666666
   },
   "asburypark.svg": {
     "name": "asburypark.svg",
@@ -191,9 +191,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Burlington",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "473",
+    "height": "46",
+    "aspectRatio": 10.282608695652174
   },
   "carlsbad.svg": {
     "name": "carlsbad.svg",
@@ -288,23 +288,17 @@
     "height": "94",
     "aspectRatio": 7.659574468085107
   },
-  "cincinnati-dark.png": {
-    "name": "cincinnati-dark.png",
+  "cincinnati.svg": {
+    "name": "cincinnati.svg",
     "domain": [
       "cincinnati.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Cincinnati"
-  },
-  "cincinnati-light.png": {
-    "name": "cincinnati-light.png",
-    "domain": [
-      "cincinnati.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Cincinnati"
+    "marketName": "Cincinnati",
+    "width": "326",
+    "height": "47",
+    "aspectRatio": 6.9361702127659575
   },
   "clarksville-dark.png": {
     "name": "clarksville-dark.png",
@@ -430,8 +424,7 @@
   "elmira-dark.png": {
     "name": "elmira-dark.png",
     "domain": [
-      "pressconnects.com",
-      "stargazette.com"
+      "pressconnects.com"
     ],
     "isSvg": false,
     "noColor": false,
@@ -440,12 +433,23 @@
   "elmira-light.png": {
     "name": "elmira-light.png",
     "domain": [
-      "pressconnects.com",
-      "stargazette.com"
+      "pressconnects.com"
     ],
     "isSvg": false,
     "noColor": false,
     "marketName": "Binghamton"
+  },
+  "elmira.svg": {
+    "name": "elmira.svg",
+    "domain": [
+      "stargazette.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Elmira",
+    "width": "281",
+    "height": "42",
+    "aspectRatio": 6.690476190476191
   },
   "elpaso.svg": {
     "name": "elpaso.svg",
@@ -537,9 +541,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Fond du Lac",
-    "width": "720",
-    "height": "157",
-    "aspectRatio": 4.585987261146497
+    "width": "301",
+    "height": "43",
+    "aspectRatio": 7
   },
   "fortcollins.svg": {
     "name": "fortcollins.svg",
@@ -661,23 +665,17 @@
     "height": "55",
     "aspectRatio": 6.345454545454546
   },
-  "greenbay-dark.png": {
-    "name": "greenbay-dark.png",
+  "greenbay.svg": {
+    "name": "greenbay.svg",
     "domain": [
       "greenbaypressgazette.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Green Bay"
-  },
-  "greenbay-light.png": {
-    "name": "greenbay-light.png",
-    "domain": [
-      "greenbaypressgazette.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Green Bay"
+    "marketName": "Green Bay",
+    "width": "555",
+    "height": "46",
+    "aspectRatio": 12.065217391304348
   },
   "greenville.svg": {
     "name": "greenville.svg",
@@ -699,9 +697,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Guam",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "398",
+    "height": "46",
+    "aspectRatio": 8.652173913043478
   },
   "hammonton-dark.png": {
     "name": "hammonton-dark.png",
@@ -834,9 +832,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Binghamton",
-    "width": "719.969",
-    "height": "167.969",
-    "aspectRatio": 4.286320690127345
+    "width": "297",
+    "height": "46",
+    "aspectRatio": 6.456521739130435
   },
   "jacksonms.svg": {
     "name": "jacksonms.svg",
@@ -1041,9 +1039,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Manitowoc",
-    "width": "663",
-    "height": "160",
-    "aspectRatio": 4.14375
+    "width": "496",
+    "height": "48",
+    "aspectRatio": 10.333333333333334
   },
   "mansfield.svg": {
     "name": "mansfield.svg",
@@ -1125,9 +1123,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Marshfield",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "522",
+    "height": "47",
+    "aspectRatio": 11.106382978723405
   },
   "memphis.svg": {
     "name": "memphis.svg",
@@ -1214,9 +1212,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Montgomery",
-    "width": "772",
-    "height": "160",
-    "aspectRatio": 4.825
+    "width": "532",
+    "height": "48",
+    "aspectRatio": 11.083333333333334
   },
   "morristown-dark.png": {
     "name": "morristown-dark.png",
@@ -1257,9 +1255,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lafayette (IN)",
-    "width": "623",
-    "height": "160",
-    "aspectRatio": 3.89375
+    "width": "237",
+    "height": "44",
+    "aspectRatio": 5.386363636363637
   },
   "murfreesboro.svg": {
     "name": "murfreesboro.svg",
@@ -1552,9 +1550,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lafayette (IN)",
-    "width": "372",
-    "height": "160",
-    "aspectRatio": 2.325
+    "width": "190",
+    "height": "45",
+    "aspectRatio": 4.222222222222222
   },
   "rochester.svg": {
     "name": "rochester.svg",
@@ -1636,9 +1634,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Sheboygan",
-    "width": "656",
-    "height": "160",
-    "aspectRatio": 4.1
+    "width": "390",
+    "height": "45",
+    "aspectRatio": 8.666666666666666
   },
   "shenandoahvalley.svg": {
     "name": "shenandoahvalley.svg",
@@ -1770,9 +1768,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Stevens Point",
-    "width": "751",
-    "height": "160",
-    "aspectRatio": 4.69375
+    "width": "480",
+    "height": "47",
+    "aspectRatio": 10.212765957446809
   },
   "stgeorge.svg": {
     "name": "stgeorge.svg",
@@ -2050,18 +2048,6 @@
     "height": "46",
     "aspectRatio": 10.76086956521739
   },
-  "tc-1-treasure-coast.svg": {
-    "name": "tc-1-treasure-coast.svg",
-    "domain": [
-      "tcpalm.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "Treasure Coast",
-    "width": "649.97",
-    "height": "256",
-    "aspectRatio": 2.5389453125
-  },
   "tc-indian-river.svg": {
     "name": "tc-indian-river.svg",
     "domain": [
@@ -2118,9 +2104,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Treasure Coast",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "178",
+    "height": "46",
+    "aspectRatio": 3.869565217391304
   },
   "upstatenewyork.svg": {
     "name": "upstatenewyork.svg",
@@ -2346,9 +2332,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Wausau",
-    "width": "749",
-    "height": "160",
-    "aspectRatio": 4.68125
+    "width": "449",
+    "height": "48",
+    "aspectRatio": 9.354166666666666
   },
   "westchester.svg": {
     "name": "westchester.svg",
@@ -2412,9 +2398,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Wisconsin Rapids",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "565",
+    "height": "47",
+    "aspectRatio": 12.02127659574468
   },
   "witchita-falls.svg": {
     "name": "witchita-falls.svg",
