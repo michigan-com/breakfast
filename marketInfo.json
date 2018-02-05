@@ -1028,6 +1028,15 @@
     }]
   },
 
+  "Pyeong Olympics": {
+    "domain": "olympics.usatoday.com",
+    "logo": [{
+      "filename": "pyeong-olympics-horizontal.svg"
+    }, {
+      "filename": "pyeong-olympics-stacked.svg"
+    }]
+  },
+
   "Redding": {
     "domain": "redding.com",
     "logo": {

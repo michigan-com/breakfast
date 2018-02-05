@@ -1379,9 +1379,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Oshkosh",
-    "width": "751",
-    "height": "160",
-    "aspectRatio": 4.69375
+    "width": "522",
+    "height": "46",
+    "aspectRatio": 11.347826086956522
   },
   "packersnews-dark.png": {
     "name": "packersnews-dark.png",
@@ -1498,6 +1498,30 @@
     "width": "472",
     "height": "47",
     "aspectRatio": 10.042553191489361
+  },
+  "pyeong-olympics-horizontal.svg": {
+    "name": "pyeong-olympics-horizontal.svg",
+    "domain": [
+      "olympics.usatoday.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Pyeong Olympics",
+    "width": "467",
+    "height": "46",
+    "aspectRatio": 10.152173913043478
+  },
+  "pyeong-olympics-stacked.svg": {
+    "name": "pyeong-olympics-stacked.svg",
+    "domain": [
+      "olympics.usatoday.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Pyeong Olympics",
+    "width": "467",
+    "height": "126",
+    "aspectRatio": 3.7063492063492065
   },
   "redding.svg": {
     "name": "redding.svg",
