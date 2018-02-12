@@ -13,7 +13,7 @@ function loginRequired(req, res, next) {
 function adminRequired(req, res, next) {
   const adminEmails = {
     'mvarano@michigan.com': true,
-    'rwilliams@gannett.com': true,
+    'rewilliams@gannett.com': true,
     'cclements@gannett.com': true,
   };
   if (!req.user || !(req.user.emailAddress in adminEmails)) {
