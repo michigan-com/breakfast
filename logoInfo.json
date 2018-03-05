@@ -7,9 +7,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Abilene",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "510",
+    "height": "48",
+    "aspectRatio": 10.625
   },
   "alamogordo.svg": {
     "name": "alamogordo.svg",
@@ -147,41 +147,17 @@
     "height": "46",
     "aspectRatio": 6.217391304347826
   },
-  "bucyrus-dark.png": {
-    "name": "bucyrus-dark.png",
+  "bucyrus.svg": {
+    "name": "bucyrus.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "bucyrustelegraphforum.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus"
-  },
-  "bucyrus-light.png": {
-    "name": "bucyrus-light.png",
-    "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Bucyrus"
+    "marketName": "Bucyrus",
+    "width": "385",
+    "height": "48",
+    "aspectRatio": 8.020833333333334
   },
   "burlington.svg": {
     "name": "burlington.svg",
@@ -270,23 +246,14 @@
   "chillicothe.svg": {
     "name": "chillicothe.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "chillicothegazette.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "720",
-    "height": "94",
-    "aspectRatio": 7.659574468085107
+    "marketName": "Chillicothe",
+    "width": "422",
+    "height": "47",
+    "aspectRatio": 8.97872340425532
   },
   "cincinnati.svg": {
     "name": "cincinnati.svg",
@@ -345,23 +312,14 @@
   "coshocton.svg": {
     "name": "coshocton.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "coshoctontribune.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "720",
-    "height": "94",
-    "aspectRatio": 7.659574468085107
+    "marketName": "Coshocton",
+    "width": "414",
+    "height": "47",
+    "aspectRatio": 8.808510638297872
   },
   "deming.svg": {
     "name": "deming.svg",
@@ -587,41 +545,17 @@
     "noColor": false,
     "marketName": "Michigan.com"
   },
-  "fremont-dark.png": {
-    "name": "fremont-dark.png",
+  "fremont.svg": {
+    "name": "fremont.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "fremont.gannett.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus"
-  },
-  "fremont-light.png": {
-    "name": "fremont-light.png",
-    "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Bucyrus"
+    "marketName": "Fremont",
+    "width": "579",
+    "height": "44",
+    "aspectRatio": 13.159090909090908
   },
   "fsunews.svg": {
     "name": "fsunews.svg",
@@ -661,9 +595,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Great Falls",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "414",
+    "height": "47",
+    "aspectRatio": 8.808510638297872
   },
   "greenbay.svg": {
     "name": "greenbay.svg",
@@ -769,9 +703,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Henderson",
-    "width": "323.97",
-    "height": "121.21",
-    "aspectRatio": 2.672799273987295
+    "width": "274",
+    "height": "46",
+    "aspectRatio": 5.956521739130435
   },
   "hudsonvalley.svg": {
     "name": "hudsonvalley.svg",
@@ -819,9 +753,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Des Moines",
-    "width": "637.8",
-    "height": "125",
-    "aspectRatio": 5.102399999999999
+    "width": "508",
+    "height": "48",
+    "aspectRatio": 10.583333333333334
   },
   "ithaca.svg": {
     "name": "ithaca.svg",
@@ -907,41 +841,17 @@
     "height": "47",
     "aspectRatio": 7.319148936170213
   },
-  "lancaster-dark.png": {
-    "name": "lancaster-dark.png",
+  "lancaster.svg": {
+    "name": "lancaster.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "lancastereaglegazette.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus"
-  },
-  "lancaster-light.png": {
-    "name": "lancaster-light.png",
-    "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Bucyrus"
+    "marketName": "Lancaster",
+    "width": "542",
+    "height": "46",
+    "aspectRatio": 11.782608695652174
   },
   "lansing.svg": {
     "name": "lansing.svg",
@@ -1046,23 +956,14 @@
   "mansfield.svg": {
     "name": "mansfield.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "mansfieldnewsjournal.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "marketName": "Mansfield",
+    "width": "522",
+    "height": "47",
+    "aspectRatio": 11.106382978723405
   },
   "marcoisland-dark.png": {
     "name": "marcoisland-dark.png",
@@ -1097,23 +998,14 @@
   "marion.svg": {
     "name": "marion.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "marionstar.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "752",
-    "height": "160",
-    "aspectRatio": 4.7
+    "marketName": "Marion",
+    "width": "255",
+    "height": "47",
+    "aspectRatio": 5.425531914893617
   },
   "marshfield.svg": {
     "name": "marshfield.svg",
@@ -1242,9 +1134,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Mountain Home",
-    "width": "782",
-    "height": "160",
-    "aspectRatio": 4.8875
+    "width": "327",
+    "height": "49",
+    "aspectRatio": 6.673469387755102
   },
   "muncie.svg": {
     "name": "muncie.svg",
@@ -1307,23 +1199,14 @@
   "newark.svg": {
     "name": "newark.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "newarkadvocate.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "760",
-    "height": "160",
-    "aspectRatio": 4.75
+    "marketName": "Newark",
+    "width": "400",
+    "height": "46",
+    "aspectRatio": 8.695652173913043
   },
   "northernnevada.svg": {
     "name": "northernnevada.svg",
@@ -1437,41 +1320,17 @@
     "height": "44",
     "aspectRatio": 4.863636363636363
   },
-  "portclinton-dark.png": {
-    "name": "portclinton-dark.png",
+  "portclinton.svg": {
+    "name": "portclinton.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
+      "portclintonnewsherald.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus"
-  },
-  "portclinton-light.png": {
-    "name": "portclinton-light.png",
-    "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
-      "zanesvilletimesrecorder.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Bucyrus"
+    "marketName": "Port Clinton",
+    "width": "549",
+    "height": "48",
+    "aspectRatio": 11.4375
   },
   "porthuron.svg": {
     "name": "porthuron.svg",
@@ -1646,9 +1505,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "San Angelo",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "310",
+    "height": "48",
+    "aspectRatio": 6.458333333333333
   },
   "sheboygan.svg": {
     "name": "sheboygan.svg",
@@ -2372,6 +2231,18 @@
     "height": "44",
     "aspectRatio": 3.0681818181818183
   },
+  "wichitafalls.svg": {
+    "name": "wichitafalls.svg",
+    "domain": [
+      "timesrecordnews.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Wichita Falls",
+    "width": "429",
+    "height": "48",
+    "aspectRatio": 8.9375
+  },
   "wilmington-dark.png": {
     "name": "wilmington-dark.png",
     "domain": [
@@ -2426,18 +2297,6 @@
     "height": "47",
     "aspectRatio": 12.02127659574468
   },
-  "witchita-falls.svg": {
-    "name": "witchita-falls.svg",
-    "domain": [
-      "timesrecordnews.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "Witchita Falls",
-    "width": "433.09",
-    "height": "75.21",
-    "aspectRatio": 5.758409785932722
-  },
   "york.svg": {
     "name": "york.svg",
     "domain": [
@@ -2465,22 +2324,13 @@
   "zanesville.svg": {
     "name": "zanesville.svg",
     "domain": [
-      "bucyrustelegraphforum.com",
-      "chillicothegazette.com",
-      "coshoctontribune.com",
-      "fremont.gannett.com",
-      "lancastereaglegazette.com",
-      "mansfieldnewsjournal.com",
-      "marionstar.com",
-      "newarkadvocate.com",
-      "portclintonnewsherald.com",
       "zanesvilletimesrecorder.com"
     ],
     "isSvg": true,
     "noColor": false,
-    "marketName": "Bucyrus",
-    "width": "756",
-    "height": "160",
-    "aspectRatio": 4.725
+    "marketName": "Zanesville",
+    "width": "344",
+    "height": "47",
+    "aspectRatio": 7.319148936170213
   }
 }
