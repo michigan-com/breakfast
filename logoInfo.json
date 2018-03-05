@@ -19,9 +19,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Alamogordo Daily News",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "525",
+    "height": "47",
+    "aspectRatio": 11.170212765957446
   },
   "alexandria.svg": {
     "name": "alexandria.svg",
@@ -123,18 +123,6 @@
     "height": "155",
     "aspectRatio": 4.645161290322581
   },
-  "bremerton.svg": {
-    "name": "bremerton.svg",
-    "domain": [
-      "kitsapsun.com"
-    ],
-    "isSvg": true,
-    "noColor": false,
-    "marketName": "Bremerton",
-    "width": "385.92",
-    "height": "125.09",
-    "aspectRatio": 3.0851387001359023
-  },
   "brevard.svg": {
     "name": "brevard.svg",
     "domain": [
@@ -179,9 +167,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Carlsbad",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "532",
+    "height": "46",
+    "aspectRatio": 11.565217391304348
   },
   "centralfloridafuture.svg": {
     "name": "centralfloridafuture.svg",
@@ -329,9 +317,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Deming",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "395",
+    "height": "47",
+    "aspectRatio": 8.404255319148936
   },
   "desmoines.svg": {
     "name": "desmoines.svg",
@@ -478,9 +466,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Farmington Daily Times",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "515",
+    "height": "47",
+    "aspectRatio": 10.957446808510639
   },
   "flipside.jpg": {
     "name": "flipside.jpg",
@@ -794,6 +782,18 @@
     "height": "160",
     "aspectRatio": 4.525
   },
+  "kitsap.svg": {
+    "name": "kitsap.svg",
+    "domain": [
+      "kitsapsun.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "Bremerton",
+    "width": "232",
+    "height": "44",
+    "aspectRatio": 5.2727272727272725
+  },
   "knoxville.svg": {
     "name": "knoxville.svg",
     "domain": [
@@ -874,9 +874,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Las Cruces Sun-News",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "470",
+    "height": "45",
+    "aspectRatio": 10.444444444444445
   },
   "lavoz.svg": {
     "name": "lavoz.svg",
@@ -1390,9 +1390,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Redding",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "418",
+    "height": "47",
+    "aspectRatio": 8.893617021276595
   },
   "reno.svg": {
     "name": "reno.svg",
@@ -1457,9 +1457,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Ruidoso News",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "306",
+    "height": "48",
+    "aspectRatio": 6.375
   },
   "salem.svg": {
     "name": "salem.svg",
@@ -1481,9 +1481,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Salinas",
-    "width": "720",
-    "height": "156",
-    "aspectRatio": 4.615384615384615
+    "width": "334",
+    "height": "48",
+    "aspectRatio": 6.958333333333333
   },
   "salisbury.svg": {
     "name": "salisbury.svg",
@@ -1554,9 +1554,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Silver City Sun News",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "454",
+    "height": "48",
+    "aspectRatio": 9.458333333333334
   },
   "siouxfalls.svg": {
     "name": "siouxfalls.svg",
@@ -1663,9 +1663,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "St. George",
-    "width": "720",
-    "height": "121",
-    "aspectRatio": 5.950413223140496
+    "width": "321",
+    "height": "46",
+    "aspectRatio": 6.978260869565218
   },
   "storytellers-cincinnati.svg": {
     "name": "storytellers-cincinnati.svg",
@@ -2191,9 +2191,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Visalia-Tulare",
-    "width": "640",
-    "height": "160",
-    "aspectRatio": 4
+    "width": "412",
+    "height": "48",
+    "aspectRatio": 8.583333333333334
   },
   "vistasemanal.svg": {
     "name": "vistasemanal.svg",
