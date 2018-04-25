@@ -32,9 +32,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Alexandria",
-    "width": "719.563",
-    "height": "119.938",
-    "aspectRatio": 5.999458053327553
+    "width": "228",
+    "height": "46",
+    "aspectRatio": 4.956521739130435
   },
   "anderson.svg": {
     "name": "anderson.svg",
@@ -44,9 +44,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Anderson",
-    "width": "596.97",
-    "height": "131.65",
-    "aspectRatio": 4.534523357387011
+    "width": "384",
+    "height": "48",
+    "aspectRatio": 8
   },
   "appleton.svg": {
     "name": "appleton.svg",
@@ -95,9 +95,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Battle Creek",
-    "width": "720",
-    "height": "83",
-    "aspectRatio": 8.674698795180722
+    "width": "475",
+    "height": "48",
+    "aspectRatio": 9.895833333333334
   },
   "binghamton.svg": {
     "name": "binghamton.svg",
@@ -191,9 +191,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Central Jersey",
-    "width": "720",
-    "height": "83",
-    "aspectRatio": 8.674698795180722
+    "width": "374",
+    "height": "56",
+    "aspectRatio": 6.678571428571429
   },
   "centralnewyork.svg": {
     "name": "centralnewyork.svg",
@@ -215,9 +215,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Chambersburg",
-    "width": "720",
-    "height": "109.969",
-    "aspectRatio": 6.547299693550001
+    "width": "316",
+    "height": "49",
+    "aspectRatio": 6.448979591836735
   },
   "cherryhill.svg": {
     "name": "cherryhill.svg",
@@ -255,23 +255,17 @@
     "height": "47",
     "aspectRatio": 6.9361702127659575
   },
-  "clarksville-dark.png": {
-    "name": "clarksville-dark.png",
+  "clarksville.svg": {
+    "name": "clarksville.svg",
     "domain": [
       "theleafchronicle.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Clarksville"
-  },
-  "clarksville-light.png": {
-    "name": "clarksville-light.png",
-    "domain": [
-      "theleafchronicle.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Clarksville"
+    "marketName": "Clarksville",
+    "width": "314",
+    "height": "48",
+    "aspectRatio": 6.541666666666667
   },
   "colliercitizen.svg": {
     "name": "colliercitizen.svg",
@@ -649,9 +643,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Hanover",
-    "width": "719.281",
-    "height": "109.75",
-    "aspectRatio": 6.553813211845102
+    "width": "267",
+    "height": "47",
+    "aspectRatio": 5.680851063829787
   },
   "hattiesburg.svg": {
     "name": "hattiesburg.svg",
@@ -661,9 +655,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Hattiesburg",
-    "width": "349",
-    "height": "55",
-    "aspectRatio": 6.345454545454546
+    "width": "484",
+    "height": "48",
+    "aspectRatio": 10.083333333333334
   },
   "hawkcentral-dark.png": {
     "name": "hawkcentral-dark.png",
@@ -778,9 +772,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Jackson (TN)",
-    "width": "724",
-    "height": "160",
-    "aspectRatio": 4.525
+    "width": "286",
+    "height": "47",
+    "aspectRatio": 6.085106382978723
   },
   "kitsap.svg": {
     "name": "kitsap.svg",
@@ -890,17 +884,17 @@
     "height": "75.9",
     "aspectRatio": 7.715415019762846
   },
-  "lebanondailynews.svg": {
-    "name": "lebanondailynews.svg",
+  "lebanon.svg": {
+    "name": "lebanon.svg",
     "domain": [
       "ldnews.com"
     ],
     "isSvg": true,
     "noColor": false,
     "marketName": "Lebanon Daily News",
-    "width": "784.06",
-    "height": "160",
-    "aspectRatio": 4.9003749999999995
+    "width": "437",
+    "height": "48",
+    "aspectRatio": 9.104166666666666
   },
   "livingston.svg": {
     "name": "livingston.svg",
@@ -911,9 +905,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lansing",
-    "width": "520",
-    "height": "160",
-    "aspectRatio": 3.25
+    "width": "353",
+    "height": "56",
+    "aspectRatio": 6.303571428571429
   },
   "livonia.svg": {
     "name": "livonia.svg",
@@ -925,9 +919,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lansing",
-    "width": "665",
-    "height": "160",
-    "aspectRatio": 4.15625
+    "width": "331",
+    "height": "47",
+    "aspectRatio": 7.042553191489362
   },
   "louisville.svg": {
     "name": "louisville.svg",
@@ -1064,25 +1058,17 @@
     "height": "47",
     "aspectRatio": 7.25531914893617
   },
-  "monroe-dark.png": {
-    "name": "monroe-dark.png",
+  "monroe.svg": {
+    "name": "monroe.svg",
     "domain": [
-      "theadvertiser.com",
       "thenewsstar.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Lafayette (LA)"
-  },
-  "monroe-light.png": {
-    "name": "monroe-light.png",
-    "domain": [
-      "theadvertiser.com",
-      "thenewsstar.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Lafayette (LA)"
+    "marketName": "Monroe",
+    "width": "232",
+    "height": "45",
+    "aspectRatio": 5.155555555555556
   },
   "montereycounty.svg": {
     "name": "montereycounty.svg",
@@ -1108,23 +1094,17 @@
     "height": "48",
     "aspectRatio": 11.083333333333334
   },
-  "morristown-dark.png": {
-    "name": "morristown-dark.png",
+  "morristown.svg": {
+    "name": "morristown.svg",
     "domain": [
       "dailyrecord.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Morristown"
-  },
-  "morristown-light.png": {
-    "name": "morristown-light.png",
-    "domain": [
-      "dailyrecord.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Morristown"
+    "marketName": "Morristown",
+    "width": "274",
+    "height": "47",
+    "aspectRatio": 5.829787234042553
   },
   "mountainhome.svg": {
     "name": "mountainhome.svg",
@@ -1159,9 +1139,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Murfreesboro",
-    "width": "769",
-    "height": "160",
-    "aspectRatio": 4.80625
+    "width": "410",
+    "height": "47",
+    "aspectRatio": 8.72340425531915
   },
   "naples-prep-zone.png": {
     "name": "naples-prep-zone.png",
@@ -1250,9 +1230,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lafayette (LA)",
-    "width": "720",
-    "height": "148",
-    "aspectRatio": 4.864864864864865
+    "width": "249",
+    "height": "47",
+    "aspectRatio": 5.297872340425532
   },
   "oshkosh.svg": {
     "name": "oshkosh.svg",
@@ -1342,9 +1322,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Lansing",
-    "width": "788",
-    "height": "160",
-    "aspectRatio": 4.925
+    "width": "287",
+    "height": "48",
+    "aspectRatio": 5.979166666666667
   },
   "poughkeepsie.svg": {
     "name": "poughkeepsie.svg",
@@ -1612,23 +1592,17 @@
     "height": "48",
     "aspectRatio": 11.458333333333334
   },
-  "staunton-dark.png": {
-    "name": "staunton-dark.png",
+  "staunton.svg": {
+    "name": "staunton.svg",
     "domain": [
       "newsleader.com"
     ],
-    "isSvg": false,
+    "isSvg": true,
     "noColor": false,
-    "marketName": "Staunton"
-  },
-  "staunton-light.png": {
-    "name": "staunton-light.png",
-    "domain": [
-      "newsleader.com"
-    ],
-    "isSvg": false,
-    "noColor": false,
-    "marketName": "Staunton"
+    "marketName": "Staunton",
+    "width": "272",
+    "height": "47",
+    "aspectRatio": 5.787234042553192
   },
   "stcloud.svg": {
     "name": "stcloud.svg",
@@ -2179,9 +2153,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Cherry Hill",
-    "width": "800",
-    "height": "160",
-    "aspectRatio": 5
+    "width": "281",
+    "height": "47",
+    "aspectRatio": 5.9787234042553195
   },
   "visaliatulare.svg": {
     "name": "visaliatulare.svg",
@@ -2269,9 +2243,9 @@
     "isSvg": true,
     "noColor": false,
     "marketName": "Wilmington",
-    "width": "724.6",
-    "height": "123.4",
-    "aspectRatio": 5.871961102106969
+    "width": "347",
+    "height": "46",
+    "aspectRatio": 7.543478260869565
   },
   "wisconsin.svg": {
     "name": "wisconsin.svg",

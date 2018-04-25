@@ -160,9 +160,7 @@
   "Clarksville": {
     "domain": "theleafchronicle.com",
     "logo": [{
-      "filename": "clarksville-dark.png"
-    }, {
-      "filename": "clarksville-light.png"
+      "filename": "clarksville.svg"
     }]
   },
 
@@ -479,10 +477,6 @@
     }, {
       "filename": "alexandria.svg"
     }, {
-      "filename": "monroe-dark.png"
-    }, {
-      "filename": "monroe-light.png"
-    }, {
       "filename": "opelousas.svg"
     }]
   },
@@ -526,7 +520,7 @@
   "Lebanon Daily News": {
     "domain": "ldnews.com",
     "logo": {
-      "filename": "lebanondailynews.svg"
+      "filename": "lebanon.svg"
     }
   },
 
@@ -647,9 +641,7 @@
   "Monroe": {
     "domain": "thenewsstar.com",
     "logo": [{
-      "filename": "monroe-dark.png"
-    }, {
-      "filename": "monroe-light.png"
+      "filename": "monroe.svg"
     }]
   },
 
@@ -663,9 +655,7 @@
   "Morristown": {
     "domain": "dailyrecord.com",
     "logo": [{
-      "filename": "morristown-dark.png"
-    }, {
-      "filename": "morristown-light.png"
+      "filename": "morristown.svg"
     }]
   },
 
@@ -947,9 +937,7 @@
   "Staunton": {
     "domain": "newsleader.com",
     "logo": [{
-      "filename": "staunton-dark.png"
-    }, {
-      "filename": "staunton-light.png"
+      "filename": "staunton.svg"
     }, {
       "filename": "shenandoahvalley.svg"
     }]
