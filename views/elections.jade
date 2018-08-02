@@ -1,0 +1,24 @@
+extends ./base
+import ./util/static
+
+block title
+  title Breakfast
+
+block css
+  link(href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic', rel='stylesheet', type='text/css')
+  +getCssLink('/css/breakfast.css')
+  +getCssLink('/css/elections.css')
+
+block content
+  #editor
+
+  a#download-link
+  #download-canvas
+
+  a#feedback(href='mailto:help@breakfast.im?subject=Breakfast Support Question') Need help? Drop us a line!
+
+
+block js
+  +getScript('/js/elections.js')
+  script.
+    window.BFAST_USER_EMAIL = '#{locals.user.emailAddress}';

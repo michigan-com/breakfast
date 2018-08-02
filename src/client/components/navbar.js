@@ -55,6 +55,7 @@ export default class NavBar extends Component {
           <a className="title" href="/">Breakfast</a>
           <div className="links">
             <a href="/">Home</a>
+            <a href="/elections/">Elections</a>
             <a href="/gallery/">Gallery</a>
           </div>
         </div>
