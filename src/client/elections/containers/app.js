@@ -9,7 +9,7 @@ import { doneDownloading } from '../../breakfast/actions/downloading';
 import { getPresentState } from '../../breakfast/selectors/present';
 import { showRepositioning } from '../../breakfast/actions/nav';
 import { getImageMetrics } from '../selectors/templates';
-import OptionsMenu from '../../breakfast/containers/options-menu';
+import OptionsMenu from './options-menu';
 import Navbar from '../../components/navbar';
 import EditingCanvas from './editing-canvas';
 

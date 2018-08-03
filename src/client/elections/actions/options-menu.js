@@ -2,8 +2,10 @@
 
 const OPTION_CHOICES = [
   'templates',
+  'text',
   'uploads',
   'logo',
+  'candidates',
 ];
 
 export const OPTION_SELECT = 'OPTION_SELECT';

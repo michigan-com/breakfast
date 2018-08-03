@@ -12,6 +12,7 @@ import Attribution from '../../../breakfast/store/reducers/attribution';
 import OptionsMenu from './options-menu';
 // import Background from './background';
 import Templates from './templates';
+import Candidates from './candidates';
 
 export default combineReducers({
   Logo,
@@ -23,4 +24,5 @@ export default combineReducers({
   Attribution,
   Uploads,
   Templates,
+  Candidates,
 });

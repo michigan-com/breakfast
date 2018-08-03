@@ -7,7 +7,8 @@ import { bindActionCreators } from 'redux';
 import { doneDownloading } from '../../breakfast/actions/downloading';
 import { getPresentState } from '../../breakfast/selectors/present';
 import { getImageMetrics } from '../selectors/templates';
-import { TEMPLATE_TYPE_SINGLE, TEMPLATE_TYPE_DOUBLE, TEMPLATE_TYPE_LIST } from '../actions/templates';
+import { TEMPLATE_TYPE_SINGLE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST } from '../actions/templates';
+import { getLinesOfText } from './helpers/svg-text-line';
 
 const MAX_CANVAS_SIZE = 2097152;
 
@@ -17,6 +18,7 @@ class EditingCanvas extends Component {
     Logo: PropTypes.object,
     imageMetrics: PropTypes.object,
     Downloading: PropTypes.object,
+    Candidates: PropTypes.object,
   }
 
   constructor(props) {
@@ -24,6 +26,8 @@ class EditingCanvas extends Component {
 
     this.markupContainer = null;
     this.svg = null;
+
+    this.singleTextBlock = null;
 
     this.state = {
       downloading: false,
@@ -33,26 +37,16 @@ class EditingCanvas extends Component {
   _renderTemplateMarkup() {
     if (!this.markupContainer) return;
 
-    const { activeTemplateIndex, templates } = this.props.Templates;
-    if (activeTemplateIndex < 0 || activeTemplateIndex >= templates.length) {
+    const { activeTemplateType, templates } = this.props.Templates;
+    if (!(activeTemplateType in templates)) return;
+
+    const { activeVariationIndex, variations } = templates[activeTemplateType];
+
+    if (activeVariationIndex < 0 || activeVariationIndex >= variations.length) {
       return;
     }
 
-    this.markupContainer.innerHTML = templates[activeTemplateIndex].markup
-  }
-
-  renderText(template) {
-    switch (template.type) {
-      case TEMPLATE_TYPE_SINGLE:
-        return (
-          <text x='0' y='100' className='text-block'>
-            { template.candidates[0].text[0] }
-          </text>
-        )
-
-      default:
-        return null;
-    }
+    this.markupContainer.innerHTML = variations[activeVariationIndex].markup
   }
 
   componentWillReceiveProps(nextProps) {
@@ -128,15 +122,65 @@ class EditingCanvas extends Component {
     }
   }
 
+  renderText(text, templateType) {
+    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    switch (templateType) {
+      case TEMPLATE_TYPE_SINGLE:
+        var lines = getLinesOfText(text[0], fontSize, lineHeight, width);
+        var bottom = height * 0.8;
+        var left = width * 0.05;
+        var top = bottom - (lines.length * lineHeight * fontSize);
+
+        return (
+          <g>
+            <rect className='text-container' x={ left / 2 } y={top - (fontSize * 1.5)} width={width * 0.95} height={(lines.length + 1.25) * fontSize } fill='white'></rect>
+            <text x={left} y={top} width={width} className='text-block'>
+              {lines.map((line, index) => (
+                <tspan
+                  x={left}
+                  y={top + (index * fontSize * lineHeight)}
+                  ref={(t) => {
+
+                  }}
+                  >{line}</tspan>
+              ))}
+            </text>
+          </g>
+        )
+
+      default:
+        return null;
+    }
+  }
+
+  renderCandidates() {
+    return null;
+  }
+
   render() {
-    const { activeTemplateIndex, templates } = this.props.Templates;
+    const { activeTemplateType, templates } = this.props.Templates;
     const { width, height } = this.props.imageMetrics;
-    if (activeTemplateIndex < 0 || activeTemplateIndex >= templates.length) {
+    const { candidates } = this.props.Candidates;
+    if (!(activeTemplateType in templates)) return null;
+
+    const { activeVariationIndex, text, variations } = templates[activeTemplateType]
+
+    if (activeVariationIndex < 0 || activeVariationIndex >= variations.length) {
       return null;
     }
 
     const { logo } = this.props.Logo;
-    const template = templates[activeTemplateIndex];
+    const variation = variations[activeVariationIndex];
+
+    const logoContainerHeight = 50;
+    var logoWidth = width * 0.35;
+    var logoHeight = logoWidth / logo.aspectRatio;
+    var electionsLogoHeight =  logoContainerHeight * 0.3;
+
+    if (logoHeight > (logoContainerHeight * 0.8)) {
+      logoHeight = logoContainerHeight * 0.6;
+      logoWidth = logoHeight * logo.aspectRatio;
+    }
 
     return (
       <div className='elections-template-container'>
@@ -145,13 +189,16 @@ class EditingCanvas extends Component {
           <style>
             { `.logo-container {
               fill: white;
+            }
+            svg {
+              background: rgb(56, 56, 56);
             }`}
           </style>
-          { this.renderText(template) }
-
-          <rect x='0' y='180' height='20' width='200' className='logo-container'>
-          </rect>
-          <image xlinkHref={logo.imgObj ? logo.imgObj.src : ''} height='20' width='100' y='180' x='100'></image>
+          { this.renderText(text, activeTemplateType) }
+          { this.renderCandidates()}
+          <rect x='0' y={height - logoContainerHeight} height={logoContainerHeight} width={width} className='logo-container'></rect>
+          <image xlinkHref='/img/elections-logo.svg' height={electionsLogoHeight} y={height - electionsLogoHeight - ((logoContainerHeight - electionsLogoHeight) / 2)} x={width * 0.05}></image>
+          <image xlinkHref={logo.imgObj ? logo.imgObj.src : ''} height={logoHeight} width={logoWidth} y={height - logoHeight - ((logoContainerHeight - logoHeight) / 2)} x={width - logoWidth - (width * 0.05)}></image>
         </svg>
       </div>
     )
@@ -159,9 +206,9 @@ class EditingCanvas extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Templates, Logo, Downloading } = getPresentState(state);
+  const { Templates, Logo, Downloading, Candidates } = getPresentState(state);
   const imageMetrics = getImageMetrics(state);
-  return { Templates, Logo, imageMetrics, Downloading };
+  return { Templates, Logo, imageMetrics, Downloading, Candidates };
 }
 
 function mapDispatchToProps(dispatch) {

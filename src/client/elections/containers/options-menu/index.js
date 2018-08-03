@@ -4,12 +4,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import OptionChoice from '../../components/options-menu/option-choice';
-import { optionSelect } from '../../actions/options-menu';
-import { updateFilename, startDownloading } from '../../breakfast/actions/downloading';
+import OptionChoice from '../../../breakfast/components/options-menu/option-choice';
+import { optionSelect } from '../../../breakfast/actions/options-menu';
+import { updateFilename, startDownloading } from '../../../breakfast/actions/downloading';
 import BackgroundOptions from '../../../breakfast/containers/options-menu/options/background';
 import LogoOptions from '../../../breakfast/containers/options-menu/options/logo';
 import Uploads from '../../../breakfast/containers/options-menu/options/uploads';
+import TextOptions from './options/text';
+import CandidateOptions from './options/candidates';
 
 class OptionsMenuComponent extends Component {
   static propTypes = {
@@ -31,23 +33,17 @@ class OptionsMenuComponent extends Component {
     const option = options[selectedIndex];
     let optionsElement = null;
     switch (option) {
-      case 'background':
-        optionsElement = <BackgroundOptions />;
-        break;
-      case 'aspect-ratio':
-        optionsElement = <AspectRatioOptions />;
-        break;
       case 'logo':
         optionsElement = <LogoOptions />;
         break;
-      case 'text-containers':
-        optionsElement = <TextContainerOptions />;
-        break;
-      case 'sports-score':
-        optionsElement = <SportsScoreOptions />;
-        break;
       case 'uploads':
         optionsElement = <Uploads />;
+        break;
+      case 'text':
+        optionsElement = <TextOptions />;
+        break;
+      case 'candidates':
+        optionsElement = <CandidateOptions />;
         break;
       default:
         optionsElement = null;
