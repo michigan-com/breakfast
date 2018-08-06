@@ -8,7 +8,7 @@ import OptionChoice from '../../../breakfast/components/options-menu/option-choi
 import { optionSelect } from '../../../breakfast/actions/options-menu';
 import { updateFilename, startDownloading } from '../../../breakfast/actions/downloading';
 import BackgroundOptions from '../../../breakfast/containers/options-menu/options/background';
-import LogoOptions from '../../../breakfast/containers/options-menu/options/logo';
+import LogoOptions from './options/logo';
 import Uploads from './options/uploads';
 import TextOptions from './options/text';
 import CandidateOptions from './options/candidates';

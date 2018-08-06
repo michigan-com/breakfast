@@ -22,7 +22,7 @@ export const getImageMetrics = createSelector(
   (template) => {
     if (template === null) return { width: 499, height: 499 };
 
-    const width = window.innerWidth < 500 ? window.innerWidth * 2 : 1000;
+    const width = window.innerWidth < 500 ? window.innerWidth * 2 : 1080;
     const totalHeight = width * template.aspectRatio;
     const logoContainerHeight = totalHeight * 0.1;
     const height = totalHeight - logoContainerHeight;

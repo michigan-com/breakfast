@@ -13,7 +13,7 @@ import OptionsMenu from './options-menu';
 import EditingCanvas from './editing-canvas';
 import DownloadCanvas from './download-canvas';
 import BackgroundPosition from './background-position';
-import Navbar from '../../components/navbar';
+import Navbar from '../../util/components/navbar';
 
 class App extends Component {
   static propTypes = {

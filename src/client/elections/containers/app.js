@@ -10,7 +10,7 @@ import { getPresentState } from '../../breakfast/selectors/present';
 import { showRepositioning } from '../../breakfast/actions/nav';
 import { getImageMetrics } from '../selectors/templates';
 import OptionsMenu from './options-menu';
-import Navbar from '../../components/navbar';
+import Navbar from '../../util/components/navbar';
 import EditingCanvas from './editing-canvas';
 
 class App extends Component {
@@ -65,7 +65,7 @@ class App extends Component {
         <Navbar email={window.BFAST_USER_EMAIL} />
         <OptionsMenu />
         <div className="pic-editor" >
-          <div className="undo-container" style={this.getCanvasWidth()}>
+          <div className="undo-container" style={{ ...this.getCanvasWidth(), display: 'none'}}>
             <div className="undo-button" onClick={this.props.actions.redo}>
               <div className="image-container">
                 <img src="/img/redo.svg" alt="Undo" />
@@ -78,9 +78,9 @@ class App extends Component {
               </div>
               <div className="text">Undo</div>
             </div>
-            <EditingCanvas ref={(e) => { this.editingCanvas = e;}}/>
           </div>
           <div className="breakfast-image-container">
+            <EditingCanvas ref={(e) => { this.editingCanvas = e;}}/>
           </div>
           {this.renderRespositionButton()}
         </div>

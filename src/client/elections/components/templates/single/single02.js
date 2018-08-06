@@ -13,7 +13,7 @@ export default class Single02 extends Component {
     uploads: PropTypes.object,
   }
 
-  getTextBottom = (height) => (height * 0.84);
+  getTextBottom = (height) => (Math.floor(height * 0.85));
   getTextLeft = (width) => (0)
 
   renderText(text, templateType) {

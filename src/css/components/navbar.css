@@ -43,7 +43,7 @@
       margin: 0px 20px;
       float: left;
 
-      &.active {
+      .active {
         text-decoration: underline;
       }
 
