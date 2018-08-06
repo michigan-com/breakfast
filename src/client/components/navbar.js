@@ -11,6 +11,19 @@ export default class NavBar extends Component {
     super(props);
     this.state = {
       expandDropdown: false,
+      urls: [{
+        href: '/',
+        text: 'Home',
+      },{
+        href: '/breakfast/',
+        text: 'Breakfast',
+      }, {
+        href: '/elections/',
+        text: <img src='/img/elections-logo-white.svg' alt='Elections' title='Elections'/>,
+      }, {
+        href: '/gallery/',
+        text: 'Gallery',
+      }]
     };
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
@@ -54,9 +67,16 @@ export default class NavBar extends Component {
         <div className="links-container">
           <a className="title" href="/">Breakfast</a>
           <div className="links">
-            <a href="/">Home</a>
-            <a href="/elections/">Elections</a>
-            <a href="/gallery/">Gallery</a>
+            {
+              this.state.urls.map((url, i) => (
+                <a
+                  href={window.location.pathname === url.href ? '#' : url.href}
+                  className={window.location.pathname === url.href ? 'active' : ''}
+                  >
+                  {url.text}
+                </a>
+              ))
+            }
           </div>
         </div>
         <div className="user-container">
