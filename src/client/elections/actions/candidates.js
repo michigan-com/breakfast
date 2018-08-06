@@ -51,7 +51,7 @@ export function updateCandidateLocation(location = '', index = -1) {
 
 export const DEFAULT_STATE = {
   candidates: [
-    { ...CANDIDATE },
-    { ...CANDIDATE }
+    { ...CANDIDATE, name: 'Abraham Lincoln', party: 'R', location: 'Illinois' },
+    { ...CANDIDATE, name: 'Barack Obama', party: 'D', location: 'Illinois' }
   ],
 }

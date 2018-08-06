@@ -22,11 +22,13 @@ export const getImageMetrics = createSelector(
   (template) => {
     if (template === null) return { width: 499, height: 499 };
 
-    const width = window.innerWidth < 720 ? window.innerWidth * 0.8 : 500;
-    const height = width * template.aspectRatio;
-    const fontSize = 16;
+    const width = window.innerWidth < 500 ? window.innerWidth * 2 : 1000;
+    const totalHeight = width * template.aspectRatio;
+    const logoContainerHeight = totalHeight * 0.1;
+    const height = totalHeight - logoContainerHeight;
+    const fontSize = 32;
     const lineHeight = 1.1;
-    return { width, height, fontSize, lineHeight };
+    return { width, totalHeight, height, fontSize, lineHeight, logoContainerHeight };
   }
 
 )

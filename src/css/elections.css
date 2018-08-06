@@ -1,0 +1,55 @@
+@import './constants';
+
+/*
+Republican
+border: #7a101b
+fill: #ba575e
+
+Democrat
+border: #0f369d
+fill: #739dde
+
+Independent
+border: #4f0f4d
+fill: #925e9c
+
+Neutral
+border: #292929
+fill: #878787 (edited)
+*/
+
+.elections-template-container svg {
+  transform: scale(0.5);
+  transform-origin: top center;
+}
+
+.upload-container .image-container {
+  cursor: pointer;
+  border: 5px solid transparent;
+  transition: border-color 150ms linear;
+  -o-transition: border-color 150ms linear;
+  -moz-transition: border-color 150ms linear;
+  -webkit-transition: border-color 150ms linear;
+}
+
+.upload-container .image-container.active {
+  border-color: $light-blue;
+}
+
+
+.template-picker .option-container .option-container-title {
+  text-transform: capitalize;
+}
+
+.template-picker .variation-option {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 150ms linear;
+  -o-transition: border-color 150ms linear;
+  -moz-transition: border-color 150ms linear;
+  -webkit-transition: border-color 150ms linear;
+}
+
+.template-picker .variation-option.active {
+  border-color: $light-blue;
+}

@@ -9,9 +9,10 @@ import { optionSelect } from '../../../breakfast/actions/options-menu';
 import { updateFilename, startDownloading } from '../../../breakfast/actions/downloading';
 import BackgroundOptions from '../../../breakfast/containers/options-menu/options/background';
 import LogoOptions from '../../../breakfast/containers/options-menu/options/logo';
-import Uploads from '../../../breakfast/containers/options-menu/options/uploads';
+import Uploads from './options/uploads';
 import TextOptions from './options/text';
 import CandidateOptions from './options/candidates';
+import TemplateOptions from './options/templates';
 
 class OptionsMenuComponent extends Component {
   static propTypes = {
@@ -44,6 +45,9 @@ class OptionsMenuComponent extends Component {
         break;
       case 'candidates':
         optionsElement = <CandidateOptions />;
+        break;
+      case 'templates':
+        optionsElement = <TemplateOptions />;
         break;
       default:
         optionsElement = null;

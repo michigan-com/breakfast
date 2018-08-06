@@ -1,6 +1,8 @@
 'use strict';
 
 export const UPDATE_SINGLE_TEXT = 'UPDATE_SINGLE_TEXT';
+export const UPDATE_VERSUS_TEXT = 'UPDATE_VERSUS_TEXT';
+export const SELECT_TEMPLATE_VARIATION = 'SELECT_TEMPLATE_VARIATION';
 
 export const TEMPLATE_TYPE_SINGLE = 'single';
 export const TEMPLATE_TYPE_VERSUS = 'versus';
@@ -17,16 +19,16 @@ const ASPECT_RATIO_SQUARE = 1;
 
 const TEMPLATE = {
   thumbnail: '',
-  markup: '',
+  templateName: '',
   type: '',
   aspectRatio: ASPECT_RATIO_SQUARE,
   activeCandidateIndices: [],
 }
 
-function createTemplate(type = '', markup = '') {
+function createTemplate(type = '', templateName) {
   if (TEMPLATE_TYPES.indexOf(type) < 0 ) return TEMPLATE;
 
-  var createdTemplate = { ...TEMPLATE, markup, type };
+  var createdTemplate = { ...TEMPLATE, templateName, type };
 
   switch (type) {
     case TEMPLATE_TYPE_LIST:
@@ -46,27 +48,34 @@ function createTemplate(type = '', markup = '') {
 const SINGLE_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_SINGLE,
-    `<style>
-      .text-block {
-        font-family: Unify Sans;
-        stroke: black;
-      }
-    </style>`,
-  )
+    'single01',
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_SINGLE,
+    'single02',
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_SINGLE,
+    'single03',
+  ),
 ];
 
 const VERSUS_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_VERSUS,
-    `<style>svg { fill: blue; }</style>`
-  )
+    'versus01',
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_VERSUS,
+    'versus02',
+  ),
 ];
 
 const LIST_TEMPLATES = [
-  createTemplate(
-    TEMPLATE_TYPE_LIST,
-    `<style>svg { fill: red; }</style>`
-  )
+  // createTemplate(
+  //   TEMPLATE_TYPE_LIST,
+  //   'list01'
+  // )
 ]
 
 
@@ -75,6 +84,26 @@ export function updateSingleText(text = '') {
   return {
     type: UPDATE_SINGLE_TEXT,
     value: text,
+  }
+}
+
+export function updateVersusText(textIndex = -1, text = '') {
+  return {
+    type: UPDATE_VERSUS_TEXT,
+    value: {
+      textIndex,
+      text,
+    }
+  }
+}
+
+export function selectTemplateVariation(templateType=TEMPLATE_TYPE_SINGLE, activeVariationIndex = 0) {
+  return {
+    type: SELECT_TEMPLATE_VARIATION,
+    value: {
+      templateType,
+      activeVariationIndex,
+    }
   }
 }
 
