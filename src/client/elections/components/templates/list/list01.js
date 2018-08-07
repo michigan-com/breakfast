@@ -52,9 +52,11 @@ export default class List01 extends Component {
       textTop += (largestLineCount * fontSize * lineHeight) + fontSize;
     }
 
+    var gradientTop = height * 0.975;
     return (
       <g>
         {textElements}
+        <rect x={0} y={gradientTop} width={width} height={height - gradientTop} fill='url(#bottom-drop-shadow)'></rect>
       </g>
     )
 
