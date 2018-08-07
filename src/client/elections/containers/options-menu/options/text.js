@@ -4,8 +4,8 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { TEMPLATE_TYPE_SINGLE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
-  updateSingleText, updateVersusText } from '../../../actions/templates';
+import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
+  updateSingleText, updateVersusText, updateListText, addListItem } from '../../../actions/templates';
 
 class TextOptions extends Component {
   static propTypes = {
@@ -28,9 +28,15 @@ class TextOptions extends Component {
     }
   }
 
+  onListTextInput(textIndex) {
+    return (e) => {
+      this.props.actions.updateListText(textIndex, e.target.value)
+    }
+  }
+
   renderTextContent(text, templateType) {
     switch (templateType) {
-      case TEMPLATE_TYPE_SINGLE:
+      case TEMPLATE_TYPE_QUOTE:
       default:
         return (
           <div className='option-container'>
@@ -59,6 +65,23 @@ class TextOptions extends Component {
               />
           </div>
         )
+      case TEMPLATE_TYPE_LIST:
+        return (
+          <div className='option-container'>
+            <div className='option-container-title'>List</div>
+            {
+              text.map((t, i) => (
+                <input
+                  type='text'
+                  value={t}
+                  onChange={this.onListTextInput(i)}
+                  key={`list-input-${i}`}
+                  />
+              ))
+            }
+            <div className='add-list-item' onClick={this.props.actions.addListItem}>+</div>
+          </div>
+        )
     }
   }
 
@@ -85,6 +108,8 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       updateSingleText,
       updateVersusText,
+      updateListText,
+      addListItem
     }, dispatch),
   };
 }

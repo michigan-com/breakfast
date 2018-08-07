@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TEMPLATE_TYPE_VERSUS } from '../../../actions/templates';
-import { updateCandidateName, updateCandidateParty, updateCandidateLocation } from '../../../actions/candidates';
+import { updateCandidateName, updateCandidateParty, updateCandidateLocation, PARTIES } from '../../../actions/candidates';
+import PartyPicker from '../../../components/party-picker';
 
 class CandidatesOptions extends Component {
   static propTypes = {
@@ -16,6 +17,8 @@ class CandidatesOptions extends Component {
   constructor(props) {
     super(props);
 
+    this.changeCandidateParty = this.changeCandidateParty.bind(this);
+
   }
 
   changeCandidateName(i) {
@@ -25,9 +28,11 @@ class CandidatesOptions extends Component {
   }
 
   changeCandidateParty(i) {
-    return (e) => {
-      this.props.actions.updateCandidateParty(e.target.value, i);
-    }
+    return (party) => (
+      (e) => (
+        this.props.actions.updateCandidateParty(party, i)
+      )
+    )
   }
 
   changeCandidateLocation(i) {
@@ -43,7 +48,12 @@ class CandidatesOptions extends Component {
         <input type='text' value={candidate.name} onChange={this.changeCandidateName(index)}/>
 
         <div className='option-container-title'>Party</div>
-        <input type='text' value={candidate.party} onChange={this.changeCandidateParty(index)}/>
+        <PartyPicker
+          partyOptions={PARTIES}
+          currentParty={candidate.party}
+          onPartyPick={this.changeCandidateParty(index)}
+          />
+
 
         <div className='option-container-title'>Location</div>
         <input type='text' value={candidate.location} onChange={this.changeCandidateLocation(index)}/>

@@ -13,43 +13,63 @@ export default class Versus02 extends Component {
     uploads: PropTypes.object,
   }
 
-  getTextBottom = (height, index = 0) => {
-    return index === 0 ? height * 2 / 5 : height * 9 / 10;
+  getTextBottom = (height, numLines, fontSize, lineHeight) => {
+    var textHeight = numLines * lineHeight * fontSize;
+    return (height / 2) + (textHeight / 2);
   };
-  getTextLeft = (width, index = 0) => {
-    return index === 0 ?  width * 0.025 + (width / 2): width * 0.025;
-  };
+  getTextLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
 
-  renderText(text, templateType) {
+  renderText(text, candidates) {
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
 
     var textElements = []
+    var candidateElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.55);
+      var lines = getLinesOfText(text[i], fontSize, lineHeight, (width / 2) - (width * 0.05));
 
-      var bottom = this.getTextBottom(height, i);
+      var bottom = this.getTextBottom(height, lines.length, fontSize, lineHeight);
       var left = this.getTextLeft(width, i);
       var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
       var top = bottom - boxHeight;
       var textTop = top + (fontSize * 2);
-      var textLeft = left + (width * 0.025);
+      var textLeft = left;
+
+      var candidate = candidates[i];
+      var candidateBoxHeight = fontSize * 3;
+      var candidateTop = bottom;
+      var candidateTextTop =(candidateTop + (candidateBoxHeight / 2)) - (fontSize / 2);
+      var candidateTextLeft = textLeft + (width * 0.025);
+
+      var secondaryText = `${candidate.party.abbr}`;
+      if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
       textElements.push((
-        <text x={textLeft} y={textTop} width={width} className='text-block' key={`versus02-text-${i}`}>
+        <text x={textLeft} y={textTop} width={width / 2} className='text-block' key={`versus02-text-${i}`}>
           {lines.map((line, index) => (
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
-              key={`versus02-text-${index}`}
+              key={`versus01-text-${index}`}
               >{line}</tspan>
           ))}
         </text>
+      ));
+
+      candidateElements.push((
+        <g>
+          <rect x={textLeft} y={candidateTextTop - (fontSize * 0.8)} width={(width * 0.05) / 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
+          <text x={candidateTextLeft} y={candidateTextTop} width={width / 2} fill='black' key={`candidate-${i}`}>
+            <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
+            <tspan className='candidate-party-location' y={candidateTextTop + (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
+          </text>
+        </g>
       ));
     }
 
     return (
       <g>
         {textElements}
+        {candidateElements}
       </g>
     )
   }
@@ -57,64 +77,10 @@ export default class Versus02 extends Component {
   renderBackground() {
     const { activeImageIndices, images } = this.props.uploads;
     const { height, width } = this.props.imageMetrics;
-
-    const backgroundImages = [];
-    for (var count = 0; count < activeImageIndices.length; count++) {
-      var index = activeImageIndices[count];
-      if (index < 0 || index >= images.length) continue;
-
-      const backgroundImage = images[index];
-      backgroundImages.push(
-        <image
-          xlinkHref={backgroundImage.img.src}
-          className={`background-image image-${count}`}
-          preserveAspectRatio='xMidYMin slice'
-          height={height / 2}
-          width={width / 2}
-          y={(height * count) / 2}
-          x={(width * count)/ 2}
-          key={`versus01-image-${count}`}>
-        </image>
-      )
-    }
-
-
-    var gradientTop = height * 0.5;
-
     var dividerWidth = width * 0.01;
     return (
       <g>
-        {backgroundImages}
-        <rect height={height} y={(height / 2) - (dividerWidth / 2)} width={width} height={dividerWidth} x={0} fill='white'></rect>
-      </g>
-    )
-  }
-
-  renderCandidates(candidates) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        {
-          candidates.map((candidate, i) => {
-            const top = this.getTextBottom(height, i);
-            const left = this.getTextLeft(width, i);
-            const boxHeight = (fontSize * 3);
-            const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-            const textLeft = left + (width * 0.025);
-            var secondaryText = `${candidate.party}`;
-            if (candidate.location) secondaryText += ` - ${candidate.location}`;
-
-            return (
-              <text x={textLeft} y={textTop} width={width / 2 } fill='black'>
-                <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
-                <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
-              </text>
-            )
-
-          })
-        }
+        <rect height={height} y='0' width={dividerWidth} x={(width / 2) - (dividerWidth / 2)} fill='white'></rect>
       </g>
     )
   }
@@ -142,8 +108,7 @@ export default class Versus02 extends Component {
           }
         </style>
         { this.renderBackground() }
-        { this.renderText(text) }
-        { this.renderCandidates(candidates)}
+        { this.renderText(text, candidates) }
       </g>
     )
   }

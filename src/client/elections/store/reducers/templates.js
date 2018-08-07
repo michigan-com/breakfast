@@ -1,6 +1,7 @@
 'use strict';
 
-import { DEFAULT_STATE, UPDATE_SINGLE_TEXT, UPDATE_VERSUS_TEXT, SELECT_TEMPLATE_VARIATION } from '../../actions/templates';
+import { DEFAULT_STATE, UPDATE_SINGLE_TEXT, UPDATE_VERSUS_TEXT, SELECT_TEMPLATE_VARIATION,
+  UPDATE_ASPECT_RATIO, UPDATE_LIST_TEXT, ADD_LIST_ITEM} from '../../actions/templates';
 
 export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
@@ -24,6 +25,16 @@ export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
       newTemplates[activeTemplateType].text[action.value.textIndex] = action.value.text;
       return { ...state, templates: newTemplates };
 
+    case UPDATE_LIST_TEXT:
+      if (action.value.textIndex < 0 || action.value.textIndex > newTemplates[activeTemplateType].text.length) return state;
+
+      newTemplates[activeTemplateType].text[action.value.textIndex] = action.value.text;
+      return { ...state, templates: newTemplates }
+
+    case ADD_LIST_ITEM:
+      newTemplates[activeTemplateType].text.push('');
+      return { ...state, templates: newTemplates }
+
     case SELECT_TEMPLATE_VARIATION:
       activeTemplateType = action.value.templateType;
       if (!(activeTemplateType in newTemplates)) return state;
@@ -34,6 +45,13 @@ export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
       newTemplates[activeTemplateType].activeVariationIndex = activeVariationIndex;
       return { ...state, activeTemplateType, templates: newTemplates };
+
+    case UPDATE_ASPECT_RATIO:
+      var activeVariation = newTemplates[activeTemplateType].variations[activeVariationIndex];
+      if (activeVariation.aspectRatioOptions.indexOf(action.value) < 0) return state;
+
+      newTemplates[activeTemplateType].variations[activeVariationIndex].aspectRatio = action.value;
+      return { ...state, templates: newTemplates };
 
   }
 

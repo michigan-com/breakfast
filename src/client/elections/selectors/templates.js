@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 
 const templateSelector = state => ( state.Templates );
 
-export const activeTemplateSelector = (state) => {
+export const activeAspectRatio = (state) => {
   const { activeTemplateType, templates } = templateSelector(state);
   if (!(activeTemplateType in templates)) return null;
   var template = templates[activeTemplateType];
@@ -14,20 +14,20 @@ export const activeTemplateSelector = (state) => {
     return null;
   }
 
-  return template.variations[template.activeVariationIndex];
+  return template.variations[template.activeVariationIndex].aspectRatio;
 }
 
 export const getImageMetrics = createSelector(
-  activeTemplateSelector,
-  (template) => {
-    if (template === null) return { width: 499, height: 499 };
+  activeAspectRatio,
+  (aspectRatio) => {
+    if (aspectRatio === null) aspectRatio = 1;
 
     const width = window.innerWidth < 500 ? window.innerWidth * 2 : 1080;
-    const totalHeight = width * template.aspectRatio;
+    const totalHeight = width * aspectRatio;
     const logoContainerHeight = totalHeight * 0.1;
     const height = totalHeight - logoContainerHeight;
     const fontSize = 32;
-    const lineHeight = 1.1;
+    const lineHeight = 1.25;
     return { width, totalHeight, height, fontSize, lineHeight, logoContainerHeight };
   }
 

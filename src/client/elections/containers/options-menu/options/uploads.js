@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Dropzone from 'react-dropzone';
 
-import { TEMPLATE_TYPE_SINGLE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST } from '../../../actions/templates';
+import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST } from '../../../actions/templates';
 import { uploadImage, removeImage, activateSingleImage, deactivateSingleImage,
   activateSecondImage, deactivateSecondImage} from '../../../actions/uploads';
 
@@ -47,7 +47,7 @@ class UploadImages extends Component {
 
       switch(activeTemplateType) {
         case TEMPLATE_TYPE_LIST:
-        case TEMPLATE_TYPE_SINGLE:
+        case TEMPLATE_TYPE_QUOTE:
           if (imageIndex === activeImageIndices[0]) this.props.actions.deactivateSingleImage();
           else this.props.actions.activateSingleImage(imageIndex);
           break
@@ -73,7 +73,7 @@ class UploadImages extends Component {
     var text = '';
     switch(activeTemplateType) {
       case TEMPLATE_TYPE_LIST:
-      case TEMPLATE_TYPE_SINGLE:
+      case TEMPLATE_TYPE_QUOTE:
         text = 'Pick one image for a background image (if applicable)';
         break
       case TEMPLATE_TYPE_VERSUS:

@@ -67,7 +67,7 @@ export default class Single03 extends Component {
     const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
     const textLeft = left * 1.5;
 
-    var secondaryText = `${candidate.party}`;
+    var secondaryText = `${candidate.party.abbr}`;
     if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
     var gradientTop = height * 0.975;

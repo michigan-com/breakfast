@@ -7,8 +7,10 @@ import { bindActionCreators } from 'redux';
 import { doneDownloading } from '../../breakfast/actions/downloading';
 import { getPresentState } from '../../breakfast/selectors/present';
 import { getImageMetrics } from '../selectors/templates';
-import { TEMPLATE_TYPE_SINGLE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST } from '../actions/templates';
+import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
+  updateAspectRatio, ASPECT_RATIO_PORTRAIT } from '../actions/templates';
 import { ElectionsTemplate } from '../components/templates';
+import AspectRatioPicker from '../components/aspect-ratio-picker';
 
 const MAX_CANVAS_SIZE = 2097152;
 
@@ -25,29 +27,11 @@ class EditingCanvas extends Component {
   constructor(props) {
     super(props);
 
-    this.markupContainer = null;
-    this.electionsTemplate = null;
-
-    this.singleTextBlock = null;
+    this.aspectRatioClick = this.aspectRatioClick.bind(this);
 
     this.state = {
       downloading: false,
     }
-  }
-
-  _renderTemplateMarkup() {
-    if (!this.markupContainer) return;
-
-    const { activeTemplateType, templates } = this.props.Templates;
-    if (!(activeTemplateType in templates)) return;
-
-    const { activeVariationIndex, variations } = templates[activeTemplateType];
-
-    if (activeVariationIndex < 0 || activeVariationIndex >= variations.length) {
-      return;
-    }
-
-    this.markupContainer.innerHTML = variations[activeVariationIndex].markup
   }
 
   componentWillReceiveProps(nextProps) {
@@ -135,6 +119,12 @@ class EditingCanvas extends Component {
     }
   }
 
+  aspectRatioClick(ratio) {
+    return (e) => {
+      this.props.actions.updateAspectRatio(ratio);
+    }
+  }
+
   render() {
     const { activeTemplateType, templates } = this.props.Templates;
     const { width, height } = this.props.imageMetrics;
@@ -150,8 +140,17 @@ class EditingCanvas extends Component {
     const { logo } = this.props.Logo;
     const variation = variations[activeVariationIndex];
 
+    var containerClass = 'elections-template-container';
+    if (variation.aspectRatio > ASPECT_RATIO_PORTRAIT) containerClass += ' large';
+
     return (
-      <div className='elections-template-container'>
+      <div className={containerClass}>
+        <AspectRatioPicker
+          availableAspectRatios={variation.aspectRatioOptions}
+          currentAspectRatio={variation.aspectRatio}
+          onAspectRatioPick={this.aspectRatioClick}
+          />
+
         <ElectionsTemplate
           logo={logo}
           text={text}
@@ -176,6 +175,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators({
       doneDownloading,
+      updateAspectRatio,
     }, dispatch),
   };
 }

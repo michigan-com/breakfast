@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 
-export default class Single01 extends Component {
+export default class Quote02 extends Component {
   static propTypes = {
     imageMetrics: PropTypes.object,
     text: PropTypes.array,
@@ -34,7 +34,7 @@ export default class Single01 extends Component {
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
-              key={`single01-text-${index}`}
+              key={`quote02-text-${index}`}
               >{line}</tspan>
           ))}
         </text>
@@ -68,13 +68,12 @@ export default class Single01 extends Component {
     const textTop = top + (fontSize * 1.5);
     const textLeft = left * 2;
 
-    var secondaryText = `${candidate.party}`;
+    var secondaryText = `${candidate.party.abbr}`;
     if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
-    // TODO pull color based on candidate
     return (
       <g>
-        <rect x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='rgb(8, 43, 149)'/>
+        <rect x={left} y={top} width={width - (left * 2)} height={boxHeight} fill={candidate.party.color}/>
         <text x={textLeft} y={textTop} width={width} fill='white'>
           <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
           <tspan className='candidate-party-location' y={textTop + (fontSize * lineHeight)} x={textLeft}>{secondaryText}</tspan>

@@ -3,19 +3,24 @@
 import React, { PropTypes, Component } from 'react';
 
 import LogoContainer from './helpers/logo-container';
-import single01 from './single/single01';
-import single02 from './single/single02';
-import single03 from './single/single03';
+import quote01 from './single/quote01';
+import quote02 from './single/quote02';
+import quote03 from './single/quote03';
 import versus01 from './versus/versus01';
 import versus02 from './versus/versus02';
+import versus03 from './versus/versus03';
+import list01 from './list/list01';
 
 export const ALL_TEMPLATES = {
-  'single01': single01,
-  'single02': single02,
-  'single03': single03,
+  'quote01': quote01,
+  'quote02': quote02,
+  'quote03': quote03,
 
   'versus01': versus01,
   'versus02': versus02,
+  'versus03': versus03,
+
+  'list01': list01,
 }
 
 export class ElectionsTemplate extends Component {

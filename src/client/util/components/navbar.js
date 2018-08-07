@@ -72,6 +72,7 @@ export default class NavBar extends Component {
                 <a
                   href={window.location.pathname === url.href ? '#' : url.href}
                   className={window.location.pathname === url.href ? 'active' : ''}
+                  key={`link-${i}`}
                   >
                   {url.text}
                 </a>

@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 
-export default class Single02 extends Component {
+export default class Quote01 extends Component {
   static propTypes = {
     imageMetrics: PropTypes.object,
     text: PropTypes.array,
@@ -34,7 +34,7 @@ export default class Single02 extends Component {
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
-              key={`single02-text-${index}`}
+              key={`quote01-text-${index}`}
               >{line}</tspan>
           ))}
         </text>
@@ -67,7 +67,7 @@ export default class Single02 extends Component {
     const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
     const textLeft = width * 0.0725;
 
-    var secondaryText = `${candidate.party}`;
+    var secondaryText = `${candidate.party.abbr}`;
     if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
     var gradientTop = height * 0.975;
@@ -76,6 +76,7 @@ export default class Single02 extends Component {
     return (
       <g>
         <rect x={left} y={top} width={width} height={boxHeight} fill='white'/>
+        <rect x={textLeft * 2/3} y={textTop - (fontSize * 0.75)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
         <text x={textLeft} y={textTop} width={width} fill='black'>
           <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
           <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
