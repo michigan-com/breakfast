@@ -65,12 +65,10 @@ class CandidatesOptions extends Component {
     const { activeTemplateType } = this.props.Templates;
     const { candidates } = this.props.Candidates;
 
-    var numCandidates = 1;
-    if (activeTemplateType === TEMPLATE_TYPE_VERSUS) numCandidates = 2;
     return (
       <div className='option-container'>
         <div className='option-title'>Candidate(s)</div>
-        {candidates.slice(0, numCandidates).map((c, i) => (this.renderCandidate(c, i)))}
+        {candidates.map((c, i) => (this.renderCandidate(c, i)))}
 
       </div>
     )

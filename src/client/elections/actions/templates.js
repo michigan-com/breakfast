@@ -58,6 +58,11 @@ const SINGLE_TEMPLATES = [
     'quote03',
     [ASPECT_RATIO_SQUARE],
   ),
+  createTemplate(
+    TEMPLATE_TYPE_QUOTE,
+    'quote04',
+    [ASPECT_RATIO_SQUARE],
+  ),
 ];
 
 const VERSUS_TEMPLATES = [
@@ -80,6 +85,10 @@ const LIST_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_LIST,
     'list01'
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_LIST,
+    'list02'
   )
 ]
 

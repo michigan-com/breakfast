@@ -79,7 +79,7 @@ class TextOptions extends Component {
                   />
               ))
             }
-            <div className='add-list-item' onClick={this.props.actions.addListItem}>+</div>
+            { text.length < 7 ? <div className='add-list-item' onClick={this.props.actions.addListItem}>+</div> : null }
           </div>
         )
     }

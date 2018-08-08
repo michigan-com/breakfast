@@ -6,21 +6,25 @@ import LogoContainer from './helpers/logo-container';
 import quote01 from './single/quote01';
 import quote02 from './single/quote02';
 import quote03 from './single/quote03';
+import quote04 from './single/quote04';
 import versus01 from './versus/versus01';
 import versus02 from './versus/versus02';
 import versus03 from './versus/versus03';
 import list01 from './list/list01';
+import list02 from './list/list02';
 
 export const ALL_TEMPLATES = {
   'quote01': quote01,
   'quote02': quote02,
   'quote03': quote03,
+  'quote04': quote04,
 
   'versus01': versus01,
   'versus02': versus02,
   'versus03': versus03,
 
   'list01': list01,
+  'list02': list02,
 }
 
 export class ElectionsTemplate extends Component {
@@ -58,7 +62,7 @@ export class ElectionsTemplate extends Component {
     const { width, totalHeight, fontSize } = imageMetrics;
 
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" height={totalHeight} width={ width} ref={(s) => { this.svg = s;}}>
+      <svg xmlns="http://www.w3.org/2000/svg" height={totalHeight} width={width} ref={(s) => { this.svg = s;}}>
         <style id="svg-styles">
           {
             `@font-face {
@@ -82,6 +86,9 @@ export class ElectionsTemplate extends Component {
             text {
               font-family: 'Unify Sans';
               font-size: ${fontSize}px;
+            }
+            text {
+              letter-spacing: 0.05em;
             }
             `
           }

@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 
-export default class List01 extends Component {
+export default class List02 extends Component {
 
   static propTypes = {
     imageMetrics: PropTypes.object,
@@ -70,23 +70,21 @@ export default class List01 extends Component {
     const candidate = candidates[0];
 
     var candidateFontSize = 40;
-    var candidateLineHeight = 1.2;
+    var candidateLineHeight = 1.1;
     var candidateInfoFontSize = candidateFontSize * 0.7;
 
-    var textBottom = this.getHeaderBottom(height) - candidateFontSize;
-    var textLeft =  width * 0.05;
+    var textBottom = this.getHeaderBottom() - (candidateFontSize * 2);
+    var textLeft =  this.getTextLeft(width);
 
     var candidateInfo = `${candidate.party.abbr}`
     if (candidate.location)  candidateInfo += ` - ${candidate.location}`;
 
     return (
       <g>
-        <rect x='0' y='0' width={width} height={this.getHeaderBottom(height)} fill={candidate.party.color}></rect>
         <text className='candidate'>
-          <tspan x={textLeft} y={textBottom - (candidateFontSize * candidateLineHeight)} style={{fontSize: candidateInfoFontSize}}>What to Know About</tspan>
           <tspan x={textLeft} y={textBottom} style={{fontSize: candidateFontSize}}>
             <tspan style={{fontWeight: 'bold'}}>{`${candidate.name}`}</tspan>
-            <tspan dx='20' dy='-2' style={{fontSize: candidateInfoFontSize}}>{candidateInfo}</tspan>
+            <tspan x={textLeft} y={textBottom + (candidateFontSize * candidateLineHeight)} style={{fontSize: candidateInfoFontSize}}>{candidateInfo}</tspan>
           </tspan>
         </text>
       </g>
@@ -107,10 +105,6 @@ export default class List01 extends Component {
             .list-index {
               stroke: #626262;
               fill: #626262;
-            }
-            .candidate {
-              fill: white;
-              stroke: white;
             }`
           }
         </style>
