@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
-  updateSingleText, updateVersusText, updateListText, addListItem } from '../../../actions/templates';
+  updateSingleText, updateVersusText, updateListText, addListItem, removeListItem } from '../../../actions/templates';
 
 class TextOptions extends Component {
   static propTypes = {
@@ -18,19 +18,30 @@ class TextOptions extends Component {
     this.onSingleTextInput = this.onSingleTextInput.bind(this);
   }
 
+  stripSpaces(text) { return text.replace(/\n/g, '') }
+
   onSingleTextInput(e) {
-    this.props.actions.updateSingleText(e.target.value);
+    var text = this.stripSpaces(e.target.value);
+    this.props.actions.updateSingleText(text);
   }
 
   onVersusTextInput(textIndex) {
     return (e) => {
-      this.props.actions.updateVersusText(textIndex, e.target.value);
+      var text = this.stripSpaces(e.target.value);
+      this.props.actions.updateVersusText(textIndex, text);
     }
   }
 
   onListTextInput(textIndex) {
     return (e) => {
-      this.props.actions.updateListText(textIndex, e.target.value)
+      var text = this.stripSpaces(e.target.value);
+      this.props.actions.updateListText(textIndex, text);
+    }
+  }
+
+  removeListItem(textIndex) {
+    return (e) => {
+      this.props.actions.removeListItem(textIndex);
     }
   }
 
@@ -41,7 +52,7 @@ class TextOptions extends Component {
         return (
           <div className='option-container'>
             <div className='option-container-title'>Quote/Fact</div>
-            <input
+            <textarea
               type='text'
               value={text[0]}
               onChange={this.onSingleTextInput}
@@ -52,13 +63,13 @@ class TextOptions extends Component {
         return (
           <div className='option-container'>
             <div className='option-container-title'>Quote/Fact (1)</div>
-            <input
+            <textarea
               type='text'
               value={text[0]}
               onChange={this.onVersusTextInput(0)}
               />
             <div className='option-container-title'>Quote/Fact (2)</div>
-            <input
+            <textarea
               type='text'
               value={text[1]}
               onChange={this.onVersusTextInput(1)}
@@ -71,15 +82,19 @@ class TextOptions extends Component {
             <div className='option-container-title'>List</div>
             {
               text.map((t, i) => (
-                <input
-                  type='text'
-                  value={t}
-                  onChange={this.onListTextInput(i)}
-                  key={`list-input-${i}`}
-                  />
+                <div className='list-item'>
+                  <textarea
+                    type='text'
+                    value={t}
+                    onChange={this.onListTextInput(i)}
+                    key={`list-input-${i}`}
+                    style={{width: '90%'}}
+                    />
+                  <div className="remove-list-item" onClick={this.removeListItem(i)}><i className="fa fa-times"></i></div>
+                </div>
               ))
             }
-            { text.length < 7 ? <div className='add-list-item' onClick={this.props.actions.addListItem}>+</div> : null }
+            { text.length < 7 ? <div className='add-list-item' onClick={this.props.actions.addListItem}>Add Item</div> : null }
           </div>
         )
     }
@@ -109,7 +124,8 @@ function mapDispatchToProps(dispatch) {
       updateSingleText,
       updateVersusText,
       updateListText,
-      addListItem
+      addListItem,
+      removeListItem
     }, dispatch),
   };
 }

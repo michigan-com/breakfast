@@ -21,7 +21,6 @@ class EditingCanvas extends Component {
     imageMetrics: PropTypes.object,
     Downloading: PropTypes.object,
     Candidates: PropTypes.object,
-    Uploads: PropTypes.object,
   }
 
   constructor(props) {
@@ -157,7 +156,6 @@ class EditingCanvas extends Component {
           candidates={candidates}
           imageMetrics={this.props.imageMetrics}
           templateName={variation.templateName}
-          uploads={this.props.Uploads}
           ref={(e) => { if (e) this.electionsTemplate = e; }}
           />
       </div>
@@ -166,9 +164,9 @@ class EditingCanvas extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Templates, Logo, Downloading, Candidates, Uploads } = getPresentState(state);
+  const { Templates, Logo, Downloading, Candidates } = getPresentState(state);
   const imageMetrics = getImageMetrics(state);
-  return { Templates, Logo, imageMetrics, Downloading, Candidates, Uploads};
+  return { Templates, Logo, imageMetrics, Downloading, Candidates };
 }
 
 function mapDispatchToProps(dispatch) {

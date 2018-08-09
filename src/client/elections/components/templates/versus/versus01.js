@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
+import { imagePositionToAspectRatio } from '../helpers/image-position';
 
 export default class Versus01 extends Component {
   static propTypes = {
@@ -10,7 +11,6 @@ export default class Versus01 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
-    uploads: PropTypes.object,
   }
 
   getTextBottom = (height) => (height * 0.84);
@@ -21,7 +21,7 @@ export default class Versus01 extends Component {
 
     var textElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width / 2);
+      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.45);
 
       var bottom = this.getTextBottom(height);
       var left = this.getTextLeft(width, i);
@@ -51,20 +51,22 @@ export default class Versus01 extends Component {
   }
 
   renderBackground() {
-    const { activeImageIndices, images } = this.props.uploads;
+    const { candidates } = this.props;
     const { height, width } = this.props.imageMetrics;
 
     const backgroundImages = [];
-    for (var count = 0; count < activeImageIndices.length; count++) {
-      var index = activeImageIndices[count];
-      if (index < 0 || index >= images.length) continue;
+    for (var count = 0; count < candidates.length; count++) {
+      var candidate = candidates[count];
+      if (!candidate.photo.img.src) continue;
 
-      const backgroundImage = images[index];
+      const containerAspectRatio = (width / 2) / height;
+      const imageAspectRatio = candidate.photo.img.width / candidate.photo.img.height;
+
       backgroundImages.push(
         <image
-          xlinkHref={backgroundImage.img.src}
+          xlinkHref={candidate.photo.img.src}
           className={`background-image image-${count}`}
-          preserveAspectRatio='xMidYMin slice'
+          preserveAspectRatio={imagePositionToAspectRatio(candidate.photo.props.imagePosition, imageAspectRatio, containerAspectRatio)}
           height={height}
           width={width / 2}
           y='0'

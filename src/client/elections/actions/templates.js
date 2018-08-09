@@ -4,6 +4,7 @@ export const UPDATE_SINGLE_TEXT = 'UPDATE_SINGLE_TEXT';
 export const UPDATE_VERSUS_TEXT = 'UPDATE_VERSUS_TEXT';
 export const UPDATE_LIST_TEXT = 'UPDATE_LIST_TEXT';
 export const ADD_LIST_ITEM = 'ADD_LIST_ITEM';
+export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM';
 export const SELECT_TEMPLATE_VARIATION = 'SELECT_TEMPLATE_VARIATION';
 export const UPDATE_ASPECT_RATIO = 'UPDATE_ASPECT_RATIO';
 
@@ -61,6 +62,11 @@ const SINGLE_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_QUOTE,
     'quote04',
+    [ASPECT_RATIO_SQUARE],
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_QUOTE,
+    'fact01',
     [ASPECT_RATIO_SQUARE],
   ),
 ];
@@ -127,6 +133,12 @@ export function addListItem() {
   }
 }
 
+export function removeListItem(textIndex = -1) {
+  return {
+    type: REMOVE_LIST_ITEM,
+    value: textIndex,
+  }
+}
 
 export function selectTemplateVariation(templateType=TEMPLATE_TYPE_QUOTE, activeVariationIndex = 0) {
   return {

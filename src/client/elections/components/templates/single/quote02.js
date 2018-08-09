@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
+import { imagePositionToAspectRatio } from '../helpers/image-position';
 
 export default class Quote02 extends Component {
   static propTypes = {
@@ -10,7 +11,6 @@ export default class Quote02 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
-    uploads: PropTypes.object,
   }
 
   getTextBottom = (height) => (Math.floor(height * 0.8))
@@ -18,7 +18,7 @@ export default class Quote02 extends Component {
 
   renderText(text, templateType) {
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.9);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
     var boxHeight = ((lines.length + 1) * lineHeight * (fontSize));
@@ -42,17 +42,26 @@ export default class Quote02 extends Component {
     )
   }
 
-  renderBackground() {
-    const { activeImageIndices, images } = this.props.uploads;
+  renderBackground(candidates) {
+    const candidate = candidates[0];
     const { height, width } = this.props.imageMetrics;
-    if (activeImageIndices[0] === -1) return null;
-    const backgroundImage = images[activeImageIndices[0]];
+    if (!candidate.photo.img.src) return null;
 
+    const containerAspectRatio = width / height;
+    const imageAspectRatio = candidate.photo.img.width / candidate.photo.img.height;
     var gradientTop = height * 0.5;
 
     return (
       <g>
-        <image className='background-image' preserveAspectRatio='xMinYMin slice' xlinkHref={backgroundImage.img.src} height={height} width={width} y='0' x='0'></image>
+        <image
+          className='background-image'
+          preserveAspectRatio={imagePositionToAspectRatio(candidate.photo.props.imagePosition, imageAspectRatio, containerAspectRatio)}
+          xlinkHref={candidate.photo.img.src}
+          height={height}
+          width={width}
+          y='0'
+          x='0'>
+        </image>
         <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={0} height={height - gradientTop} width={width}></rect>
       </g>
     )
@@ -101,7 +110,7 @@ export default class Quote02 extends Component {
             }`
           }
         </style>
-        { this.renderBackground() }
+        { this.renderBackground(candidates) }
         { this.renderText(text) }
         { this.renderCandidates(candidates)}
       </g>

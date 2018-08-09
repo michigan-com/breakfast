@@ -10,7 +10,6 @@ export default class Versus02 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
-    uploads: PropTypes.object,
   }
 
   getTextBottom = (height, numLines, fontSize, lineHeight) => {
@@ -56,9 +55,9 @@ export default class Versus02 extends Component {
       ));
 
       candidateElements.push((
-        <g>
+        <g key={`candidate-${i}`}>
           <rect x={textLeft} y={candidateTextTop - (fontSize * 0.8)} width={(width * 0.05) / 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-          <text x={candidateTextLeft} y={candidateTextTop} width={width / 2} fill='black' key={`candidate-${i}`}>
+          <text x={candidateTextLeft} y={candidateTextTop} width={width / 2} fill='black'>
             <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
             <tspan className='candidate-party-location' y={candidateTextTop + (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
           </text>
@@ -75,7 +74,6 @@ export default class Versus02 extends Component {
   }
 
   renderBackground() {
-    const { activeImageIndices, images } = this.props.uploads;
     const { height, width } = this.props.imageMetrics;
     var dividerWidth = width * 0.01;
     return (

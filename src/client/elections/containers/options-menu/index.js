@@ -9,7 +9,6 @@ import { optionSelect } from '../../../breakfast/actions/options-menu';
 import { updateFilename, startDownloading } from '../../../breakfast/actions/downloading';
 import BackgroundOptions from '../../../breakfast/containers/options-menu/options/background';
 import LogoOptions from './options/logo';
-import Uploads from './options/uploads';
 import TextOptions from './options/text';
 import CandidateOptions from './options/candidates';
 import TemplateOptions from './options/templates';
@@ -36,9 +35,6 @@ class OptionsMenuComponent extends Component {
     switch (option) {
       case 'logo':
         optionsElement = <LogoOptions />;
-        break;
-      case 'uploads':
-        optionsElement = <Uploads />;
         break;
       case 'text':
         optionsElement = <TextOptions />;

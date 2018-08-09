@@ -10,7 +10,6 @@ export default class Quote04 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
-    uploads: PropTypes.object,
   }
 
   boxMargin = (width) => (width * 0.03);
@@ -24,7 +23,7 @@ export default class Quote04 extends Component {
     var boxHeight = height - (boxMargin * 2);
 
     var giantQuoteFontSize = 400;
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.68);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.7);
     var textHeight = (lines.length + 2) * fontSize * lineHeight;
     var textTop = (height / 2) - (textHeight / 2);
     var textLeft = this.textLeft(width);

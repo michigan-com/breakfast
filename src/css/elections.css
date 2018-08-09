@@ -144,6 +144,77 @@ fill: #878787 (edited)
 
 }
 
+.image-container {
+  width: 90%;
+  margin: 10px auto;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.list-item {
+  position: relative;
+  width: 100%;
+}
+
+.remove-upload, .remove-list-item {
+  position: absolute;
+  color: white;
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  cursor: pointer;
+  top: -10px;
+  right: -10px;
+  text-align: center;
+}
+
+textarea {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: 'Unify Sans';
+  width: 100%;
+  border: 0;
+  margin: 10px 0px;
+  height: 60px;
+}
+
+.add-list-item {
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border: 1px solid #006FFF;
+  border-radius: 3px;
+  color: white;
+  font-size: 15px;
+  line-height: 2;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.swap-candidates-container {
+  width: 100%;
+}
+
+.swap-candidates {
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border: 1px solid #006FFF;
+  border-radius: 3px;
+  color: white;
+  font-size: 15px;
+  line-height: 2;
+  width: 85%;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
 
 @media (max-width: $screen-sm) {
   .elections-template-container {

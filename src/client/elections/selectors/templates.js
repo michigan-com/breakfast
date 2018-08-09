@@ -28,7 +28,18 @@ export const getImageMetrics = createSelector(
     const height = totalHeight - logoContainerHeight;
     const fontSize = 32;
     const lineHeight = 1.25;
-    return { width, totalHeight, height, fontSize, lineHeight, logoContainerHeight };
+    const marginLeft = 75;
+    const marginTop = 60;
+    return {
+      width,
+      totalHeight,
+      height,
+      fontSize,
+      lineHeight,
+      logoContainerHeight,
+      marginLeft,
+      marginTop,
+    };
   }
 
 )

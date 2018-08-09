@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function logoContainer(props) {
   const { logo, imageMetrics } = props;
-  const { totalHeight, width, logoContainerHeight } = imageMetrics;
+  const { totalHeight, width, logoContainerHeight, marginLeft, marginTop } = imageMetrics;
 
   var logoWidth = width * 0.35;
   var logoHeight = logoWidth / logo.aspectRatio;

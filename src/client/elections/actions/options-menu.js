@@ -3,7 +3,6 @@
 const OPTION_CHOICES = [
   'templates',
   'text',
-  'uploads',
   'logo',
   'candidates',
 ];

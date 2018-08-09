@@ -1,7 +1,7 @@
 'use strict';
 
 import { DEFAULT_STATE, UPDATE_SINGLE_TEXT, UPDATE_VERSUS_TEXT, SELECT_TEMPLATE_VARIATION,
-  UPDATE_ASPECT_RATIO, UPDATE_LIST_TEXT, ADD_LIST_ITEM} from '../../actions/templates';
+  UPDATE_ASPECT_RATIO, UPDATE_LIST_TEXT, ADD_LIST_ITEM, REMOVE_LIST_ITEM } from '../../actions/templates';
 
 export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
@@ -33,6 +33,15 @@ export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
     case ADD_LIST_ITEM:
       newTemplates[activeTemplateType].text.push('');
+      return { ...state, templates: newTemplates }
+
+    case REMOVE_LIST_ITEM:
+      var currentText = [ ...newTemplates[activeTemplateType].text ];
+      newTemplates[activeTemplateType].text = [];
+      for (var i = 0; i < currentText.length; i++) {
+        if (i === action.value) continue;
+        newTemplates[activeTemplateType].text.push(currentText[i]);
+      }
       return { ...state, templates: newTemplates }
 
     case SELECT_TEMPLATE_VARIATION:

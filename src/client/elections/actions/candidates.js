@@ -3,6 +3,9 @@
 export const UPDATE_CANDIDATE_NAME = 'UPDATE_CANDIDATE_NAME';
 export const UPDATE_CANDIDATE_PARTY = 'UPDATE_CANDIDATE_PARTY';
 export const UPDATE_CANDIDATE_LOCATION = 'UPDATE_CANDIDATE_LOCATION';
+export const UPDATE_CANDIDATE_IMAGE = 'UPDATE_CANDIDATE_IMAGE';
+export const UPDATE_CANDIDATE_IMAGE_PROPS = 'UPDATE_CANDIDATE_IMAGE_PROPS';
+export const SWAP_CANDIDATES = 'SWAP_CANDIDATES';
 
 const PARTY = {
   name: '',
@@ -37,11 +40,64 @@ export const PARTIES = [
   INDEPENDENT,
 ]
 
+const UPLOAD = {
+  img: {},
+  height: 0,
+  width: 0,
+  props: {
+    imagePosition: 1, // three steps: 0, 1, 2 -> left, center, right
+  },
+  aspectRatio: 0.0,
+};
+
+
 const CANDIDATE = {
   name: '',
   party: { ...PARTY },
   location: '',
+  photo: { ...UPLOAD },
 }
+
+/**
+ * After reading an image file, add it to the `images` array.
+ *
+ * @param img {Object} - `Image` object, e.g. `img = new Image()`. Will read width and height for aspect ratio
+ */
+export function updateCandidateImage(img, index=-1) {
+  const aspectRatio = img.width / img.height;
+  const height = aspectRatio > 1 ? 0.2 : 0.4;
+  const width = aspectRatio * height;
+
+  const value = { ...UPLOAD, img, height, width, aspectRatio };
+  return {
+    type: UPDATE_CANDIDATE_IMAGE,
+    value: {
+      index,
+      value
+    }
+  };
+}
+
+export function removeCandidateImage(index=-1) {
+  return {
+    type: UPDATE_CANDIDATE_IMAGE,
+    value: {
+      index,
+      value: { ...UPLOAD }
+    }
+  }
+}
+
+export function updateCandidateImageProps(props={}, index=-1) {
+  return {
+    type: UPDATE_CANDIDATE_IMAGE_PROPS,
+    value: {
+      index,
+      value: { ...props },
+    }
+  }
+}
+
 
 export function updateCandidateName(name = '', index=-1) {
   if (index < -1) return { type: 'noop' };
@@ -76,6 +132,13 @@ export function updateCandidateLocation(location = '', index = -1) {
       index,
       value: location,
     }
+  }
+}
+
+export function swapCandidates() {
+  return {
+    type: SWAP_CANDIDATES,
+    value: {},
   }
 }
 

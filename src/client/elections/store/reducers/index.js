@@ -10,7 +10,6 @@ import Nav from '../../../breakfast/store/reducers/nav';
 import Attribution from '../../../breakfast/store/reducers/attribution';
 import OptionsMenu from './options-menu';
 // import Background from './background';
-import Uploads from './uploads';
 import Templates from './templates';
 import Candidates from './candidates';
 
@@ -22,7 +21,6 @@ export default combineReducers({
   Downloading,
   Nav,
   Attribution,
-  Uploads,
   Templates,
   Candidates,
 });

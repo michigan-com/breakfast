@@ -7,6 +7,7 @@ import quote01 from './single/quote01';
 import quote02 from './single/quote02';
 import quote03 from './single/quote03';
 import quote04 from './single/quote04';
+import fact01 from './single/fact01';
 import versus01 from './versus/versus01';
 import versus02 from './versus/versus02';
 import versus03 from './versus/versus03';
@@ -25,6 +26,8 @@ export const ALL_TEMPLATES = {
 
   'list01': list01,
   'list02': list02,
+
+  'fact01': fact01,
 }
 
 export class ElectionsTemplate extends Component {

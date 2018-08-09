@@ -11,7 +11,6 @@ export default class List02 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
-    uploads: PropTypes.object,
   }
 
   getTextLeft = (width) => (width * 0.2);
