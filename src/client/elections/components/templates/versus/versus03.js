@@ -40,13 +40,14 @@ export default class Versus03 extends Component {
       if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
       textElements.push((
-        <g>
+        <g key={`versus02-text-${i}`}>
+>
           <text x={textLeft} y={textTop} width={width} className='text-block' key={`versus03-text-${i}`}>
             {lines.map((line, index) => (
               <tspan
                 x={textLeft}
                 y={textTop + (index * fontSize * lineHeight)}
-                key={`versus02-text-${index}`}
+                key={`versus02-text-line-${index}`}
                 >{line}</tspan>
             ))}
           </text>
@@ -84,7 +85,8 @@ export default class Versus03 extends Component {
       const dividerLeft = (width / 2) - (imageDividerWidth / 2);
       const dividerTriangleHeight  = (height * 0.1);
       backgroundImages.push((
-        <g>
+        <g key={`versus01-image-${count}`}>
+
           <image
             xlinkHref={candidate.photo.img.src}
             className={`background-image image-${count}`}
@@ -92,8 +94,7 @@ export default class Versus03 extends Component {
             height={height / 2}
             width={width / 2 - (count === 0 ? imageDividerWidth : 0)}
             y={(height * count) / 2}
-            x={((width * count)/ 2)}
-            key={`versus01-image-${count}`}>
+            x={((width * count)/ 2)}>
           </image>
           <path d={`M ${dividerLeft},${top}
                     L ${dividerLeft},${top + (height / 4) - (dividerTriangleHeight / 2)}
@@ -116,30 +117,6 @@ export default class Versus03 extends Component {
       <g>
         {backgroundImages}
         <rect height={height} y={(height / 2) - (dividerWidth / 2)} width={width} height={dividerWidth} x={0} fill='white'></rect>
-      </g>
-    )
-  }
-
-  renderCandidates(candidates) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        {
-          candidates.map((candidate, i) => {
-            const top = this.getTextBottom(height, i);
-            const left = this.getTextLeft(width, i);
-            const boxHeight = (fontSize * 3);
-            const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-            const textLeft = left + (width * 0.05);
-            return (
-              <g>
-              </g>
-            )
-
-          })
-        }
       </g>
     )
   }

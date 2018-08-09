@@ -107,7 +107,7 @@ export default class Versus01 extends Component {
             if (candidate.location) secondaryText += ` - ${candidate.location}`;
 
             return (
-              <g>
+              <g key={`versus01-candidate-${i}`}>
                 <rect x={textLeft * 2/3 + (width * i / 2)} y={textTop - (fontSize * 0.8)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
                 <text x={textLeft + ((width * i) / 2)} y={textTop} width={width / 2 } fill='black'>
                   <tspan className='candidate-name' y={textTop} x={textLeft + ((width * i) / 2)}>{candidate.name}</tspan>
