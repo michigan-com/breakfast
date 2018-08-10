@@ -84,7 +84,7 @@ export default class Quote02 extends Component {
 
     return (
       <g>
-        <image x={left} y={top} width={width - (left * 2)} xlinkHref={`/img/elections/templates/quote02/quote02-${candidate.party.abbr}.png`}></image>
+        <image x={left} y={top} width={width - (left * 2)} xlinkHref={`/img/elections/templates/quote02/quote02-${candidate.party.abbr.toLowerCase()}.png`}></image>
         <text x={textLeft} y={textTop} width={width} fill='white' style={{fontSize: candidateFontSize}}>
           <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
           <tspan className='candidate-party-location' y={textTop + (candidateFontSize * lineHeight)} x={textLeft}>{secondaryText}</tspan>
