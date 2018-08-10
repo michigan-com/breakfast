@@ -18,6 +18,10 @@ border: #292929
 fill: #878787 (edited)
 */
 
+.pic-editor {
+  padding-top: 55px;
+}
+
 .elections-template-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +30,7 @@ fill: #878787 (edited)
 }
 
 .elections-template-container svg {
-  transform: scale(0.5);
+  transform: scale(0.4);
   transform-origin: top center;
 }
 

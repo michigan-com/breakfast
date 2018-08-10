@@ -30,8 +30,8 @@ export default class List02 extends Component {
     }
 
     var headerBottom = this.getHeaderBottom(height);
-    var textHeight = ((largestLineCount + 1) * fontSize * lineHeight) * text.length;
-    var top = ((height - headerBottom) / 2) - (textHeight / 2) + fontSize + headerBottom;  // TODO add topper height
+    var textHeight = ((largestLineCount) * fontSize * lineHeight) * allLines.length + ((allLines.length - 1) * fontSize);
+    var top = ((height - (headerBottom)) / 2) - (textHeight / 2) + (fontSize * lineHeight) + headerBottom;
     var left = this.getTextLeft(width);
 
     var textElements = [];
@@ -68,22 +68,23 @@ export default class List02 extends Component {
     const { width, height } = this.props.imageMetrics;
     const candidate = candidates[0];
 
-    var candidateFontSize = 40;
-    var candidateLineHeight = 1.1;
+    var candidateFontSize = 70;
+    var candidateLineHeight = 1.13;
     var candidateInfoFontSize = candidateFontSize * 0.7;
 
-    var textBottom = this.getHeaderBottom() - (candidateFontSize * 2);
+    var textBottom = this.getHeaderBottom() - (candidateFontSize / 2);
     var textLeft =  this.getTextLeft(width);
 
     var candidateInfo = `${candidate.party.abbr}`
-    if (candidate.location)  candidateInfo += ` - ${candidate.location}`;
+    if (candidate.location)  candidateInfo += `-${candidate.location}`;
 
     return (
       <g>
+        <image x={0} y={0} width={width} xlinkHref={`/img/elections/templates/list02/list02-${candidate.party.abbr.toLowerCase()}.png`}></image>
         <text className='candidate'>
           <tspan x={textLeft} y={textBottom} style={{fontSize: candidateFontSize}}>
             <tspan style={{fontWeight: 'bold'}}>{`${candidate.name}`}</tspan>
-            <tspan x={textLeft} y={textBottom + (candidateFontSize * candidateLineHeight)} style={{fontSize: candidateInfoFontSize}}>{candidateInfo}</tspan>
+            <tspan x={textLeft} dy={candidateFontSize * 0.9} style={{fontSize: candidateInfoFontSize}}>{candidateInfo}</tspan>
           </tspan>
         </text>
       </g>

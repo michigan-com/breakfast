@@ -30,7 +30,7 @@ export default class Quote04 extends Component {
 
     var candidateTextTop = textTop + ((lines.length + 1) * fontSize * lineHeight);
     var candidateInfo = `${candidate.party.abbr}`
-    if (candidate.location)  candidateInfo += ` - ${candidate.location}`;
+    if (candidate.location)  candidateInfo += `-${candidate.location}`;
 
     return (
       <g>

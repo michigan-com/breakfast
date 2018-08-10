@@ -37,7 +37,7 @@ export default class Versus03 extends Component {
       const candidateTextTop = textTop + boxHeight;
 
       var secondaryText = `${candidate.party.abbr}`;
-      if (candidate.location) secondaryText += ` - ${candidate.location}`;
+      if (candidate.location) secondaryText += `-${candidate.location}`;
 
       textElements.push((
         <g key={`versus02-text-${i}`}>

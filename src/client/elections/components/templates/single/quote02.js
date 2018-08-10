@@ -18,7 +18,7 @@ export default class Quote02 extends Component {
 
   renderText(text, templateType) {
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.9);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.875);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
     var boxHeight = ((lines.length + 1) * lineHeight * (fontSize));
@@ -30,12 +30,13 @@ export default class Quote02 extends Component {
       <g>
         <rect className='text-container' x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='white'></rect>
         <text x={textLeft} y={textTop} width={width} className='text-block'>
+          <tspan dx={fontSize * -0.5} >{'“'}</tspan>
           {lines.map((line, index) => (
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
               key={`quote02-text-${index}`}
-              >{line}</tspan>
+              >{line}{index === (lines.length - 1) ? <tspan>{'”'}</tspan> : null}</tspan>
           ))}
         </text>
       </g>
@@ -71,21 +72,22 @@ export default class Quote02 extends Component {
     const candidate = candidates[0];
 
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    var candidateFontSize = fontSize * 1.2;
     const top = this.getTextBottom(height);
     const left = this.getTextLeft(width);
     const boxHeight = (fontSize * 3 * lineHeight);
-    const textTop = top + (fontSize * 1.5);
+    const textTop = top + (fontSize * 2);
     const textLeft = left * 2;
 
     var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += ` - ${candidate.location}`;
+    if (candidate.location) secondaryText += `-${candidate.location}`;
 
     return (
       <g>
-        <rect x={left} y={top} width={width - (left * 2)} height={boxHeight} fill={candidate.party.color}/>
-        <text x={textLeft} y={textTop} width={width} fill='white'>
+        <image x={left} y={top} width={width - (left * 2)} xlinkHref={`/img/elections/templates/quote02/quote02-${candidate.party.abbr}.png`}></image>
+        <text x={textLeft} y={textTop} width={width} fill='white' style={{fontSize: candidateFontSize}}>
           <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
-          <tspan className='candidate-party-location' y={textTop + (fontSize * lineHeight)} x={textLeft}>{secondaryText}</tspan>
+          <tspan className='candidate-party-location' y={textTop + (candidateFontSize * lineHeight)} x={textLeft}>{secondaryText}</tspan>
         </text>
       </g>
     )

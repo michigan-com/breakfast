@@ -13,30 +13,41 @@ export default class Single03 extends Component {
     logo: PropTypes.object,
   }
 
-  getTextBottom = (height) => (Math.floor(height * 0.84));
+  getTextBottom = (height) => (Math.floor(height * 0.95));
   getTextLeft = (width) => (width * 0.05);
 
-  renderText(text, templateType) {
+  renderText(text, candidates) {
+    const candidate = candidates[0];
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.875);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
-    var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+    var boxHeight = ((lines.length + 5) * lineHeight * (fontSize));
     var top = bottom - boxHeight;
     var textTop = top + (fontSize * 2);
-    var textLeft = left * 1.5;
+    var textLeft = left * 2;
+    const candidateTextTop = (bottom - (fontSize * 2 * lineHeight));
+    const candidateTextLeft = left * 2;
 
+    var secondaryText = `${candidate.party.abbr}`;
+    if (candidate.location) secondaryText += `-${candidate.location}`;
+    var gradientTop = height * 0.975;
     return (
       <g>
-        <rect className='text-container' x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='rgba(256, 256, 256, 0.9)'></rect>
+        <rect className='text-container' x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='rgba(256, 256, 256, 0.93)'></rect>
         <text x={textLeft} y={textTop} width={width} className='text-block'>
+          <tspan dx={fontSize * -0.5} >{'“'}</tspan>
           {lines.map((line, index) => (
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
               key={`single03-text-${index}`}
-              >{line}</tspan>
+              >{line}{index === (lines.length - 1) ? <tspan>{'”'}</tspan> : null}</tspan>
           ))}
+        </text>
+        <text x={candidateTextLeft} y={candidateTextTop} width={width} fill='black'>
+          <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
+          <tspan className='candidate-party-location' y={candidateTextTop + (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
         </text>
       </g>
     )
@@ -68,33 +79,6 @@ export default class Single03 extends Component {
     )
   }
 
-  renderCandidates(candidates) {
-    const candidate = candidates[0];
-
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    const top = this.getTextBottom(height);
-    const left = this.getTextLeft(width);
-    const boxHeight = (fontSize * 3);
-    const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-    const textLeft = left * 1.5;
-
-    var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += ` - ${candidate.location}`;
-
-    var gradientTop = height * 0.975;
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        <rect x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='rgba(256, 256, 256, 0.9)'/>
-        <text x={textLeft} y={textTop} width={width} fill='black'>
-          <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
-          <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
-        </text>
-      </g>
-    )
-  }
-
   render() {
     const { text, candidates } = this.props;
     const { width, height } = this.props.imageMetrics;
@@ -115,8 +99,7 @@ export default class Single03 extends Component {
           }
         </style>
         { this.renderBackground(candidates) }
-        { this.renderText(text) }
-        { this.renderCandidates(candidates)}
+        { this.renderText(text, candidates) }
       </g>
     )
   }

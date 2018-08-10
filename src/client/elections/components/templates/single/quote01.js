@@ -13,31 +13,46 @@ export default class Quote01 extends Component {
     logo: PropTypes.object,
   }
 
-  getTextBottom = (height) => (Math.floor(height * 0.85));
+  getTextBottom = (height) => (height);
   getTextLeft = (width) => (0)
 
-  renderText(text, templateType) {
+  renderText(text, candidates) {
+    const candidate = candidates[0];
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.95);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
-    var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+    var boxHeight = ((lines.length + 5) * lineHeight * (fontSize));
     var top = bottom - boxHeight;
     var textTop = top + (fontSize * 2);
     var textLeft = width * 0.05;
+    const candidateTextTop = (bottom - (fontSize * lineHeight * 2));
+    const candidateTextLeft = width * 0.08;
+
+    var secondaryText = `${candidate.party.abbr}`;
+    if (candidate.location) secondaryText += `-${candidate.location}`;
+
+    var gradientTop = height * 0.975;
 
     return (
       <g>
         <rect className='text-container' x={left} y={top} width={width} height={boxHeight} fill='white'></rect>
         <text x={textLeft} y={textTop} width={width} className='text-block'>
+          <tspan dx={fontSize * -0.5} >{'“'}</tspan>
           {lines.map((line, index) => (
             <tspan
               x={textLeft}
               y={textTop + (index * fontSize * lineHeight)}
               key={`quote01-text-${index}`}
-              >{line}</tspan>
+              >{line}{index === (lines.length - 1) ? <tspan>{'”'}</tspan> : null}</tspan>
           ))}
         </text>
+        <rect x={candidateTextLeft * 2/3} y={candidateTextTop - (fontSize * 0.75)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
+        <text x={candidateTextLeft} y={candidateTextTop} width={width} fill='black'>
+          <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
+          <tspan className='candidate-party-location' y={candidateTextTop+ (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
+        </text>
+        <rect x={0} y={gradientTop} width={width} height={height - gradientTop} fill='url(#bottom-drop-shadow)'></rect>
       </g>
     )
   }
@@ -68,38 +83,10 @@ export default class Quote01 extends Component {
     )
   }
 
-  renderCandidates(candidates) {
-    const candidate = candidates[0];
-
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    const top = this.getTextBottom(height);
-    const left = this.getTextLeft(width);
-    const boxHeight = height - top;
-    const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-    const textLeft = width * 0.0725;
-
-    var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += ` - ${candidate.location}`;
-
-    var gradientTop = height * 0.975;
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        <rect x={left} y={top} width={width} height={boxHeight} fill='white'/>
-        <rect x={textLeft * 2/3} y={textTop - (fontSize * 0.75)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-        <text x={textLeft} y={textTop} width={width} fill='black'>
-          <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
-          <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
-        </text>
-        <rect x={0} y={gradientTop} width={width} height={height - gradientTop} fill='url(#bottom-drop-shadow)'></rect>
-      </g>
-    )
-  }
-
   render() {
     const { text, candidates } = this.props;
     const { width, height } = this.props.imageMetrics;
+    const candidate = candidates[0];
 
     return (
       <g>
@@ -114,8 +101,14 @@ export default class Quote01 extends Component {
           }
         </style>
         { this.renderBackground(candidates) }
-        { this.renderText(text) }
-        { this.renderCandidates(candidates)}
+        <image className='corner-pattern'
+          xlinkHref={`/img/elections/templates/quote01/quote01-${candidate.party.abbr.toLowerCase()}.png`}
+          x='0'
+          y='0'
+          width={width}
+          >
+        </image>
+        { this.renderText(text, candidates) }
       </g>
     )
   }

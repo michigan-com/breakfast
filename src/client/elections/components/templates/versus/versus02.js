@@ -40,7 +40,7 @@ export default class Versus02 extends Component {
       var candidateTextLeft = textLeft + (width * 0.025);
 
       var secondaryText = `${candidate.party.abbr}`;
-      if (candidate.location) secondaryText += ` - ${candidate.location}`;
+      if (candidate.location) secondaryText += `-${candidate.location}`;
 
       textElements.push((
         <text x={textLeft} y={textTop} width={width / 2} className='text-block' key={`versus02-text-${i}`}>
@@ -73,12 +73,14 @@ export default class Versus02 extends Component {
     )
   }
 
-  renderBackground() {
+  renderBackground(candidates) {
     const { height, width } = this.props.imageMetrics;
     var dividerWidth = width * 0.01;
     return (
       <g>
         <rect height={height} y='0' width={dividerWidth} x={(width / 2) - (dividerWidth / 2)} fill='white'></rect>
+        <image x='0' y='0' width={width - (dividerWidth / 2)} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[0].party.abbr.toLowerCase()}.png`}></image>
+        <image x={(width / 2) + (dividerWidth / 2)} y='0' width={width} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[1].party.abbr.toLowerCase()}.png`}></image>
       </g>
     )
   }
@@ -105,7 +107,7 @@ export default class Versus02 extends Component {
             }`
           }
         </style>
-        { this.renderBackground() }
+        { this.renderBackground(candidates) }
         { this.renderText(text, candidates) }
       </g>
     )

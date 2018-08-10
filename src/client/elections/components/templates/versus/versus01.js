@@ -11,6 +11,7 @@ export default class Versus01 extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
+    variation: PropTypes.object,
   }
 
   getTextBottom = (height) => (height * 0.84);
@@ -51,6 +52,7 @@ export default class Versus01 extends Component {
   }
 
   renderBackground() {
+    const { variation } = this.props;
     const { candidates } = this.props;
     const { height, width } = this.props.imageMetrics;
 
@@ -78,14 +80,25 @@ export default class Versus01 extends Component {
 
 
     var gradientTop = height * 0.5;
-
     var dividerWidth = width * 0.01;
+
+    var patternImages = null;
+    if (variation.aspectRatio > 1) {
+      patternImages = (
+        <g>
+          <image x='0' y='0' width={width - (dividerWidth / 2)} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[0].party.abbr.toLowerCase()}.png`}></image>
+          <image x={(width / 2) + (dividerWidth / 2)} y='0' width={width} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[1].party.abbr.toLowerCase()}.png`}></image>
+        </g>
+      )
+    }
+
     return (
       <g>
         {backgroundImages}
         <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={0} height={height - gradientTop} width={width / 2}></rect>
         <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={width / 2} height={height - gradientTop} width={width / 2}></rect>
         <rect height={height} y='0' width={dividerWidth} x={(width / 2) - (dividerWidth / 2)} fill='white'></rect>
+        {patternImages}
       </g>
     )
   }
@@ -104,7 +117,7 @@ export default class Versus01 extends Component {
         {
           candidates.map((candidate, i) => {
             var secondaryText = `${candidate.party.abbr}`;
-            if (candidate.location) secondaryText += ` - ${candidate.location}`;
+            if (candidate.location) secondaryText += `-${candidate.location}`;
 
             return (
               <g key={`versus01-candidate-${i}`}>

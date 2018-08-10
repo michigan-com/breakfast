@@ -37,6 +37,7 @@ export class ElectionsTemplate extends Component {
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
+    variation: PropTypes.object,
   }
 
   constructor(props) {
@@ -103,7 +104,7 @@ export class ElectionsTemplate extends Component {
           </linearGradient>
           <linearGradient id="bottom-drop-shadow" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor="transparent"/>
-              <stop offset="100%"  stopColor="rgba(64, 64, 64, 0.3)"/>
+              <stop offset="100%"  stopColor="rgba(64, 64, 64, 0.1)"/>
           </linearGradient>
         </defs>
 

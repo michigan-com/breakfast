@@ -156,6 +156,7 @@ class EditingCanvas extends Component {
           candidates={candidates}
           imageMetrics={this.props.imageMetrics}
           templateName={variation.templateName}
+          variation={variation}
           ref={(e) => { if (e) this.electionsTemplate = e; }}
           />
       </div>
