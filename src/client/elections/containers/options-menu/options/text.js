@@ -90,7 +90,7 @@ class TextOptions extends Component {
                     key={`list-input-${i}`}
                     style={{width: '90%'}}
                     />
-                  <div className="remove-list-item" onClick={this.removeListItem(i)}><i className="fa fa-times"></i></div>
+                  { i <=2 ? null : <div className="remove-list-item" onClick={this.removeListItem(i)}><i className="fa fa-times"></i></div> }
                 </div>
               ))
             }

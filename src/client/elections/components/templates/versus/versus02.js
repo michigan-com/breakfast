@@ -24,7 +24,7 @@ export default class Versus02 extends Component {
     var textElements = []
     var candidateElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, (width / 2) - (width * 0.05));
+      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.42);
 
       var bottom = this.getTextBottom(height, lines.length, fontSize, lineHeight);
       var left = this.getTextLeft(width, i);

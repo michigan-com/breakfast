@@ -1,5 +1,7 @@
 'use strict';
 
+import { getIpsumText } from './test-text';
+
 export const UPDATE_SINGLE_TEXT = 'UPDATE_SINGLE_TEXT';
 export const UPDATE_VERSUS_TEXT = 'UPDATE_VERSUS_TEXT';
 export const UPDATE_LIST_TEXT = 'UPDATE_LIST_TEXT';
@@ -162,17 +164,17 @@ export const DEFAULT_STATE = {
   templates: {
     [TEMPLATE_TYPE_QUOTE]: {
       variations: [...SINGLE_TEMPLATES],
-      text: ['Single template'],
+      text: [getIpsumText(3)],
       activeVariationIndex: 0,
     },
     [TEMPLATE_TYPE_VERSUS]: {
       variations: [...VERSUS_TEMPLATES],
-      text: ['double!', 'template!'],
+      text: [getIpsumText(3), getIpsumText(3)],
       activeVariationIndex: 0,
     },
     [TEMPLATE_TYPE_LIST]: {
       variations: [...LIST_TEMPLATES],
-      text: ['list', 'listicle', 'list'],
+      text: [getIpsumText(2), getIpsumText(2), getIpsumText(2)],
       activeVariationIndex: 0,
     }
   },

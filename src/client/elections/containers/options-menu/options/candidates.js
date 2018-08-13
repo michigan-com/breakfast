@@ -127,7 +127,13 @@ class CandidatesOptions extends Component {
             </div>)
           }
         </div>
-        {index === 0 ? <hr style={{marginTop: '20px'}}></hr> : null }
+        {index === 0 ?
+          (<div className='swap-candidates-container'>
+            <div className='swap-candidates' onClick={this.swapCandidates}>
+              Swap <span className='swap-arrows'>⇆</span> Candidates
+            </div>
+          </div>)
+        : null }
       </div>
     )
   }
@@ -139,11 +145,6 @@ class CandidatesOptions extends Component {
     return (
       <div className='option-container'>
         <div className='option-title'>Candidates</div>
-        <div className='swap-candidates-container'>
-          <div className='swap-candidates' onClick={this.swapCandidates}>
-            Swap <span className='swap-arrows'>⇆</span> Candidates
-          </div>
-        </div>
         {candidates.map((c, i) => (this.renderCandidate(c, i)))}
 
       </div>

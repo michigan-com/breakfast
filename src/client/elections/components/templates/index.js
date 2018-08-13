@@ -98,9 +98,13 @@ export class ElectionsTemplate extends Component {
           }
         </style>
         <defs>
-          <linearGradient id="bottom-black-gradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="transparent"/>
-              <stop offset="100%"  stopColor="black"/>
+          <linearGradient id="bottom-black-gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop stopColor="#000000" stopOpacity="0" offset="0%"></stop>
+            <stop stopColor="#000000" stopOpacity="0.2" offset="20%"></stop>
+            <stop stopColor="#000000" stopOpacity="0.4" offset="40%"></stop>
+            <stop stopColor="#000000" stopOpacity="0.6" offset="60%"></stop>
+            <stop stopColor="#000000" stopOpacity="0.8" offset="80%"></stop>
+            <stop stopColor="#000000" offset="100%"></stop>
           </linearGradient>
           <linearGradient id="bottom-drop-shadow" x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor="transparent"/>
