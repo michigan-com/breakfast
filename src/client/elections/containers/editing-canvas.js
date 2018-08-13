@@ -42,6 +42,7 @@ class EditingCanvas extends Component {
 
   _gaEvent() {
     const { templates, activeTemplateType } = this.props.Templates;
+    const { logo } = this.props.Logo;
 
     const activeTemplates = templates[activeTemplateType];
     var activeVariation = '';
@@ -52,8 +53,8 @@ class EditingCanvas extends Component {
     ga('send', {
       hitType: 'event',
       eventCategory: 'electionImageDownload',
-      eventAction: activeTemplateType,
-      eventLabel: activeVariation,
+      eventAction: `${activeTemplateType} - ${activeVariation}`,
+      eventLabel: logo.marketName,
     });
   }
 
