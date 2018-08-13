@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import xr from 'xr';
 
 import { doneDownloading } from '../../breakfast/actions/downloading';
 import { getPresentState } from '../../breakfast/selectors/present';
@@ -39,7 +40,25 @@ class EditingCanvas extends Component {
     }
   }
 
+  _gaEvent() {
+    const { templates, activeTemplateType } = this.props.Templates;
+
+    const activeTemplates = templates[activeTemplateType];
+    var activeVariation = '';
+    if (activeTemplates.activeVariationIndex >= 0 && activeTemplates.activeVariationIndex < activeTemplates.variations.length) {
+      activeVariation = activeTemplates.variations[activeTemplates.activeVariationIndex].templateName;
+    }
+
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'electionImageDownload',
+      eventAction: activeTemplateType,
+      eventLabel: activeVariation,
+    });
+  }
+
   downloadImage() {
+    this._gaEvent();
     this.setState({ downloading: true })
     const { downloading, filename } = this.props.Downloading;
 
@@ -95,12 +114,17 @@ class EditingCanvas extends Component {
       const a = document.createElement('a');
       a.setAttribute('href', dataUri);
 
-      a.setAttribute('download', `${filename}.${fileExtension}`); // todo
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      this.props.actions.doneDownloading();
-      this.setState({ downloading: false });
+      const downloadLocalImage = () => {
+        a.setAttribute('download', `${filename}.${fileExtension}`); // todo
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        this.props.actions.doneDownloading();
+        this.setState({ downloading: false });
+      }
+
+      xr.put('/save-image/', { imageData: dataUri })
+        .then(downloadLocalImage, downloadLocalImage);
     });
 
     if (!imagesToLoad) {
