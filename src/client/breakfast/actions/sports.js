@@ -42,14 +42,16 @@ export function teamsLoaded(teamData) {
   const teams = [];
 
   Object.keys(teamData).forEach((league) => {
-    for (const team of teamData[league].teams) {
-      const searchTerm = `${team.team_first} ${team.team_last}`;
+    for (const group of teamData[league].groups) {
+      for (const team of group.teams) {
+        const searchTerm = `${team.team_long}`;
 
-      teams.push({
-        ...team,
-        league,
-        searchTerm,
-      });
+        teams.push({
+          ...team,
+          league,
+          searchTerm,
+        });
+      }
     }
   });
 
