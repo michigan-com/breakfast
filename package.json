@@ -108,7 +108,7 @@
     "run-sequence": "^1.1.2",
     "serve-favicon": "^2.3.0",
     "sinon": "^1.17.3",
-    "supertest": "^1.1.0",
+    "supertest": "^3.1.0",
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
