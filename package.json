@@ -74,7 +74,6 @@
     "jade": "^1.11.0",
     "moment": "^2.10.6",
     "mongodb": "^2.0.48",
-    "node-fetch": "^2.2.0",
     "node-neat": "^1.7.2",
     "nodemailer": "^1.11.0",
     "nodemailer-ses-transport": "^1.4.0",
