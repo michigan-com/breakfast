@@ -9,16 +9,18 @@ import nhl from '../../data/sports/nhl.json';
 import ncaab from '../../data/sports/ncaab.json';
 import ncaaf from '../../data/sports/ncaaf.json';
 import mls from '../../data/sports/mls.json';
+import wnba from '../../data/sports/wnba.json';
 
 function addRequestedChanges(sport) {
   const teams = [];
-  for (const team of sport.teams) {
-    if (team.team_first.toLowerCase() === 'louisiana-lafayette') {
-      team.team_abbr = 'UL';
+  for (const group of sport.groups) {
+    for (const team of group.teams) {
+      if (team.team_long === 'UL Lafayette Ragin\' Cajuns') {
+        team.team_abbr = 'UL';
+      }
     }
-    teams.push(team);
   }
-  return { teams };
+  return sport;
 }
 
 function registerRoutes(app) {
@@ -34,6 +36,7 @@ function registerRoutes(app) {
       ncaab: addRequestedChanges(ncaab),
       ncaaf: addRequestedChanges(ncaaf),
       mls,
+      wnba,
     });
   });
 
