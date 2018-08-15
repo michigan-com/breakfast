@@ -36,7 +36,7 @@ class Templates extends Component {
                     }
                     return (
                       <div className={className} key={`variation-${index}`} onClick={this._selectTemplate(templateType, index)}>
-                        {variation.templateName}
+                        <img src={`/img/elections/templates/${variation.templateName}/thumbnail.png`} alt={variation.templateName}/>
                       </div>
                     )
                   })

@@ -64,10 +64,18 @@ fill: #878787 (edited)
   -o-transition: border-color 150ms linear;
   -moz-transition: border-color 150ms linear;
   -webkit-transition: border-color 150ms linear;
-}
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
 
-.template-picker .variation-option.active {
-  border-color: $light-blue;
+  &.active {
+    border-color: $light-blue;
+  }
+
+  & img {
+    width: 75%;
+    margin: 0 auto;
+  }
 }
 
 .template-aspect-ratio-picker {

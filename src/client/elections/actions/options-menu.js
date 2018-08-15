@@ -2,9 +2,9 @@
 
 const OPTION_CHOICES = [
   'templates',
+  'candidates',
   'text',
   'logo',
-  'candidates',
 ];
 
 export const OPTION_SELECT = 'OPTION_SELECT';
