@@ -122,9 +122,9 @@
 
   "Central Jersey": {
     "domain": "mycentraljersey.com",
-    "logo": {
+    "logo": [{
       "filename": "centraljersey.svg"
-    }
+    }]
   },
 
   "Chambersburg": {
@@ -586,7 +586,7 @@
 
   "Marion": {
     "domain": "marionstar.com",
-    "logo": { 
+    "logo": {
       "filename": "marion.svg"
     }
   },
@@ -701,6 +701,13 @@
     "domain": "tennessean.com",
     "logo": {
       "filename": "nashville.svg"
+    }
+  },
+
+  "New Jersey": {
+    "domain": "app.com",
+    "logo": {
+      "filename": "newjersey-stacked.svg"
     }
   },
 

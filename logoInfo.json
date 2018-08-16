@@ -1188,6 +1188,18 @@
     "height": "46",
     "aspectRatio": 8.695652173913043
   },
+  "newjersey-stacked.svg": {
+    "name": "newjersey-stacked.svg",
+    "domain": [
+      "app.com"
+    ],
+    "isSvg": true,
+    "noColor": false,
+    "marketName": "New Jersey",
+    "width": "384",
+    "height": "120",
+    "aspectRatio": 3.2
+  },
   "northernnevada.svg": {
     "name": "northernnevada.svg",
     "domain": [
