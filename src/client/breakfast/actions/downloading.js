@@ -21,5 +21,6 @@ export function updateFilename(filename = '') {
 
 export const DEFAULT_STATE = {
   downloadingImage: false,
+  downloading: false,
   filename: '',
 };

@@ -1,0 +1,241 @@
+@import './constants';
+
+/*
+Republican
+border: #7a101b
+fill: #ba575e
+
+Democrat
+border: #0f369d
+fill: #739dde
+
+Independent
+border: #4f0f4d
+fill: #925e9c
+
+Neutral
+border: #292929
+fill: #878787 (edited)
+*/
+
+.pic-editor {
+  padding-top: 55px;
+}
+
+.elections-template-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+.elections-template-container svg {
+  transform: scale(0.4);
+  transform-origin: top center;
+}
+
+.elections-template-container.large svg {
+  transform: scale(0.3);
+}
+
+.upload-container .image-container {
+  cursor: pointer;
+  border: 5px solid transparent;
+  transition: border-color 150ms linear;
+  -o-transition: border-color 150ms linear;
+  -ms-transition: border-color 150ms linear;
+  -moz-transition: border-color 150ms linear;
+  -webkit-transition: border-color 150ms linear;
+}
+
+.upload-container .image-container.active {
+  border-color: $light-blue;
+}
+
+
+.template-picker .option-container .option-container-title {
+  text-transform: capitalize;
+}
+
+.template-picker .variation-option {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 150ms linear;
+  -o-transition: border-color 150ms linear;
+  -moz-transition: border-color 150ms linear;
+  -webkit-transition: border-color 150ms linear;
+  text-align: center;
+  width: 75%;
+  margin: 0 auto;
+
+  &.active {
+    border-color: $light-blue;
+  }
+
+  & img {
+    width: 75%;
+    margin: 0 auto;
+  }
+}
+
+.template-aspect-ratio-picker {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 7px;
+
+  .aspect-ratio-container {
+    padding: 10px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 150ms linear;
+    -o-transition: border-color 150ms linear;
+    -ms-transition: border-color 150ms linear;
+    -moz-transition: border-color 150ms linear;
+    -webkit-transition: border-color 150ms linear;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 7px;
+  }
+
+  .aspect-ratio {
+    background: white;
+    cursor: pointer;
+  }
+
+  .aspect-ratio-container.active, .aspect-ratio-container:hover {
+    border-color: white;
+  }
+}
+
+.party-picker-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+
+  .party-option-container {
+    position: relative;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    opacity: 0.4;
+    transition: opacity 150ms linear;
+    -o-transition: opacity 150ms linear;
+    -ms-transition: opacity 150ms linear;
+    -moz-transition: opacity 150ms linear;
+    -webkit-transition: opacity 150ms linear;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &.active, &:hover {
+      opacity: 1;
+    }
+
+    &.active:after {
+      content: '';
+      position: absolute;
+      top: calc(100% + 5px);
+      background-color: black;
+      width: 100%;
+      height: 3px;
+    }
+
+    .party-option {
+      width: 100%;
+      height: 100%;
+      line-height: 34px;
+      text-align: center;
+    }
+  }
+
+}
+
+.image-container {
+  width: 90%;
+  margin: 10px auto;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.list-item {
+  position: relative;
+  width: 100%;
+}
+
+.remove-upload, .remove-list-item {
+  position: absolute;
+  color: white;
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  cursor: pointer;
+  top: -10px;
+  right: -10px;
+  text-align: center;
+}
+
+textarea {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: 'Unify Sans';
+  width: 100%;
+  border: 0;
+  margin: 10px 0px;
+  height: 60px;
+}
+
+.add-list-item {
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border: 1px solid #006FFF;
+  border-radius: 3px;
+  color: white;
+  font-size: 15px;
+  line-height: 2;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.swap-candidates-container {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.swap-candidates {
+  background: linear-gradient(-180deg, #00AEFF 0%, #009BFF 100%);
+  border: 1px solid #006FFF;
+  border-radius: 3px;
+  color: white;
+  font-size: 15px;
+  line-height: 2;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+
+@media (max-width: $screen-sm) {
+  .elections-template-container {
+    width: 90vw;
+  }
+
+  .pic-editor {
+    padding-left: 0;
+  }
+}

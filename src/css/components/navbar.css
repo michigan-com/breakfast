@@ -43,6 +43,14 @@
       margin: 0px 20px;
       float: left;
 
+      .active {
+        text-decoration: underline;
+      }
+
+      img {
+        height: 16px;
+      }
+
       @media (max-width: $screen-sm) {
         display: none;
       }

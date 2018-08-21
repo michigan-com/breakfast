@@ -40,6 +40,13 @@ function registerRoutes(app) {
     }
   );
 
+  router.get('/elections/',
+    loginRequired,
+    (req, res) => {
+      res.render('elections');
+    }
+  );
+
   app.use('/', router);
 }
 

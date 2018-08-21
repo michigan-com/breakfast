@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/template@1x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M19,4 C19.6,4 20,4.4 20,5 L20,7 C20,7.6 19.6,8 19,8 L5,8 C4.4,8 4,7.6 4,7 L4,5 C4,4.4 4.4,4 5,4 L19,4 Z M7,10 C7.6,10 8,10.4 8,11 L8,19 C8,19.6 7.6,20 7,20 L5,20 C4.4,20 4,19.6 4,19 L4,11 C4,10.4 4.4,10 5,10 L7,10 Z M19,10 C19.6,10 20,10.4 20,11 L20,19 C20,19.6 19.6,20 19,20 L11,20 C10.4,20 10,19.6 10,19 L10,11 C10,10.4 10.4,10 11,10 L19,10 Z" id="path-1"></path>
+    </defs>
+    <g id="icon/template" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="icon/_color/ui-blue" mask="url(#mask-2)" fill="#000000">
+            <g transform="translate(1.000000, 1.000000)" id="ui-color">
+                <rect x="0" y="0" width="22" height="22"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
