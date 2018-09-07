@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 import { imagePositionToAspectRatio } from '../helpers/image-position';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class Quote01 extends Component {
   static propTypes = {
@@ -29,11 +30,8 @@ export default class Quote01 extends Component {
     const candidateTextTop = (bottom - (fontSize * lineHeight * 2));
     const candidateTextLeft = width * 0.08;
 
-    var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += `-${candidate.location}`;
-
+    var secondaryText = getCandidateText(candidate);
     var gradientTop = height * 0.975;
-
     return (
       <g>
         <rect className='text-container' x={left} y={top} width={width} height={boxHeight} fill='white'></rect>

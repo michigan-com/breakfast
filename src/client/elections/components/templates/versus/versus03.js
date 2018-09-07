@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 import { imagePositionToAspectRatio } from '../helpers/image-position';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class Versus03 extends Component {
   static propTypes = {
@@ -36,8 +37,7 @@ export default class Versus03 extends Component {
       const candidateTextLeft = left + (width * 0.05);
       const candidateTextTop = textTop + boxHeight;
 
-      var secondaryText = `${candidate.party.abbr}`;
-      if (candidate.location) secondaryText += `-${candidate.location}`;
+      var secondaryText = getCandidateText(candidate);
 
       textElements.push((
         <g key={`versus02-text-${i}`}>

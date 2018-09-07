@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import { getLinesOfText } from '../helpers/svg-text-line';
 import { getCandidateText } from '../helpers/candidate-info';
 
-export default class Versus02 extends Component {
+export default class Results02 extends Component {
   static propTypes = {
     imageMetrics: PropTypes.object,
     text: PropTypes.array,
@@ -13,53 +13,48 @@ export default class Versus02 extends Component {
     logo: PropTypes.object,
   }
 
-  getTextBottom = (height, numLines, fontSize, lineHeight) => {
-    var textHeight = numLines * lineHeight * fontSize;
+  getTextHeight = (height, fontSize, percentFontSize, lineHeight) => {
+    return  (1.75 * lineHeight * (fontSize)) + (percentFontSize) + (percentFontSize / 2)
+  };
+
+  getTextBottom = (height, fontSize, percentFontSize, lineHeight) => {
+    var textHeight = this.getTextHeight(height, fontSize, percentFontSize, lineHeight);
     return (height / 2) + (textHeight / 2);
   };
-  getTextLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
+
+  getRectangleLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
 
   renderText(text, candidates) {
     const { width, fontSize, lineHeight, totalHeight } = this.props.imageMetrics
 
-    var textElements = []
     var candidateElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.42);
+      var percent = text[i];
+      var percentFontSize = fontSize * 4;
 
-      var bottom = this.getTextBottom(totalHeight, lines.length, fontSize, lineHeight);
-      var left = this.getTextLeft(width, i);
-      var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+      var bottom = this.getTextBottom(totalHeight, fontSize, percentFontSize, lineHeight);
+      var left = this.getRectangleLeft(width, i);
+      var boxHeight = this.getTextHeight(totalHeight, fontSize, percentFontSize, lineHeight);
       var top = bottom - boxHeight;
-      var textTop = top + (fontSize * 2);
-      var textLeft = left;
+      var rectangleTop = top - (fontSize / lineHeight);
+      var textLeft  = left + (width * 0.025)
+      var percentTextTop = top + (2 * lineHeight * (fontSize)) + (percentFontSize / 2);
 
       var candidate = candidates[i];
-      var candidateBoxHeight = fontSize * 3;
-      var candidateTop = bottom;
-      var candidateTextTop =(candidateTop + (candidateBoxHeight / 2)) - (fontSize / 2);
-      var candidateTextLeft = textLeft + (width * 0.04);
-
       var secondaryText = getCandidateText(candidate);
-
-      textElements.push((
-        <text x={textLeft} y={textTop} width={width / 2} className='text-block' key={`versus02-text-${i}`}>
-          {lines.map((line, index) => (
-            <tspan
-              x={textLeft}
-              y={textTop + (index * fontSize * lineHeight)}
-              key={`versus01-text-${index}`}
-              >{line}</tspan>
-          ))}
-        </text>
-      ));
-
       candidateElements.push((
         <g key={`candidate-${i}`}>
-          <rect x={textLeft} y={candidateTextTop - (fontSize * 0.8)} width={(width * 0.05) / 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-          <text x={candidateTextLeft} y={candidateTextTop} width={width / 2} fill='black'>
-            <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
-            <tspan className='candidate-party-location' y={candidateTextTop + (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
+          <rect x={left} y={rectangleTop} height={boxHeight} fill={candidate.party.color} width={(width * 0.05) / 8} stroke={candidate.party.color}/>
+          <text x={textLeft} y={top} width={width / 2}>
+            <tspan className='candidate-name' y={top} x={textLeft}>{candidate.name}</tspan>
+            <tspan className='candidate-party-location' y={top + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
+          </text>
+          <text x={textLeft} y={percentTextTop} width={width / 2} className='text-block' key={`results02-text-${i}`}>
+            <tspan
+              style={{fontSize: `${percentFontSize}px`, fontWeight: 'bold'}}
+              >{percent}</tspan>
+            <tspan y={percentTextTop - (percentFontSize / 3)} style={{fontSize: `${percentFontSize /2}px`}}>%</tspan>
+            <tspan x={textLeft} y={percentTextTop + (percentFontSize * 1.2 / 2)} style={{fontSize: `${percentFontSize * 3/4 }px`}}>votes</tspan>
           </text>
         </g>
       ));
@@ -67,7 +62,6 @@ export default class Versus02 extends Component {
 
     return (
       <g>
-        {textElements}
         {candidateElements}
       </g>
     )
@@ -98,6 +92,9 @@ export default class Versus02 extends Component {
             }
             svg {
               background: rgb(56, 56, 56);
+            }
+            .candidate-name, .candidate-party-location {
+              fill: rgba(256, 256, 256, 0.8);
             }
             .candidate-name {
               text-transform: uppercase;

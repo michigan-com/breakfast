@@ -3,6 +3,7 @@
 import React, { PropTypes, Component } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class Quote04 extends Component {
   static propTypes = {
@@ -29,9 +30,7 @@ export default class Quote04 extends Component {
     var textLeft = this.textLeft(width);
 
     var candidateTextTop = textTop + ((lines.length + 1) * fontSize * lineHeight);
-    var candidateInfo = `${candidate.party.abbr}`
-    if (candidate.location)  candidateInfo += `-${candidate.location}`;
-
+    var candidateInfo = getCandidateText(candidate);
     return (
       <g>
         <rect x={boxMargin} y={boxMargin} width={boxWidth} height={boxHeight} fill='rgba(256, 256, 256, 0.9)'></rect>

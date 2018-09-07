@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 import { imagePositionToAspectRatio } from '../helpers/image-position';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class Single03 extends Component {
   static propTypes = {
@@ -29,8 +30,7 @@ export default class Single03 extends Component {
     const candidateTextTop = (bottom - (fontSize * 2 * lineHeight));
     const candidateTextLeft = left * 2;
 
-    var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += `-${candidate.location}`;
+    var secondaryText = getCandidateText(candidate);
     var gradientTop = height * 0.975;
     return (
       <g>

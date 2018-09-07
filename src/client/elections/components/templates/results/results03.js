@@ -6,48 +6,69 @@ import { getLinesOfText } from '../helpers/svg-text-line';
 import { imagePositionToAspectRatio } from '../helpers/image-position';
 import { getCandidateText } from '../helpers/candidate-info';
 
-export default class Versus01 extends Component {
+export default class Results03 extends Component {
   static propTypes = {
     imageMetrics: PropTypes.object,
     text: PropTypes.array,
     candidates: PropTypes.array,
     logo: PropTypes.object,
     variation: PropTypes.object,
+    activeTemplate: PropTypes.object,
   }
 
+  getTextHeight = (height, fontSize, percentFontSize, lineHeight) => {
+    return  (1.75 * lineHeight * (fontSize)) + (percentFontSize * 0.9);
+  };
   getTextBottom = (height) => (height * 0.84);
   getTextLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
+  getRectangleLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
 
-  renderText(text, templateType) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+  renderText(text, candidates) {
+    const { width, fontSize, lineHeight, totalHeight } = this.props.imageMetrics
 
-    var textElements = []
+    var candidateElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.45);
+      var percent = text[i];
+      var percentFontSize = fontSize * 2;
+      var winnerTextFontSize = fontSize * 3;
 
-      var bottom = this.getTextBottom(height);
-      var left = this.getTextLeft(width, i);
-      var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+      var bottom = this.getTextBottom(totalHeight, fontSize, percentFontSize, lineHeight);
+      var left = this.getRectangleLeft(width, i);
+      var boxHeight = this.getTextHeight(totalHeight, fontSize, percentFontSize, lineHeight);
       var top = bottom - boxHeight;
-      var textTop = top + (fontSize * 2);
-      var textLeft = left;
+      var rectangleTop = top - (fontSize / lineHeight);
+      var textLeft  = left + (width * 0.025)
+      var percentTextTop = top + (2 * lineHeight * (fontSize)) + (percentFontSize / 4);
 
-      textElements.push((
-        <text x={textLeft} y={textTop} width={width} className='text-block' key={`versus01-text-${i}`}>
-          {lines.map((line, index) => (
+      var candidate = candidates[i];
+      var secondaryText = getCandidateText(candidate);
+      candidateElements.push((
+        <g key={`candidate-${i}`}>
+          {
+            i !== 0 ? null :
+            (
+              <text x={left} y={top - (winnerTextFontSize * 0.75)} style={{fontSize: `${winnerTextFontSize}px`}}>WINNER</text>
+            )
+          }
+          <rect x={left} y={rectangleTop} height={boxHeight} fill={candidate.party.color} width={(width * 0.05) / 8} stroke={candidate.party.color}/>
+          <text x={textLeft} y={top} width={width / 2}>
+            <tspan className='candidate-name' y={top} x={textLeft}>{candidate.name}</tspan>
+            <tspan className='candidate-party-location' y={top + (fontSize * 0.75 * lineHeight)} x={textLeft} style={{fontSize: `${fontSize * 0.75}px`, fontWeight: 'bold'}}>{secondaryText}</tspan>
+          </text>
+          <text x={textLeft} y={percentTextTop} width={width / 2} className='text-block' key={`results02-text-${i}`}>
             <tspan
-              x={textLeft}
-              y={textTop + (index * fontSize * lineHeight)}
-              key={`versus01-text-${index}`}
-              >{line}</tspan>
-          ))}
-        </text>
+              style={{fontSize: `${percentFontSize}px`, fontWeight: 'bold'}}
+              >{percent}</tspan>
+            <tspan y={percentTextTop - (percentFontSize / 3)} style={{fontSize: `${percentFontSize /2}px`}}>%</tspan>
+            <tspan dx={10} y={percentTextTop} style={{fontSize: `${percentFontSize * 3/4 }px`}}>votes</tspan>
+          </text>
+        </g>
       ));
     }
 
     return (
       <g>
-        {textElements}
+        {candidateElements}
       </g>
     )
   }
@@ -74,7 +95,7 @@ export default class Versus01 extends Component {
           width={width / 2}
           y='0'
           x={(width * count)/ 2}
-          key={`versus01-image-${count}`}>
+          key={`results03-image-${count}`}>
         </image>
       )
     }
@@ -104,37 +125,6 @@ export default class Versus01 extends Component {
     )
   }
 
-  renderCandidates(candidates) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    const top = this.getTextBottom(height);
-    const left = this.getTextLeft(width);
-    const boxHeight = (fontSize * 3);
-    const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-    const textLeft = left * 1.5;
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        {
-          candidates.map((candidate, i) => {
-            var secondaryText = getCandidateText(candidate);
-
-            return (
-              <g key={`versus01-candidate-${i}`}>
-                <rect x={textLeft * 2/3 + (width * i / 2)} y={textTop - (fontSize * 0.8)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-                <text x={textLeft + ((width * i) / 2)} y={textTop} width={width / 2 } fill='black'>
-                  <tspan className='candidate-name' y={textTop} x={textLeft + ((width * i) / 2)}>{candidate.name}</tspan>
-                  <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft + ((width * i) / 2)} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
-                </text>
-              </g>
-            )
-
-          })
-        }
-      </g>
-    )
-  }
-
   render() {
     const { text, candidates } = this.props;
     const { width, height } = this.props.imageMetrics;
@@ -158,8 +148,7 @@ export default class Versus01 extends Component {
           }
         </style>
         { this.renderBackground() }
-        { this.renderText(text) }
-        { this.renderCandidates(candidates)}
+        { this.renderText(text, candidates) }
       </g>
     )
   }

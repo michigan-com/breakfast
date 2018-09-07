@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class List02 extends Component {
 
@@ -75,9 +76,7 @@ export default class List02 extends Component {
     var textBottom = this.getHeaderBottom() - (candidateFontSize / 2);
     var textLeft =  this.getTextLeft(width);
 
-    var candidateInfo = `${candidate.party.abbr}`
-    if (candidate.location)  candidateInfo += `-${candidate.location}`;
-
+    var candidateInfo = getCandidateText(candidate);
     return (
       <g>
         <image x={0} y={0} width={width} xlinkHref={`/img/elections/templates/list02/list02-${candidate.party.abbr.toLowerCase()}.png`}></image>

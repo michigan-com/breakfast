@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { getLinesOfText } from '../helpers/svg-text-line';
 import { imagePositionToAspectRatio } from '../helpers/image-position';
+import { getCandidateText } from '../helpers/candidate-info';
 
 export default class Quote02 extends Component {
   static propTypes = {
@@ -79,9 +80,7 @@ export default class Quote02 extends Component {
     const textTop = top + (fontSize * 2);
     const textLeft = left * 2;
 
-    var secondaryText = `${candidate.party.abbr}`;
-    if (candidate.location) secondaryText += `-${candidate.location}`;
-
+    var secondaryText = getCandidateText(candidate);
     return (
       <g>
         <image x={left} y={top} width={width - (left * 2)} xlinkHref={`/img/elections/templates/quote02/quote02-${candidate.party.abbr.toLowerCase()}.png`}></image>
