@@ -30,7 +30,7 @@ export default class Results03 extends Component {
     for (var i = 0; i < text.length; i++) {
       var percent = text[i];
       var percentFontSize = fontSize * 2;
-      var winnerTextFontSize = fontSize * 3;
+      var winnerTextFontSize = fontSize * 2.75;
 
       var bottom = this.getTextBottom(totalHeight, fontSize, percentFontSize, lineHeight);
       var left = this.getRectangleLeft(width, i);
@@ -47,7 +47,7 @@ export default class Results03 extends Component {
           {
             i !== 0 ? null :
             (
-              <text x={left} y={top - (winnerTextFontSize * 0.75)} style={{fontSize: `${winnerTextFontSize}px`}}>WINNER</text>
+              <text x={left} y={top - (winnerTextFontSize * 0.75)} style={{fontSize: `${winnerTextFontSize}px`, fontWeight: 'bold' }}>WINNER</text>
             )
           }
           <rect x={left} y={rectangleTop} height={boxHeight} fill={candidate.party.color} width={(width * 0.05) / 8} stroke={candidate.party.color}/>
