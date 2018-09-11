@@ -32,12 +32,21 @@ export const INDEPENDENT = {
   name: 'Independent',
   abbr: 'I',
   color: '#BA32A3'
+};
+
+export const NEUTRAL_PARTY = {
+  ...PARTY,
+  name: 'neutral',
+  abbr: 'neutral',
+  color: '#626262'
 }
+
 
 export const PARTIES = [
   DEMOCRATIC_PARTY,
   REPUBLICAN_PARTY,
   INDEPENDENT,
+  NEUTRAL_PARTY,
 ]
 
 const UPLOAD = {
@@ -119,6 +128,16 @@ export function updateCandidateParty(party = { ...PARTY }, index = -1) {
     value: {
       index,
       value: party,
+    }
+  }
+}
+
+export function removeCandidateParty(index = -1) {
+  return {
+    type: UPDATE_CANDIDATE_PARTY,
+    value: {
+      index,
+      value: { ...NEUTRAL_PARTY }
     }
   }
 }

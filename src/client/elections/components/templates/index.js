@@ -13,6 +13,8 @@ import versus02 from './versus/versus02';
 import versus03 from './versus/versus03';
 import list01 from './list/list01';
 import list02 from './list/list02';
+import results01 from './results/results01.js';
+import results03 from './results/results03.js';
 
 export const ALL_TEMPLATES = {
   'quote01': quote01,
@@ -23,6 +25,9 @@ export const ALL_TEMPLATES = {
   'versus01': versus01,
   'versus02': versus02,
   'versus03': versus03,
+
+  'results01' : results01,
+  'results03' : results03,
 
   'list01': list01,
   'list02': list02,
