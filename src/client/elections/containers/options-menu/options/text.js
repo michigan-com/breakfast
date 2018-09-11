@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
-  updateSingleText, updateVersusText, updateListText, addListItem, removeListItem } from '../../../actions/templates';
+  TEMPLATE_TYPE_RESULTS, updateSingleText, updateVersusText, updateListText,
+  updateResultsText, addListItem, removeListItem } from '../../../actions/templates';
 
 class TextOptions extends Component {
   static propTypes = {
@@ -32,6 +33,13 @@ class TextOptions extends Component {
     }
   }
 
+  onResultsTextInput(textIndex) {
+    return (e) => {
+      var text = this.stripSpaces(e.target.value);
+      this.props.actions.updateResultsText(textIndex, text);
+    }
+  }
+
   onListTextInput(textIndex) {
     return (e) => {
       var text = this.stripSpaces(e.target.value);
@@ -45,7 +53,9 @@ class TextOptions extends Component {
     }
   }
 
-  renderTextContent(text, templateType) {
+  renderTextContent(activeTemplate, templateType) {
+    const { text } = activeTemplate;
+    const variation = activeTemplate.variations[activeTemplate.activeVariationIndex];
     switch (templateType) {
       case TEMPLATE_TYPE_QUOTE:
       default:
@@ -97,6 +107,15 @@ class TextOptions extends Component {
             { text.length < 7 ? <div className='add-list-item' onClick={this.props.actions.addListItem}>Add Item</div> : null }
           </div>
         )
+      case TEMPLATE_TYPE_RESULTS:
+        return (
+          <div className='option-container'>
+            <div className='option-container-title'>Left Percent</div>
+            <input type='number' value={text[0]} onChange={this.onResultsTextInput(0)}/>
+            <div className='option-container-title'>Right Percent</div>
+            <input type='number' value={text[1]} onChange={this.onResultsTextInput(1)}/>
+          </div>
+        )
     }
   }
 
@@ -107,7 +126,7 @@ class TextOptions extends Component {
 
     return (
       <div className='text-content'>
-        {this.renderTextContent(activeTemplate.text, activeTemplateType)}
+        {this.renderTextContent(activeTemplate, activeTemplateType)}
       </div>
     )
   }
@@ -124,6 +143,7 @@ function mapDispatchToProps(dispatch) {
       updateSingleText,
       updateVersusText,
       updateListText,
+      updateResultsText,
       addListItem,
       removeListItem
     }, dispatch),

@@ -4,6 +4,7 @@ import { getIpsumText } from './test-text';
 
 export const UPDATE_SINGLE_TEXT = 'UPDATE_SINGLE_TEXT';
 export const UPDATE_VERSUS_TEXT = 'UPDATE_VERSUS_TEXT';
+export const UPDATE_RESULTS_TEXT = 'UPDATE_RESULTS_TEXT';
 export const UPDATE_LIST_TEXT = 'UPDATE_LIST_TEXT';
 export const ADD_LIST_ITEM = 'ADD_LIST_ITEM';
 export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM';
@@ -12,6 +13,7 @@ export const UPDATE_ASPECT_RATIO = 'UPDATE_ASPECT_RATIO';
 
 export const TEMPLATE_TYPE_QUOTE = 'quote';
 export const TEMPLATE_TYPE_FACT = 'fact';
+export const TEMPLATE_TYPE_RESULTS = 'results';
 export const TEMPLATE_TYPE_VERSUS = 'versus';
 export const TEMPLATE_TYPE_LIST = 'list';
 
@@ -29,6 +31,7 @@ const TEMPLATE_TYPES = [
   TEMPLATE_TYPE_QUOTE,
   TEMPLATE_TYPE_VERSUS,
   TEMPLATE_TYPE_LIST,
+  TEMPLATE_TYPE_RESULTS,
 ];
 
 const TEMPLATE = {
@@ -98,6 +101,17 @@ const LIST_TEMPLATES = [
     TEMPLATE_TYPE_LIST,
     'list02'
   )
+];
+
+const RESULTS_TEMPLATES = [
+  createTemplate(
+    TEMPLATE_TYPE_RESULTS,
+    'results01'
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_RESULTS,
+    'results03'
+  )
 ]
 
 
@@ -112,6 +126,16 @@ export function updateSingleText(text = '') {
 export function updateVersusText(textIndex = -1, text = '') {
   return {
     type: UPDATE_VERSUS_TEXT,
+    value: {
+      textIndex,
+      text,
+    }
+  }
+}
+
+export function updateResultsText(textIndex = -1, text = '') {
+  return {
+    type: UPDATE_RESULTS_TEXT,
     value: {
       textIndex,
       text,
@@ -160,12 +184,22 @@ export function updateAspectRatio(aspectRatio) {
   }
 }
 
+export function swapWinner() {
+  return { type: SWAP_WINNER };
+}
+
 export const DEFAULT_STATE = {
   templates: {
     [TEMPLATE_TYPE_QUOTE]: {
       variations: [...SINGLE_TEMPLATES],
       text: [getIpsumText(3)],
       activeVariationIndex: 0,
+    },
+    [TEMPLATE_TYPE_RESULTS]: {
+      variations: [...RESULTS_TEMPLATES],
+      text: ['0', '0'],
+      activeVariationIndex: 0,
+      winningCandidateIndex: 0,
     },
     [TEMPLATE_TYPE_VERSUS]: {
       variations: [...VERSUS_TEMPLATES],

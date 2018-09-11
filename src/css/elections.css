@@ -109,51 +109,58 @@ fill: #878787 (edited)
 }
 
 .party-picker-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   width: 100%;
-  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  .party-option-container {
-    position: relative;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    font-size: 25px;
-    opacity: 0.4;
-    transition: opacity 150ms linear;
-    -o-transition: opacity 150ms linear;
-    -ms-transition: opacity 150ms linear;
-    -moz-transition: opacity 150ms linear;
-    -webkit-transition: opacity 150ms linear;
-    color: white;
+  .party-picker {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10px;
+    width: 100%;
+    justify-content: space-evenly;
 
-    &.active, &:hover {
-      opacity: 1;
+    .party-option-container {
+      position: relative;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      font-size: 25px;
+      opacity: 0.4;
+      transition: opacity 150ms linear;
+      -o-transition: opacity 150ms linear;
+      -ms-transition: opacity 150ms linear;
+      -moz-transition: opacity 150ms linear;
+      -webkit-transition: opacity 150ms linear;
+      color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 10px;
+
+      &.active, &:hover {
+        opacity: 1;
+      }
+
+      &.active:after {
+        content: '';
+        position: absolute;
+        top: calc(100% + 5px);
+        background-color: black;
+        width: 100%;
+        height: 3px;
+      }
+
+      .party-option {
+        width: 100%;
+        height: 100%;
+        line-height: 34px;
+        text-align: center;
+      }
     }
 
-    &.active:after {
-      content: '';
-      position: absolute;
-      top: calc(100% + 5px);
-      background-color: black;
-      width: 100%;
-      height: 3px;
-    }
-
-    .party-option {
-      width: 100%;
-      height: 100%;
-      line-height: 34px;
-      text-align: center;
-    }
   }
-
 }
 
 .image-container {
@@ -229,6 +236,14 @@ textarea {
   margin-top: 15px;
 }
 
+.add-neutral-party {
+  font-size: 10px;
+  color: black;
+  text-decoration: underline;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px auto;
+}
 
 @media (max-width: $screen-sm) {
   .elections-template-container {
