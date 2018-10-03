@@ -27,10 +27,24 @@ export const REPUBLICAN_PARTY = {
   color: '#CD2D37'
 };
 
-export const INDEPENDENT = {
+export const GREEN_PARTY = {
   ...PARTY,
-  name: 'Independent',
-  abbr: 'I',
+  name: 'Green',
+  abbr: 'G',
+  color: '#1F8A5C'
+};
+
+export const LIBERTARIAN_PARTY= {
+  ...PARTY,
+  name: 'Libertarian',
+  abbr: 'L',
+  color: '#F1751D'
+};
+
+export const OTHER = {
+  ...PARTY,
+  name: 'Other',
+  abbr: 'O',
   color: '#BA32A3'
 };
 
@@ -42,10 +56,13 @@ export const NEUTRAL_PARTY = {
 }
 
 
+
 export const PARTIES = [
   DEMOCRATIC_PARTY,
   REPUBLICAN_PARTY,
-  INDEPENDENT,
+  GREEN_PARTY,
+  LIBERTARIAN_PARTY,
+  OTHER,
   NEUTRAL_PARTY,
 ]
 
