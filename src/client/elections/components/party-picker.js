@@ -7,7 +7,6 @@ export default class PartyPicker extends Component {
     partyOptions: PropTypes.array,
     currentParty: PropTypes.object,
     onPartyPick: PropTypes.func,
-    onRemoveParty: PropTypes.func,
   }
 
   constructor(props) {
@@ -38,7 +37,6 @@ export default class PartyPicker extends Component {
         <div className='party-picker'>
           {
             partyOptions.map((party, i) => {
-              if (party.abbr === 'neutral') return null;
               const isActive = party.abbr === currentParty.abbr;
               const style = { backgroundColor: party.color };
               const onClick = isActive ?  () => {} : onPartyPick(party);
@@ -61,9 +59,6 @@ export default class PartyPicker extends Component {
               )
             })
           }
-        </div>
-        <div className='add-neutral-party' onClick={onRemoveParty}>
-          Remove party / Independent
         </div>
       </div>
     )

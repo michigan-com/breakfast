@@ -8,7 +8,7 @@ import Dropzone from 'react-dropzone';
 import { TEMPLATE_TYPE_VERSUS } from '../../../actions/templates';
 import { updateCandidateName, updateCandidateParty, updateCandidateLocation,
   updateCandidateImage, removeCandidateImage, updateCandidateImageProps,
-  swapCandidates, removeCandidateParty, PARTIES } from '../../../actions/candidates';
+  swapCandidates, PARTIES } from '../../../actions/candidates';
 import PartyPicker from '../../../components/party-picker';
 
 class CandidatesOptions extends Component {
@@ -46,12 +46,6 @@ class CandidatesOptions extends Component {
         this.props.actions.updateCandidateParty(party, i)
       )
     )
-  }
-
-  removeCandidateParty = (i) => {
-    return (e) => {
-      this.props.actions.removeCandidateParty(i);
-    }
   }
 
   changeCandidateLocation = (i) => {
@@ -102,7 +96,6 @@ class CandidatesOptions extends Component {
           partyOptions={PARTIES}
           currentParty={candidate.party}
           onPartyPick={this.changeCandidateParty(index)}
-          onRemoveParty={this.removeCandidateParty(index)}
           />
 
 
@@ -170,7 +163,6 @@ function mapDispatchToProps(dispatch) {
     actions: bindActionCreators({
       updateCandidateName,
       updateCandidateParty,
-      removeCandidateParty,
       updateCandidateLocation,
       updateCandidateImage,
       removeCandidateImage,
