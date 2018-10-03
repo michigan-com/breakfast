@@ -1,13 +1,13 @@
 
-function isNeutral(candidate) {
-  return candidate.party.abbr === 'neutral';
+function shouldHidePartyAbbr(candidate) {
+  return candidate.party.abbr === 'hidePartyAbbr' || candidate.party.abbr.toLowerCase() === 'o';
 }
 
 export function getCandidateText(candidate) {
-  var neutral = isNeutral(candidate);
-  var candidateInfo = `${neutral ? '' : candidate.party.abbr}`
+  var hidePartyAbbr = shouldHidePartyAbbr(candidate);
+  var candidateInfo = `${hidePartyAbbr ? '' : candidate.party.abbr}`
   if (candidate.location)  {
-    candidateInfo += neutral ? candidate.location : `-${candidate.location}`;
+    candidateInfo += hidePartyAbbr ? candidate.location : `-${candidate.location}`;
   }
   return candidateInfo
 }

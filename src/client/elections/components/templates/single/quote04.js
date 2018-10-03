@@ -55,7 +55,12 @@ export default class Quote04 extends Component {
     const candidate = this.props.candidates[0];
     return (
       <g>
-        <rect x='0' y='0' width={width} height={height} fill={candidate.party.color}></rect>
+        <image
+          className='background-image'
+          xlinkHref={`/img/elections/templates/quote04/quote04-${candidate.party.abbr.toLowerCase()}.png`}
+          width={width}
+          y='0'
+          x='0'></image>
         {this.renderText(this.props.text, this.props.candidates[0])}
       </g>
     )

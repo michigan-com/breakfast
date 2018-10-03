@@ -9,7 +9,7 @@ Democrat
 border: #0f369d
 fill: #739dde
 
-Independent
+other
 border: #4f0f4d
 fill: #925e9c
 
@@ -157,6 +157,26 @@ fill: #878787 (edited)
         height: 100%;
         line-height: 34px;
         text-align: center;
+        position: relative;
+      }
+
+      .full-party-name-container {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 50%;
+        display: none;
+      }
+
+      .full-party-name {
+        padding: 5px 10px;
+        position: relative;
+        left: -50%;
+        color: white;
+        font-size: 10px;
+      }
+
+      .party-option.show-full-name .full-party-name-container {
+        display: block;
       }
     }
 
@@ -244,6 +264,8 @@ textarea {
   cursor: pointer;
   margin: 10px auto;
 }
+
+
 
 @media (max-width: $screen-sm) {
   .elections-template-container {

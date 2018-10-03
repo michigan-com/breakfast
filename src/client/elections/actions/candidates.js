@@ -27,26 +27,43 @@ export const REPUBLICAN_PARTY = {
   color: '#CD2D37'
 };
 
+export const GREEN_PARTY = {
+  ...PARTY,
+  name: 'Green',
+  abbr: 'G',
+  color: '#1F8A5C'
+};
+
+export const LIBERTARIAN_PARTY= {
+  ...PARTY,
+  name: 'Libertarian',
+  abbr: 'L',
+  color: '#F1751D'
+};
+
+export const OTHER = {
+  ...PARTY,
+  name: 'Other',
+  abbr: 'O',
+  color: '#BA32A3'
+};
+
 export const INDEPENDENT = {
   ...PARTY,
   name: 'Independent',
   abbr: 'I',
-  color: '#BA32A3'
-};
-
-export const NEUTRAL_PARTY = {
-  ...PARTY,
-  name: 'neutral',
-  abbr: 'neutral',
   color: '#626262'
 }
+
 
 
 export const PARTIES = [
   DEMOCRATIC_PARTY,
   REPUBLICAN_PARTY,
+  GREEN_PARTY,
+  LIBERTARIAN_PARTY,
   INDEPENDENT,
-  NEUTRAL_PARTY,
+  OTHER
 ]
 
 const UPLOAD = {
@@ -128,16 +145,6 @@ export function updateCandidateParty(party = { ...PARTY }, index = -1) {
     value: {
       index,
       value: party,
-    }
-  }
-}
-
-export function removeCandidateParty(index = -1) {
-  return {
-    type: UPDATE_CANDIDATE_PARTY,
-    value: {
-      index,
-      value: { ...NEUTRAL_PARTY }
     }
   }
 }
