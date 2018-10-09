@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import xr from 'xr';
 import { Provider } from 'react-redux';
 
@@ -34,7 +34,7 @@ export default function Breakfast() {
     Store.dispatch(windowResize());
   });
 
-  render(
+  ReactDOM.render(
     <Provider store={Store}>
       <App />
     </Provider>,

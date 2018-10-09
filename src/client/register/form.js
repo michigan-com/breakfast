@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import xr from 'xr';
 
 import Store from './store';
@@ -154,5 +155,5 @@ export default class RegisterForm extends React.Component {
 }
 
 RegisterForm.propTypes = {
-  Input: React.PropTypes.shape(DEFAULT_STATE).isRequired,
+  Input: PropTypes.shape(DEFAULT_STATE).isRequired,
 };

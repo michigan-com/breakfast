@@ -1,14 +1,15 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class CornerPicker extends React.Component {
   static cornerOptions = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
 
   static propTypes = {
-    activeCorner: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    callback: React.PropTypes.func,
+    activeCorner: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    callback: PropTypes.func,
   };
 
   static defaultProps = {

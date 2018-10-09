@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class PartyPicker extends Component {
   static propTypes = {

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 export default class Select extends React.Component {
   constructor(args) {
@@ -204,12 +205,12 @@ export default class Select extends React.Component {
 }
 
 Select.propTypes = {
-  currentIndex: React.PropTypes.number,
-  htmlClass: React.PropTypes.string,
-  options: React.PropTypes.array.isRequired,
-  onSelect: React.PropTypes.func,
-  valueKey: React.PropTypes.string,
-  displayFilter: React.PropTypes.bool,
+  currentIndex: PropTypes.number,
+  htmlClass: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onSelect: PropTypes.func,
+  valueKey: PropTypes.string,
+  displayFilter: PropTypes.bool,
 };
 
 Select.defaultProps = {

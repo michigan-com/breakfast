@@ -90,9 +90,10 @@
     "postcss-mixins": "^3.0.2",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.1.0",
-    "react": "^15.3.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
     "react-color": "^2.2.0",
-    "react-dom": "^0.14.6",
+    "react-dom": "^16.5.2",
     "react-dropzone": "^3.5.3",
     "react-masonry-component": "^3.0.0",
     "react-redux": "^4.4.5",
@@ -111,7 +112,7 @@
     "uglifyify": "^3.0.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.6.1",
+    "watchify": "^3.11.0",
     "xr": "^0.1.13"
   },
   "browserify-shim": {
@@ -125,7 +126,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
-    "chokidar": "^1.6.1",
+    "chokidar": "^2.0.4",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.9.2",

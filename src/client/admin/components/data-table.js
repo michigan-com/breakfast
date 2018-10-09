@@ -1,6 +1,7 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import xr from 'xr';
 
 const DEFAULT_PAGE_SIZE = 10;
