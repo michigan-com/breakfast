@@ -6,7 +6,7 @@ HTML 5 canvas-based social media image creator, inspired by [NPR's Lunchbox](htt
 # Requirements
 * Node
 * [MongoDB 2.6](https://docs.mongodb.com/v2.6/tutorial/install-mongodb-on-os-x/)
-  * note with the new gannett admin laptop restrictions, after installing run your mongo DB locally in a separate terminal with this command: `mongod --config /usr/local/etc/mongod.conf`
+  * note with the new gannett admin laptop restrictions, after installing run your mongo DB locally in a separate terminal with this command: `mongod --dbpath /Path/to/db/folder`
 
 # Install
 `yarn`
