@@ -21,9 +21,6 @@ if (!process.env.DB_URI) {
 // Connect to the db then start the app
 async function startServer(gitHash = '') {
   const db = await dbConnect(process.env.DB_URI);
-  console.log(db);
-  console.log(db.collection);
-
 
   // Create the app
   const app = createApp(db, true);
