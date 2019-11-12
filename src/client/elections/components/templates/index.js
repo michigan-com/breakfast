@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import LogoContainer from './helpers/logo-container';
 import quote01 from './single/quote01';
 import quote02 from './single/quote02';
-import quote03 from './single/quote03';
-import quote04 from './single/quote04';
 import fact01 from './single/fact01';
 import versus01 from './versus/versus01';
 import list01 from './list/list01';
@@ -21,8 +19,6 @@ import { DEMOCRATIC_PARTY, REPUBLICAN_PARTY } from '../../actions/candidates';
 export const ALL_TEMPLATES = {
   'quote01': quote01,
   'quote02': quote02,
-  'quote03': quote03,
-  'quote04': quote04,
 
   'versus01': versus01,
 
