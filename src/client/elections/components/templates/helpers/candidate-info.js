@@ -11,3 +11,9 @@ export function getCandidateText(candidate) {
   }
   return candidateInfo
 }
+
+export function getShortCandidateText(candidate) {
+  var hidePartyAbbr = shouldHidePartyAbbr(candidate);
+  var candidateInfo = `${hidePartyAbbr ? '' : `(${candidate.party.abbr})`}`
+  return candidateInfo;
+}

@@ -21,18 +21,16 @@ export default class Quote01 extends Component {
   renderText(text, candidates) {
     const candidate = candidates[0];
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    const candidateFontSize = fontSize * 0.8;
     var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.95);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
-    var boxHeight = ((lines.length + 5) * lineHeight * (fontSize));
+    var boxHeight = ((lines.length + 3) * lineHeight * (fontSize));
     var top = bottom - boxHeight;
     var textTop = top + (fontSize * 2);
     var textLeft = width * 0.05;
-    const candidateTextTop = (bottom - (fontSize * lineHeight * 2));
-    const candidateTextLeft = width * 0.08;
+    const candidateTextTop = (bottom - (candidateFontSize * lineHeight));
 
-    var secondaryText = getCandidateText(candidate);
-    var gradientTop = height * 0.975;
     return (
       <g>
         <rect className='text-container' x={left} y={top} width={width} height={boxHeight} fill='white'></rect>
@@ -46,12 +44,19 @@ export default class Quote01 extends Component {
               >{line}{index === (lines.length - 1) ? <tspan>{'”'}</tspan> : null}</tspan>
           ))}
         </text>
-        <rect x={candidateTextLeft * 2/3} y={candidateTextTop - (fontSize * 0.75)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-        <text x={candidateTextLeft} y={candidateTextTop} width={width} fill='black'>
-          <tspan className='candidate-name' y={candidateTextTop} x={candidateTextLeft}>{candidate.name}</tspan>
-          <tspan className='candidate-party-location' y={candidateTextTop+ (fontSize * 0.75 * lineHeight)} x={candidateTextLeft} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
+        <text x={textLeft} y={candidateTextTop} width={width} fill='black' fontWeight='bold' style={{fontSize: candidateFontSize}}>
+          <tspan className='candidate-name'>
+            {candidate.name}
+          </tspan>
+          {
+            candidate.party.abbr.toLowerCase() !== 'o' ?
+              (
+                <tspan className='simple-candidate-party' fill={candidate.party.color}>
+                  { ` (${candidate.party.abbr})` }
+                </tspan>
+              ) : null
+          }
         </text>
-        <rect x={0} y={gradientTop} width={width} height={height - gradientTop} fill='url(#bottom-drop-shadow)'></rect>
       </g>
     )
   }
@@ -84,7 +89,7 @@ export default class Quote01 extends Component {
 
   render() {
     const { text, candidates } = this.props;
-    const { width, height } = this.props.imageMetrics;
+    const { width, height, cornerElementWidth } = this.props.imageMetrics;
     const candidate = candidates[0];
 
     return (
@@ -96,15 +101,16 @@ export default class Quote01 extends Component {
             }
             svg {
               background: rgb(56, 56, 56);
-            }`
+            }
+            `
           }
         </style>
         { this.renderBackground(candidates) }
         <image className='corner-pattern'
-          xlinkHref={`/img/elections/templates/quote01/quote01-${candidate.party.abbr.toLowerCase()}.png`}
+          xlinkHref={'/img/elections/graphics/2020/2020-corner-element.png'}
           x='0'
           y='0'
-          width={width}
+          width={cornerElementWidth}
           >
         </image>
         { this.renderText(text, candidates) }

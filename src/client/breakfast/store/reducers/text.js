@@ -11,7 +11,6 @@ function handleTextContainerUpdate(state = DEFAULT_TEXT, action) {
   const textContainers = [];
 
   const { textContainerIndex } = action.value;
-  console.log(action.type, textContainerIndex);
   for (let i = 0; i < state.textContainers.length; i++) {
     const container = state.textContainers[i];
     if (i === textContainerIndex) {

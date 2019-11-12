@@ -15,23 +15,23 @@ export default class Quote02 extends Component {
     logo: PropTypes.object,
   }
 
-  getTextBottom = (height) => (Math.floor(height * 0.8))
+  getTextBottom = (height) => (Math.floor(height * 0.85))
   getTextLeft = (width) => (width * 0.05)
 
   renderText(text, templateType) {
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.875);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.87);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
-    var boxHeight = ((lines.length + 1) * lineHeight * (fontSize));
+    var boxHeight = ((lines.length + 2) * lineHeight * fontSize);
     var top = bottom - boxHeight;
-    var textTop = top + (fontSize * 1.5);
+    var textTop = top + (fontSize * lineHeight * 1.5);
     var textLeft = left * 2;
 
     return (
       <g>
         <rect className='text-container' x={left} y={top} width={width - (left * 2)} height={boxHeight} fill='white'></rect>
-        <text x={textLeft} y={textTop} width={width} className='text-block'>
+        <text x={textLeft} y={textTop} width={width} className='text-block' fontWeight='bold'>
           <tspan dx={fontSize * -0.5} >{'“'}</tspan>
           {lines.map((line, index) => (
             <tspan
@@ -47,12 +47,12 @@ export default class Quote02 extends Component {
 
   renderBackground(candidates) {
     const candidate = candidates[0];
-    const { height, width } = this.props.imageMetrics;
+    const { totalHeight, width } = this.props.imageMetrics;
     if (!candidate.photo.img.src) return null;
 
-    const containerAspectRatio = width / height;
+    const containerAspectRatio = width / totalHeight;
     const imageAspectRatio = candidate.photo.img.width / candidate.photo.img.height;
-    var gradientTop = height * 0.5;
+    var gradientTop = totalHeight * 0.5;
 
     return (
       <g>
@@ -60,12 +60,12 @@ export default class Quote02 extends Component {
           className='background-image'
           preserveAspectRatio={imagePositionToAspectRatio(candidate.photo.props.imagePosition, imageAspectRatio, containerAspectRatio)}
           xlinkHref={candidate.photo.img.src}
-          height={height}
+          height={totalHeight}
           width={width}
           y='0'
           x='0'>
         </image>
-        <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={0} height={height - gradientTop} width={width}></rect>
+        <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={0} height={totalHeight - gradientTop} width={width}></rect>
       </g>
     )
   }
@@ -74,20 +74,16 @@ export default class Quote02 extends Component {
     const candidate = candidates[0];
 
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var candidateFontSize = fontSize * 1.2;
     const top = this.getTextBottom(height);
     const left = this.getTextLeft(width);
-    const boxHeight = (fontSize * 3 * lineHeight);
-    const textTop = top + (fontSize * 2);
+    const textTop = top + (fontSize * lineHeight * 1.5);
     const textLeft = left * 2;
 
-    var secondaryText = getCandidateText(candidate);
     return (
       <g>
-        <image x={left} y={top} width={width - (left * 2)} xlinkHref={`/img/elections/templates/quote02/quote02-${candidate.party.abbr.toLowerCase()}.png`}></image>
-        <text x={textLeft} y={textTop} width={width} fill='white' style={{fontSize: candidateFontSize}}>
-          <tspan className='candidate-name' y={textTop} x={textLeft}>{candidate.name}</tspan>
-          <tspan className='candidate-party-location' y={textTop + (candidateFontSize * lineHeight)} x={textLeft}>{secondaryText}</tspan>
+        <image x={left} y={top} width={width - (left * 2)} xlinkHref='/img/elections/graphics/2020/2020-attribution-background.png'></image>
+        <text x={textLeft} y={textTop} width={width}>
+          <tspan className='candidate-name' y={textTop} x={textLeft} fill='white' >{candidate.name}</tspan>
         </text>
       </g>
     )
@@ -106,9 +102,6 @@ export default class Quote02 extends Component {
             }
             svg {
               background: rgb(56, 56, 56);
-            }
-            .candidate-name {
-              text-transform: uppercase;
             }`
           }
         </style>

@@ -189,7 +189,6 @@ function drawTeamScore(context, teamContainerMetrics, team, score) {
       const stringWidth = measureWord(context, teamNameString);
       if (stringWidth <= (teamNameWidth * 2)) {
         const numLines = Math.ceil(stringWidth / teamNameWidth);
-        console.log(`${teamNameString}: ${numLines} lines`);
         drawTop = teamNameTop + (teamNameHeight / 2) - (teamNameFontSize * (numLines / (teamNameHeight / teamNameFontSize)));
       }
       fillAllText(context, teamNameString, teamNameLeft, drawTop, teamNameWidth,

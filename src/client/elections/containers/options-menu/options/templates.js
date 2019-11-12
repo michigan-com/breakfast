@@ -9,7 +9,7 @@ import { TEMPLATE_TYPE_QUOTE, TEMPLATE_TYPE_VERSUS, TEMPLATE_TYPE_LIST,
   selectTemplateVariation } from '../../../actions/templates';
 
 class Templates extends Component {
-  static propTypes: {
+  static propTypes = {
     Templates: PropTypes.object,
   }
 
@@ -32,11 +32,15 @@ class Templates extends Component {
                 {
                   templates[templateType].variations.map((variation, index) => {
                     var className = 'variation-option';
-                    if (templateType === activeTemplateType && index === templates[templateType].activeVariationIndex) {
+                    const isActive = templateType === activeTemplateType && index === templates[templateType].activeVariationIndex
+                    if (isActive) {
                       className += ' active';
                     }
                     return (
-                      <div className={className} key={`variation-${index}`} onClick={this._selectTemplate(templateType, index)}>
+                      <div 
+                        className={className} 
+                        key={`variation-${index}`} 
+                        onClick={this._selectTemplate(templateType, index)}>
                         <img src={`/img/elections/templates/${variation.templateName}/thumbnail.png`} alt={variation.templateName}/>
                       </div>
                     )

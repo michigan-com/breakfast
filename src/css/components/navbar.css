@@ -39,9 +39,10 @@
     }
 
     .links {
-      display: inline-block;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       margin: 0px 20px;
-      float: left;
 
       .active {
         text-decoration: underline;
@@ -60,6 +61,9 @@
         line-height: $navbar-height;
         text-transform: uppercase;
         margin: 0px 15px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
         &:hover {
           text-decoration: underline;

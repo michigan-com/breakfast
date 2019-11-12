@@ -10,16 +10,22 @@ export const ADD_LIST_ITEM = 'ADD_LIST_ITEM';
 export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM';
 export const SELECT_TEMPLATE_VARIATION = 'SELECT_TEMPLATE_VARIATION';
 export const UPDATE_ASPECT_RATIO = 'UPDATE_ASPECT_RATIO';
+export const UPDATE_TOGGLE_VALUE = 'UPDATE_TOGGLE_VALUE';
+export const UPDATE_NUMBER_VALUE = 'UPDATE_NUMBER_VALUE';
+export const UPDATE_STATE_VALUE = 'UPDATE_STATE_VALUE';
 
 export const TEMPLATE_TYPE_QUOTE = 'quote';
 export const TEMPLATE_TYPE_FACT = 'fact';
 export const TEMPLATE_TYPE_RESULTS = 'results';
 export const TEMPLATE_TYPE_VERSUS = 'versus';
 export const TEMPLATE_TYPE_LIST = 'list';
+export const TEMPLATE_TYPE_DATA = 'data';
+export const TEMPLATE_TYPE_FACT_CHECK = 'fact-check';
 
 export const ASPECT_RATIO_SQUARE = 1080 / 1080; // 1
 export const ASPECT_RATIO_PORTRAIT = 1350 / 1080; // 1.25
 export const ASPECT_RATIO_VERTICAL = 1920 / 1080; // 1.77778
+export const ASPECT_RATIO_FIVE_FOUR = 5 / 4; // 0.8
 
 const ALL_ASPECT_RATIOS = [
   ASPECT_RATIO_SQUARE,
@@ -32,20 +38,25 @@ const TEMPLATE_TYPES = [
   TEMPLATE_TYPE_VERSUS,
   TEMPLATE_TYPE_LIST,
   TEMPLATE_TYPE_RESULTS,
+  TEMPLATE_TYPE_DATA,
+  TEMPLATE_TYPE_FACT_CHECK,
+  TEMPLATE_TYPE_FACT,
 ];
 
 const TEMPLATE = {
   thumbnail: '',
   templateName: '',
   type: '',
-  aspectRatio: ASPECT_RATIO_SQUARE,
-  aspectRatioOptions: [ASPECT_RATIO_SQUARE],
+  aspectRatio: ASPECT_RATIO_FIVE_FOUR,
+  aspectRatioOptions: [ASPECT_RATIO_FIVE_FOUR],
+  fontSize: undefined,
+  logoType: 'dark',
 }
 
-function createTemplate(type = '', templateName, aspectRatioOptions=ALL_ASPECT_RATIOS) {
+function createTemplate(type = '', templateName, overrideValues = {}) {
   if (TEMPLATE_TYPES.indexOf(type) < 0 ) return TEMPLATE;
 
-  var createdTemplate = { ...TEMPLATE, templateName, type, aspectRatioOptions };
+  var createdTemplate = { ...TEMPLATE, templateName, type, ...overrideValues };
 
   return createdTemplate;
 }
@@ -54,63 +65,95 @@ const SINGLE_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_QUOTE,
     'quote01',
+    { 
+      fontSize: 50
+    },
   ),
   createTemplate(
     TEMPLATE_TYPE_QUOTE,
     'quote02',
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_QUOTE,
-    'quote03',
-    [ASPECT_RATIO_SQUARE],
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_QUOTE,
-    'quote04',
-    [ASPECT_RATIO_SQUARE],
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_QUOTE,
-    'fact01',
-    [ASPECT_RATIO_SQUARE],
-  ),
-];
+    { 
+      logoType: 'light',
+      fontSize: 40
+    }
+  )
+ ];
 
 const VERSUS_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_VERSUS,
     'versus01',
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_VERSUS,
-    'versus02',
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_VERSUS,
-    'versus03',
-    [ASPECT_RATIO_SQUARE]
+    {
+      logoType: 'dark-no-background'
+    }
   ),
 ];
 
 const LIST_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_LIST,
-    'list01'
-  ),
-  createTemplate(
-    TEMPLATE_TYPE_LIST,
-    'list02'
+    'list01',
+    {
+      fontSize: 40
+    }
   )
 ];
 
 const RESULTS_TEMPLATES = [
   createTemplate(
     TEMPLATE_TYPE_RESULTS,
-    'results01'
+    'results01',
+    {
+      logoType: 'light'
+    }
   ),
   createTemplate(
     TEMPLATE_TYPE_RESULTS,
-    'results03'
+    'results02',
+    {
+      logoType: 'light',
+      fontSize: 50
+    }
+  )
+]
+
+const DATA_TEMPLATES = [
+  createTemplate(
+    TEMPLATE_TYPE_DATA,
+    'data01',
+    {
+      logoType: 'light',
+      fontSize: 45
+    }
+  ),
+  createTemplate(
+    TEMPLATE_TYPE_DATA,
+    'data02',
+    {
+      fontSize: 50,
+      logoType: 'dark-no-background'
+    }
+  )
+]
+
+const FACT_CHECK_TEMPLATES = [
+  createTemplate(
+    TEMPLATE_TYPE_FACT_CHECK,
+    'factcheck01',
+    {
+      fontSize: 47,
+    }
+  )
+]
+
+const FACT_TEMPLATES = [
+  createTemplate(
+    TEMPLATE_TYPE_FACT,
+    'fact01',
+    {
+      fontSize: 60,
+      logoType: 'light'
+    }
   )
 ]
 
@@ -150,6 +193,29 @@ export function updateListText(textIndex = -1, text = '') {
       textIndex,
       text,
     }
+  }
+}
+
+export function updateNumberValue(numberIndex = -1, numberValue = '') {
+  return {
+    type: UPDATE_NUMBER_VALUE,
+    value: {
+      numberIndex,
+      numberValue
+    }
+  }
+}
+
+export function toggleValue() {
+  return { 
+    type: UPDATE_TOGGLE_VALUE
+  }
+}
+
+export function updateStateValue(state, stateIndex) {
+  return {
+    type: UPDATE_STATE_VALUE,
+    value: stateIndex,
   }
 }
 
@@ -197,9 +263,12 @@ export const DEFAULT_STATE = {
     },
     [TEMPLATE_TYPE_RESULTS]: {
       variations: [...RESULTS_TEMPLATES],
-      text: ['0', '0'],
-      activeVariationIndex: 0,
-      winningCandidateIndex: 0,
+      text: [getIpsumText(1)],
+      numbers: ['0', '0'],
+      toggle: true, // boolean values seem useful for results and true/false templates
+      activeVariationIndex: 1,
+      selectedStateDisplayValue: '',
+      selectedStateIndex: 0,
     },
     [TEMPLATE_TYPE_VERSUS]: {
       variations: [...VERSUS_TEMPLATES],
@@ -209,6 +278,23 @@ export const DEFAULT_STATE = {
     [TEMPLATE_TYPE_LIST]: {
       variations: [...LIST_TEMPLATES],
       text: [getIpsumText(2), getIpsumText(2), getIpsumText(2)],
+      activeVariationIndex: 0,
+    },
+    [TEMPLATE_TYPE_DATA]: {
+      variations: [...DATA_TEMPLATES],
+      text: [getIpsumText(1)],
+      numbers: ['0', '0'],
+      activeVariationIndex: 0,
+    },
+    [TEMPLATE_TYPE_FACT_CHECK]: {
+      variations: [...FACT_CHECK_TEMPLATES],
+      text: [getIpsumText(3)],
+      toggle: true,
+      activeVariationIndex: 0,
+    },
+    [TEMPLATE_TYPE_FACT]: {
+      variations: [...FACT_TEMPLATES],
+      text: [getIpsumText(2)],
       activeVariationIndex: 0,
     }
   },

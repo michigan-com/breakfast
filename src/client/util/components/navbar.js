@@ -20,7 +20,7 @@ export default class NavBar extends Component {
         text: 'Breakfast',
       }, {
         href: '/elections/',
-        text: <img src='/img/elections-logo-white.svg' alt='Elections' title='Elections'/>,
+        text: <img src='/img/elections/graphics/2020/2020-elections-logo-light.png' alt='Elections' title='Elections' style={{height: '35px', marginTop: '-6px'}}/>,
       }, {
         href: '/gallery/',
         text: 'Gallery',

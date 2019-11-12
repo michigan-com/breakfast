@@ -10,12 +10,13 @@ import quote03 from './single/quote03';
 import quote04 from './single/quote04';
 import fact01 from './single/fact01';
 import versus01 from './versus/versus01';
-import versus02 from './versus/versus02';
-import versus03 from './versus/versus03';
 import list01 from './list/list01';
-import list02 from './list/list02';
 import results01 from './results/results01.js';
-import results03 from './results/results03.js';
+import results02 from './results/results02';
+import data01 from './data/data01';
+import data02 from './data/data02';
+import factCheck from './factcheck/factcheck01';
+import { DEMOCRATIC_PARTY, REPUBLICAN_PARTY } from '../../actions/candidates';
 
 export const ALL_TEMPLATES = {
   'quote01': quote01,
@@ -24,16 +25,18 @@ export const ALL_TEMPLATES = {
   'quote04': quote04,
 
   'versus01': versus01,
-  'versus02': versus02,
-  'versus03': versus03,
 
-  'results01' : results01,
-  'results03' : results03,
+  'results01': results01,
+  'results02': results02,
 
   'list01': list01,
-  'list02': list02,
 
   'fact01': fact01,
+
+  'data01': data01,
+  'data02': data02,
+
+  'factcheck01': factCheck
 }
 
 export class ElectionsTemplate extends Component {
@@ -41,6 +44,8 @@ export class ElectionsTemplate extends Component {
     templateName: PropTypes.string,
     imageMetrics: PropTypes.object,
     text: PropTypes.array,
+    number: PropTypes.array,
+    toggle: PropTypes.bool,
     candidates: PropTypes.array,
     logo: PropTypes.object,
     variation: PropTypes.object,
@@ -68,7 +73,7 @@ export class ElectionsTemplate extends Component {
   }
 
   render() {
-    const { logo, imageMetrics, templateName } = this.props;
+    const { logo, imageMetrics, templateName, variation } = this.props;
     const { width, totalHeight, fontSize } = imageMetrics;
 
     return (
@@ -93,12 +98,24 @@ export class ElectionsTemplate extends Component {
               font-style: normal;
               font-weight: normal;
             }
+            @font-face {
+              font-family: 'StateFaceRegular';
+              src: url('/fonts/StateFace/stateface-regular-webfont.eot');
+              src: url('/fonts/StateFace/stateface-regular-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('/fonts/StateFace/stateface-regular-webfont.woff') format('woff'),
+                  url('/fonts/StateFace/stateface-regular-webfont.ttf') format('truetype'),
+                  url('/fonts/StateFace/stateface-regular-webfont.svg#StateFaceRegular') format('svg');
+              font-weight: normal;
+              font-style: normal;
+            }
             text {
               font-family: 'Unify Sans';
               font-size: ${fontSize}px;
-            }
-            text {
+              fill: #404040;
               letter-spacing: 0.05em;
+            }
+            text, tspan {
+              dominant-baseline: central;
             }
             `
           }
@@ -116,10 +133,14 @@ export class ElectionsTemplate extends Component {
               <stop offset="0%" stopColor="transparent"/>
               <stop offset="100%"  stopColor="rgba(64, 64, 64, 0.1)"/>
           </linearGradient>
+          <linearGradient id='2020-elections-gradient' x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor={`${DEMOCRATIC_PARTY.color}`}/>
+            <stop offset="100%" stopColor={`${REPUBLICAN_PARTY.color}`}/>
+          </linearGradient>
         </defs>
 
         { this.renderTemplate() }
-        <LogoContainer logo={logo} imageMetrics={imageMetrics}/>
+        <LogoContainer logo={logo} imageMetrics={imageMetrics} logoType={variation.logoType}/>
       </svg>
     )
   }

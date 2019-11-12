@@ -4,9 +4,9 @@ import MongoClient from 'mongodb';
 
 function dbConnect(dbString) {
   return new Promise((resolve, reject) => {
-    MongoClient.connect(dbString, (err, db) => {
+    MongoClient.connect(dbString, (err, client) => {
       if (err) reject(err);
-      resolve(db);
+      else resolve(client.db('breakfast'));
     });
   });
 }

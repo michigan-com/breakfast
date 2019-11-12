@@ -16,7 +16,7 @@ export default class List01 extends Component {
   }
 
   getTextLeft = (width) => (width * 0.2);
-  getHeaderBottom = () => (200);
+  getHeaderBottom = (height) => (height / 6);
 
   renderText(text) {
 
@@ -38,7 +38,7 @@ export default class List01 extends Component {
 
     var textElements = [];
     var textTop = top;
-    var listIndexFontSize = largestLineCount * fontSize;
+    var listIndexFontSize = largestLineCount * fontSize * lineHeight;
     for (var i = 0; i < allLines.length; i++) {
       const lines = allLines[i]
       var centeredTextTop = textTop;
@@ -57,35 +57,32 @@ export default class List01 extends Component {
       textTop += (largestLineCount * fontSize * lineHeight) + fontSize;
     }
 
-    var gradientTop = height * 0.975;
     return (
       <g>
         {textElements}
-        <rect x={0} y={gradientTop} width={width} height={height - gradientTop} fill='url(#bottom-drop-shadow)'></rect>
       </g>
     )
   }
 
   renderCandidate(candidates) {
-    const { width, height } = this.props.imageMetrics;
+    const { cornerElementWidth, width, height } = this.props.imageMetrics;
     const candidate = candidates[0];
 
     var candidateFontSize = 70;
     var candidateLineHeight = 1.13;
     var candidateInfoFontSize = candidateFontSize * 0.7;
 
-    var textBottom = this.getHeaderBottom(height);
-    var textLeft =  width * 0.05;
+    var textTop = this.getHeaderBottom(height) - (candidateFontSize / 3);
+    var textLeft =  this.getTextLeft(width);
 
     var candidateInfo = getCandidateText(candidate);
     return (
       <g>
-        <image x='0' y='0' width={width} xlinkHref={`/img/elections/templates/list01/list01-${candidate.party.abbr.toLowerCase()}.png`}></image>
+        <image x={0} y={0} width={cornerElementWidth} xlinkHref='/img/elections/graphics/2020/2020-corner-element.png'></image>
         <text className='candidate'>
-          <tspan x={textLeft} y={textBottom - (candidateFontSize * candidateLineHeight)} style={{fontSize: candidateInfoFontSize}}>What to Know About</tspan>
-          <tspan x={textLeft} y={textBottom} style={{fontSize: candidateFontSize}}>
+          <tspan x={textLeft} y={textTop} style={{fontSize: candidateFontSize}}>
             <tspan style={{fontWeight: 'bold'}}>{`${candidate.name}`}</tspan>
-            <tspan dx={candidateFontSize * 0.7} dy='-2' style={{fontSize: candidateInfoFontSize}}>{candidateInfo}</tspan>
+            <tspan x={textLeft} dy={candidateFontSize * 0.9} style={{fontSize: candidateInfoFontSize}} fill={candidate.party.color}>{candidateInfo}</tspan>
           </tspan>
         </text>
       </g>
@@ -103,13 +100,14 @@ export default class List01 extends Component {
             `svg {
               background: white;
             }
-            .list-index {
-              stroke: #626262;
-              fill: #626262;
-            }
             .candidate {
-              fill: white;
-              stroke: white;
+              font-weight: bold;
+            }
+            .list-index {
+              stroke: #a2a2a2;
+              fill: #a2a2a2;
+              font-weight: bold;
+              dominant-baseline: initial;
             }`
           }
         </style>

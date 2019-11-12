@@ -20,7 +20,7 @@ export default function AspectRatioPicker(props) {
           }
           return (
             <div className={containerClassName} key={`aspect-ratio-${ratio}`}>
-              <eiv className='aspect-ratio' onClick={onClick(ratio)} style={style}></eiv>
+              <div className='aspect-ratio' onClick={onClick(ratio)} style={style}></div>
             </div>
           )
         })

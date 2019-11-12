@@ -3,6 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const displayNameOverride = {
+  'text': 'text, numbers, etc'
+}
+
 export default function OptionChoice(props) {
   const { option, onClick, index, selected } = props;
   const displayName = option.replace(/\-/g, ' ');
@@ -14,7 +18,7 @@ export default function OptionChoice(props) {
       <div className="option-image-container">
         <img src={`/img/${option}.svg`} alt={displayName} />
       </div>
-      <div className="display-name">{displayName}</div>
+      <div className="display-name">{displayNameOverride[option] || displayName}</div>
     </div>
   );
 }

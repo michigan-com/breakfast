@@ -17,19 +17,27 @@ export const activeAspectRatio = (state) => {
   return template.variations[template.activeVariationIndex].aspectRatio;
 }
 
+export const activeTemplate = (state) => {
+  const { activeTemplateType, templates } = templateSelector(state);
+  const template = templates[activeTemplateType];
+  return template.variations[template.activeVariationIndex];
+}
+
 export const getImageMetrics = createSelector(
   activeAspectRatio,
-  (aspectRatio) => {
+  activeTemplate,
+  (aspectRatio, template) => {
     if (aspectRatio === null) aspectRatio = 1;
 
     const width = window.innerWidth < 500 ? window.innerWidth * 2 : 1080;
     const totalHeight = width * aspectRatio;
-    const logoContainerHeight = totalHeight * 0.1;
-    const height = totalHeight - logoContainerHeight;
-    const fontSize = 32;
+    const logoContainerHeight = Math.round(totalHeight * 0.065);
+    const height = totalHeight - logoContainerHeight + 2;
+    const fontSize = template.fontSize || 36;
     const lineHeight = 1.25;
     const marginLeft = 75;
     const marginTop = 60;
+    const cornerElementWidth = width * 0.35;
     return {
       width,
       totalHeight,
@@ -39,6 +47,7 @@ export const getImageMetrics = createSelector(
       logoContainerHeight,
       marginLeft,
       marginTop,
+      cornerElementWidth,
     };
   }
 

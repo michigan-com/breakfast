@@ -1,7 +1,8 @@
 'use strict';
 
 import { DEFAULT_STATE, UPDATE_SINGLE_TEXT, UPDATE_VERSUS_TEXT, UPDATE_RESULTS_TEXT, SELECT_TEMPLATE_VARIATION,
-  UPDATE_ASPECT_RATIO, UPDATE_LIST_TEXT, ADD_LIST_ITEM, REMOVE_LIST_ITEM} from '../../actions/templates';
+  UPDATE_ASPECT_RATIO, UPDATE_LIST_TEXT, ADD_LIST_ITEM, REMOVE_LIST_ITEM, UPDATE_TOGGLE_VALUE, 
+  UPDATE_NUMBER_VALUE, UPDATE_STATE_VALUE } from '../../actions/templates';
 
 export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
@@ -35,6 +36,17 @@ export default function tepmlatesReducer(state = DEFAULT_STATE, action) {
 
       newTemplates[activeTemplateType].text[action.value.textIndex] = action.value.text;
       return { ...state, templates: newTemplates }
+    case UPDATE_TOGGLE_VALUE:
+      newTemplates[activeTemplateType].toggle = !newTemplates[activeTemplateType].toggle;
+      return { ...state, template: newTemplates };
+    case UPDATE_NUMBER_VALUE:
+      if (action.value.numberIndex < 0 || action.value.numberIndex > newTemplates[activeTemplateType].numbers.length) return state;
+
+      newTemplates[activeTemplateType].numbers[action.value.numberIndex] = action.value.numberValue;
+      return { ...state, template: newTemplates };
+    case UPDATE_STATE_VALUE:
+      newTemplates[activeTemplateType].selectedStateIndex = action.value;
+      return { ...state, template: newTemplates };
 
     case ADD_LIST_ITEM:
       newTemplates[activeTemplateType].text.push('');

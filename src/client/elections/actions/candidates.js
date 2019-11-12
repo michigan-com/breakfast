@@ -31,7 +31,7 @@ export const GREEN_PARTY = {
   ...PARTY,
   name: 'Green',
   abbr: 'G',
-  color: '#1F8A5C'
+  color: '#008700'
 };
 
 export const LIBERTARIAN_PARTY= {
@@ -43,17 +43,10 @@ export const LIBERTARIAN_PARTY= {
 
 export const OTHER = {
   ...PARTY,
-  name: 'Other',
-  abbr: 'O',
-  color: '#BA32A3'
-};
-
-export const INDEPENDENT = {
-  ...PARTY,
   name: 'Independent',
   abbr: 'I',
-  color: '#626262'
-}
+  color: '#057D78'
+};
 
 
 
@@ -62,7 +55,6 @@ export const PARTIES = [
   REPUBLICAN_PARTY,
   GREEN_PARTY,
   LIBERTARIAN_PARTY,
-  INDEPENDENT,
   OTHER
 ]
 
@@ -170,7 +162,7 @@ export function swapCandidates() {
 
 export const DEFAULT_STATE = {
   candidates: [
-    { ...CANDIDATE, name: 'Barack Obama', party: DEMOCRATIC_PARTY, location: 'Illinois' },
-    { ...CANDIDATE, name: 'Abraham Lincoln', party: REPUBLICAN_PARTY, location: 'Illinois' }
+    { ...CANDIDATE, name: 'Elizabeth Warren', party: DEMOCRATIC_PARTY, location: 'Massachusetts' },
+    { ...CANDIDATE, name: 'Donald Trump', party: REPUBLICAN_PARTY, location: 'Florida' }
   ],
 }

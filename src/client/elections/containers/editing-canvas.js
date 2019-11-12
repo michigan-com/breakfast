@@ -130,7 +130,6 @@ class EditingCanvas extends Component {
     });
 
     if (!imagesToLoad) {
-      emitter.emit('log:debug', 'no need to inline images')
       img.src = svgToUrl(svg)
     } else {
       Promise.all(Array.from(imagesToLoad).map(el => el.getAttribute('xlink:href'))
@@ -156,7 +155,7 @@ class EditingCanvas extends Component {
     const { candidates } = this.props.Candidates;
     if (!(activeTemplateType in templates)) return null;
 
-    const { activeVariationIndex, text, variations } = templates[activeTemplateType]
+    const { activeVariationIndex, text, variations, numbers, toggle } = templates[activeTemplateType]
 
     if (activeVariationIndex < 0 || activeVariationIndex >= variations.length) {
       return null;
@@ -179,6 +178,8 @@ class EditingCanvas extends Component {
         <ElectionsTemplate
           logo={logo}
           text={text}
+          numbers={numbers}
+          toggle={toggle}
           candidates={candidates}
           imageMetrics={this.props.imageMetrics}
           templateName={variation.templateName}

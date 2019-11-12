@@ -16,33 +16,41 @@ export default class Versus01 extends Component {
     variation: PropTypes.object,
   }
 
-  getTextBottom = (height) => (height * 0.84);
+  getTextBottom = (height) => (height * 0.7)
   getTextLeft = (width, index = 0) => (width * 0.05 + ((width * index) / 2));
 
   renderText(text, templateType) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    const { candidates } = this.props;
+    const { width, fontSize, lineHeight, totalHeight } = this.props.imageMetrics
 
     var textElements = []
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.45);
+      const candidate = candidates[i];
+      const lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.45);
 
-      var bottom = this.getTextBottom(height);
-      var left = this.getTextLeft(width, i);
-      var boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
-      var top = bottom - boxHeight;
-      var textTop = top + (fontSize * 2);
-      var textLeft = left;
+      const textBottom = this.getTextBottom(totalHeight);
+      const left = this.getTextLeft(width, i);
+      const boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+      const top = textBottom - boxHeight;
+      const textTop = top + (fontSize * 2);
+      const textLeft = left;
+      const candidateTop = textBottom + (fontSize / 2);
 
       textElements.push((
-        <text x={textLeft} y={textTop} width={width} className='text-block' key={`versus01-text-${i}`}>
-          {lines.map((line, index) => (
-            <tspan
-              x={textLeft}
-              y={textTop + (index * fontSize * lineHeight)}
-              key={`versus01-text-${index}`}
-              >{line}</tspan>
-          ))}
-        </text>
+        <g key={`versus01-text-${i}`}>
+          <text x={textLeft} y={textTop} width={width} className='text-block' >
+            {lines.map((line, index) => (
+              <tspan
+                x={textLeft}
+                y={textTop + (index * fontSize * lineHeight)}
+                key={`versus01-text-${index}`}
+                >{line}</tspan>
+            ))}
+          </text>
+          <text x={textLeft} y={candidateTop} fill='black' fontWeight='bold'>
+              {candidate.name} <tspan dx={10} fill={candidate.party.color}>{`(${candidate.party.abbr})`}</tspan>
+          </text>
+        </g>
       ));
     }
 
@@ -54,113 +62,32 @@ export default class Versus01 extends Component {
   }
 
   renderBackground() {
-    const { variation } = this.props;
-    const { candidates } = this.props;
-    const { height, width } = this.props.imageMetrics;
+    const { totalHeight, width } = this.props.imageMetrics;
 
-    const backgroundImages = [];
-    for (var count = 0; count < candidates.length; count++) {
-      var candidate = candidates[count];
-      if (!candidate.photo.img.src) continue;
-
-      const containerAspectRatio = (width / 2) / height;
-      const imageAspectRatio = candidate.photo.img.width / candidate.photo.img.height;
-
-      backgroundImages.push(
-        <image
-          xlinkHref={candidate.photo.img.src}
-          className={`background-image image-${count}`}
-          preserveAspectRatio={imagePositionToAspectRatio(candidate.photo.props.imagePosition, imageAspectRatio, containerAspectRatio)}
-          height={height}
-          width={width / 2}
-          y='0'
-          x={(width * count)/ 2}
-          key={`versus01-image-${count}`}>
-        </image>
-      )
-    }
-
-
-    var gradientTop = height * 0.5;
-    var dividerWidth = width * 0.01;
-
-    var patternImages = null;
-    if (variation.aspectRatio > 1) {
-      patternImages = (
-        <g>
-          <image x='0' y='0' width={width - (dividerWidth / 2)} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[0].party.abbr.toLowerCase()}.png`}></image>
-          <image x={(width / 2) + (dividerWidth / 2)} y='0' width={width} xlinkHref={`/img/elections/templates/versus02/versus02-${candidates[1].party.abbr.toLowerCase()}.png`}></image>
-        </g>
-      )
-    }
-
+    const dividerWidth = width * 0.01;
     return (
       <g>
-        {backgroundImages}
-        <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={0} height={height - gradientTop} width={width / 2}></rect>
-        <rect fill='url(#bottom-black-gradient)' y={gradientTop} x={width / 2} height={height - gradientTop} width={width / 2}></rect>
-        <rect height={height} y='0' width={dividerWidth} x={(width / 2) - (dividerWidth / 2)} fill='white'></rect>
-        {patternImages}
-      </g>
-    )
-  }
-
-  renderCandidates(candidates) {
-    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    const top = this.getTextBottom(height);
-    const left = this.getTextLeft(width);
-    const boxHeight = (fontSize * 3);
-    const textTop = (top + (boxHeight / 2)) - (fontSize / 2);
-    const textLeft = left * 1.5;
-
-    // TODO pull color based on candidate
-    return (
-      <g>
-        {
-          candidates.map((candidate, i) => {
-            var secondaryText = getCandidateText(candidate);
-
-            return (
-              <g key={`versus01-candidate-${i}`}>
-                <rect x={textLeft * 2/3 + (width * i / 2)} y={textTop - (fontSize * 0.8)} width={(width * 0.05)/ 8} height={(fontSize + (fontSize * 0.72 * lineHeight) * 0.9)} fill={candidate.party.color} stroke={candidate.party.color}/>
-                <text x={textLeft + ((width * i) / 2)} y={textTop} width={width / 2 } fill='black'>
-                  <tspan className='candidate-name' y={textTop} x={textLeft + ((width * i) / 2)}>{candidate.name}</tspan>
-                  <tspan className='candidate-party-location' y={textTop + (fontSize * 0.75 * lineHeight)} x={textLeft + ((width * i) / 2)} style={{fontSize: `${fontSize * 0.75}px`}}>{secondaryText}</tspan>
-                </text>
-              </g>
-            )
-
-          })
-        }
+        <image x='0' y='0' height={totalHeight} width={width} xlinkHref='/img/elections/graphics/2020/2020-grey-background.png'></image>
+        <rect height={totalHeight} y='0' width={dividerWidth} x={(width / 2) - (dividerWidth / 2)} fill='url(#2020-elections-gradient)'></rect>
       </g>
     )
   }
 
   render() {
-    const { text, candidates } = this.props;
-    const { width, height } = this.props.imageMetrics;
+    const { text } = this.props;
 
     return (
       <g>
         <style>
           {
-            `.logo-container {
-              fill: white;
-            }
-            svg {
-              background: rgb(56, 56, 56);
-            }
-            .candidate-name {
+            `.candidate-name {
               text-transform: uppercase;
             }
-            text {
-              fill: white;
-            }`
+            `
           }
         </style>
         { this.renderBackground() }
         { this.renderText(text) }
-        { this.renderCandidates(candidates)}
       </g>
     )
   }
