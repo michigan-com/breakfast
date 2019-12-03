@@ -77,13 +77,13 @@ export class ElectionsTemplate extends Component {
         <style id="svg-styles">
           {
             `@font-face {
-              font-family: 'Unify Sans';
+              font-family: 'Unify Sans SemiBold';
               src: url('/fonts/UnifySans/UnifySans_SBd.ttf') format('truetype');
               font-style: normal;
               font-weight: 700;
             }
             @font-face {
-              font-family: 'Unify Sans';
+              font-family: 'Unify Sans Bold';
               src: url('/fonts/UnifySans/UnifySans_Bd.ttf') format('truetype');
               font-style: normal;
               font-weight: 900;

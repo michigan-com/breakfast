@@ -36,9 +36,9 @@ export default class FactCheck01 extends Component {
             <g>
                 <image x='0' y='0' width={width} xlinkHref='/img/elections/graphics/2020/2020-attribution-background-large.png'></image>
 
-                <text className='topper-text' x={left} y={factCheckTop}>Fact Check</text>
+                <text className='topper-text' x={left} y={factCheckTop} style={{fontSize: fontSize * 0.9}}>Fact Check</text>
                 <text className='topper-text' x={left} y={candidateNameTop} style={{fontSize: candidateFontSize}}>
-                    <tspan style={{fontWeight: 'bold'}}>{candidate.name}</tspan>
+                    <tspan style={{fontFamily: 'Unify Sans SemiBold'}}>{candidate.name}</tspan>
                     <tspan dx="10">{`(${candidate.party.abbr})`}</tspan>
                 </text>
             </g>
@@ -54,10 +54,10 @@ export default class FactCheck01 extends Component {
         const textWidth = width - (left * 2);
 
         const lines = getLinesOfText(text[0], fontSize, lineHeight, textWidth);
-        const top = topperHeight + (fontSize * 2);
+        const top = topperHeight + (fontSize * 3);
         const textBottom = top + (lines.length * fontSize * lineHeight);
 
-        const trueFalseTop = textBottom + (fontSize);
+        const trueFalseTop = textBottom; //+ (fontSize * 0.7);
         const rectHeight = this.factCheckValueFontSize(fontSize);
         const falseLeft = width * 0.4;
 

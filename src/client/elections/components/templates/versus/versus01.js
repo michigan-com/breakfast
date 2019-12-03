@@ -23,14 +23,20 @@ export default class Versus01 extends Component {
     const { candidates } = this.props;
     const { width, fontSize, lineHeight, totalHeight } = this.props.imageMetrics
 
+    const textWidth = width * 0.43;
+    const maxLines = text.reduce((a, txt) => {
+      const numLines = getLinesOfText(txt, fontSize, lineHeight, textWidth).length;
+      return numLines > a ? numLines : a;
+    }, 0);
+
     var textElements = []
     for (var i = 0; i < text.length; i++) {
       const candidate = candidates[i];
-      const lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.45);
+      const lines = getLinesOfText(text[i], fontSize, lineHeight, textWidth);
 
       const textBottom = this.getTextBottom(totalHeight);
       const left = this.getTextLeft(width, i);
-      const boxHeight = ((lines.length + 2) * lineHeight * (fontSize));
+      const boxHeight = ((maxLines + 2) * lineHeight * (fontSize));
       const top = textBottom - boxHeight;
       const textTop = top + (fontSize * 2);
       const textLeft = left;
@@ -47,7 +53,7 @@ export default class Versus01 extends Component {
                 >{line}</tspan>
             ))}
           </text>
-          <text x={textLeft} y={candidateTop} fill='black' fontWeight='bold'>
+          <text x={textLeft} y={candidateTop} fill='black' className='candidate-name' style={{fontSize: `${fontSize * 0.9}px`}}>
               {candidate.name} <tspan dx={10} fill={candidate.party.color}>{`(${candidate.party.abbr})`}</tspan>
           </text>
         </g>
@@ -82,6 +88,7 @@ export default class Versus01 extends Component {
           {
             `.candidate-name {
               text-transform: uppercase;
+              font-family: 'Unify Sans Bold';
             }
             `
           }

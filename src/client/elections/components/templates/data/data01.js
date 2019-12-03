@@ -90,7 +90,7 @@ export default class Data01  extends Component {
 
         return (
             <g>
-                <image x={0} y={0} width={width} height={totalHeight} xlinkHref='/img/elections/graphics/2020/2020-full-gradient-background.png'></image>
+                <image x={0} y={0} width={width} height={totalHeight} xlinkHref='/img/elections/graphics/2020/2020-two-color-background.png'></image>
                 <image x={iconLeft} y={iconTop} width={iconWidth} xlinkHref="/img/elections/icons/2020/congress-white.svg"></image>
             </g>
         )

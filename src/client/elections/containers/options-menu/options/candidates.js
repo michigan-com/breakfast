@@ -9,7 +9,7 @@ import Dropzone from 'react-dropzone';
 import { TEMPLATE_TYPE_VERSUS } from '../../../actions/templates';
 import { updateCandidateName, updateCandidateParty, updateCandidateLocation,
   updateCandidateImage, removeCandidateImage, updateCandidateImageProps,
-  swapCandidates, PARTIES } from '../../../actions/candidates';
+  updateCandidateTwitterHandle, swapCandidates, PARTIES } from '../../../actions/candidates';
 import PartyPicker from '../../../components/party-picker';
 
 class CandidatesOptions extends Component {
@@ -74,6 +74,12 @@ class CandidatesOptions extends Component {
     }
   }
 
+  updateTwitterHandle = (index) => {
+    return (e) => {
+      this.props.actions.updateCandidateTwitterHandle(e.target.value, index);
+    }
+  }
+
   swapCandidates = () => {
     this.props.actions.swapCandidates();
   }
@@ -81,7 +87,7 @@ class CandidatesOptions extends Component {
   renderCandidate(candidate, index) {
     const dropzoneStyle = {
       width: '90%',
-      margin: '0 auto',
+      margin: '10px auto',
       height: '100px',
       border: '2px dashed black',
       textAlign: 'center'
@@ -103,7 +109,11 @@ class CandidatesOptions extends Component {
         <div className='option-container-title'>Location</div>
         <input type='text' value={candidate.location} onChange={this.changeCandidateLocation(index)}/>
 
+        <div className='option-container-title'>Twitter Handle</div>
+        <input type='text' value={candidate.twitterHandle} onChange={this.updateTwitterHandle(index)}/>
+
         <div className='candiate-upload-container'>
+          <div className='option-container-title'>Candidate Image</div>
           {
             candidate.photo.img.src
             ?
@@ -116,7 +126,6 @@ class CandidatesOptions extends Component {
             </div>)
             :
             (<div>
-              <span>Upload image</span>
               <Dropzone
                 onDropAccepted={this.handleFileUpload(index)}
                 accept="image/*"
@@ -168,6 +177,7 @@ function mapDispatchToProps(dispatch) {
       updateCandidateImage,
       removeCandidateImage,
       updateCandidateImageProps,
+      updateCandidateTwitterHandle,
       swapCandidates,
     }, dispatch)
   }

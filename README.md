@@ -12,4 +12,4 @@ HTML 5 canvas-based social media image creator, inspired by [NPR's Lunchbox](htt
 `yarn`
 
 # Run
-`npm run server`
+`DEBUG=breakfast:* npm run server`

@@ -53,7 +53,7 @@ export default class PartyPicker extends Component {
                   <div className={`party-option ${party.abbr} ${this.state.showName === party.abbr ? 'show-full-name' : ''}`}>
                     {party.abbr}
                     <span className='full-party-name-container'>
-                      <span className='full-party-name' style={style}>{party.name}</span>
+                      <div className='full-party-name' style={style}>{party.name}</div>
                     </span>
                   </div>
                 </div>

@@ -5,6 +5,7 @@ export const UPDATE_CANDIDATE_PARTY = 'UPDATE_CANDIDATE_PARTY';
 export const UPDATE_CANDIDATE_LOCATION = 'UPDATE_CANDIDATE_LOCATION';
 export const UPDATE_CANDIDATE_IMAGE = 'UPDATE_CANDIDATE_IMAGE';
 export const UPDATE_CANDIDATE_IMAGE_PROPS = 'UPDATE_CANDIDATE_IMAGE_PROPS';
+export const UPDATE_CANDIDATE_TWITTER_HANDLE = 'UPDATE_CANDIDATE_TWITTER_HANDLE';
 export const SWAP_CANDIDATES = 'SWAP_CANDIDATES';
 
 const PARTY = {
@@ -43,7 +44,7 @@ export const LIBERTARIAN_PARTY= {
 
 export const OTHER = {
   ...PARTY,
-  name: 'Independent',
+  name: 'Other Party/Independent',
   abbr: 'I',
   color: '#057D78'
 };
@@ -74,6 +75,7 @@ const CANDIDATE = {
   party: { ...PARTY },
   location: '',
   photo: { ...UPLOAD },
+  twitterHandle: ''
 }
 
 /**
@@ -153,6 +155,16 @@ export function updateCandidateLocation(location = '', index = -1) {
   }
 }
 
+export function updateCandidateTwitterHandle(handle = '', index = -1) {
+  return {
+    type: UPDATE_CANDIDATE_TWITTER_HANDLE,
+    value: {
+      index,
+      value: handle,
+    }
+  }
+}
+
 export function swapCandidates() {
   return {
     type: SWAP_CANDIDATES,
@@ -162,7 +174,7 @@ export function swapCandidates() {
 
 export const DEFAULT_STATE = {
   candidates: [
-    { ...CANDIDATE, name: 'Elizabeth Warren', party: DEMOCRATIC_PARTY, location: 'Massachusetts' },
-    { ...CANDIDATE, name: 'Donald Trump', party: REPUBLICAN_PARTY, location: 'Florida' }
+    { ...CANDIDATE, name: 'Elizabeth Warren', party: DEMOCRATIC_PARTY, location: 'Massachusetts', twitterHandle: 'ewarren'},
+    { ...CANDIDATE, name: 'Donald Trump', party: REPUBLICAN_PARTY, location: 'Florida', twitterHandle: 'realDonaldTrump'}
   ],
 }

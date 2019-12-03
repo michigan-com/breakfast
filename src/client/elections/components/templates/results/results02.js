@@ -22,19 +22,22 @@ export default class Results02 extends Component {
 
         const candidateTop = totalHeight * 0.25;
 
-        const lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.9);
+        const textWidth = width * 0.7;
+        const textLeft = (width / 2 ) - (textWidth / 2);
+        const lines = getLinesOfText(text[0], fontSize, lineHeight, textWidth * 1.2);
         const textTop = candidateTop + (fontSize * lineHeight);
 
         const stateIconTop = textTop + (fontSize * lineHeight * (lines.length + 2));
 
         return (
             <g>
-                <text className='candidate-text' y={candidateTop} x={'50%'}>
-                    {`${candidate.name} (${candidate.party.abbr})`}
+                <text className='candidate-text' y={candidateTop} x={textLeft}>
+                    {`${candidate.name}`}
+                    <tspan style={{fontFamily: 'Unify Sans'}}>{` (${candidate.party.abbr})`}</tspan>
                 </text>
                 {
                     lines.map((line, i) => (
-                        <text x={'50%'} y={textTop + (fontSize * lineHeight * i)} key={`results-02-text-${i}`}>
+                        <text x={textLeft} y={textTop + (fontSize * lineHeight * i)} key={`results-02-text-${i}`}>
                             {line}
                         </text>
                     ))
@@ -60,11 +63,11 @@ export default class Results02 extends Component {
                 <style>
                     {`
                     text {
-                        text-anchor: middle;
                         fill: white;
                     }
 
                     .candidate-text {
+                        font-family: 'Unify Sans SemiBold';
                         text-transform: uppercase;
                         font-weight: bold;
                     }
@@ -73,6 +76,7 @@ export default class Results02 extends Component {
                         font-family: 'StateFaceRegular';
                         font-size: 500px;
                         dominant-baseline: hanging;
+                        text-anchor: middle;
                     }
                     `}
                 </style>

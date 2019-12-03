@@ -17,19 +17,26 @@ export default class Quote01 extends Component {
 
   getTextBottom = (height) => (height);
   getTextLeft = (width) => (0)
+  getTextBoxThings = () => {
+    const { text } = this.props;
+    const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    const lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.95);
+    const bottom = this.getTextBottom(height);
+    const boxHeight = ((lines.length + 3.5) * lineHeight * (fontSize)); 
+    const top = bottom - boxHeight;
+    return { bottom, boxHeight, lines, top};
+  }
 
   renderText(text, candidates) {
     const candidate = candidates[0];
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
+    const { lines, bottom, boxHeight, top} = this.getTextBoxThings();
+
     const candidateFontSize = fontSize * 0.8;
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.95);
-    var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
-    var boxHeight = ((lines.length + 3) * lineHeight * (fontSize));
-    var top = bottom - boxHeight;
     var textTop = top + (fontSize * 2);
     var textLeft = width * 0.05;
-    const candidateTextTop = (bottom - (candidateFontSize * lineHeight));
+    const candidateTextTop = (bottom - (candidateFontSize * lineHeight * 2));
 
     return (
       <g>
@@ -44,7 +51,7 @@ export default class Quote01 extends Component {
               >{line}{index === (lines.length - 1) ? <tspan>{'”'}</tspan> : null}</tspan>
           ))}
         </text>
-        <text x={textLeft} y={candidateTextTop} width={width} fill='black' fontWeight='bold' style={{fontSize: candidateFontSize}}>
+        <text x={textLeft} y={candidateTextTop} width={width} fill='black' fontWeight='bold' style={{fontSize: candidateFontSize, fontFamily: 'Unify Sans Bold'}}>
           <tspan className='candidate-name'>
             {candidate.name}
           </tspan>
@@ -57,6 +64,9 @@ export default class Quote01 extends Component {
               ) : null
           }
         </text>
+        <text className='candidate-twitter-handle' y={candidateTextTop + candidateFontSize} x={textLeft} style={{fontWeight: 'lighter', fontSize: candidateFontSize * 0.9}}>
+          { candidate.twitterHandle ? `@${candidate.twitterHandle}` : ''}
+        </text>
       </g>
     )
   }
@@ -64,12 +74,11 @@ export default class Quote01 extends Component {
   renderBackground(candidates) {
     const candidate = candidates[0];
     const { height, width } = this.props.imageMetrics;
+    const { top } = this.getTextBoxThings();
     if (!candidate.photo.img.src) return null;
 
     const containerAspectRatio = width / height;
     const imageAspectRatio = candidate.photo.img.width / candidate.photo.img.height;
-
-    var gradientTop = height * 0.5;
 
     return (
       <g>
@@ -77,7 +86,7 @@ export default class Quote01 extends Component {
           className='background-image'
           preserveAspectRatio={imagePositionToAspectRatio(candidate.photo.props.imagePosition, imageAspectRatio, containerAspectRatio)}
           xlinkHref={candidate.photo.img.src}
-          height={height}
+          height={top}
           width={width}
           y='0'
           x='0'

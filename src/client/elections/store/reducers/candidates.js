@@ -2,7 +2,7 @@
 
 import { DEFAULT_STATE, UPDATE_CANDIDATE_NAME, UPDATE_CANDIDATE_PARTY,
   UPDATE_CANDIDATE_LOCATION, UPDATE_CANDIDATE_IMAGE, UPDATE_CANDIDATE_IMAGE_PROPS,
-  SWAP_CANDIDATES } from '../../actions/candidates';
+  SWAP_CANDIDATES, UPDATE_CANDIDATE_TWITTER_HANDLE } from '../../actions/candidates';
 
 export default function candidates(state = DEFAULT_STATE, action) {
   const  { candidates } = state;
@@ -29,6 +29,9 @@ export default function candidates(state = DEFAULT_STATE, action) {
       return { candidates: [ ...newCandidates ] }
     case UPDATE_CANDIDATE_IMAGE_PROPS:
       newCandidates[index].photo.props = { ...value };
+      return { candidates: [ ...newCandidates ] };
+    case UPDATE_CANDIDATE_TWITTER_HANDLE:
+      newCandidates[index].twitterHandle = value;
       return { candidates: [ ...newCandidates ] };
     case SWAP_CANDIDATES:
       newCandidates[0] = newCandidates[1];

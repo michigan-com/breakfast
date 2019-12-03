@@ -66,7 +66,7 @@ const SINGLE_TEMPLATES = [
     TEMPLATE_TYPE_QUOTE,
     'quote01',
     { 
-      fontSize: 50
+      fontSize: 47
     },
   ),
   createTemplate(
@@ -112,7 +112,7 @@ const RESULTS_TEMPLATES = [
     'results02',
     {
       logoType: 'light',
-      fontSize: 50
+      fontSize: 53
     }
   )
 ]

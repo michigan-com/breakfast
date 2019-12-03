@@ -15,7 +15,7 @@ export default class List01 extends Component {
     logo: PropTypes.object,
   }
 
-  getTextLeft = (width) => (width * 0.2);
+  getTextLeft = (width) => (width * 0.23);
   getHeaderBottom = (height) => (height / 6);
 
   renderText(text) {
@@ -25,7 +25,7 @@ export default class List01 extends Component {
     var allLines = [];
     var largestLineCount = 0;
     for (var i = 0; i < text.length; i++) {
-      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.8);
+      var lines = getLinesOfText(text[i], fontSize, lineHeight, width * 0.7);
       allLines.push(lines);
       totalLines += lines.length;
       if (lines.length > largestLineCount) largestLineCount = lines.length;
@@ -38,14 +38,14 @@ export default class List01 extends Component {
 
     var textElements = [];
     var textTop = top;
-    var listIndexFontSize = largestLineCount * fontSize * lineHeight;
+    var listIndexFontSize = largestLineCount * fontSize * lineHeight * 0.8;
     for (var i = 0; i < allLines.length; i++) {
       const lines = allLines[i]
       var centeredTextTop = textTop;
       centeredTextTop += ((largestLineCount - lines.length) / 2) * (fontSize * lineHeight);
       textElements.push((
         <text x={left} y={textTop} key={`list-item-${i}`}>
-          <tspan x={(left / 2) - (listIndexFontSize / 3)} y={textTop - fontSize +  (largestLineCount * fontSize / 2) + (listIndexFontSize / 2)} className='list-index' style={{fontSize: `${listIndexFontSize}px`}}>{i+1}</tspan>
+          <tspan x={(left / 2) - (listIndexFontSize / 3)} y={textTop} className='list-index' style={{fontSize: `${listIndexFontSize}px`}}>{i+1}</tspan>
           {
             lines.map((l, lineIndex) => (
               <tspan x={left} y={centeredTextTop + (lineIndex * fontSize * lineHeight)} key={`line-item-${lineIndex}`}>{l}</tspan>
@@ -81,7 +81,7 @@ export default class List01 extends Component {
         <image x={0} y={0} width={cornerElementWidth} xlinkHref='/img/elections/graphics/2020/2020-corner-element.png'></image>
         <text className='candidate'>
           <tspan x={textLeft} y={textTop} style={{fontSize: candidateFontSize}}>
-            <tspan style={{fontWeight: 'bold'}}>{`${candidate.name}`}</tspan>
+            <tspan style={{fontFamily: 'Unify Sans SemiBold'}}>{`${candidate.name}`}</tspan>
             <tspan x={textLeft} dy={candidateFontSize * 0.9} style={{fontSize: candidateInfoFontSize}} fill={candidate.party.color}>{candidateInfo}</tspan>
           </tspan>
         </text>
@@ -107,7 +107,8 @@ export default class List01 extends Component {
               stroke: #a2a2a2;
               fill: #a2a2a2;
               font-weight: bold;
-              dominant-baseline: initial;
+              dominant-baseline: hanging;
+              font-family: 'Unify Sans Bold';
             }`
           }
         </style>

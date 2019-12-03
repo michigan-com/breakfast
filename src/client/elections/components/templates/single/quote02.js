@@ -20,7 +20,7 @@ export default class Quote02 extends Component {
 
   renderText(text, templateType) {
     const { width, fontSize, lineHeight, height } = this.props.imageMetrics
-    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.87);
+    var lines = getLinesOfText(text[0], fontSize, lineHeight, width * 0.8);
     var bottom = this.getTextBottom(height);
     var left = this.getTextLeft(width);
     var boxHeight = ((lines.length + 2) * lineHeight * fontSize);
@@ -102,7 +102,11 @@ export default class Quote02 extends Component {
             }
             svg {
               background: rgb(56, 56, 56);
-            }`
+            }
+            .text-block {
+              font-family: 'Unify Sans Bold';
+            }
+            `
           }
         </style>
         { this.renderBackground(candidates) }

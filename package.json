@@ -18,7 +18,7 @@
     "watch:css": "postcss -mwc postcss.json src/css/*.css",
     "watch:server": "echo \"console.log('node-dev options need browserifyflag (figure me out)!')\" | node & npm run server",
     "watch": "npm run watch:js & npm run watch:css",
-    "server": "npm run build:server; node dist/server.js",
+    "server": "npm run build:server; DEBUG=breakfast:* node dist/server.js",
     "dev": "npm run watch & npm run watch:server",
     "start": "npm build:min & DEBUG=breakfast:* npm run server"
   },

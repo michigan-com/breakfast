@@ -31,7 +31,7 @@ export default class Results01 extends Component {
     var candidateElements = []
     for (var i = 0; i < numbers.length; i++) {
       var percent = numbers[i];
-      var percentFontSize = fontSize * 2;
+      var percentFontSize = fontSize * 1.75;
 
       var bottom = this.getTextBottom(totalHeight, fontSize, percentFontSize, lineHeight);
       var left = this.getRectangleLeft(width, i);
@@ -48,10 +48,10 @@ export default class Results01 extends Component {
           {
             i !== 0 ? null :
             (
-              <text x={left} y={top} style={{fontSize: `${percentFontSize}px`, fontWeight: 'bold' }}>WINNER</text>
+              <text x={left} y={top} style={{fontSize: `${percentFontSize}px`, fontFamily: 'Unify Sans Bold' }}>WINNER</text>
             )
           }
-          <text x={textLeft} y={percentTextTop} width={width / 2} className='text-block' key={`results02-text-${i}`} style={{fontSize: `${percentFontSize}px`, fontWeight: 'bold'}}>
+          <text x={textLeft} y={percentTextTop} width={width / 2} className='text-block' key={`results02-text-${i}`} style={{fontSize: `${percentFontSize}px`, fontFamily: 'Unify Sans Bold'}}>
             {`${percent}% votes`}
           </text>
           <text x={textLeft} y={candidateTextTop} width={width / 2}>
